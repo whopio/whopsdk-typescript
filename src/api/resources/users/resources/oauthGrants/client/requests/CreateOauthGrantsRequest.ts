@@ -19,6 +19,8 @@ export interface CreateOauthGrantsRequest {
     code_challenge_method?: CreateOauthGrantsRequest.CodeChallengeMethod;
     /** Whether the consent UI listed these scopes for the user. Sending `false` succeeds only when the user has already granted every scope requested, or when the app is one of Whop's own with the consent skip switched on and asks for `openid` alone. */
     consent_shown?: boolean;
+    /** The downstream MCP client displayed on the consent screen. Requires explicit consent even when the upstream app already has a grant. Bound to the authorization code and returned on token exchange so the MCP server can verify the approved client. */
+    mcp_client?: CreateOauthGrantsRequest.McpClient;
     /** OIDC nonce, echoed into the resulting ID token. Required when `requested_scopes` includes `openid`. */
     nonce?: string;
     /** Where to send the user once they have consented. Must match one of the app's registered redirect URIs exactly — it is compared as a string, not normalized. */
@@ -37,6 +39,19 @@ export namespace CreateOauthGrantsRequest {
         S256: "S256",
     } as const;
     export type CodeChallengeMethod = (typeof CodeChallengeMethod)[keyof typeof CodeChallengeMethod];
+
+    /**
+     * The downstream MCP client displayed on the consent screen. Requires explicit consent even when the upstream app already has a grant. Bound to the authorization code and returned on token exchange so the MCP server can verify the approved client.
+     */
+    export interface McpClient {
+        /** The requesting MCP client's identifier. */
+        client_id: string;
+        /** The requesting MCP client's display name. */
+        client_name: string;
+        /** The downstream redirect URI displayed to the user. */
+        redirect_uri: string;
+    }
+
     /** The OAuth response type. Only `code` is accepted; defaults to `code`. */
     export const ResponseType = {
         Code: "code",
