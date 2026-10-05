@@ -56,11 +56,13 @@ describe("AdCampaignsClient", () => {
                     impressions: 220000,
                     issues: [
                         {
+                            category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
                                 "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
+                            title: "Ad issue",
                         },
                     ],
                     lead_value: 3960,
@@ -209,11 +211,13 @@ describe("AdCampaignsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             lead_value: 3960,
@@ -372,11 +376,13 @@ describe("AdCampaignsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             lead_value: 3960,
@@ -540,11 +546,13 @@ describe("AdCampaignsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             lead_value: 3960,
@@ -643,11 +651,13 @@ describe("AdCampaignsClient", () => {
                     impressions: 220000,
                     issues: [
                         {
+                            category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
                                 "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
+                            title: "Ad issue",
                         },
                     ],
                     lead_value: 3960,
@@ -830,11 +840,13 @@ describe("AdCampaignsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             lead_value: 3960,
@@ -957,11 +969,13 @@ describe("AdCampaignsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             lead_value: 3960,

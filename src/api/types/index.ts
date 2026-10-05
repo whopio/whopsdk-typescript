@@ -69,6 +69,7 @@ export * from "./AdGroupDevicesBody.js";
 export * from "./AdGroupFrequencyCap.js";
 export * from "./AdGroupGeoLocations.js";
 export * from "./AdGroupGeoLocationsBody.js";
+export * from "./AdGroupLearningProgress.js";
 export * from "./AdGroupOperatingSystem.js";
 export * from "./AdGroupPlacement.js";
 export * from "./AdGroupRegions.js";

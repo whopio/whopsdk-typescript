@@ -77,16 +77,19 @@ describe("AdGroupsClient", () => {
                     impressions: 220000,
                     issues: [
                         {
+                            category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
                                 "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
+                            title: "Ad issue",
                         },
                     ],
                     languages: ["en"],
                     lead_value: 3960,
                     leads: 132,
+                    learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
                     link_clicks: 4400,
                     message_apps: ["messenger"],
                     minimum_daily_spend: 25,
@@ -247,16 +250,19 @@ describe("AdGroupsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             languages: ["en"],
             lead_value: 3960,
             leads: 132,
+            learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
             link_clicks: 4400,
             message_apps: ["messenger"],
             minimum_daily_spend: 25,
@@ -720,16 +726,19 @@ describe("AdGroupsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             languages: ["en"],
             lead_value: 3960,
             leads: 132,
+            learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
             link_clicks: 4400,
             message_apps: ["messenger"],
             minimum_daily_spend: 25,
@@ -933,16 +942,19 @@ describe("AdGroupsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             languages: ["en"],
             lead_value: 3960,
             leads: 132,
+            learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
             link_clicks: 4400,
             message_apps: ["messenger"],
             minimum_daily_spend: 25,
@@ -1121,16 +1133,19 @@ describe("AdGroupsClient", () => {
                     impressions: 220000,
                     issues: [
                         {
+                            category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
                                 "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
+                            title: "Ad issue",
                         },
                     ],
                     languages: ["en"],
                     lead_value: 3960,
                     leads: 132,
+                    learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
                     link_clicks: 4400,
                     message_apps: ["messenger"],
                     minimum_daily_spend: 25,
@@ -1365,16 +1380,19 @@ describe("AdGroupsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             languages: ["en"],
             lead_value: 3960,
             leads: 132,
+            learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
             link_clicks: 4400,
             message_apps: ["messenger"],
             minimum_daily_spend: 25,
@@ -1549,16 +1567,19 @@ describe("AdGroupsClient", () => {
             impressions: 220000,
             issues: [
                 {
+                    category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
                         "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
+                    title: "Ad issue",
                 },
             ],
             languages: ["en"],
             lead_value: 3960,
             leads: 132,
+            learning_progress: { conversion_threshold: 1, conversions: 1, progress_percent: 1.1 },
             link_clicks: 4400,
             message_apps: ["messenger"],
             minimum_daily_spend: 25,
