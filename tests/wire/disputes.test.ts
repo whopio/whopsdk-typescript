@@ -96,6 +96,7 @@ describe("DisputesClient", () => {
                     evidence_editable: false,
                     evidence_locked_reason: "submitted",
                     evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+                    fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "dspt_xxxxxxxxxxxxxx",
                     inquiry: false,
                     issuer_comments: [
@@ -418,6 +419,7 @@ describe("DisputesClient", () => {
             evidence_editable: false,
             evidence_locked_reason: "submitted",
             evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -637,6 +639,7 @@ describe("DisputesClient", () => {
             evidence_editable: false,
             evidence_locked_reason: "submitted",
             evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -905,6 +908,7 @@ describe("DisputesClient", () => {
             evidence_editable: false,
             evidence_locked_reason: "submitted",
             evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -1196,6 +1200,7 @@ describe("DisputesClient", () => {
             evidence_editable: false,
             evidence_locked_reason: "submitted",
             evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
