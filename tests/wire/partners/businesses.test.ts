@@ -49,7 +49,13 @@ describe("BusinessesClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "ninaalvarez",
                     },
-                    payout_percentages: { ad_spend: 0.015, card_interchange: 0.2, sales: 0.3, transfer: 0.25 },
+                    payout_percentages: {
+                        ad_spend: 0.015,
+                        card_interchange: 0.2,
+                        sales: 0.3,
+                        transfer: 0.25,
+                        withdrawal: 0.3,
+                    },
                     referral_expires_at: "2026-01-01T12:00:00Z",
                     referral_started_at: "2026-01-01T12:00:00Z",
                     second_tier_partner: {
@@ -250,7 +256,7 @@ describe("BusinessesClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "tanyacole",
             },
-            payout_percentages: { ad_spend: 0, card_interchange: 0, sales: 0.3, transfer: 0 },
+            payout_percentages: { ad_spend: 0, card_interchange: 0, sales: 0.3, transfer: 0, withdrawal: 0 },
             referral_expires_at: "2026-01-01T12:00:00Z",
             referral_started_at: "2026-01-01T12:00:00Z",
             second_tier_partner: {

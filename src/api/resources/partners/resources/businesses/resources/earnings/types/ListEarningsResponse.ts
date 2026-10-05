@@ -22,7 +22,7 @@ export namespace ListEarningsResponse {
             /** Income and cost lines behind this earning's commission. Null for earnings settled before this data was recorded. */
             financial_activity: Item.FinancialActivity.Item[] | null;
             id: string | null;
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, withdrawal gross profit, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
             income_source: Item.IncomeSource;
             object: Item.Object_;
             payout_at: string | null;
@@ -31,7 +31,7 @@ export namespace ListEarningsResponse {
             product: Item.Product | null;
             /** Estimated commission while awaiting settlement. Null when no estimate is available or the earning has settled. */
             projected_commission_amount_usd: Whop.Money | null;
-            /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings. */
+            /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the withdrawal for withdrawal earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings. */
             resource: Item.Resource | null;
             /** Whether this earning is a second-tier (grandparent) commission. */
             second_tier: boolean;
@@ -83,12 +83,13 @@ export namespace ListEarningsResponse {
                 }
             }
 
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, withdrawal gross profit, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
             export const IncomeSource = {
                 Sales: "sales",
                 AdSpend: "ad_spend",
                 Transfer: "transfer",
                 CardInterchange: "card_interchange",
+                Withdrawal: "withdrawal",
                 OnboardingReward: "onboarding_reward",
                 PartnerReward: "partner_reward",
                 VerifiedPartnerReferralPayback: "verified_partner_referral_payback",
@@ -106,7 +107,7 @@ export namespace ListEarningsResponse {
             }
 
             /**
-             * The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings.
+             * The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the withdrawal for withdrawal earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings.
              */
             export type Resource =
                 | {
@@ -129,6 +130,12 @@ export namespace ListEarningsResponse {
                       currency: string;
                       id: string;
                       object: "transfer";
+                  }
+                | {
+                      created_at: string;
+                      currency: string;
+                      id: string;
+                      object: "withdrawal";
                   }
                 | {
                       created_at: string;

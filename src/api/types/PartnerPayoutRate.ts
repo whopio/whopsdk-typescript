@@ -14,6 +14,7 @@ export namespace PartnerPayoutRate {
         Transfer: "transfer",
         CardInterchange: "card_interchange",
         AdSpend: "ad_spend",
+        Withdrawal: "withdrawal",
     } as const;
     export type IncomeSource = (typeof IncomeSource)[keyof typeof IncomeSource];
 }

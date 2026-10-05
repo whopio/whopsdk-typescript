@@ -161,6 +161,8 @@ export namespace ListBusinessesResponse {
                 sales: number;
                 /** Share of Whop's profit from platform balance transfers. */
                 transfer: number | null;
+                /** Share of Whop's profit from withdrawals. */
+                withdrawal: number | null;
             }
 
             /**
