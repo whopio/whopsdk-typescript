@@ -5,6 +5,7 @@ export const ListEarningsRequestIncomeSourceItem = {
     AdSpend: "ad_spend",
     Transfer: "transfer",
     CardInterchange: "card_interchange",
+    Withdrawal: "withdrawal",
     OnboardingReward: "onboarding_reward",
     PartnerReward: "partner_reward",
     VerifiedPartnerReferralPayback: "verified_partner_referral_payback",
