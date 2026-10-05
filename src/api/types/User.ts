@@ -34,4 +34,8 @@ export interface User {
     verification: Record<string, unknown>;
     /** When the user became an enrolled Whop Partner, as an ISO 8601 timestamp. `null` if never enrolled. */
     whop_partner_enabled_at: string | null;
+    /** Number of accounts the user referred to Whop as a Whop Partner that have processed more than $1 in volume attributed to the user. Populated only when retrieving a single user who is a Verified Whop Partner; `null` otherwise. */
+    whop_partner_onboarded_accounts_count: number | null;
+    /** When the user became a Verified Whop Partner, as an ISO 8601 timestamp. `null` for users who are not Verified Whop Partners, including partners who left the program and suspended users. */
+    whop_partner_verified_at: string | null;
 }

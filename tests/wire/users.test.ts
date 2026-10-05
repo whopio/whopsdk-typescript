@@ -253,6 +253,8 @@ describe("UsersClient", () => {
                     username: "marcuswebb",
                     verification: {},
                     whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
+                    whop_partner_onboarded_accounts_count: 1,
+                    whop_partner_verified_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
             page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
@@ -475,6 +477,8 @@ describe("UsersClient", () => {
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
+            whop_partner_onboarded_accounts_count: 1,
+            whop_partner_verified_at: "2026-01-01T12:00:00.000Z",
         };
 
         server.mockEndpoint().get("/users/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -702,6 +706,8 @@ describe("UsersClient", () => {
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
+            whop_partner_onboarded_accounts_count: 1,
+            whop_partner_verified_at: "2026-01-01T12:00:00.000Z",
         };
 
         server
@@ -924,6 +930,8 @@ describe("UsersClient", () => {
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
+            whop_partner_onboarded_accounts_count: 1,
+            whop_partner_verified_at: "2026-01-01T12:00:00.000Z",
         };
 
         server.mockEndpoint().get("/users/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -1157,6 +1165,8 @@ describe("UsersClient", () => {
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
+            whop_partner_onboarded_accounts_count: 1,
+            whop_partner_verified_at: "2026-01-01T12:00:00.000Z",
         };
 
         server
