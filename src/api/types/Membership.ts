@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface Membership {
     /** The account (seller) this membership belongs to. */
     account: Whop.StorefrontAccount;
+    /** The membership's affiliate commission. `null` without an affiliate, without `affiliate:basic:read` on the account, and always in webhooks. */
+    affiliate: Whop.MembershipAffiliate | null;
     /** Number of days between recurring charges. `null` for non-renewing memberships or memberships with multiple renewal schedules. */
     billing_period_days: number | null;
     /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring variants. */

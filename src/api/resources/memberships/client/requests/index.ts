@@ -1,4 +1,5 @@
 export type { ApplyPromoCodeMembershipsRequest } from "./ApplyPromoCodeMembershipsRequest.js";
+export { AssignAffiliateMembershipsRequest } from "./AssignAffiliateMembershipsRequest.js";
 export type { CancelMembershipsRequest } from "./CancelMembershipsRequest.js";
 export type { ExtendMembershipsRequest } from "./ExtendMembershipsRequest.js";
 export type { ListMembershipsRequest } from "./ListMembershipsRequest.js";

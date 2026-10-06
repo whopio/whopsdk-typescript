@@ -25,6 +25,15 @@ describe("MembershipsClient", () => {
                         route: "shine-time-auto-detailing",
                         title: "Shine Time Auto Detailing",
                     },
+                    affiliate: {
+                        applies_to_payments: "first_payment",
+                        commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        commission_percentage: null,
+                        commission_type: "flat_fee",
+                        enabled: true,
+                        id: "id",
+                        user_id: "user_id",
+                    },
                     billing_period_days: 30,
                     cancel_at_period_end: true,
                     canceled_at: "2026-01-01T12:00:00.000Z",
@@ -342,6 +351,15 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
             billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
@@ -434,6 +452,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,
@@ -549,6 +576,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,
@@ -707,6 +743,326 @@ describe("MembershipsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("assignAffiliate (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 5, email: "affiliate@example.com" };
+        const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
+            billing_period_days: 30,
+            cancel_at_period_end: true,
+            canceled_at: "2026-01-01T12:00:00.000Z",
+            cancellation_reason: "Too expensive",
+            created_at: "2026-01-01T12:00:00.000Z",
+            current_period_end: "2026-01-01T12:00:00.000Z",
+            current_period_start: "2026-01-01T12:00:00.000Z",
+            id: "mem_xxxxxxxxxxxxxx",
+            license_key: "WHOP-XXXX-XXXX-XXXX",
+            manage_url: "https://whop.com/billing/manage/mber_xxxxxxxxxxxxxx",
+            member: {
+                access_level: "no_access",
+                last_accessed_at: "2026-01-01T12:00:00.000Z",
+                position: 1767268800000,
+            },
+            metadata: { key: "value" },
+            phone_number: "+xxxxxxxxxxx",
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
+            status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.memberships.assignAffiliate({
+            id: "id",
+            commission_type: "flat_fee",
+            commission_value: 5,
+            email: "affiliate@example.com",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("assignAffiliate (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "percentage", commission_value: 20, user_id: "user_xxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
+            billing_period_days: 30,
+            cancel_at_period_end: true,
+            canceled_at: "2026-01-01T12:00:00.000Z",
+            cancellation_reason: "Too expensive",
+            created_at: "2026-01-01T12:00:00.000Z",
+            current_period_end: "2026-01-01T12:00:00.000Z",
+            current_period_start: "2026-01-01T12:00:00.000Z",
+            id: "mem_xxxxxxxxxxxxxx",
+            license_key: "WHOP-XXXX-XXXX-XXXX",
+            manage_url: "https://whop.com/billing/manage/mber_xxxxxxxxxxxxxx",
+            member: {
+                access_level: "no_access",
+                last_accessed_at: "2026-01-01T12:00:00.000Z",
+                position: 1767268800000,
+            },
+            metadata: { key: "value" },
+            phone_number: "+xxxxxxxxxxx",
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
+            status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.memberships.assignAffiliate({
+            id: "id",
+            commission_type: "percentage",
+            commission_value: 20,
+            user_id: "user_xxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("assignAffiliate (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("assignAffiliate (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("assignAffiliate (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("assignAffiliate (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("assignAffiliate (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("assignAffiliate (8)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { commission_type: "flat_fee", commission_value: 1.1 };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/assign_affiliate")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(503)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.assignAffiliate({
+                id: "id",
+                commission_type: "flat_fee",
+                commission_value: 1.1,
+            });
+        }).rejects.toThrow(Whop.ServiceUnavailableError);
+    });
+
     test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -724,6 +1080,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,
@@ -866,6 +1231,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,
@@ -1013,6 +1387,15 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
             billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
@@ -1154,6 +1537,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,
@@ -1353,6 +1745,15 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
             billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
@@ -1490,6 +1891,15 @@ describe("MembershipsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
             },
             billing_period_days: 30,
             cancel_at_period_end: true,

@@ -16346,6 +16346,74 @@ await client.memberships.applyPromoCode({
 </dl>
 </details>
 
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">assignAffiliate</a>({ ...params }) -> Whop.Membership</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Assigns an affiliate to a membership and pays them the commission you set on its future payments. Name the user with exactly one of `user_id`, `email`, or `username`. A user who is not yet an affiliate of your account becomes one, which also requires `affiliate:create`. Send a new `commission_type` or `commission_value` for the membership's current affiliate to change their commission; a membership that already has a different affiliate returns a conflict. Works for active or trialing memberships with one recurring plan that bill through Stripe or Whop's billing engine, and not for marketplace memberships, paused payments, or a scheduled cancellation. The payout cannot exceed 90% of the next renewal amount, and no past payments are recalculated. You cannot assign yourself.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.memberships.assignAffiliate({
+    id: "id",
+    commission_type: "flat_fee",
+    commission_value: 5,
+    email: "affiliate@example.com"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.AssignAffiliateMembershipsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembershipsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">cancel</a>({ ...params }) -> Whop.Membership</code></summary>
 <dl>
 <dd>
