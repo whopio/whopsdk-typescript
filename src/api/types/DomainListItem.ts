@@ -5,54 +5,58 @@ import type * as Whop from "../index.js";
 export interface DomainListItem {
     /** ID of the account claiming or owning this domain, prefixed `biz_`. `null` for a search result. */
     account_id: string | null;
-    /** ID of the app assigned to this domain, prefixed `app_`. `null` for a search result. */
+    /** The charge the domain owes now. `null` when nothing is owed. */
+    amount_due: Whop.Money | null;
+    /** ID of the app the domain serves, prefixed `app_`. `null` for a search result or a bought domain without an app. */
     app_id: string | null;
-    /** The latest issuance status of the domain's TLS certificate. */
-    certificate_status: string | null;
-    /** When the domain claim was created, as an ISO 8601 timestamp. `null` for a search result. */
+    /** Whether Whop charges the saved payment method to renew a bought domain before it expires. `null` for connected domains and search results. */
+    auto_renew: boolean | null;
+    /** When the domain was created, as an ISO 8601 timestamp. `null` for a search result. */
     created_at: string | null;
     dns_records: Whop.DomainDnsRecord[];
-    /** Result of the most recent DNS routing check. Ownership is verified separately. `null` for a search result. */
-    dns_status: DomainListItem.DnsStatus | null;
     /** Normalized hostname, such as checkout.example.com. */
     domain: string;
-    /** The latest activation status of the hostname on Whop's network. */
-    hostname_status: string | null;
+    /** When the registration of a bought domain expires unless renewed, as an ISO 8601 timestamp. `null` for connected domains and search results. */
+    expires_at: string | null;
     /** Domain ID, prefixed `dom_`. `null` for a search result. */
     id: string | null;
     issues: Whop.DomainIssue[];
-    /** When DNS and provider state were last checked, as an ISO 8601 timestamp. */
-    last_checked_at: string | null;
     /** Custom string keys and values attached to this domain. Empty for a search result. */
     metadata: Record<string, unknown>;
+    /** `managed` for a domain bought and renewed through Whop; `external` for a domain registered elsewhere and connected with DNS records. `null` for a search result. */
+    mode: DomainListItem.Mode | null;
+    /** ID of the saved card charged for a bought domain, prefixed `payt_`. `null` when none is set. */
+    payment_method_id: string | null;
+    /** Link to pay the charge the domain owes now: its registration, or a yearly renewal. `null` when nothing is owed. */
+    purchase_url: string | null;
     /** Whether you can register the domain and what it costs. Set for search results and hostname lookups; `null` for your own domains. */
     registration_quote: Whop.DomainRegistrationQuote | null;
-    /** Domain lifecycle. Only active domains resolve to their app. `null` for a search result. */
+    /** Domain lifecycle. Only active domains serve their app. `null` for a search result. */
     status: DomainListItem.Status | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. `null` for a search result. */
     updated_at: string | null;
     /** When an unverified claim is automatically deleted, 48 hours after creation, as an ISO 8601 timestamp. */
     verification_expires_at: string | null;
-    /** When Whop verified the ownership TXT record, as an ISO 8601 timestamp. */
-    verified_at: string | null;
 }
 
 export namespace DomainListItem {
-    /** Result of the most recent DNS routing check. Ownership is verified separately. `null` for a search result. */
-    export const DnsStatus = {
-        Pending: "pending",
-        Valid: "valid",
-        Invalid: "invalid",
-        Unknown: "unknown",
+    /** `managed` for a domain bought and renewed through Whop; `external` for a domain registered elsewhere and connected with DNS records. `null` for a search result. */
+    export const Mode = {
+        External: "external",
+        Managed: "managed",
     } as const;
-    export type DnsStatus = (typeof DnsStatus)[keyof typeof DnsStatus];
-    /** Domain lifecycle. Only active domains resolve to their app. `null` for a search result. */
+    export type Mode = (typeof Mode)[keyof typeof Mode];
+    /** Domain lifecycle. Only active domains serve their app. `null` for a search result. */
     export const Status = {
         PendingVerification: "pending_verification",
+        AwaitingPayment: "awaiting_payment",
+        Registering: "registering",
         Provisioning: "provisioning",
         Active: "active",
         ActionRequired: "action_required",
         Deleting: "deleting",
+        Expired: "expired",
+        Failed: "failed",
         Removed: "removed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];

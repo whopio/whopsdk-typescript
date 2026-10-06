@@ -17,7 +17,9 @@ export declare namespace DomainsClient {
 }
 
 /**
- * A Domain is a hostname an account claims and assigns to an app. Publish the returned DNS records; verification and certificates run automatically, the domain serves its app once its hostname and certificate are active, and unverified claims expire after 48 hours. A claim doesn't reserve the hostname.
+ * A Domain is a hostname an account buys through Whop or connects from another registrar, and assigns to one of its apps. Creating a domain buys it unless `mode` is `external`: pay at its `purchase_url`, or set `payment_method_id` to charge a saved card, and Whop registers the domain and runs its DNS. Thirty days before a bought domain expires, Whop opens a renewal charge at `purchase_url` and, while `auto_renew` is on, charges the saved card for it. An unpaid domain stops serving its app when it expires but stays renewable at `purchase_url` until the registry's grace period ends, and is then removed.
+ *
+ * A connected domain returns DNS records to publish instead. Verification and certificates run automatically, and unverified claims expire after 48 hours. A claim doesn't reserve the hostname. Either kind serves its app once its hostname and certificate are active.
  *
  * To find a domain to buy, pass `search` to List Domains or a hostname to Retrieve Domain.
  */
@@ -29,7 +31,7 @@ export class DomainsClient {
     }
 
     /**
-     * Lists your domains. Filter by account, app, or status.
+     * Lists your domains. Filter by account, app, status, or hostname.
      *
      * Pass `search` to find domains to buy instead: the exact domain first, even when taken, then your name on popular extensions, then suggestions. Pass `tlds` to check only the extensions you choose. Results aren't reserved.
      *
@@ -65,6 +67,7 @@ export class DomainsClient {
                     before,
                     search,
                     tlds,
+                    domain,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -78,6 +81,7 @@ export class DomainsClient {
                     before,
                     search,
                     tlds,
+                    domain,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -152,18 +156,22 @@ export class DomainsClient {
     }
 
     /**
-     * Claims a hostname for an app and returns the DNS records to publish. Verification and certificate setup run automatically, and unverified claims are deleted after 48 hours. A claim doesn't reserve the hostname.
+     * Buys a domain through Whop, or connects one you registered elsewhere.
+     *
+     * A bought domain starts `awaiting_payment`. Pay its `amount_due` at `purchase_url`, or pass `payment_method_id` to charge a saved card. Whop then registers it, hosts its DNS, issues its certificate and serves the app, and renews it every year while `auto_renew` is on. An unpaid purchase is removed after 7 days.
+     *
+     * With `mode: external`, Whop returns the DNS records to publish instead. Verification and certificate setup run automatically, and unverified claims are deleted after 48 hours. A claim doesn't reserve the hostname.
      *
      * @param {Whop.CreateDomainsRequest} request
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.domains.create({
-     *         app_id: "app_xxxxxxxxxxxxxx",
      *         domain: "store.example.com"
      *     })
      */
@@ -213,6 +221,8 @@ export class DomainsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
@@ -228,7 +238,7 @@ export class DomainsClient {
     }
 
     /**
-     * Retrieves a domain's claim, app assignment, DNS records, and hostname and certificate status, and starts a background check if it isn't active yet.
+     * Retrieves a domain's status, issues, billing, and DNS records, and checks it again in the background if it isn't active yet.
      *
      * Pass a hostname instead of an ID to look up any domain, with its `registration_quote` and, if registered, its `public_record`.
      *
@@ -306,11 +316,12 @@ export class DomainsClient {
     }
 
     /**
-     * Stops routing the domain to its app and starts cleanup. It returns as `deleting`; retrieve it until it's `removed`.
+     * Stops routing a connected domain to its app and starts cleanup: it returns as `deleting`; retrieve it until it's `removed`. Deleting an unpaid purchase cancels it. A registered domain can't be deleted; turn off `auto_renew` and it's released after it expires.
      *
      * @param {Whop.DeleteDomainsRequest} request
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -362,22 +373,28 @@ export class DomainsClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.WhopError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/domains/{id}");
     }
 
     /**
-     * Reassigns a domain to another app in the same account or replaces its metadata. The hostname and owning account cannot be edited.
+     * Reassigns a domain to another app in the same account, replaces its metadata, or changes how a bought domain renews. The hostname and owning account cannot be edited.
      *
      * @param {Whop.UpdateDomainsRequest} request
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -432,11 +449,16 @@ export class DomainsClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.WhopError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/domains/{id}");
