@@ -9,8 +9,12 @@
 export interface UpdateDomainsRequest {
     /** Domain ID, prefixed `dom_`. To retrieve, you can pass a hostname such as `example.com` instead; a bare name looks up `.com`. */
     id: string;
-    /** App ID, prefixed app_. Must belong to the same account. */
-    app_id?: string;
+    /** App ID, prefixed app_. Must belong to the same account. Pass `null` to detach a bought domain from its app; it keeps renewing. */
+    app_id?: string | null;
+    /** For a bought domain, whether Whop charges its saved card to renew it before it expires. */
+    auto_renew?: boolean;
     /** Replacement custom string keys and values. */
     metadata?: Record<string, string>;
+    /** For a bought domain, the saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
+    payment_method_id?: string | null;
 }

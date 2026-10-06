@@ -7,6 +7,8 @@ export const PermissionAction = {
     WaitlistEntryCancel: "waitlist_entry:cancel",
     ExperimentManage: "experiment:manage",
     ExperimentRead: "experiment:read",
+    DomainManage: "domain:manage",
+    DomainRead: "domain:read",
     AiPromptCreate: "ai_prompt:create",
     AccessPassBasicExport: "access_pass:basic:export",
     AccessPassBasicRead: "access_pass:basic:read",

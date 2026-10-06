@@ -13,7 +13,7 @@ export interface ListDomainsRequest {
     account_id?: string;
     /** Only domains assigned to this app, prefixed app_. */
     app_id?: string;
-    /** Only domains with this lifecycle status. */
+    /** Only domains with this lifecycle status. Removed and failed domains aren't listed; retrieve them by ID. */
     status?: Whop.ListDomainsRequestStatus;
     /** Field to sort by. */
     order?: Whop.ListDomainsRequestOrder;
@@ -31,4 +31,6 @@ export interface ListDomainsRequest {
     search?: string;
     /** With `search`, check only these extensions, such as `com` or `co.uk`, returned in this order. Repeat for several, up to 100. */
     tlds?: string | string[];
+    /** Only your domain with this hostname, such as `example.com`. */
+    domain?: string;
 }

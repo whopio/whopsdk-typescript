@@ -2,10 +2,12 @@
 
 export const ListDomainsRequestStatus = {
     PendingVerification: "pending_verification",
+    AwaitingPayment: "awaiting_payment",
+    Registering: "registering",
     Provisioning: "provisioning",
     Active: "active",
     ActionRequired: "action_required",
     Deleting: "deleting",
-    Removed: "removed",
+    Expired: "expired",
 } as const;
 export type ListDomainsRequestStatus = (typeof ListDomainsRequestStatus)[keyof typeof ListDomainsRequestStatus];

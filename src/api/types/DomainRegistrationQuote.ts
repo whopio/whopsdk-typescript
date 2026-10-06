@@ -9,8 +9,6 @@ export interface DomainRegistrationQuote {
     premium: boolean;
     /** What the first year of registration costs. `null` when the domain is not available. */
     price: Whop.Money | null;
-    /** Link to buy the domain in your Whop dashboard. `null` when it isn't available or the request has no account, such as a user token. */
-    purchase_url: string | null;
     /** What each yearly renewal costs after the first year. `null` when the domain is not available. */
     renewal_price: Whop.Money | null;
     /** How desirable the domain is, from 0 to 100. Short, real-word names on well-known extensions score highest. */

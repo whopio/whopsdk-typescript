@@ -10861,7 +10861,7 @@ await client.dmMembers.update({
 <dl>
 <dd>
 
-Lists your domains. Filter by account, app, or status.
+Lists your domains. Filter by account, app, status, or hostname.
 
 Pass `search` to find domains to buy instead: the exact domain first, even when taken, then your name on popular extensions, then suggestions. Pass `tlds` to check only the extensions you choose. Results aren't reserved.
 </dd>
@@ -10942,7 +10942,11 @@ const response = page.response;
 <dl>
 <dd>
 
-Claims a hostname for an app and returns the DNS records to publish. Verification and certificate setup run automatically, and unverified claims are deleted after 48 hours. A claim doesn't reserve the hostname.
+Buys a domain through Whop, or connects one you registered elsewhere.
+
+A bought domain starts `awaiting_payment`. Pay its `amount_due` at `purchase_url`, or pass `payment_method_id` to charge a saved card. Whop then registers it, hosts its DNS, issues its certificate and serves the app, and renews it every year while `auto_renew` is on. An unpaid purchase is removed after 7 days.
+
+With `mode: external`, Whop returns the DNS records to publish instead. Verification and certificate setup run automatically, and unverified claims are deleted after 48 hours. A claim doesn't reserve the hostname.
 </dd>
 </dl>
 </dd>
@@ -10958,7 +10962,6 @@ Claims a hostname for an app and returns the DNS records to publish. Verificatio
 
 ```typescript
 await client.domains.create({
-    app_id: "app_xxxxxxxxxxxxxx",
     domain: "store.example.com"
 });
 
@@ -11008,7 +11011,7 @@ await client.domains.create({
 <dl>
 <dd>
 
-Retrieves a domain's claim, app assignment, DNS records, and hostname and certificate status, and starts a background check if it isn't active yet.
+Retrieves a domain's status, issues, billing, and DNS records, and checks it again in the background if it isn't active yet.
 
 Pass a hostname instead of an ID to look up any domain, with its `registration_quote` and, if registered, its `public_record`.
 </dd>
@@ -11075,7 +11078,7 @@ await client.domains.retrieve({
 <dl>
 <dd>
 
-Stops routing the domain to its app and starts cleanup. It returns as `deleting`; retrieve it until it's `removed`.
+Stops routing a connected domain to its app and starts cleanup: it returns as `deleting`; retrieve it until it's `removed`. Deleting an unpaid purchase cancels it. A registered domain can't be deleted; turn off `auto_renew` and it's released after it expires.
 </dd>
 </dl>
 </dd>
@@ -11140,7 +11143,7 @@ await client.domains.delete({
 <dl>
 <dd>
 
-Reassigns a domain to another app in the same account or replaces its metadata. The hostname and owning account cannot be edited.
+Reassigns a domain to another app in the same account, replaces its metadata, or changes how a bought domain renews. The hostname and owning account cannot be edited.
 </dd>
 </dl>
 </dd>

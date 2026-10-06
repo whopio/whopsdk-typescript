@@ -3,19 +3,31 @@
 /**
  * @example
  *     {
- *         app_id: "app_xxxxxxxxxxxxxx",
  *         domain: "store.example.com"
  *     }
  */
 export interface CreateDomainsRequest {
     /** Account ID, prefixed biz_. Required for user credentials; otherwise defaults to the credential's account. */
     account_id?: string;
-    /** App ID, prefixed app_. The app must belong to the account. */
-    app_id: string;
-    /** Bare hostname, such as example.com or checkout.example.com. Wildcards, paths, schemes, and ports are not accepted. */
+    /** App ID, prefixed app_, for the domain to serve. The app must belong to the account. Required with `mode: external`. */
+    app_id?: string;
+    /** Bare hostname, such as example.com or checkout.example.com. A bought domain must be a root domain. Wildcards, paths, schemes, and ports are not accepted. */
     domain: string;
     /** Custom string keys and values. */
     metadata?: Record<string, string>;
-    /** Explicitly transfer a domain from its current owner after publishing this new claim's TXT proof. Create the claim after the current owner verified. */
+    /** `managed` buys the domain through Whop; `external` connects a domain you registered elsewhere. */
+    mode?: CreateDomainsRequest.Mode;
+    /** Saved card to charge for a bought domain and its renewals, prefixed `payt_`. It must belong to the signed-in user. */
+    payment_method_id?: string;
+    /** With `mode: external`, explicitly transfer a domain from its current owner after publishing this new claim's TXT proof. Create the claim after the current owner verified. */
     replace_existing?: boolean;
+}
+
+export namespace CreateDomainsRequest {
+    /** `managed` buys the domain through Whop; `external` connects a domain you registered elsewhere. */
+    export const Mode = {
+        External: "external",
+        Managed: "managed",
+    } as const;
+    export type Mode = (typeof Mode)[keyof typeof Mode];
 }
