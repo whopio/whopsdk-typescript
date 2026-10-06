@@ -489,6 +489,116 @@ export class MembershipsClient {
     }
 
     /**
+     * Assigns an affiliate to a membership and pays them the commission you set on its future payments. Name the user with exactly one of `user_id`, `email`, or `username`. A user who is not yet an affiliate of your account becomes one, which also requires `affiliate:create`. Send a new `commission_type` or `commission_value` for the membership's current affiliate to change their commission; a membership that already has a different affiliate returns a conflict. Works for active or trialing memberships with one recurring plan that bill through Stripe or Whop's billing engine, and not for marketplace memberships, paused payments, or a scheduled cancellation. The payout cannot exceed 90% of the next renewal amount, and no past payments are recalculated. You cannot assign yourself.
+     *
+     * @param {Whop.AssignAffiliateMembershipsRequest} request
+     * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.ServiceUnavailableError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.memberships.assignAffiliate({
+     *         id: "id",
+     *         commission_type: "flat_fee",
+     *         commission_value: 5,
+     *         email: "affiliate@example.com"
+     *     })
+     *
+     * @example
+     *     await client.memberships.assignAffiliate({
+     *         id: "id",
+     *         commission_type: "percentage",
+     *         commission_value: 20,
+     *         user_id: "user_xxxxxxxxxxxxx"
+     *     })
+     */
+    public assignAffiliate(
+        request: Whop.AssignAffiliateMembershipsRequest,
+        requestOptions?: MembershipsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Membership> {
+        return core.HttpResponsePromise.fromPromise(this.__assignAffiliate(request, requestOptions));
+    }
+
+    private async __assignAffiliate(
+        request: Whop.AssignAffiliateMembershipsRequest,
+        requestOptions?: MembershipsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Membership>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `memberships/${core.url.encodePathParam(id)}/assign_affiliate`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/memberships/{id}/assign_affiliate",
+        );
+    }
+
+    /**
      * Cancels a membership. Pass `cancel_at_period_end: true` to stop auto-renewal and keep access until the current billing period ends. Omit it (or pass `false`) to revoke access immediately. Buyers cannot cancel buy-now-pay-later (`splitit`, `sezzle`) or non-trial split-pay memberships.
      *
      * @param {Whop.CancelMembershipsRequest} request
