@@ -87,7 +87,7 @@ export class SetupIntentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-05",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -154,7 +154,7 @@ export class SetupIntentsClient {
     }
 
     /**
-     * Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: while it is `requires_action` the buyer still has a step, so hand `client_secret` to the elements' `handleNextAction` or poll Retrieve setup status. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
+     * Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: it is `processing` while the payment method is saved in the background, and `requires_action` when the buyer still has a step. Hand `client_secret` to the elements' `handleNextAction`, or poll Retrieve setup status, for the outcome. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
      *
      * @param {Whop.CreateSetupIntentsRequest} request
      * @param {SetupIntentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -188,7 +188,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-05",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -274,7 +274,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-05",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -354,7 +354,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-05",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -441,7 +441,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-05",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
