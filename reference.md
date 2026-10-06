@@ -23451,7 +23451,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: while it is `requires_action` the buyer still has a step, so hand `client_secret` to the elements' `handleNextAction` or poll Retrieve setup status. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
+Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: it is `processing` while the payment method is saved in the background, and `requires_action` when the buyer still has a step. Hand `client_secret` to the elements' `handleNextAction`, or poll Retrieve setup status, for the outcome. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
 </dd>
 </dl>
 </dd>
