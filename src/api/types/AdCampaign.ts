@@ -19,6 +19,8 @@ export interface AdCampaign {
     budget_optimization: AdCampaign.BudgetOptimization | null;
     /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). */
     budget_type: AdCampaign.BudgetType | null;
+    /** The kind of campaign, fixed at creation. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. */
+    campaign_type: AdCampaign.CampaignType;
     /** Clicks divided by impressions, between 0 and 1. */
     click_through_rate: number;
     /** The number of clicks. */
@@ -153,6 +155,12 @@ export namespace AdCampaign {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
+    /** The kind of campaign, fixed at creation. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. */
+    export const CampaignType = {
+        Standard: "standard",
+        Search: "search",
+    } as const;
+    export type CampaignType = (typeof CampaignType)[keyof typeof CampaignType];
     /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
     export const DeliveryStatus = {
         PaymentFailed: "payment_failed",

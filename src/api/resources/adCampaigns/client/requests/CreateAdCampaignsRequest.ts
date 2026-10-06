@@ -21,6 +21,8 @@ export interface CreateAdCampaignsRequest {
     budget_optimization?: CreateAdCampaignsRequest.BudgetOptimization;
     /** Whether the budget is spent per day (`daily`) or over the campaign's full run (`lifetime`). Defaults to `daily`. */
     budget_type?: CreateAdCampaignsRequest.BudgetType;
+    /** The kind of campaign to create. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
+    campaign_type?: CreateAdCampaignsRequest.CampaignType;
     /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). Only for campaigns that own the budget. */
     desired_cost_per_result?: number;
     /** When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
@@ -57,6 +59,12 @@ export namespace CreateAdCampaignsRequest {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
+    /** The kind of campaign to create. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
+    export const CampaignType = {
+        Standard: "standard",
+        Search: "search",
+    } as const;
+    export type CampaignType = (typeof CampaignType)[keyof typeof CampaignType];
     /** The goal the campaign optimizes toward. */
     export const Objective = {
         Awareness: "awareness",

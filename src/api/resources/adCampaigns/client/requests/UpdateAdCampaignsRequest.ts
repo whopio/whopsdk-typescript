@@ -19,6 +19,8 @@ export interface UpdateAdCampaignsRequest {
     budget_optimization?: UpdateAdCampaignsRequest.BudgetOptimization;
     /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). Only changeable while the campaign is a draft; send budget_amount in the same request so the amount lands on the new type. */
     budget_type?: UpdateAdCampaignsRequest.BudgetType;
+    /** Accepted only when it matches the campaign's current type, so a read can be sent back unchanged. The type is fixed at creation. */
+    campaign_type?: UpdateAdCampaignsRequest.CampaignType;
     /** When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
     ends_at?: string;
     /** Regulated categories the campaign falls under. Editable on any campaign, draft or launched; pass an empty array to clear. */
@@ -51,6 +53,12 @@ export namespace UpdateAdCampaignsRequest {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
+    /** Accepted only when it matches the campaign's current type, so a read can be sent back unchanged. The type is fixed at creation. */
+    export const CampaignType = {
+        Standard: "standard",
+        Search: "search",
+    } as const;
+    export type CampaignType = (typeof CampaignType)[keyof typeof CampaignType];
     export type SpecialAdCategories = SpecialAdCategories.Item[];
 
     export namespace SpecialAdCategories {

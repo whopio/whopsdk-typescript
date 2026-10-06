@@ -17,6 +17,8 @@ export interface ListAdCampaignsRequest {
     order?: Whop.ListAdCampaignsRequestOrder;
     /** The sort direction. Defaults to desc. */
     direction?: Whop.ListAdCampaignsRequestDirection;
+    /** Only return campaigns of this type. */
+    campaign_type?: Whop.ListAdCampaignsRequestCampaignType;
     /** Only return campaigns created before this timestamp. */
     created_before?: string;
     /** Only return campaigns created after this timestamp. */
