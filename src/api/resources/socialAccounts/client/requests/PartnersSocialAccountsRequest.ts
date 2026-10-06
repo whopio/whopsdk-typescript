@@ -7,7 +7,7 @@
  *     }
  */
 export interface PartnersSocialAccountsRequest {
-    /** The Instagram account (a sacc_ identifier) the partners run partnership ads with. */
+    /** The brand's Instagram social account (a sacc_ identifier). */
     id: string;
     /** The Account (biz_ identifier) that advertises as the Instagram account. An account-scoped API key may omit this to default to its own account. */
     account_id?: string;

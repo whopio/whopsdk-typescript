@@ -26,16 +26,16 @@ describe("AudiencesClient", () => {
                             {
                                 object: "facebook_page",
                                 event: "engaged",
+                                external_account_id: "sacc_xxxxxxxxxxxxxx",
                                 retention_days: 30,
-                                social_account_id: "sacc_xxxxxxxxxxxxxx",
                             },
                         ],
                         include: [
                             {
                                 object: "facebook_page",
                                 event: "engaged",
+                                external_account_id: "sacc_xxxxxxxxxxxxxx",
                                 retention_days: 30,
-                                social_account_id: "sacc_xxxxxxxxxxxxxx",
                             },
                         ],
                         platform: "meta",
@@ -123,8 +123,8 @@ describe("AudiencesClient", () => {
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 platform: "meta",
@@ -141,16 +141,16 @@ describe("AudiencesClient", () => {
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 include: [
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 platform: "meta",
@@ -190,8 +190,8 @@ describe("AudiencesClient", () => {
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 platform: "meta",
@@ -325,16 +325,16 @@ describe("AudiencesClient", () => {
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 include: [
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 platform: "meta",
@@ -420,16 +420,16 @@ describe("AudiencesClient", () => {
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 include: [
                     {
                         object: "facebook_page",
                         event: "engaged",
+                        external_account_id: "sacc_xxxxxxxxxxxxxx",
                         retention_days: 30,
-                        social_account_id: "sacc_xxxxxxxxxxxxxx",
                     },
                 ],
                 platform: "meta",

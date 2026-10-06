@@ -10,6 +10,5 @@
 export interface LeadFormsSocialAccountsRequest {
     /** The social account (a sacc_ identifier) whose lead forms to list. */
     id: string;
-    /** The Account (a biz_ identifier) the social account is connected to. */
     account_id: string;
 }

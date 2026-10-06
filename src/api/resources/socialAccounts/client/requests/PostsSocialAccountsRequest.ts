@@ -10,9 +10,7 @@
 export interface PostsSocialAccountsRequest {
     /** The social account (a sacc_ identifier) whose posts to list. */
     id: string;
-    /** The Account (a biz_ identifier) the social account is connected to. */
     account_id: string;
-    /** Return only the single post with this platform id, instead of the full list. */
     post_id?: string;
     /** Number of results to return from the start of the range. */
     first?: number;

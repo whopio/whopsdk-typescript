@@ -9,6 +9,6 @@
 export interface RefreshSocialAccountsRequest {
     /** The social account (a sacc_ identifier) to refresh. */
     id: string;
-    /** The Account (biz_ identifier) the social account is connected to. An account-scoped API key may omit this to default to its own account. */
+    /** The Account (biz_ identifier) the external account is connected to. An account-scoped API key may omit this to default to its own account. */
     account_id?: string;
 }

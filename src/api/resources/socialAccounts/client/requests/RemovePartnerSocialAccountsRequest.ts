@@ -8,7 +8,7 @@
  *     }
  */
 export interface RemovePartnerSocialAccountsRequest {
-    /** The Instagram account (a sacc_ identifier) the partner runs partnership ads with. */
+    /** The brand's Instagram social account (a sacc_ identifier). */
     id: string;
     /** The partner creator's social account (a sacc_ identifier). */
     partner_id: string;

@@ -42,6 +42,7 @@ export namespace PostAdUpdatedPayload {
         descriptions: Whop.AdText[];
         /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
         existing_post_id: string | null;
+        external_accounts: Whop.AdEntityReference[];
         headlines: Whop.AdText[];
         /** Unique identifier for the ad, prefixed `ad_`. */
         id: string;
@@ -65,7 +66,6 @@ export namespace PostAdUpdatedPayload {
         /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
         post_thumbnail_url: string | null;
         primary_texts: Whop.AdText[];
-        social_accounts: Whop.AdEntityReference[];
         /** Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and `rejected` come from ad review. */
         status: Data.Status;
         /** Display title of the ad. */
