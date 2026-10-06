@@ -560,6 +560,8 @@ describe("PayoutsClient", () => {
                 },
             },
             payout_request_id: "cofr_xxxxxxxxxxxxx",
+            recipient_name: "Rishabh J.",
+            sender_name: "Whop Blueprints",
             source: "api",
             speed: "standard",
             statement_descriptor: "MYCOMPANY",
@@ -597,27 +599,6 @@ describe("PayoutsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/payouts/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payouts.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/payouts/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -627,28 +608,7 @@ describe("PayoutsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payouts/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payouts.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("retrieve (5)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,

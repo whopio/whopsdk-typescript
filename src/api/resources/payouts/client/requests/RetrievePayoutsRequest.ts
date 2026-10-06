@@ -9,8 +9,8 @@
 export interface RetrievePayoutsRequest {
     /** Payout ID, prefixed `wdrl_` for a payout returned by `GET /payouts` or `cofr_` for the payout request returned by `POST /payouts`. */
     id: string;
-    /** Owning account ID, prefixed `biz_`. Provide exactly one of `account_id` or `user_id`. */
+    /** Optional owning account ID, prefixed `biz_`. The payout ID identifies its ledger. If supplied, this must match the owner and cannot be combined with `user_id`. */
     account_id?: string;
-    /** Owning user ID, prefixed `user_`. Provide exactly one of `account_id` or `user_id`. */
+    /** Optional owning user ID, prefixed `user_`. The payout ID identifies its ledger. If supplied, this must match the owner and cannot be combined with `account_id`. */
     user_id?: string;
 }

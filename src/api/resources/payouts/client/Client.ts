@@ -335,14 +335,12 @@ export class PayoutsClient {
     }
 
     /**
-     * Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object.
+     * Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object. Authentication is optional. Anyone with the ID can view payout tracking details, including notes, trace code, exchange rate, and payout request ID. Accounting fields require payout:withdrawal:read on the owning ledger. A supplied invalid credential returns 401.
      *
      * @param {Whop.RetrievePayoutsRequest} request
      * @param {PayoutsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -404,12 +402,8 @@ export class PayoutsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
