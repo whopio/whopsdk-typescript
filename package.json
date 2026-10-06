@@ -484,6 +484,17 @@
             },
             "default": "./dist/cjs/api/resources/feeMarkups/exports.js"
         },
+        "./feedbackSubmissions": {
+            "import": {
+                "types": "./dist/esm/api/resources/feedbackSubmissions/exports.d.mts",
+                "default": "./dist/esm/api/resources/feedbackSubmissions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/feedbackSubmissions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/feedbackSubmissions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/feedbackSubmissions/exports.js"
+        },
         "./files": {
             "import": {
                 "types": "./dist/esm/api/resources/files/exports.d.mts",
