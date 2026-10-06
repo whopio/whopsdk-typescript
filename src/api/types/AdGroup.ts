@@ -93,6 +93,7 @@ export interface AdGroup {
     /** The number of impressions. */
     impressions: number;
     issues: Whop.AdPlatformIssue[];
+    keywords?: Whop.AdGroupKeyword[] | undefined;
     languages: string[];
     /** USD value attributed to lead events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
     lead_value: number;

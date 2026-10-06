@@ -1,6 +1,7 @@
 export * from "./DeleteAdCampaignsResponse.js";
 export * from "./DuplicateAdCampaignsResponse.js";
 export * from "./ListAdCampaignsRequestAttributionModel.js";
+export * from "./ListAdCampaignsRequestCampaignType.js";
 export * from "./ListAdCampaignsRequestDirection.js";
 export * from "./ListAdCampaignsRequestOrder.js";
 export * from "./ListAdCampaignsRequestStatus.js";

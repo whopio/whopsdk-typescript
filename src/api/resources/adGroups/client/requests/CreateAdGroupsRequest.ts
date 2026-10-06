@@ -40,6 +40,8 @@ export interface CreateAdGroupsRequest {
     ends_at?: string;
     /** Cap on how often one person sees ads from this ad group. Only available when the ad group optimizes for reach or ThruPlay. Under a campaign budget every ad group must use the same cap, which applies across the whole campaign, and only with the awareness objective (reach or ThruPlay ad groups) or engagement (ThruPlay). Fixed once the campaign launches; `null` clears it before then. */
     frequency_cap?: CreateAdGroupsRequest.FrequencyCap | null;
+    /** Search terms the ad group's ads can show for, and terms they never show for. Only search campaigns take keywords, and each of their ad groups needs at least one before launch. Replaces the stored list; omit to keep it. */
+    keywords?: CreateAdGroupsRequest.Keywords.Item[];
     /** Languages to target, as ISO 639 codes such as `en` or `es`. Empty or omitted targets all languages. */
     languages?: string[];
     /** Apps the conversation opens in. Required when setting `conversion_location` to `messaging`, and rejected unless the ad group's conversion location is `messaging`. */
@@ -206,6 +208,29 @@ export namespace CreateAdGroupsRequest {
         maximum_impressions?: number | undefined;
         /** Length of the rolling window, in days. */
         per_days?: number | undefined;
+    }
+
+    export type Keywords = Keywords.Item[];
+
+    export namespace Keywords {
+        export interface Item {
+            /** How closely a search has to match: `broad` also reaches related searches, `phrase` needs the meaning of the phrase, and `exact` needs the same meaning as the term. Defaults to `broad`. */
+            match_type?: Item.MatchType | undefined;
+            /** Set to `true` to keep the ads from showing for this term instead. Defaults to `false`. */
+            negative?: boolean | undefined;
+            /** The search term, up to 80 characters and 10 words. Symbols such as ! @ % , * = ^ ; ~ | < > ? ( ) { } and quotes aren't allowed: set the match with match_type instead. */
+            text: string;
+        }
+
+        export namespace Item {
+            /** How closely a search has to match: `broad` also reaches related searches, `phrase` needs the meaning of the phrase, and `exact` needs the same meaning as the term. Defaults to `broad`. */
+            export const MatchType = {
+                Broad: "broad",
+                Phrase: "phrase",
+                Exact: "exact",
+            } as const;
+            export type MatchType = (typeof MatchType)[keyof typeof MatchType];
+        }
     }
 
     export type MessageApps = MessageApps.Item[];
