@@ -13476,6 +13476,73 @@ await client.feeMarkups.delete({
 </dl>
 </details>
 
+## FeedbackSubmissions
+<details><summary><code>client.feedbackSubmissions.<a href="/src/api/resources/feedbackSubmissions/client/Client.ts">create</a>({ ...params }) -> Whop.CreateFeedbackSubmissionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submits an issue or an unanswered question to Whop for internal review, recorded under the authenticated user, account, or app. Returns a receipt once the submission is accepted; processing is asynchronous and no reply is sent. Accepts user, account, and app credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.feedbackSubmissions.create({
+    content: "The docs omit the required permission",
+    source: "mcp_report_feedback"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateFeedbackSubmissionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FeedbackSubmissionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Files
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.File_, Whop.ListFilesResponse&gt;</code></summary>
 <dl>
