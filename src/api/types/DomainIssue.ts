@@ -21,6 +21,8 @@ export namespace DomainIssue {
         DomainUnavailable: "domain_unavailable",
         PremiumNotSupported: "premium_not_supported",
         UnsupportedTld: "unsupported_tld",
+        RegistrationUnavailable: "registration_unavailable",
+        RegistrationPremium: "registration_premium",
         RegistrationFailed: "registration_failed",
         RenewalFailed: "renewal_failed",
         PaymentActionRequired: "payment_action_required",
