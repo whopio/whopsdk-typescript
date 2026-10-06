@@ -10,8 +10,8 @@ import type * as Whop from "../../../../index.js";
  *             include: [{
  *                     object: "facebook_page",
  *                     event: "engaged",
- *                     retention_days: 30,
- *                     social_account_id: "sacc_xxxxxxxxxxxxxx"
+ *                     external_account_id: "sacc_xxxxxxxxxxxxxx",
+ *                     retention_days: 30
  *                 }],
  *             platform: "meta"
  *         },

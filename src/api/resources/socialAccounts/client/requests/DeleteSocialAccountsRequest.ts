@@ -9,8 +9,6 @@
 export interface DeleteSocialAccountsRequest {
     /** The ID of the social account to disconnect. */
     id: string;
-    /** The Account that the social account is connected to. Provide either this or user_id. */
     account_id?: string;
-    /** The User that the social account is connected to. Provide either this or account_id. */
     user_id?: string;
 }

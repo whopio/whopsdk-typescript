@@ -33,6 +33,7 @@ export namespace Export {
         CheckoutConfigurations: "checkout_configurations",
         Disputes: "disputes",
         Events: "events",
+        ExternalAccounts: "external_accounts",
         FinancialActivity: "financial-activity",
         PayoutMethods: "payout_methods",
         Payouts: "payouts",

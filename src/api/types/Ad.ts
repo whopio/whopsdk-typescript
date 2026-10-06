@@ -63,6 +63,7 @@ export interface Ad {
     descriptions: Whop.AdText[];
     /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
     existing_post_id: string | null;
+    external_accounts: Whop.AdEntityReference[];
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
     headlines: Whop.AdText[];
@@ -114,7 +115,6 @@ export interface Ad {
     schedule_value: number;
     /** Whop pixel-attributed schedule events, last-click. */
     schedules: number;
-    social_accounts: Whop.AdEntityReference[];
     /** The amount charged, in spend_currency. */
     spend: number;
     /** The ISO 4217 currency code of all monetary metrics. */

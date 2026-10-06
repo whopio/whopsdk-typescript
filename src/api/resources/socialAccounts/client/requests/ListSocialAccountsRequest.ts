@@ -7,17 +7,17 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListSocialAccountsRequest {
-    /** The Account that the social accounts are connected to. Provide either this or user_id. */
+    /** The Account that the external accounts are connected to. Provide either this or user_id. */
     account_id?: string;
-    /** The User that the social accounts are connected to. Provide either this or account_id. */
+    /** The User that the external accounts are connected to. Provide either this or account_id. */
     user_id?: string;
-    /** Only return social accounts for the platform that is specified. */
+    /** Only return external accounts for the platform that is specified. */
     platform?: Whop.ListSocialAccountsRequestPlatform;
-    /** Only return social accounts linked with this trust level, such as `oauth` for accounts connected through OAuth. */
+    /** Only return external accounts linked with this trust level, such as `oauth` for accounts connected through OAuth. */
     trust_level?: Whop.ListSocialAccountsRequestTrustLevel;
-    /** Only return social accounts that are verified on the platform. */
+    /** Only return external accounts that are verified on the platform. */
     verified?: boolean;
-    /** Only return social accounts that have these scopes. */
+    /** Only return external accounts that have these scopes. */
     scopes?: Whop.ListSocialAccountsRequestScopesItem | Whop.ListSocialAccountsRequestScopesItem[];
     /** Number of results to return from the start of the range. */
     first?: number;
@@ -27,7 +27,7 @@ export interface ListSocialAccountsRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
-    /** The field to sort social accounts by. */
+    /** The field to sort external accounts by. */
     order?: Whop.ListSocialAccountsRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListSocialAccountsRequestDirection;

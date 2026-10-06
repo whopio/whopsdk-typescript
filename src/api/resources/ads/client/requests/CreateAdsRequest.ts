@@ -17,6 +17,8 @@ export interface CreateAdsRequest {
     descriptions?: CreateAdsRequest.Descriptions.Item[];
     /** Promote a post you already published instead of uploading creatives — a Facebook post or Instagram media id. Mutually exclusive with creatives. Pair with post_source. */
     existing_post_id?: string;
+    /** The external accounts the ad runs under — a connected Facebook page and, optionally, an Instagram profile. */
+    external_accounts?: CreateAdsRequest.ExternalAccounts.Item[];
     /** The headline shown on the ad. Entries without a language are the ad's own copy; add one entry per other language on a Meta ad with `translations`. */
     headlines?: CreateAdsRequest.Headlines.Item[];
     /** Instant lead form for the ad. Only allowed when the ad group's conversion_location is an instant-form destination (instant_forms, instant_forms_and_messenger, website_and_instant_forms). Mutually exclusive with lead_form_id. */
@@ -33,8 +35,6 @@ export interface CreateAdsRequest {
     post_source?: CreateAdsRequest.PostSource;
     /** The primary text shown in the ad body. Entries without a language are the ad's own copy (several make text variations); add one entry per other language on a Meta ad with `translations`. */
     primary_texts?: CreateAdsRequest.PrimaryTexts.Item[];
-    /** The social accounts the ad runs under — a connected Facebook page and, optionally, an Instagram profile. */
-    social_accounts?: CreateAdsRequest.SocialAccounts.Item[];
     /** The display name of the ad. */
     title?: string;
     /** Shows a Meta ad in other languages. Each viewer sees the version for their language; everyone else sees the ad's own copy. Tag every copy and creatives entry with its language: the ad's own with `source_language`, and give every other language a `primary_texts` and `headlines` entry (a `descriptions` entry and a `creatives` entry are optional), or list it in `automatic_languages`. Needs a website destination, one image or video, and exactly one primary text and headline of the ad's own (and at most one description), with no Dynamic Creative or crops. Replaced as a whole when sent, so send `automatic_languages` with `source_language`. null turns translations off and deletes their media. Meta-only. */
@@ -116,6 +116,15 @@ export namespace CreateAdsRequest {
             language?: (string | null) | undefined;
             /** The text shown to viewers. */
             text: string;
+        }
+    }
+
+    export type ExternalAccounts = ExternalAccounts.Item[];
+
+    export namespace ExternalAccounts {
+        export interface Item {
+            /** External account ID, prefixed `sacc_`. */
+            id?: string | undefined;
         }
     }
 
@@ -322,15 +331,6 @@ export namespace CreateAdsRequest {
             language?: (string | null) | undefined;
             /** The text shown to viewers. */
             text: string;
-        }
-    }
-
-    export type SocialAccounts = SocialAccounts.Item[];
-
-    export namespace SocialAccounts {
-        export interface Item {
-            /** Social account ID, prefixed `sacc_`. */
-            id?: string | undefined;
         }
     }
 

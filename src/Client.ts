@@ -40,6 +40,7 @@ import { EventsClient } from "./api/resources/events/client/Client.js";
 import { ExperiencesClient } from "./api/resources/experiences/client/Client.js";
 import { ExperimentsClient } from "./api/resources/experiments/client/Client.js";
 import { ExportsClient } from "./api/resources/exports/client/Client.js";
+import { ExternalAccountsClient } from "./api/resources/externalAccounts/client/Client.js";
 import { FeeMarkupsClient } from "./api/resources/feeMarkups/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
 import { FinancialActivityClient } from "./api/resources/financialActivity/client/Client.js";
@@ -143,6 +144,7 @@ export class WhopClient {
     protected _experiences: ExperiencesClient | undefined;
     protected _experiments: ExperimentsClient | undefined;
     protected _exports: ExportsClient | undefined;
+    protected _externalAccounts: ExternalAccountsClient | undefined;
     protected _feeMarkups: FeeMarkupsClient | undefined;
     protected _files: FilesClient | undefined;
     protected _financialActivity: FinancialActivityClient | undefined;
@@ -356,6 +358,10 @@ export class WhopClient {
 
     public get exports(): ExportsClient {
         return (this._exports ??= new ExportsClient(this._options));
+    }
+
+    public get externalAccounts(): ExternalAccountsClient {
+        return (this._externalAccounts ??= new ExternalAccountsClient(this._options));
     }
 
     public get feeMarkups(): FeeMarkupsClient {

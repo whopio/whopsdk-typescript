@@ -3,11 +3,11 @@
 export interface AudienceEngagementLeadFormRule {
     /** Interaction that qualifies a person for this rule. */
     event: AudienceEngagementLeadFormRule.Event;
+    /** Connected external account ID, prefixed `sacc_`, with advertising access. */
+    external_account_id: string;
     platform_form_ids: string[];
     /** Rolling membership window in days, from 1 to 90. */
     retention_days: number;
-    /** Connected social account ID, prefixed `sacc_`, with advertising access. */
-    social_account_id: string;
 }
 
 export namespace AudienceEngagementLeadFormRule {

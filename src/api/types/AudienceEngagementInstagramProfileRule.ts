@@ -3,10 +3,10 @@
 export interface AudienceEngagementInstagramProfileRule {
     /** Interaction that qualifies a person for this rule. */
     event: AudienceEngagementInstagramProfileRule.Event;
+    /** Connected external account ID, prefixed `sacc_`, with advertising access. */
+    external_account_id: string;
     /** Rolling membership window in days, from 1 to 730. */
     retention_days: number;
-    /** Connected social account ID, prefixed `sacc_`, with advertising access. */
-    social_account_id: string;
 }
 
 export namespace AudienceEngagementInstagramProfileRule {

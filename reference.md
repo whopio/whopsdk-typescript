@@ -5217,8 +5217,8 @@ await client.audiences.create({
         include: [{
                 object: "facebook_page",
                 event: "engaged",
-                retention_days: 30,
-                social_account_id: "sacc_xxxxxxxxxxxxxx"
+                external_account_id: "sacc_xxxxxxxxxxxxxx",
+                retention_days: 30
             }],
         platform: "meta"
     },
@@ -12901,6 +12901,343 @@ await client.exports.retrieve({
 <dd>
 
 **requestOptions:** `ExportsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## External Accounts
+<details><summary><code>client.externalAccounts.<a href="/src/api/resources/externalAccounts/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ExternalAccount, Whop.ListExternalAccountsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the external accounts linked to an account or user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.externalAccounts.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.externalAccounts.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListExternalAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExternalAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.<a href="/src/api/resources/externalAccounts/client/Client.ts">create</a>({ ...params }) -> Whop.ExternalAccount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates or returns a Whop-managed Facebook page or TikTok account for an account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.create({
+    platform: "facebook"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateExternalAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExternalAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.<a href="/src/api/resources/externalAccounts/client/Client.ts">connect</a>({ ...params }) -> Whop.ConnectExternalAccountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Starts an OAuth connection flow and returns an authorize_url where the user can connect an external account. LinkedIn supports personal profiles only, with scopes omitted. TikTok connects the authenticated user’s profile when scopes are omitted or company advertising assets with advertise. Meta Business and Snapchat support advertising connections only and require advertise. Personal profile connections must be completed in a browser signed in as the initiating Whop user.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.connect({
+    platform: "meta_business",
+    redirect_url: "https://example.com/settings/social-accounts"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ConnectExternalAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExternalAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.<a href="/src/api/resources/externalAccounts/client/Client.ts">delete</a>({ ...params }) -> Whop.DeleteExternalAccountsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disconnects an external account from an account or user without deleting the underlying platform account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.delete({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.DeleteExternalAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExternalAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.<a href="/src/api/resources/externalAccounts/client/Client.ts">refresh</a>({ ...params }) -> Whop.ExternalAccount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Refreshes the state of an external account. Use it to clear an `error` that has been resolved.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.refresh({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RefreshExternalAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExternalAccountsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -23990,7 +24327,7 @@ await client.shipments.update({
 <dl>
 <dd>
 
-Lists the social accounts linked to an account or user.
+Deprecated compatibility endpoint. List external accounts with `GET /external_accounts` instead.
 </dd>
 </dl>
 </dd>
@@ -24065,7 +24402,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates or returns a Whop-managed Facebook page or TikTok account for an account.
+Deprecated compatibility endpoint. Create external accounts with `POST /external_accounts` instead.
 </dd>
 </dl>
 </dd>
@@ -24130,7 +24467,7 @@ await client.socialAccounts.create({
 <dl>
 <dd>
 
-Starts an OAuth connection flow and returns an authorize_url where the user can connect a social account. LinkedIn supports personal profiles only, with scopes omitted. TikTok connects the authenticated user’s profile when scopes are omitted or company advertising assets with advertise. Meta Business and Snapchat support advertising connections only and require advertise. Personal profile connections must be completed in a browser signed in as the initiating Whop user.
+Deprecated compatibility endpoint. Connect external accounts with `POST /external_accounts/connect` instead.
 </dd>
 </dl>
 </dd>
@@ -24196,7 +24533,7 @@ await client.socialAccounts.connect({
 <dl>
 <dd>
 
-Disconnects a social account from an account or user without deleting the underlying platform account.
+Deprecated compatibility endpoint. Disconnect external accounts with `DELETE /external_accounts/{id}` instead.
 </dd>
 </dl>
 </dd>
@@ -24261,7 +24598,7 @@ await client.socialAccounts.delete({
 <dl>
 <dd>
 
-Lists the active lead (instant) forms that already exist on a connected Facebook page, so an ad can reuse one as its `lead_gen_form_id` instead of authoring a new form. Every active form comes back in a single response — the list is not paginated.
+Deprecated compatibility endpoint. List lead forms with `GET /external_accounts/{id}/lead_forms` instead.
 </dd>
 </dl>
 </dd>
@@ -24327,7 +24664,7 @@ await client.socialAccounts.leadForms({
 <dl>
 <dd>
 
-Lists the creators an Instagram account runs partnership ads with, and where each creator's permission stands.
+Deprecated compatibility endpoint. List partners with `GET /external_accounts/{external_account_id}/partners` instead.
 </dd>
 </dl>
 </dd>
@@ -24406,7 +24743,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Invites an Instagram creator to run partnership ads with an Instagram account. The creator approves the invitation in the Instagram app, and `partnership_status` stays `pending` until they do; [refresh](/api-reference/beta/social-accounts/refresh) the partner to pick up their answer.
+Deprecated compatibility endpoint. Add partners with `POST /external_accounts/{external_account_id}/partners` instead.
 </dd>
 </dl>
 </dd>
@@ -24472,7 +24809,7 @@ await client.socialAccounts.addPartner({
 <dl>
 <dd>
 
-Revokes a creator's permission to run partnership ads with an Instagram account. Every account that advertises as the Instagram account loses the partner, since the permission belongs to the Instagram account.
+Deprecated compatibility endpoint. Remove partners with `DELETE /external_accounts/{external_account_id}/partners/{id}` instead.
 </dd>
 </dl>
 </dd>
@@ -24538,7 +24875,7 @@ await client.socialAccounts.removePartner({
 <dl>
 <dd>
 
-Lists the existing posts of a connected Facebook page, Instagram account, or TikTok account.
+Deprecated compatibility endpoint. List posts with `GET /external_accounts/{id}/posts` instead.
 </dd>
 </dl>
 </dd>
@@ -24619,7 +24956,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Refreshes the state of a social account. Use it to clear an `error` that has been resolved.
+Deprecated compatibility endpoint. Refresh external accounts with `POST /external_accounts/{id}/refresh` instead.
 </dd>
 </dl>
 </dd>
@@ -29743,6 +30080,367 @@ await client.bounties.submissions.retrieve({
 <dd>
 
 **requestOptions:** `SubmissionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ExternalAccounts Partners
+<details><summary><code>client.externalAccounts.partners.<a href="/src/api/resources/externalAccounts/resources/partners/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ExternalAccount, Whop.ListPartnersResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the creators an Instagram account runs partnership ads with, and where each creator's permission stands.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.externalAccounts.partners.list({
+    external_account_id: "external_account_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.externalAccounts.partners.list({
+    external_account_id: "external_account_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.externalAccounts.ListPartnersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PartnersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.partners.<a href="/src/api/resources/externalAccounts/resources/partners/client/Client.ts">create</a>({ ...params }) -> Whop.ExternalAccount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Invites an Instagram creator to run partnership ads with an Instagram account. The creator approves the invitation in the Instagram app, and `partnership_status` stays `pending` until they do; [refresh](/api-reference/beta/external-accounts/refresh) the partner to pick up their answer.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.partners.create({
+    external_account_id: "external_account_id",
+    username: "@luverahealth"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.externalAccounts.CreatePartnersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PartnersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.externalAccounts.partners.<a href="/src/api/resources/externalAccounts/resources/partners/client/Client.ts">delete</a>({ ...params }) -> Whop.DeletePartnersResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Revokes a creator's permission to run partnership ads with an Instagram account. Every account that advertises as the Instagram account loses the partner, since the permission belongs to the Instagram account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.partners.delete({
+    external_account_id: "external_account_id",
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.externalAccounts.DeletePartnersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PartnersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ExternalAccounts LeadForms
+<details><summary><code>client.externalAccounts.leadForms.<a href="/src/api/resources/externalAccounts/resources/leadForms/client/Client.ts">list</a>({ ...params }) -> Whop.ListLeadFormsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the active lead (instant) forms that already exist on a connected Facebook page, so an ad can reuse one as its `lead_gen_form_id` instead of authoring a new form. Every active form comes back in a single response — the list is not paginated.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.externalAccounts.leadForms.list({
+    id: "id",
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.externalAccounts.ListLeadFormsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LeadFormsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ExternalAccounts Posts
+<details><summary><code>client.externalAccounts.posts.<a href="/src/api/resources/externalAccounts/resources/posts/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ExternalAccountPost, Whop.ListPostsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the existing posts of a connected Facebook page, Instagram account, or TikTok account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.externalAccounts.posts.list({
+    id: "id",
+    account_id: "account_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.externalAccounts.posts.list({
+    id: "id",
+    account_id: "account_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.externalAccounts.ListPostsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PostsClient.RequestOptions` 
     
 </dd>
 </dl>
