@@ -27,6 +27,10 @@ export interface UpdatePreferencesResponse {
     economic_intelligence_fee_percentage: number | null;
     /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or the account is still on the Economic Intelligence waitlist. */
     economic_intelligence_offers: UpdatePreferencesResponse.EconomicIntelligenceOffers.Item[] | null;
+    /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
+    preferred_settlement_currency: UpdatePreferencesResponse.PreferredSettlementCurrency | null;
+    /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */
+    preferred_settlement_currency_changeable_at: string | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: UpdatePreferencesResponse.SubscriptionFailureBehavior;
 }
@@ -226,6 +230,16 @@ export namespace UpdatePreferencesResponse {
         }
     }
 
+    /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
+    export const PreferredSettlementCurrency = {
+        Usd: "usd",
+        Eur: "eur",
+        Gbp: "gbp",
+        Cad: "cad",
+        Aud: "aud",
+    } as const;
+    export type PreferredSettlementCurrency =
+        (typeof PreferredSettlementCurrency)[keyof typeof PreferredSettlementCurrency];
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     export const SubscriptionFailureBehavior = {
         Cancel: "cancel",
