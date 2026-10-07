@@ -29,13 +29,13 @@ export interface EconomicIntelligence {
     result_url: string | null;
     /** The user who started the run, prefixed `user_`, or `null` if it has not run or was started without a user, such as with an API key. */
     run_by_user_id: string | null;
-    /** When Whop AI's run ended, whether executed or incomplete, as an ISO 8601 timestamp, or `null` if it has not ended. */
+    /** When the run ended, whether executed or incomplete, as an ISO 8601 timestamp, or `null` if it has not ended. */
     run_ended_at: string | null;
-    /** When Whop AI started carrying out the recommendation, as an ISO 8601 timestamp, or `null` if it has not run. */
+    /** When the run started, by Whop AI or the recommendation's API calls, as an ISO 8601 timestamp, or `null` if it has not run. */
     run_started_at: string | null;
     /** How the user rated this recommendation, or `null` if they have not rated it */
     sentiment: EconomicIntelligence.Sentiment | null;
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI carries it out; `executed` when carried out; `incomplete` when Whop AI's run ended without carrying it out; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
     status: EconomicIntelligence.Status;
     /** When the recommendation was rejected or replaced, as an ISO 8601 timestamp, or `null` if neither has occurred. */
     superseded_at: string | null;
@@ -54,7 +54,7 @@ export namespace EconomicIntelligence {
         Negative: "negative",
     } as const;
     export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI carries it out; `executed` when carried out; `incomplete` when Whop AI's run ended without carrying it out; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
     export const Status = {
         Queued: "queued",
         Pending: "pending",
