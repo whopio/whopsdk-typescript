@@ -25,7 +25,9 @@ export interface UpdatePreferencesRequest {
     cards_notifications?: boolean;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. Requires the `payment:dispute` scope on your API key. */
     dispute_fighter_enabled?: boolean;
-    /** Turns on Economic Intelligence for the duration with this `key` in `economic_intelligence_offers`, at that duration's fee. It can't be changed or turned off until `economic_intelligence_ends_at`. Requires the `company:update` scope on your API key. */
+    /** `false` stops renewing: Economic Intelligence stays on until the end of the current week. `true` keeps it renewing again before then, or turns it on like the `weekly` offer. Can't be combined with `economic_intelligence_duration_key`. Requires the `company:update` scope on your API key. */
+    economic_intelligence_auto_renew?: boolean;
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once every 7 days (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
@@ -105,8 +107,9 @@ export namespace UpdatePreferencesRequest {
         shop_domain?: string | undefined;
     }
 
-    /** Turns on Economic Intelligence for the duration with this `key` in `economic_intelligence_offers`, at that duration's fee. It can't be changed or turned off until `economic_intelligence_ends_at`. Requires the `company:update` scope on your API key. */
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */
     export const EconomicIntelligenceDurationKey = {
+        Weekly: "weekly",
         SevenDays: "7_days",
         OneDay: "1_day",
         OneHour: "1_hour",

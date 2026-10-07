@@ -22,11 +22,15 @@ export interface AccountPreferences {
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
     economic_intelligence: boolean;
-    /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or has no end date. */
+    /** Whether Economic Intelligence renews itself every week, with no end date. Turn it on with the `weekly` offer. Set it to `false` to stop renewing, which keeps Economic Intelligence on until the end of the current week, shown in `economic_intelligence_ends_at`; set it back to `true` before then to keep renewing. */
+    economic_intelligence_auto_renew: boolean;
+    /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or renews automatically. */
     economic_intelligence_ends_at: string | null;
     /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. `null` when Economic Intelligence is off. */
     economic_intelligence_fee_percentage: number | null;
-    economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[] | null;
+    economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[];
+    /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
+    economic_intelligence_previous_period: Whop.AccountEconomicIntelligencePreviousPeriod | null;
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: AccountPreferences.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */
