@@ -378,126 +378,9 @@ describe("AccountsClient", () => {
                     total_usd: "50.00",
                     trading: {
                         account_id: null,
-                        hyperliquid: {
-                            address: "address",
-                            builder_fee_bps: null,
-                            margin_summary: {
-                                account_value: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                                total_margin_used: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                                total_position_notional: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                                total_raw_usd: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                                withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
-                            websocket_url: "websocket_url",
-                        },
+                        hyperliquid: null,
                         id: "id",
                         object: "trading_account",
-                        open_orders: [
-                            {
-                                client_order_id: null,
-                                created_at: null,
-                                hyperliquid: {
-                                    reduce_only: null,
-                                    trigger_price: {
-                                        amount: "-1234.56",
-                                        currency: "usd",
-                                        decimals: 2,
-                                        display_decimals: 2,
-                                    },
-                                },
-                                id: "id",
-                                market: "market",
-                                object: "trading_order",
-                                order_type: "limit",
-                                original_size: null,
-                                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                provider_order_id: null,
-                                side: "buy",
-                                size: "size",
-                                status: "open",
-                                status_updated_at: null,
-                                time_in_force: null,
-                            },
-                        ],
-                        positions: [
-                            {
-                                entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                hyperliquid: {
-                                    cumulative_funding: {
-                                        all_time: {
-                                            amount: "-1234.56",
-                                            currency: "usd",
-                                            decimals: 2,
-                                            display_decimals: 2,
-                                        },
-                                        since_change: {
-                                            amount: "-1234.56",
-                                            currency: "usd",
-                                            decimals: 2,
-                                            display_decimals: 2,
-                                        },
-                                        since_open: {
-                                            amount: "-1234.56",
-                                            currency: "usd",
-                                            decimals: 2,
-                                            display_decimals: 2,
-                                        },
-                                    },
-                                    leverage: { type: "cross", value: 1 },
-                                    liquidation_price: {
-                                        amount: "-1234.56",
-                                        currency: "usd",
-                                        decimals: 2,
-                                        display_decimals: 2,
-                                    },
-                                    margin_used: {
-                                        amount: "-1234.56",
-                                        currency: "usd",
-                                        decimals: 2,
-                                        display_decimals: 2,
-                                    },
-                                    return_on_equity: "return_on_equity",
-                                },
-                                id: "id",
-                                market: "market",
-                                object: "trading_position",
-                                position_value: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                                side: "long",
-                                size: "size",
-                                unrealized_pnl: {
-                                    amount: "-1234.56",
-                                    currency: "usd",
-                                    decimals: 2,
-                                    display_decimals: 2,
-                                },
-                            },
-                        ],
                         provider: "hyperliquid",
                         user_id: null,
                     },
@@ -946,74 +829,11 @@ describe("AccountsClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
-                    builder_fee_bps: "builder_fee_bps",
-                    margin_summary: {
-                        account_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_position_notional: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        total_raw_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
                 id: "id",
                 object: "trading_account",
-                open_orders: [
-                    {
-                        client_order_id: null,
-                        created_at: null,
-                        hyperliquid: {
-                            reduce_only: null,
-                            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_order",
-                        order_type: "limit",
-                        original_size: null,
-                        price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        provider_order_id: null,
-                        side: "buy",
-                        size: "size",
-                        status: "open",
-                        status_updated_at: null,
-                        time_in_force: null,
-                    },
-                ],
-                positions: [
-                    {
-                        entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        hyperliquid: {
-                            cumulative_funding: {
-                                all_time: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_change: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_open: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            leverage: { type: "cross", value: 1 },
-                            liquidation_price: {
-                                amount: "-1234.56",
-                                currency: "usd",
-                                decimals: 2,
-                                display_decimals: 2,
-                            },
-                            margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            return_on_equity: "return_on_equity",
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_position",
-                        position_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        side: "long",
-                        size: "size",
-                        unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                ],
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
@@ -1497,74 +1317,11 @@ describe("AccountsClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
-                    builder_fee_bps: "builder_fee_bps",
-                    margin_summary: {
-                        account_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_position_notional: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        total_raw_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
                 id: "id",
                 object: "trading_account",
-                open_orders: [
-                    {
-                        client_order_id: null,
-                        created_at: null,
-                        hyperliquid: {
-                            reduce_only: null,
-                            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_order",
-                        order_type: "limit",
-                        original_size: null,
-                        price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        provider_order_id: null,
-                        side: "buy",
-                        size: "size",
-                        status: "open",
-                        status_updated_at: null,
-                        time_in_force: null,
-                    },
-                ],
-                positions: [
-                    {
-                        entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        hyperliquid: {
-                            cumulative_funding: {
-                                all_time: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_change: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_open: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            leverage: { type: "cross", value: 1 },
-                            liquidation_price: {
-                                amount: "-1234.56",
-                                currency: "usd",
-                                decimals: 2,
-                                display_decimals: 2,
-                            },
-                            margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            return_on_equity: "return_on_equity",
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_position",
-                        position_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        side: "long",
-                        size: "size",
-                        unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                ],
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
@@ -1617,25 +1374,6 @@ describe("AccountsClient", () => {
         await expect(async () => {
             return await client.accounts.me();
         }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("me (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { error: { message: "message", type: "type" } };
-
-        server.mockEndpoint().get("/accounts/me").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.accounts.me();
-        }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
 
     test("retrieve (1)", async () => {
@@ -1994,74 +1732,11 @@ describe("AccountsClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
-                    builder_fee_bps: "builder_fee_bps",
-                    margin_summary: {
-                        account_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_position_notional: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        total_raw_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
                 id: "id",
                 object: "trading_account",
-                open_orders: [
-                    {
-                        client_order_id: null,
-                        created_at: null,
-                        hyperliquid: {
-                            reduce_only: null,
-                            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_order",
-                        order_type: "limit",
-                        original_size: null,
-                        price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        provider_order_id: null,
-                        side: "buy",
-                        size: "size",
-                        status: "open",
-                        status_updated_at: null,
-                        time_in_force: null,
-                    },
-                ],
-                positions: [
-                    {
-                        entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        hyperliquid: {
-                            cumulative_funding: {
-                                all_time: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_change: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_open: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            leverage: { type: "cross", value: 1 },
-                            liquidation_price: {
-                                amount: "-1234.56",
-                                currency: "usd",
-                                decimals: 2,
-                                display_decimals: 2,
-                            },
-                            margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            return_on_equity: "return_on_equity",
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_position",
-                        position_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        side: "long",
-                        size: "size",
-                        unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                ],
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
@@ -2141,27 +1816,6 @@ describe("AccountsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("retrieve (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { error: { message: "message", type: "type" } };
-
-        server.mockEndpoint().get("/accounts/id").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.accounts.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
 
     test("delete (1)", async () => {
@@ -2624,74 +2278,11 @@ describe("AccountsClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
-                    builder_fee_bps: "builder_fee_bps",
-                    margin_summary: {
-                        account_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_position_notional: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        total_raw_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
                 id: "id",
                 object: "trading_account",
-                open_orders: [
-                    {
-                        client_order_id: null,
-                        created_at: null,
-                        hyperliquid: {
-                            reduce_only: null,
-                            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_order",
-                        order_type: "limit",
-                        original_size: null,
-                        price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        provider_order_id: null,
-                        side: "buy",
-                        size: "size",
-                        status: "open",
-                        status_updated_at: null,
-                        time_in_force: null,
-                    },
-                ],
-                positions: [
-                    {
-                        entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        hyperliquid: {
-                            cumulative_funding: {
-                                all_time: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_change: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_open: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            leverage: { type: "cross", value: 1 },
-                            liquidation_price: {
-                                amount: "-1234.56",
-                                currency: "usd",
-                                decimals: 2,
-                                display_decimals: 2,
-                            },
-                            margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            return_on_equity: "return_on_equity",
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_position",
-                        position_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        side: "long",
-                        size: "size",
-                        unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                ],
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
@@ -3959,74 +3550,11 @@ describe("AccountsClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
-                    builder_fee_bps: "builder_fee_bps",
-                    margin_summary: {
-                        account_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        total_position_notional: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        total_raw_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        withdrawable: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
                 id: "id",
                 object: "trading_account",
-                open_orders: [
-                    {
-                        client_order_id: null,
-                        created_at: null,
-                        hyperliquid: {
-                            reduce_only: null,
-                            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_order",
-                        order_type: "limit",
-                        original_size: null,
-                        price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        provider_order_id: null,
-                        side: "buy",
-                        size: "size",
-                        status: "open",
-                        status_updated_at: null,
-                        time_in_force: null,
-                    },
-                ],
-                positions: [
-                    {
-                        entry_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        hyperliquid: {
-                            cumulative_funding: {
-                                all_time: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_change: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                since_open: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            },
-                            leverage: { type: "cross", value: 1 },
-                            liquidation_price: {
-                                amount: "-1234.56",
-                                currency: "usd",
-                                decimals: 2,
-                                display_decimals: 2,
-                            },
-                            margin_used: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            return_on_equity: "return_on_equity",
-                        },
-                        id: "id",
-                        market: "market",
-                        object: "trading_position",
-                        position_value: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        side: "long",
-                        size: "size",
-                        unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                ],
                 provider: "hyperliquid",
                 user_id: "user_id",
             },

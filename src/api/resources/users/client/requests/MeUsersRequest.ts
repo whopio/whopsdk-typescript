@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface MeUsersRequest {
-    /** Also retrieve live trading state under `trading`. Only honored on the self view (me) with crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet. Provider failures return 503. */
+    /** Also return the trading account under `trading`: its address and its Hyperliquid WebSocket subscriptions. Only honored on the self view (me) with crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet. */
     include_trading?: boolean;
     /** When set, returns your account-specific profile overrides for this account. */
     account_id?: string;

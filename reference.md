@@ -26248,7 +26248,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">create</a>({ ...params }) -> Whop.Trade</code></summary>
+<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">create</a>() -> void</code></summary>
 <dl>
 <dd>
 
@@ -26260,7 +26260,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Submits perpetual orders from a funded trading wallet. Send several limit orders for a ladder, or attach `take_profit` and `stop_loss` to a single entry order. Whop's builder fee is approved and attached automatically. The returned `trop_` ID identifies the submission, not a position, and `completed` doesn't mean filled: check each order acknowledgement, and read live orders and positions from the account's `trading` field. Requires an `Idempotency-Key`. Early beta: email support@whop.com for access.
+Retired. Order batches can no longer be placed. Every caller gets `410 Gone`, whatever the body, and nothing is sent to the trading provider. List and retrieve earlier trades with `GET /trades`.
 </dd>
 </dl>
 </dd>
@@ -26275,16 +26275,7 @@ Submits perpetual orders from a funded trading wallet. Send several limit orders
 <dd>
 
 ```typescript
-await client.trades.create({
-    account_id: "biz_xxxxxxxxxxxxxx",
-    instrument_type: "perpetual",
-    orders: [{
-            market: "ETH",
-            side: "buy",
-            size: "0.02"
-        }],
-    provider: "hyperliquid"
-});
+await client.trades.create();
 
 ```
 </dd>
@@ -26296,14 +26287,6 @@ await client.trades.create({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateTradesRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -26320,7 +26303,7 @@ await client.trades.create({
 </dl>
 </details>
 
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">updateLeverage</a>({ ...params }) -> Whop.Trade</code></summary>
+<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">updateLeverage</a>() -> void</code></summary>
 <dl>
 <dd>
 
@@ -26332,7 +26315,7 @@ await client.trades.create({
 <dl>
 <dd>
 
-Sets cross or isolated leverage for a perpetual market, up to that market's maximum. Returns a trade recording the submission. Requires an `Idempotency-Key`.
+Retired. Every caller gets `410 Gone`, and no leverage change is sent to the trading provider.
 </dd>
 </dl>
 </dd>
@@ -26347,13 +26330,7 @@ Sets cross or isolated leverage for a perpetual market, up to that market's maxi
 <dd>
 
 ```typescript
-await client.trades.updateLeverage({
-    account_id: "biz_xxxxxxxxxxxxxx",
-    leverage: 5,
-    margin_mode: "cross",
-    market: "ETH",
-    provider: "hyperliquid"
-});
+await client.trades.updateLeverage();
 
 ```
 </dd>
@@ -26365,14 +26342,6 @@ await client.trades.updateLeverage({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.UpdateLeverageTradesRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -26401,7 +26370,7 @@ await client.trades.updateLeverage({
 <dl>
 <dd>
 
-Retrieves a trade. Order acknowledgements don't update as orders fill; read live orders and positions from the account's `trading` field. Never resubmit a `submission_unknown` trade with a new idempotency key.
+Retrieves a trade. Order acknowledgements don't update as orders fill. Never resubmit a `submission_unknown` trade with a new idempotency key.
 </dd>
 </dl>
 </dd>
@@ -26454,7 +26423,7 @@ await client.trades.retrieve({
 </dl>
 </details>
 
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">cancel</a>({ ...params }) -> Whop.Trade</code></summary>
+<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">cancel</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -26466,7 +26435,7 @@ await client.trades.retrieve({
 <dl>
 <dd>
 
-Cancels every order in an order trade, including attached take-profit and stop-loss. This doesn't close filled positions. Returns a new cancellation trade whose `trade_id` points to the original, which is left unchanged. Cancellation works even while opening new positions is disabled. Requires an `Idempotency-Key`.
+Retired. Every caller gets `410 Gone`, and no cancellation is sent to the trading provider.
 </dd>
 </dl>
 </dd>

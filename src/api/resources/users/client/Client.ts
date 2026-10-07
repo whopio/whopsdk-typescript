@@ -145,7 +145,6 @@ export class UsersClient {
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -221,11 +220,6 @@ export class UsersClient {
             switch (_response.error.statusCode) {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 503:
-                    throw new Whop.ServiceUnavailableError(
-                        _response.error.body as Whop.V1ErrorResponse,
-                        _response.rawResponse,
-                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -326,7 +320,6 @@ export class UsersClient {
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -405,11 +398,6 @@ export class UsersClient {
             switch (_response.error.statusCode) {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 503:
-                    throw new Whop.ServiceUnavailableError(
-                        _response.error.body as Whop.V1ErrorResponse,
-                        _response.rawResponse,
-                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

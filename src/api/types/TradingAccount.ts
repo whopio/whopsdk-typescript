@@ -10,8 +10,6 @@ export interface TradingAccount {
     /** The Whop wallet ID backing this trading account, prefixed `cwal_`. */
     id: string;
     object: TradingAccount.Object_;
-    open_orders: Whop.TradingOrder[];
-    positions: Whop.TradingPosition[];
     /** Trading venue that holds the positions and orders. */
     provider: TradingAccount.Provider;
     /** The user who owns this trading account, prefixed `user_`. `null` when an account owns it. */
