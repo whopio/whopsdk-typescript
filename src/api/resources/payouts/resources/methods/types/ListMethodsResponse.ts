@@ -277,7 +277,6 @@ export namespace ListMethodsResponse {
                 RmiClear: "rmi_clear",
                 IdentityRfiClear: "identity_rfi_clear",
                 GuardianIdClear: "guardian_id_clear",
-                EcommerceFulfillmentConnected: "ecommerce_fulfillment_connected",
                 BlockMoveMoneyOut: "block_move_money_out",
                 BlockMoveMoneyOutSetByParent: "block_move_money_out_set_by_parent",
                 NoAvailableBalance: "no_available_balance",

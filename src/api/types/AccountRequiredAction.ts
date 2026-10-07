@@ -31,7 +31,6 @@ export namespace AccountRequiredAction {
         VerifyIdentity: "verify_identity",
         ScaleAccountSetup: "scale_account_setup",
         SignFormationDocuments: "sign_formation_documents",
-        ConnectFulfillmentTracker: "connect_fulfillment_tracker",
         SetupApplePayDomains: "setup_apple_pay_domains",
         ConfigureTaxRemitter: "configure_tax_remitter",
         AddVatRegistration: "add_vat_registration",
