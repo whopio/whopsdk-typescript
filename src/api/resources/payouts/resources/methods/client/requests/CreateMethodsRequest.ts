@@ -17,7 +17,7 @@ export interface CreateMethodsRequest {
     is_default?: boolean;
     /** A label for the payout method, unique per destination. */
     nickname?: string;
-    /** Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. The MassPay email is generated when omitted. Recipient methods cannot be default or recurring methods and cannot use Plaid. */
+    /** Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. A valid recipient email is required. Recipient methods cannot be default or recurring methods and cannot use Plaid. */
     recipient?: CreateMethodsRequest.Recipient;
     /** The supported payout method to save (a podst_ identifier from a previous listing). */
     supported_payout_method_id: string;
@@ -27,13 +27,13 @@ export interface CreateMethodsRequest {
 
 export namespace CreateMethodsRequest {
     /**
-     * Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. The MassPay email is generated when omitted. Recipient methods cannot be default or recurring methods and cannot use Plaid.
+     * Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. A valid recipient email is required. Recipient methods cannot be default or recurring methods and cannot use Plaid.
      */
     export interface Recipient {
         /** ISO 3166-1 alpha-2 or alpha-3 country code. */
         country: string;
-        /** Optional email for the recipient's MassPay payout account. Trimmed and lowercased. When omitted or null, generates a random address ending in `_bp@payouts.whop.com`. */
-        email?: (string | null) | undefined;
+        /** Required email for the recipient's MassPay payout account. Trimmed and lowercased. */
+        email: string;
         /** Recipient's first name, at most 120 UTF-8 bytes. The trimmed full name, including a space between the names, must be at most 100 characters and cannot contain angle brackets or double quotes. */
         first_name: string;
         /** Recipient's last name, at most 120 UTF-8 bytes. The combined full name follows the same 100-character limit as a Whop user name. */
