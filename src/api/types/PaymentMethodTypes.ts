@@ -36,6 +36,7 @@ export const PaymentMethodTypes = {
     Custom: "custom",
     CustomerBalance: "customer_balance",
     DemoPay: "demo_pay",
+    DuitnowQr: "duitnow_qr",
     Efecty: "efecty",
     Eps: "eps",
     EuBankTransfer: "eu_bank_transfer",
