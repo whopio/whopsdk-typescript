@@ -18,12 +18,20 @@ describe("ReportsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    breakdowns: ["breakdowns"],
-                    columns: [{ key: "key", name: "name", type: "property" }],
-                    description: "description",
-                    key: "key",
-                    path: "path",
-                    window_field: "window_field",
+                    breakdowns: ["industry_type"],
+                    columns: [
+                        {
+                            available_on: ["industry_type"],
+                            key: "industry_type",
+                            name: "Industry type",
+                            type: "property",
+                        },
+                    ],
+                    description:
+                        "Payments across all of Whop, by business type, industry type, account country or customer country.",
+                    key: "platform_trends",
+                    path: "/api/v1/stats/reports/platform_trends",
+                    window_field: "paid_at",
                     window_kind: "range",
                 },
             ],
@@ -52,5 +60,133 @@ describe("ReportsClient", () => {
         await expect(async () => {
             return await client.stats.reports.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("platformTrends (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            data: {
+                breakdown_by: "industry_type",
+                columns: [
+                    { key: "industry_type", name: "Industry type", type: "property" },
+                    { key: "business_type", name: "Business type", type: "property" },
+                    { aggregate: "sum", key: "gross_revenue", name: "Gross revenue", type: "metric", unit: "money" },
+                    { aggregate: "sum", key: "businesses", name: "Businesses", type: "metric", unit: "count" },
+                ],
+                data_as_of: "2026-10-07T04:48:34Z",
+                report: "platform_trends",
+                reports: [
+                    {
+                        rows: [
+                            {
+                                account_country: { id: "education", name: "Education" },
+                                aov: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                business_type: { id: "services", name: "Services" },
+                                businesses: 828,
+                                customer_country: { id: "education", name: "Education" },
+                                gross_revenue: {
+                                    amount: "7002670.25",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                                industry_type: { id: "marketing_agency", name: "Marketing Agency" },
+                                p99_gross_revenue: {
+                                    amount: "-1234.56",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                            },
+                        ],
+                        window: {
+                            as_of: null,
+                            from: "2026-09-30T04:00:00Z",
+                            key: "7d",
+                            kind: "range",
+                            time_zone: "Etc/UTC",
+                            to: "2026-10-07T04:00:00Z",
+                        },
+                    },
+                    {
+                        rows: [
+                            {
+                                account_country: { id: "education", name: "Education" },
+                                aov: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                business_type: { id: "services", name: "Services" },
+                                businesses: 796,
+                                customer_country: { id: "education", name: "Education" },
+                                gross_revenue: {
+                                    amount: "5841223.30",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                                industry_type: { id: "marketing_agency", name: "Marketing Agency" },
+                                p99_gross_revenue: {
+                                    amount: "-1234.56",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                            },
+                        ],
+                        window: {
+                            as_of: null,
+                            from: "2026-09-23T04:00:00Z",
+                            key: "prev:7d",
+                            kind: "range",
+                            time_zone: "Etc/UTC",
+                            to: "2026-09-30T04:00:00Z",
+                        },
+                    },
+                ],
+            },
+            page_info: { end_cursor: "MQ", has_next_page: true, has_previous_page: false, start_cursor: "MQ" },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/stats/reports/platform_trends")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.stats.reports.platformTrends();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("platformTrends (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/stats/reports/platform_trends")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.stats.reports.platformTrends();
+        }).rejects.toThrow(Whop.BadRequestError);
     });
 });

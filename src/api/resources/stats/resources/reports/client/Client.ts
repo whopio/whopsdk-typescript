@@ -88,4 +88,116 @@ export class ReportsClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/stats/reports");
     }
+
+    /**
+     * Payments across all of Whop, for up to four windows at once. Break rows down by business type, industry type, account country or customer country, and let the business type ride along on industry type rows. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it. A breakdown value with fewer than three businesses behind it is left out, and a filtered total that small comes back with every metric `null`.
+     *
+     * @param {Whop.stats.PlatformTrendsReportsRequest} request
+     * @param {ReportsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.stats.reports.platformTrends()
+     */
+    public platformTrends(
+        request: Whop.stats.PlatformTrendsReportsRequest = {},
+        requestOptions?: ReportsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.stats.PlatformTrendsReportsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__platformTrends(request, requestOptions));
+    }
+
+    private async __platformTrends(
+        request: Whop.stats.PlatformTrendsReportsRequest = {},
+        requestOptions?: ReportsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.stats.PlatformTrendsReportsResponse>> {
+        const {
+            breakdown_by: breakdownBy,
+            columns,
+            windows,
+            time_zone: timeZone,
+            order,
+            direction,
+            convert_to: convertTo,
+            business_type: businessType,
+            industry_type: industryType,
+            account_country: accountCountry,
+            customer_country: customerCountry,
+            first,
+            after,
+        } = request;
+        const _queryParams: Record<string, unknown> = {
+            breakdown_by: breakdownBy != null ? breakdownBy : undefined,
+            columns,
+            windows,
+            time_zone: timeZone,
+            order: order != null ? order : undefined,
+            direction: direction != null ? direction : undefined,
+            convert_to: convertTo,
+            business_type: businessType,
+            industry_type: industryType,
+            account_country: accountCountry,
+            customer_country: customerCountry,
+            first,
+            after,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                "stats/reports/platform_trends",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Whop.stats.PlatformTrendsReportsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/stats/reports/platform_trends",
+        );
+    }
 }
