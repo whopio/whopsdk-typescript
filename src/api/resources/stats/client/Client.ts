@@ -8,6 +8,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import type * as Whop from "../../../index.js";
+import { ReportsClient } from "../resources/reports/client/Client.js";
 import { TimeSeriesClient } from "../resources/timeSeries/client/Client.js";
 
 export declare namespace StatsClient {
@@ -23,10 +24,15 @@ export declare namespace StatsClient {
  */
 export class StatsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<StatsClient.Options>;
+    protected _reports: ReportsClient | undefined;
     protected _timeSeries: TimeSeriesClient | undefined;
 
     constructor(options: StatsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get reports(): ReportsClient {
+        return (this._reports ??= new ReportsClient(this._options));
     }
 
     public get timeSeries(): TimeSeriesClient {
@@ -36,7 +42,7 @@ export class StatsClient {
     /**
      * @deprecated
      *
-     * Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`, or the ones you can rank with `GET /stats/reports`.
+     * Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`. Aggregates that are not bucketed over time are reports, listed at `GET /stats/reports`.
      *
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -97,7 +103,7 @@ export class StatsClient {
     /**
      * @deprecated
      *
-     * Deprecated compatibility endpoint. Retrieve a metric's time series with `GET /stats/time_series/{metric}` instead, or rank one across a breakdown with `GET /stats/reports/{metric}`.
+     * Deprecated compatibility endpoint. Retrieve a metric's time series with `GET /stats/time_series/{metric}` instead.
      *
      * @param {Whop.RetrieveStatsRequest} request
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
