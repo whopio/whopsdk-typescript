@@ -17,7 +17,7 @@ export interface CreateMethodsRequest {
     is_default?: boolean;
     /** A label for the payout method, unique per destination. */
     nickname?: string;
-    /** Creates an external recipient and saves the bank method on their payout account, bound to the funding account. The MassPay email is generated when omitted; the recipient does not need a Whop login or Sumsub verification. Recipient methods cannot be default or recurring methods and cannot use Plaid. */
+    /** Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. The MassPay email is generated when omitted. Recipient methods cannot be default or recurring methods and cannot use Plaid. */
     recipient?: CreateMethodsRequest.Recipient;
     /** The supported payout method to save (a podst_ identifier from a previous listing). */
     supported_payout_method_id: string;
@@ -27,7 +27,7 @@ export interface CreateMethodsRequest {
 
 export namespace CreateMethodsRequest {
     /**
-     * Creates an external recipient and saves the bank method on their payout account, bound to the funding account. The MassPay email is generated when omitted; the recipient does not need a Whop login or Sumsub verification. Recipient methods cannot be default or recurring methods and cannot use Plaid.
+     * Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. The MassPay email is generated when omitted. Recipient methods cannot be default or recurring methods and cannot use Plaid.
      */
     export interface Recipient {
         /** ISO 3166-1 alpha-2 or alpha-3 country code. */

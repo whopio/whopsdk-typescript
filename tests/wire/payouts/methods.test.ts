@@ -44,12 +44,7 @@ describe("MethodsClient", () => {
                         min_limit: 1,
                         standard: { fee: 0.25, total_received: 499.75 },
                     },
-                    recipient: {
-                        country: "country",
-                        first_name: "first_name",
-                        last_name: "last_name",
-                        user_id: "user_id",
-                    },
+                    recipient: { country: "country", first_name: "first_name", last_name: "last_name" },
                     status: "created",
                     status_reason: "status_reason",
                     supported_payout_method: {
@@ -209,7 +204,7 @@ describe("MethodsClient", () => {
             object: "payout_method",
             payer_name: "ACH Bank Deposit",
             quote: { key: "value" },
-            recipient: { country: "USA", first_name: "Jane", last_name: "Doe", user_id: "user_xxxxxxxxxxxxxx" },
+            recipient: { country: "USA", first_name: "Jane", last_name: "Doe" },
             status: "created",
             status_reason: "status_reason",
             supported_payout_method: {
@@ -514,7 +509,7 @@ describe("MethodsClient", () => {
             object: "payout_method",
             payer_name: "ACH Bank Deposit",
             quote: { key: "value" },
-            recipient: { country: "country", first_name: "first_name", last_name: "last_name", user_id: "user_id" },
+            recipient: { country: "country", first_name: "first_name", last_name: "last_name" },
             status: "created",
             status_reason: "status_reason",
             supported_payout_method: {

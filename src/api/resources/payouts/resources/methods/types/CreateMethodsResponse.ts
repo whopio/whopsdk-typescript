@@ -63,8 +63,6 @@ export namespace CreateMethodsResponse {
         country: string;
         first_name: string;
         last_name: string;
-        /** The recipient's Whop user ID, prefixed `user_`. */
-        user_id: string;
     }
 
     /** Always `created` on create — no payout has used the method yet. */

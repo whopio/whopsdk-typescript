@@ -168,8 +168,6 @@ export namespace PostPayoutMethodCreatedPayload {
             country: string;
             first_name: string;
             last_name: string;
-            /** The recipient's Whop user ID, prefixed `user_`. */
-            user_id: string;
         }
 
         /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */

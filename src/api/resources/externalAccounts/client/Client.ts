@@ -102,7 +102,7 @@ export class ExternalAccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -199,7 +199,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -281,7 +281,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -369,7 +369,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -459,7 +459,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
