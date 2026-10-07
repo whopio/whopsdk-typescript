@@ -4,7 +4,6 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
-import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -19,7 +18,9 @@ export declare namespace TradesClient {
 /**
  * A Trade records an order batch, cancellation, or leverage change submitted to a trading provider from an account or user's Whop-managed wallet. Its `status` tracks the submission, not whether orders filled.
  *
- * Use the Trades API to place limit or market orders with optional take-profit and stop-loss protection, cancel a submitted batch, set leverage, and list or retrieve past submissions. Read live margin, positions, and open orders by passing `include_trading=true` to Retrieve Account or Retrieve User with `id=me`. Whop's builder fee is added to each order. Hyperliquid perpetuals are currently supported; email support@whop.com to request access.
+ * Use the Trades API to list and retrieve earlier submissions. The order, cancel, and leverage writes are retired: they return `410 Gone` to every caller, and the API cannot place trades now. Hyperliquid perpetuals are the only supported provider.
+ *
+ * The trading API, including `include_trading` on accounts and users, is in beta. It can change without a new API version date.
  */
 export class TradesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TradesClient.Options>;
@@ -141,42 +142,24 @@ export class TradesClient {
     }
 
     /**
-     * Submits perpetual orders from a funded trading wallet. Send several limit orders for a ladder, or attach `take_profit` and `stop_loss` to a single entry order. Whop's builder fee is approved and attached automatically. The returned `trop_` ID identifies the submission, not a position, and `completed` doesn't mean filled: check each order acknowledgement, and read live orders and positions from the account's `trading` field. Requires an `Idempotency-Key`. Early beta: email support@whop.com for access.
+     * Retired. Order batches can no longer be placed. Every caller gets `410 Gone`, whatever the body, and nothing is sent to the trading provider. List and retrieve earlier trades with `GET /trades`.
      *
-     * @param {Whop.CreateTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.GoneError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.trades.create({
-     *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         instrument_type: "perpetual",
-     *         orders: [{
-     *                 market: "ETH",
-     *                 side: "buy",
-     *                 size: "0.02"
-     *             }],
-     *         provider: "hyperliquid"
-     *     })
+     *     await client.trades.create()
      */
-    public create(
-        request: Whop.CreateTradesRequest,
-        requestOptions?: TradesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Trade> {
-        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
+    public create(requestOptions?: TradesClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__create(requestOptions));
     }
 
-    private async __create(
-        request: Whop.CreateTradesRequest,
-        requestOptions?: TradesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Trade>> {
+    private async __create(requestOptions?: TradesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -196,10 +179,7 @@ export class TradesClient {
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -207,21 +187,17 @@ export class TradesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Trade, rawResponse: _response.rawResponse };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                case 410:
+                    throw new Whop.GoneError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -235,38 +211,24 @@ export class TradesClient {
     }
 
     /**
-     * Sets cross or isolated leverage for a perpetual market, up to that market's maximum. Returns a trade recording the submission. Requires an `Idempotency-Key`.
+     * Retired. Every caller gets `410 Gone`, and no leverage change is sent to the trading provider.
      *
-     * @param {Whop.UpdateLeverageTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.GoneError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.trades.updateLeverage({
-     *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         leverage: 5,
-     *         margin_mode: "cross",
-     *         market: "ETH",
-     *         provider: "hyperliquid"
-     *     })
+     *     await client.trades.updateLeverage()
      */
-    public updateLeverage(
-        request: Whop.UpdateLeverageTradesRequest,
-        requestOptions?: TradesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Trade> {
-        return core.HttpResponsePromise.fromPromise(this.__updateLeverage(request, requestOptions));
+    public updateLeverage(requestOptions?: TradesClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__updateLeverage(requestOptions));
     }
 
-    private async __updateLeverage(
-        request: Whop.UpdateLeverageTradesRequest,
-        requestOptions?: TradesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Trade>> {
+    private async __updateLeverage(requestOptions?: TradesClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -286,10 +248,7 @@ export class TradesClient {
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -297,19 +256,17 @@ export class TradesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Trade, rawResponse: _response.rawResponse };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                case 410:
+                    throw new Whop.GoneError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -323,7 +280,7 @@ export class TradesClient {
     }
 
     /**
-     * Retrieves a trade. Order acknowledgements don't update as orders fill; read live orders and positions from the account's `trading` field. Never resubmit a `submission_unknown` trade with a new idempotency key.
+     * Retrieves a trade. Order acknowledgements don't update as orders fill. Never resubmit a `submission_unknown` trade with a new idempotency key.
      *
      * @param {Whop.RetrieveTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -402,16 +359,14 @@ export class TradesClient {
     }
 
     /**
-     * Cancels every order in an order trade, including attached take-profit and stop-loss. This doesn't close filled positions. Returns a new cancellation trade whose `trade_id` points to the original, which is left unchanged. Cancellation works even while opening new positions is disabled. Requires an `Idempotency-Key`.
+     * Retired. Every caller gets `410 Gone`, and no cancellation is sent to the trading provider.
      *
      * @param {Whop.CancelTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.GoneError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -423,15 +378,15 @@ export class TradesClient {
     public cancel(
         request: Whop.CancelTradesRequest,
         requestOptions?: TradesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Trade> {
+    ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__cancel(request, requestOptions));
     }
 
     private async __cancel(
         request: Whop.CancelTradesRequest,
         requestOptions?: TradesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Trade>> {
-        const { id, ..._body } = request;
+    ): Promise<core.WithRawResponse<void>> {
+        const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -451,10 +406,7 @@ export class TradesClient {
             ),
             method: "POST",
             headers: _headers,
-            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -462,21 +414,17 @@ export class TradesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Trade, rawResponse: _response.rawResponse };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                case 410:
+                    throw new Whop.GoneError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

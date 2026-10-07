@@ -19,16 +19,14 @@ describe("TradesClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    cancellations: [
-                        { error: null, id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", status: "canceled" },
-                    ],
-                    completed_at: "2026-01-01T12:00:00.000Z",
+                    cancellations: [{ error: null, id: "id", status: "canceled" }],
+                    completed_at: "completed_at",
                     created_at: "2026-01-01T12:00:00.000Z",
                     failure_code: "pre_submission_error",
                     hyperliquid: { builder_fee_bps: null },
                     id: "trop_xxxxxxxxxxxxxx",
                     instrument_type: "perpetual",
-                    leverage: { leverage: 5, margin_mode: null, market: "ETH" },
+                    leverage: { leverage: null, margin_mode: null, market: "market" },
                     metadata: { key: "value" },
                     object: "trade",
                     operation_type: "create_orders",
@@ -65,7 +63,7 @@ describe("TradesClient", () => {
                             client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                             market: "ETH",
                             order_type: null,
-                            parent_client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            parent_client_order_id: null,
                             price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             side: null,
                             size: "0.02",
@@ -73,7 +71,7 @@ describe("TradesClient", () => {
                         },
                     ],
                     status: "pending",
-                    trade_id: "trop_xxxxxxxxxxxxxx",
+                    trade_id: "trade_id",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user_id: "user_id",
                 },
@@ -169,88 +167,11 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            instrument_type: "perpetual",
-            orders: [{ market: "ETH", side: "buy", size: "0.02" }],
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            cancellations: [{ error: "error", id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", status: "canceled" }],
-            completed_at: "2026-01-01T12:00:00.000Z",
-            created_at: "2026-01-01T12:00:00.000Z",
-            failure_code: "pre_submission_error",
-            hyperliquid: { builder_fee_bps: "builder_fee_bps" },
-            id: "trop_xxxxxxxxxxxxxx",
-            instrument_type: "perpetual",
-            leverage: { leverage: 5, margin_mode: "cross", market: "ETH" },
-            metadata: { key: "value" },
-            object: "trade",
-            operation_type: "create_orders",
-            orders: [
-                {
-                    average_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    client_order_id: "client_order_id",
-                    error: "error",
-                    filled_size: "filled_size",
-                    hyperliquid: {
-                        reduce_only: null,
-                        trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                    id: "id",
-                    market: "market",
-                    object: "trading_order",
-                    order_type: "limit",
-                    parent_client_order_id: "parent_client_order_id",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    provider_order_id: "provider_order_id",
-                    side: "buy",
-                    size: "size",
-                    status: "open",
-                },
-            ],
-            provider: "hyperliquid",
-            requested_orders: [
-                {
-                    client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    market: "ETH",
-                    order_type: "limit",
-                    parent_client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    side: "buy",
-                    size: "0.02",
-                    trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                },
-            ],
-            status: "pending",
-            trade_id: "trop_xxxxxxxxxxxxxx",
-            updated_at: "2026-01-01T12:00:00.000Z",
-            user_id: "user_id",
-        };
 
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades").respondWith().statusCode(200).build();
 
-        const response = await client.trades.create({
-            account_id: "biz_xxxxxxxxxxxxxx",
-            instrument_type: "perpetual",
-            orders: [
-                {
-                    market: "ETH",
-                    side: "buy",
-                    size: "0.02",
-                },
-            ],
-            provider: "hyperliquid",
-        });
-        expect(response).toEqual(rawResponseBody);
+        const response = await client.trades.create();
+        expect(response).toEqual(undefined);
     });
 
     test("create (2)", async () => {
@@ -262,45 +183,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            instrument_type: "perpetual",
-            orders: [
-                { market: "market", side: "buy", size: "size" },
-                { market: "market", side: "buy", size: "size" },
-            ],
-            provider: "hyperliquid",
-        };
+
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.create({
-                account_id: "account_id",
-                instrument_type: "perpetual",
-                orders: [
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                ],
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
+            return await client.trades.create();
+        }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
     test("create (3)", async () => {
@@ -312,45 +202,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            instrument_type: "perpetual",
-            orders: [
-                { market: "market", side: "buy", size: "size" },
-                { market: "market", side: "buy", size: "size" },
-            ],
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().post("/trades").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.create({
-                account_id: "account_id",
-                instrument_type: "perpetual",
-                orders: [
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                ],
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
+            return await client.trades.create();
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("create (4)", async () => {
@@ -362,145 +221,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            instrument_type: "perpetual",
-            orders: [
-                { market: "market", side: "buy", size: "size" },
-                { market: "market", side: "buy", size: "size" },
-            ],
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.trades.create({
-                account_id: "account_id",
-                instrument_type: "perpetual",
-                orders: [
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                ],
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("create (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            instrument_type: "perpetual",
-            orders: [
-                { market: "market", side: "buy", size: "size" },
-                { market: "market", side: "buy", size: "size" },
-            ],
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.trades.create({
-                account_id: "account_id",
-                instrument_type: "perpetual",
-                orders: [
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                ],
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("create (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            instrument_type: "perpetual",
-            orders: [
-                { market: "market", side: "buy", size: "size" },
-                { market: "market", side: "buy", size: "size" },
-            ],
-            provider: "hyperliquid",
-        };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
-        server
-            .mockEndpoint()
-            .post("/trades")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(409)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades").respondWith().statusCode(410).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.create({
-                account_id: "account_id",
-                instrument_type: "perpetual",
-                orders: [
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                    {
-                        market: "market",
-                        side: "buy",
-                        size: "size",
-                    },
-                ],
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.ConflictError);
+            return await client.trades.create();
+        }).rejects.toThrow(Whop.GoneError);
     });
 
     test("updateLeverage (1)", async () => {
@@ -512,84 +240,11 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            leverage: 5,
-            margin_mode: "cross",
-            market: "ETH",
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            cancellations: [{ error: "error", id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", status: "canceled" }],
-            completed_at: "2026-01-01T12:00:00.000Z",
-            created_at: "2026-01-01T12:00:00.000Z",
-            failure_code: "pre_submission_error",
-            hyperliquid: { builder_fee_bps: "builder_fee_bps" },
-            id: "trop_xxxxxxxxxxxxxx",
-            instrument_type: "perpetual",
-            leverage: { leverage: 5, margin_mode: "cross", market: "ETH" },
-            metadata: { key: "value" },
-            object: "trade",
-            operation_type: "create_orders",
-            orders: [
-                {
-                    average_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    client_order_id: "client_order_id",
-                    error: "error",
-                    filled_size: "filled_size",
-                    hyperliquid: {
-                        reduce_only: null,
-                        trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                    id: "id",
-                    market: "market",
-                    object: "trading_order",
-                    order_type: "limit",
-                    parent_client_order_id: "parent_client_order_id",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    provider_order_id: "provider_order_id",
-                    side: "buy",
-                    size: "size",
-                    status: "open",
-                },
-            ],
-            provider: "hyperliquid",
-            requested_orders: [
-                {
-                    client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    market: "ETH",
-                    order_type: "limit",
-                    parent_client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    side: "buy",
-                    size: "0.02",
-                    trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                },
-            ],
-            status: "pending",
-            trade_id: "trop_xxxxxxxxxxxxxx",
-            updated_at: "2026-01-01T12:00:00.000Z",
-            user_id: "user_id",
-        };
 
-        server
-            .mockEndpoint()
-            .post("/trades/leverage")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/leverage").respondWith().statusCode(200).build();
 
-        const response = await client.trades.updateLeverage({
-            account_id: "biz_xxxxxxxxxxxxxx",
-            leverage: 5,
-            margin_mode: "cross",
-            market: "ETH",
-            provider: "hyperliquid",
-        });
-        expect(response).toEqual(rawResponseBody);
+        const response = await client.trades.updateLeverage();
+        expect(response).toEqual(undefined);
     });
 
     test("updateLeverage (2)", async () => {
@@ -601,33 +256,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            leverage: 1,
-            margin_mode: "cross",
-            market: "market",
-            provider: "hyperliquid",
-        };
+
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/leverage")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/leverage").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.updateLeverage({
-                account_id: "account_id",
-                leverage: 1,
-                margin_mode: "cross",
-                market: "market",
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
+            return await client.trades.updateLeverage();
+        }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
     test("updateLeverage (3)", async () => {
@@ -639,33 +275,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            leverage: 1,
-            margin_mode: "cross",
-            market: "market",
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/leverage")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().post("/trades/leverage").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.updateLeverage({
-                account_id: "account_id",
-                leverage: 1,
-                margin_mode: "cross",
-                market: "market",
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
+            return await client.trades.updateLeverage();
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("updateLeverage (4)", async () => {
@@ -677,71 +294,14 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            leverage: 1,
-            margin_mode: "cross",
-            market: "market",
-            provider: "hyperliquid",
-        };
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/leverage")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.trades.updateLeverage({
-                account_id: "account_id",
-                leverage: 1,
-                margin_mode: "cross",
-                market: "market",
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("updateLeverage (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            leverage: 1,
-            margin_mode: "cross",
-            market: "market",
-            provider: "hyperliquid",
-        };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
-        server
-            .mockEndpoint()
-            .post("/trades/leverage")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(409)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/leverage").respondWith().statusCode(410).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.trades.updateLeverage({
-                account_id: "account_id",
-                leverage: 1,
-                margin_mode: "cross",
-                market: "market",
-                provider: "hyperliquid",
-            });
-        }).rejects.toThrow(Whop.ConflictError);
+            return await client.trades.updateLeverage();
+        }).rejects.toThrow(Whop.GoneError);
     });
 
     test("retrieve (1)", async () => {
@@ -756,14 +316,14 @@ describe("TradesClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            cancellations: [{ error: "error", id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", status: "canceled" }],
-            completed_at: "2026-01-01T12:00:00.000Z",
+            cancellations: [{ error: "error", id: "id", status: "canceled" }],
+            completed_at: "completed_at",
             created_at: "2026-01-01T12:00:00.000Z",
             failure_code: "pre_submission_error",
             hyperliquid: { builder_fee_bps: "builder_fee_bps" },
             id: "trop_xxxxxxxxxxxxxx",
             instrument_type: "perpetual",
-            leverage: { leverage: 5, margin_mode: "cross", market: "ETH" },
+            leverage: { leverage: 1, margin_mode: "cross", market: "market" },
             metadata: { key: "value" },
             object: "trade",
             operation_type: "create_orders",
@@ -795,7 +355,7 @@ describe("TradesClient", () => {
                     client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     market: "ETH",
                     order_type: "limit",
-                    parent_client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    parent_client_order_id: "parent_client_order_id",
                     price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     side: "buy",
                     size: "0.02",
@@ -803,7 +363,7 @@ describe("TradesClient", () => {
                 },
             ],
             status: "pending",
-            trade_id: "trop_xxxxxxxxxxxxxx",
+            trade_id: "trade_id",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_id",
         };
@@ -888,74 +448,13 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            cancellations: [{ error: "error", id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", status: "canceled" }],
-            completed_at: "2026-01-01T12:00:00.000Z",
-            created_at: "2026-01-01T12:00:00.000Z",
-            failure_code: "pre_submission_error",
-            hyperliquid: { builder_fee_bps: "builder_fee_bps" },
-            id: "trop_xxxxxxxxxxxxxx",
-            instrument_type: "perpetual",
-            leverage: { leverage: 5, margin_mode: "cross", market: "ETH" },
-            metadata: { key: "value" },
-            object: "trade",
-            operation_type: "create_orders",
-            orders: [
-                {
-                    average_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    client_order_id: "client_order_id",
-                    error: "error",
-                    filled_size: "filled_size",
-                    hyperliquid: {
-                        reduce_only: null,
-                        trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    },
-                    id: "id",
-                    market: "market",
-                    object: "trading_order",
-                    order_type: "limit",
-                    parent_client_order_id: "parent_client_order_id",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    provider_order_id: "provider_order_id",
-                    side: "buy",
-                    size: "size",
-                    status: "open",
-                },
-            ],
-            provider: "hyperliquid",
-            requested_orders: [
-                {
-                    client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    market: "ETH",
-                    order_type: "limit",
-                    parent_client_order_id: "trdcloid_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    side: "buy",
-                    size: "0.02",
-                    trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                },
-            ],
-            status: "pending",
-            trade_id: "trop_xxxxxxxxxxxxxx",
-            updated_at: "2026-01-01T12:00:00.000Z",
-            user_id: "user_id",
-        };
 
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(200).build();
 
         const response = await client.trades.cancel({
             id: "id",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual(undefined);
     });
 
     test("cancel (2)", async () => {
@@ -967,23 +466,16 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.trades.cancel({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.BadRequestError);
+        }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
     test("cancel (3)", async () => {
@@ -995,23 +487,16 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.trades.cancel({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.UnauthorizedError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("cancel (4)", async () => {
@@ -1023,78 +508,15 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.trades.cancel({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("cancel (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.trades.cancel({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("cancel (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
-        server
-            .mockEndpoint()
-            .post("/trades/id/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(409)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(410).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.trades.cancel({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.ConflictError);
+        }).rejects.toThrow(Whop.GoneError);
     });
 });

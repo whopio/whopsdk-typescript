@@ -9,6 +9,4 @@
 export interface CancelTradesRequest {
     /** ID of the order trade to cancel, prefixed `trop_`. */
     id: string;
-    /** Free-form string-to-string annotations stored on the trade. */
-    metadata?: Record<string, string | null> | null;
 }
