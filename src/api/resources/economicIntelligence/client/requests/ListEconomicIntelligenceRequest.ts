@@ -13,7 +13,7 @@ export interface ListEconomicIntelligenceRequest {
     status?: Whop.ListEconomicIntelligenceRequestStatus;
     /** What you want recommendations for, in your own words. Up to 1000 characters. Narrows the list to the recommendations that address it. Without a `status` filter, when none do and you can update the account, new recommendations start generating for your input, and the list shows that request until they're ready. Repeating the same input while it generates doesn't start another. */
     input?: string;
-    /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read that has Economic Intelligence. Can't be combined with `input`. */
+    /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read, including accounts whose Economic Intelligence is off. Can't be combined with `input`. */
     has_run?: boolean;
     /** Sort field. */
     order?: Whop.ListEconomicIntelligenceRequestOrder;
