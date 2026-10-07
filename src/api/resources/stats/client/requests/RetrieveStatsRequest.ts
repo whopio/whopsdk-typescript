@@ -14,7 +14,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface RetrieveStatsRequest {
-    /** The metric to retrieve, for example net_revenue. Use GET /stats to see every metric key. The metric sets the unit and the properties you can filter or break down by. */
+    /** The metric to retrieve, for example net_revenue. */
     metric: string;
     /** The account this query concerns, for example biz_AbC123. */
     account_id?: string;

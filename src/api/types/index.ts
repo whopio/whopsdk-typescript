@@ -454,6 +454,7 @@ export * from "./ResolutionCenterCaseStatuses.js";
 export * from "./ResolutionEvent.js";
 export * from "./ResolutionPayment.js";
 export * from "./RetrieveStatsRequestSteps.js";
+export * from "./RetrieveTimeSeriesRequestSteps.js";
 export * from "./Review.js";
 export * from "./ReviewListItem.js";
 export * from "./ReviewStatus.js";

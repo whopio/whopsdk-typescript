@@ -14,7 +14,7 @@ export namespace ListStatsResponse {
             breakdowns?: string[] | undefined;
             /** A short description of what the metric measures. */
             description: string;
-            /** The metric's key. Pass it to GET /stats/{metric} to query its values. */
+            /** The metric's key. Pass it to GET /stats/time_series/{metric} to query its values. */
             key: string;
             /** Human-readable display name for the metric. */
             name: string;
