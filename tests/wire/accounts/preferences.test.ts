@@ -75,6 +75,8 @@ describe("PreferencesClient", () => {
             economic_intelligence_offers: [
                 { duration: 7, duration_unit: "hours", fee_percentage: 1, key: "7_days", recommended: false },
             ],
+            preferred_settlement_currency: "usd",
+            preferred_settlement_currency_changeable_at: "preferred_settlement_currency_changeable_at",
             subscription_failure_behavior: "cancel",
         };
 
@@ -216,6 +218,8 @@ describe("PreferencesClient", () => {
             economic_intelligence_offers: [
                 { duration: 7, duration_unit: "hours", fee_percentage: 1, key: "7_days", recommended: false },
             ],
+            preferred_settlement_currency: "usd",
+            preferred_settlement_currency_changeable_at: "2026-01-01T12:00:00.000Z",
             subscription_failure_behavior: "cancel",
         };
 

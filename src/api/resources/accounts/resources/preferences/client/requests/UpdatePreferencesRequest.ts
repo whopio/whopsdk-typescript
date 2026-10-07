@@ -27,6 +27,8 @@ export interface UpdatePreferencesRequest {
     dispute_fighter_enabled?: boolean;
     /** Turns on Economic Intelligence for the duration with this `key` in `economic_intelligence_offers`, at that duration's fee. It can't be changed or turned off until `economic_intelligence_ends_at`. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
+    /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once every 7 days (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
+    preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
     subscription_failure_behavior?: UpdatePreferencesRequest.SubscriptionFailureBehavior;
 }
@@ -111,6 +113,16 @@ export namespace UpdatePreferencesRequest {
     } as const;
     export type EconomicIntelligenceDurationKey =
         (typeof EconomicIntelligenceDurationKey)[keyof typeof EconomicIntelligenceDurationKey];
+    /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once every 7 days (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
+    export const PreferredSettlementCurrency = {
+        Usd: "usd",
+        Eur: "eur",
+        Gbp: "gbp",
+        Cad: "cad",
+        Aud: "aud",
+    } as const;
+    export type PreferredSettlementCurrency =
+        (typeof PreferredSettlementCurrency)[keyof typeof PreferredSettlementCurrency];
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
     export const SubscriptionFailureBehavior = {
         Cancel: "cancel",
