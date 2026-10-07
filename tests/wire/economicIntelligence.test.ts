@@ -20,7 +20,7 @@ describe("EconomicIntelligenceClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     acknowledged_at: "2026-01-01T12:00:00.000Z",
-                    action_type: "scale_winning_ads",
+                    action_type: "cut_losing_ad_spend",
                     ai_chat_id: "aich_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
@@ -190,7 +190,7 @@ describe("EconomicIntelligenceClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             acknowledged_at: "2026-01-01T12:00:00.000Z",
-            action_type: "scale_winning_ads",
+            action_type: "cut_losing_ad_spend",
             ai_chat_id: "aich_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
