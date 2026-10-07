@@ -63,8 +63,6 @@ export namespace UpdateMethodsResponse {
         country: string;
         first_name: string;
         last_name: string;
-        /** The recipient's Whop user ID, prefixed `user_`. */
-        user_id: string;
     }
 
     /** `created` — saved, no payout has completed through it yet. `active` — a payout through it completed. `broken` — a payout through it failed with an error attributable to the method, and it no longer accepts payouts; a later successful payout returns it to `active`. */
