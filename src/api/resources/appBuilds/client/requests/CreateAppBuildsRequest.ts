@@ -9,8 +9,6 @@
  *     }
  */
 export interface CreateAppBuildsRequest {
-    /** The AI prompt that generated this build, if applicable. */
-    ai_prompt_id?: string;
     /** The app to create the build for, prefixed `app_`. Defaults to the app behind the presented credential. */
     app_id?: string;
     /** The uploaded build file: `{ id }` for an existing file or `{ direct_upload_id }` for a completed direct upload. */
