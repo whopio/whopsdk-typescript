@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface PartnerReferralRequest {
     /** Business receiving the request, when one is assigned. */
     account: Whop.AccountSummary | null;
+    /** The partner's team membership this referral was created for, prefixed `ausr_`. `null` when the referral is personal. */
+    authorized_user_id: string | null;
     /** Unique referral code, when assigned. */
     code: string | null;
     /** When the request was created, as an ISO 8601 timestamp. */
