@@ -31595,6 +31595,69 @@ await client.stats.reports.list();
 </dl>
 </details>
 
+<details><summary><code>client.stats.reports.<a href="/src/api/resources/stats/resources/reports/client/Client.ts">platformTrends</a>({ ...params }) -> Whop.PlatformTrendsReportsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Payments across all of Whop, for up to four windows at once. Break rows down by business type, industry type, account country or customer country, and let the business type ride along on industry type rows. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it. A breakdown value with fewer than three businesses behind it is left out, and a filtered total that small comes back with every metric `null`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.stats.reports.platformTrends();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.stats.PlatformTrendsReportsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReportsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Stats TimeSeries
 <details><summary><code>client.stats.timeSeries.<a href="/src/api/resources/stats/resources/timeSeries/client/Client.ts">list</a>() -> Whop.ListTimeSeriesResponse</code></summary>
 <dl>
