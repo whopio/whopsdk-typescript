@@ -7,7 +7,8 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
-import * as Whop from "../../../index.js";
+import type * as Whop from "../../../index.js";
+import { TimeSeriesClient } from "../resources/timeSeries/client/Client.js";
 
 export declare namespace StatsClient {
     export type Options = BaseClientOptions;
@@ -22,17 +23,23 @@ export declare namespace StatsClient {
  */
 export class StatsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<StatsClient.Options>;
+    protected _timeSeries: TimeSeriesClient | undefined;
 
     constructor(options: StatsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
+    public get timeSeries(): TimeSeriesClient {
+        return (this._timeSeries ??= new TimeSeriesClient(this._options));
+    }
+
     /**
-     * Lists every metric you can query, with its unit and the properties you can filter or break it down by.
+     * @deprecated
+     *
+     * Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`, or the ones you can rank with `GET /stats/reports`.
      *
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.UnauthorizedError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -51,7 +58,7 @@ export class StatsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -77,31 +84,24 @@ export class StatsClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/stats");
     }
 
     /**
-     * Retrieves a metric as a time series of points for an account or user over a time range. The `market_prices` metric is public and requires no authentication. The `funnel` metric measures 2 to 10 ordered events per person. Its first matching event inside from/to anchors the cohort, breakdown and conversion window; later entries do not restart it. Intervening events are allowed, and conversions may occur after to. Funnel values are final conversion percentages; steps include counts and cumulative conversion percentages. Experiment funnels use experiment.exposure as step 1 and breakdown_by=variant. Pass steps using bracket parameters such as steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Retrieve a metric's time series with `GET /stats/time_series/{metric}` instead, or rank one across a breakdown with `GET /stats/reports/{metric}`.
      *
      * @param {Whop.RetrieveStatsRequest} request
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -268,7 +268,7 @@ export class StatsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-06-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -298,22 +298,11 @@ export class StatsClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/stats/{metric}");

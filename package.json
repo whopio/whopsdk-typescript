@@ -1232,6 +1232,17 @@
             },
             "default": "./dist/cjs/api/resources/setupIntents/resources/direct/exports.js"
         },
+        "./stats/timeSeries": {
+            "import": {
+                "types": "./dist/esm/api/resources/stats/resources/timeSeries/exports.d.mts",
+                "default": "./dist/esm/api/resources/stats/resources/timeSeries/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/stats/resources/timeSeries/exports.d.ts",
+                "default": "./dist/cjs/api/resources/stats/resources/timeSeries/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/stats/resources/timeSeries/exports.js"
+        },
         "./users/oauthGrants": {
             "import": {
                 "types": "./dist/esm/api/resources/users/resources/oauthGrants/exports.d.mts",

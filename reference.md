@@ -25160,7 +25160,7 @@ await client.socialAccounts.refresh({
 <dl>
 <dd>
 
-Lists every metric you can query, with its unit and the properties you can filter or break it down by.
+Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`, or the ones you can rank with `GET /stats/reports`.
 </dd>
 </dl>
 </dd>
@@ -25215,7 +25215,7 @@ await client.stats.list();
 <dl>
 <dd>
 
-Retrieves a metric as a time series of points for an account or user over a time range. The `market_prices` metric is public and requires no authentication. The `funnel` metric measures 2 to 10 ordered events per person. Its first matching event inside from/to anchors the cohort, breakdown and conversion window; later entries do not restart it. Intervening events are allowed, and conversions may occur after to. Funnel values are final conversion percentages; steps include counts and cumulative conversion percentages. Experiment funnels use experiment.exposure as step 1 and breakdown_by=variant. Pass steps using bracket parameters such as steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed.
+Deprecated compatibility endpoint. Retrieve a metric's time series with `GET /stats/time_series/{metric}` instead, or rank one across a breakdown with `GET /stats/reports/{metric}`.
 </dd>
 </dl>
 </dd>
@@ -31528,6 +31528,132 @@ await client.setupIntents.direct.create({
 <dd>
 
 **requestOptions:** `DirectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Stats TimeSeries
+<details><summary><code>client.stats.timeSeries.<a href="/src/api/resources/stats/resources/timeSeries/client/Client.ts">list</a>() -> Whop.ListTimeSeriesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the metrics you can chart over time, with the unit each reports and the properties you can filter or break it down by. Every metric can be charted, so this is the whole catalog; the metrics you can rank are the narrower list at `GET /stats/reports`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.stats.timeSeries.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `TimeSeriesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.stats.timeSeries.<a href="/src/api/resources/stats/resources/timeSeries/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrieveTimeSeriesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a metric as a time series of points for an account or user over a time range. To rank a metric across one of its breakdowns instead of charting it, use `GET /stats/reports/{metric}`. The `market_prices` metric is public and requires no authentication. The `funnel` metric measures 2 to 10 ordered events per person. Its first matching event inside from/to anchors the cohort, breakdown and conversion window; later entries do not restart it. Intervening events are allowed, and conversions may occur after to. Funnel values are final conversion percentages; steps include counts and cumulative conversion percentages. Experiment funnels use experiment.exposure as step 1 and breakdown_by=variant. Pass steps using bracket parameters such as steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.stats.timeSeries.retrieve({
+    metric: "metric",
+    from: "from",
+    to: "to",
+    ad_campaign_ids: ["adcamp_xxxxxxxxxxxxxx"],
+    ad_group_ids: ["adgrp_xxxxxxxxxxxxxx"],
+    ad_ids: ["ad_xxxxxxxxxxxxxx"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.stats.RetrieveTimeSeriesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TimeSeriesClient.RequestOptions` 
     
 </dd>
 </dl>
