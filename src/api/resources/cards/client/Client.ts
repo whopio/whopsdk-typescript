@@ -20,8 +20,6 @@ export declare namespace CardsClient {
  * Cards represent virtual payment cards that spend from an account or user balance. Cards can be assigned to cardholders and configured with spending limits for controlled spending.
  *
  * Use the Cards API to issue cards, list cards for an account or user, and retrieve active card details such as the card number and CVC.
- *
- * Card issuing is not enabled by default. Please reach out to sales for more information on enabling it.
  */
 export class CardsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CardsClient.Options>;
