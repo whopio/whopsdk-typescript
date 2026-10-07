@@ -21,12 +21,16 @@ export interface RetrievePreferencesResponse {
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
     economic_intelligence: boolean;
-    /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or has no end date. */
+    /** Whether Economic Intelligence renews itself every week, with no end date. Turn it on with the `weekly` offer. Set it to `false` to stop renewing, which keeps Economic Intelligence on until the end of the current week, shown in `economic_intelligence_ends_at`; set it back to `true` before then to keep renewing. */
+    economic_intelligence_auto_renew: boolean;
+    /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or renews automatically. */
     economic_intelligence_ends_at: string | null;
     /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. `null` when Economic Intelligence is off. */
     economic_intelligence_fee_percentage: number | null;
-    /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or the account is still on the Economic Intelligence waitlist. */
-    economic_intelligence_offers: RetrievePreferencesResponse.EconomicIntelligenceOffers.Item[] | null;
+    /** What the account can choose now to turn on Economic Intelligence, each with its fee. Every offer while Economic Intelligence is off; only the `weekly` auto-renew offer while a committed period is running, as an upgrade; empty while it renews automatically. */
+    economic_intelligence_offers: RetrievePreferencesResponse.EconomicIntelligenceOffers.Item[];
+    /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
+    economic_intelligence_previous_period: RetrievePreferencesResponse.EconomicIntelligencePreviousPeriod | null;
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: RetrievePreferencesResponse.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */
@@ -201,15 +205,17 @@ export namespace RetrievePreferencesResponse {
 
     export namespace EconomicIntelligenceOffers {
         export interface Item {
-            /** What period of time Economic Intelligence stays on. */
+            /** Whether this offer renews every period until auto-renew is turned off, rather than ending after one. */
+            auto_renew: boolean;
+            /** What period of time Economic Intelligence stays on. For an auto-renew offer, the length of each period it renews for. */
             duration: number;
             /** The unit of time the duration is in (hours or days) */
             duration_unit: Item.DurationUnit;
             /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. */
             fee_percentage: number;
-            /** The unique identifier for this duration. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+            /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. */
             key: Item.Key;
-            /** Whether Whop recommends this duration. Exactly one offer is recommended. */
+            /** Whether Whop recommends this offer. At most one offer is recommended. */
             recommended: boolean;
         }
 
@@ -220,14 +226,25 @@ export namespace RetrievePreferencesResponse {
                 Days: "days",
             } as const;
             export type DurationUnit = (typeof DurationUnit)[keyof typeof DurationUnit];
-            /** The unique identifier for this duration. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+            /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. */
             export const Key = {
+                Weekly: "weekly",
                 SevenDays: "7_days",
                 OneDay: "1_day",
                 OneHour: "1_hour",
             } as const;
             export type Key = (typeof Key)[keyof typeof Key];
         }
+    }
+
+    /**
+     * The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on.
+     */
+    export interface EconomicIntelligencePreviousPeriod {
+        /** When the period ended, as an ISO 8601 timestamp. */
+        ended_at: string;
+        /** Percentage of volume charged during the period, such as `3` for 3%. */
+        fee_percentage: number;
     }
 
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */

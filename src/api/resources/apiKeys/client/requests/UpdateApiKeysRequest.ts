@@ -83,6 +83,7 @@ export namespace UpdateApiKeysRequest {
         TwoThousandTwentySix10062: "2026-10-06-2",
         TwoThousandTwentySix1007: "2026-10-07",
         TwoThousandTwentySix10071: "2026-10-07-1",
+        TwoThousandTwentySix10072: "2026-10-07-2",
     } as const;
     export type ApiVersionDate = (typeof ApiVersionDate)[keyof typeof ApiVersionDate];
 

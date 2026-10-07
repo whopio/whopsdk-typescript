@@ -15,6 +15,7 @@ export * from "./AccountCompanyFormationSignatures.js";
 export * from "./AccountCoveredPayoutFees.js";
 export * from "./AccountDisputeAlertAutoRefundControl.js";
 export * from "./AccountEconomicIntelligenceOffer.js";
+export * from "./AccountEconomicIntelligencePreviousPeriod.js";
 export * from "./AccountFee.js";
 export * from "./AccountFeeMarkup.js";
 export * from "./AccountFeeMarkups.js";
