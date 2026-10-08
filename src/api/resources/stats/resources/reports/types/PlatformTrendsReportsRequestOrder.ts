@@ -7,7 +7,7 @@ export const PlatformTrendsReportsRequestOrder = {
     Customers: "customers",
     Aov: "aov",
     RepeatRate: "repeat_rate",
-    P99GrossRevenue: "p99_gross_revenue",
+    MedianGrossRevenue: "median_gross_revenue",
     NewBusinesses: "new_businesses",
     AvgBusinessAge: "avg_business_age",
     AvgOwnerAge: "avg_owner_age",
