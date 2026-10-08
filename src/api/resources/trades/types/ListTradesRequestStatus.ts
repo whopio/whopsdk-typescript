@@ -2,9 +2,9 @@
 
 export const ListTradesRequestStatus = {
     Pending: "pending",
-    Submitted: "submitted",
+    Processing: "processing",
+    InReview: "in_review",
     Completed: "completed",
     Failed: "failed",
-    SubmissionUnknown: "submission_unknown",
 } as const;
 export type ListTradesRequestStatus = (typeof ListTradesRequestStatus)[keyof typeof ListTradesRequestStatus];

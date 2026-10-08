@@ -9,10 +9,10 @@ import type * as Whop from "../../../../index.js";
 export interface ListTradesRequest {
     /** Only return trades for this account or user, prefixed `biz_` or `user_`. */
     account_id?: string;
-    /** Only return trades with this submission status. */
+    /** Only return trades with this status. */
     status?: Whop.ListTradesRequestStatus;
-    /** Only return trades of this kind, such as `create_orders` for order submissions. */
-    operation_type?: Whop.ListTradesRequestOperationType;
+    /** Only return trades of this type. */
+    type?: Whop.ListTradesRequestType;
     /** Field to sort by. */
     order?: Whop.ListTradesRequestOrder;
     /** Sort direction. */
