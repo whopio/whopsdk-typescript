@@ -1,4 +1,5 @@
 export * from "./CreateTransfersResponse.js";
+export * from "./CreateTransfersResponseClaimLinkSender.js";
 export * from "./CreateTransfersResponseTransferDestination.js";
 export * from "./CreateTransfersResponseTransferOrigin.js";
 export * from "./ListRecipientsTransfersResponse.js";

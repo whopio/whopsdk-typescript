@@ -10,7 +10,7 @@ export type CreateTransfersResponse =
      * Returned for a wallet_send: an onchain USDT send to a recipient. */
     | Whop.CreateTransfersResponse.Send
     /**
-     * Returned for a claim_link: a shareable URL anyone can open to claim the funds. */
+     * A shareable link anyone holding its code can open to claim the funds. */
     | Whop.CreateTransfersResponse.ClaimLink;
 
 export namespace CreateTransfersResponse {
@@ -95,14 +95,29 @@ export namespace CreateTransfersResponse {
 
     export interface ClaimLink {
         object: "claim_link";
+        /** Amount each claim receives. */
         amount: string;
+        /** Shareable claim URL. */
         claim_url: string;
+        /** Whether this link can currently be claimed. */
+        claimable: boolean;
+        /** Redeemable claim code. */
+        code: string;
+        created_at: string;
         currency: string;
         expires_at: string | null;
+        /** Claim-link ID, prefixed `airdrp_`. */
         id: string;
+        /** Maximum number of claims. */
         redeemable_count: number;
+        /** Number of completed claims. */
+        redeemed_count: number;
+        /** Number of available claims, excluding slots reserved by pending claims. */
+        remaining_claims: number;
+        /** The public account or user funding the claim link. */
+        sender: Whop.CreateTransfersResponseClaimLinkSender;
         source: CreateTransfersResponseClaimLink.Source;
-        /** A newly funded claim link is always `pending` — it stays claimable until it is fully claimed, canceled, or expires. */
+        /** The newly funded link is ready to claim. */
         status: CreateTransfersResponseClaimLink.Status;
     }
 
@@ -111,7 +126,7 @@ export namespace CreateTransfersResponse {
             account_id: string;
         }
 
-        /** A newly funded claim link is always `pending` — it stays claimable until it is fully claimed, canceled, or expires. */
+        /** The newly funded link is ready to claim. */
         export const Status = {
             Pending: "pending",
         } as const;

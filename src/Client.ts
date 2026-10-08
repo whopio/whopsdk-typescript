@@ -22,6 +22,7 @@ import { CardTransactionsClient } from "./api/resources/cardTransactions/client/
 import { CashbackRulesClient } from "./api/resources/cashbackRules/client/Client.js";
 import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.js";
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
+import { ClaimLinksClient } from "./api/resources/claimLinks/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
 import { ConfirmationTokensClient } from "./api/resources/confirmationTokens/client/Client.js";
 import { CourseChaptersClient } from "./api/resources/courseChapters/client/Client.js";
@@ -127,6 +128,7 @@ export class WhopClient {
     protected _cashbackRules: CashbackRulesClient | undefined;
     protected _chatChannels: ChatChannelsClient | undefined;
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
+    protected _claimLinks: ClaimLinksClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
     protected _confirmationTokens: ConfirmationTokensClient | undefined;
     protected _courseChapters: CourseChaptersClient | undefined;
@@ -288,6 +290,10 @@ export class WhopClient {
 
     public get checkoutConfigurations(): CheckoutConfigurationsClient {
         return (this._checkoutConfigurations ??= new CheckoutConfigurationsClient(this._options));
+    }
+
+    public get claimLinks(): ClaimLinksClient {
+        return (this._claimLinks ??= new ClaimLinksClient(this._options));
     }
 
     public get companyTokenTransactions(): CompanyTokenTransactionsClient {
