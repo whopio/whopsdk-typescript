@@ -22,12 +22,14 @@ export interface AccountPreferences {
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
     economic_intelligence: boolean;
-    /** Whether Economic Intelligence renews itself every week, with no end date. Turn it on with the `weekly` offer. Set it to `false` to stop renewing, which keeps Economic Intelligence on until the end of the current week, shown in `economic_intelligence_ends_at`; set it back to `true` before then to keep renewing. */
+    /** Whether Economic Intelligence renews itself every week, with no end date. Turn it on with the `weekly` offer. Set it to `false` to stop renewing, which keeps Economic Intelligence on until the end of the current week, shown in `economic_intelligence_ends_at`; stopping before the first renewal charges the rest of that week at the `7_days` offer's fee. Set it back to `true` before then to keep renewing at the weekly fee. */
     economic_intelligence_auto_renew: boolean;
     /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or renews automatically. */
     economic_intelligence_ends_at: string | null;
     /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. `null` when Economic Intelligence is off. */
     economic_intelligence_fee_percentage: number | null;
+    /** When auto-renew first renews, as an ISO 8601 timestamp. Turning auto-renew off before then charges the rest of that week at the `7_days` offer's fee. `null` when auto-renew is off. */
+    economic_intelligence_first_renewal_at: string | null;
     economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[];
     /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
     economic_intelligence_previous_period: Whop.AccountEconomicIntelligencePreviousPeriod | null;

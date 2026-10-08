@@ -73,6 +73,7 @@ describe("PreferencesClient", () => {
             economic_intelligence_auto_renew: false,
             economic_intelligence_ends_at: "economic_intelligence_ends_at",
             economic_intelligence_fee_percentage: 1.1,
+            economic_intelligence_first_renewal_at: "economic_intelligence_first_renewal_at",
             economic_intelligence_offers: [
                 {
                     auto_renew: true,
@@ -225,6 +226,7 @@ describe("PreferencesClient", () => {
             economic_intelligence_auto_renew: false,
             economic_intelligence_ends_at: "2026-01-01T12:00:00.000Z",
             economic_intelligence_fee_percentage: 1.5,
+            economic_intelligence_first_renewal_at: "economic_intelligence_first_renewal_at",
             economic_intelligence_offers: [
                 {
                     auto_renew: true,
