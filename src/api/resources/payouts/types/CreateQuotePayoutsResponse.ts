@@ -20,6 +20,8 @@ export interface CreateQuotePayoutsResponse {
     object: CreateQuotePayoutsResponse.Object_;
     /** Server-signed quote token to submit to POST /payouts. */
     quote_token: string;
+    /** An optional payout method to connect for estimated savings. The quote still uses the requested saved method. */
+    recommended_method: CreateQuotePayoutsResponse.RecommendedMethod | null;
 }
 
 export namespace CreateQuotePayoutsResponse {
@@ -27,4 +29,24 @@ export namespace CreateQuotePayoutsResponse {
         PayoutQuote: "payout_quote",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+
+    /**
+     * An optional payout method to connect for estimated savings. The quote still uses the requested saved method.
+     */
+    export interface RecommendedMethod {
+        /** Two-letter ISO country code for connecting the method. */
+        country: string;
+        /** Currency to select when connecting the method. */
+        destination_currency: string;
+        /** Estimated arrival when paying out with the suggested method, when available. */
+        estimated_arrival: string | null;
+        /** Estimated total cost, including same-currency exchange-rate loss. */
+        estimated_fee: Whop.Money;
+        /** Estimated increase in the delivered amount after fees compared with this quote. */
+        estimated_savings: Whop.Money;
+        /** Display name of the suggested payout method. */
+        name: string;
+        /** Supported payout method to connect, prefixed `podst_`. */
+        supported_payout_method_id: string;
+    }
 }
