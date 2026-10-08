@@ -24,6 +24,8 @@ export declare namespace AccountsClient {
  * An Account represents a person or business on Whop that can have its own profile, wallet, and account-scoped settings. Use accounts for customers, creators, merchants, sellers, or connected businesses your integration supports.
  *
  * Use the Accounts API to create accounts, list accounts visible to your credentials, retrieve or update an account, suspend or delete a connected account managed by your platform, and retrieve the account associated with the current API key.
+ *
+ * An account applies to accept financing payments through financing applications. A financing application requests review of a merchant account for payment financing, not a loan or business capital. Create, list, and retrieve applications for your account and its direct sub-accounts. Creating an application returns an existing open application when one is already collecting information or awaiting review.
  */
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
