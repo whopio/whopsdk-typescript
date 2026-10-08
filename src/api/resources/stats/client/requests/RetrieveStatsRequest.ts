@@ -16,7 +16,7 @@ import type * as Whop from "../../../../index.js";
 export interface RetrieveStatsRequest {
     /** The metric to retrieve, for example net_revenue. */
     metric: string;
-    /** The account this query concerns, for example biz_AbC123. */
+    /** Account this query concerns, prefixed `biz_`, or `platform` for all of Whop. */
     account_id?: string;
     /** The user this query concerns, for example user_AbC123. Available on metrics that support user subjects, such as account_balance. */
     user_id?: string;
@@ -84,6 +84,10 @@ export interface RetrieveStatsRequest {
     snapshot_window?: Whop.RetrieveStatsRequestSnapshotWindow;
     /** Filter the events metric to one or more full event names, for example payment.completed or pixel.lead. Comma-separated names match any listed event. Use group_by=event for separate groups. Available on metrics that list event. */
     event?: string;
+    /** Filter to one business type, for example `education`. Pair with `breakdown_by=business_type` to split by business type. Available on metrics that list `business_type`. */
+    business_type?: string;
+    /** Filter to one industry type, for example `options_trading`. Pair with `breakdown_by=industry_type` to split by industry type. Available on metrics that list `industry_type`. */
+    industry_type?: string;
     /** Funnel only. Time allowed from the first event to the final event: integer minutes, hours, or days, up to 30d. */
     conversion_window?: string;
     /** Funnel only. Include only entrants whose full conversion window has elapsed. Required for confidence intervals and comparisons. */
