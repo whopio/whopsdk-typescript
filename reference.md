@@ -28431,17 +28431,13 @@ Returns a paginated list of webhook endpoints configured for an account, ordered
 <dd>
 
 ```typescript
-const pageableResponse = await client.webhooks.list({
-    account_id: "account_id"
-});
+const pageableResponse = await client.webhooks.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.webhooks.list({
-    account_id: "account_id"
-});
+let page = await client.webhooks.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }

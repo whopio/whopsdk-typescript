@@ -52,9 +52,7 @@ describe("WebhooksClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.webhooks.list({
-            account_id: "account_id",
-        });
+        const page = await client.webhooks.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -77,9 +75,7 @@ describe("WebhooksClient", () => {
         server.mockEndpoint().get("/webhooks").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.webhooks.list({
-                account_id: "account_id",
-            });
+            return await client.webhooks.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -98,9 +94,7 @@ describe("WebhooksClient", () => {
         server.mockEndpoint().get("/webhooks").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.webhooks.list({
-                account_id: "account_id",
-            });
+            return await client.webhooks.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -119,9 +113,7 @@ describe("WebhooksClient", () => {
         server.mockEndpoint().get("/webhooks").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.webhooks.list({
-                account_id: "account_id",
-            });
+            return await client.webhooks.list();
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
@@ -140,9 +132,7 @@ describe("WebhooksClient", () => {
         server.mockEndpoint().get("/webhooks").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.webhooks.list({
-                account_id: "account_id",
-            });
+            return await client.webhooks.list();
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
