@@ -99,7 +99,7 @@ describe("ReportsClient", () => {
                                     display_decimals: 2,
                                 },
                                 industry_type: { id: "marketing_agency", name: "Marketing Agency" },
-                                p99_gross_revenue: {
+                                median_gross_revenue: {
                                     amount: "-1234.56",
                                     currency: "usd",
                                     decimals: 2,
@@ -131,7 +131,7 @@ describe("ReportsClient", () => {
                                     display_decimals: 2,
                                 },
                                 industry_type: { id: "marketing_agency", name: "Marketing Agency" },
-                                p99_gross_revenue: {
+                                median_gross_revenue: {
                                     amount: "-1234.56",
                                     currency: "usd",
                                     decimals: 2,

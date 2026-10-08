@@ -98,10 +98,10 @@ export namespace PlatformTrendsReportsResponse {
                         /** Paid sales, before refunds and fees, measured the way an account's gross revenue is. */
                         gross_revenue?: (Whop.Money | null) | undefined;
                         industry_type?: (Item.IndustryType | null) | undefined;
+                        /** The median paid volume per business that sold. */
+                        median_gross_revenue?: (Whop.Money | null) | undefined;
                         /** Businesses created in the window that also sold in it. */
                         new_businesses?: (number | null) | undefined;
-                        /** The 99th percentile of paid volume per business. `null` when fewer than 100 businesses sold, since below that it is the top seller's own volume. */
-                        p99_gross_revenue?: (Whop.Money | null) | undefined;
                         /** Paid payments. */
                         payments?: (number | null) | undefined;
                         /** Share of customers who paid more than once, as a fraction. */
