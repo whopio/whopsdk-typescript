@@ -108,6 +108,8 @@ export namespace RetrieveFinancialReportsResponse {
             export const LineCategory = {
                 AcceleratedSettlementFee: "accelerated_settlement_fee",
                 AccountSettlement: "account_settlement",
+                AdAffiliatePayout: "ad_affiliate_payout",
+                AdAffiliatePayoutReceived: "ad_affiliate_payout_received",
                 AdBalanceFundingReceipt: "ad_balance_funding_receipt",
                 AdBudgetRelease: "ad_budget_release",
                 AdCampaignBudget: "ad_campaign_budget",

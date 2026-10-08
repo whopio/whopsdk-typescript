@@ -2,6 +2,7 @@
 
 export const ListFinancialActivityRequestLineTypesItem = {
     AccountSettlement: "account_settlement",
+    AdAffiliatePayoutReceived: "ad_affiliate_payout_received",
     AdBudgetRelease: "ad_budget_release",
     AdCampaignBudget: "ad_campaign_budget",
     AdPublisherPayout: "ad_publisher_payout",
