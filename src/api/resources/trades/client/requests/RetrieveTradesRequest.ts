@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveTradesRequest {
-    /** Trade ID, prefixed `trop_`. */
+    /** Trade ID, prefixed `tint_`. */
     id: string;
 }

@@ -26318,7 +26318,7 @@ await client.topups.create({
 <dl>
 <dd>
 
-Lists trades you can access, newest first. User credentials see their own trades and those of accounts they belong to, including connected accounts; account credentials see their account and its connected accounts. These are submission records, not fill or position history.
+Lists trades you can access, newest first. User credentials see their own trades and those of accounts they belong to, including connected accounts; account credentials see their account and its connected accounts.
 </dd>
 </dl>
 </dd>
@@ -26381,7 +26381,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">create</a>() -> void</code></summary>
+<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">create</a>({ ...params }) -> Whop.Trade</code></summary>
 <dl>
 <dd>
 
@@ -26393,7 +26393,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retired. Order batches can no longer be placed. Every caller gets `410 Gone`, whatever the body, and nothing is sent to the trading provider. List and retrieve earlier trades with `GET /trades`.
+Creates a trade on the Whop-managed wallet of an account or user and answers `201` with the trade in `pending`. The trade runs in the background; read it with `GET /trades/{id}` until it is `completed`, `failed` or `in_review`. A `buy` bridges `amount` USDT0 to the trading account, sets `leverage` (cross) on `market`, and places one market buy. If the buy does not fill, its money goes back to the wallet. A `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. One trade runs at a time for each wallet. A retry with the same `Idempotency-Key` returns the same trade.
 </dd>
 </dl>
 </dd>
@@ -26408,7 +26408,11 @@ Retired. Order batches can no longer be placed. Every caller gets `410 Gone`, wh
 <dd>
 
 ```typescript
-await client.trades.create();
+await client.trades.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    market: "BTC",
+    type: "buy"
+});
 
 ```
 </dd>
@@ -26424,57 +26428,10 @@ await client.trades.create();
 <dl>
 <dd>
 
-**requestOptions:** `TradesClient.RequestOptions` 
+**request:** `Whop.CreateTradesRequest` 
     
 </dd>
 </dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">updateLeverage</a>() -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retired. Every caller gets `410 Gone`, and no leverage change is sent to the trading provider.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.trades.updateLeverage();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
 
 <dl>
 <dd>
@@ -26503,7 +26460,7 @@ await client.trades.updateLeverage();
 <dl>
 <dd>
 
-Retrieves a trade. Order acknowledgements don't update as orders fill. Never resubmit a `submission_unknown` trade with a new idempotency key.
+Retrieves a trade. Read it until its `status` is `completed`, `failed` or `in_review`.
 </dd>
 </dl>
 </dd>
@@ -26537,71 +26494,6 @@ await client.trades.retrieve({
 <dd>
 
 **request:** `Whop.RetrieveTradesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TradesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">cancel</a>({ ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retired. Every caller gets `410 Gone`, and no cancellation is sent to the trading provider.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.trades.cancel({
-    id: "id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CancelTradesRequest` 
     
 </dd>
 </dl>
