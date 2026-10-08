@@ -166,6 +166,7 @@ export namespace PostPayoutMethodCreatedPayload {
         export interface Recipient {
             /** ISO 3166-1 alpha-3 country code. */
             country: string;
+            email: string;
             first_name: string;
             last_name: string;
         }
