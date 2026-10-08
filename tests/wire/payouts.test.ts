@@ -572,7 +572,7 @@ describe("PayoutsClient", () => {
                     error_message: "error_message",
                     estimated_arrival: "2024-01-15T09:30:00Z",
                     status: "requested",
-                    status_detail: "status_detail",
+                    status_detail: "security_review",
                     timestamp: "2026-01-01T12:00:00Z",
                 },
             ],

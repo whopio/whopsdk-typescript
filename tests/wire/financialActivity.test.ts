@@ -87,7 +87,7 @@ describe("FinancialActivityClient", () => {
                         },
                         payout_token_nickname: "Ops checking",
                         reason: "bounty_payout",
-                        risk_review_hold: false,
+                        risk_review_hold: true,
                         sender_address: "0x8a4de51b9c37f2e6a0d1b8c94e5f7a2d3c6b0e19",
                         status: "fully_claimed",
                         to_amount: "500.0",
