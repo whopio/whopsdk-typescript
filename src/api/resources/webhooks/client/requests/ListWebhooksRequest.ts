@@ -2,13 +2,11 @@
 
 /**
  * @example
- *     {
- *         account_id: "account_id"
- *     }
+ *     {}
  */
 export interface ListWebhooksRequest {
     /** The unique identifier of the account to list webhooks for. */
-    account_id: string;
+    account_id?: string;
     /** Only return webhooks attached to this app. Omit to list the account's own webhooks. */
     app_id?: string;
     /** Also return webhooks attached to the account's apps, not just the account's own. Cannot be combined with `app_id`. */

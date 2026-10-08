@@ -37,12 +37,10 @@ export class WebhooksClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.webhooks.list({
-     *         account_id: "account_id"
-     *     })
+     *     await client.webhooks.list()
      */
     public async list(
-        request: Whop.ListWebhooksRequest,
+        request: Whop.ListWebhooksRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
     ): Promise<core.Page<Whop.WebhookListItem, Whop.ListWebhooksResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
