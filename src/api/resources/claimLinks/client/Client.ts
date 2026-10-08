@@ -100,4 +100,89 @@ export class ClaimLinksClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/claim_links/{id}");
     }
+
+    /**
+     * Claims a funded link into the authenticated user's personal balance and returns the updated link. Requires a signed-in user and the public claim code; company API keys cannot claim on a recipient's behalf. Each user can claim a link once. Reuse the same Idempotency-Key when retrying the same request. On-chain claims wait for the existing transfer workflow and may take several minutes.
+     *
+     * @param {Whop.ClaimClaimLinksRequest} request
+     * @param {ClaimLinksClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.claimLinks.claim({
+     *         id: "id"
+     *     })
+     */
+    public claim(
+        request: Whop.ClaimClaimLinksRequest,
+        requestOptions?: ClaimLinksClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.ClaimClaimLinksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__claim(request, requestOptions));
+    }
+
+    private async __claim(
+        request: Whop.ClaimClaimLinksRequest,
+        requestOptions?: ClaimLinksClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.ClaimClaimLinksResponse>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-07-2",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `claim_links/${core.url.encodePathParam(id)}/claim`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.ClaimClaimLinksResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/claim_links/{id}/claim");
+    }
 }
