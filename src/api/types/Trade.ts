@@ -46,6 +46,7 @@ export namespace Trade {
         TradingPaused: "trading_paused",
         FundingFailed: "funding_failed",
         MarginUnavailable: "margin_unavailable",
+        BuilderFeeUnapproved: "builder_fee_unapproved",
         LeverageRejected: "leverage_rejected",
         LeverageUnconfirmed: "leverage_unconfirmed",
         OrderRejected: "order_rejected",
