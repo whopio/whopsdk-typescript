@@ -235,6 +235,8 @@ export namespace LedgerActivity {
         AdIncomeReceipt: "ad_income_receipt",
         AdBudgetRelease: "ad_budget_release",
         AdNetworkSettlement: "ad_network_settlement",
+        AdAffiliatePayout: "ad_affiliate_payout",
+        AdAffiliatePayoutReceived: "ad_affiliate_payout_received",
         AdBalanceFundingReceipt: "ad_balance_funding_receipt",
         MiscReversal: "misc_reversal",
         FxGainLoss: "fx_gain_loss",
