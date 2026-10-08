@@ -35,7 +35,7 @@ export interface DomainListItem {
     status: DomainListItem.Status | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. `null` for a search result. */
     updated_at: string | null;
-    /** When an unverified claim is automatically deleted, 48 hours after creation, as an ISO 8601 timestamp. */
+    /** When an unverified claim is automatically removed, 48 hours after it was claimed, as an ISO 8601 timestamp. */
     verification_expires_at: string | null;
 }
 
