@@ -383,6 +383,15 @@ describe("PayoutsClient", () => {
             net_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             object: "payout_quote",
             quote_token: "signed-payout-quote",
+            recommended_method: {
+                country: "AE",
+                destination_currency: "eur",
+                estimated_arrival: "2026-01-01T12:00:00Z",
+                estimated_fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                estimated_savings: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                name: "Bank Wire",
+                supported_payout_method_id: "podst_xxxxxxxxxxxxxx",
+            },
         };
 
         server
