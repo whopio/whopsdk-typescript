@@ -123,6 +123,7 @@ describe("DirectClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
+            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
