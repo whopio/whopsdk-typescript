@@ -7610,6 +7610,72 @@ await client.checkoutConfigurations.delete({
 </dl>
 </details>
 
+## ClaimLinks
+<details><summary><code>client.claimLinks.<a href="/src/api/resources/claimLinks/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrieveClaimLinksResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a funded claim link. IDs require `airdrop_link:basic:read` on the funding account, or the personal account's owner. Claim codes allow unauthenticated previews of the sender, amount, expiry, and claim availability. Treat codes as secrets: anyone holding one can claim after signing in. By ID, the code and URL require `airdrop_link:manage` on the funding company or `payout:withdraw_funds` on the personal account; read-only credentials receive null values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.claimLinks.retrieve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveClaimLinksRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ClaimLinksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## CompanyTokenTransactions
 <details><summary><code>client.companyTokenTransactions.<a href="/src/api/resources/companyTokenTransactions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.CompanyTokenTransactionListItem, Whop.ListCompanyTokenTransactionsResponse&gt;</code></summary>
 <dl>

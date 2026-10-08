@@ -264,6 +264,17 @@
             },
             "default": "./dist/cjs/api/resources/checkoutConfigurations/exports.js"
         },
+        "./claimLinks": {
+            "import": {
+                "types": "./dist/esm/api/resources/claimLinks/exports.d.mts",
+                "default": "./dist/esm/api/resources/claimLinks/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/claimLinks/exports.d.ts",
+                "default": "./dist/cjs/api/resources/claimLinks/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/claimLinks/exports.js"
+        },
         "./companyTokenTransactions": {
             "import": {
                 "types": "./dist/esm/api/resources/companyTokenTransactions/exports.d.mts",
