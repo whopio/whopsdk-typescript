@@ -325,7 +325,7 @@ describe("DomainsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { domain: "domain" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -549,7 +549,7 @@ describe("DomainsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server.mockEndpoint().delete("/domains/id").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
@@ -767,7 +767,7 @@ describe("DomainsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server.mockEndpoint().post("/domains/id/check").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 

@@ -264,7 +264,7 @@ describe("DirectClient", () => {
             payment_method: { type: "card" },
             account_id: "account_id",
         };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

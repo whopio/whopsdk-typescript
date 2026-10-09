@@ -254,7 +254,7 @@ describe("AdConversionValueRulesClient", () => {
                 { platform: "tiktok", scope: "business" },
             ],
         };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -463,7 +463,7 @@ describe("AdConversionValueRulesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -535,7 +535,7 @@ describe("AdConversionValueRulesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

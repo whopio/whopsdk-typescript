@@ -280,7 +280,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message: "message", reason: "fraudulent", receipt_id: "receipt_id" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -648,7 +648,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -777,7 +777,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message: "message" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -909,7 +909,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message: "message" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1150,7 +1150,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message: "message" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1278,7 +1278,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1403,7 +1403,7 @@ describe("ResolutionCenterCasesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

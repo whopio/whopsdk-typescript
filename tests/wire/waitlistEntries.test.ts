@@ -297,7 +297,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -464,7 +464,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -734,7 +734,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -882,7 +882,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1030,7 +1030,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

@@ -179,7 +179,7 @@ describe("MediaClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

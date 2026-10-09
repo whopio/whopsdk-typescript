@@ -202,7 +202,7 @@ describe("PaymentQuotesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

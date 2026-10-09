@@ -6,6 +6,7 @@ import { AccountsClient } from "./api/resources/accounts/client/Client.js";
 import { AdCampaignsClient } from "./api/resources/adCampaigns/client/Client.js";
 import { AdConversionValueRulesClient } from "./api/resources/adConversionValueRules/client/Client.js";
 import { AdGroupsClient } from "./api/resources/adGroups/client/Client.js";
+import { AdPixelsClient } from "./api/resources/adPixels/client/Client.js";
 import { AdsClient } from "./api/resources/ads/client/Client.js";
 import { AffiliatesClient } from "./api/resources/affiliates/client/Client.js";
 import { AiChatsClient } from "./api/resources/aiChats/client/Client.js";
@@ -112,6 +113,7 @@ export class WhopClient {
     protected _adCampaigns: AdCampaignsClient | undefined;
     protected _adConversionValueRules: AdConversionValueRulesClient | undefined;
     protected _adGroups: AdGroupsClient | undefined;
+    protected _adPixels: AdPixelsClient | undefined;
     protected _ads: AdsClient | undefined;
     protected _affiliates: AffiliatesClient | undefined;
     protected _aiChats: AiChatsClient | undefined;
@@ -226,6 +228,10 @@ export class WhopClient {
 
     public get adGroups(): AdGroupsClient {
         return (this._adGroups ??= new AdGroupsClient(this._options));
+    }
+
+    public get adPixels(): AdPixelsClient {
+        return (this._adPixels ??= new AdPixelsClient(this._options));
     }
 
     public get ads(): AdsClient {

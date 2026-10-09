@@ -449,7 +449,7 @@ describe("AdsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1082,7 +1082,7 @@ describe("AdsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -1264,7 +1264,7 @@ describe("AdsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server.mockEndpoint().post("/ads/id/pause").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
@@ -1439,7 +1439,7 @@ describe("AdsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server.mockEndpoint().post("/ads/id/unpause").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 

@@ -216,7 +216,7 @@ export class AdConversionValueRulesClient {
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -509,7 +509,7 @@ export class AdConversionValueRulesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -587,7 +587,7 @@ export class AdConversionValueRulesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
