@@ -5604,6 +5604,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                satispay: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.5,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 4.5,
+                    region: "eu",
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.5,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 scalapay: {
                     adjustable: false,
                     category: "payments",
@@ -14136,6 +14179,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 2.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                satispay: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.5,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 4.5,
+                    region: "eu",
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.5,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
