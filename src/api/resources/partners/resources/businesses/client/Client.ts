@@ -52,6 +52,7 @@ export class BusinessesClient {
                 request: Whop.partners.ListBusinessesRequest,
             ): Promise<core.WithRawResponse<Whop.partners.ListBusinessesResponse>> => {
                 const {
+                    referring_account_id: referringAccountId,
                     status,
                     has_earnings: hasEarnings,
                     first,
@@ -68,6 +69,7 @@ export class BusinessesClient {
                     business_prefix_query: businessPrefixQuery,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
+                    referring_account_id: referringAccountId,
                     status: status != null ? status : undefined,
                     has_earnings: hasEarnings,
                     first,
