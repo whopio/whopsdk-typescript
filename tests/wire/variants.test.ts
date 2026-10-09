@@ -102,6 +102,8 @@ describe("VariantsClient", () => {
             visibilities: ["visible"],
             plan_types: ["renewal"],
             product_ids: ["prod_xxxxxxxxxxxxxx"],
+            presentment_currency: "auto",
+            ip_address: "203.0.113.7",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -397,6 +399,8 @@ describe("VariantsClient", () => {
 
         const response = await client.variants.retrieve({
             id: "id",
+            presentment_currency: "auto",
+            ip_address: "203.0.113.7",
         });
         expect(response).toEqual(rawResponseBody);
     });

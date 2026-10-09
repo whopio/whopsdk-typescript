@@ -27359,7 +27359,9 @@ const pageableResponse = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
     plan_types: ["renewal"],
-    product_ids: ["prod_xxxxxxxxxxxxxx"]
+    product_ids: ["prod_xxxxxxxxxxxxxx"],
+    presentment_currency: "auto",
+    ip_address: "203.0.113.7"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -27370,7 +27372,9 @@ let page = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
     plan_types: ["renewal"],
-    product_ids: ["prod_xxxxxxxxxxxxxx"]
+    product_ids: ["prod_xxxxxxxxxxxxxx"],
+    presentment_currency: "auto",
+    ip_address: "203.0.113.7"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -27504,7 +27508,9 @@ Retrieves the details of an existing variant.
 
 ```typescript
 await client.variants.retrieve({
-    id: "id"
+    id: "id",
+    presentment_currency: "auto",
+    ip_address: "203.0.113.7"
 });
 
 ```

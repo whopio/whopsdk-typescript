@@ -8,7 +8,9 @@ import type * as Whop from "../../../../index.js";
  *         release_methods: ["buy_now"],
  *         visibilities: ["visible"],
  *         plan_types: ["renewal"],
- *         product_ids: ["prod_xxxxxxxxxxxxxx"]
+ *         product_ids: ["prod_xxxxxxxxxxxxxx"],
+ *         presentment_currency: "auto",
+ *         ip_address: "203.0.113.7"
  *     }
  */
 export interface ListVariantsRequest {
@@ -30,6 +32,10 @@ export interface ListVariantsRequest {
     created_before?: string;
     /** Only return variants created after this timestamp. */
     created_after?: string;
+    /** The currency to state each variant's prices in. Omit it, or send null, for each variant's own currency. `auto` states them in the currency of the country Whop places the buyer in: by `ip_address` when your server sends one, and by the request's own IP address otherwise. A three-letter ISO 4217 code, such as `eur`, states them in that currency. A variant converts only where a payment quote for it would be priced in that currency, and stays in its own currency otherwise: a renewing variant, one with adaptive pricing off, a currency no payment method can collect, or `auto` for a buyer Whop cannot place in a country. Converted prices are an estimate at the current exchange rate. Nothing is held: the payment quote the buyer pays from fixes the rate. */
+    presentment_currency?: string | null;
+    /** The buyer's IP address, when your server reads on their behalf. Needs an API key; any other caller is placed by its own request. Where `presentment_currency` `auto` finds the buyer's local currency. */
+    ip_address?: string | null;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */

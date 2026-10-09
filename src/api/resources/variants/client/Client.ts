@@ -44,7 +44,9 @@ export class VariantsClient {
      *         release_methods: ["buy_now"],
      *         visibilities: ["visible"],
      *         plan_types: ["renewal"],
-     *         product_ids: ["prod_xxxxxxxxxxxxxx"]
+     *         product_ids: ["prod_xxxxxxxxxxxxxx"],
+     *         presentment_currency: "auto",
+     *         ip_address: "203.0.113.7"
      *     })
      */
     public async list(
@@ -63,6 +65,8 @@ export class VariantsClient {
                     product_ids: productIds,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    presentment_currency: presentmentCurrency,
+                    ip_address: ipAddress,
                     first,
                     after,
                     last,
@@ -78,6 +82,8 @@ export class VariantsClient {
                     product_ids: productIds,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    presentment_currency: presentmentCurrency,
+                    ip_address: ipAddress,
                     first,
                     after,
                     last,
@@ -241,7 +247,9 @@ export class VariantsClient {
      *
      * @example
      *     await client.variants.retrieve({
-     *         id: "id"
+     *         id: "id",
+     *         presentment_currency: "auto",
+     *         ip_address: "203.0.113.7"
      *     })
      */
     public retrieve(
@@ -255,7 +263,11 @@ export class VariantsClient {
         request: Whop.RetrieveVariantsRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.Variant>> {
-        const { id } = request;
+        const { id, presentment_currency: presentmentCurrency, ip_address: ipAddress } = request;
+        const _queryParams: Record<string, unknown> = {
+            presentment_currency: presentmentCurrency,
+            ip_address: ipAddress,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -275,7 +287,11 @@ export class VariantsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

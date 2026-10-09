@@ -21,7 +21,7 @@ export interface Variant {
     collect_tax: boolean;
     /** When the variant was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** Three-letter ISO currency code for this variant's prices. */
+    /** Three-letter ISO 4217 code of the currency every price on this variant is stated in, lowercase: the variant's own currency, or the `presentment_currency` the read asked for when the variant can be converted into it. */
     currency: string;
     custom_fields: Whop.PlanCustomField[];
     /** Whether the variant can be deleted (it has no memberships or waitlist entries). `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
@@ -32,15 +32,15 @@ export interface Variant {
     effective_payment_method_configuration: Whop.CheckoutSessionPaymentMethodConfiguration | null;
     /** Access duration in days for expiration-based variants, such as 365 for a one-year pass. `null` for variants without an expiration. */
     expiration_days: number | null;
-    /** Human-readable price for display (currency + interval), e.g. "$10 / month". */
+    /** Human-readable price for display (currency + interval) in `currency`, e.g. "$10 / month". */
     formatted_price: string;
     /** Variant ID, prefixed `plan_`. */
     id: string;
     /** Pricing-tier image (`url`, `blurhash`) shown on the product page; `null` when no image is set. */
     image: Record<string, unknown> | null;
-    /** Initial purchase price in variant currency. */
+    /** Initial purchase price, in `currency`. */
     initial_price: number;
-    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring variants, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this variant. */
+    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring variants, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this variant. Stated in `currency`. */
     initial_price_due: Whop.Money;
     /** Private notes not shown to customers. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     internal_notes: string | null;
@@ -62,7 +62,7 @@ export interface Variant {
     purchase_url: string;
     /** Sales method for this variant. */
     release_method: Variant.ReleaseMethod;
-    /** Recurring price charged every billing period. */
+    /** Recurring price charged every billing period, in `currency`. */
     renewal_price: number;
     /** Stock keeping unit, free text set by the seller (e.g. `TSHIRT-LARGE-BLUE`). Not enforced unique. `null` when unset. */
     sku: string | null;
@@ -70,9 +70,9 @@ export interface Variant {
     split_pay_required_payments: number | null;
     /** Units available for purchase. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     stock: number | null;
-    /** Original initial price shown with a strikethrough, in the variant's currency. `null` when no strikethrough is set. */
+    /** Original initial price shown with a strikethrough, in `currency`. `null` when no strikethrough is set. */
     strike_through_initial_price: number | null;
-    /** Original renewal price shown with a strikethrough, in the variant's currency. `null` when no strikethrough is set. */
+    /** Original renewal price shown with a strikethrough, in `currency`. `null` when no strikethrough is set. */
     strike_through_renewal_price: number | null;
     /** How tax is handled for this variant, including whether tax is included in the price, added at checkout, or not configured. */
     tax_type: Variant.TaxType;
