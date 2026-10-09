@@ -18,6 +18,8 @@ export interface App {
     /** Website businesses created from this app as a template. */
     businesses_created_count: number;
     businesses_created_logo_urls: string[];
+    /** Website businesses created from this app as a template that processed a payment in the last 24 hours. Recounted hourly, so it can be up to an hour behind. */
+    businesses_with_recent_sales_count: number;
     /** The user who owns the publishing account. */
     creator: Whop.AppCreator;
     /** URL path for the account dashboard view, or `null` when not configured. */

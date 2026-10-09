@@ -3,6 +3,7 @@
 export const ListAppsRequestOrder = {
     CreatedAt: "created_at",
     DiscoverableAt: "discoverable_at",
+    TemplateRecentSales: "template_recent_sales",
     TemplateUsage: "template_usage",
     TotalInstallsLast30Days: "total_installs_last_30_days",
     TotalInstallsLast7Days: "total_installs_last_7_days",
