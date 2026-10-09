@@ -1,5 +1,6 @@
 export type { CapturePaymentsRequest } from "./CapturePaymentsRequest.js";
 export { CreatePaymentsRequest } from "./CreatePaymentsRequest.js";
+export type { GeneratePdfPaymentsRequest } from "./GeneratePdfPaymentsRequest.js";
 export type { ListFeesPaymentsRequest } from "./ListFeesPaymentsRequest.js";
 export type { ListPaymentsRequest } from "./ListPaymentsRequest.js";
 export type { RefundPaymentsRequest } from "./RefundPaymentsRequest.js";

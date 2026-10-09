@@ -381,6 +381,7 @@ export * from "./PaymentNextActionCollectCardPresentData.js";
 export * from "./PaymentNextActionDisplayInstructions.js";
 export * from "./PaymentNextActionRedirect.js";
 export * from "./PaymentNextActionRedirectData.js";
+export * from "./PaymentPdf.js";
 export * from "./PaymentProcessingDetails.js";
 export * from "./PaymentProviders.js";
 export * from "./PaymentQr.js";
