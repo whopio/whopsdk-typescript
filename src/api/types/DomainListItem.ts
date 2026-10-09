@@ -18,6 +18,8 @@ export interface DomainListItem {
     metadata: Record<string, unknown>;
     /** The other account that has proven it owns this hostname. `null` when no other account does. */
     owned_by: Whop.DomainOwner | null;
+    /** An address on a zone Whop runs, such as example.whop.site, that follows its app's route. `null` for other domains or when not visible to you. */
+    platform: Whop.DomainPlatform | null;
     /** Buying the domain through Whop, renewing it, and running its DNS. `null` when not wanted or not visible to you. */
     registration: Whop.DomainRegistration | null;
     /** The most pressing state of the domain's capabilities: `releasing`, then `action_required`, then `pending`, then `ready`. `idle` when it wants nothing. */

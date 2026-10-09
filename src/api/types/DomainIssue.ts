@@ -17,6 +17,7 @@ export namespace DomainIssue {
     export const Capability = {
         Verification: "verification",
         Registration: "registration",
+        Platform: "platform",
         Website: "website",
     } as const;
     export type Capability = (typeof Capability)[keyof typeof Capability];
