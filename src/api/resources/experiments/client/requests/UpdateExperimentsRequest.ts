@@ -11,11 +11,12 @@ import type * as Whop from "../../../../index.js";
 export interface UpdateExperimentsRequest {
     /** The experiment identifier — the `expt_` id or the flag_key handle. */
     id: string;
-    /** Owning account or internal. Required when id is a flag key; optional for an expt_ ID. */
+    /** Owning account ID. Required when id is a flag key; optional for an expt_ ID. */
     account_id?: string;
     control?: UpdateExperimentsRequest.Control;
     /** Omit to leave unchanged. Send an empty string to clear it. Not accepted on feature flags. When setting it, structure it as "If we [change] for [cohort], then [measurable behavior] will [increase/decrease], resulting in [business outcome], because [evidence]. Created by [name]." same as on create. */
     hypothesis?: string | null;
+    /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
     related_resource?: Whop.ExperimentResourceReference;
     /** Replace the targeting rules with this set. Omit to leave unchanged. */
     targeting_rules?: UpdateExperimentsRequest.TargetingRules.Item[];

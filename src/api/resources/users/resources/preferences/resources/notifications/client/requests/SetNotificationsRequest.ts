@@ -45,7 +45,7 @@ export namespace SetNotificationsRequest {
                 experience_id?: (string | null) | undefined;
                 /** Account whose team notifications the preference is scoped to, `biz_` tag. */
                 team_account_id?: (string | null) | undefined;
-                /** Notification topic to scope the preference to, `topic_` tag. */
+                /** Notification topic to scope the preference to, `topic_` tag. Topic IDs come from `GET /notifications/topics`. */
                 topic_id?: (string | null) | undefined;
             }
 

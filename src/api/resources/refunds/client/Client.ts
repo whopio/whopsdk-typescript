@@ -16,9 +16,9 @@ export declare namespace RefundsClient {
 }
 
 /**
- * A Refund is one reversal of a payment, full or partial. Refunds are issued with `POST /payments/{id}/refund`; this resource is the record of each one — how much moved, through which provider, and where it stands (`pending`, `succeeded`, `failed`).
+ * A Refund is one full or partial reversal of a payment, issued with [Refund Payment](/api-reference/beta/payments/refund-payment). It records how much moved, through which provider, and whether it succeeded.
  *
- * List a payment's refunds with `?payment_id=`, or every refund an account issued with `?account_id=`. `amount` is stated in the payment's settlement currency so it nets against the payment's `total`; `original_amount` is what the processor moved.
+ * Use the Refunds API to list the refunds on a payment or across an account, and to retrieve a single refund.
  */
 export class RefundsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<RefundsClient.Options>;

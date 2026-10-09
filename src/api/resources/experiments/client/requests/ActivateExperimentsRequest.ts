@@ -9,7 +9,7 @@
 export interface ActivateExperimentsRequest {
     /** The experiment identifier — the `expt_` id or the flag_key handle. */
     id: string;
-    /** Owning account or internal. Required when id is a flag key; optional for an expt_ ID. */
+    /** Owning account ID. Required when id is a flag key; optional for an expt_ ID. */
     account_id?: string;
     /** Reporting window length in days. Omit to use the default. This does not automatically end the experiment. */
     duration_days?: number | null;

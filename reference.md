@@ -11407,7 +11407,7 @@ await client.domains.check({
 <dl>
 <dd>
 
-Lists an account's recommendations and generation requests, newest first by default. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
+Lists an account's recommendations and generation requests, newest first by default. For callers with company:update permission, listing queues generation when no recommendations are ready or in progress, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
 </dd>
 </dl>
 </dd>
@@ -12393,7 +12393,7 @@ await client.experiences.duplicate({
 <dl>
 <dd>
 
-Lists experiments for one account with experiment:read permission. Omit account_id or pass internal to list internal experiments, which requires Whop internal access.
+Lists experiments for one account with experiment:read permission.
 </dd>
 </dl>
 </dd>
@@ -12468,7 +12468,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a draft experiment for the specified account. Use internal for a Whop platform experiment.
+Creates a draft experiment for the specified account.
 </dd>
 </dl>
 </dd>
@@ -12484,7 +12484,7 @@ Creates a draft experiment for the specified account. Use internal for a Whop pl
 
 ```typescript
 await client.experiments.create({
-    account_id: "internal",
+    account_id: "biz_xxxxxxxxxxxxxx",
     flag_key: "checkout_redesign_v2"
 });
 
@@ -12536,9 +12536,9 @@ await client.experiments.create({
 
 Evaluates and records an exposure without requiring authentication. When credentials resolve, their authentication method, API key ID, and signed-in user ID are recorded on the exposure event. Pass subject for bucketing identity and account_id for experiment ownership.
 
-Pass `flag_key` to check a single flag, or omit it to fetch active flags in the account and related resource scope. Internal anonymous callers may use the `x-whop-anonymous-id` header or `ajs_anonymous_id` cookie; explicit `subject[anonymous_id]` takes precedence.
+Pass `flag_key` to check a single flag, or omit it to fetch active flags in the account and related resource scope.
 
-Assignments use exactly the configured `bucket_by`: `subject[user_id]`, `subject[account_id]`, or `subject[anonymous_id]`. Internal user experiments derive identity from the signed-in session. Missing the required identity fails single evaluation and omits the experiment from batch evaluation. Subjects outside all treatment ranges receive control.
+Assignments use exactly the configured `bucket_by`: `subject[user_id]`, `subject[account_id]`, or `subject[anonymous_id]`. Missing the required identity fails single evaluation and omits the experiment from batch evaluation. Subjects outside all treatment ranges receive control.
 
 Pass `subject[account_id]` to enable account-level targeting rules. Pass `properties` as a JSON object to supply the values that `property` targeting conditions match against.
 
@@ -12605,7 +12605,7 @@ await client.experiments.exposures();
 <dl>
 <dd>
 
-Retrieves a single experiment or feature flag by its `expt_` id or flag_key handle. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+Retrieves a single experiment or feature flag by its `expt_` id or flag_key handle. Requires the corresponding experiment permission on the owning account.
 </dd>
 </dl>
 </dd>
@@ -12670,7 +12670,7 @@ await client.experiments.retrieve({
 <dl>
 <dd>
 
-Updates the targeting rules, treatment allocation, metrics, or hypothesis of an existing experiment or feature flag. Weights and metrics can only grow, so enrolled users never change arms and an existing metric is never dropped. Lifecycle moves through the transition endpoints (`activate`, `pause`, `end`), never through this update. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+Updates the targeting rules, treatment allocation, metrics, or hypothesis of an existing experiment or feature flag. Weights and metrics can only grow, so enrolled users never change arms and an existing metric is never dropped. Lifecycle moves through the transition endpoints (`activate`, `pause`, `end`), never through this update. Requires the corresponding experiment permission on the owning account.
 </dd>
 </dl>
 </dd>
@@ -12735,7 +12735,7 @@ await client.experiments.update({
 <dl>
 <dd>
 
-Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires the corresponding experiment permission on the owning account.
 </dd>
 </dl>
 </dd>
@@ -12800,7 +12800,7 @@ await client.experiments.activate({
 <dl>
 <dd>
 
-Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires experiment:manage on the account, or internal access for platform experiments.
+Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires experiment:manage on the account.
 </dd>
 </dl>
 </dd>
@@ -12866,7 +12866,7 @@ await client.experiments.end({
 <dl>
 <dd>
 
-Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires the corresponding experiment permission on the owning account.
 </dd>
 </dl>
 </dd>
@@ -13687,7 +13687,7 @@ await client.feeMarkups.delete({
 <dl>
 <dd>
 
-Submits an issue or an unanswered question to Whop for internal review, recorded under the authenticated user, account, or app. Returns a receipt once the submission is accepted; processing is asynchronous and no reply is sent. Accepts user, account, and app credentials.
+Submits an issue or an unanswered question to Whop for review, recorded under the authenticated user, account, or app. Returns a receipt once the submission is accepted; processing is asynchronous and no reply is sent. Accepts user, account, and app credentials.
 </dd>
 </dl>
 </dd>
@@ -22369,7 +22369,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a promo code for an account. First-party sessions may attach an affiliate.
+Creates a promo code for an account.
 </dd>
 </dl>
 </dd>
@@ -30815,7 +30815,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Lists the platform's visible notification topics — the categories users can set notification preferences on. App-created topics are internal and not returned.
+Lists the platform's visible notification topics — the categories users can set notification preferences on. App-created topics are not returned.
 </dd>
 </dl>
 </dd>

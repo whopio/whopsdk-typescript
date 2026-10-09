@@ -16,6 +16,11 @@ export declare namespace WebhooksClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A Webhook is an endpoint on your server that Whop sends signed HTTP POST requests to when events happen, such as a payment succeeding or a membership going active. A webhook is attached to an account or an app and subscribes to the events you choose.
+ *
+ * Use the Webhooks API to create and update endpoints, send a test event, inspect the delivery log, and replay deliveries your server missed. See [Webhooks & Events](/developer/guides/webhooks) for verifying signatures and handling retries.
+ */
 export class WebhooksClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<WebhooksClient.Options>;
 

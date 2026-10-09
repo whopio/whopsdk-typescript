@@ -17,9 +17,9 @@ export declare namespace ExportsClient {
 }
 
 /**
- * An Export is an asynchronous CSV of one resource for one account — members, payments, disputes, ads, and the other tables the Whop dashboard can export. Generating a full table takes longer than a request, so an export is created in `pending`, moves through `processing`, and lands on `completed` with a download link. Each resource requires that resource's own export scope.
+ * An Export is a CSV of one of an account's dashboard tables, such as members, payments, or disputes. Exports are generated in the background, so a new export starts `pending` and becomes `completed` with a download link.
  *
- * Use the Exports API to start an export, poll it until `download_url` is set, and list the exports already requested for an account. Finished CSVs are retained for 30 days, after which the file is deleted and the export moves to `expired`.
+ * Use the Exports API to start an export, poll it until `download_url` is set, and list an account's past exports. Each table requires its own export scope, and finished files are deleted after 30 days.
  */
 export class ExportsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ExportsClient.Options>;

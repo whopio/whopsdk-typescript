@@ -17,8 +17,9 @@ export declare namespace WaitlistEntriesClient {
 }
 
 /**
- * Join a free variant's waitlist, read or cancel your own signups, and manage signups for accounts you are authorized to operate.
- * Joining does not grant membership or charge a payment method. Seller approval runs asynchronously and can charge a saved payment method for a paid variant.
+ * A Waitlist Entry is a user's signup for a variant that requires seller approval. Joining doesn't grant a membership or charge a payment method; the seller approves or denies each signup.
+ *
+ * Use the Waitlist Entries API to join a waitlist, read or cancel your own signups, and approve or deny the signups for accounts you operate.
  */
 export class WaitlistEntriesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<WaitlistEntriesClient.Options>;

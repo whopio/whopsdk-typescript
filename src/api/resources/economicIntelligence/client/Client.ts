@@ -17,9 +17,9 @@ export declare namespace EconomicIntelligenceClient {
 }
 
 /**
- * Economic Intelligence is Whop's recommendation engine for an account. Each recommendation is a single action: a title the owner sees, a step-by-step brief Whop AI carries out, and the bet it makes on the account's ledger. Whop generates them from the account's sales, site, ads, and what its owner has said.
+ * Economic Intelligence is Whop's recommendation engine for an account. Each recommendation is one action: a title the owner sees, a step-by-step brief Whop AI carries out, and the result it expects. Whop generates them from the account's sales, site, ads, and what its owner has said.
  *
- * Use the Economic Intelligence API to list recommendations and to request actions for a specific goal with POST. For callers with company:update permission, listing automatically queues generation when no actions are ready or in progress, with a ten-minute cooldown after an unsuccessful request from the current pipeline version. A new request returns a recommendation with status `queued`; the engine moves it through `pending` to `ready`. Unsuccessful requests are omitted from the list. A `ready` recommendation becomes `executed` once the owner runs it from the dashboard, or `superseded` when a newer one replaces it.
+ * Use the Economic Intelligence API to list an account's recommendations, request new ones for a specific goal, and follow each one from `queued` to `ready`, then to `executed` once the owner runs it or `superseded` when a newer one replaces it.
  */
 export class EconomicIntelligenceClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EconomicIntelligenceClient.Options>;
@@ -29,7 +29,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists an account's recommendations and generation requests, newest first by default. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
+     * Lists an account's recommendations and generation requests, newest first by default. For callers with company:update permission, listing queues generation when no recommendations are ready or in progress, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
