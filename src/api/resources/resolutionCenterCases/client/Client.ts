@@ -17,9 +17,9 @@ export declare namespace ResolutionCenterCasesClient {
 }
 
 /**
- * A Resolution Center Case is opened by a buyer when something is wrong with a purchase — an unwanted renewal, an item that never arrived, or a charge they don't recognize. It is the step before a chargeback: the two sides work it out directly, and Whop decides the case if they can't. Each case carries a reason, a status naming which side it is waiting on, a timeline of events, and the actions available to whoever is reading it.
+ * A Resolution Center Case is opened by a buyer when something is wrong with a purchase, such as an unwanted renewal, an item that never arrived, or a charge they don't recognize. It is the step before a chargeback: the buyer and merchant work it out directly, and Whop decides the case if they can't.
  *
- * Use the Resolution Center Cases API from either side: as the buyer, open a case, reply, appeal a decision, or withdraw it; as the merchant, accept it (refunding the payment), deny it, or ask the buyer for more information. Both sides read the same case, page its timeline, and summarize the cases they can see.
+ * Use the Resolution Center Cases API from either side: as the buyer, open, reply to, appeal, or withdraw a case; as the merchant, accept it (refunding the payment), deny it, or ask the buyer for more information.
  */
 export class ResolutionCenterCasesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ResolutionCenterCasesClient.Options>;

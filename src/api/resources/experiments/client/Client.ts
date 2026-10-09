@@ -17,13 +17,9 @@ export declare namespace ExperimentsClient {
 }
 
 /**
- * Experiments belong to an account. Use `account_id` to select the owning account, or `internal` for Whop's platform experiments. Reading and managing account experiments requires `experiment:read` or `experiment:manage`; internal configuration requires Whop internal access. Exposure is callable without authentication.
+ * An Experiment is a feature flag or A/B test owned by an account. Treatments take stable percentage ranges of traffic and everyone else gets control, so growing an allocation never moves an existing user to another arm.
  *
- * Create a draft, configure treatment weights and targeting, then activate, pause, or end it. Treatments occupy stable percentage ranges; the remainder is control. Growing an allocation preserves existing treatment assignments. Optional `related_resource` references attach experiments, control, and variants to resources owned by the account. Bindings cannot change after first activation.
- *
- * `GET /experiments/exposures` evaluates and records exposure. Ownership is separate from `subject` identity: `subject[user_id]`, `subject[account_id]`, and `subject[anonymous_id]` supply the experiment's bucketing unit. Internal user identity comes from the authenticated session. Resolved authentication is recorded on the event separately from the subject. Pass a flag key and its account, or a globally unique experiment ID. Without a flag key, evaluation returns active experiments in the account and related resource scope.
- *
- * Account experiments run without a reporting provider. Statistical results and the metric catalog currently remain internal. Configuration responses include an assignment seed and revision for consumers that cache experiment definitions.
+ * Use the Experiments API to create a draft, configure its weights, targeting, and resource bindings, then activate, pause, or end it, and to evaluate which arm a user, account, or anonymous visitor gets. Managing experiments requires `experiment:read` or `experiment:manage`; evaluation works without authentication.
  */
 export class ExperimentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ExperimentsClient.Options>;
@@ -33,7 +29,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Lists experiments for one account with experiment:read permission. Omit account_id or pass internal to list internal experiments, which requires Whop internal access.
+     * Lists experiments for one account with experiment:read permission.
      *
      * @param {Whop.ListExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -141,7 +137,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Creates a draft experiment for the specified account. Use internal for a Whop platform experiment.
+     * Creates a draft experiment for the specified account.
      *
      * @param {Whop.CreateExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -152,7 +148,7 @@ export class ExperimentsClient {
      *
      * @example
      *     await client.experiments.create({
-     *         account_id: "internal",
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         flag_key: "checkout_redesign_v2"
      *     })
      */
@@ -219,9 +215,9 @@ export class ExperimentsClient {
     /**
      * Evaluates and records an exposure without requiring authentication. When credentials resolve, their authentication method, API key ID, and signed-in user ID are recorded on the exposure event. Pass subject for bucketing identity and account_id for experiment ownership.
      *
-     * Pass `flag_key` to check a single flag, or omit it to fetch active flags in the account and related resource scope. Internal anonymous callers may use the `x-whop-anonymous-id` header or `ajs_anonymous_id` cookie; explicit `subject[anonymous_id]` takes precedence.
+     * Pass `flag_key` to check a single flag, or omit it to fetch active flags in the account and related resource scope.
      *
-     * Assignments use exactly the configured `bucket_by`: `subject[user_id]`, `subject[account_id]`, or `subject[anonymous_id]`. Internal user experiments derive identity from the signed-in session. Missing the required identity fails single evaluation and omits the experiment from batch evaluation. Subjects outside all treatment ranges receive control.
+     * Assignments use exactly the configured `bucket_by`: `subject[user_id]`, `subject[account_id]`, or `subject[anonymous_id]`. Missing the required identity fails single evaluation and omits the experiment from batch evaluation. Subjects outside all treatment ranges receive control.
      *
      * Pass `subject[account_id]` to enable account-level targeting rules. Pass `properties` as a JSON object to supply the values that `property` targeting conditions match against.
      *
@@ -309,7 +305,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Retrieves a single experiment or feature flag by its `expt_` id or flag_key handle. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+     * Retrieves a single experiment or feature flag by its `expt_` id or flag_key handle. Requires the corresponding experiment permission on the owning account.
      *
      * @param {Whop.RetrieveExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -389,7 +385,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Updates the targeting rules, treatment allocation, metrics, or hypothesis of an existing experiment or feature flag. Weights and metrics can only grow, so enrolled users never change arms and an existing metric is never dropped. Lifecycle moves through the transition endpoints (`activate`, `pause`, `end`), never through this update. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+     * Updates the targeting rules, treatment allocation, metrics, or hypothesis of an existing experiment or feature flag. Weights and metrics can only grow, so enrolled users never change arms and an existing metric is never dropped. Lifecycle moves through the transition endpoints (`activate`, `pause`, `end`), never through this update. Requires the corresponding experiment permission on the owning account.
      *
      * @param {Whop.UpdateExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -472,7 +468,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+     * Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires the corresponding experiment permission on the owning account.
      *
      * @param {Whop.ActivateExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -558,7 +554,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires experiment:manage on the account, or internal access for platform experiments.
+     * Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires experiment:manage on the account.
      *
      * @param {Whop.EndExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -645,7 +641,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires the corresponding experiment permission on the owning account, or Whop internal access for internal experiments.
+     * Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires the corresponding experiment permission on the owning account.
      *
      * @param {Whop.PauseExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.

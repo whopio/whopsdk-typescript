@@ -18,7 +18,7 @@ describe("ExperimentsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account_id: "internal",
+                    account_id: "biz_xxxxxxxxxxxxxx",
                     assignment_seed: "checkout_redesign_v21768435200",
                     bucket_by: "user",
                     configuration_revision: 1,
@@ -94,9 +94,9 @@ describe("ExperimentsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "internal", flag_key: "checkout_redesign_v2" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", flag_key: "checkout_redesign_v2" };
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,
@@ -131,7 +131,7 @@ describe("ExperimentsClient", () => {
             .build();
 
         const response = await client.experiments.create({
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             flag_key: "checkout_redesign_v2",
         });
         expect(response).toEqual(rawResponseBody);
@@ -208,7 +208,7 @@ describe("ExperimentsClient", () => {
         });
 
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,
@@ -273,7 +273,7 @@ describe("ExperimentsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,
@@ -352,7 +352,7 @@ describe("ExperimentsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,
@@ -459,7 +459,7 @@ describe("ExperimentsClient", () => {
         });
         const rawRequestBody = { findings: "Treatment lifted signups 12%, shipping it to everyone." };
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,
@@ -569,7 +569,7 @@ describe("ExperimentsClient", () => {
         });
 
         const rawResponseBody = {
-            account_id: "internal",
+            account_id: "biz_xxxxxxxxxxxxxx",
             assignment_seed: "checkout_redesign_v21768435200",
             bucket_by: "user",
             configuration_revision: 1,

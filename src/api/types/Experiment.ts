@@ -3,13 +3,13 @@
 import type * as Whop from "../index.js";
 
 export interface Experiment {
-    /** Owning account ID, or internal for Whop platform experiments. */
+    /** Owning account ID. */
     account_id: string;
     /** Assignment hashes UTF-8 seed + subject ID with CRC32 modulo 100 and selects the stored end-exclusive range. */
     assignment_seed: string;
     /** Randomization unit — `user` buckets each user independently, `account` buckets whole accounts (every user of an account gets the same arm). `null` for feature flags. */
     bucket_by?: (Experiment.BucketBy | null) | undefined;
-    /** Revision of the serving configuration. Does not change the assignment seed. */
+    /** Revision of the serving configuration. Increments on every configuration change, so a cached definition with a lower revision is stale. Does not change the assignment seed. */
     configuration_revision: number;
     control: Experiment.Control;
     /** When the experiment was created, as an ISO 8601 timestamp. */
@@ -30,6 +30,7 @@ export interface Experiment {
     id: string;
     /** Human-readable display name. */
     name: string;
+    /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
     related_resource: Whop.ExperimentResourceReference;
     /** When the experiment began collecting data, as an ISO 8601 timestamp. `null` for drafts. */
     started_at?: (string | null) | undefined;

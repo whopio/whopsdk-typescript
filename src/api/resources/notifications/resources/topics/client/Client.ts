@@ -23,7 +23,7 @@ export class TopicsClient {
     }
 
     /**
-     * Lists the platform's visible notification topics — the categories users can set notification preferences on. App-created topics are internal and not returned.
+     * Lists the platform's visible notification topics — the categories users can set notification preferences on. App-created topics are not returned.
      *
      * @param {Whop.notifications.ListTopicsRequest} request
      * @param {TopicsClient.RequestOptions} requestOptions - Request-specific configuration.

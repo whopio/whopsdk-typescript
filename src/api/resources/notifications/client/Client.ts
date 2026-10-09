@@ -18,11 +18,9 @@ export declare namespace NotificationsClient {
 }
 
 /**
- * A Notification is a message delivered to a user — a new post, a payment, a mention. Every notification comes from an experience the user belongs to or a team they are on, and users control what they receive with notification preferences.
+ * A Notification is a message delivered to a user, such as a new post, a payment, or a mention. Each one comes from an experience the user belongs to or a team they are on, and falls under a topic, like new sales, that users set preferences on.
  *
- * Every notification belongs to a topic: the category it falls under, such as new sales or account activity. Topics carry a default, so a user only needs a preference row where they diverge from it. `GET /notifications/topics` lists the platform's visible topics, and a topic's `id` is what the notification preference endpoints take as `topic_id` — the catalog is the only place those ids come from, so read it rather than hardcoding. Each topic also carries an `identifier` such as `new-follower`, which is stable across environments and is the value to match on in code.
- *
- * Use the Notifications API to list the authenticated user's feed, read per-experience unread badges, mark an experience (or everything) as read, send notifications from your app to an experience's users or an account's team, and list the topic catalog.
+ * Use the Notifications API to list a user's feed, read and clear unread badges, send notifications from your app to an experience's users or an account's team, and list the topic catalog that notification preferences reference.
  */
 export class NotificationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<NotificationsClient.Options>;

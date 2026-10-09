@@ -16,6 +16,11 @@ export declare namespace PromoCodesClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A Promo Code is a discount a buyer enters at checkout, either a percentage or a fixed amount off. It belongs to an account, can be limited to one product, and controls who can redeem it, how many times, until when, and for how many billing periods the discount lasts.
+ *
+ * Use the Promo Codes API to create codes for an account, list and retrieve them, deactivate a code to pause redemptions or activate it again, and archive codes you no longer offer.
+ */
 export class PromoCodesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PromoCodesClient.Options>;
 
@@ -146,7 +151,7 @@ export class PromoCodesClient {
     }
 
     /**
-     * Creates a promo code for an account. First-party sessions may attach an affiliate.
+     * Creates a promo code for an account.
      *
      * @param {Whop.CreatePromoCodesRequest} request
      * @param {PromoCodesClient.RequestOptions} requestOptions - Request-specific configuration.

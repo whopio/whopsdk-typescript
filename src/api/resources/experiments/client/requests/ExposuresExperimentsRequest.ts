@@ -7,15 +7,15 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ExposuresExperimentsRequest {
-    /** Bucketing subject. Ownership is the top-level account_id. Account experiments accept caller-supplied subject IDs; internal experiments derive the user from the session. */
+    /** Bucketing subject: the user, account, or anonymous ID the experiment's `bucket_by` assigns on. Ownership is the top-level account_id. */
     subject?: Whop.ExposuresExperimentsRequestSubject;
     /** Restricts batch evaluation to this related resource; omitted batches contain only unbound experiments. */
     related_resource?: Whop.ExperimentResourceReference;
     /** Flag or experiment to evaluate — the flag_key handle or the `expt_` id. Omit to return all flags the caller qualifies for. */
     flag_key?: string;
-    /** Owning account ID or internal. Required when evaluating by flag_key or in a batch; optional for an expt_ ID. */
+    /** Owning account ID. Required when evaluating by flag_key or in a batch; optional for an expt_ ID. */
     account_id?: string;
-    /** JSON-encoded scalar values that property targeting conditions match against. Numeric and boolean strings are coerced. Nested query keys such as properties[variant]=pro remain accepted for existing callers. For internal experiments, is_internal_user is derived from the session and cannot be overridden. */
+    /** JSON-encoded scalar values that property targeting conditions match against. Numeric and boolean strings are coerced. Nested query keys such as properties[variant]=pro remain accepted for existing callers. */
     properties?: string;
     /** Set false to evaluate without recording an exposure. Omitted records it. */
     log_exposure?: boolean;

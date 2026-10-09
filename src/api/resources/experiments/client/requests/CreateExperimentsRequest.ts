@@ -5,14 +5,14 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         account_id: "internal",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         flag_key: "checkout_redesign_v2"
  *     }
  */
 export interface CreateExperimentsRequest {
-    /** Owning account tag or internal. Required; ownership cannot change. */
+    /** Owning account ID. Required; ownership cannot change. */
     account_id: string;
-    /** Randomization unit, and the only identity the assignment is keyed on — evaluation fails rather than falling back to another. `user` (default) uses `subject[user_id]` for account experiments and the signed-in user for internal experiments; `account` uses `subject[account_id]`, so every user of an account gets the same arm; `anonymous` uses the anonymous id and survives sign-in. Fixed after creation. */
+    /** Randomization unit, and the only identity the assignment is keyed on — evaluation fails rather than falling back to another. `user` (default) uses `subject[user_id]`; `account` uses `subject[account_id]`, so every user of an account gets the same arm; `anonymous` uses the anonymous id and survives sign-in. Fixed after creation. */
     bucket_by?: CreateExperimentsRequest.BucketBy;
     control?: CreateExperimentsRequest.Control;
     /** When `true`, creates a binary feature flag rather than a full experiment. Feature flags expose the same evaluation API but do not collect metric results. Defaults to `false`. */
@@ -23,6 +23,7 @@ export interface CreateExperimentsRequest {
     hypothesis?: string | null;
     /** Human-readable display name. Defaults to `flag_key` when omitted. */
     name?: string;
+    /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
     related_resource?: Whop.ExperimentResourceReference;
     /** Rules that determine which subjects qualify for the experiment. */
     targeting_rules?: CreateExperimentsRequest.TargetingRules.Item[];
@@ -31,7 +32,7 @@ export interface CreateExperimentsRequest {
 }
 
 export namespace CreateExperimentsRequest {
-    /** Randomization unit, and the only identity the assignment is keyed on — evaluation fails rather than falling back to another. `user` (default) uses `subject[user_id]` for account experiments and the signed-in user for internal experiments; `account` uses `subject[account_id]`, so every user of an account gets the same arm; `anonymous` uses the anonymous id and survives sign-in. Fixed after creation. */
+    /** Randomization unit, and the only identity the assignment is keyed on — evaluation fails rather than falling back to another. `user` (default) uses `subject[user_id]`; `account` uses `subject[account_id]`, so every user of an account gets the same arm; `anonymous` uses the anonymous id and survives sign-in. Fixed after creation. */
     export const BucketBy = {
         User: "user",
         Account: "account",

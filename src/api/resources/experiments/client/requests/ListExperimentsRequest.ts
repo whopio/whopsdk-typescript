@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListExperimentsRequest {
-    /** Owning account ID. Omit or pass internal for Whop internal experiments; internal access is required. */
+    /** Owning account ID. */
     account_id?: string;
     /** Filter by related resource; requires account_id. */
     related_resource?: Whop.ExperimentResourceReference;
