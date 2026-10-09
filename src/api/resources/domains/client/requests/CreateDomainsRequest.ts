@@ -9,25 +9,39 @@
 export interface CreateDomainsRequest {
     /** Account ID, prefixed biz_. Required for user credentials; otherwise defaults to the credential's account. */
     account_id?: string;
-    /** App ID, prefixed app_, for the domain to serve. The app must belong to the account. Required with `mode: external`. */
-    app_id?: string;
     /** Bare hostname, such as example.com or checkout.example.com. A bought domain must be a root domain. Wildcards, paths, schemes, and ports are not accepted. */
     domain: string;
     /** Custom string keys and values. */
     metadata?: Record<string, string>;
-    /** `managed` buys the domain through Whop; `external` connects a domain you registered elsewhere. */
-    mode?: CreateDomainsRequest.Mode;
-    /** Saved card to charge for a bought domain and its renewals, prefixed `payt_`. It must belong to the signed-in user. */
-    payment_method_id?: string;
-    /** With `mode: external`, explicitly transfer a domain from its current owner after publishing this new claim's TXT proof. Create the claim after the current owner verified. */
-    replace_existing?: boolean;
+    /** Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase. */
+    registration?: CreateDomainsRequest.Registration | null;
+    /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
+    verification?: CreateDomainsRequest.Verification | null;
+    /** Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities. */
+    website?: CreateDomainsRequest.Website | null;
 }
 
 export namespace CreateDomainsRequest {
-    /** `managed` buys the domain through Whop; `external` connects a domain you registered elsewhere. */
-    export const Mode = {
-        External: "external",
-        Managed: "managed",
-    } as const;
-    export type Mode = (typeof Mode)[keyof typeof Mode];
+    /**
+     * Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase.
+     */
+    export interface Registration {
+        /** Whether Whop charges the saved card to renew the domain before it expires. */
+        auto_renew?: boolean | undefined;
+        /** Saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
+        payment_method_id?: (string | null) | undefined;
+    }
+
+    /**
+     * Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`.
+     */
+    export type Verification = {};
+
+    /**
+     * Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities.
+     */
+    export interface Website {
+        /** App ID, prefixed app_, of the website to serve. The app must belong to the account. */
+        app_id?: string | undefined;
+    }
 }

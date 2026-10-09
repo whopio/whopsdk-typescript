@@ -11,9 +11,9 @@ import type * as Whop from "../../../../index.js";
 export interface ListDomainsRequest {
     /** Only domains belonging to this account, prefixed biz_. */
     account_id?: string;
-    /** Only domains assigned to this app, prefixed app_. */
+    /** Only domains whose website serves this app, prefixed app_. */
     app_id?: string;
-    /** Only domains with this lifecycle status. Removed and failed domains aren't listed; retrieve them by ID. */
+    /** Only domains with this status: the most pressing state of their capabilities, or `idle` when they want nothing. */
     status?: Whop.ListDomainsRequestStatus;
     /** Field to sort by. */
     order?: Whop.ListDomainsRequestOrder;
@@ -27,10 +27,16 @@ export interface ListDomainsRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
-    /** A name or domain to find domains to buy, such as `example` or `example.com`; a subdomain or URL searches its registrable domain. Returns search results instead of your domains, without other filters or pagination. */
+    /** A name or domain to find domains to buy, such as `example` or `example.com`; a subdomain or URL searches its registrable domain. Returns domains with `availability` instead of your domains, without other filters or pagination. */
     search?: string;
     /** With `search`, check only these extensions, such as `com` or `co.uk`, returned in this order. Repeat for several, up to 100. */
     tlds?: string | string[];
     /** Only your domain with this hostname, such as `example.com`. */
     domain?: string;
+    /** Only domains with verification in this state, such as `ready`, or `any` for every domain that has verification. */
+    verification?: string;
+    /** Only domains with registration in this state, such as `ready`, or `any` for every domain that has registration. */
+    registration?: string;
+    /** Only domains with website in this state, such as `ready`, or `any` for every domain that has website. */
+    website?: string;
 }

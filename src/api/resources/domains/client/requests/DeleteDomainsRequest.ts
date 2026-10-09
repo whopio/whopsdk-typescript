@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteDomainsRequest {
-    /** Domain ID, prefixed `dom_`. To retrieve, you can pass a hostname such as `example.com` instead; a bare name looks up `.com`. */
+    /** Domain ID, prefixed `dom_`, or a hostname such as `example.com`; a bare name looks up `.com`. */
     id: string;
 }

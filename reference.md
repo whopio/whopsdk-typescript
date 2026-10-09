@@ -10992,7 +10992,7 @@ await client.dmMembers.update({
 <dl>
 <dd>
 
-Lists your domains. Filter by account, app, status, or hostname.
+Lists your domains. Filter by account, app, status, hostname, or the state of a capability.
 
 Pass `search` to find domains to buy instead: the exact domain first, even when taken, then your name on popular extensions, then suggestions. Pass `tlds` to check only the extensions you choose. Results aren't reserved.
 </dd>
@@ -11073,13 +11073,13 @@ const response = page.response;
 <dl>
 <dd>
 
-Buys a domain through Whop, or connects one you registered elsewhere.
+Adds a domain to your account with the capabilities you want.
 
-A bought domain starts `awaiting_payment`. Pay its `amount_due` at `purchase_url`, or pass `payment_method_id` to charge a saved card. Whop then registers it, hosts its DNS, issues its certificate and serves the app, and renews it every year while `auto_renew` is on. An unpaid purchase is removed after 7 days.
+Pass `registration` to buy the domain through Whop; it's the default when you pass no capability. Pay its `amount_due` at `purchase_url`, or pass `registration.payment_method_id` to charge a saved card. Whop then registers it, runs its DNS, and renews it every year while `auto_renew` is on.
 
-With `mode: external`, Whop returns the DNS records to publish instead. Verification and certificate setup run automatically, and unverified claims are removed after 48 hours. A claim doesn't reserve the hostname.
+Pass `verification` to connect a domain you registered elsewhere: its `issues` list the TXT and routing records to publish. Pass `website` with an `app_id` to serve that app on the domain.
 
-Adding a domain this account removed or failed before revives it under its original ID, starting over as a new claim or purchase.
+To change a domain you already have, update it instead. Adding a domain this account deleted revives it under its original ID.
 </dd>
 </dl>
 </dd>
@@ -11144,9 +11144,9 @@ await client.domains.create({
 <dl>
 <dd>
 
-Retrieves a domain's status, issues, billing, and DNS records, and checks it again in the background if it isn't active yet.
+Retrieves a domain by ID or hostname. Both return the same domain, shown as fully as you can see it: everything for your own accounts, and only who has it and what it serves for anyone else.
 
-Pass a hostname instead of an ID to look up any domain, with its `registration_quote` and, if registered, its `public_record`.
+A hostname no domain on Whop has comes back with its `availability` instead.
 </dd>
 </dl>
 </dd>
@@ -11211,7 +11211,7 @@ await client.domains.retrieve({
 <dl>
 <dd>
 
-Stops routing a connected domain to its app and starts cleanup: it returns as `deleting`; retrieve it until it's `removed`. Deleting an unpaid purchase cancels it. A registered domain can't be deleted; turn off `auto_renew` and it's released after it expires. Creating the domain on this account again revives it under the same ID.
+Removes the domain from your account and releases its capabilities in the background. Deleting an unpaid purchase cancels it. A registered domain can't be deleted; turn off `auto_renew` and it's released after it expires. Adding the domain to this account again revives it under the same ID.
 </dd>
 </dl>
 </dd>
@@ -11276,7 +11276,7 @@ await client.domains.delete({
 <dl>
 <dd>
 
-Reassigns a domain to another app in the same account, replaces its metadata, or changes how a bought domain renews. The hostname and owning account cannot be edited.
+Changes a domain's capabilities or metadata. Pass a capability to add it or change its settings, or `null` to release it; capabilities you leave out don't change. Passing a capability that needs action again retries it. Releasing every capability keeps the domain, `idle`; delete it to remove it.
 </dd>
 </dl>
 </dd>
@@ -11310,6 +11310,71 @@ await client.domains.update({
 <dd>
 
 **request:** `Whop.UpdateDomainsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DomainsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.domains.<a href="/src/api/resources/domains/client/Client.ts">check</a>({ ...params }) -> Whop.Domain</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Checks the domain's DNS, payment, and provider state again now instead of at its next scheduled check. Returns the domain as saved; retrieve it again to see the result.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.domains.check({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CheckDomainsRequest` 
     
 </dd>
 </dl>

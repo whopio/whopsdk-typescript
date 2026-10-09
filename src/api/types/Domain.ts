@@ -3,63 +3,43 @@
 import type * as Whop from "../index.js";
 
 export interface Domain {
-    /** ID of the account claiming or owning this domain, prefixed `biz_`. `null` for a search result. */
+    /** ID of the account the domain belongs to, prefixed `biz_`. */
     account_id: string | null;
-    /** The charge the domain owes now. `null` when nothing is owed. */
-    amount_due: Whop.Money | null;
-    /** ID of the app the domain serves, prefixed `app_`. `null` for a search result or a bought domain without an app. */
-    app_id: string | null;
-    /** Whether Whop charges the saved payment method to renew a bought domain before it expires. `null` for connected domains and search results. */
-    auto_renew: boolean | null;
-    /** When the domain was created, as an ISO 8601 timestamp. `null` for a search result. */
+    /** Whether you can register the hostname and what it costs. Set only when no domain on Whop has it. */
+    availability: Whop.DomainAvailability | null;
+    /** When the domain was created, as an ISO 8601 timestamp. */
     created_at: string | null;
-    dns_records: Whop.DomainDnsRecord[];
     /** Normalized hostname, such as checkout.example.com. */
     domain: string;
-    /** When the registration of a bought domain expires unless renewed, as an ISO 8601 timestamp. `null` for connected domains and search results. */
-    expires_at: string | null;
-    /** Domain ID, prefixed `dom_`. `null` for a search result. */
+    /** Domain ID, prefixed `dom_`. `null` when no domain on Whop has this hostname. */
     id: string | null;
     issues: Whop.DomainIssue[];
-    /** Custom string keys and values attached to this domain. Empty for a search result. */
+    /** Custom string keys and values attached to this domain. Empty when the domain isn't yours. */
     metadata: Record<string, string>;
-    /** `managed` for a domain bought and renewed through Whop; `external` for a domain registered elsewhere and connected with DNS records. `null` for a search result. */
-    mode: Domain.Mode | null;
-    /** ID of the saved card charged for a bought domain, prefixed `payt_`. `null` when none is set. */
-    payment_method_id: string | null;
-    /** The domain's public registration record (RDAP), read when you retrieve it by hostname. `null` for your own domains, available domains, or a record that couldn't be read. */
+    /** The other account that has proven it owns this hostname. `null` when no other account does. */
+    owned_by: Whop.DomainOwner | null;
+    /** The domain's public registration record (RDAP), read when you retrieve it by hostname. `null` for domains on Whop, available domains, or a record that couldn't be read. */
     public_record: Whop.DomainPublicRecord | null;
-    /** Link to pay the charge the domain owes now: its registration, or a yearly renewal. `null` when nothing is owed. */
-    purchase_url: string | null;
-    /** Whether you can register the domain and what it costs. Set for search results and hostname lookups; `null` for your own domains. */
-    registration_quote: Whop.DomainRegistrationQuote | null;
-    /** Domain lifecycle. Only active domains serve their app. `null` for a search result. */
+    /** Buying the domain through Whop, renewing it, and running its DNS. `null` when not wanted or not visible to you. */
+    registration: Whop.DomainRegistration | null;
+    /** The most pressing state of the domain's capabilities: `releasing`, then `action_required`, then `pending`, then `ready`. `idle` when it wants nothing. */
     status: Domain.Status | null;
-    /** When the domain was last updated, as an ISO 8601 timestamp. `null` for a search result. */
+    /** When the domain was last updated, as an ISO 8601 timestamp. */
     updated_at: string | null;
-    /** When an unverified claim is automatically removed, 48 hours after it was claimed, as an ISO 8601 timestamp. */
-    verification_expires_at: string | null;
+    /** Proving you control the domain's DNS with a TXT record. `null` when not wanted or not visible to you. */
+    verification: Whop.DomainVerification | null;
+    /** Serving a Whop website on the domain. `null` when not wanted. */
+    website: Whop.DomainWebsite | null;
 }
 
 export namespace Domain {
-    /** `managed` for a domain bought and renewed through Whop; `external` for a domain registered elsewhere and connected with DNS records. `null` for a search result. */
-    export const Mode = {
-        External: "external",
-        Managed: "managed",
-    } as const;
-    export type Mode = (typeof Mode)[keyof typeof Mode];
-    /** Domain lifecycle. Only active domains serve their app. `null` for a search result. */
+    /** The most pressing state of the domain's capabilities: `releasing`, then `action_required`, then `pending`, then `ready`. `idle` when it wants nothing. */
     export const Status = {
-        PendingVerification: "pending_verification",
-        AwaitingPayment: "awaiting_payment",
-        Registering: "registering",
-        Provisioning: "provisioning",
-        Active: "active",
+        Idle: "idle",
+        Pending: "pending",
+        Ready: "ready",
         ActionRequired: "action_required",
-        Deleting: "deleting",
-        Expired: "expired",
-        Failed: "failed",
-        Removed: "removed",
+        Releasing: "releasing",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }
