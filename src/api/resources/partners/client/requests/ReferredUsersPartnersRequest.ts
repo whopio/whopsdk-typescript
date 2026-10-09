@@ -13,6 +13,8 @@ export interface ReferredUsersPartnersRequest {
     earning_partner_id?: string;
     /** The selected referring partner's exact username. Requires user_id=global; cannot be combined with earning_partner_id. */
     earning_partner_username?: string;
+    /** List the users this business's team members referred, past members included, instead of the caller's own. Requires company:basic:read on that business, which every team member holds, and cannot be combined with user_id. earning_partner_id or earning_partner_username then narrows to one team member. */
+    referring_account_id?: string;
     /** Search referred users by name or username. In global mode, matches the beginning of usernames only. */
     query?: string;
     /** When true, only referred users who brought at least one business onto Whop. */

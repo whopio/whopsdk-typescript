@@ -154,4 +154,6 @@ export interface RetrieveStatsRequest {
     event_count_lt?: number;
     /** People metric only: event_count less than or equal this value. Applies to the current person profile for every time bucket. LTV and AOV are in USD. Not accepted by the Events metric. */
     event_count_lte?: number;
+    /** Read a referral metric for a business instead of the caller: the referrals its team members made, past members included, for example biz_AbC123. Requires company:basic:read on that business and cannot be combined with user_id. Available on metrics that list referring_account_id. */
+    referring_account_id?: string;
 }

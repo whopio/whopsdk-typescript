@@ -7,6 +7,8 @@ import type * as Whop from "../../../../../../index.js";
  *     {}
  */
 export interface ListBusinessesRequest {
+    /** List the referrals this business's team members made, past members included, instead of the authenticated user's own. Requires company:basic:read on that business, which every team member holds, and cannot be combined with user_id. */
+    referring_account_id?: string;
     /** Filter by referral status. */
     status?: Whop.partners.ListBusinessesRequestStatus;
     /** When true, only businesses with pending or completed earnings paid to the caller. */

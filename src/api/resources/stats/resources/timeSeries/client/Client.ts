@@ -194,6 +194,7 @@ export class TimeSeriesClient {
             event_count_gte: eventCountGte,
             event_count_lt: eventCountLt,
             event_count_lte: eventCountLte,
+            referring_account_id: referringAccountId,
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
@@ -265,6 +266,7 @@ export class TimeSeriesClient {
             event_count_gte: eventCountGte,
             event_count_lt: eventCountLt,
             event_count_lte: eventCountLte,
+            referring_account_id: referringAccountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
