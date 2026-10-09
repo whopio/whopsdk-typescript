@@ -173,11 +173,13 @@ export class AdGroupsClient {
         request: Whop.CreateAdGroupsRequest,
         requestOptions?: AdGroupsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.AdGroup>> {
+        const { "X-Ads-Platform": adsPlatform, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
+                "X-Ads-Platform": adsPlatform,
                 "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-08",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
@@ -195,7 +197,7 @@ export class AdGroupsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -609,12 +611,13 @@ export class AdGroupsClient {
         request: Whop.UpdateAdGroupsRequest,
         requestOptions?: AdGroupsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.AdGroup>> {
-        const { id, ..._body } = request;
+        const { id, "X-Ads-Platform": adsPlatform, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
+                "X-Ads-Platform": adsPlatform,
                 "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-08",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
