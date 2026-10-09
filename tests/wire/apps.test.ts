@@ -38,6 +38,7 @@ describe("AppsClient", () => {
                     businesses_created_logo_urls: [
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     ],
+                    businesses_with_recent_sales_count: 0,
                     creator: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
                     dashboard_path: "/dashboard/[companyId]",
                     description: "Let members book a mobile detailing appointment without leaving your whop.",
@@ -159,6 +160,7 @@ describe("AppsClient", () => {
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             ],
+            businesses_with_recent_sales_count: 0,
             creator: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
             dashboard_path: "/dashboard/[companyId]",
             default_api_key: {
@@ -435,6 +437,7 @@ describe("AppsClient", () => {
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             ],
+            businesses_with_recent_sales_count: 0,
             creator: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
             dashboard_path: "/dashboard/[companyId]",
             default_api_key: {
@@ -668,6 +671,7 @@ describe("AppsClient", () => {
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             ],
+            businesses_with_recent_sales_count: 0,
             creator: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
             dashboard_path: "/dashboard/[companyId]",
             default_api_key: {
@@ -1140,6 +1144,7 @@ describe("AppsClient", () => {
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             ],
+            businesses_with_recent_sales_count: 0,
             creator: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
             dashboard_path: "/dashboard/[companyId]",
             default_api_key: {
