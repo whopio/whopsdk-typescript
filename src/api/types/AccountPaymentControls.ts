@@ -22,7 +22,7 @@ export interface AccountPaymentControls {
     /** Automatic refund settings for resolution center cases. */
     resolution_center_auto_refund: Whop.AccountResolutionCenterAutoRefundControl;
     restricted_payment_methods: AccountPaymentControls.RestrictedPaymentMethods.Item[];
-    /** Why pending funds without a settlement date aren't moving yet. `kyc_incomplete` and `pending_information_request` are things the merchant can act on. `withdrawals_disabled` means Whop has blocked withdrawals, so these funds cannot become available. `null` when there's no reason to show — still clearing, or held for a reason that isn't named here. */
+    /** Why pending funds without a settlement date aren't moving yet. `kyc_incomplete`, `pending_information_request`, and `update_payout_profile` are things the merchant can act on. `compliance_review` means a verification the merchant already submitted is being reviewed, so these funds stay pending until it clears. `withdrawals_disabled` means Whop has blocked withdrawals, so these funds cannot become available. `null` when there's no reason to show — still clearing, or held for a reason that isn't named here. */
     undated_pending_reason: AccountPaymentControls.UndatedPendingReason | null;
     /** How the account's balance automatically withdraws. */
     withdrawal_schedule: Whop.AccountWithdrawalScheduleControl;
@@ -42,10 +42,12 @@ export namespace AccountPaymentControls {
         export type Item = (typeof Item)[keyof typeof Item];
     }
 
-    /** Why pending funds without a settlement date aren't moving yet. `kyc_incomplete` and `pending_information_request` are things the merchant can act on. `withdrawals_disabled` means Whop has blocked withdrawals, so these funds cannot become available. `null` when there's no reason to show — still clearing, or held for a reason that isn't named here. */
+    /** Why pending funds without a settlement date aren't moving yet. `kyc_incomplete`, `pending_information_request`, and `update_payout_profile` are things the merchant can act on. `compliance_review` means a verification the merchant already submitted is being reviewed, so these funds stay pending until it clears. `withdrawals_disabled` means Whop has blocked withdrawals, so these funds cannot become available. `null` when there's no reason to show — still clearing, or held for a reason that isn't named here. */
     export const UndatedPendingReason = {
         KycIncomplete: "kyc_incomplete",
         PendingInformationRequest: "pending_information_request",
+        UpdatePayoutProfile: "update_payout_profile",
+        ComplianceReview: "compliance_review",
         WithdrawalsDisabled: "withdrawals_disabled",
     } as const;
     export type UndatedPendingReason = (typeof UndatedPendingReason)[keyof typeof UndatedPendingReason];
