@@ -9,6 +9,8 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreateAdGroupsRequest {
+    /** The platform returned when you last retrieved the campaign, ad group, or ad. A different current platform rejects the request with campaign_changed; retrieve the resource again before editing. Required after a delivery-platform migration when creating ads or ad groups, or changing fields other than title, status, budget, and account scope. */
+    "X-Ads-Platform"?: Whop.CreateAdGroupsRequestXAdsPlatform;
     /** The ad campaign to create the ad group in, prefixed `adcamp_`. */
     ad_campaign_id: string;
     /** Saved audiences to deliver to or exclude. Can't be combined with demographics.automatic. */
