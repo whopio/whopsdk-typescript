@@ -27,6 +27,7 @@ export const PermissionAction = {
     AdCampaignRead: "ad_campaign:read",
     AdCampaignStatsRead: "ad_campaign:stats:read",
     AdCampaignUpdate: "ad_campaign:update",
+    AdPixelManage: "ad_pixel:manage",
     AudienceBasicRead: "audience:basic:read",
     AudienceUpdate: "audience:update",
     AdPublisherRead: "ad_publisher:read",

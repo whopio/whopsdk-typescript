@@ -219,7 +219,7 @@ describe("FilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -529,7 +529,7 @@ describe("FilesClient", () => {
             ],
             multipart_upload_id: "multipart_upload_id",
         };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

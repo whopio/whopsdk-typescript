@@ -199,7 +199,7 @@ export class ExperimentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -540,7 +540,7 @@ export class ExperimentsClient {
                 case 400:
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -627,7 +627,7 @@ export class ExperimentsClient {
                 case 400:
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -707,7 +707,7 @@ export class ExperimentsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

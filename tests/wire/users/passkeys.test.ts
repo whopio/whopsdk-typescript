@@ -271,7 +271,7 @@ describe("PasskeysClient", () => {
             credential_id: "credential_id",
             nickname: "nickname",
         };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -441,7 +441,7 @@ describe("PasskeysClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { challenge_type: "registration" };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

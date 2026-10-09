@@ -221,7 +221,7 @@ export class ShipmentsClient {
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

@@ -320,7 +320,7 @@ describe("OauthGrantsClient", () => {
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
-        const rawResponseBody = { error: { message: "message", type: "type" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

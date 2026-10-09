@@ -88,6 +88,7 @@ export * from "./AdLeadFormQuestion.js";
 export * from "./AdLeadFormQuestionOption.js";
 export * from "./AdMessagingConfig.js";
 export * from "./AdMusic.js";
+export * from "./AdPixel.js";
 export * from "./AdPlatformIssue.js";
 export * from "./AdText.js";
 export * from "./AdTranslations.js";
