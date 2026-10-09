@@ -12,16 +12,11 @@ export interface AppDomain {
 export namespace AppDomain {
     /** Domain lifecycle status, matching the domain resource. */
     export const Status = {
-        PendingVerification: "pending_verification",
-        AwaitingPayment: "awaiting_payment",
-        Registering: "registering",
-        Provisioning: "provisioning",
-        Active: "active",
+        Idle: "idle",
+        Pending: "pending",
+        Ready: "ready",
         ActionRequired: "action_required",
-        Deleting: "deleting",
-        Expired: "expired",
-        Failed: "failed",
-        Removed: "removed",
+        Releasing: "releasing",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }

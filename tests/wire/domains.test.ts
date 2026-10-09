@@ -19,32 +19,7 @@ describe("DomainsClient", () => {
             data: [
                 {
                     account_id: null,
-                    amount_due: null,
-                    app_id: null,
-                    auto_renew: null,
-                    created_at: null,
-                    dns_records: [
-                        {
-                            name: "_whop.shop.example.com",
-                            type: "TXT",
-                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                        },
-                    ],
-                    domain: "example.com",
-                    expires_at: null,
-                    id: null,
-                    issues: [
-                        {
-                            code: "ownership_required",
-                            message:
-                                "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
-                        },
-                    ],
-                    metadata: { key: "value" },
-                    mode: null,
-                    payment_method_id: null,
-                    purchase_url: null,
-                    registration_quote: {
+                    availability: {
                         available: false,
                         premium: false,
                         price: null,
@@ -52,38 +27,35 @@ describe("DomainsClient", () => {
                         score: 81,
                         transfer_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
                     },
-                    status: null,
-                    updated_at: null,
-                    verification_expires_at: null,
-                },
-                {
-                    account_id: null,
-                    amount_due: null,
-                    app_id: null,
-                    auto_renew: null,
                     created_at: null,
-                    dns_records: [
-                        {
-                            name: "_whop.shop.example.com",
-                            type: "TXT",
-                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                        },
-                    ],
-                    domain: "example.co",
-                    expires_at: null,
+                    domain: "example.com",
                     id: null,
                     issues: [
                         {
-                            code: "ownership_required",
+                            capability: "verification",
+                            code: "verification_required",
+                            dns_records: [
+                                {
+                                    name: "_whop.shop.example.com",
+                                    type: "TXT",
+                                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                },
+                            ],
                             message:
-                                "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                                "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                         },
                     ],
                     metadata: { key: "value" },
-                    mode: null,
-                    payment_method_id: null,
-                    purchase_url: null,
-                    registration_quote: {
+                    owned_by: null,
+                    registration: null,
+                    status: null,
+                    updated_at: null,
+                    verification: null,
+                    website: null,
+                },
+                {
+                    account_id: null,
+                    availability: {
                         available: true,
                         premium: false,
                         price: { amount: "24.99", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -91,38 +63,35 @@ describe("DomainsClient", () => {
                         score: 78,
                         transfer_price: null,
                     },
-                    status: null,
-                    updated_at: null,
-                    verification_expires_at: null,
-                },
-                {
-                    account_id: null,
-                    amount_due: null,
-                    app_id: null,
-                    auto_renew: null,
                     created_at: null,
-                    dns_records: [
-                        {
-                            name: "_whop.shop.example.com",
-                            type: "TXT",
-                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                        },
-                    ],
-                    domain: "example.dev",
-                    expires_at: null,
+                    domain: "example.co",
                     id: null,
                     issues: [
                         {
-                            code: "ownership_required",
+                            capability: "verification",
+                            code: "verification_required",
+                            dns_records: [
+                                {
+                                    name: "_whop.shop.example.com",
+                                    type: "TXT",
+                                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                },
+                            ],
                             message:
-                                "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                                "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                         },
                     ],
                     metadata: { key: "value" },
-                    mode: null,
-                    payment_method_id: null,
-                    purchase_url: null,
-                    registration_quote: {
+                    owned_by: null,
+                    registration: null,
+                    status: null,
+                    updated_at: null,
+                    verification: null,
+                    website: null,
+                },
+                {
+                    account_id: null,
+                    availability: {
                         available: true,
                         premium: false,
                         price: { amount: "12.99", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -130,9 +99,31 @@ describe("DomainsClient", () => {
                         score: 75,
                         transfer_price: null,
                     },
+                    created_at: null,
+                    domain: "example.dev",
+                    id: null,
+                    issues: [
+                        {
+                            capability: "verification",
+                            code: "verification_required",
+                            dns_records: [
+                                {
+                                    name: "_whop.shop.example.com",
+                                    type: "TXT",
+                                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                                },
+                            ],
+                            message:
+                                "Publish this TXT record to prove you own the domain. Verification runs automatically.",
+                        },
+                    ],
+                    metadata: { key: "value" },
+                    owned_by: null,
+                    registration: null,
                     status: null,
                     updated_at: null,
-                    verification_expires_at: null,
+                    verification: null,
+                    website: null,
                 },
             ],
             page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: null },
@@ -217,29 +208,33 @@ describe("DomainsClient", () => {
         const rawRequestBody = { domain: "store.example.com" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            app_id: "app_xxxxxxxxxxxxxx",
-            auto_renew: true,
+            availability: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             created_at: "2026-01-01T12:00:00.000Z",
-            dns_records: [
-                {
-                    name: "_whop.shop.example.com",
-                    type: "TXT",
-                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                },
-            ],
             domain: "shop.com",
-            expires_at: "expires_at",
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
-                    code: "ownership_required",
-                    message: "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                    capability: "verification",
+                    code: "verification_required",
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    message: "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                 },
             ],
             metadata: { project: "website" },
-            mode: "external",
-            payment_method_id: "payment_method_id",
+            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -258,18 +253,19 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-            registration_quote: {
-                available: true,
-                premium: false,
-                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                score: 75,
-                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            registration: {
+                amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                auto_renew: true,
+                expires_at: "expires_at",
+                payment_method_id: "payment_method_id",
+                phase: "awaiting_payment",
+                purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+                state: "pending",
             },
-            status: "pending_verification",
+            status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
-            verification_expires_at: "2026-01-01T12:00:00.000Z",
+            verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
+            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
         };
 
         server
@@ -355,29 +351,33 @@ describe("DomainsClient", () => {
 
         const rawResponseBody = {
             account_id: null,
-            amount_due: null,
-            app_id: null,
-            auto_renew: null,
+            availability: {
+                available: false,
+                premium: false,
+                price: null,
+                renewal_price: null,
+                score: 81,
+                transfer_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             created_at: null,
-            dns_records: [
-                {
-                    name: "_whop.shop.example.com",
-                    type: "TXT",
-                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                },
-            ],
             domain: "example.com",
-            expires_at: null,
             id: null,
             issues: [
                 {
-                    code: "ownership_required",
-                    message: "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                    capability: "verification",
+                    code: "verification_required",
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    message: "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                 },
             ],
             metadata: { key: "value" },
-            mode: null,
-            payment_method_id: null,
+            owned_by: null,
             public_record: {
                 dnssec: false,
                 expires_at: "2027-08-13T04:00:00.000Z",
@@ -396,18 +396,11 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-08-14T07:01:44.000Z",
             },
-            purchase_url: null,
-            registration_quote: {
-                available: false,
-                premium: false,
-                price: null,
-                renewal_price: null,
-                score: 81,
-                transfer_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
-            },
+            registration: null,
             status: null,
             updated_at: null,
-            verification_expires_at: null,
+            verification: null,
+            website: null,
         };
 
         server.mockEndpoint().get("/domains/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -472,29 +465,33 @@ describe("DomainsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            app_id: "app_xxxxxxxxxxxxxx",
-            auto_renew: true,
+            availability: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             created_at: "2026-01-01T12:00:00.000Z",
-            dns_records: [
-                {
-                    name: "_whop.shop.example.com",
-                    type: "TXT",
-                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                },
-            ],
             domain: "shop.com",
-            expires_at: "expires_at",
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
-                    code: "ownership_required",
-                    message: "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                    capability: "verification",
+                    code: "verification_required",
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    message: "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                 },
             ],
             metadata: { project: "website" },
-            mode: "external",
-            payment_method_id: "payment_method_id",
+            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -513,18 +510,19 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-            registration_quote: {
-                available: true,
-                premium: false,
-                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                score: 75,
-                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            registration: {
+                amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                auto_renew: true,
+                expires_at: "expires_at",
+                payment_method_id: "payment_method_id",
+                phase: "awaiting_payment",
+                purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+                state: "pending",
             },
-            status: "pending_verification",
+            status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
-            verification_expires_at: "2026-01-01T12:00:00.000Z",
+            verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
+            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
         };
 
         server.mockEndpoint().delete("/domains/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -568,29 +566,33 @@ describe("DomainsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            app_id: "app_xxxxxxxxxxxxxx",
-            auto_renew: true,
+            availability: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             created_at: "2026-01-01T12:00:00.000Z",
-            dns_records: [
-                {
-                    name: "_whop.shop.example.com",
-                    type: "TXT",
-                    value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                },
-            ],
             domain: "shop.com",
-            expires_at: "expires_at",
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
-                    code: "ownership_required",
-                    message: "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                    capability: "verification",
+                    code: "verification_required",
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    message: "Publish this TXT record to prove you own the domain. Verification runs automatically.",
                 },
             ],
             metadata: { project: "website" },
-            mode: "external",
-            payment_method_id: "payment_method_id",
+            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -609,18 +611,19 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-            registration_quote: {
-                available: true,
-                premium: false,
-                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                score: 75,
-                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            registration: {
+                amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                auto_renew: true,
+                expires_at: "expires_at",
+                payment_method_id: "payment_method_id",
+                phase: "awaiting_payment",
+                purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+                state: "pending",
             },
-            status: "pending_verification",
+            status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
-            verification_expires_at: "2026-01-01T12:00:00.000Z",
+            verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
+            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
         };
 
         server
@@ -664,5 +667,106 @@ describe("DomainsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("check (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            availability: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
+            created_at: "2026-01-01T12:00:00.000Z",
+            domain: "shop.com",
+            id: "dom_xxxxxxxxxxxxxx",
+            issues: [
+                {
+                    capability: "verification",
+                    code: "verification_required",
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    message: "Publish this TXT record to prove you own the domain. Verification runs automatically.",
+                },
+            ],
+            metadata: { project: "website" },
+            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            public_record: {
+                dnssec: false,
+                expires_at: "2026-01-01T12:00:00.000Z",
+                name_servers: ["ns1.example.com"],
+                registered_at: "2026-01-01T12:00:00.000Z",
+                registrant: {
+                    address: "Burlington\nMA",
+                    contact_url: "https://registrar.example/contact/example.com",
+                    country: "US",
+                    email: "email",
+                    name: "name",
+                    organization: "Privacy Protect, LLC",
+                    phone: "phone",
+                },
+                registrar: { iana_id: "9999", name: "Example Registrar, Inc.", url: "https://registrar.example" },
+                statuses: ["client transfer prohibited"],
+                updated_at: "2026-01-01T12:00:00.000Z",
+            },
+            registration: {
+                amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                auto_renew: true,
+                expires_at: "expires_at",
+                payment_method_id: "payment_method_id",
+                phase: "awaiting_payment",
+                purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+                state: "pending",
+            },
+            status: "idle",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
+            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
+        };
+
+        server.mockEndpoint().post("/domains/id/check").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.domains.check({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("check (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().post("/domains/id/check").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.check({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });

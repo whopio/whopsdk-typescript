@@ -7,14 +7,39 @@
  *     }
  */
 export interface UpdateDomainsRequest {
-    /** Domain ID, prefixed `dom_`. To retrieve, you can pass a hostname such as `example.com` instead; a bare name looks up `.com`. */
+    /** Domain ID, prefixed `dom_`, or a hostname such as `example.com`; a bare name looks up `.com`. */
     id: string;
-    /** App ID, prefixed app_. Must belong to the same account. Pass `null` to detach a bought domain from its app; it keeps renewing. */
-    app_id?: string | null;
-    /** For a bought domain, whether Whop charges its saved card to renew it before it expires. */
-    auto_renew?: boolean;
     /** Replacement custom string keys and values. */
     metadata?: Record<string, string>;
-    /** For a bought domain, the saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
-    payment_method_id?: string | null;
+    /** Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase. */
+    registration?: UpdateDomainsRequest.Registration | null;
+    /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
+    verification?: UpdateDomainsRequest.Verification | null;
+    /** Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities. */
+    website?: UpdateDomainsRequest.Website | null;
+}
+
+export namespace UpdateDomainsRequest {
+    /**
+     * Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase.
+     */
+    export interface Registration {
+        /** Whether Whop charges the saved card to renew the domain before it expires. */
+        auto_renew?: boolean | undefined;
+        /** Saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
+        payment_method_id?: (string | null) | undefined;
+    }
+
+    /**
+     * Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`.
+     */
+    export type Verification = {};
+
+    /**
+     * Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities.
+     */
+    export interface Website {
+        /** App ID, prefixed app_, of the website to serve. The app must belong to the account. */
+        app_id?: string | undefined;
+    }
 }
