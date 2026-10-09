@@ -47,6 +47,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    platform: null,
                     registration: null,
                     status: null,
                     updated_at: null,
@@ -83,6 +84,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    platform: null,
                     registration: null,
                     status: null,
                     updated_at: null,
@@ -119,6 +121,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    platform: null,
                     registration: null,
                     status: null,
                     updated_at: null,
@@ -235,6 +238,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            platform: { state: "pending" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -378,6 +382,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { key: "value" },
             owned_by: null,
+            platform: null,
             public_record: {
                 dnssec: false,
                 expires_at: "2027-08-13T04:00:00.000Z",
@@ -492,6 +497,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            platform: { state: "pending" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -593,6 +599,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            platform: { state: "pending" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",
@@ -708,6 +715,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            platform: { state: "pending" },
             public_record: {
                 dnssec: false,
                 expires_at: "2026-01-01T12:00:00.000Z",

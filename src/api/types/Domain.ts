@@ -18,6 +18,8 @@ export interface Domain {
     metadata: Record<string, string>;
     /** The other account that has proven it owns this hostname. `null` when no other account does. */
     owned_by: Whop.DomainOwner | null;
+    /** An address on a zone Whop runs, such as example.whop.site, that follows its app's route. `null` for other domains or when not visible to you. */
+    platform: Whop.DomainPlatform | null;
     /** The domain's public registration record (RDAP), read when you retrieve it by hostname. `null` for domains on Whop, available domains, or a record that couldn't be read. */
     public_record: Whop.DomainPublicRecord | null;
     /** Buying the domain through Whop, renewing it, and running its DNS. `null` when not wanted or not visible to you. */

@@ -70,6 +70,7 @@ export class DomainsClient {
                     domain,
                     verification,
                     registration,
+                    platform,
                     website,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
@@ -85,9 +86,10 @@ export class DomainsClient {
                     search,
                     tlds,
                     domain,
-                    verification,
-                    registration,
-                    website,
+                    verification: verification != null ? verification : undefined,
+                    registration: registration != null ? registration : undefined,
+                    platform: platform != null ? platform : undefined,
+                    website: website != null ? website : undefined,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

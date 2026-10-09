@@ -34,9 +34,11 @@ export interface ListDomainsRequest {
     /** Only your domain with this hostname, such as `example.com`. */
     domain?: string;
     /** Only domains with verification in this state, such as `ready`, or `any` for every domain that has verification. */
-    verification?: string;
+    verification?: Whop.ListDomainsRequestVerification;
     /** Only domains with registration in this state, such as `ready`, or `any` for every domain that has registration. */
-    registration?: string;
+    registration?: Whop.ListDomainsRequestRegistration;
+    /** Only domains with platform in this state, such as `ready`, or `any` for every domain that has platform. */
+    platform?: Whop.ListDomainsRequestPlatform;
     /** Only domains with website in this state, such as `ready`, or `any` for every domain that has website. */
-    website?: string;
+    website?: Whop.ListDomainsRequestWebsite;
 }
