@@ -60,8 +60,6 @@ export interface Payment {
     payment_rule_matches: Whop.PaymentRuleMatch[];
     /** How many charge attempts have failed on this payment. */
     payments_failed: number;
-    /** A link to download this payment's receipt (invoice) as a PDF. Fetch it with the same credential as this request to receive the file. Null until the payment is paid. */
-    pdf_url: string | null;
     /** The variant that was charged, prefixed `plan_`. */
     plan_id: string | null;
     /** The account-facing total in the currency presented to the buyer, before conversion into the settlement currency. Excludes buyer fees. */

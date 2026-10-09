@@ -117,7 +117,6 @@ describe("PaymentsClient", () => {
                     payment_method_type: "acss_debit",
                     payment_rule_matches: [{ action: "allow", id: "id", name: null }],
                     payments_failed: 0,
-                    pdf_url: "https://whop.com/api/receipt_pdf/",
                     plan_id: "plan_xxxxxxxxxxxxxx",
                     presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     product_id: "prod_xxxxxxxxxxxxxx",
@@ -341,7 +340,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
@@ -657,7 +655,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
@@ -889,7 +886,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
@@ -1300,6 +1296,143 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("generatePdf (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            expires_at: "2026-01-01T12:00:00.000Z",
+            url: "https://content.whop.com/exports/2026-01-01/pdfs/receipt_pay_xxxxxxxxxxxxxx.pdf",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/generate_pdf")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payments.generatePdf({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generatePdf (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/generate_pdf")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("generatePdf (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/generate_pdf")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("generatePdf (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/generate_pdf")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("generatePdf (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/generate_pdf")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("refund (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1410,7 +1543,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
@@ -1726,7 +1858,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
@@ -1982,7 +2113,6 @@ describe("PaymentsClient", () => {
             payment_method_type: "acss_debit",
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
-            pdf_url: "https://whop.com/api/receipt_pdf/",
             plan_id: "plan_xxxxxxxxxxxxxx",
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
