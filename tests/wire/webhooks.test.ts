@@ -19,7 +19,7 @@ describe("WebhooksClient", () => {
             data: [
                 {
                     api_version: "v1",
-                    api_version_date: "2026-01-01",
+                    api_version_date: "2026-10-09-1",
                     child_resource_events: false,
                     consecutive_failures: 0,
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -148,7 +148,7 @@ describe("WebhooksClient", () => {
         const rawRequestBody = { url: "https://example.com/hooks" };
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-01-01",
+            api_version_date: "2026-10-09-1",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",
@@ -332,7 +332,7 @@ describe("WebhooksClient", () => {
 
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-01-01",
+            api_version_date: "2026-10-09-1",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",
@@ -515,7 +515,7 @@ describe("WebhooksClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-01-01",
+            api_version_date: "2026-10-09-1",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",

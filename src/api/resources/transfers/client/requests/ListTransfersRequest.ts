@@ -7,9 +7,9 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListTransfersRequest {
-    /** Filter to transfers sent from this account. Provide this or destination_id. */
+    /** Filter to transfers sent from this account. */
     origin_id?: string;
-    /** Filter to transfers received by this account. Provide this or origin_id. */
+    /** Filter to transfers received by this account. */
     destination_id?: string;
     /** Sort column. Defaults to created_at. */
     order?: Whop.ListTransfersRequestOrder;

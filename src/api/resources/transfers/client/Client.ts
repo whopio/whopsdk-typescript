@@ -33,12 +33,11 @@ export class TransfersClient {
     }
 
     /**
-     * Lists an account's transfers.
+     * Lists transfers visible to the caller. Optional account filters narrow the results.
      *
      * @param {Whop.ListTransfersRequest} request
      * @param {TransfersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -81,7 +80,7 @@ export class TransfersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -112,16 +111,11 @@ export class TransfersClient {
                     return { data: _response.body as Whop.ListTransfersResponse, rawResponse: _response.rawResponse };
                 }
                 if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        default:
-                            throw new errors.WhopError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
                 }
                 return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/transfers");
             },
@@ -143,7 +137,7 @@ export class TransfersClient {
     /**
      * Moves money between accounts, or into a claim link anyone with the URL can redeem.
      *
-     * @param {Whop.CreateTransfersRequest} request
+     * @param {Whop.CreateTransfersRequestBody} request
      * @param {TransfersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
@@ -155,19 +149,22 @@ export class TransfersClient {
      *
      * @example
      *     await client.transfers.create({
+     *         type: "balance",
      *         amount: 25,
+     *         currency: "usd",
+     *         destination_id: "user_xxxxxxxxxxxxxx",
      *         origin_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
-        request: Whop.CreateTransfersRequest,
+        request: Whop.CreateTransfersRequestBody,
         requestOptions?: TransfersClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.CreateTransfersResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: Whop.CreateTransfersRequest,
+        request: Whop.CreateTransfersRequestBody,
         requestOptions?: TransfersClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.CreateTransfersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -175,7 +172,7 @@ export class TransfersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -264,7 +261,7 @@ export class TransfersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -364,7 +361,7 @@ export class TransfersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-09-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
