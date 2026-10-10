@@ -16,9 +16,9 @@ export declare namespace PeopleClient {
 }
 
 /**
- * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/beta/events/event) the person generated — pixel page views, ad clicks, leads, identifies, and payments. Each profile carries the person's known identities (names, emails, phones, user IDs), purchase history and LTV, geo/device profile, traffic sources, and the first and last marketing touches that reached them.
+ * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/beta/events/event) the person generated, such as pixel page views, ad clicks, leads, and payments.
  *
- * Use the People API to list and segment the people of an account — filter by activity, purchases, traffic source, location, or marketing touch, and sort by value — or retrieve one person by person ID, user ID, email address, or phone number.
+ * Use the People API to list and segment the people of an account by activity, purchases, traffic source, or marketing touch, and to retrieve one person by person ID, user ID, email address, or phone number.
  */
 export class PeopleClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PeopleClient.Options>;
@@ -28,7 +28,7 @@ export class PeopleClient {
     }
 
     /**
-     * Lists the people (visitors and customers) of an account: the identity-linked person profiles aggregated from every pixel, payment, and platform event — identities, purchases and LTV, geo/device profile, traffic sources, and first/last marketing touches.
+     * Lists the people (visitors and customers) of an account: identity-linked profiles assembled from every pixel, payment, and platform event. Filter and sort them to segment an account's audience.
      *
      * @param {Whop.ListPeopleRequest} request
      * @param {PeopleClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -212,7 +212,7 @@ export class PeopleClient {
     }
 
     /**
-     * Retrieves one person for an account. The identifier can be a person ID (prefixed `prsn_`), a user ID (prefixed `user_`), an email address, or a phone number — merged people resolve to the surviving profile.
+     * Retrieves one person for an account, looked up by person ID, user ID, email address, or phone number.
      *
      * @param {Whop.RetrievePeopleRequest} request
      * @param {PeopleClient.RequestOptions} requestOptions - Request-specific configuration.

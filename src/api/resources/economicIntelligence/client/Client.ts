@@ -29,7 +29,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists an account's recommendations and generation requests, newest first by default. For callers with company:update permission, listing queues generation when no recommendations are ready or in progress, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
+     * Lists an account's recommendations and generation requests, newest first by default. When no recommendations are ready or in progress and you have `company:update` permission, listing queues generation, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. An account's executed recommendations and runs stay listed after Economic Intelligence turns off, but new recommendations are offered only while it is on. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.

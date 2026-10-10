@@ -7,7 +7,7 @@
  *     }
  */
 export interface RetrieveAccountsRequest {
-    /** Account ID, prefixed `biz_`, its public route, or `me` for the account associated with the current API key. */
+    /** Account ID, prefixed `biz_`, its public route, or `me` for the account associated with the current Account API key. User tokens have no single account, so they cannot use `me`. */
     id: string;
     /** Also return the trading account under `trading`: its address and its Hyperliquid WebSocket subscriptions. Requires crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet; null otherwise. */
     include_trading?: boolean;

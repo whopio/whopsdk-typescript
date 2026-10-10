@@ -17,9 +17,9 @@ export declare namespace PaymentQuotesClient {
 }
 
 /**
- * A Payment Quote prices a purchase exactly as a payment for it will be charged: the same line pricing, the same promo code, the same per-line tax calculation. The body is the `PaymentInput` a payment takes (the account, the variants or an inline plan, the promo code) plus where the buyer is: `address`, `shipping_address`, `tax_ids`, `ip_address` and `presentment_country`. Tax is calculated for the shipping address, else the billing address, else the country the buyer chose, else the IP address, and `located_by` says which one priced it. A seller who collects no tax on the purchase needs no location at all.
+ * A Payment Quote prices a purchase exactly as a payment for it will be charged: the same line pricing, promo code, and tax, for a buyer located by the address, country, or IP address you send. A quote is priced once, can be consumed by one payment, and expires.
  *
- * Pass the quote's `id` as `quote_id` when you create the payment and the buyer is charged exactly this quote: its purchase (which the payment may then omit), its promo code and its `tax_amount`, with no figure recomputed at charge time. A quote is priced once, may be consumed by one payment, and expires at `expires_at`; quote again whenever the cart, the promo code or the address changes. It is priced in the variants' own currency unless you send `presentment_currency` (`auto` for the currency of the country Whop places the buyer's `ip_address` in, or a currency code) or `presentment_country` (the currency `auto` would pick for a buyer in a country they chose): every amount is then converted at an `exchange_rate` fixed until `expires_at`, the payment is charged in that currency at that rate, and `recommended_currencies` lists the currencies to offer the buyer. A quote located by `presentment_country` or `ip_address` is a preview: show it, then quote again with the buyer's address to pay. `tax_status` says whether every line was priced (`calculated`), whether the seller collects no tax on this purchase (`not_applicable`), or whether tax could not be priced (`unavailable`, which a payment refuses: quote again, or charge without `quote_id` to have tax calculated at charge time).
+ * Use the Payment Quotes API to show a buyer the total, tax, and currency before they pay, then pass the quote's `id` as `quote_id` when you create the payment to charge exactly that quote. Quote again whenever the cart, promo code, or address changes.
  */
 export class PaymentQuotesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentQuotesClient.Options>;
@@ -29,7 +29,7 @@ export class PaymentQuotesClient {
     }
 
     /**
-     * Prices a purchase the way a payment for it will be charged, for a buyer located by the shipping address, then the billing address, then the IP address you pass. The body is the `PaymentInput` a payment takes plus where the buyer is (`address`, `shipping_address`, `tax_ids`, `ip_address`); a seller that collects no tax on the purchase can be quoted without them. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Quote what you are about to charge and pass the quote's `id` as `quote_id` when you create the payment: it then charges exactly the purchase, promo code and tax shown here. A quote is priced once, in the plans' own currency or the `presentment_currency` you ask for, and may be consumed by one payment before `expires_at`.
+     * Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`.
      *
      * @param {Whop.CreatePaymentQuotesRequest} request
      * @param {PaymentQuotesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -116,7 +116,7 @@ export class PaymentQuotesClient {
     }
 
     /**
-     * Retrieves a payment quote, including the payment holding it (`payment_id`, whose `status` says whether it collected) and when it expires.
+     * Retrieves a payment quote. Use it to check which payment holds the quote, through `payment_id`, and when it expires.
      *
      * @param {Whop.RetrievePaymentQuotesRequest} request
      * @param {PaymentQuotesClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -23,7 +23,7 @@ export class CardTransactionsClient {
     }
 
     /**
-     * Lists the card transactions of an account or a user, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
+     * Lists the card transactions of an account or a user, newest first. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
      *
      * @param {Whop.ListCardTransactionsRequest} request
      * @param {CardTransactionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -154,7 +154,7 @@ export class CardTransactionsClient {
     }
 
     /**
-     * Fetches a single card transaction by its `citx_` identifier. The owner defaults to the account the credential belongs to.
+     * Retrieves a single card transaction from any card the owner has ever had, including canceled cards. Team members can retrieve only transactions on the cards assigned to them.
      *
      * @param {Whop.RetrieveCardTransactionsRequest} request
      * @param {CardTransactionsClient.RequestOptions} requestOptions - Request-specific configuration.

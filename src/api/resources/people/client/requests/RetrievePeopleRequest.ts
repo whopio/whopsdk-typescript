@@ -7,7 +7,7 @@
  *     }
  */
 export interface RetrievePeopleRequest {
-    /** The person ID, user ID, email address, or phone number to look up. */
+    /** The person ID (prefixed `prsn_`), user ID (prefixed `user_`), email address, or phone number to look up. A merged person resolves to the surviving profile. */
     id: string;
     /** Account ID, prefixed `biz_`. Optional for account API keys; required for credentials that can access multiple accounts. */
     account_id?: string;

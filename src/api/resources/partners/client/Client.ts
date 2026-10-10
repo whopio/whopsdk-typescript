@@ -19,7 +19,7 @@ export declare namespace PartnersClient {
 /**
  * Get started at [whop.com/network](https://whop.com/network). A Partner is a user who refers people and businesses to Whop. The partner profile includes enrollment, active direct business referral counts, and default payout terms.
  *
- * Retrieve your profile with `/partners/{id}`. Use `/partner_referral_requests` to create and manage referral links and their rewards. You can also enroll in the partner program, review referred users and businesses, track earnings, and see the partner leaderboard.
+ * Retrieve your profile with `/partners/me`. Use `/partner_referral_requests` to create and manage referral links and their rewards. You can also enroll in the partner program, review referred users and businesses, track earnings, and see the partner leaderboard.
  */
 export class PartnersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PartnersClient.Options>;
@@ -107,7 +107,7 @@ export class PartnersClient {
     }
 
     /**
-     * Ranks referrers by partner business earnings — all-time by default, or over the current day, month, year, or trailing 30 days. Authentication is optional: authenticated callers also get their own standing, anonymous callers get the rankings alone.
+     * Ranks referrers by partner business earnings over the chosen `period`, all-time by default. Authentication is optional: authenticated callers also get their own standing, anonymous callers get the rankings alone.
      *
      * @param {Whop.LeaderboardPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -185,7 +185,7 @@ export class PartnersClient {
     }
 
     /**
-     * Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals. Authorized staff can set user_id=global to list referrals across partners, with earnings for each user's current primary referrer.
+     * Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers.
      *
      * @param {Whop.ReferredUsersPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -209,7 +209,6 @@ export class PartnersClient {
                 request: Whop.ReferredUsersPartnersRequest,
             ): Promise<core.WithRawResponse<Whop.ReferredUsersPartnersResponse>> => {
                 const {
-                    user_id: userId,
                     earning_partner_id: earningPartnerId,
                     earning_partner_username: earningPartnerUsername,
                     referring_account_id: referringAccountId,
@@ -224,7 +223,6 @@ export class PartnersClient {
                     before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    user_id: userId != null ? userId : undefined,
                     earning_partner_id: earningPartnerId,
                     earning_partner_username: earningPartnerUsername,
                     referring_account_id: referringAccountId,
@@ -318,7 +316,7 @@ export class PartnersClient {
     }
 
     /**
-     * Retrieves the authenticated user's public profile, enrollment date, partner verification timestamp, verification waitlist status, partner certification completion, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Create and manage referral links through /partner_referral_requests.
+     * Retrieves the authenticated user's partner profile: enrollment and verification status, certification completion, active direct business referral count, and default payout rates. Other users' profiles are not accessible. To create and manage referral links, use `/partner_referral_requests`.
      *
      * @param {Whop.RetrievePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.

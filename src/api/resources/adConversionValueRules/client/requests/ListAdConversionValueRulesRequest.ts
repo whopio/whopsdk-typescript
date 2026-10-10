@@ -7,6 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListAdConversionValueRulesRequest {
+    /** Only rules belonging to this account, prefixed `biz_`. */
     account_id?: string;
     status?: Whop.ListAdConversionValueRulesRequestStatus;
     platform?: Whop.ListAdConversionValueRulesRequestPlatform;

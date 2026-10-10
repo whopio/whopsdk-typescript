@@ -9,13 +9,13 @@ import type * as Whop from "../../../../../../../../../../index.js";
 export interface ListTopicsRequest {
     /** Only return preferences for this delivery channel (or not narrowed to a channel). */
     channel?: Whop.users.preferences.notifications.ListTopicsRequestChannel;
-    /** Only return preferences scoped to this account's member notifications (`biz_` tag). */
+    /** Only return preferences scoped to this account's member notifications (`biz_` tag), or not narrowed to an account. */
     account_id?: string;
-    /** Only return preferences scoped to this account's team notifications (`biz_` tag). */
+    /** Only return preferences scoped to this account's team notifications (`biz_` tag), or not narrowed to a team account. */
     team_account_id?: string;
-    /** Only return preferences scoped to this experience (`exp_` tag). */
+    /** Only return preferences scoped to this experience (`exp_` tag), or not narrowed to an experience. */
     experience_id?: string;
-    /** Only return preferences scoped to this notification topic (`topic_` tag). */
+    /** Only return preferences scoped to this notification topic (`topic_` tag), or not narrowed to a topic. */
     topic_id?: string;
     /** Number of results to return from the start of the range. */
     first?: number;

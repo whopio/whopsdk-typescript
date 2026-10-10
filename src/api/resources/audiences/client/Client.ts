@@ -19,7 +19,7 @@ export declare namespace AudiencesClient {
 /**
  * An Audience is a reusable group of people to include or exclude when targeting ads. Build custom audiences from customer lists, Whop People data, or social engagement, and create lookalikes to reach people similar to an existing audience.
  *
- * Use the Audiences API to create, list, and delete audiences and monitor asynchronous processing. Meta engagement sources include videos, lead forms, Instagram profiles, and Facebook pages. Engagement membership updates on Meta; Whop People audiences can refresh automatically or keep a snapshot.
+ * Use the Audiences API to create audiences, add people to an uploaded customer list, rename or refilter an audience, and monitor asynchronous processing. Engagement sources on Meta include videos, lead forms, Instagram profiles, and Facebook pages, and their membership updates on Meta; Whop People audiences can refresh automatically or keep a snapshot.
  */
 export class AudiencesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AudiencesClient.Options>;
@@ -29,7 +29,7 @@ export class AudiencesClient {
     }
 
     /**
-     * List custom and lookalike audiences for an account. Pass `audience_id` to return a specific audience.
+     * Lists an account's custom and lookalike audiences.
      *
      * @param {Whop.ListAudiencesRequest} request
      * @param {AudiencesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -131,7 +131,7 @@ export class AudiencesClient {
     }
 
     /**
-     * Create an audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages. Create lookalike audiences to reach people similar to an existing audience. Processing runs asynchronously. Custom creation returns one audience; lookalike creation returns the requested similarity bands in `data`.
+     * Creates a custom audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
      *
      * @param {Whop.CreateAudiencesRequest} request
      * @param {AudiencesClient.RequestOptions} requestOptions - Request-specific configuration.

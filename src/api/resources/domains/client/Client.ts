@@ -17,11 +17,9 @@ export declare namespace DomainsClient {
 }
 
 /**
- * A Domain is a hostname an account buys through Whop or connects from another registrar, and assigns to one of its apps. Creating a domain buys it unless `mode` is `external`: pay at its `purchase_url`, or set `payment_method_id` to charge a saved card, and Whop registers the domain and runs its DNS. Thirty days before a bought domain expires, Whop opens a renewal charge at `purchase_url` and, while `auto_renew` is on, charges the saved card for it. An unpaid domain stops serving its app when it expires but stays renewable at `purchase_url` until the registry's grace period ends, and is then removed.
+ * A Domain is a hostname an account holds on Whop. Its capabilities set what Whop does with it: `registration` buys the domain through Whop, runs its DNS, and renews it every year; `verification` connects a domain registered elsewhere once you publish the DNS records it returns, and expires if ownership is not proven within 48 hours; `website` serves one of the account's apps on it.
  *
- * A connected domain returns DNS records to publish instead. Verification and certificates run automatically, and unverified claims expire after 48 hours. A claim doesn't reserve the hostname. Either kind serves its app once its hostname and certificate are active.
- *
- * To find a domain to buy, pass `search` to List Domains or a hostname to Retrieve Domain.
+ * Use the Domains API to search for a domain to buy, buy or connect one, serve a website on it, and check its DNS, payment, and renewal state. Thirty days before a bought domain expires, Whop opens a renewal charge at `purchase_url` and, while `auto_renew` is on, charges the saved card. An unpaid domain stops serving when it expires but stays renewable at `purchase_url` until the registry's grace period ends, and is then removed.
  */
 export class DomainsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<DomainsClient.Options>;

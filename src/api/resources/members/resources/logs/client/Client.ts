@@ -23,7 +23,7 @@ export class LogsClient {
     }
 
     /**
-     * Lists activity for a member and all of their non-drafted memberships, most recent first.
+     * Lists activity for a member and all of their memberships that are not `drafted`, most recent first.
      *
      * @param {Whop.members.ListLogsRequest} request
      * @param {LogsClient.RequestOptions} requestOptions - Request-specific configuration.

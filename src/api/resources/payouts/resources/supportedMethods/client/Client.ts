@@ -23,7 +23,7 @@ export class SupportedMethodsClient {
     }
 
     /**
-     * Lists the payout methods an account or user is eligible to add.
+     * Lists the payout methods an account or user is eligible to add. Pass a result's ID as `supported_payout_method_id` to `POST /payouts/methods` to save one.
      *
      * @param {Whop.payouts.ListSupportedMethodsRequest} request
      * @param {SupportedMethodsClient.RequestOptions} requestOptions - Request-specific configuration.

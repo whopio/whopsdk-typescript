@@ -23,7 +23,7 @@ export class IdentityProfilesClient {
     }
 
     /**
-     * Returns a paginated list of identity profiles. When account_id is provided, lists IPs currently linked to that account's ledger. When omitted, lists IPs linked to any ledger the actor can read (including child accounts under a parent).
+     * Lists the identity profiles currently linked to an account, or to every account you can read when `account_id` is omitted.
      *
      * Required permissions:
      *  - `identity:read`
@@ -252,7 +252,7 @@ export class IdentityProfilesClient {
     }
 
     /**
-     * Unlinks an IdentityProfile from a LedgerAccount (flips the matching link to is_current=false).
+     * Unlinks an identity profile from the account or user that owns `ledger_account_id`. Requires `identity:write` on that account or user.
      *
      * @param {Whop.UnlinkIdentityProfileRequest} request
      * @param {IdentityProfilesClient.RequestOptions} requestOptions - Request-specific configuration.

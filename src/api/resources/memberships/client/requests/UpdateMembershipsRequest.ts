@@ -10,7 +10,7 @@
 export interface UpdateMembershipsRequest {
     /** Membership ID (`mem_` tag), or a software license key. */
     id: string;
-    /** Number of days between recurring charges. Sets the current period end to the current period start plus this value and applies to every recurring variant. The new period end must remain in the future. Existing non-daily memberships cannot be changed to daily billing. */
+    /** Number of days between recurring charges. Sets the current period end to the current period start plus this value and applies to every recurring variant, so future renewals use the same cadence. The new period end must remain in the future. Only for active, trialing, or past-due memberships billed automatically by Whop; invoice, externally billed, and canceling memberships are not supported. Existing non-daily memberships cannot be changed to daily billing. Cannot be combined with other fields. */
     billing_period_days?: number;
     /** `true` cancels at the end of the current billing period (the customer keeps access until then); `false` reverses a pending cancellation. */
     cancel_at_period_end?: boolean;

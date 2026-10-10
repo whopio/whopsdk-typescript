@@ -24,7 +24,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Lists payment-financing applications for the account in the URL. Account credentials can access their own account and direct sub-accounts, excluding deeper descendants. User credentials require the read permission on each account. Filters only narrow this visibility.
+     * Lists payment-financing applications for an account. Account credentials can list their own account and its direct connected accounts, but not deeper descendants; user credentials need read access to the account.
      *
      * @param {Whop.accounts.ListFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -149,7 +149,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Creates an application for merchant payment-financing approval. Requires an existing ledger account. Returns an existing application collecting information or awaiting review; applications awaiting review take precedence. Restricted industries cannot apply. Closed applications allow reapplication. This does not submit the application for review. Supports Idempotency-Key replay; open applications are also reused across different keys.
+     * Starts an application for payment-financing approval, or returns the account's open one: an application in `awaiting_review` takes precedence over one in `requires_collection`, and the open application is reused across different `Idempotency-Key` values. Creating an application does not submit it for review. The account must have a Whop balance set up, and accounts in restricted industries cannot apply. Once an application closes, the account can apply again.
      *
      * @param {Whop.accounts.CreateFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -242,7 +242,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Retrieves a payment-financing application's review state, requirements, saved answers, documents, current terms, and public review feedback. Requires read access to its owning account. Internal review notes and risk metrics are not exposed.
+     * Retrieves a payment-financing application with its review state, requirements, saved answers, documents, current terms, and review feedback. Requires read access to the account that owns it.
      *
      * @param {Whop.accounts.RetrieveFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -327,7 +327,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Saves merchant answers while the application requires_collection. The entire batch is atomic. Omitted requirements and answer fields are unchanged; empty arrays clear values or documents, and null money clears a price. Only merchant requirement IDs returned by this application are accepted. Upload documents through the Files API first: new files must belong to the caller, be ready and private, and satisfy the requirement's formats and 20 MB limit. file_ids replaces the requirement's attachments. This does not submit the application.
+     * Saves merchant answers to an application in `requires_collection`. The batch is atomic: if any answer is rejected, none are saved. Omitted requirements and answer fields are left unchanged. Saving answers does not submit the application; call Submit Financing Application when it is complete.
      *
      * @param {Whop.accounts.UpdateFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -421,7 +421,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Submits a complete application for financing review. Present the application's terms.content, policies, and disclosure to the merchant and collect affirmative acceptance before calling this endpoint. Pass the terms.version that was presented; stale versions are rejected. The server records acceptance, submitting actor, and submission time before entering awaiting_review. Only requires_collection applications may submit, including after a reviewer requests more information. Resubmissions require acceptance again. Use Idempotency-Key for retries; submitting an application already in review without replay returns an error. Approval does not itself enable financing payment methods.
+     * Submits a complete application for financing review, recording the merchant's acceptance, who submitted, and when, then moving it to `awaiting_review`. Before calling, present the application's `terms.content`, policies, and disclosure to the merchant and collect affirmative acceptance; every resubmission needs acceptance again. Only an application in `requires_collection` can be submitted, including after a reviewer requests more information. Retry with the same `Idempotency-Key`: submitting an application already in review without a replay returns an error. Approval does not by itself enable financing payment methods.
      *
      * @param {Whop.accounts.SubmitFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.

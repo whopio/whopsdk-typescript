@@ -17,11 +17,9 @@ export declare namespace CashbackRulesClient {
 }
 
 /**
- * Cashback rules designate a funding platform, optional merchant name and category filters, a rate, and an eligibility window. Every supplied merchant filter must match. An account ID limits the rule to one of the platform's direct connected accounts and is required when both merchant filters are omitted or null.
+ * A Cashback Rule pays a platform's direct connected accounts back a share of their card spend, funded by the platform. Each rule sets a rate, an eligibility window, and optional merchant filters, and can be limited to one connected account.
  *
- * Use the Cashback Rules API to create future-dated rules, update their merchant name, MCC, description, or expiration, and list every rule funded by the authenticated platform, including expired and discarded rules. Discarded rules cannot be updated. Creating or updating a rule does not transfer funds.
- *
- * Pay out cashback on demand from the platform's available USD balance with optional rule, account, and transaction filters. Only completed, unpaid, eligible transactions are paid. The response returns status `processing` and echoes supplied filters; `failed` means the queue rejected the request. These statuses describe scheduling, not payment completion.
+ * Use the Cashback Rules API to create, update, and list the rules your platform funds, then pay out cashback on demand from your available USD balance.
  */
 export class CashbackRulesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CashbackRulesClient.Options>;
@@ -31,7 +29,7 @@ export class CashbackRulesClient {
     }
 
     /**
-     * Creates a future-dated card cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Merchant name and MCC are optional. Every supplied merchant filter must match. When both are omitted or null, scoped_account_id is required and all eligible transactions for that account match. Optionally limit the rule to one direct connected account. The funding account is derived from the credential and cannot be supplied. Creation does not transfer funds. Supports Idempotency-Key for safe retries.
+     * Creates a future-dated card cashback rule for your direct connected accounts, funded by the authenticated platform account. Creating a rule does not transfer funds; pay cashback out with `POST /cashback_rules/payout`. Requires `payout:transfer_funds`. Supports `Idempotency-Key` for safe retries.
      *
      * @param {Whop.CreateCashbackRulesRequest} request
      * @param {CashbackRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -119,7 +117,7 @@ export class CashbackRulesClient {
     }
 
     /**
-     * Lists all cashback rules funded by the authenticated platform account. Includes scheduled, expired, and discarded rules. Requires payout:transfer:read. Account-scoped credentials are required; there is no caller-supplied funding-account filter.
+     * Lists the cashback rules funded by the authenticated platform account, including scheduled, expired, and discarded rules. Requires an account-scoped credential with `payout:transfer:read`.
      *
      * @param {Whop.ListCashbackRulesRequest} request
      * @param {CashbackRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -223,7 +221,7 @@ export class CashbackRulesClient {
     }
 
     /**
-     * Distributes cashback on demand from the authenticated platform's available USD balance to its direct connected accounts. Requires payout:transfer_funds. Optional filters combine; an empty body includes all eligible transactions. Only completed, unpaid transactions created before this request are considered. The latest matching rule wins; its funding account must be the authenticated platform. Amounts are calculated when processed. Returns status `processing` and echoes supplied filters when background processing is queued. Status `failed` with HTTP 200 means the queue rejected the request. This is not a payment confirmation. Failed transaction jobs retry automatically; insufficient funds requires adding USD to the funding wallet. Supports Idempotency-Key, and overlapping requests cannot pay the same card transaction twice.
+     * Pays out cashback on demand from the authenticated platform's available USD balance to its direct connected accounts. Covers completed, unpaid card transactions created before the request, each under its latest matching rule, which must be funded by the authenticated platform. Filters combine, and an empty body includes every eligible transaction. Payouts process in the background and amounts are calculated then, so the response confirms queuing, not payment. If a payout fails for insufficient funds, add USD to the platform's balance. Requires `payout:transfer_funds`. Supports `Idempotency-Key`, and overlapping requests cannot pay the same card transaction twice.
      *
      * @param {Whop.PayoutCashbackRulesRequest} request
      * @param {CashbackRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -302,7 +300,7 @@ export class CashbackRulesClient {
     }
 
     /**
-     * Updates a cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Only merchant_name, merchant_category_code, description, and expires_at can change; starts_at, rate_bps, funding_account_id, and scoped_account_id are immutable. Omitted fields stay unchanged. Scheduled, active, and expired rules can be updated; discarded rules cannot. Updating a rule does not transfer funds.
+     * Updates the merchant filters, description, or expiration of a cashback rule funded by the authenticated platform account; its start, rate, and accounts can't change. Omitted fields stay unchanged. Scheduled, active, and expired rules can be updated, but discarded rules can't. Updating a rule does not transfer funds. Requires `payout:transfer_funds`.
      *
      * @param {Whop.UpdateCashbackRulesRequest} request
      * @param {CashbackRulesClient.RequestOptions} requestOptions - Request-specific configuration.

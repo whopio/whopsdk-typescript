@@ -11,9 +11,9 @@
  *     }
  */
 export interface UpdateFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed biz_. */
+    /** Merchant account ID, prefixed `biz_`. */
     account_id: string;
-    /** Financing application ID, prefixed inrq_. */
+    /** Financing application ID, prefixed `inrq_`. */
     id: string;
     answers: UpdateFinancingApplicationsRequest.Answers.Item[];
 }
@@ -23,16 +23,20 @@ export namespace UpdateFinancingApplicationsRequest {
 
     export namespace Answers {
         export interface Item {
-            /** Complete replacement set of uploaded file IDs for this requirement. Empty removes all files. */
+            /** Complete replacement set of file IDs for this requirement, prefixed `file_`. Upload documents through the Files API first: new files must belong to the caller, be ready and private, and satisfy the requirement's formats and 20 MB limit. An empty array removes all files. */
             file_ids?: string[] | undefined;
+            /** Price answer, such as `max_product_price`. `null` clears the price. */
             money?: (Item.Money | null) | undefined;
             /** ID of a merchant requirement returned on this application. */
             requirement_id: string;
-            /** Text answers. Use money instead for max_product_price. */
+            /** Text answers. Use `money` instead for `max_product_price`. An empty array clears the answer. */
             values?: string[] | undefined;
         }
 
         export namespace Item {
+            /**
+             * Price answer, such as `max_product_price`. `null` clears the price.
+             */
             export interface Money {
                 /** Positive exact decimal amount in major units, such as 1234.56. At most 12 whole digits and the currency's fractional precision. */
                 amount: string;

@@ -127,7 +127,7 @@ export class ExportsClient {
     }
 
     /**
-     * Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
+     * Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/:id` until `download_url` is set.
      *
      * @param {Whop.CreateExportsRequest} request
      * @param {ExportsClient.RequestOptions} requestOptions - Request-specific configuration.

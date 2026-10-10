@@ -9,7 +9,7 @@ export interface TeamMember {
     authorized_role: Whop.TeamMemberAuthorizedRole | null;
     /** When the member joined or the invite was sent, as an ISO 8601 timestamp. */
     created_at: string;
-    /** The member's email address. For accepted members, `null` unless the caller holds the email read scope; for invites, the invited address. */
+    /** The member's email address. For accepted members, `null` unless the caller holds the `company:authorized_user:email:read` scope; for invites, the invited address. */
     email: string | null;
     /** Team member ID — `ausr_` for accepted members, `ausri_` for pending invites. */
     id: string;

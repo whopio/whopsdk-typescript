@@ -151,7 +151,7 @@ export class CheckoutConfigurationsClient {
     }
 
     /**
-     * Creates a reusable checkout configuration for an existing or inline variant.
+     * Creates a reusable checkout configuration for an existing or inline variant. Send customers to its `purchase_url` to check out.
      *
      * @param {Whop.CreateCheckoutConfigurationsRequest} request
      * @param {CheckoutConfigurationsClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -30,7 +30,7 @@ export class AffiliatesClient {
     }
 
     /**
-     * Returns a paginated list of affiliates for the actor in context, with optional filtering by status, search, and sorting.
+     * Lists the affiliates of an account.
      *
      * Required permissions:
      *  - `affiliate:basic:read`
@@ -154,7 +154,7 @@ export class AffiliatesClient {
     }
 
     /**
-     * Creates or finds an affiliate for a company and user.
+     * Creates an affiliate for a user on an account. If the user is already an affiliate of the account, returns that affiliate, reactivating it if it was archived.
      *
      * Required permissions:
      *  - `affiliate:create`
@@ -345,7 +345,7 @@ export class AffiliatesClient {
     }
 
     /**
-     * Archives an existing Affiliate
+     * Archives an affiliate. The affiliate that handles Whop marketplace referrals cannot be archived.
      *
      * Required permissions:
      *  - `affiliate:update`
@@ -439,7 +439,7 @@ export class AffiliatesClient {
     }
 
     /**
-     * Unarchives an existing Affiliate
+     * Unarchives an archived affiliate.
      *
      * Required permissions:
      *  - `affiliate:update`

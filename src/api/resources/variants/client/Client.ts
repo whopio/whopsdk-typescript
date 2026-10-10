@@ -29,7 +29,7 @@ export class VariantsClient {
     }
 
     /**
-     * Returns a paginated list of variants. Omit `account_id` and pass `product_ids` to list a product's public buyable variants.
+     * Lists an account's variants. To list a product's public, buyable variants without authentication, omit `account_id` and pass `product_ids`.
      *
      * @param {Whop.ListVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -160,7 +160,7 @@ export class VariantsClient {
     }
 
     /**
-     * Create a new pricing variant for a product. The variant defines the billing interval, price, and availability for customers.
+     * Creates a pricing variant for a product, defining the billing interval, price, and availability customers buy it with.
      *
      * @param {Whop.CreateVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -239,7 +239,7 @@ export class VariantsClient {
     }
 
     /**
-     * Retrieves the details of an existing variant.
+     * Retrieves a variant. Requires no authentication; fields that need a permission are `null` for callers without it.
      *
      * @param {Whop.RetrieveVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -329,7 +329,7 @@ export class VariantsClient {
     }
 
     /**
-     * Delete a variant from a product. It stops selling immediately; existing memberships on this variant will not be affected.
+     * Deletes a variant from a product. It stops selling immediately; existing memberships on it are unaffected.
      *
      * @param {Whop.DeleteVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -402,7 +402,7 @@ export class VariantsClient {
     }
 
     /**
-     * Update a variant's pricing, billing interval, visibility, stock, and other settings.
+     * Updates a variant's pricing, billing interval, visibility, stock, and other settings.
      *
      * @param {Whop.UpdateVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.

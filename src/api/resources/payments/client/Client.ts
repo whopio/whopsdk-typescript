@@ -18,9 +18,9 @@ export declare namespace PaymentsClient {
 }
 
 /**
- * A Payment is one charge against a buyer. Create an on-session payment with a `confirmation_token` for the method the buyer selected, or an off-session payment with an existing member's stored payment method.
+ * A Payment is one charge against a buyer, for one or more variants. Create an on-session payment with a `confirmation_token` for the method the buyer selected, or an off-session payment with an existing member's stored payment method.
  *
- * Collection runs in the background, so the create response is not the outcome. Poll [Retrieve status](/api-reference/beta/payments/retrieve-payment-status) for how far the payment has gone and, while it is `requires_action`, what the buyer must do next — follow a redirect, complete 3D Secure, display transfer instructions, or link a bank account. Use the return_url operation to change where they land afterwards, up until they come back.
+ * Use the Payments API to charge buyers, list and retrieve payments, and refund, void, capture, or retry them. Collection runs in the background, so the create response is not the outcome. Poll [Retrieve status](/api-reference/beta/payments/retrieve-payment-status) for how far the payment has gone and, while it is `requires_action`, what the buyer must do next: follow a redirect, complete 3D Secure, display transfer instructions, or link a bank account. Update the payment's `return_url` to change where they land afterwards, up until they come back.
  */
 export class PaymentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentsClient.Options>;
@@ -35,7 +35,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Lists payments, newest first. By default, returns account sales: a company credential's own account, or for a user every account they can read payments for. Set `mode=user_sales` to list only the sales received by the signed-in user's primary ledger account, without a company. This mode requires the user's own Whop login session and cannot be combined with `account_id`. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
+     * Lists payments, newest first. By default, returns sales for the accounts your credential can read: an account credential's own account, or every account a user can read payments for. Set `mode` to `user_sales` to list the sales the signed-in user received personally, outside any account.
      *
      * @param {Whop.ListPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -164,7 +164,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Charges a buyer for one or more variants. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `line_items` for one or more variants with quantities, `plan_id` for an existing variant, or the compatibility input `plan` to find or create one inline. These inputs are mutually exclusive.
+     * Charges a buyer for one or more variants with a payment method already on file (`member_id` and `payment_method_id`), or with a `confirmation_token` for a method the buyer just supplied. Collection runs in the background, so the response is the payment as created, not its outcome: poll Retrieve payment status for how far it has got and what the buyer must still do.
      *
      * @param {Whop.CreatePaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -330,7 +330,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Updates a payment's `shipping_address` or `return_url`. Send the complete `shipping_address`, because it replaces the existing address and any field you leave out is cleared.
+     * Updates a payment's `shipping_address` or `return_url`.
      *
      * @param {Whop.UpdatePaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -655,7 +655,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Issues a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
+     * Refunds all or part of a payment through the processor that charged it, and updates its membership to match. The buyer is emailed, the affiliate commission on the payment is clawed back, and any open Resolution Center case on the payment is closed.
      *
      * @param {Whop.RefundPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -743,7 +743,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Retries a failed or pending payment. This re-attempts the charge using the original payment method and variant details.
+     * Charges an unpaid payment again with its original payment method and variant. A payment can typically be retried once, and only while its membership is active, trialing or past due, or when it is a membership's failed first payment.
      *
      * @param {Whop.RetryPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.

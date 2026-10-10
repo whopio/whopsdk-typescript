@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface AccountFeeMarkup {
     /** Whether the caller may change this markup through `PATCH`. True for the platform's team holding the `company:update_child_fees` scope. */
     adjustable: boolean;
-    /** What applies if this row is cleared: the platform's default for all its connected accounts, or zero. */
+    /** What applies if this row is cleared: the platform's default for all its connected accounts, or zero. Its `percentage` and `fixed` are `null` when a connected account's fees are read without access to its parent account. */
     default: Whop.AccountFeeRate;
     /** The amount the platform adds per event. Zero when no markup is set. */
     fixed: Whop.Money;
@@ -13,14 +13,14 @@ export interface AccountFeeMarkup {
     maximum: Whop.AccountFeeRate;
     /** The percentage of the transaction the platform adds, where `2` means 2%. `0` when no markup is set. */
     percentage: number;
-    /** `custom` when a row is set at this level, `default` when the rate falls through to the platform default or zero. */
+    /** `custom` when a row is set at this level, `default` when the rate falls through to the platform default or zero. `null` when a connected account's fees are read without access to its parent account. */
     source: AccountFeeMarkup.Source | null;
     /** Why the caller may not change this markup, or `null` when `adjustable`. */
     unadjustable_reason: AccountFeeMarkup.UnadjustableReason | null;
 }
 
 export namespace AccountFeeMarkup {
-    /** `custom` when a row is set at this level, `default` when the rate falls through to the platform default or zero. */
+    /** `custom` when a row is set at this level, `default` when the rate falls through to the platform default or zero. `null` when a connected account's fees are read without access to its parent account. */
     export const Source = {
         Default: "default",
         Custom: "custom",

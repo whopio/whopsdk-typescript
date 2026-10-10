@@ -12,9 +12,9 @@
  *     }
  */
 export interface SubmitFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed biz_. */
+    /** Merchant account ID, prefixed `biz_`. */
     account_id: string;
-    /** Financing application ID, prefixed inrq_. */
+    /** Financing application ID, prefixed `inrq_`. */
     id: string;
     merchant_acceptance: SubmitFinancingApplicationsRequest.MerchantAcceptance;
 }
@@ -23,7 +23,7 @@ export namespace SubmitFinancingApplicationsRequest {
     export interface MerchantAcceptance {
         /** Affirmation that the merchant accepted the presented terms. */
         accepted: boolean;
-        /** Exact terms.version returned by the application and presented to the merchant. */
+        /** Exact `terms.version` returned by the application and presented to the merchant. A stale version is rejected. */
         terms_version: string;
     }
 }

@@ -8,8 +8,8 @@
  *     }
  */
 export interface RetrieveFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed biz_. */
+    /** Merchant account ID, prefixed `biz_`. */
     account_id: string;
-    /** Financing application ID, prefixed inrq_. */
+    /** Financing application ID, prefixed `inrq_`. */
     id: string;
 }

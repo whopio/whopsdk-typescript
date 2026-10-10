@@ -11,7 +11,7 @@
 export interface CreateAppBuildsRequest {
     /** The app to create the build for, prefixed `app_`. Defaults to the app behind the presented credential. */
     app_id?: string;
-    /** The uploaded build file: `{ id }` for an existing file or `{ direct_upload_id }` for a completed direct upload. */
+    /** The uploaded build file: pass `id` for an existing file or `direct_upload_id` for a completed direct upload. iOS and Android builds take a .zip bundle; web builds take a JavaScript file or a .zip archive of the hosted site. */
     attachment: CreateAppBuildsRequest.Attachment;
     /** A client-generated checksum of the build file, used to verify file integrity when unpacked. */
     checksum: string;
@@ -25,7 +25,7 @@ export interface CreateAppBuildsRequest {
 
 export namespace CreateAppBuildsRequest {
     /**
-     * The uploaded build file: `{ id }` for an existing file or `{ direct_upload_id }` for a completed direct upload.
+     * The uploaded build file: pass `id` for an existing file or `direct_upload_id` for a completed direct upload. iOS and Android builds take a .zip bundle; web builds take a JavaScript file or a .zip archive of the hosted site.
      */
     export interface Attachment {
         /** The signed id of a completed direct upload. */

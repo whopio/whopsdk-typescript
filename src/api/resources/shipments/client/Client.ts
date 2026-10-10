@@ -19,7 +19,7 @@ export declare namespace ShipmentsClient {
 /**
  * A Shipment attaches a carrier tracking number to a payment and follows the package from label creation to delivery, exposing the current delivery status and a customer-facing tracking URL.
  *
- * Use the Shipments API to list an account's shipments, retrieve one by its id or the payment it fulfills, attach a tracking number to a payment, and update the tracking number on an existing shipment.
+ * Use the Shipments API to list an account's shipments, retrieve one by its ID or the payment it fulfills, attach a tracking number to a payment, and update the tracking number on an existing shipment.
  */
 export class ShipmentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ShipmentsClient.Options>;
@@ -29,7 +29,7 @@ export class ShipmentsClient {
     }
 
     /**
-     * Returns a paginated list of shipments for an account.
+     * Lists an account's shipments.
      *
      * @param {Whop.ListShipmentsRequest} request
      * @param {ShipmentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -235,7 +235,7 @@ export class ShipmentsClient {
     }
 
     /**
-     * Retrieves a shipment by its id, or by the payment id it fulfills.
+     * Retrieves a shipment by its ID, or by the ID of the payment it fulfills.
      *
      * @param {Whop.RetrieveShipmentsRequest} request
      * @param {ShipmentsClient.RequestOptions} requestOptions - Request-specific configuration.

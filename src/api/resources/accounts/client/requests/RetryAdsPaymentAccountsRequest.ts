@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetryAdsPaymentAccountsRequest {
-    /** The account ID. */
+    /** Account ID, prefixed `biz_`. */
     id: string;
 }

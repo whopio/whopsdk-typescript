@@ -47,7 +47,7 @@ export interface AccountFees {
     parent_account_id: string | null;
     /** Processing fees for every non-card payment method the platform prices, keyed by payment method type such as `us_bank_account` or `klarna`. */
     payment_methods: Record<string, Whop.AccountFee>;
-    /** Fees on withdrawals, keyed by payout method: `bank_wire`, `same_day_bank`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. */
+    /** Fees on withdrawals, keyed by payout method: `bank_wire`, `same_day_bank`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. Payout fees the parent account covers show as zero when a connected account's fees are read without access to its parent account. */
     payouts: Record<string, Whop.AccountFee>;
     /** Charged on a Whop Ads auto top-up that is funded from pending balance. */
     pending_auto_topup: Whop.AccountFee;

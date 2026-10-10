@@ -17,12 +17,12 @@ export interface CreateTradesRequest {
     leverage?: number;
     /** The perpetual market, for example `BTC`. */
     market: string;
-    /** `buy` or `close`. */
+    /** `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     type: CreateTradesRequest.Type;
 }
 
 export namespace CreateTradesRequest {
-    /** `buy` or `close`. */
+    /** `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     export const Type = {
         Buy: "buy",
         Close: "close",

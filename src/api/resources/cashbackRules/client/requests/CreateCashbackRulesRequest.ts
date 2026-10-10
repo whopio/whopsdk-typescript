@@ -18,7 +18,7 @@ export interface CreateCashbackRulesRequest {
     merchant_name?: string | null;
     /** Cashback rate in basis points: 500 means 5%. */
     rate_bps: number;
-    /** Account ID prefixed biz_ belonging to a direct connected account. Required when both merchant filters are omitted or null. Otherwise, omit or set null to designate all direct connected accounts. */
+    /** Account ID, prefixed `biz_`, of one direct connected account to limit the rule to. Required when both merchant filters are omitted or `null`, in which case the rule matches all eligible transactions for that account. Otherwise, omit or set `null` to designate all direct connected accounts. */
     scoped_account_id?: string | null;
     /** Inclusive start, strictly later than the current time, as an ISO 8601 timestamp. */
     starts_at: string;

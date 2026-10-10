@@ -23,7 +23,7 @@ export class ClaimLinksClient {
     }
 
     /**
-     * Retrieves a funded claim link. IDs require `airdrop_link:basic:read` on the funding account, or the personal account's owner. Claim codes allow unauthenticated previews of the sender, amount, expiry, and claim availability. Treat codes as secrets: anyone holding one can claim after signing in. By ID, the code and URL require `airdrop_link:manage` on the funding company or `payout:withdraw_funds` on the personal account; read-only credentials receive null values.
+     * Retrieves a funded claim link by ID or by its public claim code. By ID, the caller needs `airdrop_link:basic:read` on the funding account, or must own the funding personal account; `code` and `claim_url` are `null` without `airdrop_link:manage` on the funding account or `payout:withdraw_funds` on the personal account. A claim code previews the sender, amount, expiry, and claim availability without authentication. Treat codes as secrets: anyone holding one can claim after signing in.
      *
      * @param {Whop.RetrieveClaimLinksRequest} request
      * @param {ClaimLinksClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -102,7 +102,7 @@ export class ClaimLinksClient {
     }
 
     /**
-     * Claims a funded link into the authenticated user's personal balance and returns the updated link. Requires a signed-in user and the public claim code; company API keys cannot claim on a recipient's behalf. Each user can claim a link once. Reuse the same Idempotency-Key when retrying the same request. On-chain claims wait for the existing transfer workflow and may take several minutes.
+     * Claims a funded link into the authenticated user's personal balance and returns the updated link. Requires a signed-in user and the public claim code; account API keys cannot claim on a recipient's behalf. Each user can claim a link once. Reuse the same `Idempotency-Key` when retrying the same request. On-chain claims may take several minutes to complete.
      *
      * @param {Whop.ClaimClaimLinksRequest} request
      * @param {ClaimLinksClient.RequestOptions} requestOptions - Request-specific configuration.

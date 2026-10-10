@@ -17,7 +17,9 @@ export declare namespace PartnerReferralRequestsClient {
 }
 
 /**
- * Partner Referral Requests let partners create referral links and request attribution for an existing business or enrolled partner, with manual requests requiring recipient approval.
+ * A Partner Referral Request is a partner's referral link, or a request to be credited as the referrer of an existing business or user. An attribution request takes effect only when the recipient accepts it.
+ *
+ * Use the Partner Referral Requests API to create referral links, send attribution requests, list the links and requests you've sent or received, and accept, decline, or cancel a pending request.
  */
 export class PartnerReferralRequestsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PartnerReferralRequestsClient.Options>;
@@ -153,7 +155,7 @@ export class PartnerReferralRequestsClient {
     }
 
     /**
-     * Creates a referral link or sends a verified partner's attribution request to an existing business or user for approval. Whop sessions creating a link with their own active `authorized_user_id` enroll automatically. Manual requests always require a verified partner. Recipients do not need to join the partner program.
+     * Creates a referral link, or sends an attribution request to an existing business or user for approval. Links require an enrolled partner who is not suspended; attribution requests require an enrolled, verified partner. Recipients do not need to join the partner program.
      *
      * @param {Whop.CreatePartnerReferralRequestsRequestBody} request
      * @param {PartnerReferralRequestsClient.RequestOptions} requestOptions - Request-specific configuration.

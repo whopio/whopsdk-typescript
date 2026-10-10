@@ -20,7 +20,7 @@ export declare namespace StatsClient {
 /**
  * Stats represent aggregated activity for an account over time. They help you understand revenue, transactions, disputes, members, referrals, and advertising performance across reporting periods like days, weeks, or months.
  *
- * Use the Stats API to list available metrics and their filterable properties, then retrieve time-series values for a date range.
+ * Use the Stats API to list the metrics you can chart and retrieve one as a time series over a date range, or list reports and retrieve aggregates that are not bucketed over time, such as platform-wide payment trends.
  */
 export class StatsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<StatsClient.Options>;
@@ -42,7 +42,7 @@ export class StatsClient {
     /**
      * @deprecated
      *
-     * Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`. Aggregates that are not bucketed over time are reports, listed at `GET /stats/reports`.
+     * Deprecated. Lists every metric without saying which ones you can chart. List chartable metrics with `GET /stats/time_series`, and aggregates that are not bucketed over time with `GET /stats/reports`.
      *
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
      *

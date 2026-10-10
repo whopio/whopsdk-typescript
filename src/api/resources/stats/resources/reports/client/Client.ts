@@ -23,7 +23,7 @@ export class ReportsClient {
     }
 
     /**
-     * Lists every report: the aggregates that are not bucketed over time. Each entry names the report's path, its window kind, the breakdowns it accepts and its columns. A property column is an attribute of the row and lists the breakdowns it can ride along with. A metric column is a number measured over the row, with the unit that sets its JSON type, the aggregate that says how to combine it across rows, and the breakdowns and windows it supports. For a bucketed series, use `GET /stats/time_series`.
+     * Lists every report: the aggregates that are not bucketed over time, with the breakdowns and columns each one accepts. Use it to discover what a report can return before you retrieve it. For a bucketed series, use `GET /stats/time_series`.
      *
      * @param {ReportsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -90,7 +90,7 @@ export class ReportsClient {
     }
 
     /**
-     * Payments across all of Whop, for up to four windows at once. Break rows down by business type, industry type, account country or customer country, and let the business type ride along on industry type rows. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it. A breakdown value with fewer than three businesses behind it is left out, and a filtered total that small comes back with every metric `null`.
+     * Retrieves payments across all of Whop for up to four windows at once, optionally broken down by business type, industry type, account country or customer country. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it.
      *
      * @param {Whop.stats.PlatformTrendsReportsRequest} request
      * @param {ReportsClient.RequestOptions} requestOptions - Request-specific configuration.

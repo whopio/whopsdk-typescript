@@ -17,9 +17,9 @@ export declare namespace AdConversionValueRulesClient {
 }
 
 /**
- * A conversion value rule allows you to report accurate conversion values to Whop while modifying how those values are sent to ad networks. Rules belong to an account and can apply to an account, an ad campaign, an ad group, or an ad.
+ * A conversion value rule changes the conversion values Whop sends to ad networks while Whop keeps recording the accurate values. Each rule belongs to an account and applies one value adjustment to a set of targets (the account, an ad campaign, an ad group, or an ad) and events. Every selected event applies to every selected target, and the most specific rule applies.
  *
- * Each rule contains targets and events that share one value adjustment. Every selected event applies to every selected target. Create, retrieve, edit, delete, pause, or resume one rule by its ID. Create may set an initial active or paused status. Edits keep that status. Filter the list with resource_id to find rules overlapping a campaign, ad group, or ad. Every target must support every selected event; Google does not support named custom events. Create and edit accept replace_rule_ids to replace only the overlapping selections in the same transaction. Other selections keep their values. Remaining selections may split into separate rules so every event still applies to every target. Broader rules remain as fallbacks for other items; the most specific rule applies. Rules with no remaining selections are paused. Unpause automatically replaces overlapping selections using the same behavior as create and edit: other selections keep their values, and broader rules remain as defaults. Resuming an already-active rule makes no changes. Each write succeeds or fails as one transaction. Use Idempotency-Key to safely retry POST requests. Each conversion send attempt uses the rules saved at that time, including retries.
+ * Use the Ad Conversion Value Rules API to create, edit, pause, resume, and delete rules, and to find the rules that cover a campaign, ad group, or ad. Each write succeeds or fails as one transaction, and each conversion send uses the rules saved at that moment.
  */
 export class AdConversionValueRulesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AdConversionValueRulesClient.Options>;
@@ -29,7 +29,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * List saved rules the caller can read. Filter by business with account_id.
+     * Lists the conversion value rules you can read.
      *
      * @param {Whop.ListAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -141,7 +141,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * Create one rule covering every selected target and event combination. Active rules cannot overlap for the same platform and event. Customer prices and Whop revenue stay unchanged.
+     * Creates one rule covering every selected target and event combination. Active rules cannot overlap for the same platform and event. Customer prices and Whop revenue stay unchanged.
      *
      * @param {Whop.CreateAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -230,6 +230,8 @@ export class AdConversionValueRulesClient {
     }
 
     /**
+     * Retrieves a conversion value rule with its targets, events, and value adjustment.
+     *
      * @param {Whop.RetrieveAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -300,7 +302,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * Soft-delete a rule and deactivate all its coverage. Preserve its stored settings.
+     * Deletes a rule and deactivates all its coverage. The rule's stored settings are preserved.
      *
      * @param {Whop.DeleteAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -375,7 +377,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * Edit a rule without changing its status. Supplied targets or events replace that selection in full. Omitted fields stay unchanged. All changes succeed or fail together.
+     * Edits a rule without changing its status. Supplied `targets` or `events` replace that selection in full, and omitted fields stay unchanged. All changes succeed or fail together.
      *
      * @param {Whop.UpdateAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -450,7 +452,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * Pause the rule across all selected targets and events.
+     * Pauses the rule across all selected targets and events.
      *
      * @param {Whop.PauseAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -528,7 +530,7 @@ export class AdConversionValueRulesClient {
     }
 
     /**
-     * Resume the rule and automatically replace overlapping selections in the same transaction. Other selections keep their values, and broader rules remain as defaults. Rules with no remaining selections are paused. Resuming an already-active rule makes no changes.
+     * Resumes the rule and automatically replaces overlapping selections in the same transaction. Other selections keep their values, and broader rules remain as defaults. Rules with no remaining selections are paused. Resuming an already-active rule makes no changes.
      *
      * @param {Whop.UnpauseAdConversionValueRulesRequest} request
      * @param {AdConversionValueRulesClient.RequestOptions} requestOptions - Request-specific configuration.

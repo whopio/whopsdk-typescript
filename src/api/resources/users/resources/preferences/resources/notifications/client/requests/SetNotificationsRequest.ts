@@ -18,14 +18,14 @@ export namespace SetNotificationsRequest {
 
     export namespace Preferences {
         export interface Item {
-            /** What the user is notified about in this scope. `mentions` is only valid for an experience level. `null` clears the preference. */
+            /** What the user is notified about in this scope. `mentions` is only valid for an experience level; a topic override is `all` or `nothing`. `null` clears the preference, so the scope inherits its default again rather than being switched off. */
             level: Item.Level | null;
-            /** What the preference applies to. `null` on a dimension means the preference is not narrowed there. */
+            /** What the preference applies to. `null` on a dimension means the preference is not narrowed there. A scope read back from either list endpoint can be sent as-is. A scope naming an experience with no topic sets that experience's level; any other scope sets a topic override. */
             scope: Item.Scope;
         }
 
         export namespace Item {
-            /** What the user is notified about in this scope. `mentions` is only valid for an experience level. `null` clears the preference. */
+            /** What the user is notified about in this scope. `mentions` is only valid for an experience level; a topic override is `all` or `nothing`. `null` clears the preference, so the scope inherits its default again rather than being switched off. */
             export const Level = {
                 All: "all",
                 Mentions: "mentions",
@@ -34,7 +34,7 @@ export namespace SetNotificationsRequest {
             export type Level = (typeof Level)[keyof typeof Level];
 
             /**
-             * What the preference applies to. `null` on a dimension means the preference is not narrowed there.
+             * What the preference applies to. `null` on a dimension means the preference is not narrowed there. A scope read back from either list endpoint can be sent as-is. A scope naming an experience with no topic sets that experience's level; any other scope sets a topic override.
              */
             export interface Scope {
                 /** Account to scope the preference to (member notifications), `biz_` tag. */

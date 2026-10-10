@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Create a short-lived access token for authenticating API requests. When using API key authentication, provide account_id or user_id. When using OAuth, the user is derived from the token. Use this token with Whop's web and mobile embedded components.
+Creates a short-lived access token for Whop's web and mobile embedded components. With API key authentication, pass `account_id` or `user_id`; with OAuth, the token is issued for the OAuth user.
 </dd>
 </dl>
 </dd>
@@ -76,7 +76,7 @@ await client.accessTokens.create();
 <dl>
 <dd>
 
-Generate a URL that directs a sub-merchant to their account portal, such as the hosted payouts dashboard or the KYC onboarding flow.
+Generates a URL that sends a sub-merchant to a hosted Whop page, such as the payouts dashboard or the KYC onboarding flow. Requires an API key.
 </dd>
 </dl>
 </dd>
@@ -145,7 +145,7 @@ await client.accountLinks.create({
 <dl>
 <dd>
 
-Lists accounts visible to the credential. User tokens return the user's business accounts; Account API keys return the requesting account and its connected accounts. Pass `parent_account_id` to return only that parent account's connected accounts. Includes each account's `cards` application summary when the caller has `company:balance:read` access to that account.
+Lists accounts visible to the credential. User tokens return the user's business accounts; Account API keys return the requesting account and its connected accounts.
 </dd>
 </dl>
 </dd>
@@ -346,7 +346,7 @@ await client.accounts.me();
 <dl>
 <dd>
 
-Retrieves a single account by ID or public route when it is visible to the credential, including its crypto wallet. The reserved id `me` retrieves the account associated with the current Account API key; user tokens have no single account, so they must address one by ID or route.
+Retrieves an account visible to the credential by ID or public route, including its crypto wallet.
 </dd>
 </dl>
 </dd>
@@ -476,7 +476,7 @@ await client.accounts.delete({
 <dl>
 <dd>
 
-Updates an account. User tokens can update business accounts; Account API keys can update connected accounts. The reserved id `me` — accepted on Retrieve Account — resolves to the requesting account, which an Account API key cannot edit, so updates must name the connected account by its `biz_` id.
+Updates an account. User tokens can update business accounts; Account API keys can update connected accounts.
 </dd>
 </dl>
 </dd>
@@ -541,7 +541,7 @@ await client.accounts.update({
 <dl>
 <dd>
 
-Starts an LLC or C-Corp formation for a business account. Defaults to an LLC; set `entity_type` to `c_corp` to form a C-Corp, which additionally requires `share_structure` and officer `roles` on every founder. On submission, the application is validated and the response returns a hosted checkout URL. Once paid, the filing is submitted. Track progress through the account's [`company_formation`](/api-reference/beta/accounts/retrieve-account) field on Retrieve Account.
+Starts an LLC or C-Corp formation for a business account. The application is validated and the response returns a hosted checkout URL; once paid, the filing is submitted. Track progress through the account's [`company_formation`](/api-reference/beta/accounts/retrieve-account) field on Retrieve Account.
 </dd>
 </dl>
 </dd>
@@ -648,7 +648,7 @@ await client.accounts.formCompany({
 <dl>
 <dd>
 
-Queues one background retry of the account's failed ads payments across its campaigns, using the account's configured ads payment methods. A queued response does not mean payment succeeded. Read campaign delivery_status and issues for the outcome. Successful settlement clears the payment block without changing configured active or paused status; legacy payment_failed status becomes paused. Another request while the account retry is queued or running returns an error asking you to wait.
+Queues one background retry of the account's failed ads payments across its campaigns, using the account's configured ads payment methods. A queued response does not mean payment succeeded; read each campaign's `delivery_status` and `issues` for the outcome. Successful settlement clears the payment block without changing a configured `active` or `paused` status; a legacy `payment_failed` status becomes `paused`. Returns an error when the account has no failed ads payments, or while a previous retry for the account is queued or running.
 </dd>
 </dl>
 </dd>
@@ -920,7 +920,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an ad campaign for an account.
+Creates an ad campaign in `draft` status for an account. Nothing runs until you launch it by setting `status` to `active` with `PATCH /ad_campaigns/:id`.
 </dd>
 </dl>
 </dd>
@@ -1117,7 +1117,7 @@ await client.adCampaigns.delete({
 <dl>
 <dd>
 
-Updates an ad campaign's editable fields (title, budget, schedule, bid strategy, special ad categories, and, before launch, budget type and budget optimization), and launches a draft campaign by setting status to active. Objective and desired cost per result are fixed at creation and cannot be changed.
+Updates an ad campaign's settings, or launches a draft campaign by setting `status` to `active`. The objective and desired cost per result are fixed at creation and cannot be changed.
 </dd>
 </dl>
 </dd>
@@ -1378,7 +1378,7 @@ await client.adCampaigns.unpause({
 <dl>
 <dd>
 
-List saved rules the caller can read. Filter by business with account_id.
+Lists the conversion value rules you can read.
 </dd>
 </dl>
 </dd>
@@ -1453,7 +1453,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create one rule covering every selected target and event combination. Active rules cannot overlap for the same platform and event. Customer prices and Whop revenue stay unchanged.
+Creates one rule covering every selected target and event combination. Active rules cannot overlap for the same platform and event. Customer prices and Whop revenue stay unchanged.
 </dd>
 </dl>
 </dd>
@@ -1518,6 +1518,20 @@ await client.adConversionValueRules.create({
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a conversion value rule with its targets, events, and value adjustment.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -1577,7 +1591,7 @@ await client.adConversionValueRules.retrieve({
 <dl>
 <dd>
 
-Soft-delete a rule and deactivate all its coverage. Preserve its stored settings.
+Deletes a rule and deactivates all its coverage. The rule's stored settings are preserved.
 </dd>
 </dl>
 </dd>
@@ -1642,7 +1656,7 @@ await client.adConversionValueRules.delete({
 <dl>
 <dd>
 
-Edit a rule without changing its status. Supplied targets or events replace that selection in full. Omitted fields stay unchanged. All changes succeed or fail together.
+Edits a rule without changing its status. Supplied `targets` or `events` replace that selection in full, and omitted fields stay unchanged. All changes succeed or fail together.
 </dd>
 </dl>
 </dd>
@@ -1707,7 +1721,7 @@ await client.adConversionValueRules.update({
 <dl>
 <dd>
 
-Pause the rule across all selected targets and events.
+Pauses the rule across all selected targets and events.
 </dd>
 </dl>
 </dd>
@@ -1772,7 +1786,7 @@ await client.adConversionValueRules.pause({
 <dl>
 <dd>
 
-Resume the rule and automatically replace overlapping selections in the same transaction. Other selections keep their values, and broader rules remain as defaults. Rules with no remaining selections are paused. Resuming an already-active rule makes no changes.
+Resumes the rule and automatically replaces overlapping selections in the same transaction. Other selections keep their values, and broader rules remain as defaults. Rules with no remaining selections are paused. Resuming an already-active rule makes no changes.
 </dd>
 </dl>
 </dd>
@@ -1982,7 +1996,7 @@ await client.adGroups.create({
 <dl>
 <dd>
 
-Estimates how many people a draft targeting spec can reach, before an ad group is created. The body takes the same targeting fields as creating an ad group — `regions`, `demographics`, `detailed_targeting`, `audiences`, `languages`, and `devices` — and nothing is persisted.
+Estimates how many people a draft targeting spec can reach, before an ad group is created. The body takes the same targeting fields as creating an ad group, and nothing is persisted.
 </dd>
 </dl>
 </dd>
@@ -2047,7 +2061,7 @@ await client.adGroups.estimateReach({
 <dl>
 <dd>
 
-Searches the ad platform's targeting taxonomy for options to target an ad group with. Each result comes back in the exact shape the ad-group body accepts for its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages` as-is. A blank `query` browses the small fixed lists (behaviors, browse demographic categories, languages); interests, work employers, job titles, schools, majors, and locations need a search term.
+Searches the ad platform's targeting taxonomy for options to target an ad group with. Each result comes back in the exact shape the ad-group body accepts for its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages` as-is.
 </dd>
 </dl>
 </dd>
@@ -2112,7 +2126,7 @@ await client.adGroups.searchTargetingOptions({
 <dl>
 <dd>
 
-Retrieves a single ad group.
+Retrieves an ad group, with performance stats for the window set by `stats_from` and `stats_to`.
 </dd>
 </dl>
 </dd>
@@ -2177,7 +2191,7 @@ await client.adGroups.retrieve({
 <dl>
 <dd>
 
-Deletes an ad group.
+Deletes an ad group, removing it from the ad platform so it stops delivering.
 </dd>
 </dl>
 </dd>
@@ -2307,7 +2321,7 @@ await client.adGroups.update({
 <dl>
 <dd>
 
-Creates copies of the ad group in `duplicating` status and returns them — into its own campaign, or into target_ad_campaign_id (which must belong to the same account and be compatible with the ad group's targeting and goals); each copy transitions to its final status (matching the source's active/paused state) once duplication completes. Poll each returned ad group until it leaves `duplicating` — a copy that could not be completed is deleted and returns 404.
+Starts copying an ad group and returns the copies in `duplicating` status. Poll each returned ad group until it leaves `duplicating`: it then takes the source's `active` or `paused` status, or, if the copy could not be completed, is deleted and returns 404.
 </dd>
 </dl>
 </dd>
@@ -3168,7 +3182,7 @@ await client.ads.update({
 <dl>
 <dd>
 
-Copies the ad into its own ad group, or into target_ad_group_id (which must belong to the same account and be compatible with the ad). Copies keep the source ad's active/paused state.
+Copies an ad into its own ad group or into another one. Copies keep the source ad's active or paused state.
 </dd>
 </dl>
 </dd>
@@ -3364,7 +3378,7 @@ await client.ads.unpause({
 <dl>
 <dd>
 
-Returns a paginated list of affiliates for the actor in context, with optional filtering by status, search, and sorting.
+Lists the affiliates of an account.
 
 Required permissions:
  - `affiliate:basic:read`
@@ -3450,7 +3464,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates or finds an affiliate for a company and user.
+Creates an affiliate for a user on an account. If the user is already an affiliate of the account, returns that affiliate, reactivating it if it was archived.
 
 Required permissions:
  - `affiliate:create`
@@ -3587,7 +3601,7 @@ await client.affiliates.retrieve({
 <dl>
 <dd>
 
-Archives an existing Affiliate
+Archives an affiliate. The affiliate that handles Whop marketplace referrals cannot be archived.
 
 Required permissions:
  - `affiliate:update`
@@ -3655,7 +3669,7 @@ await client.affiliates.archive({
 <dl>
 <dd>
 
-Unarchives an existing Affiliate
+Unarchives an archived affiliate.
 
 Required permissions:
  - `affiliate:update`
@@ -4224,7 +4238,7 @@ await client.apiKeys.create({
 <dl>
 <dd>
 
-Lists the catalog of permission actions that can be granted to users, apps, and API keys — the source for the dashboard's permission pickers. Small and returned in full on one page.
+Lists the catalog of permission actions that can be granted to users, apps, and API keys. Use it to choose the `permissions` for an API key or to build a permission picker. Small and returned in full on one page.
 </dd>
 </dl>
 </dd>
@@ -4695,7 +4709,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Uploads a new build artifact for an app. Upload the file first (POST /files or a direct upload), then reference it here; iOS and Android take a .zip bundle, web takes a JavaScript file or a .zip archive of the hosted site.
+Uploads a new build artifact for an app. Upload the file first with `POST /files` or a direct upload, then reference it in `attachment`.
 </dd>
 </dl>
 </dd>
@@ -5033,7 +5047,7 @@ await client.apps.create({
 <dl>
 <dd>
 
-Retrieves an app by ID, claimed route, active verified custom hostname, or proxy domain id. Custom hostnames return 404 for inactive assignments, suspended accounts, or deleted apps. Credential fields (api_key, default_api_key, secrets) render `null` unless the caller has the corresponding developer permission on the owning account.
+Retrieves an app by ID, claimed route, active verified custom hostname, or proxy domain id. Authentication is optional; credential fields stay `null` unless you have the matching developer permission on the owning account.
 </dd>
 </dl>
 </dd>
@@ -5443,7 +5457,7 @@ await client.apps.updatePermissions({
 <dl>
 <dd>
 
-List custom and lookalike audiences for an account. Pass `audience_id` to return a specific audience.
+Lists an account's custom and lookalike audiences.
 </dd>
 </dl>
 </dd>
@@ -5522,7 +5536,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create an audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages. Create lookalike audiences to reach people similar to an existing audience. Processing runs asynchronously. Custom creation returns one audience; lookalike creation returns the requested similarity bands in `data`.
+Creates a custom audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
 </dd>
 </dl>
 </dd>
@@ -5795,7 +5809,7 @@ await client.audiences.addPeople({
 <dl>
 <dd>
 
-Returns a paginated list of authorized team members for a company, with optional filtering by user, role, and creation date.
+Lists the authorized users on an account's team.
 
 Required permissions:
  - `company:authorized_user:read`
@@ -5888,7 +5902,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Add a new authorized user to a company.
+Adds a user to an account's team as an authorized user with the given role.
 
 Required permissions:
  - `authorized_user:create`
@@ -6028,7 +6042,7 @@ await client.authorizedUsers.retrieve({
 <dl>
 <dd>
 
-Remove an authorized user from a company.
+Removes an authorized user from an account's team.
 
 Required permissions:
  - `authorized_user:delete`
@@ -6511,7 +6525,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a submission on a workforce bounty. Include a `deliverable` payload — any combination of links and uploaded files, with at least one of the two — and the submission goes straight to review; create is the only step. For `data_capture` bounties, omit the deliverable: this starts a claimed attempt whose proof accumulates server-side, and the separate submit endpoint sends it to review once complete. Requires a user credential — account API keys cannot author submissions.
+Creates a submission on a workforce bounty. Include a `deliverable` and the submission goes straight to review; create is the only step. For `data_capture` bounties, omit the deliverable: this starts a claimed attempt whose proof accumulates server-side, and `POST /bounty_submissions/:id/submit` sends it to review once complete. Requires a user credential — account API keys cannot author submissions.
 </dd>
 </dl>
 </dd>
@@ -6706,7 +6720,7 @@ await client.bountySubmissions.delete({
 <dl>
 <dd>
 
-Submits a claimed attempt for review. A livestream attempt needs an ended proof stream and can attach an optional `deliverable` — links, files, and a caption in any combination; if the attempt already went to review when its stream ended, the payload attaches to it once, until reviewers start voting. A data capture attempt instead needs enough validated clip time and takes no payload. Only the worker who started the attempt can submit it — account API keys cannot.
+Submits a claimed attempt for review. A livestream attempt needs an ended proof stream and can attach a `deliverable`; a data capture attempt instead needs enough validated clip time and takes no payload. Only the worker who started the attempt can submit it — account API keys cannot.
 </dd>
 </dl>
 </dd>
@@ -6772,7 +6786,7 @@ await client.bountySubmissions.submit({
 <dl>
 <dd>
 
-Lists the card transactions of an account or a user, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
+Lists the card transactions of an account or a user, newest first. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
 </dd>
 </dl>
 </dd>
@@ -6855,7 +6869,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Fetches a single card transaction by its `citx_` identifier. The owner defaults to the account the credential belongs to.
+Retrieves a single card transaction from any card the owner has ever had, including canceled cards. Team members can retrieve only transactions on the cards assigned to them.
 </dd>
 </dl>
 </dd>
@@ -6984,7 +6998,7 @@ await client.cards.list();
 <dl>
 <dd>
 
-Issue a virtual card, or apply for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
+Issues a virtual card, or applies for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
 </dd>
 </dl>
 </dd>
@@ -7047,7 +7061,7 @@ await client.cards.create();
 <dl>
 <dd>
 
-Retrieve a single card.
+Retrieves a single card, including its `secrets` (card number, CVC, and PIN), which List Cards does not return.
 </dd>
 </dl>
 </dd>
@@ -7112,7 +7126,7 @@ await client.cards.retrieve({
 <dl>
 <dd>
 
-Update, freeze, or cancel a card. Updating the card's name, billing address, or limits requires both `payout:account:update` and `company:balance:read`; a card's assigned holder may update their own card's pin and frozen state with any user token.
+Updates, freezes, or cancels a card. Updating the card's name, billing address, or limits requires both `payout:account:update` and `company:balance:read`; a card's assigned holder may update their own card's pin and frozen state with any user token.
 </dd>
 </dl>
 </dd>
@@ -7178,7 +7192,7 @@ await client.cards.update({
 <dl>
 <dd>
 
-Creates a future-dated card cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Merchant name and MCC are optional. Every supplied merchant filter must match. When both are omitted or null, scoped_account_id is required and all eligible transactions for that account match. Optionally limit the rule to one direct connected account. The funding account is derived from the credential and cannot be supplied. Creation does not transfer funds. Supports Idempotency-Key for safe retries.
+Creates a future-dated card cashback rule for your direct connected accounts, funded by the authenticated platform account. Creating a rule does not transfer funds; pay cashback out with `POST /cashback_rules/payout`. Requires `payout:transfer_funds`. Supports `Idempotency-Key` for safe retries.
 </dd>
 </dl>
 </dd>
@@ -7244,7 +7258,7 @@ await client.cashbackRules.create({
 <dl>
 <dd>
 
-Lists all cashback rules funded by the authenticated platform account. Includes scheduled, expired, and discarded rules. Requires payout:transfer:read. Account-scoped credentials are required; there is no caller-supplied funding-account filter.
+Lists the cashback rules funded by the authenticated platform account, including scheduled, expired, and discarded rules. Requires an account-scoped credential with `payout:transfer:read`.
 </dd>
 </dl>
 </dd>
@@ -7319,7 +7333,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Distributes cashback on demand from the authenticated platform's available USD balance to its direct connected accounts. Requires payout:transfer_funds. Optional filters combine; an empty body includes all eligible transactions. Only completed, unpaid transactions created before this request are considered. The latest matching rule wins; its funding account must be the authenticated platform. Amounts are calculated when processed. Returns status `processing` and echoes supplied filters when background processing is queued. Status `failed` with HTTP 200 means the queue rejected the request. This is not a payment confirmation. Failed transaction jobs retry automatically; insufficient funds requires adding USD to the funding wallet. Supports Idempotency-Key, and overlapping requests cannot pay the same card transaction twice.
+Pays out cashback on demand from the authenticated platform's available USD balance to its direct connected accounts. Covers completed, unpaid card transactions created before the request, each under its latest matching rule, which must be funded by the authenticated platform. Filters combine, and an empty body includes every eligible transaction. Payouts process in the background and amounts are calculated then, so the response confirms queuing, not payment. If a payout fails for insufficient funds, add USD to the platform's balance. Requires `payout:transfer_funds`. Supports `Idempotency-Key`, and overlapping requests cannot pay the same card transaction twice.
 </dd>
 </dl>
 </dd>
@@ -7382,7 +7396,7 @@ await client.cashbackRules.payout();
 <dl>
 <dd>
 
-Updates a cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Only merchant_name, merchant_category_code, description, and expires_at can change; starts_at, rate_bps, funding_account_id, and scoped_account_id are immutable. Omitted fields stay unchanged. Scheduled, active, and expired rules can be updated; discarded rules cannot. Updating a rule does not transfer funds.
+Updates the merchant filters, description, or expiration of a cashback rule funded by the authenticated platform account; its start, rate, and accounts can't change. Omitted fields stay unchanged. Scheduled, active, and expired rules can be updated, but discarded rules can't. Updating a rule does not transfer funds. Requires `payout:transfer_funds`.
 </dd>
 </dl>
 </dd>
@@ -7448,7 +7462,7 @@ await client.cashbackRules.update({
 <dl>
 <dd>
 
-Returns a paginated list of chat channels within a specific company, with optional filtering by product.
+Lists the chat channels in an account.
 
 Required permissions:
  - `chat:read`
@@ -7604,7 +7618,7 @@ await client.chatChannels.retrieve({
 <dl>
 <dd>
 
-Update moderation settings for a chat channel, such as who can post, banned words, and media restrictions.
+Updates a chat channel's moderation settings, such as who can post, banned words, and media restrictions.
 
 Required permissions:
  - `chat:moderate`
@@ -7752,7 +7766,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a reusable checkout configuration for an existing or inline variant.
+Creates a reusable checkout configuration for an existing or inline variant. Send customers to its `purchase_url` to check out.
 </dd>
 </dl>
 </dd>
@@ -7949,7 +7963,7 @@ await client.checkoutConfigurations.delete({
 <dl>
 <dd>
 
-Retrieves a funded claim link. IDs require `airdrop_link:basic:read` on the funding account, or the personal account's owner. Claim codes allow unauthenticated previews of the sender, amount, expiry, and claim availability. Treat codes as secrets: anyone holding one can claim after signing in. By ID, the code and URL require `airdrop_link:manage` on the funding company or `payout:withdraw_funds` on the personal account; read-only credentials receive null values.
+Retrieves a funded claim link by ID or by its public claim code. By ID, the caller needs `airdrop_link:basic:read` on the funding account, or must own the funding personal account; `code` and `claim_url` are `null` without `airdrop_link:manage` on the funding account or `payout:withdraw_funds` on the personal account. A claim code previews the sender, amount, expiry, and claim availability without authentication. Treat codes as secrets: anyone holding one can claim after signing in.
 </dd>
 </dl>
 </dd>
@@ -8014,7 +8028,7 @@ await client.claimLinks.retrieve({
 <dl>
 <dd>
 
-Claims a funded link into the authenticated user's personal balance and returns the updated link. Requires a signed-in user and the public claim code; company API keys cannot claim on a recipient's behalf. Each user can claim a link once. Reuse the same Idempotency-Key when retrying the same request. On-chain claims wait for the existing transfer workflow and may take several minutes.
+Claims a funded link into the authenticated user's personal balance and returns the updated link. Requires a signed-in user and the public claim code; account API keys cannot claim on a recipient's behalf. Each user can claim a link once. Reuse the same `Idempotency-Key` when retrying the same request. On-chain claims may take several minutes to complete.
 </dd>
 </dl>
 </dd>
@@ -8080,7 +8094,7 @@ await client.claimLinks.claim({
 <dl>
 <dd>
 
-Returns a paginated list of token transactions for a user or company, depending on the authenticated actor, with optional filtering by user and transaction type.
+Lists an account's token transactions, newest first.
 
 Required permissions:
  - `company_token_transaction:read`
@@ -8170,7 +8184,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a token transaction to add, subtract, or transfer tokens for a member within a company.
+Creates a token transaction that adds, subtracts, or transfers tokens for a member of an account.
 
 Required permissions:
  - `company_token_transaction:create`
@@ -8244,7 +8258,7 @@ await client.companyTokenTransactions.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing company token transaction.
+Retrieves a token transaction.
 
 Required permissions:
  - `company_token_transaction:read`
@@ -8315,7 +8329,7 @@ await client.companyTokenTransactions.retrieve({
 <dl>
 <dd>
 
-Retrieves a token's payment method and billing details — never the underlying payment credential. Public and rate-limited: the account_id query param must match the account the token was minted for. A bearer credential with payment:basic:read on that account also receives the collected billing address.
+Retrieves a confirmation token's payment method and billing details, never the underlying payment credential, to display what the buyer chose or check that the token is still usable. Requires no authentication and is rate-limited.
 </dd>
 </dl>
 </dd>
@@ -8742,7 +8756,7 @@ await client.courseChapters.update({
 <dl>
 <dd>
 
-Returns a paginated list of lesson interactions, filtered by lesson, course, user, or completion status.
+Returns a paginated list of lesson interactions for a lesson or course. Callers without admin access to the course's experience see only their own interactions.
 
 Required permissions:
  - `courses:read`
@@ -9620,7 +9634,7 @@ await client.courseStudents.retrieve({
 <dl>
 <dd>
 
-Returns a paginated list of courses, filtered by either an experience or a company.
+Returns a paginated list of the courses in an experience or an account. `hidden` courses are included only for callers with `courses:update`.
 
 Required permissions:
  - `courses:read`
@@ -9777,7 +9791,7 @@ await client.courses.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing course.
+Retrieves the details of an existing course. A `hidden` course is returned only to callers with `courses:update`.
 
 Required permissions:
  - `courses:read`
@@ -9982,7 +9996,7 @@ await client.courses.update({
 <dl>
 <dd>
 
-Retrieve the deposit methods for an account, including crypto and bank transfer. Bitcoin deposits are converted by Relay directly to USDT on Plasma in the destination account's wallet. Crypto deposits require a $10 minimum.
+Returns the deposit methods for an account or user, including crypto addresses, bank transfer instructions, and, for a business, a hosted deposit page. Bitcoin deposits are converted to USDT on Plasma in the destination's wallet. Business destinations require no authentication.
 </dd>
 </dl>
 </dd>
@@ -10392,7 +10406,7 @@ await client.disputes.retrieve({
 <dl>
 <dd>
 
-Edits a dispute's evidence, while it is still editable. Sending it is a separate call. `evidence.documents`, when provided, replaces the full set of documents beyond the four fixed evidence slots — see its own description.
+Edits a dispute's evidence while it is still editable. When the evidence is ready, send it to the payment processor with `POST /disputes/:id/submit`.
 </dd>
 </dl>
 </dd>
@@ -10522,7 +10536,7 @@ await client.disputes.submit({
 <dl>
 <dd>
 
-Prefer `PATCH /disputes/{id}` with `evidence.documents` — it does the same replace alongside every other evidence field in one call. Replaces the full set of uploaded evidence documents on a dispute, beyond the four fixed evidence slots. Upload files through `POST /files` and reference them by `id`, or send the files as multipart file parts to upload and attach in one call. Send every document the packet should carry — up to 10, 10MB each and 25MB in total; an empty list removes them all. Accepted content types: application/pdf, application/json, image/jpeg, image/png, image/webp — any other type is rejected. Policy documents (`return_policy`, `shipping_policy`, `cancellation_policy`, `terms_of_service`) default from the account's own documents; uploading one here replaces the account copy for this dispute, and a `cancellation_policy` or `return_policy` upload also takes precedence over the matching fixed evidence slot.
+Replaces the full set of uploaded evidence documents on a dispute, beyond the four fixed evidence slots. Prefer `PATCH /disputes/:id` with `evidence.documents`, which does the same replace alongside every other evidence field in one call.
 </dd>
 </dl>
 </dd>
@@ -10591,7 +10605,7 @@ await client.disputes.uploadEvidence({
 <dl>
 <dd>
 
-Returns a paginated list of DM channels for the currently authenticated user, sorted by most recently active.
+Lists the authenticated user's DM channels, most recently active first.
 
 Required permissions:
  - `dms:read`
@@ -10677,7 +10691,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new DM channel between two or more users, optionally scoped to a specific company. Returns the existing channel if one already exists.
+Creates a DM channel between two or more users, optionally scoped to an account. Returns the existing channel if one already exists.
 
 Required permissions:
  - `dms:channel:manage`
@@ -10814,7 +10828,7 @@ await client.dmChannels.retrieve({
 <dl>
 <dd>
 
-Permanently delete a DM channel and all of its messages. Only an admin of the channel can perform this action.
+Permanently deletes a DM channel and all of its messages. Only a channel admin can delete it.
 
 Required permissions (one of):
  - `dms:channel:manage`
@@ -10883,7 +10897,7 @@ await client.dmChannels.delete({
 <dl>
 <dd>
 
-Update the settings of an existing DM channel, such as its display name. Only an admin of the channel can perform this action.
+Updates a DM channel's settings, such as its display name. Only a channel admin can update it.
 
 Required permissions (one of):
  - `dms:channel:manage`
@@ -11733,7 +11747,7 @@ await client.domains.check({
 <dl>
 <dd>
 
-Lists an account's recommendations and generation requests, newest first by default. For callers with company:update permission, listing queues generation when no recommendations are ready or in progress, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read that has Economic Intelligence. An account's executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only while it is on. Visitor countries, page views, ad impressions and clicks, and payment volume for a time range come from `GET /stats/time_series/{metric}`.
+Lists an account's recommendations and generation requests, newest first by default. When no recommendations are ready or in progress and you have `company:update` permission, listing queues generation, with a ten-minute cooldown after an unsuccessful request; unsuccessful requests are not listed. An account's executed recommendations and runs stay listed after Economic Intelligence turns off, but new recommendations are offered only while it is on. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
 </dd>
 </dl>
 </dd>
@@ -11874,7 +11888,7 @@ await client.economicIntelligence.update({
 <dl>
 <dd>
 
-Lists identity-linked events, most recent first by default. Pass identifier for one person's journey, or omit it to list events for an account within an explicit time range. Pass direction=asc to read a journey forwards from where it starts. Events are shaped like the POST /events intake: attribution in context, identity in user.
+Lists identity-linked events, most recent first by default. Pass `identifier` for one person's journey, or omit it to list an account's events within a time range. Events have the same shape as the `POST /events` intake: attribution in `context`, identity in `user`.
 </dd>
 </dl>
 </dd>
@@ -11949,7 +11963,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Tracks a conversion or engagement event for an account.
+Tracks a conversion or engagement event for an account, such as a lead or a sign-up, so it can be attributed to the ads and links that drove it. Send server-side events with an API key that has `event:create`; the browser pixel calls this without authentication.
 </dd>
 </dl>
 </dd>
@@ -12015,7 +12029,7 @@ await client.events.create({
 <dl>
 <dd>
 
-Returns a fully anonymized feed of recent platform-wide money movement, most recent first: purchases, affiliate commissions, card and ad spend, app revenue, off-platform sales, wallet deposits, card loads, claimed drops, transfers between accounts, and referral bonuses. Items carry only a `type`, the underlying event name, a USD amount, a coarse location under `user`, and a timestamp coarsened to the start of the minute; missing fields are omitted, not nulled. The payload is identical for every caller; no auth is required.
+Returns a fully anonymized feed of recent money movement across Whop, most recent first, such as purchases, card spend, and transfers between accounts. Each item carries only its `type`, a USD amount, a coarse location, and a timestamp coarsened to the minute. The payload is identical for every caller and requires no authentication.
 </dd>
 </dl>
 </dd>
@@ -12090,7 +12104,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Checks whether the Whop pixel is installed for an account. Recent pixel events count as proof on their own, so an account that has sent data lately comes back installed without a `url`. Pass a `url` and events from that page settle it; conversion events are also read across the hostname because they commonly fire on a later confirmation page. If the requested page hasn't sent any events lately, it is fetched and read for the pixel and conversion events wired on it. `installed` is only true when the pixel was actually seen — in the account's events or in the page. `affiliate_tracking_detected` reports an affiliate tracking SDK found on the page. Supported platforms: Everflow.
+Checks whether the Whop pixel is installed for an account, or on one page when you pass a `url`. Use it before launching an ad to confirm its destination is tracked, or in a setup flow to tell a merchant whether their install is live.
 </dd>
 </dl>
 </dd>
@@ -12154,7 +12168,7 @@ await client.events.validatePixel();
 <dl>
 <dd>
 
-Returns a paginated list of experiences belonging to a company, with optional filtering by product and app.
+Lists the experiences in an account, optionally filtered to those attached to one product or powered by one app.
 </dd>
 </dl>
 </dd>
@@ -12244,6 +12258,8 @@ const response = page.response;
 
 <dl>
 <dd>
+
+Creates an experience for an account, powered by an app such as courses, forums, or chat. Attach it to a product with `POST /experiences/:id/attach` to give that product's customers access.
 
 Required permissions:
  - `experience:create`
@@ -12377,6 +12393,8 @@ await client.experiences.retrieve({
 <dl>
 <dd>
 
+Deletes an experience and detaches it from every product, removing customer access to it. Returns `true` on success.
+
 Required permissions:
  - `experience:delete`
 </dd>
@@ -12442,6 +12460,8 @@ await client.experiences.delete({
 
 <dl>
 <dd>
+
+Updates an experience's name, logo, visibility, or notification setting, or moves it to another section or position.
 
 Required permissions:
  - `experience:update`
@@ -12509,7 +12529,7 @@ await client.experiences.update({
 <dl>
 <dd>
 
-Attach an experience to a product, making it accessible to the product's customers.
+Attaches an experience to a product, giving the product's customers access to it.
 
 Required permissions:
  - `experience:attach`
@@ -12578,7 +12598,7 @@ await client.experiences.attach({
 <dl>
 <dd>
 
-Detach an experience from a product, removing customer access to it through that product.
+Detaches an experience from a product, removing customer access to it through that product.
 
 Required permissions:
  - `experience:detach`
@@ -12647,10 +12667,7 @@ await client.experiences.detach({
 <dl>
 <dd>
 
-Duplicates an existing experience. The name will be copied, unless provided. The new experience will be attached to the same products as the original experience.
-If duplicating a Forum or Chat experience, the new experience will have the same settings as the original experience, e.g. who can post, who can comment, etc.
-No content, e.g. posts, messages, lessons from within the original experience will be copied.
-
+Duplicates an experience and attaches the copy to the same products as the original. Forum and chat copies keep the original's settings, such as who can post or comment. No content, such as posts, messages, or lessons, is copied.
 
 Required permissions:
  - `experience:create`
@@ -12719,7 +12736,7 @@ await client.experiences.duplicate({
 <dl>
 <dd>
 
-Lists experiments for one account with experiment:read permission.
+Lists the experiments and feature flags owned by an account. Requires `experiment:read` on the account.
 </dd>
 </dl>
 </dd>
@@ -12794,7 +12811,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a draft experiment for the specified account.
+Creates an experiment or feature flag in `draft` status for an account. Nothing is served until you activate it with `POST /experiments/:id/activate`. Requires `experiment:manage` on the account.
 </dd>
 </dl>
 </dd>
@@ -12860,15 +12877,7 @@ await client.experiments.create({
 <dl>
 <dd>
 
-Evaluates and records an exposure without requiring authentication. When credentials resolve, their authentication method, API key ID, and signed-in user ID are recorded on the exposure event. Pass subject for bucketing identity and account_id for experiment ownership.
-
-Pass `flag_key` to check a single flag, or omit it to fetch active flags in the account and related resource scope.
-
-Assignments use exactly the configured `bucket_by`: `subject[user_id]`, `subject[account_id]`, or `subject[anonymous_id]`. Missing the required identity fails single evaluation and omits the experiment from batch evaluation. Subjects outside all treatment ranges receive control.
-
-Pass `subject[account_id]` to enable account-level targeting rules. Pass `properties` as a JSON object to supply the values that `property` targeting conditions match against.
-
-Pass `log_exposure=false` to read an assignment without recording an exposure, for a client that caches assignments up front and records the exposure when the arm is actually rendered. Omitted records the exposure, so pinned callers are unchanged.
+Evaluates experiments and feature flags for a subject and records an exposure. Pass `flag_key` to evaluate one flag, or omit it to evaluate every active flag in the account and related resource scope. Requires no authentication; when a credential resolves, its authentication method, API key ID, and signed-in user ID are recorded on the exposure event.
 </dd>
 </dl>
 </dd>
@@ -12931,7 +12940,7 @@ await client.experiments.exposures();
 <dl>
 <dd>
 
-Retrieves a single experiment or feature flag by its `expt_` id or flag_key handle. Requires the corresponding experiment permission on the owning account.
+Retrieves an experiment or feature flag by its `expt_` ID or `flag_key` handle. Requires `experiment:read` on the owning account.
 </dd>
 </dl>
 </dd>
@@ -12996,7 +13005,7 @@ await client.experiments.retrieve({
 <dl>
 <dd>
 
-Updates the targeting rules, treatment allocation, metrics, or hypothesis of an existing experiment or feature flag. Weights and metrics can only grow, so enrolled users never change arms and an existing metric is never dropped. Lifecycle moves through the transition endpoints (`activate`, `pause`, `end`), never through this update. Requires the corresponding experiment permission on the owning account.
+Updates the targeting rules, treatment allocation, or hypothesis of an existing experiment or feature flag. To change its lifecycle, use the `activate`, `pause`, and `end` endpoints instead. Requires `experiment:manage` on the owning account.
 </dd>
 </dl>
 </dd>
@@ -13061,7 +13070,7 @@ await client.experiments.update({
 <dl>
 <dd>
 
-Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires the corresponding experiment permission on the owning account.
+Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires `experiment:manage` on the owning account.
 </dd>
 </dl>
 </dd>
@@ -13126,7 +13135,7 @@ await client.experiments.activate({
 <dl>
 <dd>
 
-Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires experiment:manage on the account.
+Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires `experiment:manage` on the owning account.
 </dd>
 </dl>
 </dd>
@@ -13192,7 +13201,7 @@ await client.experiments.end({
 <dl>
 <dd>
 
-Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires the corresponding experiment permission on the owning account.
+Pauses an active experiment or feature flag: evaluation stops serving it and exposures stop flowing. Assignments are keyed on stable identity, so users return to their original arm when the experiment resumes. Requires `experiment:manage` on the owning account.
 </dd>
 </dl>
 </dd>
@@ -13321,7 +13330,7 @@ await client.exports.list();
 <dl>
 <dd>
 
-Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
+Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/:id` until `download_url` is set.
 </dd>
 </dl>
 </dd>
@@ -13592,7 +13601,7 @@ await client.externalAccounts.create({
 <dl>
 <dd>
 
-Starts an OAuth connection flow and returns an authorize_url where the user can connect an external account. LinkedIn supports personal profiles only, with scopes omitted. TikTok connects the authenticated user’s profile when scopes are omitted or company advertising assets with advertise. Meta Business and Snapchat support advertising connections only and require advertise. Personal profile connections must be completed in a browser signed in as the initiating Whop user.
+Starts an OAuth connection flow and returns an `authorize_url` to send the user to, where they connect an external account. Personal profile connections must be completed in a browser signed in as the Whop user who started the flow.
 </dd>
 </dl>
 </dd>
@@ -13789,7 +13798,7 @@ await client.externalAccounts.refresh({
 <dl>
 <dd>
 
-Returns a paginated list of fee markups configured for a company. If the company is a platform account, returns the platform default markups.
+Lists the fee markups configured for an account. For a platform account, returns the platform's default markups.
 
 Required permissions:
  - `company:update_child_fees`
@@ -13875,7 +13884,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create or update a fee markup for a company. If a markup for the specified fee type already exists, it will be updated with the new values.
+Creates or updates an account's markup for one fee type. If the account already has a markup for that `fee_type`, it is updated with the new values.
 
 Required permissions:
  - `company:update_child_fees`
@@ -13944,7 +13953,7 @@ await client.feeMarkups.create({
 <dl>
 <dd>
 
-Delete a fee markup configuration for a company. This removes the custom fee override and reverts to the parent company's default fees.
+Deletes a fee markup, removing the custom fee override so the account reverts to its parent account's default fees.
 
 Required permissions:
  - `company:update_child_fees`
@@ -14013,7 +14022,7 @@ await client.feeMarkups.delete({
 <dl>
 <dd>
 
-Submits an issue or an unanswered question to Whop for review, recorded under the authenticated user, account, or app. Returns a receipt once the submission is accepted; processing is asynchronous and no reply is sent. Accepts user, account, and app credentials.
+Submits an issue or an unanswered question to Whop for review, recorded under the authenticated user, account, or app. Returns a receipt once the submission is accepted; processing is asynchronous and no reply is sent.
 </dd>
 </dl>
 </dd>
@@ -14080,7 +14089,7 @@ await client.feedbackSubmissions.create({
 <dl>
 <dd>
 
-Returns the files with the given IDs, newest first — fetch a batch in one request instead of retrieving each file individually. Only files you created are returned; IDs that do not exist, or that another credential created, are omitted. A request for up to 100 IDs answers in a single page by default; a larger batch pages at up to 100 files per response — follow `page_info` with the same `file_ids` to walk the rest.
+Returns the files with the given IDs, newest first — fetch a batch in one request instead of retrieving each file individually. Only files you created are returned; IDs that do not exist, or that another credential created, are omitted. For a batch larger than one page, follow `page_info` with the same `file_ids` to walk the rest.
 </dd>
 </dl>
 </dd>
@@ -14577,7 +14586,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning. Pass experience_id 'public' with an account_id to post to an account's public forum.
+Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning.
 
 Required permissions:
  - `forum:post:create`
@@ -14779,7 +14788,7 @@ await client.forumPosts.update({
 <dl>
 <dd>
 
-Returns a paginated list of forums within a specific company, with optional filtering by product.
+Returns a paginated list of forums for an account, with optional filtering by product.
 
 Required permissions:
  - `forum:read`
@@ -15004,7 +15013,7 @@ await client.forums.update({
 <dl>
 <dd>
 
-Returns a paginated list of identity profiles. When account_id is provided, lists IPs currently linked to that account's ledger. When omitted, lists IPs linked to any ledger the actor can read (including child accounts under a parent).
+Lists the identity profiles currently linked to an account, or to every account you can read when `account_id` is omitted.
 
 Required permissions:
  - `identity:read`
@@ -15158,7 +15167,7 @@ await client.identityProfiles.retrieveIdentityProfile({
 <dl>
 <dd>
 
-Unlinks an IdentityProfile from a LedgerAccount (flips the matching link to is_current=false).
+Unlinks an identity profile from the account or user that owns `ledger_account_id`. Requires `identity:write` on that account or user.
 </dd>
 </dl>
 </dd>
@@ -15311,7 +15320,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Returns a paginated list of invoices for a company, with optional filtering by product, status, collection method, and creation date.
+Returns a paginated list of invoices for an account, with optional filtering by product, status, collection method, and creation date.
 
 Required permissions:
  - `invoice:basic:read`
@@ -15960,7 +15969,7 @@ await client.invoices.void({
 <dl>
 <dd>
 
-Returns a paginated list of leads for a company, with optional filtering by product and creation date.
+Lists an account's leads, newest first.
 
 Required permissions:
  - `lead:basic:read`
@@ -16053,7 +16062,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Record a new lead for a company, capturing a potential customer's interest in a specific product.
+Records a lead: a potential customer's interest in an account or one of its products.
 
 Required permissions:
  - `lead:manage`
@@ -16195,7 +16204,7 @@ await client.leads.retrieve({
 <dl>
 <dd>
 
-Update the metadata or referrer information on an existing lead record.
+Updates a lead's `metadata` or `referrer`.
 
 Required permissions:
  - `lead:manage`
@@ -16689,7 +16698,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Sends an email inviting one recipient to join the account through a free variant. Identify the recipient by exactly one of `user_id` or `email`. The invitation is bound to that recipient; after signing in, accepting it immediately grants the membership without checkout. This Experimental endpoint is available only to accounts enabled for membership invitations.
+Emails one recipient an invitation to a free variant's membership. The invitation is bound to that recipient; after signing in, accepting it immediately grants the membership without checkout. This Experimental endpoint is available only to accounts enabled for membership invitations.
 </dd>
 </dl>
 </dd>
@@ -16820,7 +16829,7 @@ await client.memberships.retrieve({
 <dl>
 <dd>
 
-Updates a membership: merge metadata key-value pairs, toggle `cancel_at_period_end` — `true` schedules the cancellation for the end of the current billing period, `false` reverses a pending one — or move future renewals to another of the customer's saved payment methods with `payment_method_id`, or set `billing_period_days` to change renewal cadence for an active, trialing, or past-due membership billed automatically by Whop. The current period end moves to the current period start plus the requested number of days, and future renewals use the same cadence. Invoice, externally billed, and canceling memberships are not supported.
+Updates a membership's metadata, scheduled cancellation, renewal payment method, or renewal cadence.
 </dd>
 </dl>
 </dd>
@@ -16886,7 +16895,7 @@ await client.memberships.update({
 <dl>
 <dd>
 
-Applies a promo code to an `active` or `trialing` membership that does not already have one and has exactly one recurring item. The discount lands on the next invoice and follows the code's duration (`once`, `repeating`, or `forever`). Works for Stripe-billed memberships and memberships billed by Whop's billing engine, including payment-element and multi-PSP renewals. Stock, plan eligibility, and expiry are still checked. Memberships with multiple recurring items are rejected.
+Applies a promo code to an `active` or `trialing` membership that does not already have one and has exactly one recurring item, for Stripe-billed memberships and memberships billed by Whop's billing engine. The discount lands on the next invoice and follows the code's duration (`once`, `repeating`, or `forever`).
 </dd>
 </dl>
 </dd>
@@ -16952,7 +16961,7 @@ await client.memberships.applyPromoCode({
 <dl>
 <dd>
 
-Assigns an affiliate to a membership and pays them the commission you set on its future payments. Name the user with exactly one of `user_id`, `email`, or `username`. A user who is not yet an affiliate of your account becomes one, which also requires `affiliate:create`. Send a new `commission_type` or `commission_value` for the membership's current affiliate to change their commission; a membership that already has a different affiliate returns a conflict. Works for active or trialing memberships with one recurring plan that bill through Stripe or Whop's billing engine, and not for marketplace memberships, paused payments, or a scheduled cancellation. The payout cannot exceed 90% of the next renewal amount, and no past payments are recalculated. You cannot assign yourself.
+Assigns an affiliate to a membership and pays them the commission you set on its future payments; past payments are not recalculated. A user who is not yet an affiliate of your account becomes one, which also requires `affiliate:create`. Send a new `commission_type` or `commission_value` for the membership's current affiliate to change their commission; a membership that already has a different affiliate returns a conflict. Works for active or trialing memberships with one recurring variant that bill through Stripe or Whop's billing engine, and not for marketplace memberships, paused payments, or a scheduled cancellation. You cannot assign yourself.
 </dd>
 </dl>
 </dd>
@@ -17020,7 +17029,7 @@ await client.memberships.assignAffiliate({
 <dl>
 <dd>
 
-Cancels a membership. Pass `cancel_at_period_end: true` to stop auto-renewal and keep access until the current billing period ends. Omit it (or pass `false`) to revoke access immediately. Buyers cannot cancel buy-now-pay-later (`splitit`, `sezzle`) or non-trial split-pay memberships.
+Cancels a membership, either immediately or at the end of the current billing period. Buyers cannot cancel buy-now-pay-later (`splitit`, `sezzle`) or non-trial split-pay memberships.
 </dd>
 </dl>
 </dd>
@@ -17216,7 +17225,7 @@ await client.memberships.pause({
 <dl>
 <dd>
 
-Restores access to a `canceled` or `expired` membership that contains only one-time purchases and sets its `status` to `completed`. Lifetime memberships regain lifetime access. For memberships with an expiration, `days` sets `current_period_end` that many days from now; without it the original `current_period_end` is kept, so `days` is required once that has passed. Active and recurring memberships cannot be reactivated.
+Restores access to a `canceled` or `expired` membership that contains only one-time purchases and sets its `status` to `completed`. Lifetime memberships regain lifetime access; for memberships with an expiration, `days` sets the new `current_period_end`. Active and recurring memberships cannot be reactivated.
 </dd>
 </dl>
 </dd>
@@ -17477,7 +17486,7 @@ await client.memberships.transfer({
 <dl>
 <dd>
 
-Returns a paginated list of messages within a specific experience chat, DM, or group chat channel, sorted by creation time.
+Lists messages in an experience chat, DM, or group chat channel, sorted by creation time.
 
 Required permissions (one of):
  - `chat:read`
@@ -17565,7 +17574,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Send a new message in an experience chat, DM, or group chat channel. Supports text content, attachments, polls, and replies.
+Sends a message in an experience chat, DM, or group chat channel. Supports text content, attachments, polls, and replies.
 
 Required permissions (one of):
  - `chat:message:create`
@@ -17708,7 +17717,7 @@ await client.messages.retrieve({
 <dl>
 <dd>
 
-Permanently delete a message from an experience chat, DM, or group chat channel. Only the message author or a channel admin can delete a message.
+Permanently deletes a message from an experience chat, DM, or group chat channel. Only the message author or a channel admin can delete a message.
 
 Required permissions (one of):
  - `chat:message:create` and `chat:read`
@@ -17779,7 +17788,7 @@ await client.messages.delete({
 <dl>
 <dd>
 
-Edit the content, attachments, or pinned status of an existing message in an experience chat, DM, or group chat channel.
+Edits the content, attachments, or pinned status of a message in an experience chat, DM, or group chat channel.
 
 Required permissions (one of):
  - `chat:message:create`
@@ -17851,7 +17860,7 @@ await client.messages.update({
 <dl>
 <dd>
 
-Lists the authenticated user's notifications, newest first. Requires a user credential — an account API key has no notification feed. Without filters the feed spans every experience the user belongs to plus the teams they are a member of. The `after` cursor is a notification `id` from a previous response; subsequent pages contain older notifications.
+Lists the authenticated user's notifications, newest first. Without filters the feed spans every experience the user belongs to plus the teams they are a member of. Requires a user credential — an account API key has no notification feed.
 </dd>
 </dl>
 </dd>
@@ -18057,7 +18066,7 @@ await client.notifications.badges({
 <dl>
 <dd>
 
-Marks the authenticated user's notifications as read: one experience's (`experience_id`) or everything (`all: true`) — exactly one of the two. Requires a user credential. Responds with the refreshed badge rows for the affected scope.
+Marks the authenticated user's notifications as read, for one experience or all of them, and returns the refreshed badge rows for that scope. Requires a user credential.
 </dd>
 </dl>
 </dd>
@@ -18120,7 +18129,7 @@ await client.notifications.markRead();
 <dl>
 <dd>
 
-Retrieves a single notification by id — either an `id` returned by List Notifications, or the ephemeral id delivered with a push/websocket event. Requires a user credential.
+Retrieves a single notification, from the feed or from a push or websocket event. Requires a user credential.
 </dd>
 </dl>
 </dd>
@@ -18261,7 +18270,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a referral link or sends a verified partner's attribution request to an existing business or user for approval. Whop sessions creating a link with their own active `authorized_user_id` enroll automatically. Manual requests always require a verified partner. Recipients do not need to join the partner program.
+Creates a referral link, or sends an attribution request to an existing business or user for approval. Links require an enrolled partner who is not suspended; attribution requests require an enrolled, verified partner. Recipients do not need to join the partner program.
 </dd>
 </dl>
 </dd>
@@ -18642,7 +18651,7 @@ await client.partners.create();
 <dl>
 <dd>
 
-Ranks referrers by partner business earnings — all-time by default, or over the current day, month, year, or trailing 30 days. Authentication is optional: authenticated callers also get their own standing, anonymous callers get the rankings alone.
+Ranks referrers by partner business earnings over the chosen `period`, all-time by default. Authentication is optional: authenticated callers also get their own standing, anonymous callers get the rankings alone.
 </dd>
 </dl>
 </dd>
@@ -18705,7 +18714,7 @@ await client.partners.leaderboard();
 <dl>
 <dd>
 
-Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals. Authorized staff can set user_id=global to list referrals across partners, with earnings for each user's current primary referrer.
+Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers.
 </dd>
 </dl>
 </dd>
@@ -18780,7 +18789,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the authenticated user's public profile, enrollment date, partner verification timestamp, verification waitlist status, partner certification completion, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Create and manage referral links through /partner_referral_requests.
+Retrieves the authenticated user's partner profile: enrollment and verification status, certification completion, active direct business referral count, and default payout rates. Other users' profiles are not accessible. To create and manage referral links, use `/partner_referral_requests`.
 </dd>
 </dl>
 </dd>
@@ -18846,7 +18855,7 @@ await client.partners.retrieve({
 <dl>
 <dd>
 
-Lists payment method domains. Without `account_id`, returns the caller's own domains and those of every connected account.
+Lists the payment method domains registered for your account and its connected accounts.
 </dd>
 </dl>
 </dd>
@@ -18921,7 +18930,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not — host the file, then retry with the verify endpoint.
+Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not: host the file, then retry with `POST /payment_method_domains/:id/verify`.
 </dd>
 </dl>
 </dd>
@@ -19182,7 +19191,7 @@ await client.paymentMethodDomains.verify({
 <dl>
 <dd>
 
-Returns a paginated list of payment methods for a member or company, or for the authenticated user when neither is given, with optional filtering by creation date. A payment method is a stored representation of how a customer intends to pay, such as a card, bank account, or digital wallet.
+Returns a paginated list of saved payment methods for a member or account, or for the authenticated user when you pass neither.
 
 Required permissions:
  - `member:payment_methods:read`
@@ -19274,7 +19283,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the details of an existing payment method. Addresses a member's wallet when member_id or account_id is given, otherwise your own.
+Retrieves a saved payment method from a member's wallet when you pass `member_id` or `account_id`, or from your own otherwise.
 
 Required permissions:
  - `member:payment_methods:read`
@@ -19415,7 +19424,7 @@ await client.paymentMethods.deletePaymentMethod({
 <dl>
 <dd>
 
-Prices a purchase the way a payment for it will be charged, for a buyer located by the shipping address, then the billing address, then the IP address you pass. The body is the `PaymentInput` a payment takes plus where the buyer is (`address`, `shipping_address`, `tax_ids`, `ip_address`); a seller that collects no tax on the purchase can be quoted without them. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Quote what you are about to charge and pass the quote's `id` as `quote_id` when you create the payment: it then charges exactly the purchase, promo code and tax shown here. A quote is priced once, in the plans' own currency or the `presentment_currency` you ask for, and may be consumed by one payment before `expires_at`.
+Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`.
 </dd>
 </dl>
 </dd>
@@ -19480,7 +19489,7 @@ await client.paymentQuotes.create({
 <dl>
 <dd>
 
-Retrieves a payment quote, including the payment holding it (`payment_id`, whose `status` says whether it collected) and when it expires.
+Retrieves a payment quote. Use it to check which payment holds the quote, through `payment_id`, and when it expires.
 </dd>
 </dl>
 </dd>
@@ -19537,6 +19546,20 @@ await client.paymentQuotes.retrieve({
 <details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.PaymentRule, Whop.ListPaymentRulesResponse&gt;</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the payment rules on an account.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -19598,6 +19621,20 @@ const response = page.response;
 <details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">create</a>({ ...params }) -> Whop.PaymentRule</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -19666,7 +19703,7 @@ await client.paymentRules.create({
 <dl>
 <dd>
 
-Small and returned in full on one page.
+Lists the payment attributes a rule condition can read, with the operators and values each one accepts. Small and returned in full on one page.
 </dd>
 </dl>
 </dd>
@@ -19712,6 +19749,20 @@ await client.paymentRules.listFields();
 <details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">retrieve</a>({ ...params }) -> Whop.PaymentRule</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a payment rule.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -19772,7 +19823,7 @@ await client.paymentRules.retrieve({
 <dl>
 <dd>
 
-The rule stops applying to new payments and is kept, so the payments it already decided still name it.
+Deletes a payment rule. It stops applying to new payments but is kept, so the payments it already decided still name it.
 </dd>
 </dl>
 </dd>
@@ -19837,7 +19888,7 @@ await client.paymentRules.delete({
 <dl>
 <dd>
 
-Changes the rule's name or metadata, keeping its ID and everything recorded against it. What the rule *does* is fixed once created, so the payments it decided keep naming the rule that decided them; use replace to change that.
+Updates a payment rule's name or metadata, keeping its ID and everything recorded against it. A rule's `action` and `conditions` are fixed once created, so the payments it decided keep naming the rule that decided them; use `POST /payment_rules/:id/replace` to change them.
 </dd>
 </dl>
 </dd>
@@ -19893,6 +19944,20 @@ await client.paymentRules.update({
 <details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">activate</a>({ ...params }) -> Whop.PaymentRule</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Activates an inactive payment rule so it applies to new payments again. A deleted rule cannot be activated.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -19953,7 +20018,7 @@ await client.paymentRules.activate({
 <dl>
 <dd>
 
-The rule stops applying to new payments. It keeps its ID and can be activated again.
+Deactivates a payment rule so it stops applying to new payments. It keeps its ID and can be activated again.
 </dd>
 </dl>
 </dd>
@@ -20018,7 +20083,7 @@ await client.paymentRules.deactivate({
 <dl>
 <dd>
 
-Deletes this rule and creates its successor in one step. The successor carries a new ID and the metadata of the rule it replaced,.
+Changes a payment rule's `action` and `conditions` by deleting it and creating its successor in one step. The successor has a new ID and keeps the replaced rule's name, metadata, and `active` or `inactive` status.
 </dd>
 </dl>
 </dd>
@@ -20092,7 +20157,7 @@ await client.paymentRules.replace({
 <dl>
 <dd>
 
-Lists payments, newest first. By default, returns account sales: a company credential's own account, or for a user every account they can read payments for. Set `mode=user_sales` to list only the sales received by the signed-in user's primary ledger account, without a company. This mode requires the user's own Whop login session and cannot be combined with `account_id`. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
+Lists payments, newest first. By default, returns sales for the accounts your credential can read: an account credential's own account, or every account a user can read payments for. Set `mode` to `user_sales` to list the sales the signed-in user received personally, outside any account.
 </dd>
 </dl>
 </dd>
@@ -20167,7 +20232,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charges a buyer for one or more variants. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `line_items` for one or more variants with quantities, `plan_id` for an existing variant, or the compatibility input `plan` to find or create one inline. These inputs are mutually exclusive.
+Charges a buyer for one or more variants with a payment method already on file (`member_id` and `payment_method_id`), or with a `confirmation_token` for a method the buyer just supplied. Collection runs in the background, so the response is the payment as created, not its outcome: poll Retrieve payment status for how far it has got and what the buyer must still do.
 </dd>
 </dl>
 </dd>
@@ -20297,7 +20362,7 @@ await client.payments.retrieve({
 <dl>
 <dd>
 
-Updates a payment's `shipping_address` or `return_url`. Send the complete `shipping_address`, because it replaces the existing address and any field you leave out is cleared.
+Updates a payment's `shipping_address` or `return_url`.
 </dd>
 </dl>
 </dd>
@@ -20557,7 +20622,7 @@ await client.payments.generatePdf({
 <dl>
 <dd>
 
-Issues a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
+Refunds all or part of a payment through the processor that charged it, and updates its membership to match. The buyer is emailed, the affiliate commission on the payment is clawed back, and any open Resolution Center case on the payment is closed.
 </dd>
 </dl>
 </dd>
@@ -20622,7 +20687,7 @@ await client.payments.refund({
 <dl>
 <dd>
 
-Retries a failed or pending payment. This re-attempts the charge using the original payment method and variant details.
+Charges an unpaid payment again with its original payment method and variant. A payment can typically be retried once, and only while its membership is active, trialing or past due, or when it is a membership's failed first payment.
 </dd>
 </dl>
 </dd>
@@ -21018,7 +21083,7 @@ await client.payoutAccounts.retrieve({
 <dl>
 <dd>
 
-Returns a list of active payout methods configured for a company, ordered by most recently created.
+Lists the active payout methods configured for an account, newest first.
 
 Required permissions:
  - `payout:destination:read`
@@ -21314,7 +21379,7 @@ await client.payouts.create({
 <dl>
 <dd>
 
-Creates a short-lived, provider-backed quote for a payout. No funds move until the returned quote_token is submitted to POST /payouts. An Idempotency-Key header is required.
+Creates a short-lived, provider-backed quote of a payout's fee, exchange rate, and destination amount. No funds move until you submit the returned `quote_token` to `POST /payouts`.
 </dd>
 </dl>
 </dd>
@@ -21380,7 +21445,7 @@ await client.payouts.createQuote({
 <dl>
 <dd>
 
-Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object. Authentication is optional. Anyone with the ID can view payout tracking details, including notes, trace code, exchange rate, and payout request ID. Accounting fields require payout:withdrawal:read on the owning ledger. A supplied invalid credential returns 401.
+Retrieves a payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id`. Authentication is optional: anyone with the ID can view tracking details, including notes, trace code, exchange rate, and payout request ID, while accounting fields require `payout:withdrawal:read` on the account or user that owns the payout. A supplied invalid credential returns 401.
 </dd>
 </dl>
 </dd>
@@ -21445,7 +21510,7 @@ await client.payouts.retrieve({
 <dl>
 <dd>
 
-Cancels a payout that is still in review and returns the funds, fees included, to the balance. A payout can be canceled while its status is `in_review`. A `requested` payout is still being prepared (its funds may be converting) and answers 409 until it reaches review; from `processing` on, the money is on its way and the answer is 409 with error type `not_cancelable`. Canceling a payout that is already canceled succeeds and returns it unchanged.
+Cancels a payout whose `status` is `in_review` and returns the funds, fees included, to the balance. A `requested` payout is still being prepared (its funds may be converting) and returns 409 until it reaches review; from `processing` on, the money is on its way and the response is 409 with error type `not_cancelable`. Canceling an already-canceled payout succeeds and returns it unchanged.
 </dd>
 </dl>
 </dd>
@@ -21511,7 +21576,7 @@ await client.payouts.cancel({
 <dl>
 <dd>
 
-Lists the people (visitors and customers) of an account: the identity-linked person profiles aggregated from every pixel, payment, and platform event — identities, purchases and LTV, geo/device profile, traffic sources, and first/last marketing touches.
+Lists the people (visitors and customers) of an account: identity-linked profiles assembled from every pixel, payment, and platform event. Filter and sort them to segment an account's audience.
 </dd>
 </dl>
 </dd>
@@ -21592,7 +21657,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves one person for an account. The identifier can be a person ID (prefixed `prsn_`), a user ID (prefixed `user_`), an email address, or a phone number — merged people resolve to the surviving profile.
+Retrieves one person for an account, looked up by person ID, user ID, email address, or phone number.
 </dd>
 </dl>
 </dd>
@@ -22205,7 +22270,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Returns a paginated list of products. Omit `account_id` to search the public marketplace.
+Lists an account's products, or searches the public marketplace when you omit `account_id`.
 </dd>
 </dl>
 </dd>
@@ -22351,7 +22416,7 @@ await client.products.create({
 <dl>
 <dd>
 
-Retrieves a product. Public — no credentials.
+Retrieves a product. Requires no authentication.
 </dd>
 </dl>
 </dd>
@@ -22677,7 +22742,7 @@ await client.products.unpublish({
 <dl>
 <dd>
 
-Lists promo codes for an account with cursor pagination, filters, and sorting.
+Lists an account's promo codes.
 </dd>
 </dl>
 </dd>
@@ -23399,7 +23464,7 @@ await client.reactions.delete({
 <dl>
 <dd>
 
-Lists refunds, newest first. Without filters this is every refund the caller can read; narrow it to one payment with `payment_id`, one account with `account_id`, or one buyer with `user_id`.
+Lists refunds the caller can read, newest first. Filter by payment, account, or buyer to narrow the results.
 </dd>
 </dl>
 </dd>
@@ -24283,7 +24348,7 @@ await client.resolutionCenterCases.withdraw({
 <dl>
 <dd>
 
-Returns a paginated list of customer reviews for a specific product, with optional filtering by star rating and creation date.
+Lists the customer reviews for a product.
 </dd>
 </dl>
 </dd>
@@ -24440,7 +24505,7 @@ await client.reviews.retrieve({
 <dl>
 <dd>
 
-Lists setup intents newest first. An account API key lists its own account; a user token lists every account it can read, or one account with `account_id`. `client_secret` is always null on list rows — retrieve the setup intent for it.
+Lists setup intents newest first. An account API key lists its own account; a user token lists every account it can read, or one account with `account_id`.
 </dd>
 </dl>
 </dd>
@@ -24515,7 +24580,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: it is `processing` while the payment method is saved in the background, and `requires_action` when the buyer still has a step. Hand `client_secret` to the elements' `handleNextAction`, or poll Retrieve setup status, for the outcome. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
+Saves a buyer's payment method for later without charging it — one the buyer just supplied through the payment elements in setup mode, or one already on file to re-verify. The setup completes in the background, so the response is the setup intent as created, not its outcome: hand `client_secret` to the elements' `handleNextAction`, or poll Retrieve setup status. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
 </dd>
 </dl>
 </dd>
@@ -24580,7 +24645,7 @@ await client.setupIntents.create({
 <dl>
 <dd>
 
-Returns one setup intent. Related records are ids — once `status` is `succeeded`, `payment_method_id` is the saved method to charge or retrieve. The buyer's own token may retrieve a setup intent that belongs to it.
+Retrieves a setup intent. Once its `status` is `succeeded`, charge the saved method by its `payment_method_id`. The buyer's own token may retrieve a setup intent that belongs to it.
 </dd>
 </dl>
 </dd>
@@ -24777,7 +24842,7 @@ await client.setupIntents.retrieveStatus({
 <dl>
 <dd>
 
-Returns a paginated list of shipments for an account.
+Lists an account's shipments.
 </dd>
 </dl>
 </dd>
@@ -24922,7 +24987,7 @@ await client.shipments.create({
 <dl>
 <dd>
 
-Retrieves a shipment by its id, or by the payment id it fulfills.
+Retrieves a shipment by its ID, or by the ID of the payment it fulfills.
 </dd>
 </dl>
 </dd>
@@ -25749,7 +25814,7 @@ await client.socialAccounts.refresh({
 <dl>
 <dd>
 
-Deprecated. Lists every metric, which no longer says which of them a projection accepts. List the ones you can chart with `GET /stats/time_series`. Aggregates that are not bucketed over time are reports, listed at `GET /stats/reports`.
+Deprecated. Lists every metric without saying which ones you can chart. List chartable metrics with `GET /stats/time_series`, and aggregates that are not bucketed over time with `GET /stats/reports`.
 </dd>
 </dl>
 </dd>
@@ -25875,7 +25940,7 @@ await client.stats.retrieve({
 <dl>
 <dd>
 
-Returns a paginated list of support channels for a specific company, with optional filtering by resolution status and custom sorting.
+Lists support channels between an account's team and its customers, most recently active first by default. Pass `open=true` to find channels awaiting a support response.
 
 Required permissions:
  - `support_chat:read`
@@ -25961,7 +26026,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Open a new support channel between a company team member and a customer. Returns the existing channel if one already exists for that user.
+Opens a support channel between an account's team and a customer. Returns the existing channel if that customer already has one.
 
 Required permissions:
  - `support_chat:create`
@@ -26099,7 +26164,7 @@ await client.supportChannels.retrieve({
 <dl>
 <dd>
 
-Retrieve the account's completed or pending swaps — currently just the latest one.
+Lists the completed or pending swaps for an account or user — currently only the most recent one.
 </dd>
 </dl>
 </dd>
@@ -26162,7 +26227,7 @@ await client.swaps.list();
 <dl>
 <dd>
 
-Swaps one token for another from the account's wallet, or converts between fiat currencies in the account's ledger at the mid-market rate. Crypto swaps finish in the background — check the swap for its status.
+Swaps one token for another in an account or user's wallet, or converts between their fiat balances at the mid-market rate. Crypto swaps finish in the background — retrieve the swap to follow its status.
 </dd>
 </dl>
 </dd>
@@ -26228,7 +26293,7 @@ await client.swaps.create({
 <dl>
 <dd>
 
-Previews the price of a swap. Fiat pairs quote the in-ledger mid-market conversion — the same rate creating the swap fills at. No funds move and nothing is saved.
+Previews the price of a swap before you create it. Fiat pairs quote the mid-market rate — the same rate creating the swap fills at. No funds move, nothing is saved, and no authentication is required.
 </dd>
 </dl>
 </dd>
@@ -26295,7 +26360,7 @@ await client.swaps.createQuote({
 <dl>
 <dd>
 
-Retrieves a single swap and its status.
+Retrieves a swap and its status. Poll it after creating a crypto swap, which finishes in the background.
 </dd>
 </dl>
 </dd>
@@ -26361,7 +26426,7 @@ await client.swaps.retrieve({
 <dl>
 <dd>
 
-Lists an account's team members, including pending invites (`status: "pending"`, `ausri_` ids; `user` is `null` for invites sent to an email with no Whop account yet). For accepted members, `email` requires the `company:authorized_user:email:read` scope and is `null` otherwise. A user credential with `company:basic:read` may list only its own joined membership by passing its own `user_id` and `status=joined`. Listing `role=workforce` is also allowed with the `bounty:create` scope.
+Lists an account's team members, including pending invites. A user credential with `company:basic:read` may list only its own joined membership by passing its own `user_id` and `status=joined`. Listing `role=workforce` is also allowed with the `bounty:create` scope.
 </dd>
 </dl>
 </dd>
@@ -26440,7 +26505,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Adds a member to an account's team with a system role. Identify them by exactly one of `user_id` or `email`. If the person has not yet accepted — or the email does not belong to a Whop account yet — an invitation is sent instead and the response is `202` with `{ "object": "team_member_invite", "invitation_sent": true }`. If they already have a pending invite, the request fails with a `400`. Custom roles cannot be granted via the API. Granting the `workforce` role is also allowed with the `bounty:create` scope.
+Adds a member to an account's team with a system role. Identify them by exactly one of `user_id` or `email`. If the person has not yet accepted — or the email does not belong to a Whop account yet — an invitation is sent instead and the response is `202` with an `object` of `team_member_invite`. If they already have a pending invite, the request fails with a `400`. Granting the `workforce` role is also allowed with the `bounty:create` scope.
 </dd>
 </dl>
 </dd>
@@ -26506,7 +26571,7 @@ await client.teamMembers.create({
 <dl>
 <dd>
 
-Retrieves a team member by ID. `email` requires the `company:authorized_user:email:read` scope and is `null` otherwise.
+Retrieves a team member or pending invite by ID.
 </dd>
 </dl>
 </dd>
@@ -26702,7 +26767,7 @@ await client.teamMembers.update({
 <dl>
 <dd>
 
-Add funds to a company's platform balance by charging a stored payment method. Top-ups have no fees or taxes and do not count as revenue.
+Add funds to an account's platform balance by charging a stored payment method. Top-ups have no fees or taxes and do not count as revenue.
 
 Required permissions:
  - `payment:charge`
@@ -26849,7 +26914,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a trade on the Whop-managed wallet of an account or user and answers `201` with the trade in `pending`. The trade runs in the background; read it with `GET /trades/{id}` until it is `completed`, `failed` or `in_review`. A `buy` bridges `amount` USDT0 to the trading account, sets `leverage` (cross) on `market`, and places one market buy. If the buy does not fill, its money goes back to the wallet. A `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. One trade runs at a time for each wallet. A retry with the same `Idempotency-Key` returns the same trade.
+Opens or closes a perpetual position from the Whop-managed wallet of an account or user. Answers `201` with the trade in `pending`; it runs in the background, so read it with `GET /trades/:id` until its `status` is `completed`, `failed` or `in_review`. One trade runs at a time for each wallet, and a retry with the same `Idempotency-Key` returns the same trade.
 </dd>
 </dl>
 </dd>
@@ -26982,7 +27047,7 @@ await client.trades.retrieve({
 <dl>
 <dd>
 
-Lists transfers visible to the caller. Optional account filters narrow the results.
+Lists the transfers you can see, sent or received, newest first by default. Optional account filters narrow the results.
 </dd>
 </dl>
 </dd>
@@ -27057,7 +27122,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Moves money between accounts, or into a claim link anyone with the URL can redeem.
+Moves money between Whop balances, sends USDT from an account's wallet, or funds a claim link anyone with the URL can redeem. The `type` you send decides which object comes back.
 </dd>
 </dl>
 </dd>
@@ -27126,7 +27191,7 @@ await client.transfers.create({
 <dl>
 <dd>
 
-Lists the people and accounts you can send money to.
+Lists the people and accounts you can send money to from a balance. Pass a result's ID as `destination_id` when creating a transfer.
 </dd>
 </dl>
 </dd>
@@ -27271,7 +27336,7 @@ await client.transfers.retrieve({
 <dl>
 <dd>
 
-Search for users by name or username, ranked by social proximity to the authenticated user. Returns the user's most recently followed users when no query is given.
+Searches for users by name or username, ranked by social proximity to the authenticated user. Without a `query`, returns the user's most recently followed users.
 </dd>
 </dl>
 </dd>
@@ -27346,7 +27411,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the authenticated user — the self view of the user object. Same shape as `GET /users/{id}`, with the self-only fields populated: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance`, `cards` and `earnings_usd` (balance-read scope), the opt-in `balance_history`, and every linked social account.
+Retrieves the authenticated user. Same as `GET /users/:id` with the reserved id `me`: the self view, where self-only fields such as `email`, `balance`, and `cards` can be populated.
 </dd>
 </dl>
 </dd>
@@ -27409,7 +27474,7 @@ await client.users.me();
 <dl>
 <dd>
 
-Updates the authenticated user's global profile, or their profile override for an account when account_id is given. Not available to API keys.
+Updates the authenticated user's global profile, or their profile override for an account when `account_id` is given. Not available to API keys.
 </dd>
 </dl>
 </dd>
@@ -27472,7 +27537,7 @@ await client.users.updateMe();
 <dl>
 <dd>
 
-Retrieves a user by `user_` tag or username, or the authenticated user with the reserved id `me`. Profiles include linked social accounts — reading your own profile returns every linked account, other profiles only what is public on Whop (the primary Discord and the X account). The self-only fields are populated only when the id is `me`: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance` and `earnings_usd` (balance-read scope), and the opt-in `balance_history`. They are always `null` when addressing a user by tag or username.
+Retrieves a user by `user_` tag or username, or the authenticated user with the reserved id `me`. Self-only fields such as `email`, `balance`, and `earnings_usd` are populated only when the id is `me`, and are always `null` when addressing a user by tag or username.
 </dd>
 </dl>
 </dd>
@@ -27537,7 +27602,7 @@ await client.users.retrieve({
 <dl>
 <dd>
 
-Updates a user, addressed by `user_` tag, username, or the reserved id `me` for the authenticated user. A user token updates their own global profile; an API key updates the user's account-specific profile override (account_id required).
+Updates a user, addressed by `user_` tag, username, or the reserved id `me` for the authenticated user. A user token updates their own global profile; an API key updates the user's profile override for the account in `account_id`.
 </dd>
 </dl>
 </dd>
@@ -27668,7 +27733,7 @@ await client.users.checkAccess({
 <dl>
 <dd>
 
-Lists the recommended actions computed for the user: personal suggestions (e.g. start a business or become an affiliate) pooled with the highest-impact actions across the accounts the user owns. Business actions are tagged with their `account_id`/`account_name`; personal actions leave those `null`. Self-only: `id` must be `me` or the authenticated user's own tag/username.
+Lists the recommended actions computed for the authenticated user: personal suggestions, such as starting a business or becoming an affiliate, pooled with the highest-impact actions across the accounts the user owns. You can only list your own recommended actions.
 </dd>
 </dl>
 </dd>
@@ -27734,7 +27799,7 @@ await client.users.recommendActions({
 <dl>
 <dd>
 
-Returns a paginated list of variants. Omit `account_id` and pass `product_ids` to list a product's public buyable variants.
+Lists an account's variants. To list a product's public, buyable variants without authentication, omit `account_id` and pass `product_ids`.
 </dd>
 </dl>
 </dd>
@@ -27825,7 +27890,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new pricing variant for a product. The variant defines the billing interval, price, and availability for customers.
+Creates a pricing variant for a product, defining the billing interval, price, and availability customers buy it with.
 </dd>
 </dl>
 </dd>
@@ -27888,7 +27953,7 @@ await client.variants.create();
 <dl>
 <dd>
 
-Retrieves the details of an existing variant.
+Retrieves a variant. Requires no authentication; fields that need a permission are `null` for callers without it.
 </dd>
 </dl>
 </dd>
@@ -27956,7 +28021,7 @@ await client.variants.retrieve({
 <dl>
 <dd>
 
-Delete a variant from a product. It stops selling immediately; existing memberships on this variant will not be affected.
+Deletes a variant from a product. It stops selling immediately; existing memberships on it are unaffected.
 </dd>
 </dl>
 </dd>
@@ -28021,7 +28086,7 @@ await client.variants.delete({
 <dl>
 <dd>
 
-Update a variant's pricing, billing interval, visibility, stock, and other settings.
+Updates a variant's pricing, billing interval, visibility, stock, and other settings.
 </dd>
 </dl>
 </dd>
@@ -28156,7 +28221,7 @@ await client.variants.calculateTax({
 <dl>
 <dd>
 
-Returns verifications for an account, including their status and any required actions.
+Lists the verifications for an account or user, including their status and any required actions.
 </dd>
 </dl>
 </dd>
@@ -28219,7 +28284,7 @@ await client.verifications.list();
 <dl>
 <dd>
 
-Starts a hosted verification session for an account or user, or returns the active session when one already exists. Any fields you include in the request body are used to prefill the session. Send `documents` (with `document_type`) to instead verify the person from identity documents included in this request — no hosted session involved. Send `share_token` to reuse a verification another Sumsub account has already completed for this person, instead of verifying them again. Send `verification_id` to reuse a verification the signed-in user already completed on Whop. Every mode except `verification_id` is rejected once the account has an `approved` verification — unlink it first to start a new one — while `verification_id` replaces whichever verification of that kind the account currently has.
+Starts a hosted verification session for an account or user, or returns the active session when one already exists; any fields you send prefill it. To skip the hosted session, send `documents` to verify the person from files in this request, `share_token` to reuse a verification another Sumsub account completed, or `verification_id` to reuse one the signed-in user completed on Whop. Once the account has an `approved` verification, every mode except `verification_id` is rejected — unlink it first to start a new one.
 </dd>
 </dl>
 </dd>
@@ -28286,7 +28351,7 @@ await client.verifications.create({
 <dl>
 <dd>
 
-Returns verifications for an account, including their status and any required actions.
+Retrieves a verification by ID, including its status and any information or documents still required.
 </dd>
 </dl>
 </dd>
@@ -28418,7 +28483,7 @@ await client.verifications.update({
 <dl>
 <dd>
 
-Lists visible waitlist signups. waitlist_entry:read grants the user's own signups; plan:waitlist:read grants signups for authorized seller accounts. With both permissions, returns their union. Account credentials are limited to their account. Filters narrow this set.
+Lists the waitlist signups you can see. `waitlist_entry:read` returns the user's own signups and `plan:waitlist:read` returns signups to the seller accounts they are authorized on; with both, you get both sets. Account credentials see only their own account's signups.
 </dd>
 </dl>
 </dd>
@@ -28493,7 +28558,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Joins a free waitlist variant as the authenticated user. Requires waitlist_entry:create. Repeated joins return the existing pending entry, or an approved entry with a valid membership. Paid variants are rejected; no payment method is collected and no membership is granted.
+Joins a free waitlist variant as the authenticated user. Requires `waitlist_entry:create`. Joining again returns the existing pending signup, or the approved one while its membership is valid. Paid variants are rejected; joining collects no payment method and grants no membership.
 </dd>
 </dl>
 </dd>
@@ -28558,7 +28623,7 @@ await client.waitlistEntries.create({
 <dl>
 <dd>
 
-Queues approval of every pending signup for an account, optionally narrowed to a variant. Requires plan:waitlist:manage. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
+Queues approval of every pending signup for an account, optionally narrowed to a variant. Requires `plan:waitlist:manage`. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
 </dd>
 </dl>
 </dd>
@@ -28623,7 +28688,7 @@ await client.waitlistEntries.approveAll({
 <dl>
 <dd>
 
-Retrieves a signup owned by the caller with waitlist_entry:read, or submitted to an account they can read with plan:waitlist:read.
+Retrieves a signup the caller owns, with `waitlist_entry:read`, or one submitted to an account they can read, with `plan:waitlist:read`.
 </dd>
 </dl>
 </dd>
@@ -28688,7 +28753,7 @@ await client.waitlistEntries.retrieve({
 <dl>
 <dd>
 
-Queues approval of a pending signup. Requires plan:waitlist:manage on its seller account. Paid signups may charge their saved payment method. Returns the signup's current state; retrieve it to read `status` and `approval_failure_reason` after processing.
+Queues approval of a pending signup. Requires `plan:waitlist:manage` on its seller account. Paid signups may charge their saved payment method. Returns the signup's current state; retrieve it to read `status` and `approval_failure_reason` after processing.
 </dd>
 </dl>
 </dd>
@@ -28753,7 +28818,7 @@ await client.waitlistEntries.approve({
 <dl>
 <dd>
 
-Withdraws the caller's pending personal signup. Requires waitlist_entry:cancel. Does not cancel an approved membership.
+Withdraws the caller's own pending signup. Requires `waitlist_entry:cancel`. Does not cancel an approved membership.
 </dd>
 </dl>
 </dd>
@@ -28818,7 +28883,7 @@ await client.waitlistEntries.cancel({
 <dl>
 <dd>
 
-Denies a pending signup. Requires plan:waitlist:manage on its seller account.
+Denies a pending signup. Requires `plan:waitlist:manage` on its seller account.
 </dd>
 </dl>
 </dd>
@@ -29089,7 +29154,7 @@ await client.webhooks.retrieve({
 <dl>
 <dd>
 
-Permanently deletes a webhook endpoint. Returns `true` on success, matching the legacy proxy response.
+Permanently deletes a webhook endpoint. To stop deliveries without deleting it, set `enabled` to `false` with `PATCH /webhooks/:id`.
 </dd>
 </dl>
 </dd>
@@ -29298,7 +29363,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Re-sends the exact payload of a past delivery to the webhook's current URL and returns the delivery result. By default the replay keeps the original `webhook-id`, so consumers that deduplicate on it can drop events they already processed. Pass `regenerate_id` to re-send under a freshly generated `webhook-id` instead, so a deduplicating consumer processes the replay as a new message. Only available for enabled webhooks on API version v1; deliveries are retained for 30 days.
+Re-sends the exact payload of a past delivery to the webhook's current URL and returns the delivery result. The replay keeps the original `webhook-id` unless you pass `regenerate_id`, so consumers that deduplicate on it can drop events they already processed. Only available for enabled webhooks on API version `v1`; deliveries are retained for 30 days.
 </dd>
 </dl>
 </dd>
@@ -29364,7 +29429,7 @@ await client.webhooks.replayDelivery({
 <dl>
 <dd>
 
-Re-sends the webhook's past deliveries within a time window, optionally limited to specific events or to messages whose most recent delivery attempt failed. Fire and forget: nothing about the replay is stored, and each re-send appears as a new entry in the webhook's delivery log. Each matching message is re-sent once, by default with its original `webhook-id`, so consumers that deduplicate are unaffected; pass `regenerate_ids` to re-send under freshly generated ids instead. Only available for enabled webhooks on API version v1; deliveries are retained for 30 days.
+Re-sends the webhook's past deliveries within a time window, optionally limited to specific events or to failed deliveries. Use it to recover events your endpoint missed. The replay runs asynchronously and nothing about it is stored: each re-send appears as a new entry in the webhook's delivery log. Each matching message is re-sent once, with its original `webhook-id` unless you pass `regenerate_ids`. Only available for enabled webhooks on API version `v1`; deliveries are retained for 30 days.
 </dd>
 </dl>
 </dd>
@@ -29497,7 +29562,7 @@ await client.webhooks.test({
 <dl>
 <dd>
 
-Retrieves the account's fees: a singleton document keyed by fee, with any markups its platform adds. Connected accounts see their effective rates, with covered payouts shown as zero; pricing provenance and comparisons are null without parent-account access. `adjustable` on each fee says what the caller may change.
+Retrieves the account's fees as a single document keyed by fee, with any markups its platform adds. Connected accounts see the rates in effect for them. `adjustable` on each fee says what you may change with Update Account Fees.
 </dd>
 </dl>
 </dd>
@@ -29562,7 +29627,7 @@ await client.accounts.fees.retrieve({
 <dl>
 <dd>
 
-Updates the account's fees. The response shows effective rates and hides pricing provenance and comparisons without parent-account access. Each key present in the body is replaced; omitted keys are left untouched. Only fees the document reports as `adjustable` can be changed.
+Updates the account's fees. Each key present in the body is replaced; omitted keys are left untouched. Only fees that Retrieve Account Fees reports as `adjustable` can be changed.
 </dd>
 </dl>
 </dd>
@@ -29628,7 +29693,7 @@ await client.accounts.fees.update({
 <dl>
 <dd>
 
-Lists payment-financing applications for the account in the URL. Account credentials can access their own account and direct sub-accounts, excluding deeper descendants. User credentials require the read permission on each account. Filters only narrow this visibility.
+Lists payment-financing applications for an account. Account credentials can list their own account and its direct connected accounts, but not deeper descendants; user credentials need read access to the account.
 </dd>
 </dl>
 </dd>
@@ -29707,7 +29772,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an application for merchant payment-financing approval. Requires an existing ledger account. Returns an existing application collecting information or awaiting review; applications awaiting review take precedence. Restricted industries cannot apply. Closed applications allow reapplication. This does not submit the application for review. Supports Idempotency-Key replay; open applications are also reused across different keys.
+Starts an application for payment-financing approval, or returns the account's open one: an application in `awaiting_review` takes precedence over one in `requires_collection`, and the open application is reused across different `Idempotency-Key` values. Creating an application does not submit it for review. The account must have a Whop balance set up, and accounts in restricted industries cannot apply. Once an application closes, the account can apply again.
 </dd>
 </dl>
 </dd>
@@ -29772,7 +29837,7 @@ await client.accounts.financingApplications.create({
 <dl>
 <dd>
 
-Retrieves a payment-financing application's review state, requirements, saved answers, documents, current terms, and public review feedback. Requires read access to its owning account. Internal review notes and risk metrics are not exposed.
+Retrieves a payment-financing application with its review state, requirements, saved answers, documents, current terms, and review feedback. Requires read access to the account that owns it.
 </dd>
 </dl>
 </dd>
@@ -29838,7 +29903,7 @@ await client.accounts.financingApplications.retrieve({
 <dl>
 <dd>
 
-Saves merchant answers while the application requires_collection. The entire batch is atomic. Omitted requirements and answer fields are unchanged; empty arrays clear values or documents, and null money clears a price. Only merchant requirement IDs returned by this application are accepted. Upload documents through the Files API first: new files must belong to the caller, be ready and private, and satisfy the requirement's formats and 20 MB limit. file_ids replaces the requirement's attachments. This does not submit the application.
+Saves merchant answers to an application in `requires_collection`. The batch is atomic: if any answer is rejected, none are saved. Omitted requirements and answer fields are left unchanged. Saving answers does not submit the application; call Submit Financing Application when it is complete.
 </dd>
 </dl>
 </dd>
@@ -29907,7 +29972,7 @@ await client.accounts.financingApplications.update({
 <dl>
 <dd>
 
-Submits a complete application for financing review. Present the application's terms.content, policies, and disclosure to the merchant and collect affirmative acceptance before calling this endpoint. Pass the terms.version that was presented; stale versions are rejected. The server records acceptance, submitting actor, and submission time before entering awaiting_review. Only requires_collection applications may submit, including after a reviewer requests more information. Resubmissions require acceptance again. Use Idempotency-Key for retries; submitting an application already in review without replay returns an error. Approval does not itself enable financing payment methods.
+Submits a complete application for financing review, recording the merchant's acceptance, who submitted, and when, then moving it to `awaiting_review`. Before calling, present the application's `terms.content`, policies, and disclosure to the merchant and collect affirmative acceptance; every resubmission needs acceptance again. Only an application in `requires_collection` can be submitted, including after a reviewer requests more information. Retry with the same `Idempotency-Key`: submitting an application already in review without a replay returns an error. Approval does not by itself enable financing payment methods.
 </dd>
 </dl>
 </dd>
@@ -31061,7 +31126,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Returns the top entities behind one high-level financial report bucket and an aggregate remainder.
+Breaks one bucket of a financial report, such as payments received or card spend, into the customers, accounts, merchants, or campaigns that contributed most, with the rest summed as a remainder. Use it to explain a total from `GET /financial_reports`.
 </dd>
 </dl>
 </dd>
@@ -31132,7 +31197,7 @@ await client.financialReports.breakdown.retrieve({
 <dl>
 <dd>
 
-Lists activity for a member and all of their non-drafted memberships, most recent first.
+Lists activity for a member and all of their memberships that are not `drafted`, most recent first.
 </dd>
 </dl>
 </dd>
@@ -31509,7 +31574,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charges a buyer for a variant from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and what the buyer must still do, such as 3D Secure.
+Charges a buyer for a variant from card details you hold yourself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, which tokenizes the card before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. Collection runs in the background, so the response is the payment as created, not its outcome: poll Retrieve payment status for how far it has got and what the buyer must still do, such as 3D Secure.
 </dd>
 </dl>
 </dd>
@@ -31661,7 +31726,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Saves a new place an account or user can pay out to. Sensitive details are vaulted in transit and never stored raw.
+Saves a bank account, wallet, or crypto address an account or user can pay out to, from a method listed by `GET /payouts/supported_methods`. Sensitive details are vaulted in transit and never stored raw.
 </dd>
 </dl>
 </dd>
@@ -31857,7 +31922,7 @@ await client.payouts.methods.update({
 <dl>
 <dd>
 
-Lists the payout methods an account or user is eligible to add.
+Lists the payout methods an account or user is eligible to add. Pass a result's ID as `supported_payout_method_id` to `POST /payouts/methods` to save one.
 </dd>
 </dl>
 </dd>
@@ -31933,7 +31998,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Saves a card for later charges from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) The setup runs in the background: poll Retrieve setup status for its outcome and for anything the buyer must still do, such as 3D Secure. Once it succeeds, the saved payment method arrives on the `setup_intent.succeeded` webhook and in List payment methods for the member.
+Saves a card for later charges from card details you hold yourself, for integrators whose own systems are PCI compliant. Send this operation to the vault host, which tokenizes the card before it reaches Whop; the official SDKs route it there, and raw card details sent to the regular host are refused. The setup runs in the background: poll Retrieve setup status for its outcome and for anything the buyer must still do, such as 3D Secure. Once it succeeds, the saved payment method arrives on the `setup_intent.succeeded` webhook and in List payment methods for the member.
 </dd>
 </dl>
 </dd>
@@ -32010,7 +32075,7 @@ await client.setupIntents.direct.create({
 <dl>
 <dd>
 
-Lists every report: the aggregates that are not bucketed over time. Each entry names the report's path, its window kind, the breakdowns it accepts and its columns. A property column is an attribute of the row and lists the breakdowns it can ride along with. A metric column is a number measured over the row, with the unit that sets its JSON type, the aggregate that says how to combine it across rows, and the breakdowns and windows it supports. For a bucketed series, use `GET /stats/time_series`.
+Lists every report: the aggregates that are not bucketed over time, with the breakdowns and columns each one accepts. Use it to discover what a report can return before you retrieve it. For a bucketed series, use `GET /stats/time_series`.
 </dd>
 </dl>
 </dd>
@@ -32065,7 +32130,7 @@ await client.stats.reports.list();
 <dl>
 <dd>
 
-Payments across all of Whop, for up to four windows at once. Break rows down by business type, industry type, account country or customer country, and let the business type ride along on industry type rows. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it. A breakdown value with fewer than three businesses behind it is left out, and a filtered total that small comes back with every metric `null`.
+Retrieves payments across all of Whop for up to four windows at once, optionally broken down by business type, industry type, account country or customer country. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it.
 </dd>
 </dl>
 </dd>
@@ -32184,7 +32249,7 @@ await client.stats.timeSeries.list();
 <dl>
 <dd>
 
-Retrieves a metric as a time series of points for an account or user over a time range. For an aggregate that is not bucketed over time, use a report from `GET /stats/reports`. The `market_prices` metric is public and requires no authentication. The `funnel` metric measures 2 to 10 ordered events per person. Its first matching event inside from/to anchors the cohort, breakdown and conversion window; later entries do not restart it. Intervening events are allowed, and conversions may occur after to. Funnel values are final conversion percentages; steps include counts and cumulative conversion percentages. Experiment funnels use experiment.exposure as step 1 and breakdown_by=variant. Pass steps using bracket parameters such as steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed.
+Retrieves a metric as a series of points over a time range for an account or user. For an aggregate that is not bucketed over time, use a report from `GET /stats/reports`. The `market_prices` metric is public and requires no authentication.
 </dd>
 </dl>
 </dd>
@@ -32255,7 +32320,7 @@ await client.stats.timeSeries.retrieve({
 <dl>
 <dd>
 
-Lists the authenticated user's own OAuth grants — one per app they have authorized, per account they authorized it for. The list is always the caller's own; there is no parameter for reading another user's grants. Requires a user session: an API key or an OAuth token is refused, so an app can never enumerate the other apps a user has authorized.
+Lists the authenticated user's own OAuth grants: one per app they have authorized, per account they authorized it for. You cannot read another user's grants. Requires a user session: an API key or an OAuth token is refused, so an app can never enumerate the other apps a user has authorized.
 </dd>
 </dl>
 </dd>
@@ -32330,7 +32395,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Completes the OAuth authorization step for the authenticated user: records their consent for the scopes an app asked for and mints the authorization code to hand back to it. Returns the grant, plus a `redirect_url` carrying that code — the one and only time it is returned. Exchange the code at `POST /oauth/token` with the verifier for `code_challenge`, or with the app's secret when a confidential app sent none. Requires a user session, because consent has to come from the account holder: an API key or an OAuth token is refused, so an app can never authorize itself. Send an `Idempotency-Key` to make a retry safe — a replay returns the original `redirect_url` and its code rather than issuing a second one.
+Completes the OAuth authorization step for the authenticated user: records their consent to the scopes an app asked for and mints an authorization code. Returns the grant plus a `redirect_url` carrying the code, which is returned only this once; the app exchanges it at `POST /oauth/token`. Requires a user session, because consent has to come from the account holder: an API key or an OAuth token is refused, so an app can never authorize itself. Send an `Idempotency-Key` so a retry returns the original `redirect_url` and code instead of issuing a second one.
 </dd>
 </dl>
 </dd>
@@ -32398,7 +32463,7 @@ await client.users.oauthGrants.create({
 <dl>
 <dd>
 
-Lists the authenticated user's own passkeys, newest first. The list is always the caller's own; there is no parameter for reading another user's passkeys. Requires a user session: an API key or an OAuth token is refused, because a passkey confirms the account holder before a sensitive action and no app may enumerate one.
+Lists the authenticated user's own passkeys, newest first. You cannot read another user's passkeys. Requires a user session: an API key or an OAuth token is refused, because a passkey confirms the account holder before a sensitive action and no app may enumerate one.
 </dd>
 </dl>
 </dd>
@@ -32675,7 +32740,7 @@ await client.users.passkeys.delete({
 <dl>
 <dd>
 
-Retrieves the authenticated user's settings document. Addressed only as `me` — the document always belongs to the session user.
+Retrieves the authenticated user's settings document.
 </dd>
 </dl>
 </dd>
@@ -32794,13 +32859,7 @@ await client.users.preferences.update();
 <dl>
 <dd>
 
-Sets the authenticated user's notification preferences. Each preference is addressed by `scope`, not by id, so a scope read back from either list endpoint can be sent straight here.
-
-A scope naming an experience with no topic sets that experience's level, and accepts all three levels. Any other scope sets a topic override, which is binary — `all` or `nothing`. A topic override with no `channel` applies to every delivery channel.
-
-`level: null` clears the preference. Preferences are stored as overrides, so clearing one means the scope inherits its default again rather than being switched off.
-
-The batch is applied in one transaction: if any entry is rejected, none are written. Experience levels are applied before topic overrides, because setting a level replaces every topic preference for that experience — so an override sent alongside a level wins. The response reports what each scope now resolves to, in the order the entries were sent.
+Sets the authenticated user's notification preferences, each addressed by `scope` rather than by ID. The batch is applied in one transaction: if any entry is rejected, none are written. Experience levels are applied before topic overrides, because setting a level replaces every topic preference for that experience, so an override sent alongside a level wins. The response reports what each scope now resolves to, in the order the entries were sent.
 </dd>
 </dl>
 </dd>
@@ -32944,7 +33003,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Lists the authenticated user's topic-scoped notification preferences, plus user-agnostic platform defaults. Each filter matches preferences scoped to its value or not narrowed on that dimension. Per-experience levels are listed separately, by `GET /users/me/preferences/notifications/experiences`.
+Lists the authenticated user's topic-scoped notification preferences, plus user-agnostic platform defaults. Per-experience levels are listed separately, by `GET /users/me/preferences/notifications/experiences`.
 </dd>
 </dl>
 </dd>

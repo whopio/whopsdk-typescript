@@ -250,7 +250,7 @@ export class PayoutsClient {
     }
 
     /**
-     * Creates a short-lived, provider-backed quote for a payout. No funds move until the returned quote_token is submitted to POST /payouts. An Idempotency-Key header is required.
+     * Creates a short-lived, provider-backed quote of a payout's fee, exchange rate, and destination amount. No funds move until you submit the returned `quote_token` to `POST /payouts`.
      *
      * @param {Whop.CreateQuotePayoutsRequest} request
      * @param {PayoutsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -335,7 +335,7 @@ export class PayoutsClient {
     }
 
     /**
-     * Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object. Authentication is optional. Anyone with the ID can view payout tracking details, including notes, trace code, exchange rate, and payout request ID. Accounting fields require payout:withdrawal:read on the owning ledger. A supplied invalid credential returns 401.
+     * Retrieves a payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id`. Authentication is optional: anyone with the ID can view tracking details, including notes, trace code, exchange rate, and payout request ID, while accounting fields require `payout:withdrawal:read` on the account or user that owns the payout. A supplied invalid credential returns 401.
      *
      * @param {Whop.RetrievePayoutsRequest} request
      * @param {PayoutsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -419,7 +419,7 @@ export class PayoutsClient {
     }
 
     /**
-     * Cancels a payout that is still in review and returns the funds, fees included, to the balance. A payout can be canceled while its status is `in_review`. A `requested` payout is still being prepared (its funds may be converting) and answers 409 until it reaches review; from `processing` on, the money is on its way and the answer is 409 with error type `not_cancelable`. Canceling a payout that is already canceled succeeds and returns it unchanged.
+     * Cancels a payout whose `status` is `in_review` and returns the funds, fees included, to the balance. A `requested` payout is still being prepared (its funds may be converting) and returns 409 until it reaches review; from `processing` on, the money is on its way and the response is 409 with error type `not_cancelable`. Canceling an already-canceled payout succeeds and returns it unchanged.
      *
      * @param {Whop.CancelPayoutsRequest} request
      * @param {PayoutsClient.RequestOptions} requestOptions - Request-specific configuration.

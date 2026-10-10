@@ -29,7 +29,7 @@ export class PromoCodesClient {
     }
 
     /**
-     * Lists promo codes for an account with cursor pagination, filters, and sorting.
+     * Lists an account's promo codes.
      *
      * @param {Whop.ListPromoCodesRequest} request
      * @param {PromoCodesClient.RequestOptions} requestOptions - Request-specific configuration.

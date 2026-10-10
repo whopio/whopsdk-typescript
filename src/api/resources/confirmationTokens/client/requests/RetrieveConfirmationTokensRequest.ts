@@ -10,6 +10,6 @@
 export interface RetrieveConfirmationTokensRequest {
     /** Confirmation token ID, prefixed `ctok_`. */
     id: string;
-    /** The account (biz_) the token was minted for. */
+    /** The account the token was minted for, prefixed `biz_`. It must match the token's account. */
     account_id: string;
 }
