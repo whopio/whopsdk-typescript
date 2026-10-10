@@ -77,6 +77,7 @@ export const WebhookEvent = {
     AdCampaignPaymentFailed: "ad_campaign.payment_failed",
     AdCampaignUpdated: "ad_campaign.updated",
     AdCampaignEvents: "ad_campaign.events",
+    AdGroupUpdated: "ad_group.updated",
     AdUpdated: "ad.updated",
     ChatMessageCreated: "chat.message.created",
     ChatReactionCreated: "chat.reaction.created",
