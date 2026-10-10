@@ -24,7 +24,7 @@ export interface CreateAdConversionValueRulesRequest {
     metadata?: Record<string, string>;
     /** Signed percent change from negative 100 to 10000. The sent value cannot go below zero. */
     percentage_change?: number | null;
-    /** Exact IDs of active rules whose overlapping selections will be replaced. Other selections keep their values; remaining selections may split into separate rules. Broader rules remain as fallbacks for other items. Stale or incomplete conflict selections fail. */
+    /** Exact IDs of active rules whose overlapping selections will be replaced. Other selections keep their values; remaining selections may split into separate rules. Broader rules remain as fallbacks for other items. Rules left with no selections are paused. Stale or incomplete conflict selections fail. */
     replace_rule_ids?: string[];
     /** Initial rule status. Defaults to active. */
     status?: CreateAdConversionValueRulesRequest.Status;
@@ -42,7 +42,7 @@ export namespace CreateAdConversionValueRulesRequest {
 
     export namespace Events {
         export interface Item {
-            /** Exact custom event name. Required for custom events; null for standard events. */
+            /** Exact custom event name. Required for custom events; `null` for standard events. Google does not support named custom events. */
             custom_name?: (string | null) | undefined;
             event_name: Item.EventName;
         }

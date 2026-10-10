@@ -21,6 +21,6 @@ export interface ListIdentityProfileRequest {
     last?: number;
     profile_type?: Whop.IdentityProfileKinds;
     status?: Whop.IdentityProfileStatuses;
-    /** The unique identifier of the company to filter to. When omitted, returns IPs across all ledgers the actor can read. */
+    /** Account to list identity profiles for, prefixed `biz_`. Omit to list profiles across every account you can read, including child accounts under a parent and, with a user credential, your own user. */
     account_id?: string;
 }

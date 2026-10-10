@@ -17,9 +17,9 @@ export declare namespace DepositsClient {
 }
 
 /**
- * Deposits describe ways to add funds to an account balance, including hosted deposit pages, bank deposit instructions, and supported crypto wallet addresses.
+ * Deposits describe the ways to add funds to an account or user balance: a hosted deposit page, bank transfer instructions, and crypto wallet addresses.
  *
- * Use the Deposits API to create deposit instructions for an account. Crypto deposits require a $10 minimum.
+ * Use the Deposits API to get deposit instructions for an account or user, such as a crypto address to send funds to or bank details for a transfer.
  */
 export class DepositsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<DepositsClient.Options>;
@@ -29,7 +29,7 @@ export class DepositsClient {
     }
 
     /**
-     * Retrieve the deposit methods for an account, including crypto and bank transfer. Bitcoin deposits are converted by Relay directly to USDT on Plasma in the destination account's wallet. Crypto deposits require a $10 minimum.
+     * Returns the deposit methods for an account or user, including crypto addresses, bank transfer instructions, and, for a business, a hosted deposit page. Bitcoin deposits are converted to USDT on Plasma in the destination's wallet. Business destinations require no authentication.
      *
      * @param {Whop.CreateDepositsRequest} request
      * @param {DepositsClient.RequestOptions} requestOptions - Request-specific configuration.

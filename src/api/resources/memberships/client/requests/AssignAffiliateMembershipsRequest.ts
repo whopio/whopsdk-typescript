@@ -22,7 +22,7 @@ export interface AssignAffiliateMembershipsRequest {
     id: string;
     /** Whether the commission is a percentage of each payment or a fixed amount per payment. */
     commission_type: AssignAffiliateMembershipsRequest.CommissionType;
-    /** A whole number from 1 to 90 for `percentage`, or an amount greater than 1 in the membership currency for `flat_fee`. Flat fees need matching billing and settlement currencies. */
+    /** A whole number from 1 to 90 for `percentage`, or an amount greater than 1 in the membership currency for `flat_fee`. The payout cannot exceed 90% of the next renewal amount. Flat fees need matching billing and settlement currencies. */
     commission_value: number;
     /** Email address of the user to assign. Pass exactly one of `user_id`, `email`, or `username`. */
     email?: string;

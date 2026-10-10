@@ -27,7 +27,7 @@ export namespace RetrieveTimeSeriesResponse {
                 steps?: Whop.FunnelStepResult[] | undefined;
                 /** Unix timestamp (seconds) of the period start. */
                 timestamp: number;
-                /** The metric's value for this period, in the metric's unit. */
+                /** The metric's value for this period, in the metric's unit. For `funnel`, the final-step conversion percentage. */
                 value: number | null;
             }
 

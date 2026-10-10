@@ -13,7 +13,7 @@ export interface SearchTargetingOptionsAdGroupsRequest {
     account_id?: string;
     /** The ad network whose targeting taxonomy to search. */
     platform: Whop.SearchTargetingOptionsAdGroupsRequestPlatform;
-    /** The search term. Blank browses the fixed lists; interests, work employers, job titles, schools, majors, and locations return nothing without one. */
+    /** The search term. Blank browses the small fixed lists (behaviors, browse demographic categories, and languages); interests, work employers, job titles, schools, majors, and locations return nothing without one. */
     query?: string;
     /** Kinds of targeting options to search. Defaults to all of them. */
     types?: Whop.SearchTargetingOptionsAdGroupsRequestTypesItem | Whop.SearchTargetingOptionsAdGroupsRequestTypesItem[];

@@ -23,7 +23,7 @@ export class ReviewsClient {
     }
 
     /**
-     * Returns a paginated list of customer reviews for a specific product, with optional filtering by star rating and creation date.
+     * Lists the customer reviews for a product.
      *
      * @param {Whop.ListReviewsRequest} request
      * @param {ReviewsClient.RequestOptions} requestOptions - Request-specific configuration.

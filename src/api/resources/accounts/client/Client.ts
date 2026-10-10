@@ -25,7 +25,7 @@ export declare namespace AccountsClient {
  *
  * Use the Accounts API to create accounts, list accounts visible to your credentials, retrieve or update an account, suspend or delete a connected account managed by your platform, and retrieve the account associated with the current API key.
  *
- * An account applies to accept financing payments through financing applications. A financing application requests review of a merchant account for payment financing, not a loan or business capital. Create, list, and retrieve applications for your account and its direct sub-accounts. Creating an application returns an existing open application when one is already collecting information or awaiting review.
+ * To accept payment-financing methods, an account applies through a financing application: a request to review the account for payment financing, not a loan or business capital. Create an application, save answers to its requirements, then submit it for review. You can manage applications for your own account and its direct connected accounts.
  */
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
@@ -55,7 +55,7 @@ export class AccountsClient {
     }
 
     /**
-     * Lists accounts visible to the credential. User tokens return the user's business accounts; Account API keys return the requesting account and its connected accounts. Pass `parent_account_id` to return only that parent account's connected accounts. Includes each account's `cards` application summary when the caller has `company:balance:read` access to that account.
+     * Lists accounts visible to the credential. User tokens return the user's business accounts; Account API keys return the requesting account and its connected accounts.
      *
      * @param {Whop.ListAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -338,7 +338,7 @@ export class AccountsClient {
     }
 
     /**
-     * Retrieves a single account by ID or public route when it is visible to the credential, including its crypto wallet. The reserved id `me` retrieves the account associated with the current Account API key; user tokens have no single account, so they must address one by ID or route.
+     * Retrieves an account visible to the credential by ID or public route, including its crypto wallet.
      *
      * @param {Whop.RetrieveAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -506,7 +506,7 @@ export class AccountsClient {
     }
 
     /**
-     * Updates an account. User tokens can update business accounts; Account API keys can update connected accounts. The reserved id `me` — accepted on Retrieve Account — resolves to the requesting account, which an Account API key cannot edit, so updates must name the connected account by its `biz_` id.
+     * Updates an account. User tokens can update business accounts; Account API keys can update connected accounts.
      *
      * @param {Whop.UpdateAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -591,7 +591,7 @@ export class AccountsClient {
     }
 
     /**
-     * Starts an LLC or C-Corp formation for a business account. Defaults to an LLC; set `entity_type` to `c_corp` to form a C-Corp, which additionally requires `share_structure` and officer `roles` on every founder. On submission, the application is validated and the response returns a hosted checkout URL. Once paid, the filing is submitted. Track progress through the account's [`company_formation`](/api-reference/beta/accounts/retrieve-account) field on Retrieve Account.
+     * Starts an LLC or C-Corp formation for a business account. The application is validated and the response returns a hosted checkout URL; once paid, the filing is submitted. Track progress through the account's [`company_formation`](/api-reference/beta/accounts/retrieve-account) field on Retrieve Account.
      *
      * @param {Whop.FormCompanyAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -721,7 +721,7 @@ export class AccountsClient {
     }
 
     /**
-     * Queues one background retry of the account's failed ads payments across its campaigns, using the account's configured ads payment methods. A queued response does not mean payment succeeded. Read campaign delivery_status and issues for the outcome. Successful settlement clears the payment block without changing configured active or paused status; legacy payment_failed status becomes paused. Another request while the account retry is queued or running returns an error asking you to wait.
+     * Queues one background retry of the account's failed ads payments across its campaigns, using the account's configured ads payment methods. A queued response does not mean payment succeeded; read each campaign's `delivery_status` and `issues` for the outcome. Successful settlement clears the payment block without changing a configured `active` or `paused` status; a legacy `payment_failed` status becomes `paused`. Returns an error when the account has no failed ads payments, or while a previous retry for the account is queued or running.
      *
      * @param {Whop.RetryAdsPaymentAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.

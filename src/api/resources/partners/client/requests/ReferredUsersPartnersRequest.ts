@@ -7,8 +7,6 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ReferredUsersPartnersRequest {
-    /** Set to global to view referred users across partners with each primary referrer's cached total earnings. Requires an admin or partner manager session; OAuth tokens and company API keys cannot use global mode. Optionally narrow to one earning_partner_id or earning_partner_username. */
-    user_id?: Whop.ReferredUsersPartnersRequestUserId;
     /** The selected referring partner's user_ ID. Requires user_id=global; cannot be combined with earning_partner_username. */
     earning_partner_id?: string;
     /** The selected referring partner's exact username. Requires user_id=global; cannot be combined with earning_partner_id. */

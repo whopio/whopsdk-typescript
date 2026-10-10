@@ -7,9 +7,9 @@ export interface AccountFee {
     adjustable: boolean;
     /** Which group of the fee schedule this fee belongs to, for grouping in a UI. */
     category: AccountFee.Category;
-    /** The platform rate before custom or inherited pricing is applied. */
+    /** The platform rate before custom or inherited pricing is applied. Its `percentage` and `fixed` are `null` when a connected account's fees are read without access to its parent account. */
     default: Whop.AccountFeeRate;
-    /** When a custom or inherited rate expires and the fee returns to `default`, as an ISO 8601 timestamp. `null` when the default applies or the rate does not expire. */
+    /** When a custom or inherited rate expires and the fee returns to `default`, as an ISO 8601 timestamp. `null` when the default applies, the rate does not expire, or a connected account's fees are read without access to its parent account. */
     ends_at: string | null;
     /** The amount charged per event in effect. `null` when the fee has no fixed component. */
     fixed: Whop.Money | null;
@@ -23,9 +23,9 @@ export interface AccountFee {
     region: AccountFee.Region | null;
     /** The rate, source, default, reset rate, and editable limits in every other region this fee varies by, keyed by region. Empty for a fee that does not vary by region. */
     regions: Record<string, Whop.AccountFeeRegionalRate>;
-    /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. */
+    /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. Its `percentage` and `fixed` are `null` when a connected account's fees are read without access to its parent account. */
     reset: Whop.AccountFeeRate;
-    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
+    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. `null` when a connected account's fees are read without access to its parent account. */
     source: AccountFee.Source | null;
     /** Why the caller may not change this fee, or `null` when `adjustable`. `not_permitted` when the caller has no say over it. */
     unadjustable_reason: AccountFee.UnadjustableReason | null;
@@ -63,7 +63,7 @@ export namespace AccountFee {
         My: "my",
     } as const;
     export type Region = (typeof Region)[keyof typeof Region];
-    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
+    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. `null` when a connected account's fees are read without access to its parent account. */
     export const Source = {
         Default: "default",
         Custom: "custom",

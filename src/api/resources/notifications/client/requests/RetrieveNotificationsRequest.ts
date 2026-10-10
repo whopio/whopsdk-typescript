@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveNotificationsRequest {
-    /** A notification `id` from List Notifications, or the id delivered with a push/websocket event. */
+    /** A notification `id` from List Notifications, or the ephemeral id delivered with a push or websocket event. */
     id: string;
 }

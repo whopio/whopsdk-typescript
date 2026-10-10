@@ -9,13 +9,13 @@
 export interface SubmitBountySubmissionsRequest {
     /** The claimed attempt to submit for review (`btys_` tag). */
     id: string;
-    /** Work to attach to the submission. Combine `urls`, `file_ids`, and `caption` freely; all are optional. */
+    /** Work to attach to a livestream attempt. Combine `urls`, `file_ids`, and `caption` freely; all are optional. If the attempt already went to review when its stream ended, the deliverable attaches to it once, until reviewers start voting. Data capture attempts take no deliverable. */
     deliverable?: SubmitBountySubmissionsRequest.Deliverable | null;
 }
 
 export namespace SubmitBountySubmissionsRequest {
     /**
-     * Work to attach to the submission. Combine `urls`, `file_ids`, and `caption` freely; all are optional.
+     * Work to attach to a livestream attempt. Combine `urls`, `file_ids`, and `caption` freely; all are optional. If the attempt already went to review when its stream ended, the deliverable attaches to it once, until reviewers start voting. Data capture attempts take no deliverable.
      */
     export interface Deliverable {
         /** Written context shown to reviewers alongside the work. */

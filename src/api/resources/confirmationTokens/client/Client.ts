@@ -16,7 +16,7 @@ export declare namespace ConfirmationTokensClient {
 }
 
 /**
- * A Confirmation Token is a single-use, short-lived reference to a payment method and billing details collected from a buyer. Its response never returns the underlying payment credential. Public callers receive a billing preview; bearer-authenticated callers with `payment:basic:read` on the token’s account also receive the collected billing address.
+ * A Confirmation Token is a single-use, short-lived reference to a payment method and billing details collected from a buyer. Its response never returns the underlying payment credential.
  *
  * Whop Elements mint the token in your buyer-facing collection flow and hand you its `ctok_` ID to send to the Payments API from your server. Retrieve a token to display its payment method and billing preview or check whether it is still usable.
  */
@@ -28,7 +28,7 @@ export class ConfirmationTokensClient {
     }
 
     /**
-     * Retrieves a token's payment method and billing details — never the underlying payment credential. Public and rate-limited: the account_id query param must match the account the token was minted for. A bearer credential with payment:basic:read on that account also receives the collected billing address.
+     * Retrieves a confirmation token's payment method and billing details, never the underlying payment credential, to display what the buyer chose or check that the token is still usable. Requires no authentication and is rate-limited.
      *
      * @param {Whop.RetrieveConfirmationTokensRequest} request
      * @param {ConfirmationTokensClient.RequestOptions} requestOptions - Request-specific configuration.

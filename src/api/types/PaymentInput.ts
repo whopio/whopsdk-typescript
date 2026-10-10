@@ -6,7 +6,7 @@
 export interface PaymentInput {
     /** The account the purchase belongs to, prefixed `biz_`. */
     account_id: string;
-    /** What the buyer is purchasing. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
+    /** What the buyer is purchasing. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. Mutually exclusive with `plan_id` and `plan`. */
     line_items?: PaymentInput.LineItems.Item[] | undefined;
     /** The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
     plan?: PaymentInput.Plan | undefined;

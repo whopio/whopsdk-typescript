@@ -17,9 +17,9 @@ export declare namespace TransfersClient {
 }
 
 /**
- * Transfers move value between identities on Whop. They are used for account-to-account money movement, user payouts inside Whop, crypto transfers, and claim links depending on the destination type.
+ * A Transfer moves money between Whop balances: from one account or user to another, from an account's wallet to a person or address, or into a claim link anyone with the URL can redeem.
  *
- * Use the Transfers API to create a transfer, list previous transfers, and retrieve a transfer by ID when reconciling money movement between accounts or users.
+ * Use the Transfers API to send money, find recipients you can pay, list and retrieve transfers when reconciling money movement, and preview or redeem claim links.
  *
  * Subscribe to `transfer.completed` and `transfer.failed` for outcomes instead of polling. Each participating account can subscribe to these events. `transfer.created` is also emitted on success, not when processing starts. A failed transfer can be retried under the same ID and later succeed; retrieve the transfer to reconcile its current status.
  *
@@ -33,7 +33,7 @@ export class TransfersClient {
     }
 
     /**
-     * Lists transfers visible to the caller. Optional account filters narrow the results.
+     * Lists the transfers you can see, sent or received, newest first by default. Optional account filters narrow the results.
      *
      * @param {Whop.ListTransfersRequest} request
      * @param {TransfersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -135,7 +135,7 @@ export class TransfersClient {
     }
 
     /**
-     * Moves money between accounts, or into a claim link anyone with the URL can redeem.
+     * Moves money between Whop balances, sends USDT from an account's wallet, or funds a claim link anyone with the URL can redeem. The `type` you send decides which object comes back.
      *
      * @param {Whop.CreateTransfersRequestBody} request
      * @param {TransfersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -223,7 +223,7 @@ export class TransfersClient {
     }
 
     /**
-     * Lists the people and accounts you can send money to.
+     * Lists the people and accounts you can send money to from a balance. Pass a result's ID as `destination_id` when creating a transfer.
      *
      * @param {Whop.ListRecipientsTransfersRequest} request
      * @param {TransfersClient.RequestOptions} requestOptions - Request-specific configuration.

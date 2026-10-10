@@ -7,6 +7,6 @@
  *     }
  */
 export interface PauseAdConversionValueRulesRequest {
-    /** Conversion value rule ID. */
+    /** Conversion value rule ID, prefixed `adcvr_`. */
     id: string;
 }

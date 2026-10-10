@@ -29,6 +29,8 @@ export class PaymentRulesClient {
     }
 
     /**
+     * Lists the payment rules on an account.
+     *
      * @param {Whop.ListPaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -128,6 +130,8 @@ export class PaymentRulesClient {
     }
 
     /**
+     * Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`.
+     *
      * @param {Whop.CreatePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -215,7 +219,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * Small and returned in full on one page.
+     * Lists the payment attributes a rule condition can read, with the operators and values each one accepts. Small and returned in full on one page.
      *
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -276,6 +280,8 @@ export class PaymentRulesClient {
     }
 
     /**
+     * Retrieves a payment rule.
+     *
      * @param {Whop.RetrievePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -347,7 +353,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * The rule stops applying to new payments and is kept, so the payments it already decided still name it.
+     * Deletes a payment rule. It stops applying to new payments but is kept, so the payments it already decided still name it.
      *
      * @param {Whop.DeletePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -414,7 +420,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * Changes the rule's name or metadata, keeping its ID and everything recorded against it. What the rule *does* is fixed once created, so the payments it decided keep naming the rule that decided them; use replace to change that.
+     * Updates a payment rule's name or metadata, keeping its ID and everything recorded against it. A rule's `action` and `conditions` are fixed once created, so the payments it decided keep naming the rule that decided them; use `POST /payment_rules/:id/replace` to change them.
      *
      * @param {Whop.UpdatePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -484,6 +490,8 @@ export class PaymentRulesClient {
     }
 
     /**
+     * Activates an inactive payment rule so it applies to new payments again. A deleted rule cannot be activated.
+     *
      * @param {Whop.ActivatePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -555,7 +563,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * The rule stops applying to new payments. It keeps its ID and can be activated again.
+     * Deactivates a payment rule so it stops applying to new payments. It keeps its ID and can be activated again.
      *
      * @param {Whop.DeactivatePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -633,7 +641,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * Deletes this rule and creates its successor in one step. The successor carries a new ID and the metadata of the rule it replaced,.
+     * Changes a payment rule's `action` and `conditions` by deleting it and creating its successor in one step. The successor has a new ID and keeps the replaced rule's name, metadata, and `active` or `inactive` status.
      *
      * @param {Whop.ReplacePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.

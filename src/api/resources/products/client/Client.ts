@@ -29,7 +29,7 @@ export class ProductsClient {
     }
 
     /**
-     * Returns a paginated list of products. Omit `account_id` to search the public marketplace.
+     * Lists an account's products, or searches the public marketplace when you omit `account_id`.
      *
      * @param {Whop.ListProductsRequest} request
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -239,7 +239,7 @@ export class ProductsClient {
     }
 
     /**
-     * Retrieves a product. Public — no credentials.
+     * Retrieves a product. Requires no authentication.
      *
      * @param {Whop.RetrieveProductsRequest} request
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -23,7 +23,7 @@ export class BreakdownClient {
     }
 
     /**
-     * Returns the top entities behind one high-level financial report bucket and an aggregate remainder.
+     * Breaks one bucket of a financial report, such as payments received or card spend, into the customers, accounts, merchants, or campaigns that contributed most, with the rest summed as a remainder. Use it to explain a total from `GET /financial_reports`.
      *
      * @param {Whop.financialReports.RetrieveBreakdownRequest} request
      * @param {BreakdownClient.RequestOptions} requestOptions - Request-specific configuration.

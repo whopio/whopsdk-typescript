@@ -227,7 +227,7 @@ export class AdGroupsClient {
     }
 
     /**
-     * Estimates how many people a draft targeting spec can reach, before an ad group is created. The body takes the same targeting fields as creating an ad group — `regions`, `demographics`, `detailed_targeting`, `audiences`, `languages`, and `devices` — and nothing is persisted.
+     * Estimates how many people a draft targeting spec can reach, before an ad group is created. The body takes the same targeting fields as creating an ad group, and nothing is persisted.
      *
      * @param {Whop.EstimateReachAdGroupsRequest} request
      * @param {AdGroupsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -311,7 +311,7 @@ export class AdGroupsClient {
     }
 
     /**
-     * Searches the ad platform's targeting taxonomy for options to target an ad group with. Each result comes back in the exact shape the ad-group body accepts for its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages` as-is. A blank `query` browses the small fixed lists (behaviors, browse demographic categories, languages); interests, work employers, job titles, schools, majors, and locations need a search term.
+     * Searches the ad platform's targeting taxonomy for options to target an ad group with. Each result comes back in the exact shape the ad-group body accepts for its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages` as-is.
      *
      * @param {Whop.SearchTargetingOptionsAdGroupsRequest} request
      * @param {AdGroupsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -424,7 +424,7 @@ export class AdGroupsClient {
     }
 
     /**
-     * Retrieves a single ad group.
+     * Retrieves an ad group, with performance stats for the window set by `stats_from` and `stats_to`.
      *
      * @param {Whop.RetrieveAdGroupsRequest} request
      * @param {AdGroupsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -513,7 +513,7 @@ export class AdGroupsClient {
     }
 
     /**
-     * Deletes an ad group.
+     * Deletes an ad group, removing it from the ad platform so it stops delivering.
      *
      * @param {Whop.DeleteAdGroupsRequest} request
      * @param {AdGroupsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -663,7 +663,7 @@ export class AdGroupsClient {
     }
 
     /**
-     * Creates copies of the ad group in `duplicating` status and returns them — into its own campaign, or into target_ad_campaign_id (which must belong to the same account and be compatible with the ad group's targeting and goals); each copy transitions to its final status (matching the source's active/paused state) once duplication completes. Poll each returned ad group until it leaves `duplicating` — a copy that could not be completed is deleted and returns 404.
+     * Starts copying an ad group and returns the copies in `duplicating` status. Poll each returned ad group until it leaves `duplicating`: it then takes the source's `active` or `paused` status, or, if the copy could not be completed, is deleted and returns 404.
      *
      * @param {Whop.DuplicateAdGroupsRequest} request
      * @param {AdGroupsClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -7,7 +7,7 @@
  *     }
  */
 export interface UpdateAccountsRequest {
-    /** Account ID, prefixed `biz_`. */
+    /** Account ID, prefixed `biz_`. The reserved id `me` resolves to the requesting account, which an Account API key cannot edit. */
     id: string;
     /** Whether prospective affiliates must submit an application before promoting this account. */
     affiliate_application_required?: boolean;

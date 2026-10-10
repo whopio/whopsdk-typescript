@@ -24,7 +24,7 @@ export class FeeMarkupsClient {
     }
 
     /**
-     * Returns a paginated list of fee markups configured for a company. If the company is a platform account, returns the platform default markups.
+     * Lists the fee markups configured for an account. For a platform account, returns the platform's default markups.
      *
      * Required permissions:
      *  - `company:update_child_fees`
@@ -144,7 +144,7 @@ export class FeeMarkupsClient {
     }
 
     /**
-     * Create or update a fee markup for a company. If a markup for the specified fee type already exists, it will be updated with the new values.
+     * Creates or updates an account's markup for one fee type. If the account already has a markup for that `fee_type`, it is updated with the new values.
      *
      * Required permissions:
      *  - `company:update_child_fees`
@@ -241,7 +241,7 @@ export class FeeMarkupsClient {
     }
 
     /**
-     * Delete a fee markup configuration for a company. This removes the custom fee override and reverts to the parent company's default fees.
+     * Deletes a fee markup, removing the custom fee override so the account reverts to its parent account's default fees.
      *
      * Required permissions:
      *  - `company:update_child_fees`

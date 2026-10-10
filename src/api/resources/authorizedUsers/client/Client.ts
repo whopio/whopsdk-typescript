@@ -24,7 +24,7 @@ export class AuthorizedUsersClient {
     }
 
     /**
-     * Returns a paginated list of authorized team members for a company, with optional filtering by user, role, and creation date.
+     * Lists the authorized users on an account's team.
      *
      * Required permissions:
      *  - `company:authorized_user:read`
@@ -167,7 +167,7 @@ export class AuthorizedUsersClient {
     }
 
     /**
-     * Add a new authorized user to a company.
+     * Adds a user to an account's team as an authorized user with the given role.
      *
      * Required permissions:
      *  - `authorized_user:create`
@@ -361,7 +361,7 @@ export class AuthorizedUsersClient {
     }
 
     /**
-     * Remove an authorized user from a company.
+     * Removes an authorized user from an account's team.
      *
      * Required permissions:
      *  - `authorized_user:delete`

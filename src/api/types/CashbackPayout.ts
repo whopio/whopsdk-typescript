@@ -5,14 +5,14 @@ export interface CashbackPayout {
     account_id?: (string | null) | undefined;
     /** Cashback rule filter from the request, prefixed `cicbr_`. Omitted when not supplied. */
     cashback_rule_id?: (string | null) | undefined;
-    /** Request status. `processing` means background processing was queued, not that payment completed. `failed` means the queue rejected the request. Subsequent transaction failures retry automatically. */
+    /** Request status. `processing` means background processing was queued, not that payment completed. `failed`, returned with HTTP `200`, means the queue rejected the request. Subsequent transaction failures retry automatically. */
     status: CashbackPayout.Status;
     /** Card transaction filter from the request, prefixed `citx_`. Omitted when not supplied. */
     transaction_id?: (string | null) | undefined;
 }
 
 export namespace CashbackPayout {
-    /** Request status. `processing` means background processing was queued, not that payment completed. `failed` means the queue rejected the request. Subsequent transaction failures retry automatically. */
+    /** Request status. `processing` means background processing was queued, not that payment completed. `failed`, returned with HTTP `200`, means the queue rejected the request. Subsequent transaction failures retry automatically. */
     export const Status = {
         Processing: "processing",
         Failed: "failed",

@@ -28,7 +28,7 @@ export class RefundsClient {
     }
 
     /**
-     * Lists refunds, newest first. Without filters this is every refund the caller can read; narrow it to one payment with `payment_id`, one account with `account_id`, or one buyer with `user_id`.
+     * Lists refunds the caller can read, newest first. Filter by payment, account, or buyer to narrow the results.
      *
      * @param {Whop.ListRefundsRequest} request
      * @param {RefundsClient.RequestOptions} requestOptions - Request-specific configuration.

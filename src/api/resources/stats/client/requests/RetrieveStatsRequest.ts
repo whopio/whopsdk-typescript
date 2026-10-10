@@ -94,7 +94,7 @@ export interface RetrieveStatsRequest {
     conversion_window?: string;
     /** Funnel only. Include only entrants whose full conversion window has elapsed. Required for confidence intervals and comparisons. */
     mature_only?: boolean;
-    /** Funnel only. Required when metric=funnel. Consecutive one-based steps encoded as steps[1][event], steps[1][page], steps[2][event], and so on. Values are scalar strings, never JSON. */
+    /** Funnel only. Required when metric=funnel. 2 to 10 ordered events per person, as consecutive one-based bracket parameters such as `steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed`. Values are scalar strings, never JSON. A person's first step 1 match inside `from`/`to` anchors their cohort, breakdown, and conversion window; later matches do not restart it. Other events may occur between steps, and conversions may land after `to`. For an experiment funnel, make `experiment.exposure` step 1 and pass `breakdown_by=variant`. */
     steps?: Whop.RetrieveStatsRequestSteps;
     /** Funnel only. The breakdown value to use as baseline for whole-window final conversion. Requires breakdown_by and mature_only=true; defaults confidence_level to 0.95. */
     compare_to?: string;

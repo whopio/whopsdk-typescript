@@ -30,7 +30,7 @@ export class PreferencesClient {
     }
 
     /**
-     * Retrieves the authenticated user's settings document. Addressed only as `me` — the document always belongs to the session user.
+     * Retrieves the authenticated user's settings document.
      *
      * @param {PreferencesClient.RequestOptions} requestOptions - Request-specific configuration.
      *

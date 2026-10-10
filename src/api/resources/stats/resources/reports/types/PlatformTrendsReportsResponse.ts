@@ -70,7 +70,7 @@ export namespace PlatformTrendsReportsResponse {
 
         export namespace Reports {
             export interface Item {
-                /** The page of rows. Only the requested columns are present. */
+                /** The page of rows. Only the requested columns are present. A breakdown value with fewer than three businesses behind it is left out, and a filtered total that small comes back with every metric `null`. */
                 rows: Item.Rows.Item[];
                 window: Item.Window;
             }

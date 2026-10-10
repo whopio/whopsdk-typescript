@@ -10,6 +10,6 @@
 export interface ApplyPromoCodeMembershipsRequest {
     /** Membership ID (`mem_` tag). */
     id: string;
-    /** The promo code to apply, as customers enter it at checkout (for example `SAVE20`). */
+    /** The promo code to apply, as customers enter it at checkout (for example `SAVE20`). Its stock, variant eligibility, and expiry are checked as at checkout. */
     promo_code: string;
 }

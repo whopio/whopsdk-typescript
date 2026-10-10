@@ -17,9 +17,9 @@ export declare namespace MembersClient {
 }
 
 /**
- * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+ * A Member is one buyer's relationship with an account: one record per customer, however many memberships they hold. It tracks whether they have joined or left, their access level, and when they last opened the account's content.
  *
- * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
+ * Use the Members API to list and search an account's members, retrieve a single member, and read a member's activity log. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
  */
 export class MembersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MembersClient.Options>;

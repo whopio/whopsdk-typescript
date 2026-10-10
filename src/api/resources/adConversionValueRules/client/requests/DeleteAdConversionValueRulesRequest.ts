@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteAdConversionValueRulesRequest {
-    /** Conversion value rule ID. */
+    /** Conversion value rule ID, prefixed `adcvr_`. */
     id: string;
 }

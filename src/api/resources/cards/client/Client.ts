@@ -19,7 +19,7 @@ export declare namespace CardsClient {
 /**
  * Cards represent virtual payment cards that spend from an account or user balance. Cards can be assigned to cardholders and configured with spending limits for controlled spending.
  *
- * Use the Cards API to issue cards, list cards for an account or user, and retrieve active card details such as the card number and CVC.
+ * Use the Cards API to issue cards, list cards for an account or user, retrieve active card details such as the card number and CVC, and list the transactions made with them.
  */
 export class CardsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CardsClient.Options>;
@@ -117,7 +117,7 @@ export class CardsClient {
     }
 
     /**
-     * Issue a virtual card, or apply for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
+     * Issues a virtual card, or applies for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
      *
      * @param {Whop.CreateCardsRequest} request
      * @param {CardsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -202,7 +202,7 @@ export class CardsClient {
     }
 
     /**
-     * Retrieve a single card.
+     * Retrieves a single card, including its `secrets` (card number, CVC, and PIN), which List Cards does not return.
      *
      * @param {Whop.RetrieveCardsRequest} request
      * @param {CardsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -283,7 +283,7 @@ export class CardsClient {
     }
 
     /**
-     * Update, freeze, or cancel a card. Updating the card's name, billing address, or limits requires both `payout:account:update` and `company:balance:read`; a card's assigned holder may update their own card's pin and frozen state with any user token.
+     * Updates, freezes, or cancels a card. Updating the card's name, billing address, or limits requires both `payout:account:update` and `company:balance:read`; a card's assigned holder may update their own card's pin and frozen state with any user token.
      *
      * @param {Whop.UpdateCardsRequest} request
      * @param {CardsClient.RequestOptions} requestOptions - Request-specific configuration.

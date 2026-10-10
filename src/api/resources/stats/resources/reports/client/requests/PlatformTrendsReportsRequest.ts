@@ -9,7 +9,7 @@ import type * as Whop from "../../../../../../index.js";
 export interface PlatformTrendsReportsRequest {
     /** What each row is. Omit it for one row per window, holding the window's total. */
     breakdown_by?: Whop.stats.PlatformTrendsReportsRequestBreakdownBy;
-    /** Comma-separated properties and metrics to return on each row. Defaults to `gross_revenue,businesses`. */
+    /** Comma-separated properties and metrics to return on each row. `business_type` can ride along on `industry_type` rows. Defaults to `gross_revenue,businesses`. */
     columns?: string;
     /** Comma-separated windows, at most four: `1d`, `7d`, `30d`, `90d`, `365d`, `mtd`, `qtd`, `ytd`, `all_time`, an explicit `2026-09-01..2026-10-01`, any of these prefixed `prev:` for the equal-length period before, or suffixed `@2026-09-01` to end earlier. Defaults to `30d`. */
     windows?: string;

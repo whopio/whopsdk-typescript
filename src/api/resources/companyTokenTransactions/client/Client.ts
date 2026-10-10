@@ -24,7 +24,7 @@ export class CompanyTokenTransactionsClient {
     }
 
     /**
-     * Returns a paginated list of token transactions for a user or company, depending on the authenticated actor, with optional filtering by user and transaction type.
+     * Lists an account's token transactions, newest first.
      *
      * Required permissions:
      *  - `company_token_transaction:read`
@@ -167,7 +167,7 @@ export class CompanyTokenTransactionsClient {
     }
 
     /**
-     * Create a token transaction to add, subtract, or transfer tokens for a member within a company.
+     * Creates a token transaction that adds, subtracts, or transfers tokens for a member of an account.
      *
      * Required permissions:
      *  - `company_token_transaction:create`
@@ -269,7 +269,7 @@ export class CompanyTokenTransactionsClient {
     }
 
     /**
-     * Retrieves the details of an existing company token transaction.
+     * Retrieves a token transaction.
      *
      * Required permissions:
      *  - `company_token_transaction:read`

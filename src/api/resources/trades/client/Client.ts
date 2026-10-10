@@ -19,7 +19,7 @@ export declare namespace TradesClient {
 /**
  * A Trade is one request on an account's or user's Whop-managed wallet. A `buy` bridges USDT0 to the trading account, sets the cross leverage, and places one market buy. A `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. Hyperliquid perpetuals are the only supported venue.
  *
- * Creating a trade returns `201` with the trade in `pending`. The trade runs in the background: read it with `GET /trades/{id}` until its `status` is `completed`, `failed` or `in_review`. A buy that does not fill sends its money back to the wallet, and `funds_location` says where the money is.
+ * Use the Trades API to open and close positions from a wallet and follow each trade until it finishes. Trades run in the background; a buy that does not fill sends its money back to the wallet, and `funds_location` says where the money is.
  *
  * The trading API, including `include_trading` on accounts and users, is in beta. It can change without a new API version date.
  */
@@ -143,7 +143,7 @@ export class TradesClient {
     }
 
     /**
-     * Creates a trade on the Whop-managed wallet of an account or user and answers `201` with the trade in `pending`. The trade runs in the background; read it with `GET /trades/{id}` until it is `completed`, `failed` or `in_review`. A `buy` bridges `amount` USDT0 to the trading account, sets `leverage` (cross) on `market`, and places one market buy. If the buy does not fill, its money goes back to the wallet. A `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. One trade runs at a time for each wallet. A retry with the same `Idempotency-Key` returns the same trade.
+     * Opens or closes a perpetual position from the Whop-managed wallet of an account or user. Answers `201` with the trade in `pending`; it runs in the background, so read it with `GET /trades/:id` until its `status` is `completed`, `failed` or `in_review`. One trade runs at a time for each wallet, and a retry with the same `Idempotency-Key` returns the same trade.
      *
      * @param {Whop.CreateTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.

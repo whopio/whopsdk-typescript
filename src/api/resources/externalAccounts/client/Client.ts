@@ -22,7 +22,7 @@ export declare namespace ExternalAccountsClient {
 /**
  * An External Account represents a profile on another platform connected to a Whop account or user, such as a Facebook page, Instagram account, or TikTok account. Connecting an external account lets Whop run [ads](/api-reference/beta/ads/ad) under that profile's identity and promote its existing posts. External account IDs are prefixed `sacc_`.
  *
- * Use the External Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect an external account, and list a connected profile's posts or a Facebook page's lead forms.
+ * Use the External Accounts API to list connected accounts, create a Whop-managed Facebook page or TikTok account, start an OAuth connection, disconnect an external account, list a connected profile's posts or a Facebook page's lead forms, and manage the creators an Instagram account runs partnership ads with.
  */
 export class ExternalAccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ExternalAccountsClient.Options>;
@@ -248,7 +248,7 @@ export class ExternalAccountsClient {
     }
 
     /**
-     * Starts an OAuth connection flow and returns an authorize_url where the user can connect an external account. LinkedIn supports personal profiles only, with scopes omitted. TikTok connects the authenticated user’s profile when scopes are omitted or company advertising assets with advertise. Meta Business and Snapchat support advertising connections only and require advertise. Personal profile connections must be completed in a browser signed in as the initiating Whop user.
+     * Starts an OAuth connection flow and returns an `authorize_url` to send the user to, where they connect an external account. Personal profile connections must be completed in a browser signed in as the Whop user who started the flow.
      *
      * @param {Whop.ConnectExternalAccountsRequest} request
      * @param {ExternalAccountsClient.RequestOptions} requestOptions - Request-specific configuration.

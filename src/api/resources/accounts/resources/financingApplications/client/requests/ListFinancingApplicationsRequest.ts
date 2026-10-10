@@ -9,7 +9,7 @@ import type * as Whop from "../../../../../../index.js";
  *     }
  */
 export interface ListFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed biz_. */
+    /** Merchant account ID, prefixed `biz_`. */
     account_id: string;
     /** Only applications in this review state. */
     status?: Whop.accounts.ListFinancingApplicationsRequestStatus;

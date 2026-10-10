@@ -7,13 +7,13 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListPaymentsRequest {
-    /** Which sales to list. `account_sales` returns sales for the accounts the caller can read. `user_sales` returns only sales received by the signed-in user's primary ledger account, without a company; requires their own Whop login session and cannot be combined with `account_id`. */
+    /** Which sales to list. `account_sales` returns sales for the accounts the caller can read. `user_sales` returns only sales the signed-in user received personally, outside any account; it requires the user's own Whop login session and cannot be combined with `account_id`. */
     mode?: Whop.ListPaymentsRequestMode;
     /** Only payments charged by this account, prefixed `biz_`. */
     account_id?: string;
     /** Only payments in this lifecycle state. */
     status?: Whop.ListPaymentsRequestStatus;
-    /** Only payments charged for this reason. */
+    /** Only payments charged for this reason. `subscription_cycle` also matches renewals recorded as `subscription_update`. */
     billing_reason?: Whop.ListPaymentsRequestBillingReason;
     /** Only payments presented in this three-letter currency, such as `usd`. */
     currency?: string;

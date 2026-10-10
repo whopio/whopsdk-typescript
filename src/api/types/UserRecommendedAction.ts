@@ -3,7 +3,7 @@
 export interface UserRecommendedAction {
     /** The account (`biz_`) a business recommendation is for, or `null` for personal recommendations */
     account_id: string | null;
-    /** The account's display name, or `null` */
+    /** The account's display name, or `null` for personal recommendations */
     account_name: string | null;
     /** The recommendation; new values may be added, so handle unknown actions gracefully */
     action: UserRecommendedAction.Action;
