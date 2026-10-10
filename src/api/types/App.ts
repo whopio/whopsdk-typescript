@@ -34,11 +34,14 @@ export interface App {
     discover_path: string | null;
     /** Subdomain identifier for the app's proxied URL, forming https://{domain_id}.apps.whop.com. */
     domain_id: string;
-    domains: Whop.AppDomain[] | null;
+    domains: Whop.AppDomain[];
     elements_used: App.ElementsUsed.Item[];
     /** URL path for the member-facing hub view, or `null` when not configured. */
     experience_path: string | null;
-    /** Full URL where the app's hosted web build is served, or `null` if no route is claimed. */
+    /**
+     * Full URL where the app's hosted web build is served, or `null` if no route is claimed.
+     * DEPRECATED: Read `domains` instead.
+     */
     hosted_url: string | null;
     /** The app's icon. Falls back to the default app icon when none is uploaded. */
     icon: Whop.AppIcon;
@@ -58,7 +61,6 @@ export interface App {
     origin: string | null;
     /** A short-lived signed pass scoping the caller to this app's gated preview hosts — every build preview and the live dev-server sandbox. Add it to a preview host as the `__whop_preview` query param (or `x-whop-preview-token` header). `null` unless the caller is a team member who can read the app's developer settings. */
     preview_token: string | null;
-    previous_hosted_urls: string[];
     /** ID of the app's product listing on the Whop app store, or `null` when the app has no associated product. */
     product_id: string | null;
     /** The approved build currently served on Android, or `null` when none is deployed. */
@@ -70,7 +72,10 @@ export interface App {
     redirect_uris: string[];
     requested_permissions: Whop.AppRequestedPermission[];
     required_scopes: App.RequiredScopes.Item[];
-    /** Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed. */
+    /**
+     * Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed.
+     * DEPRECATED: Read `domains` instead.
+     */
     route: string | null;
     /** The app's production secrets as an object of string values, injected into the hosted server runtime. `null` when the caller lacks the `developer:update_app` permission. */
     secrets: Record<string, unknown> | null;
