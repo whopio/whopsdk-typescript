@@ -46,7 +46,8 @@ export class VariantsClient {
      *         plan_types: ["renewal"],
      *         product_ids: ["prod_xxxxxxxxxxxxxx"],
      *         presentment_currency: "auto",
-     *         ip_address: "203.0.113.7"
+     *         ip_address: "203.0.113.7",
+     *         presentment_country: "JP"
      *     })
      */
     public async list(
@@ -67,6 +68,7 @@ export class VariantsClient {
                     created_after: createdAfter,
                     presentment_currency: presentmentCurrency,
                     ip_address: ipAddress,
+                    presentment_country: presentmentCountry,
                     first,
                     after,
                     last,
@@ -84,6 +86,7 @@ export class VariantsClient {
                     created_after: createdAfter,
                     presentment_currency: presentmentCurrency,
                     ip_address: ipAddress,
+                    presentment_country: presentmentCountry,
                     first,
                     after,
                     last,
@@ -249,7 +252,8 @@ export class VariantsClient {
      *     await client.variants.retrieve({
      *         id: "id",
      *         presentment_currency: "auto",
-     *         ip_address: "203.0.113.7"
+     *         ip_address: "203.0.113.7",
+     *         presentment_country: "JP"
      *     })
      */
     public retrieve(
@@ -263,10 +267,16 @@ export class VariantsClient {
         request: Whop.RetrieveVariantsRequest,
         requestOptions?: VariantsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.Variant>> {
-        const { id, presentment_currency: presentmentCurrency, ip_address: ipAddress } = request;
+        const {
+            id,
+            presentment_currency: presentmentCurrency,
+            ip_address: ipAddress,
+            presentment_country: presentmentCountry,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             presentment_currency: presentmentCurrency,
             ip_address: ipAddress,
+            presentment_country: presentmentCountry,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

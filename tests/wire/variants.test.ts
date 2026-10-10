@@ -104,6 +104,7 @@ describe("VariantsClient", () => {
             product_ids: ["prod_xxxxxxxxxxxxxx"],
             presentment_currency: "auto",
             ip_address: "203.0.113.7",
+            presentment_country: "JP",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -401,6 +402,7 @@ describe("VariantsClient", () => {
             id: "id",
             presentment_currency: "auto",
             ip_address: "203.0.113.7",
+            presentment_country: "JP",
         });
         expect(response).toEqual(rawResponseBody);
     });

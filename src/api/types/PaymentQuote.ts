@@ -24,7 +24,7 @@ export interface PaymentQuote {
     /** Payment quote ID, prefixed `pq_`. */
     id: string;
     line_items: Whop.PaymentQuoteLineItem[];
-    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is a preview: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
+    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the `presentment_country` sent, else the buyer's `ip_address`. A quote located by `presentment_country` or `ip_address` is a preview that estimates tax: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
     located_by: PaymentQuote.LocatedBy | null;
     /** The payment holding this quote, prefixed `pay_`, or null while it is unspent. A declined payment keeps its quote and can be retried; check that payment's `status`. */
     payment_id: string | null;
@@ -47,10 +47,11 @@ export interface PaymentQuote {
 }
 
 export namespace PaymentQuote {
-    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is a preview: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
+    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the `presentment_country` sent, else the buyer's `ip_address`. A quote located by `presentment_country` or `ip_address` is a preview that estimates tax: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
     export const LocatedBy = {
         ShippingAddress: "shipping_address",
         Address: "address",
+        PresentmentCountry: "presentment_country",
         IpAddress: "ip_address",
     } as const;
     export type LocatedBy = (typeof LocatedBy)[keyof typeof LocatedBy];
