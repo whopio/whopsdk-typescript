@@ -27755,7 +27755,8 @@ const pageableResponse = await client.variants.list({
     plan_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
-    ip_address: "203.0.113.7"
+    ip_address: "203.0.113.7",
+    presentment_country: "JP"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -27768,7 +27769,8 @@ let page = await client.variants.list({
     plan_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
-    ip_address: "203.0.113.7"
+    ip_address: "203.0.113.7",
+    presentment_country: "JP"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -27904,7 +27906,8 @@ Retrieves the details of an existing variant.
 await client.variants.retrieve({
     id: "id",
     presentment_currency: "auto",
-    ip_address: "203.0.113.7"
+    ip_address: "203.0.113.7",
+    presentment_country: "JP"
 });
 
 ```
