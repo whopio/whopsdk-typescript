@@ -6,6 +6,7 @@ export * from "./ListAdGroupsRequestDirection.js";
 export * from "./ListAdGroupsRequestOrder.js";
 export * from "./ListAdGroupsRequestStatus.js";
 export * from "./ListAdGroupsResponse.js";
+export * from "./PostAdGroupUpdatedPayload.js";
 export * from "./RetrieveAdGroupsRequestAttributionModel.js";
 export * from "./SearchTargetingOptionsAdGroupsRequestLocationTypesItem.js";
 export * from "./SearchTargetingOptionsAdGroupsRequestPlatform.js";
