@@ -26,10 +26,13 @@ export interface AppListItem {
     discover_path: string | null;
     /** Subdomain identifier for the app's proxied URL, forming https://{domain_id}.apps.whop.com. */
     domain_id: string;
-    domains: Whop.AppDomain[] | null;
+    domains: Whop.AppDomain[];
     /** URL path for the member-facing hub view, or `null` when not configured. */
     experience_path: string | null;
-    /** Full URL where the app's hosted web build is served, or `null` if no route is claimed. */
+    /**
+     * Full URL where the app's hosted web build is served, or `null` if no route is claimed.
+     * DEPRECATED: Read `domains` instead.
+     */
     hosted_url: string | null;
     /** The app's icon. Falls back to the default app icon when none is uploaded. */
     icon: Whop.AppIcon;
@@ -41,8 +44,10 @@ export interface AppListItem {
     openapi_path: string | null;
     /** Full origin URL of the app's proxied domain, for example https://ab1c2d3e4f.apps.whop.com. */
     origin: string | null;
-    previous_hosted_urls: string[];
-    /** Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed. */
+    /**
+     * Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed.
+     * DEPRECATED: Read `domains` instead.
+     */
     route: string | null;
     /** URL path to the app's skills directory, or `null` when not configured. */
     skills_path: string | null;
