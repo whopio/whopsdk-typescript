@@ -11,6 +11,8 @@ export interface User {
     banner: Whop.UserBanner | null;
     /** The user's biography */
     bio: string | null;
+    /** Where the user's personal card application stands. Populated only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise, or when the user has never applied for a card. */
+    cards: Whop.AccountCards | null;
     /** When the user was created, as an ISO 8601 timestamp */
     created_at: string;
     /** The user's gross USD income over time, including a Partner commission breakdown. Populated only on single-user self reads for callers with balance-read scope; `null` otherwise. */

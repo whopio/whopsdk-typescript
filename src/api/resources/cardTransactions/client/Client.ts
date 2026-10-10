@@ -23,7 +23,7 @@ export class CardTransactionsClient {
     }
 
     /**
-     * Lists an account's card transactions, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
+     * Lists the card transactions of an account or a user, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
      *
      * @param {Whop.ListCardTransactionsRequest} request
      * @param {CardTransactionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -51,6 +51,7 @@ export class CardTransactionsClient {
             ): Promise<core.WithRawResponse<Whop.ListCardTransactionsResponse>> => {
                 const {
                     account_id: accountId,
+                    user_id: userId,
                     transaction_ids: transactionIds,
                     card_id: cardId,
                     cardholder_id: cardholderId,
@@ -66,6 +67,7 @@ export class CardTransactionsClient {
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
+                    user_id: userId,
                     transaction_ids: transactionIds,
                     card_id: cardId,
                     cardholder_id: cardholderId,
@@ -179,9 +181,10 @@ export class CardTransactionsClient {
         request: Whop.RetrieveCardTransactionsRequest,
         requestOptions?: CardTransactionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.CardTransaction>> {
-        const { id, account_id: accountId } = request;
+        const { id, account_id: accountId, user_id: userId } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            user_id: userId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

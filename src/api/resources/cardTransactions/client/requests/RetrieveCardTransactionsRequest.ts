@@ -9,6 +9,8 @@
 export interface RetrieveCardTransactionsRequest {
     /** The card transaction ID, prefixed `citx_`. */
     id: string;
-    /** The account that owns the transaction, prefixed `biz_`. Defaults to the credential's account. */
+    /** The account that owns the transaction, prefixed `biz_`. Provide this or `user_id`. Defaults to the credential's account. */
     account_id?: string;
+    /** The user that owns the transaction, prefixed `user_`. Provide this or `account_id`. Only that user can read it. */
+    user_id?: string;
 }
