@@ -26982,7 +26982,7 @@ await client.trades.retrieve({
 <dl>
 <dd>
 
-Lists an account's transfers.
+Lists transfers visible to the caller. Optional account filters narrow the results.
 </dd>
 </dl>
 </dd>
@@ -27073,7 +27073,10 @@ Moves money between accounts, or into a claim link anyone with the URL can redee
 
 ```typescript
 await client.transfers.create({
+    type: "balance",
     amount: 25,
+    currency: "usd",
+    destination_id: "user_xxxxxxxxxxxxxx",
     origin_id: "biz_xxxxxxxxxxxxxx"
 });
 
@@ -27091,7 +27094,7 @@ await client.transfers.create({
 <dl>
 <dd>
 
-**request:** `Whop.CreateTransfersRequest` 
+**request:** `Whop.CreateTransfersRequestBody` 
     
 </dd>
 </dl>

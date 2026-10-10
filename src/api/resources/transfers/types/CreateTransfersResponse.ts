@@ -4,11 +4,8 @@ import type * as Whop from "../../../index.js";
 
 export type CreateTransfersResponse =
     /**
-     * A transfer of credit between two ledger accounts. */
+     * A transfer between Whop accounts or users. */
     | Whop.CreateTransfersResponse.Transfer
-    /**
-     * Returned for a wallet_send: an onchain USDT send to a recipient. */
-    | Whop.CreateTransfersResponse.Send
     /**
      * A shareable link anyone holding its code can open to claim the funds. */
     | Whop.CreateTransfersResponse.ClaimLink;
@@ -16,81 +13,92 @@ export type CreateTransfersResponse =
 export namespace CreateTransfersResponse {
     export interface Transfer {
         object: "transfer";
-        /** Transfer amount. */
-        amount: number;
+        /** Amount credited to the recipient. Null while the transfer has not succeeded. */
+        amount: Whop.Money | null;
         /** When the transfer was created. */
         created_at: string;
-        /** The user who initiated the transfer, such as the team member who sent a manual payout. Null if the creator is unavailable. */
-        created_by_user: CreateTransfersResponseTransfer.CreatedByUser | null;
-        /** Transfer currency. */
-        currency: string;
-        /** Account or user receiving funds. */
-        destination: Whop.CreateTransfersResponseTransferDestination;
-        /** Destination ledger account ID. */
-        destination_ledger_account_id: string;
-        /** When the transfer failed, as an ISO 8601 timestamp. Null unless the transfer has failed. */
-        failed_at?: (string | null) | undefined;
-        /** Machine-readable code for why the transfer failed. Null unless the transfer has failed. */
-        failure_code?: (string | null) | undefined;
-        /** Human-readable explanation of why the transfer failed. Null unless the transfer has failed. */
-        failure_reason?: (string | null) | undefined;
-        /** Fee charged for the transfer. */
-        fee_amount?: (number | null) | undefined;
+        /** Business account or user receiving the transfer. */
+        destination: CreateTransfersResponseTransfer.Destination | null;
+        /** Recorded failure time. Null unless the transfer has failed. */
+        failed_at: string | null;
+        /** Machine-readable failure code. Null unless the transfer has failed. */
+        failure_code: string | null;
+        /** Failure explanation. Null unless the transfer has failed. */
+        failure_reason: string | null;
+        /** All applicable transfer fees, including platform markup. Null when the authoritative total is unavailable. */
+        fee: Whop.Money | null;
         /** Transfer ID. */
         id: string;
         /** Custom metadata attached to the transfer. */
-        metadata?: (Record<string, unknown> | null) | undefined;
+        metadata: Record<string, unknown>;
         /** Transfer note. */
-        notes?: (string | null) | undefined;
-        /** Account or user sending funds. */
-        origin: Whop.CreateTransfersResponseTransferOrigin;
-        /** Source ledger account ID. */
-        origin_ledger_account_id: string;
-        /** Transfer status. `processing` means the on-chain leg is still executing — subscribe to `transfer.completed` and `transfer.failed`, or retrieve the transfer to check its current status. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
+        notes: string | null;
+        /** Business account or user sending the transfer. */
+        origin: CreateTransfersResponseTransfer.Origin | null;
+        /** Current transfer status. */
         status: CreateTransfersResponseTransfer.Status;
+        /** Recorded time of the current transition. Null when the historical transition time is unknown. */
+        status_changed_at: string | null;
+        /** Recorded success time. Null when unknown. */
+        succeeded_at: string | null;
+        /** Tracking page for the transfer. Viewing it requires sign-in and access to the transfer. */
+        tracking_url: string;
     }
 
     export namespace CreateTransfersResponseTransfer {
         /**
-         * The user who initiated the transfer, such as the team member who sent a manual payout. Null if the creator is unavailable.
+         * Business account or user receiving the transfer.
          */
-        export interface CreatedByUser {
-            /** User ID. */
+        export interface Destination {
+            /** Account or user ID. */
             id: string;
-            /** User display name. */
-            name?: (string | null) | undefined;
-            /** User's username. */
-            username: string;
+            /** Business logo or user avatar URL. Null when no image is available. */
+            logo_url: string | null;
+            /** Business or user display name. */
+            name: string | null;
+            /** Whether the profile is a business account or a user. */
+            object: Destination.Object_;
         }
 
-        /** Transfer status. `processing` means the on-chain leg is still executing — subscribe to `transfer.completed` and `transfer.failed`, or retrieve the transfer to check its current status. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
+        export namespace Destination {
+            /** Whether the profile is a business account or a user. */
+            export const Object_ = {
+                Account: "account",
+                User: "user",
+            } as const;
+            export type Object_ = (typeof Object_)[keyof typeof Object_];
+        }
+
+        /**
+         * Business account or user sending the transfer.
+         */
+        export interface Origin {
+            /** Account or user ID. */
+            id: string;
+            /** Business logo or user avatar URL. Null when no image is available. */
+            logo_url: string | null;
+            /** Business or user display name. */
+            name: string | null;
+            /** Whether the profile is a business account or a user. */
+            object: Origin.Object_;
+        }
+
+        export namespace Origin {
+            /** Whether the profile is a business account or a user. */
+            export const Object_ = {
+                Account: "account",
+                User: "user",
+            } as const;
+            export type Object_ = (typeof Object_)[keyof typeof Object_];
+        }
+
+        /** Current transfer status. */
         export const Status = {
             Processing: "processing",
             Succeeded: "succeeded",
             Failed: "failed",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
-    }
-
-    export interface Send {
-        object: "send";
-        amount: string;
-        currency: string;
-        destination: CreateTransfersResponseSend.Destination;
-        source: CreateTransfersResponseSend.Source;
-        tx_hash: string;
-    }
-
-    export namespace CreateTransfersResponseSend {
-        export interface Destination {
-            account_id: string;
-            address: string;
-        }
-
-        export interface Source {
-            account_id: string;
-            address: string;
-        }
     }
 
     export interface ClaimLink {

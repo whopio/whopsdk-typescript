@@ -5,7 +5,7 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("TransfersClient", () => {
-    test("list (1)", async () => {
+    test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -18,21 +18,33 @@ describe("TransfersClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    amount: 25,
+                    amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     created_at: "2026-01-01T12:00:00Z",
-                    created_by_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-                    currency: "usd",
-                    destination_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
+                    destination: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        logo_url: null,
+                        name: "Dana Whitfield",
+                        object: "account",
+                    },
                     failed_at: "2024-01-15T09:30:00Z",
                     failure_code: "failure_code",
                     failure_reason: "failure_reason",
-                    fee_amount: 0.5,
+                    fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "ctt_xxxxxxxxxxxxxx",
                     metadata: { order_id: "SHINE-1042" },
                     notes: "Refund for the rescheduled interior detail",
                     object: "transfer",
-                    origin_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
+                    origin: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
+                        name: "Shine Time Auto Detailing",
+                        object: "account",
+                    },
                     status: "processing",
+                    status_changed_at: "2024-01-15T09:30:00Z",
+                    succeeded_at: "2024-01-15T09:30:00Z",
+                    tracking_url: "https://whop.com/ctt_xxxxxxxxxxxxxx/",
                 },
             ],
             page_info: {
@@ -60,25 +72,6 @@ describe("TransfersClient", () => {
         expect(expected.data).toEqual(nextPage.data);
     });
 
-    test("list (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/transfers").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.transfers.list();
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -88,35 +81,40 @@ describe("TransfersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 25, origin_id: "biz_xxxxxxxxxxxxxx" };
+        const rawRequestBody = {
+            type: "balance",
+            amount: 25,
+            currency: "usd",
+            destination_id: "user_xxxxxxxxxxxxxx",
+            origin_id: "biz_xxxxxxxxxxxxxx",
+        };
         const rawResponseBody = {
             object: "transfer",
-            amount: 25,
+            amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             created_at: "2026-01-01T12:00:00Z",
-            created_by_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            currency: "usd",
             destination: {
-                typename: "Company",
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
-                title: "Shine Time Auto Detailing",
+                logo_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
+                name: "Shine Time Auto Detailing",
+                object: "account",
             },
-            destination_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
             failed_at: "2024-01-15T09:30:00Z",
             failure_code: "failure_code",
             failure_reason: "failure_reason",
-            fee_amount: 0.5,
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "ctt_xxxxxxxxxxxxxx",
             metadata: { order_id: "SHINE-1042" },
             notes: "Refund for the rescheduled interior detail",
             origin: {
-                typename: "Company",
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
-                title: "Shine Time Auto Detailing",
+                logo_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
+                name: "Shine Time Auto Detailing",
+                object: "account",
             },
-            origin_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
             status: "processing",
+            status_changed_at: "2024-01-15T09:30:00Z",
+            succeeded_at: "2024-01-15T09:30:00Z",
+            tracking_url: "https://whop.com/ctt_xxxxxxxxxxxxxx/",
         };
 
         server
@@ -129,7 +127,10 @@ describe("TransfersClient", () => {
             .build();
 
         const response = await client.transfers.create({
+            type: "balance",
             amount: 25,
+            currency: "usd",
+            destination_id: "user_xxxxxxxxxxxxxx",
             origin_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
@@ -144,7 +145,13 @@ describe("TransfersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, origin_id: "origin_id" };
+        const rawRequestBody = {
+            type: "balance",
+            amount: 1.1,
+            currency: "currency",
+            destination_id: "destination_id",
+            origin_id: "origin_id",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -158,7 +165,10 @@ describe("TransfersClient", () => {
 
         await expect(async () => {
             return await client.transfers.create({
+                type: "balance",
                 amount: 1.1,
+                currency: "currency",
+                destination_id: "destination_id",
                 origin_id: "origin_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -173,7 +183,13 @@ describe("TransfersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, origin_id: "origin_id" };
+        const rawRequestBody = {
+            type: "balance",
+            amount: 1.1,
+            currency: "currency",
+            destination_id: "destination_id",
+            origin_id: "origin_id",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -187,7 +203,10 @@ describe("TransfersClient", () => {
 
         await expect(async () => {
             return await client.transfers.create({
+                type: "balance",
                 amount: 1.1,
+                currency: "currency",
+                destination_id: "destination_id",
                 origin_id: "origin_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -202,7 +221,13 @@ describe("TransfersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, origin_id: "origin_id" };
+        const rawRequestBody = {
+            type: "balance",
+            amount: 1.1,
+            currency: "currency",
+            destination_id: "destination_id",
+            origin_id: "origin_id",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -216,7 +241,10 @@ describe("TransfersClient", () => {
 
         await expect(async () => {
             return await client.transfers.create({
+                type: "balance",
                 amount: 1.1,
+                currency: "currency",
+                destination_id: "destination_id",
                 origin_id: "origin_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -231,7 +259,13 @@ describe("TransfersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, origin_id: "origin_id" };
+        const rawRequestBody = {
+            type: "balance",
+            amount: 1.1,
+            currency: "currency",
+            destination_id: "destination_id",
+            origin_id: "origin_id",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -245,7 +279,10 @@ describe("TransfersClient", () => {
 
         await expect(async () => {
             return await client.transfers.create({
+                type: "balance",
                 amount: 1.1,
+                currency: "currency",
+                destination_id: "destination_id",
                 origin_id: "origin_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
@@ -412,33 +449,32 @@ describe("TransfersClient", () => {
         });
 
         const rawResponseBody = {
-            amount: 25,
+            amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             created_at: "2026-01-01T12:00:00Z",
-            created_by_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            currency: "usd",
             destination: {
-                typename: "Company",
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
-                title: "Shine Time Auto Detailing",
+                logo_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
+                name: "Shine Time Auto Detailing",
+                object: "account",
             },
-            destination_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
             failed_at: "2024-01-15T09:30:00Z",
             failure_code: "failure_code",
             failure_reason: "failure_reason",
-            fee_amount: 0.5,
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "ctt_xxxxxxxxxxxxxx",
             metadata: { order_id: "SHINE-1042" },
             notes: "Refund for the rescheduled interior detail",
             object: "transfer",
             origin: {
-                typename: "Company",
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
-                title: "Shine Time Auto Detailing",
+                logo_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
+                name: "Shine Time Auto Detailing",
+                object: "account",
             },
-            origin_ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
             status: "processing",
+            status_changed_at: "2024-01-15T09:30:00Z",
+            succeeded_at: "2024-01-15T09:30:00Z",
+            tracking_url: "https://whop.com/ctt_xxxxxxxxxxxxxx/",
         };
 
         server.mockEndpoint().get("/transfers/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
