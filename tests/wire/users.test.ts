@@ -68,6 +68,7 @@ describe("UsersClient", () => {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
                     bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
+                    cards: { kind: null, status: "approved" },
                     created_at: "2026-01-01T12:00:00.000Z",
                     earnings_usd: {
                         first_earned_at: "2026-01-01T12:00:00.000Z",
@@ -216,6 +217,7 @@ describe("UsersClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
+            cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
@@ -339,6 +341,7 @@ describe("UsersClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
+            cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
@@ -476,6 +479,7 @@ describe("UsersClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
+            cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
@@ -603,6 +607,7 @@ describe("UsersClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
+            cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",

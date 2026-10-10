@@ -11,8 +11,10 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface ListCardTransactionsRequest {
-    /** The account whose card transactions to list, prefixed `biz_`. Defaults to the credential's account. */
+    /** The account whose card transactions to list, prefixed `biz_`. Provide this or `user_id`. Defaults to the credential's account. */
     account_id?: string;
+    /** The user whose personal card transactions to list, prefixed `user_`. Provide this or `account_id`. Only that user can read them. */
+    user_id?: string;
     /** Return only these card transactions, each prefixed `citx_`. Repeat the parameter, or pass one comma-separated value. */
     transaction_ids?: string | string[];
     /** Return only transactions charged to these cards, each prefixed `icrd_`. */

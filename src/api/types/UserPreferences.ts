@@ -3,6 +3,8 @@
 export interface UserPreferences {
     /** Whether the user has dismissed the first-time bounty worker onboarding. Set to `false` to show it again. */
     bounty_worker_onboarding_dismissed: boolean;
+    /** Whether incoming funds, including pending balance, are automatically moved to the user's personal cards balance. `false` when the user has no cards balance. */
+    cards_auto_top_up: boolean;
     /** Whether investigation mode is enabled for the user. Only meaningful for staff users with investigation access. */
     investigation_enabled: boolean;
     /** Whether the user has accepted Whop's terms and policies. `false` until recorded via `PATCH` with `terms_accepted: true`. */

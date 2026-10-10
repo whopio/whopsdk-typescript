@@ -6772,7 +6772,7 @@ await client.bountySubmissions.submit({
 <dl>
 <dd>
 
-Lists an account's card transactions, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
+Lists the card transactions of an account or a user, newest first. Defaults to the account the credential belongs to. Covers every card the owner has ever had, including canceled cards and spend that predates a re-application, and team members only see transactions on the cards assigned to them. Pass `transaction_ids` to fetch specific transactions instead of paging for them.
 </dd>
 </dl>
 </dd>
@@ -27346,7 +27346,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the authenticated user — the self view of the user object. Same shape as `GET /users/{id}`, with the self-only fields populated: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance` and `earnings_usd` (balance-read scope), the opt-in `balance_history`, and every linked social account.
+Retrieves the authenticated user — the self view of the user object. Same shape as `GET /users/{id}`, with the self-only fields populated: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance`, `cards` and `earnings_usd` (balance-read scope), the opt-in `balance_history`, and every linked social account.
 </dd>
 </dl>
 </dd>
