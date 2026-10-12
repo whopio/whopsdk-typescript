@@ -526,7 +526,6 @@ export * from "./UserNotificationPreference.js";
 export * from "./UserPreferences.js";
 export * from "./UserProfilePicture.js";
 export * from "./UserRecommendedAction.js";
-export * from "./UserStaffAccess.js";
 export * from "./UserSummary.js";
 export * from "./V1ErrorResponse.js";
 export * from "./Variant.js";

@@ -40,7 +40,7 @@ describe("UsersClient", () => {
                                 total_withdrawable_balance: 4385.75,
                             },
                         ],
-                        cash_usd: "0.00",
+                        cash_usd: "4820.75",
                         crypto: [
                             {
                                 balance: "1500.0",
@@ -58,12 +58,12 @@ describe("UsersClient", () => {
                                 value_usd: 1500,
                             },
                         ],
-                        crypto_usd: "0.00",
-                        pending_usd: "0.00",
-                        total_usd: "0.00",
+                        crypto_usd: "1500.00",
+                        pending_usd: "310.00",
+                        total_usd: "6320.75",
                         treasury_pending_usd: "0.00",
                     },
-                    balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 0, max: 0, min: 0 },
+                    balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
                     banner: {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
@@ -101,7 +101,6 @@ describe("UsersClient", () => {
                     id: "user_xxxxxxxxxxxxxx",
                     name: "Marcus Webb",
                     profile_picture: { url: "https://ui-avatars.com/api/" },
-                    staff: { admin: true, investigation_access: true, manager: false, support: false },
                     trading: {
                         account_id: null,
                         hyperliquid: null,
@@ -189,7 +188,7 @@ describe("UsersClient", () => {
                         total_withdrawable_balance: 4385.75,
                     },
                 ],
-                cash_usd: "0.00",
+                cash_usd: "4820.75",
                 crypto: [
                     {
                         balance: "1500.0",
@@ -207,12 +206,12 @@ describe("UsersClient", () => {
                         value_usd: 1500,
                     },
                 ],
-                crypto_usd: "0.00",
-                pending_usd: "0.00",
-                total_usd: "0.00",
+                crypto_usd: "1500.00",
+                pending_usd: "310.00",
+                total_usd: "6320.75",
                 treasury_pending_usd: "0.00",
             },
-            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 0, max: 0, min: 0 },
+            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -235,7 +234,6 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
-            staff: { admin: true, investigation_access: true, manager: false, support: false },
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -313,7 +311,7 @@ describe("UsersClient", () => {
                         total_withdrawable_balance: 4385.75,
                     },
                 ],
-                cash_usd: "0.00",
+                cash_usd: "4820.75",
                 crypto: [
                     {
                         balance: "1500.0",
@@ -331,12 +329,12 @@ describe("UsersClient", () => {
                         value_usd: 1500,
                     },
                 ],
-                crypto_usd: "0.00",
-                pending_usd: "0.00",
-                total_usd: "0.00",
+                crypto_usd: "1500.00",
+                pending_usd: "310.00",
+                total_usd: "6320.75",
                 treasury_pending_usd: "0.00",
             },
-            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 0, max: 0, min: 0 },
+            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -359,7 +357,6 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
-            staff: { admin: true, investigation_access: true, manager: false, support: false },
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -451,7 +448,7 @@ describe("UsersClient", () => {
                         total_withdrawable_balance: 4385.75,
                     },
                 ],
-                cash_usd: "0.00",
+                cash_usd: "4820.75",
                 crypto: [
                     {
                         balance: "1500.0",
@@ -469,12 +466,12 @@ describe("UsersClient", () => {
                         value_usd: 1500,
                     },
                 ],
-                crypto_usd: "0.00",
-                pending_usd: "0.00",
-                total_usd: "0.00",
+                crypto_usd: "1500.00",
+                pending_usd: "310.00",
+                total_usd: "6320.75",
                 treasury_pending_usd: "0.00",
             },
-            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 0, max: 0, min: 0 },
+            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -497,7 +494,6 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
-            staff: { admin: true, investigation_access: true, manager: false, support: false },
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -579,7 +575,7 @@ describe("UsersClient", () => {
                         total_withdrawable_balance: 4385.75,
                     },
                 ],
-                cash_usd: "0.00",
+                cash_usd: "4820.75",
                 crypto: [
                     {
                         balance: "1500.0",
@@ -597,12 +593,12 @@ describe("UsersClient", () => {
                         value_usd: 1500,
                     },
                 ],
-                crypto_usd: "0.00",
-                pending_usd: "0.00",
-                total_usd: "0.00",
+                crypto_usd: "1500.00",
+                pending_usd: "310.00",
+                total_usd: "6320.75",
                 treasury_pending_usd: "0.00",
             },
-            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 0, max: 0, min: 0 },
+            balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -625,7 +621,6 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
-            staff: { admin: true, investigation_access: true, manager: false, support: false },
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
