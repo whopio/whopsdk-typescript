@@ -426,7 +426,7 @@ export class PlansClient {
     /**
      * @deprecated
      *
-     * Deprecated compatibility endpoint. Preview variant tax with `POST /variants/{id}/calculate_tax` instead.
+     * Deprecated compatibility endpoint. Quote tax with `POST /payment_quotes` instead.
      *
      * @param {Whop.CalculateTaxPlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
