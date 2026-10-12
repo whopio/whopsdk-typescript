@@ -170,6 +170,7 @@ export namespace AdCampaign {
         NoAdGroups: "no_ad_groups",
         NoAds: "no_ads",
         Paused: "paused",
+        Learning: "learning",
         Processing: "processing",
         Issues: "issues",
         Scheduled: "scheduled",
