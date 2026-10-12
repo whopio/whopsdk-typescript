@@ -18946,7 +18946,7 @@ Registers a hostname with the wallet provider and attempts verification inline. 
 
 ```typescript
 await client.paymentMethodDomains.create({
-    hostname: "pending.shinetime.example"
+    hostname: "pending.shinetime.com"
 });
 
 ```

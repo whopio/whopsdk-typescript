@@ -177,7 +177,7 @@ export class PaymentMethodDomainsClient {
      *
      * @example
      *     await client.paymentMethodDomains.create({
-     *         hostname: "pending.shinetime.example"
+     *         hostname: "pending.shinetime.com"
      *     })
      */
     public create(

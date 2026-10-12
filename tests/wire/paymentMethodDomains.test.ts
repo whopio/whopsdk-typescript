@@ -20,7 +20,7 @@ describe("PaymentMethodDomainsClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
-                    hostname: "checkout.shinetime.example",
+                    hostname: "checkout.shinetime.com",
                     id: "pmd_xxxxxxxxxxxxxx",
                     provider: "apple",
                     status: "pending",
@@ -161,11 +161,11 @@ describe("PaymentMethodDomainsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { hostname: "pending.shinetime.example" };
+        const rawRequestBody = { hostname: "pending.shinetime.com" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
-            hostname: "checkout.shinetime.example",
+            hostname: "checkout.shinetime.com",
             id: "pmd_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
@@ -182,7 +182,7 @@ describe("PaymentMethodDomainsClient", () => {
             .build();
 
         const response = await client.paymentMethodDomains.create({
-            hostname: "pending.shinetime.example",
+            hostname: "pending.shinetime.com",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -340,7 +340,7 @@ describe("PaymentMethodDomainsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
-            hostname: "checkout.shinetime.example",
+            hostname: "checkout.shinetime.com",
             id: "pmd_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
@@ -562,7 +562,7 @@ describe("PaymentMethodDomainsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
-            hostname: "checkout.shinetime.example",
+            hostname: "checkout.shinetime.com",
             id: "pmd_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
