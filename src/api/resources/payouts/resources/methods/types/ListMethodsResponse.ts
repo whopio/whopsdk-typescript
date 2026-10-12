@@ -270,8 +270,8 @@ export namespace ListMethodsResponse {
             export const ErrorCode = {
                 AccountSuspended: "account_suspended",
                 BlockMoveMoneyOutBecauseClawback: "block_move_money_out_because_clawback",
-                SupportabilityCheckPayoutStatusHold: "supportability_check_payout_status_hold",
                 CardUsageReviewPayoutStatusHold: "card_usage_review_payout_status_hold",
+                UnderReview: "under_review",
                 KycCompleted: "kyc_completed",
                 RmiClear: "rmi_clear",
                 IdentityRfiClear: "identity_rfi_clear",
