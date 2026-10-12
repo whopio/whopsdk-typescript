@@ -3,5 +3,6 @@
 export const ListTradesRequestType = {
     Buy: "buy",
     Close: "close",
+    Order: "order",
 } as const;
 export type ListTradesRequestType = (typeof ListTradesRequestType)[keyof typeof ListTradesRequestType];
