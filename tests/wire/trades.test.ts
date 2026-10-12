@@ -21,6 +21,7 @@ describe("TradesClient", () => {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     amount: "25",
                     average_price: "average_price",
+                    client_order_id: "client_order_id",
                     completed_at: "completed_at",
                     created_at: "2026-01-01T12:00:00.000Z",
                     failure_code: "market_unavailable",
@@ -29,7 +30,13 @@ describe("TradesClient", () => {
                     id: "tint_xxxxxxxxxxxxxx",
                     leverage: 10,
                     market: "BTC",
+                    metadata: { key: "value" },
                     object: "trade",
+                    order_type: "market",
+                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    reduce_only: true,
+                    side: "buy",
+                    size: "size",
                     status: "pending",
                     status_detail: "partial_fill",
                     type: "buy",
@@ -128,11 +135,12 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", market: "BTC", type: "buy" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", type: "buy" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: "25",
             average_price: "average_price",
+            client_order_id: "client_order_id",
             completed_at: "completed_at",
             created_at: "2026-01-01T12:00:00.000Z",
             failure_code: "market_unavailable",
@@ -141,7 +149,13 @@ describe("TradesClient", () => {
             id: "tint_xxxxxxxxxxxxxx",
             leverage: 10,
             market: "BTC",
+            metadata: { key: "value" },
             object: "trade",
+            order_type: "market",
+            price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            reduce_only: true,
+            side: "buy",
+            size: "size",
             status: "pending",
             status_detail: "partial_fill",
             type: "buy",
@@ -160,7 +174,6 @@ describe("TradesClient", () => {
 
         const response = await client.trades.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            market: "BTC",
             type: "buy",
         });
         expect(response).toEqual(rawResponseBody);
@@ -175,7 +188,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", market: "market", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "buy" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -190,7 +203,6 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                market: "market",
                 type: "buy",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -205,7 +217,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", market: "market", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "buy" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -220,7 +232,6 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                market: "market",
                 type: "buy",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -235,7 +246,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", market: "market", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "buy" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -250,7 +261,6 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                market: "market",
                 type: "buy",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -265,7 +275,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", market: "market", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "buy" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -280,7 +290,6 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                market: "market",
                 type: "buy",
             });
         }).rejects.toThrow(Whop.ConflictError);
@@ -295,7 +304,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", market: "market", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "buy" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -310,7 +319,6 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                market: "market",
                 type: "buy",
             });
         }).rejects.toThrow(Whop.ServiceUnavailableError);
@@ -330,6 +338,7 @@ describe("TradesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: "25",
             average_price: "average_price",
+            client_order_id: "client_order_id",
             completed_at: "completed_at",
             created_at: "2026-01-01T12:00:00.000Z",
             failure_code: "market_unavailable",
@@ -338,7 +347,13 @@ describe("TradesClient", () => {
             id: "tint_xxxxxxxxxxxxxx",
             leverage: 10,
             market: "BTC",
+            metadata: { key: "value" },
             object: "trade",
+            order_type: "market",
+            price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            reduce_only: true,
+            side: "buy",
+            size: "size",
             status: "pending",
             status_detail: "partial_fill",
             type: "buy",

@@ -643,7 +643,7 @@ export class AccountsClient {
      *                 ssn: "123-45-6789"
      *             }],
      *         industry_group: "automotive",
-     *         industry_type: "car_wash",
+     *         industry_type: "car_wash_and_detailing_shop",
      *         share_structure: {
      *             number_of_shares: 123,
      *             value: 123

@@ -4,7 +4,6 @@
  * @example
  *     {
  *         account_id: "biz_xxxxxxxxxxxxxx",
- *         market: "BTC",
  *         type: "buy"
  *     }
  */
@@ -13,19 +12,57 @@ export interface CreateTradesRequest {
     account_id: string;
     /** The USDT0 to send from the wallet for a buy, with at most 6 decimals. Required for a buy. */
     amount?: string;
-    /** The cross leverage for a buy, from 1 to the market's maximum. Required for a buy. */
+    /** Only for an order. Your own ID for the trade, 1 to 128 characters, unique for the account. Sending it again with the same order returns the same trade; with a different order it answers `409`. */
+    client_order_id?: string;
+    /** The kind of market. Required for an order. */
+    instrument_type?: CreateTradesRequest.InstrumentType;
+    /** The cross leverage, from 1 to the market's maximum. Required for a buy and for an order that is not `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
-    /** The perpetual market, for example `BTC`. */
-    market: string;
-    /** `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** The perpetual market, for example `BTC`. Required for a buy, close or order. */
+    market?: string;
+    /** Only for an order. Free-form string-to-string annotations: up to 50 keys of at most 40 characters, values up to 500 characters. */
+    metadata?: Record<string, string>;
+    /** Only for an order. The order value in USD, as a decimal string; the size is rounded down to the market's decimals. Send exactly one of `size` or `notional`. */
+    notional?: string;
+    /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
+    order_type?: CreateTradesRequest.OrderType;
+    /** Only for an order. The limit price in USD, as a decimal string Hyperliquid accepts without rounding. Required for a limit order; not accepted for a market order. */
+    price?: string;
+    /** Only for an order. Only reduce an open position; defaults to `false`. A reduce-only order takes no `leverage`. */
+    reduce_only?: boolean;
+    /** `buy` or `sell`. Required for an order. */
+    side?: CreateTradesRequest.Side;
+    /** Only for an order. The size in units of the market, as a decimal string, with at most the market's size decimals. Send exactly one of `size` or `notional`. The order must be worth at least 10 USD, unless reduce-only, and at most 5000 USD. */
+    size?: string;
+    /** Only for a market order. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100. */
+    slippage_bps?: number;
+    /** `order` places one order from the trading balance and sets cross `leverage` first. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     type: CreateTradesRequest.Type;
 }
 
 export namespace CreateTradesRequest {
-    /** `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** The kind of market. Required for an order. */
+    export const InstrumentType = {
+        Perpetual: "perpetual",
+    } as const;
+    export type InstrumentType = (typeof InstrumentType)[keyof typeof InstrumentType];
+    /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
+    export const OrderType = {
+        Market: "market",
+        Limit: "limit",
+    } as const;
+    export type OrderType = (typeof OrderType)[keyof typeof OrderType];
+    /** `buy` or `sell`. Required for an order. */
+    export const Side = {
+        Buy: "buy",
+        Sell: "sell",
+    } as const;
+    export type Side = (typeof Side)[keyof typeof Side];
+    /** `order` places one order from the trading balance and sets cross `leverage` first. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     export const Type = {
         Buy: "buy",
         Close: "close",
+        Order: "order",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }
