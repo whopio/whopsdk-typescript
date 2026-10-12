@@ -65,7 +65,7 @@ describe("EventsClient", () => {
                         },
                         ad_campaign: {
                             id: "adcamp_xxxxxxxxxxxxxx",
-                            platform: "meta",
+                            platform: "whop_ads",
                             title: "Ceramic coating — spring push",
                         },
                         ad_group: { id: "adgrp_xxxxxxxxxxxxxx", title: "Austin — SUV owners" },
