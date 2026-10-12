@@ -478,7 +478,9 @@ export class VariantsClient {
     }
 
     /**
-     * Previews tax for a variant before checkout, based on the buyer's location.
+     * @deprecated
+     *
+     * Deprecated. Quote tax with `POST /payment_quotes` instead. Previews tax for a variant before checkout, based on the buyer's location.
      *
      * @param {Whop.CalculateTaxVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
