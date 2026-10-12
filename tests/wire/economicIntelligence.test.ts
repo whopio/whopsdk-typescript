@@ -49,7 +49,7 @@ describe("EconomicIntelligenceClient", () => {
                     superseded_at: "2026-01-01T12:00:00.000Z",
                     target_url: "https://example.com/join",
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-                    user_feedback: "user_feedback",
+                    user_feedback: "They already do this",
                 },
             ],
             page_info: {
@@ -219,7 +219,7 @@ describe("EconomicIntelligenceClient", () => {
             superseded_at: "2026-01-01T12:00:00.000Z",
             target_url: "https://example.com/join",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-            user_feedback: "user_feedback",
+            user_feedback: "They already do this",
         };
 
         server
