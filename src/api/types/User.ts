@@ -25,8 +25,6 @@ export interface User {
     name: string | null;
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
-    /** Whop staff access flags. Populated only on the self view (retrieved with the reserved id `me`) for callers with staff-read scope; `null` there for every user who is not Whop staff, and always `null` elsewhere. */
-    staff: Whop.UserStaffAccess | null;
     /** The trading account address and its WebSocket subscriptions. Opt in with `include_trading=true` when retrieving `me`. `null` otherwise, without trading permission, or without an Ethereum wallet. */
     trading: Whop.TradingAccount | null;
     /** The user's unique username */
