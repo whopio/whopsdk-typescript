@@ -33,7 +33,7 @@ describe("AppsClient", () => {
                     banner_image: {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
-                    base_url: "base_url",
+                    base_url: "https://booking.shinetime.example",
                     businesses_created_count: 0,
                     businesses_created_logo_urls: [
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
