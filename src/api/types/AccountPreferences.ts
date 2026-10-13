@@ -33,6 +33,7 @@ export interface AccountPreferences {
     economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[];
     /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
     economic_intelligence_previous_period: Whop.AccountEconomicIntelligencePreviousPeriod | null;
+    feedback_options: Whop.FeedbackOption[];
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: AccountPreferences.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */

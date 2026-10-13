@@ -11,6 +11,8 @@ export interface CancelMembershipsRequest {
     id: string;
     /** `true` stops auto-renewal and keeps access until the current billing period ends. Omit or `false` revokes access immediately. */
     cancel_at_period_end?: boolean;
+    /** The ID of the feedback option the customer picked as their reason for canceling, from the account's `feedback_options` preference. The membership records the option's label as the customer saw it and its category as `cancel_option`. */
+    feedback_option_id?: string;
     /** Free-form note recording why the membership was canceled. */
     reason?: string;
 }

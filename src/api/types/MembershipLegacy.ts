@@ -26,6 +26,8 @@ export interface MembershipLegacy {
     currency: Whop.Currencies | null;
     /** The customer's responses to custom checkout questions configured on the product at the time of purchase. */
     custom_field_responses: MembershipLegacy.CustomFieldResponses.Item[];
+    /** The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason. */
+    feedback_option: MembershipLegacy.FeedbackOption | null;
     /** The recurring renewal price for this membership, formatted with currency symbol and billing interval. Null if the membership is not recurring. */
     formatted_renewal_price: string | null;
     /** The unique identifier for the membership. */
@@ -87,6 +89,14 @@ export namespace MembershipLegacy {
             /** The question asked by the custom field */
             question: string;
         }
+    }
+
+    /**
+     * The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason.
+     */
+    export interface FeedbackOption {
+        /** The option's label when the member picked it. Renaming the option later does not change it. */
+        label: string;
     }
 
     /**

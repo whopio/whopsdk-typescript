@@ -27,6 +27,8 @@ export interface Membership {
     current_period_start: string | null;
     /** When access ends for a membership with a fixed expiration, as an ISO 8601 timestamp. `null` when the membership has no expiration, such as a renewing membership. */
     expires_at: string | null;
+    /** The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason. */
+    feedback_option: Whop.MembershipFeedbackOption | null;
     /** Membership ID, prefixed `mem_`. */
     id: string;
     /** The variant's current up-front price, in the variant's currency. A list price, not necessarily what the buyer paid. `amount` is `"0.00"` when the first charge is free. */
@@ -77,6 +79,7 @@ export namespace Membership {
         MissingFeatures: "missing_features",
         TechnicalIssues: "technical_issues",
         BadExperience: "bad_experience",
+        Unused: "unused",
         Other: "other",
         Testing: "testing",
     } as const;
