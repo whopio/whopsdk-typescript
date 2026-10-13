@@ -34,6 +34,7 @@ describe("DomainsClient", () => {
                         {
                             capability: "verification",
                             code: "verification_required",
+                            code_block: null,
                             dns_records: [
                                 {
                                     name: "_whop.shop.example.com",
@@ -71,6 +72,7 @@ describe("DomainsClient", () => {
                         {
                             capability: "verification",
                             code: "verification_required",
+                            code_block: null,
                             dns_records: [
                                 {
                                     name: "_whop.shop.example.com",
@@ -108,6 +110,7 @@ describe("DomainsClient", () => {
                         {
                             capability: "verification",
                             code: "verification_required",
+                            code_block: null,
                             dns_records: [
                                 {
                                     name: "_whop.shop.example.com",
@@ -226,6 +229,7 @@ describe("DomainsClient", () => {
                 {
                     capability: "verification",
                     code: "verification_required",
+                    code_block: "code_block",
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",
@@ -370,6 +374,7 @@ describe("DomainsClient", () => {
                 {
                     capability: "verification",
                     code: "verification_required",
+                    code_block: "code_block",
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",
@@ -485,6 +490,7 @@ describe("DomainsClient", () => {
                 {
                     capability: "verification",
                     code: "verification_required",
+                    code_block: "code_block",
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",
@@ -587,6 +593,7 @@ describe("DomainsClient", () => {
                 {
                     capability: "verification",
                     code: "verification_required",
+                    code_block: "code_block",
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",
@@ -703,6 +710,7 @@ describe("DomainsClient", () => {
                 {
                     capability: "verification",
                     code: "verification_required",
+                    code_block: "code_block",
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",

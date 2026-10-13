@@ -7,6 +7,8 @@ export interface DomainIssue {
     capability: DomainIssue.Capability;
     /** What needs attention, as a stable code. */
     code: DomainIssue.Code;
+    /** Code to add to the site to fix the issue, ready to copy. `null` when the issue needs none. */
+    code_block: string | null;
     dns_records: Whop.DomainDnsRecord[];
     /** What needs attention and how to fix it. */
     message: string;
