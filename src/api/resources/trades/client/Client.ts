@@ -17,7 +17,7 @@ export declare namespace TradesClient {
 }
 
 /**
- * A Trade is one request on an account's or user's Whop-managed wallet. An `order` places one order from the trading balance, bridging the USDT0 it needs from the wallet first when the balance is short. A `close` closes the whole position in one market; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. A `deposit` or `withdraw` moves money between the wallet and the trading balance. Hyperliquid perpetuals are the only supported venue.
+ * A Trade is one request on an account's or user's Whop-managed wallet. An `order` places one order from the trading balance, bridging the USDT0 it needs from the wallet first when the balance is short. A `close` closes the whole position in one market; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. A `deposit` or `withdraw` moves money between the wallet and the trading balance. Orders trade Hyperliquid perpetuals and spot pairs priced in USDC.
  *
  * Use the Trades API to place orders, close positions and move funds, and follow each trade until it finishes. Trades run in the background; an order that bridged money in and does not fill sends that money back to the wallet, and `funds_location` says where the money is.
  *

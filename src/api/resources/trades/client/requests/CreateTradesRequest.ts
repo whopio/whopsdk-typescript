@@ -14,11 +14,11 @@ export interface CreateTradesRequest {
     amount?: string;
     /** Only for an order. Your own ID for the trade, 1 to 128 characters, unique for the account. Sending it again with the same order returns the same trade; with a different order it answers `409`. */
     client_order_id?: string;
-    /** The kind of market. Required for an order. */
+    /** `perpetual` or `spot`. Required for an order. Spot needs the trading account in Hyperliquid's unified account mode. */
     instrument_type?: CreateTradesRequest.InstrumentType;
-    /** Only for an order. The cross leverage, from 1 to the market's maximum. Required unless `reduce_only`; not accepted on a reduce-only order. */
+    /** Only for a perpetual order. The cross leverage, from 1 to the market's maximum. Required unless `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
-    /** The perpetual market, for example `BTC`. Required for an order or close; not accepted for a deposit or withdraw. */
+    /** The market: a perpetual such as `BTC`, or for spot a pair priced in USDC such as `HYPE/USDC`. Required for an order or close, and a close takes only a perpetual; not accepted for a deposit or withdraw. */
     market?: string;
     /** Only for an order. Free-form string-to-string annotations: up to 50 keys of at most 40 characters, values up to 500 characters. */
     metadata?: Record<string, string>;
@@ -28,7 +28,7 @@ export interface CreateTradesRequest {
     order_type?: CreateTradesRequest.OrderType;
     /** Only for an order. The limit price in USD, as a decimal string Hyperliquid accepts without rounding. Required for a limit order; not accepted for a market order. */
     price?: string;
-    /** Only for an order. Only reduce an open position; defaults to `false`. A reduce-only order takes no `leverage`. */
+    /** Only for a perpetual order. Only reduce an open position; defaults to `false`. A reduce-only order takes no `leverage`. */
     reduce_only?: boolean;
     /** `buy` or `sell`. Required for an order. */
     side?: CreateTradesRequest.Side;
@@ -36,14 +36,15 @@ export interface CreateTradesRequest {
     size?: string;
     /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100. */
     slippage_bps?: number;
-    /** `order` places one order from the trading balance and sets cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order from the trading balance, setting cross `leverage` first on a perpetual; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: CreateTradesRequest.Type;
 }
 
 export namespace CreateTradesRequest {
-    /** The kind of market. Required for an order. */
+    /** `perpetual` or `spot`. Required for an order. Spot needs the trading account in Hyperliquid's unified account mode. */
     export const InstrumentType = {
         Perpetual: "perpetual",
+        Spot: "spot",
     } as const;
     export type InstrumentType = (typeof InstrumentType)[keyof typeof InstrumentType];
     /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
@@ -58,7 +59,7 @@ export namespace CreateTradesRequest {
         Sell: "sell",
     } as const;
     export type Side = (typeof Side)[keyof typeof Side];
-    /** `order` places one order from the trading balance and sets cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order from the trading balance, setting cross `leverage` first on a perpetual; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     export const Type = {
         Close: "close",
         Order: "order",
