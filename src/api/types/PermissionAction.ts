@@ -5,6 +5,7 @@ export const PermissionAction = {
     WaitlistEntryRead: "waitlist_entry:read",
     WaitlistEntryCreate: "waitlist_entry:create",
     WaitlistEntryCancel: "waitlist_entry:cancel",
+    ReviewDelete: "review:delete",
     ExperimentManage: "experiment:manage",
     ExperimentRead: "experiment:read",
     DomainManage: "domain:manage",

@@ -19435,7 +19435,7 @@ await client.paymentMethods.deletePaymentMethod({
 <dl>
 <dd>
 
-Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`.
+Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`. Cart entries must name existing variants with `plan_id`.
 </dd>
 </dl>
 </dd>
@@ -24359,7 +24359,7 @@ await client.resolutionCenterCases.withdraw({
 <dl>
 <dd>
 
-Lists the customer reviews for a product.
+Lists the published reviews for a product or account. Without `account_id` or `product_id`, a user lists the reviews they wrote, an account or app API key lists its account's reviews, and a request without credentials returns 400.
 </dd>
 </dl>
 </dd>
@@ -24375,13 +24375,8 @@ Lists the customer reviews for a product.
 
 ```typescript
 const pageableResponse = await client.reviews.list({
-    first: 42,
-    last: 42,
-    product_id: "prod_xxxxxxxxxxxxx",
-    min_stars: 42,
-    max_stars: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    account_id: "biz_xxxxxxxxxxxxxx",
+    product_id: "prod_xxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -24389,13 +24384,8 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.reviews.list({
-    first: 42,
-    last: 42,
-    product_id: "prod_xxxxxxxxxxxxx",
-    min_stars: 42,
-    max_stars: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    account_id: "biz_xxxxxxxxxxxxxx",
+    product_id: "prod_xxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -24450,7 +24440,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the details of an existing review.
+Retrieves a published review. Reviews that are not published return 404.
 </dd>
 </dl>
 </dd>
@@ -24484,6 +24474,71 @@ await client.reviews.retrieve({
 <dd>
 
 **request:** `Whop.RetrieveReviewsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReviewsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.reviews.<a href="/src/api/resources/reviews/client/Client.ts">delete</a>({ ...params }) -> Whop.DeleteReviewsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a review the signed-in user wrote. Requires the `review:delete` scope, and returns 404 for a review another user wrote.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.reviews.delete({
+    id: "rev_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.DeleteReviewsRequest` 
     
 </dd>
 </dl>

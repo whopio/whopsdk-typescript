@@ -57,6 +57,7 @@ describe("DirectClient", () => {
                 },
             ],
             id: "pay_xxxxxxxxxxxxxx",
+            ip_address: "ip_address",
             last_payment_attempt_at: "last_payment_attempt_at",
             line_items: [
                 {

@@ -2,64 +2,36 @@
 
 import type * as Whop from "../index.js";
 
-/**
- * A user-submitted review of a company, including a star rating and optional text feedback.
- */
 export interface ReviewListItem {
-    /** A list of files and media attached to the review. */
-    attachments: ReviewListItem.Attachments.Item[];
-    /** The datetime the review was created. */
+    attachments: Whop.ReviewAttachment[];
+    /** When the review was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** The body text of the review containing the user's detailed feedback. Returns an empty string if no description was provided. */
     description: string | null;
     /** The unique identifier for the review. */
     id: string;
-    /** The timestamp of when the reviewer first joined the product. Null if unknown. */
+    /** When the reviewer first joined the product, as an ISO 8601 timestamp. Null if unknown. */
     joined_at: string | null;
     /** Whether the reviewer paid for the product. Null if the payment status is unknown. */
     paid_for_product: boolean | null;
-    /** The timestamp of when the review was published. Null if the review has not been published yet. */
+    /** When the review was published, as an ISO 8601 timestamp. Null if unknown. */
     published_at: string | null;
     /** The star rating given by the reviewer, from 1 to 5. */
     stars: number;
-    /** The current moderation status of the review. */
-    status: Whop.ReviewStatus;
+    /** The moderation status of the review. Only published reviews are returned. */
+    status: ReviewListItem.Status;
     /** A short summary title for the review. Null if the reviewer did not provide one. */
     title: string | null;
-    /** The datetime the review was last updated. */
+    /** When the review was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
     /** The user account of the person who wrote this review. */
-    user: ReviewListItem.User;
+    user: Whop.ReviewUser;
 }
 
 export namespace ReviewListItem {
-    export type Attachments = Attachments.Item[];
-
-    export namespace Attachments {
-        /**
-         * Represents an image attachment
-         */
-        export interface Item {
-            /** Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg. */
-            content_type: string | null;
-            /** The original filename of the uploaded attachment, including its file extension. */
-            filename: string | null;
-            /** Represents a unique identifier that is Base64 obfuscated. It is often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`) input value will be accepted as an ID. */
-            id: string;
-            /** A pre-optimized URL for rendering this attachment on the client. This should be used for displaying attachments in apps. */
-            url: string | null;
-        }
-    }
-
-    /**
-     * The user account of the person who wrote this review.
-     */
-    export interface User {
-        /** The unique identifier for the user. */
-        id: string;
-        /** The user's display name shown on their public profile. */
-        name: string | null;
-        /** The user's unique username shown on their public profile. */
-        username: string;
-    }
+    /** The moderation status of the review. Only published reviews are returned. */
+    export const Status = {
+        Published: "published",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }

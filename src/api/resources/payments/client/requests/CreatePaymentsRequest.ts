@@ -21,6 +21,8 @@ export interface CreatePaymentsRequest extends Whop.PaymentInput {
     email?: string | null;
     /** The buyer's IPv4 or IPv6 address, used to assess the charge's risk and passed to the processor. Ignored unless a saved payment method is charged with `off_session` set to false. */
     ip_address?: string | null;
+    /** What the buyer is purchasing. Each entry takes exactly one of `plan_id` or an inline `plan`. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. Mutually exclusive with `plan_id` and `plan`. */
+    line_items?: CreatePaymentsRequest.LineItems.Item[];
     /** The member to charge, prefixed `mber_`. Required with `payment_method_id` unless `confirmation_token` is provided. */
     member_id?: string | null;
     /** Custom metadata to attach to the payment. */
@@ -42,6 +44,12 @@ export interface CreatePaymentsRequest extends Whop.PaymentInput {
 }
 
 export namespace CreatePaymentsRequest {
+    export type LineItems = LineItems.Item[];
+
+    export namespace LineItems {
+        export type Item = unknown;
+    }
+
     /**
      * A payment method collected on the seller's device rather than described by a confirmation token. `type` names it and the member named after it carries what the device needs. Today only `card_present` (Tap to Pay): nothing is collected on this call, the payment is created first and the reader then collects against it with the client secret the status endpoint serves in `next_action`. Mutually exclusive with `confirmation_token`, `member_id` and `payment_method_id`.
      */

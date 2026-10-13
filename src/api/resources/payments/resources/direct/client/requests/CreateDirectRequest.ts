@@ -28,6 +28,8 @@ export interface CreateDirectRequest extends Whop.PaymentInput {
     billing_details: CreateDirectRequest.BillingDetails;
     /** Whether to capture the payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. */
     capture?: boolean | null;
+    /** What the buyer is purchasing. Each entry names an existing variant by plan_id. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
+    line_items?: CreateDirectRequest.LineItems.Item[];
     /** The member to charge, prefixed `mber_`. When omitted the buyer is resolved from `billing_details.email`. */
     member_id?: string | null;
     /** Custom metadata to attach to the payment. */
@@ -78,6 +80,17 @@ export namespace CreateDirectRequest {
             postal_code: string;
             /** State, province or region. */
             state?: (string | null) | undefined;
+        }
+    }
+
+    export type LineItems = LineItems.Item[];
+
+    export namespace LineItems {
+        export interface Item {
+            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
+            plan_id: string;
+            /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
+            quantity?: (number | null) | undefined;
         }
     }
 
