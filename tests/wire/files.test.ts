@@ -18,9 +18,12 @@ describe("FilesClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    blurhash: "blurhash",
                     content_type: "application/pdf",
                     created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
                     filename: "evidence.pdf",
+                    height: 1,
                     id: "file_xxxxxxxxxxxxxx",
                     multipart_chunk_size: 5242880,
                     multipart_upload_id: "upload-id",
@@ -31,6 +34,7 @@ describe("FilesClient", () => {
                         },
                     ],
                     object: "file",
+                    removed_by_moderation: false,
                     size: 9670,
                     upload_headers: { key: "value" },
                     upload_status: "pending",
@@ -38,6 +42,8 @@ describe("FilesClient", () => {
                         "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
                     url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
                 },
             ],
             page_info: {
@@ -116,9 +122,12 @@ describe("FilesClient", () => {
         });
         const rawRequestBody = { filename: "terms.pdf" };
         const rawResponseBody = {
+            blurhash: "blurhash",
             content_type: "application/pdf",
             created_at: "2026-01-01T12:00:00.000Z",
+            duration_seconds: 1.1,
             filename: "evidence.pdf",
+            height: 1,
             id: "file_xxxxxxxxxxxxxx",
             multipart_chunk_size: 5242880,
             multipart_upload_id: "upload-id",
@@ -129,6 +138,7 @@ describe("FilesClient", () => {
                 },
             ],
             object: "file",
+            removed_by_moderation: false,
             size: 9670,
             upload_headers: { key: "value" },
             upload_status: "pending",
@@ -136,6 +146,8 @@ describe("FilesClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
             url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             visibility: "public",
+            waveform_url: "waveform_url",
+            width: 1,
         };
 
         server
@@ -248,9 +260,12 @@ describe("FilesClient", () => {
         });
 
         const rawResponseBody = {
+            blurhash: "blurhash",
             content_type: "application/pdf",
             created_at: "2026-01-01T12:00:00.000Z",
+            duration_seconds: 1.1,
             filename: "evidence.pdf",
+            height: 1,
             id: "file_xxxxxxxxxxxxxx",
             multipart_chunk_size: 5242880,
             multipart_upload_id: "upload-id",
@@ -261,6 +276,7 @@ describe("FilesClient", () => {
                 },
             ],
             object: "file",
+            removed_by_moderation: false,
             size: 9670,
             upload_headers: { key: "value" },
             upload_status: "pending",
@@ -268,6 +284,8 @@ describe("FilesClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
             url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             visibility: "public",
+            waveform_url: "waveform_url",
+            width: 1,
         };
 
         server.mockEndpoint().get("/files/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -334,9 +352,12 @@ describe("FilesClient", () => {
             multipart_upload_id: "upload-id",
         };
         const rawResponseBody = {
+            blurhash: "blurhash",
             content_type: "application/pdf",
             created_at: "2026-01-01T12:00:00.000Z",
+            duration_seconds: 1.1,
             filename: "evidence.pdf",
+            height: 1,
             id: "file_xxxxxxxxxxxxxx",
             multipart_chunk_size: 5242880,
             multipart_upload_id: "upload-id",
@@ -347,6 +368,7 @@ describe("FilesClient", () => {
                 },
             ],
             object: "file",
+            removed_by_moderation: false,
             size: 9670,
             upload_headers: { key: "value" },
             upload_status: "pending",
@@ -354,6 +376,8 @@ describe("FilesClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
             url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             visibility: "public",
+            waveform_url: "waveform_url",
+            width: 1,
         };
 
         server
