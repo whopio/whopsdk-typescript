@@ -15,6 +15,11 @@ export declare namespace ReviewsClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A Review is a customer's star rating and optional written feedback on a product, shown on the product's store page.
+ *
+ * Use the Reviews API to list a product's reviews, filtered by star rating or creation date, and retrieve a review by ID.
+ */
 export class ReviewsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ReviewsClient.Options>;
 
@@ -23,59 +28,55 @@ export class ReviewsClient {
     }
 
     /**
-     * Lists the customer reviews for a product.
+     * Lists the published reviews for a product or account. Without `account_id` or `product_id`, a user lists the reviews they wrote, an account or app API key lists its account's reviews, and a request without credentials returns 400.
      *
      * @param {Whop.ListReviewsRequest} request
      * @param {ReviewsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.reviews.list({
-     *         first: 42,
-     *         last: 42,
-     *         product_id: "prod_xxxxxxxxxxxxx",
-     *         min_stars: 42,
-     *         max_stars: 42,
-     *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z"
+     *         account_id: "biz_xxxxxxxxxxxxxx",
+     *         product_id: "prod_xxxxxxxxxxxxx"
      *     })
      */
     public async list(
-        request: Whop.ListReviewsRequest,
+        request: Whop.ListReviewsRequest = {},
         requestOptions?: ReviewsClient.RequestOptions,
     ): Promise<core.Page<Whop.ReviewListItem, Whop.ListReviewsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListReviewsRequest): Promise<core.WithRawResponse<Whop.ListReviewsResponse>> => {
                 const {
-                    after,
-                    before,
-                    first,
-                    last,
+                    account_id: accountId,
                     product_id: productId,
                     min_stars: minStars,
                     max_stars: maxStars,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
+                    account_id: accountId,
                     product_id: productId,
                     min_stars: minStars,
                     max_stars: maxStars,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                    first,
+                    after,
+                    last,
+                    before,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -83,7 +84,7 @@ export class ReviewsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -117,21 +118,8 @@ export class ReviewsClient {
                     switch (_response.error.statusCode) {
                         case 400:
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 401:
-                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         case 404:
                             throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -158,18 +146,12 @@ export class ReviewsClient {
     }
 
     /**
-     * Retrieves the details of an existing review.
+     * Retrieves a published review. Reviews that are not published return 404.
      *
      * @param {Whop.RetrieveReviewsRequest} request
      * @param {ReviewsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -195,7 +177,7 @@ export class ReviewsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -222,20 +204,8 @@ export class ReviewsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -246,5 +216,84 @@ export class ReviewsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/reviews/{id}");
+    }
+
+    /**
+     * Deletes a review the signed-in user wrote. Requires the `review:delete` scope, and returns 404 for a review another user wrote.
+     *
+     * @param {Whop.DeleteReviewsRequest} request
+     * @param {ReviewsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.reviews.delete({
+     *         id: "rev_xxxxxxxxxxxxxx"
+     *     })
+     */
+    public delete(
+        request: Whop.DeleteReviewsRequest,
+        requestOptions?: ReviewsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.DeleteReviewsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
+    }
+
+    private async __delete(
+        request: Whop.DeleteReviewsRequest,
+        requestOptions?: ReviewsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.DeleteReviewsResponse>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `reviews/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.DeleteReviewsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/reviews/{id}");
     }
 }

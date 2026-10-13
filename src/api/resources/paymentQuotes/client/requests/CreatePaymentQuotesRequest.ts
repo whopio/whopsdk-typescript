@@ -13,6 +13,8 @@ export interface CreatePaymentQuotesRequest extends Whop.PaymentInput {
     address?: CreatePaymentQuotesRequest.Address | null;
     /** The buyer's IP address, when your server makes the call on their behalf. Locates the buyer when neither address carries a country and no `presentment_country` is sent. A quote located this way (`located_by` is `ip_address`) is a preview: a payment refuses it with `quote_preview_only`, so quote again with the buyer's address before paying. Also where `presentment_currency` `auto` and `recommended_currencies` find the buyer's local currency, and where a payment method must be able to collect it. */
     ip_address?: string | null;
+    /** What the buyer is purchasing. Each entry names an existing variant by plan_id. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
+    line_items?: CreatePaymentQuotesRequest.LineItems.Item[];
     /** The country to price the purchase for, as an ISO 3166-1 alpha-2 code such as `JP`, when the buyer chose one: a store's country picker. Prices in the currency `auto` would pick for a buyer in that country, so send it instead of `presentment_currency`, never with it. Whether a payment method can collect that currency is still judged where the buyer is: by `ip_address`, and by this country only without one. With no address that carries a country, tax is estimated for this country (`located_by` is `presentment_country`) at the country level, and a quote located this way is a preview a payment refuses with `quote_preview_only`. Send it only once the buyer has chosen a country: without it, an `ip_address` estimates more precisely, such as for a US state. For a country Whop has no currency for, the quote is priced as `auto` for the buyer's `ip_address`, and tax is still estimated for the country. */
     presentment_country?: string | null;
     /** The currency to price and charge the purchase in. Omit it, or send null, to price in the variants' own currency. `auto` prices in the currency of the country Whop places the buyer's `ip_address` in when the purchase can be converted into it and a payment method can collect it, and in the variants' own currency otherwise, including when no `ip_address` is sent or Whop cannot place it in a country. To choose that country instead, send `presentment_country` in place of this. A three-letter ISO 4217 code, such as `eur`, prices in that currency or is refused: with `presentment_currency_unsupported` when the purchase cannot be converted into it (adaptive pricing is off for the variant, the variant is not a one-time purchase, or `plan` describes a variant that does not exist yet), and with `presentment_currency_not_payable` when no payment method can collect it. A converted quote states every amount in this currency at an `exchange_rate` fixed until `expires_at`, and the payment that consumes it is charged in this currency at that rate. */
@@ -42,6 +44,17 @@ export namespace CreatePaymentQuotesRequest {
         postal_code?: (string | null) | undefined;
         /** State, province, or region code, such as `CA`. */
         state?: (string | null) | undefined;
+    }
+
+    export type LineItems = LineItems.Item[];
+
+    export namespace LineItems {
+        export interface Item {
+            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
+            plan_id: string;
+            /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
+            quantity?: (number | null) | undefined;
+        }
     }
 
     /**

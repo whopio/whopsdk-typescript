@@ -20,30 +20,30 @@ describe("ReviewsClient", () => {
                 {
                     attachments: [
                         {
-                            content_type: "image/jpeg",
-                            filename: "document.pdf",
-                            id: "id",
-                            url: "https://media.whop.com/abc123/optimized.jpg",
+                            content_type: "image/png",
+                            filename: "coated-hood.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://img.whop.com/xxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxx/mb:180000/plain/https://assets-2-rough.whop.com/uploads/image/2026-01-01/review-coated-hood",
                         },
                     ],
-                    created_at: "2023-12-01T05:00:00Z",
-                    description: "Great product, really helped me grow my audience.",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    description: "Two years on and the paint still beads like the day it was coated.",
                     id: "rev_xxxxxxxxxxxxxx",
-                    joined_at: "2023-12-01T05:00:00Z",
+                    joined_at: "2026-01-01T12:00:00.000Z",
                     paid_for_product: true,
-                    published_at: "2023-12-01T05:00:00Z",
-                    stars: 42,
-                    status: "pending",
-                    title: "Amazing community and tools",
-                    updated_at: "2023-12-01T05:00:00Z",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    published_at: "2026-01-01T12:00:00.000Z",
+                    stars: 4,
+                    status: "published",
+                    title: "Worth every penny",
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    user: { id: "user_xxxxxxxxxxxxxx", name: "Dana Whitfield", username: "danawhitfield" },
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -57,13 +57,8 @@ describe("ReviewsClient", () => {
 
         const expected = rawResponseBody;
         const page = await client.reviews.list({
-            first: 42,
-            last: 42,
+            account_id: "biz_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxx",
-            min_stars: 42,
-            max_stars: 42,
-            created_before: "2023-12-01T05:00:00Z",
-            created_after: "2023-12-01T05:00:00Z",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -87,9 +82,7 @@ describe("ReviewsClient", () => {
         server.mockEndpoint().get("/reviews").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
+            return await client.reviews.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -105,118 +98,11 @@ describe("ReviewsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/reviews").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("list (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("list (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/reviews").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
+            return await client.reviews.list();
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.list({
-                product_id: "product_id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 
     test("retrieve (1)", async () => {
@@ -230,27 +116,31 @@ describe("ReviewsClient", () => {
         });
 
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             attachments: [
                 {
-                    content_type: "image/jpeg",
-                    filename: "document.pdf",
-                    id: "id",
-                    url: "https://media.whop.com/abc123/optimized.jpg",
+                    content_type: "image/png",
+                    filename: "coated-hood.png",
+                    id: "file_xxxxxxxxxxxxxx",
+                    url: "https://img.whop.com/xxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxx/mb:180000/plain/https://assets-2-rough.whop.com/uploads/image/2026-01-01/review-coated-hood",
                 },
             ],
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
-            created_at: "2023-12-01T05:00:00Z",
-            description: "Great product, really helped me grow my audience.",
+            created_at: "2026-01-01T12:00:00.000Z",
+            description: "Two years on and the paint still beads like the day it was coated.",
             id: "rev_xxxxxxxxxxxxxx",
-            joined_at: "2023-12-01T05:00:00Z",
+            joined_at: "2026-01-01T12:00:00.000Z",
             paid_for_product: true,
-            product: { id: "prod_xxxxxxxxxxxxx", title: "Pickaxe Analytics" },
-            published_at: "2023-12-01T05:00:00Z",
-            stars: 42,
-            status: "pending",
-            title: "Amazing community and tools",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
+            published_at: "2026-01-01T12:00:00.000Z",
+            stars: 4,
+            status: "published",
+            title: "Worth every penny",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user: { id: "user_xxxxxxxxxxxxxx", name: "Dana Whitfield", username: "danawhitfield" },
         };
 
         server
@@ -279,69 +169,6 @@ describe("ReviewsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("retrieve (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.reviews.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("retrieve (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/reviews/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -351,7 +178,7 @@ describe("ReviewsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("retrieve (6)", async () => {
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -361,18 +188,23 @@ describe("ReviewsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { deleted: true, id: "rev_xxxxxxxxxxxxxx" };
 
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .delete("/reviews/rev_xxxxxxxxxxxxxx")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
-        await expect(async () => {
-            return await client.reviews.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
+        const response = await client.reviews.delete({
+            id: "rev_xxxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("retrieve (7)", async () => {
+    test("delete (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -384,16 +216,16 @@ describe("ReviewsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().delete("/reviews/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.reviews.retrieve({
+            return await client.reviews.delete({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
+        }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (8)", async () => {
+    test("delete (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -405,12 +237,33 @@ describe("ReviewsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/reviews/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().delete("/reviews/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.reviews.retrieve({
+            return await client.reviews.delete({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("delete (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/reviews/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.reviews.delete({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
     });
 });

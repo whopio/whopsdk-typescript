@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveReviewsRequest {
-    /** The unique identifier of the review to retrieve. */
+    /** The unique identifier of the review. */
     id: string;
 }
