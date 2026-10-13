@@ -3,6 +3,7 @@ export * from "./InviteMembershipsResponse.js";
 export * from "./ListMembershipsRequestDirection.js";
 export * from "./ListMembershipsRequestOrder.js";
 export * from "./ListMembershipsRequestStatus.js";
+export * from "./ListMembershipsRequestStatusesItem.js";
 export * from "./ListMembershipsResponse.js";
 export * from "./PostMembershipActivatedPayload.js";
 export * from "./PostMembershipTrialEndingSoonPayload.js";

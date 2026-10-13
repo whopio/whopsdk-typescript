@@ -16494,7 +16494,10 @@ Lists the members of an account. A member is one buyer's relationship with the a
 
 ```typescript
 const pageableResponse = await client.members.list({
-    user_ids: ["user_xxxxxxxxxxxxxx"]
+    user_ids: ["user_xxxxxxxxxxxxxx"],
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -16502,7 +16505,10 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.members.list({
-    user_ids: ["user_xxxxxxxxxxxxxx"]
+    user_ids: ["user_xxxxxxxxxxxxxx"],
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -16638,13 +16644,21 @@ Lists every membership the caller can read: an account API key its account's; a 
 <dd>
 
 ```typescript
-const pageableResponse = await client.memberships.list();
+const pageableResponse = await client.memberships.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
+});
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.memberships.list();
+let page = await client.memberships.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -31252,6 +31266,152 @@ const response = page.response;
 <dd>
 
 **requestOptions:** `LogsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Members Notes
+<details><summary><code>client.members.notes.<a href="/src/api/resources/members/resources/notes/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.MemberNote, Whop.ListNotesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists a member's notes, newest first. Notes are visible to the account's team.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.members.notes.list({
+    member_id: "member_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.members.notes.list({
+    member_id: "member_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.members.ListNotesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `NotesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.members.notes.<a href="/src/api/resources/members/resources/notes/client/Client.ts">create</a>({ ...params }) -> Whop.MemberNote</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a note to a member. Notes are visible to the account's team.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.members.notes.create({
+    member_id: "member_id",
+    content: "Wants a call next week."
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.members.CreateNotesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `NotesClient.RequestOptions` 
     
 </dd>
 </dl>

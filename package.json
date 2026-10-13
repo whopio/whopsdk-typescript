@@ -1177,6 +1177,17 @@
             },
             "default": "./dist/cjs/api/resources/members/resources/logs/exports.js"
         },
+        "./members/notes": {
+            "import": {
+                "types": "./dist/esm/api/resources/members/resources/notes/exports.d.mts",
+                "default": "./dist/esm/api/resources/members/resources/notes/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/members/resources/notes/exports.d.ts",
+                "default": "./dist/cjs/api/resources/members/resources/notes/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/members/resources/notes/exports.js"
+        },
         "./notifications/topics": {
             "import": {
                 "types": "./dist/esm/api/resources/notifications/resources/topics/exports.d.mts",

@@ -9,6 +9,10 @@ export const ListMembershipsRequestStatus = {
     Expired: "expired",
     Canceling: "canceling",
     Paused: "paused",
+    Expiring: "expiring",
+    OneTime: "one_time",
+    Unclaimed: "unclaimed",
+    Banned: "banned",
 } as const;
 export type ListMembershipsRequestStatus =
     (typeof ListMembershipsRequestStatus)[keyof typeof ListMembershipsRequestStatus];

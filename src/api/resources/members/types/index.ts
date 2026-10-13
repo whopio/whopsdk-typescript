@@ -1,5 +1,7 @@
 export * from "./ListMembersRequestAccessLevel.js";
 export * from "./ListMembersRequestDirection.js";
+export * from "./ListMembersRequestMembershipStatus.js";
+export * from "./ListMembersRequestMostRecentActionsItem.js";
 export * from "./ListMembersRequestOrder.js";
 export * from "./ListMembersRequestStatus.js";
 export * from "./ListMembersResponse.js";

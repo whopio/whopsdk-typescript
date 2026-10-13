@@ -22,6 +22,14 @@ export interface ListSupportChannelsRequest {
     view?: Whop.SupportChannelView;
     /** Whether to filter by open or resolved support channels. Set to true to only return channels awaiting a response, or false for resolved channels. */
     open?: boolean;
+    /** Only return support channels opened by this customer. */
+    customer_user_id?: string;
+    /** Set to true to only return channels the authenticated user has joined as a participant. Requires a user. */
+    participated?: boolean;
+    /** Set to true to return `last_message` and `unread` on each channel. Both are `null` otherwise, which keeps large lists fast. */
+    include_last_message?: boolean;
+    /** Set to true to return `participated` on each channel. It is `null` otherwise, which keeps large lists fast. */
+    include_participated?: boolean;
     direction?: Whop.Direction;
     order?: Whop.MessageChannelOrder;
     /** The unique identifier of the company to list support channels for. Includes channels of child companies. When omitted, returns support channels across all companies the user has access to. */

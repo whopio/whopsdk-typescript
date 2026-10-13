@@ -15,34 +15,78 @@ export interface Membership {
     canceled_at: string | null;
     /** Free-text explanation provided when canceling. `null` when no reason was provided. */
     cancellation_reason: string | null;
+    /** How renewals are collected. `charge_automatically` charges the saved payment method each period; `send_invoice` emails the buyer an invoice each period. `null` when not set. */
+    collection_method: Membership.CollectionMethod | null;
     /** When the membership was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** When the current billing period renews, or when a non-renewing membership expires, as an ISO 8601 timestamp. `null` for one-time purchases with no expiration. */
     current_period_end: string | null;
     /** When the current billing period started, as an ISO 8601 timestamp. `null` when no billing period is recorded. */
     current_period_start: string | null;
+    /** When access ends for a membership with a fixed expiration, as an ISO 8601 timestamp. `null` when the membership has no expiration, such as a renewing membership. */
+    expires_at: string | null;
     /** Membership ID, prefixed `mem_`. */
     id: string;
+    /** The variant's current up-front price, in the variant's currency. A list price, not necessarily what the buyer paid. `amount` is `"0.00"` when the first charge is free. */
+    initial_price: Whop.Money;
     /** The software license key for this membership. Only present when the product includes a software licensing experience. */
     license_key: string | null;
     /** URL where the buyer can sign in to manage billing. `null` without a member record or unless the caller is the buyer or has `member:manage` on the account. */
     manage_url: string | null;
     /** The caller's member row on the account. Present only when the membership belongs to the caller; `null` on seller-side reads. */
     member: Whop.MembershipMember | null;
+    /** The buyer's member record on the account, prefixed `mber_`. `null` when the membership has no member record, such as an unclaimed membership. */
+    member_id: string | null;
     /** Custom key-value pairs stored on the membership, commonly used for software licensing. */
     metadata: Record<string, unknown>;
+    /** The membership's latest lifecycle event, such as `renewing_on` or `canceled_on`. Pair it with `most_recent_action_at`. `null` when none is recorded. */
+    most_recent_action: Membership.MostRecentAction | null;
+    /** When `most_recent_action` happened or is scheduled to happen, as an ISO 8601 timestamp. A future time for upcoming events such as `renewing_on`. `null` when no action is recorded. */
+    most_recent_action_at: string | null;
     /** The buyer's phone number recorded for this membership, or `null`. The number collected (or verified) at checkout when the seller's phone collection is on; falls back to the buyer's account number when they have shared one with this seller. */
     phone_number: string | null;
     /** The variant the buyer purchased, prefixed `plan_`. */
     plan_id: string;
+    /** The product this membership grants access to. */
+    product: Whop.MembershipProduct;
     /** The product this membership grants access to, prefixed `prod_`. */
     product_id: string;
     /** The promo code discounting this membership, prefixed `promo_`. `null` when none is applied. Set at checkout or by Apply Promo Code to Membership. */
     promo_code_id: string | null;
+    /** What the next renewal charges, after any promo code that still applies. `null` for non-renewing memberships. */
+    renewal_price: Whop.Money | null;
+    /** Paid installments counted so far on a split pay membership. `null` when the membership is not on split pay, or before its first installment is counted. */
+    split_pay_current_payments: number | null;
+    /** Installment payments required before the membership stops billing. `null` when the membership is not on split pay. */
+    split_pay_required_payments: number | null;
     /** Billing state of the membership. `active`/`trialing` memberships grant access; `past_due` is the grace period after a failed payment; `completed` one-time purchases keep access; `canceled`/`expired` do not. */
     status: Whop.MembershipStatus;
     /** When the membership was last changed, as an ISO 8601 timestamp. Reflects the most recent change to the membership itself, so you can reconcile against webhook retries, replays, and backfills. */
     updated_at: string;
     /** The buyer, prefixed `user_`. `null` when the buyer is another business or the membership is unclaimed. */
     user_id: string | null;
+}
+
+export namespace Membership {
+    /** How renewals are collected. `charge_automatically` charges the saved payment method each period; `send_invoice` emails the buyer an invoice each period. `null` when not set. */
+    export const CollectionMethod = {
+        ChargeAutomatically: "charge_automatically",
+        SendInvoice: "send_invoice",
+    } as const;
+    export type CollectionMethod = (typeof CollectionMethod)[keyof typeof CollectionMethod];
+    /** The membership's latest lifecycle event, such as `renewing_on` or `canceled_on`. Pair it with `most_recent_action_at`. `null` when none is recorded. */
+    export const MostRecentAction = {
+        CanceledOn: "canceled_on",
+        FinishedSplitPayAt: "finished_split_pay_at",
+        CancelingOn: "canceling_on",
+        EndingOn: "ending_on",
+        RenewingOn: "renewing_on",
+        PastDue: "past_due",
+        NextPaymentAttempt: "next_payment_attempt",
+        PausedAt: "paused_at",
+        TrialEndsAt: "trial_ends_at",
+        UnresolvedAt: "unresolved_at",
+        TrialCancelingOn: "trial_canceling_on",
+    } as const;
+    export type MostRecentAction = (typeof MostRecentAction)[keyof typeof MostRecentAction];
 }

@@ -4,6 +4,7 @@ export const ListMembersRequestOrder = {
     CreatedAt: "created_at",
     JoinedAt: "joined_at",
     LastAccessedAt: "last_accessed_at",
+    MostRecentActionAt: "most_recent_action_at",
     UsdTotalSpent: "usd_total_spent",
 } as const;
 export type ListMembersRequestOrder = (typeof ListMembersRequestOrder)[keyof typeof ListMembersRequestOrder];

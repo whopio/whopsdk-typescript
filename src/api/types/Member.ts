@@ -9,18 +9,28 @@ export interface Member {
     account_id: string;
     /** When the member record was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** The name to show for this member: the user's name, or their username when they have not set one. The buying business's name when `user` is `null`. */
+    display_name: string;
+    /** The user's email address. `null` without `member:email:read` on the account, when the buyer is another business, or when the user has no assigned email. */
+    email: string | null;
     /** Member ID, prefixed `mber_`. */
     id: string;
     /** When the member first joined the account, as an ISO 8601 timestamp. */
     joined_at: string;
     /** When the member last opened the account's content, as an ISO 8601 timestamp. `null` if they never have. */
     last_accessed_at: string | null;
+    /** The member's latest lifecycle state on the account, derived from their memberships, such as `paid_subscriber`, `canceling`, or `churned`. `null` until it is first computed. */
+    most_recent_action: Member.MostRecentAction | null;
+    /** When `most_recent_action` took effect, as an ISO 8601 timestamp. `null` when `most_recent_action` is `null`. */
+    most_recent_action_at: string | null;
     /** The member's phone number, or `null`. Their account number when they have shared one with this seller; otherwise the most recent number collected (or verified) at checkout. */
     phone_number: string | null;
     /** `joined` while the member is part of the account, `left` after they leave. */
     status: Member.Status;
     /** The member's current token balance for this account, computed from token transactions. */
     token_balance: number;
+    /** How much the member has spent on the account's products, in USD. */
+    usd_total_spent: Whop.Money;
     /** The user behind this member. `null` when the buyer is another business rather than a person. */
     user: Whop.UserSummary | null;
 }
@@ -33,6 +43,23 @@ export namespace Member {
         Customer: "customer",
     } as const;
     export type AccessLevel = (typeof AccessLevel)[keyof typeof AccessLevel];
+    /** The member's latest lifecycle state on the account, derived from their memberships, such as `paid_subscriber`, `canceling`, or `churned`. `null` until it is first computed. */
+    export const MostRecentAction = {
+        Canceling: "canceling",
+        Churned: "churned",
+        FinishedSplitPay: "finished_split_pay",
+        Paused: "paused",
+        PaidSubscriber: "paid_subscriber",
+        PaidOnce: "paid_once",
+        Expiring: "expiring",
+        Joined: "joined",
+        Left: "left",
+        Trialing: "trialing",
+        PendingEntry: "pending_entry",
+        Renewing: "renewing",
+        PastDue: "past_due",
+    } as const;
+    export type MostRecentAction = (typeof MostRecentAction)[keyof typeof MostRecentAction];
     /** `joined` while the member is part of the account, `left` after they leave. */
     export const Status = {
         Joined: "joined",
