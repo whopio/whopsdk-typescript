@@ -12,6 +12,8 @@ export interface TransferOwnershipAccountsRequest {
     id: string;
     /** If true, the current owner is credited as the account's Whop partner, earning partner commission on its sales. Requires the current owner to already be an enrolled Whop partner. Skipped if the account already has an active partner. */
     as_partner?: boolean;
+    /** Your team membership on the business this referral is made for, prefixed `ausr_`. The referral then credits that team instead of you personally. Requires `as_partner`. */
+    authorized_user_id?: string;
     /** The user to transfer ownership to: a user ID (`user_*`) or an email address. An email address with no Whop account yet is sent an invite to create one. */
     identifier: string;
     /** A note from the partner, shown as a quote in the invite email and signed with their name. Requires `as_partner`; sending it on an ordinary transfer is a 400. Omit it and the email sends without a note. */
