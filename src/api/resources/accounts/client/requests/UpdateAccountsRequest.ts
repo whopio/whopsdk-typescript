@@ -19,8 +19,6 @@ export interface UpdateAccountsRequest {
     business_address?: UpdateAccountsRequest.BusinessAddress;
     /** The legal business name used with the account's tax address. */
     business_name?: string | null;
-    /** High-level business category for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
-    business_type?: string | null;
     /** The account's cancellation policy document. Attached to new disputes as the cancellation policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
     cancellation_policy?: UpdateAccountsRequest.CancellationPolicy | null;
     /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
@@ -37,10 +35,6 @@ export interface UpdateAccountsRequest {
     featured_affiliate_product_id?: string | null;
     /** Public account home page preferences. */
     home_preferences?: UpdateAccountsRequest.HomePreferences.Item[];
-    /** Account industry group. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
-    industry_group?: string | null;
-    /** Specific industry vertical for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
-    industry_type?: string | null;
     /** Prefix used for account invoices. */
     invoice_prefix?: string | null;
     /** Account logo, used as the profile picture when creating a Whop-managed Facebook page. Image files up to 5 MB. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file). */
@@ -103,6 +97,7 @@ export interface UpdateAccountsRequest {
     use_logo_as_opengraph_image_fallback?: boolean;
     /** The account's business website, as an `http` or `https` URL of at most 255 characters. Also added to the account's `social_links` as a `website` entry. Pass `null` to clear the website; existing social links are left unchanged. */
     website?: string | null;
+    industry_type?: unknown;
 }
 
 export namespace UpdateAccountsRequest {

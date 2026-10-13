@@ -47,7 +47,7 @@ describe("AccountsClient", () => {
                         state: "TX",
                     },
                     business_name: "Shine Time Auto Detailing, LLC",
-                    business_type: "other",
+                    business_type: "software",
                     can_transfer_pending_balance_to_children: false,
                     cancellation_policy: {
                         content_type: "application/pdf",
@@ -144,8 +144,7 @@ describe("AccountsClient", () => {
                     financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
                     home_preferences: ["hide_member_count"],
                     id: "biz_xxxxxxxxxxxxxx",
-                    industry_group: "industry_group",
-                    industry_type: "other",
+                    industry_type: "trading",
                     invoice_prefix: "SHINE",
                     logo_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -155,8 +154,8 @@ describe("AccountsClient", () => {
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     opengraph_image_variant: "white",
                     orchestration_enabled: true,
-                    other_business_description: "Mobile auto detailing",
-                    other_industry_description: "Automotive services",
+                    other_business_description: "other_business_description",
+                    other_industry_description: "other_industry_description",
                     owner: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -513,7 +512,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "other",
+            business_type: "software",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 content_type: "application/pdf",
@@ -610,8 +609,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "industry_group",
-            industry_type: "other",
+            industry_type: "trading",
             invoice_prefix: "SHINE",
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -621,8 +619,8 @@ describe("AccountsClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
             orchestration_enabled: true,
-            other_business_description: "Mobile auto detailing",
-            other_industry_description: "Automotive services",
+            other_business_description: "other_business_description",
+            other_industry_description: "other_industry_description",
             owner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -1001,7 +999,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "other",
+            business_type: "software",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 content_type: "application/pdf",
@@ -1098,8 +1096,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "industry_group",
-            industry_type: "other",
+            industry_type: "trading",
             invoice_prefix: "SHINE",
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1109,8 +1106,8 @@ describe("AccountsClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
             orchestration_enabled: true,
-            other_business_description: "Mobile auto detailing",
-            other_industry_description: "Automotive services",
+            other_business_description: "other_business_description",
+            other_industry_description: "other_industry_description",
             owner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -1416,7 +1413,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "other",
+            business_type: "software",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 content_type: "application/pdf",
@@ -1513,8 +1510,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "industry_group",
-            industry_type: "other",
+            industry_type: "trading",
             invoice_prefix: "SHINE",
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1524,8 +1520,8 @@ describe("AccountsClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
             orchestration_enabled: true,
-            other_business_description: "Mobile auto detailing",
-            other_industry_description: "Automotive services",
+            other_business_description: "other_business_description",
+            other_industry_description: "other_industry_description",
             owner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -1962,7 +1958,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "other",
+            business_type: "software",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 content_type: "application/pdf",
@@ -2059,8 +2055,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "industry_group",
-            industry_type: "other",
+            industry_type: "trading",
             invoice_prefix: "SHINE",
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -2070,8 +2065,8 @@ describe("AccountsClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
             orchestration_enabled: true,
-            other_business_description: "Mobile auto detailing",
-            other_industry_description: "Automotive services",
+            other_business_description: "other_business_description",
+            other_industry_description: "other_industry_description",
             owner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -2440,7 +2435,6 @@ describe("AccountsClient", () => {
             },
             business_name: "Shine Time Auto Detailing",
             business_phone: "+15125550142",
-            business_type: "brick_and_mortar",
             business_website: "https://shinetime.example",
             entity_suffix: "LLC",
             entity_type: "llc",
@@ -2467,8 +2461,6 @@ describe("AccountsClient", () => {
                     ssn: "123-45-6789",
                 },
             ],
-            industry_group: "automotive",
-            industry_type: "car_wash_and_detailing_shop",
             share_structure: { number_of_shares: 123, value: 123 },
             use_registered_agent: true,
         };
@@ -2500,7 +2492,6 @@ describe("AccountsClient", () => {
             },
             business_name: "Shine Time Auto Detailing",
             business_phone: "+15125550142",
-            business_type: "brick_and_mortar",
             business_website: "https://shinetime.example",
             entity_suffix: "LLC",
             entity_type: "llc",
@@ -2527,8 +2518,6 @@ describe("AccountsClient", () => {
                     ssn: "123-45-6789",
                 },
             ],
-            industry_group: "automotive",
-            industry_type: "car_wash_and_detailing_shop",
             share_structure: {
                 number_of_shares: 123,
                 value: 123,
@@ -2549,7 +2538,6 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {
             business_name: "business_name",
-            business_type: "business_type",
             formation_state: "AL",
             founders: [
                 {
@@ -2581,8 +2569,6 @@ describe("AccountsClient", () => {
                     phone: "phone",
                 },
             ],
-            industry_group: "industry_group",
-            industry_type: "industry_type",
         };
         const rawResponseBody = { key: "value" };
 
@@ -2599,7 +2585,6 @@ describe("AccountsClient", () => {
             return await client.accounts.formCompany({
                 id: "id",
                 business_name: "business_name",
-                business_type: "business_type",
                 formation_state: "AL",
                 founders: [
                     {
@@ -2631,8 +2616,6 @@ describe("AccountsClient", () => {
                         phone: "phone",
                     },
                 ],
-                industry_group: "industry_group",
-                industry_type: "industry_type",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -2648,7 +2631,6 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {
             business_name: "business_name",
-            business_type: "business_type",
             formation_state: "AL",
             founders: [
                 {
@@ -2680,8 +2662,6 @@ describe("AccountsClient", () => {
                     phone: "phone",
                 },
             ],
-            industry_group: "industry_group",
-            industry_type: "industry_type",
         };
         const rawResponseBody = { key: "value" };
 
@@ -2698,7 +2678,6 @@ describe("AccountsClient", () => {
             return await client.accounts.formCompany({
                 id: "id",
                 business_name: "business_name",
-                business_type: "business_type",
                 formation_state: "AL",
                 founders: [
                     {
@@ -2730,8 +2709,6 @@ describe("AccountsClient", () => {
                         phone: "phone",
                     },
                 ],
-                industry_group: "industry_group",
-                industry_type: "industry_type",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -2747,7 +2724,6 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {
             business_name: "business_name",
-            business_type: "business_type",
             formation_state: "AL",
             founders: [
                 {
@@ -2779,8 +2755,6 @@ describe("AccountsClient", () => {
                     phone: "phone",
                 },
             ],
-            industry_group: "industry_group",
-            industry_type: "industry_type",
         };
         const rawResponseBody = { key: "value" };
 
@@ -2797,7 +2771,6 @@ describe("AccountsClient", () => {
             return await client.accounts.formCompany({
                 id: "id",
                 business_name: "business_name",
-                business_type: "business_type",
                 formation_state: "AL",
                 founders: [
                     {
@@ -2829,8 +2802,6 @@ describe("AccountsClient", () => {
                         phone: "phone",
                     },
                 ],
-                industry_group: "industry_group",
-                industry_type: "industry_type",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -2846,7 +2817,6 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {
             business_name: "business_name",
-            business_type: "business_type",
             formation_state: "AL",
             founders: [
                 {
@@ -2878,8 +2848,6 @@ describe("AccountsClient", () => {
                     phone: "phone",
                 },
             ],
-            industry_group: "industry_group",
-            industry_type: "industry_type",
         };
         const rawResponseBody = { key: "value" };
 
@@ -2896,7 +2864,6 @@ describe("AccountsClient", () => {
             return await client.accounts.formCompany({
                 id: "id",
                 business_name: "business_name",
-                business_type: "business_type",
                 formation_state: "AL",
                 founders: [
                     {
@@ -2928,8 +2895,6 @@ describe("AccountsClient", () => {
                         phone: "phone",
                     },
                 ],
-                industry_group: "industry_group",
-                industry_type: "industry_type",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -2945,7 +2910,6 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {
             business_name: "business_name",
-            business_type: "business_type",
             formation_state: "AL",
             founders: [
                 {
@@ -2977,8 +2941,6 @@ describe("AccountsClient", () => {
                     phone: "phone",
                 },
             ],
-            industry_group: "industry_group",
-            industry_type: "industry_type",
         };
         const rawResponseBody = { key: "value" };
 
@@ -2995,7 +2957,6 @@ describe("AccountsClient", () => {
             return await client.accounts.formCompany({
                 id: "id",
                 business_name: "business_name",
-                business_type: "business_type",
                 formation_state: "AL",
                 founders: [
                     {
@@ -3027,8 +2988,6 @@ describe("AccountsClient", () => {
                         phone: "phone",
                     },
                 ],
-                industry_group: "industry_group",
-                industry_type: "industry_type",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -3234,7 +3193,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "other",
+            business_type: "software",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 content_type: "application/pdf",
@@ -3331,8 +3290,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "industry_group",
-            industry_type: "other",
+            industry_type: "trading",
             invoice_prefix: "SHINE",
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -3342,8 +3300,8 @@ describe("AccountsClient", () => {
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
             orchestration_enabled: true,
-            other_business_description: "Mobile auto detailing",
-            other_industry_description: "Automotive services",
+            other_business_description: "other_business_description",
+            other_industry_description: "other_industry_description",
             owner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
