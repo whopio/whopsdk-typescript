@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrievePaymentMethodDomainsRequest {
-    /** The unique identifier of the payment method domain, prefixed `pmd_`. */
+    /** The unique identifier of the payment method domain, prefixed `pmd_` or `dom_`. */
     id: string;
 }
