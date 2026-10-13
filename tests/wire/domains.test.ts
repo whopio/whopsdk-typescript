@@ -19,6 +19,7 @@ describe("DomainsClient", () => {
             data: [
                 {
                     account_id: null,
+                    apple_pay: null,
                     availability: {
                         available: false,
                         premium: false,
@@ -57,6 +58,7 @@ describe("DomainsClient", () => {
                 },
                 {
                     account_id: null,
+                    apple_pay: null,
                     availability: {
                         available: true,
                         premium: false,
@@ -95,6 +97,7 @@ describe("DomainsClient", () => {
                 },
                 {
                     account_id: null,
+                    apple_pay: null,
                     availability: {
                         available: true,
                         premium: false,
@@ -214,6 +217,7 @@ describe("DomainsClient", () => {
         const rawRequestBody = { domain: "store.example.com" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            apple_pay: { state: "ready" },
             availability: {
                 available: true,
                 premium: false,
@@ -359,6 +363,7 @@ describe("DomainsClient", () => {
 
         const rawResponseBody = {
             account_id: null,
+            apple_pay: null,
             availability: {
                 available: false,
                 premium: false,
@@ -475,6 +480,7 @@ describe("DomainsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            apple_pay: { state: "ready" },
             availability: {
                 available: true,
                 premium: false,
@@ -578,6 +584,7 @@ describe("DomainsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            apple_pay: { state: "ready" },
             availability: {
                 available: true,
                 premium: false,
@@ -695,6 +702,7 @@ describe("DomainsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            apple_pay: { state: "ready" },
             availability: {
                 available: true,
                 premium: false,

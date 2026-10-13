@@ -41,4 +41,6 @@ export interface ListDomainsRequest {
     platform?: Whop.ListDomainsRequestPlatform;
     /** Only domains with website in this state, such as `ready`, or `any` for every domain that has website. */
     website?: Whop.ListDomainsRequestWebsite;
+    /** Only domains with apple_pay in this state, such as `ready`, or `any` for every domain that has apple_pay. */
+    apple_pay?: Whop.ListDomainsRequestApplePay;
 }

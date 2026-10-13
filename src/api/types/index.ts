@@ -220,6 +220,7 @@ export * from "./DmsFeedMemberNotificationPreferences.js";
 export * from "./DmsFeedMemberStatuses.js";
 export * from "./DmsPostTypes.js";
 export * from "./Domain.js";
+export * from "./DomainApplePay.js";
 export * from "./DomainAvailability.js";
 export * from "./DomainDnsRecord.js";
 export * from "./DomainIssue.js";
