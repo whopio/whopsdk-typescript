@@ -17,9 +17,9 @@ export declare namespace TradesClient {
 }
 
 /**
- * A Trade is one request on an account's or user's Whop-managed wallet. A `buy` bridges USDT0 to the trading account, sets the cross leverage, and places one market buy. A `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. Hyperliquid perpetuals are the only supported venue.
+ * A Trade is one request on an account's or user's Whop-managed wallet. An `order` places one order from the trading balance, bridging the USDT0 it needs from the wallet first when the balance is short. A `close` closes the whole position in one market; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. A `deposit` or `withdraw` moves money between the wallet and the trading balance. Hyperliquid perpetuals are the only supported venue.
  *
- * Use the Trades API to open and close positions from a wallet and follow each trade until it finishes. Trades run in the background; a buy that does not fill sends its money back to the wallet, and `funds_location` says where the money is.
+ * Use the Trades API to place orders, close positions and move funds, and follow each trade until it finishes. Trades run in the background; an order that bridged money in and does not fill sends that money back to the wallet, and `funds_location` says where the money is.
  *
  * The trading API, including `include_trading` on accounts and users, is in beta. It can change without a new API version date.
  */
@@ -143,7 +143,7 @@ export class TradesClient {
     }
 
     /**
-     * Places an order, deposits to or withdraws from the trading balance, or buys or closes a perpetual position, from the Whop-managed wallet of an account or user. Answers `201` with the trade in `pending`; it runs in the background, so read it with `GET /trades/:id` until its `status` is `completed`, `failed` or `in_review`. A buy or close waits for the wallet's other trades; orders run alongside each other, except a second order on one market at a different leverage, which answers `409`. A retry with the same `Idempotency-Key` returns the same trade.
+     * Places an order, closes a perpetual position, or deposits to or withdraws from the trading balance, from the Whop-managed wallet of an account or user. Answers `201` with the trade in `pending`; it runs in the background, so read it with `GET /trades/:id` until its `status` is `completed`, `failed` or `in_review`. Trades run alongside each other, except a second order on one market at a different leverage, which answers `409`. A retry with the same `Idempotency-Key` returns the same trade.
      *
      * @param {Whop.CreateTradesRequest} request
      * @param {TradesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -159,7 +159,7 @@ export class TradesClient {
      * @example
      *     await client.trades.create({
      *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         type: "buy"
+     *         type: "close"
      *     })
      */
     public create(

@@ -39,7 +39,7 @@ describe("TradesClient", () => {
                     size: "size",
                     status: "pending",
                     status_detail: "partial_fill",
-                    type: "buy",
+                    type: "close",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user_id: "user_id",
                 },
@@ -135,7 +135,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", type: "buy" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", type: "close" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: "25",
@@ -158,7 +158,7 @@ describe("TradesClient", () => {
             size: "size",
             status: "pending",
             status_detail: "partial_fill",
-            type: "buy",
+            type: "close",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_id",
         };
@@ -174,7 +174,7 @@ describe("TradesClient", () => {
 
         const response = await client.trades.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            type: "buy",
+            type: "close",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -188,7 +188,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "close" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -203,7 +203,7 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                type: "buy",
+                type: "close",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -217,7 +217,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "close" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -232,7 +232,7 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                type: "buy",
+                type: "close",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -246,7 +246,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "close" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -261,7 +261,7 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                type: "buy",
+                type: "close",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -275,7 +275,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "close" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -290,7 +290,7 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                type: "buy",
+                type: "close",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -304,7 +304,7 @@ describe("TradesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", type: "buy" };
+        const rawRequestBody = { account_id: "account_id", type: "close" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -319,7 +319,7 @@ describe("TradesClient", () => {
         await expect(async () => {
             return await client.trades.create({
                 account_id: "account_id",
-                type: "buy",
+                type: "close",
             });
         }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
@@ -356,7 +356,7 @@ describe("TradesClient", () => {
             size: "size",
             status: "pending",
             status_detail: "partial_fill",
-            type: "buy",
+            type: "close",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_id",
         };
