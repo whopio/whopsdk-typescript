@@ -6,6 +6,7 @@ export * from "./ListAccountsRequestStatus.js";
 export * from "./ListAccountsResponse.js";
 export * from "./PostAccountFinancingApprovedPayload.js";
 export * from "./PostAccountFinancingDeniedPayload.js";
+export * from "./PostAccountFinancingDisabledPayload.js";
 export * from "./PostAccountUpdatedPayload.js";
 export * from "./RetryAdsPaymentAccountsResponse.js";
 export * from "./TransferOwnershipAccountsResponse.js";
