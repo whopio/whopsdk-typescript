@@ -281,7 +281,7 @@ describe("DomainsClient", () => {
             status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
-            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
+            website: { app: { base_url: "base_url", id: "app_xxxxxxxxxxxxxx" }, state: "pending" },
         };
 
         server
@@ -546,7 +546,7 @@ describe("DomainsClient", () => {
             status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
-            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
+            website: { app: { base_url: "base_url", id: "app_xxxxxxxxxxxxxx" }, state: "pending" },
         };
 
         server.mockEndpoint().delete("/domains/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -651,7 +651,7 @@ describe("DomainsClient", () => {
             status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
-            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
+            website: { app: { base_url: "base_url", id: "app_xxxxxxxxxxxxxx" }, state: "pending" },
         };
 
         server
@@ -770,7 +770,7 @@ describe("DomainsClient", () => {
             status: "idle",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
-            website: { app_id: "app_xxxxxxxxxxxxxx", state: "pending" },
+            website: { app: { base_url: "base_url", id: "app_xxxxxxxxxxxxxx" }, state: "pending" },
         };
 
         server.mockEndpoint().post("/domains/id/check").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
