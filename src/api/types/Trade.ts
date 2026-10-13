@@ -44,7 +44,7 @@ export interface Trade {
     status: Trade.Status;
     /** More about the outcome: `partial_fill` (the buy filled only part of its size), `no_position` (the close found no position), `partial_close` (part of the position is still open), or `nothing_to_return` (the close had less than 1 USDC to send back). `null` otherwise. */
     status_detail: Trade.StatusDetail | null;
-    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: Trade.Type;
     /** When the trade last changed, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -111,7 +111,7 @@ export namespace Trade {
         NothingToReturn: "nothing_to_return",
     } as const;
     export type StatusDetail = (typeof StatusDetail)[keyof typeof StatusDetail];
-    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     export const Type = {
         Buy: "buy",
         Close: "close",
