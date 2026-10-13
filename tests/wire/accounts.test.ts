@@ -144,7 +144,7 @@ describe("AccountsClient", () => {
                     financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
                     home_preferences: ["hide_member_count"],
                     id: "biz_xxxxxxxxxxxxxx",
-                    industry_group: "automotive",
+                    industry_group: "industry_group",
                     industry_type: "other",
                     invoice_prefix: "SHINE",
                     logo_url:
@@ -610,7 +610,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "automotive",
+            industry_group: "industry_group",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -1098,7 +1098,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "automotive",
+            industry_group: "industry_group",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -1513,7 +1513,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "automotive",
+            industry_group: "industry_group",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -2059,7 +2059,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "automotive",
+            industry_group: "industry_group",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -3331,7 +3331,7 @@ describe("AccountsClient", () => {
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "automotive",
+            industry_group: "industry_group",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
