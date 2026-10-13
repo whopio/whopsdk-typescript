@@ -3,14 +3,20 @@
 import type * as Whop from "../index.js";
 
 export interface DisputeEvidenceDocument {
+    /** BlurHash placeholder for an image or video. Null when unavailable or removed by moderation. */
+    blurhash: string | null;
     /** The uploaded file's MIME type. Uploads are restricted to the types the processor accepts, and rejected without one — never null. */
     content_type: DisputeEvidenceDocument.ContentType | null;
     /** When the file was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** What this document proves, in the processor's own evidence vocabulary. `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's policy documents — uploading one overrides the account's copy for this dispute (`return_policy`, `cancellation_policy`, and `customer_communication` also override the matching fixed evidence slot). `shipping_policy` is the seller's shipping terms. `customer_communication` is correspondence with the buyer — a support thread or chat log. `product_image` is a photo of the product or service the buyer received. `physical_fulfillment` is proof a physical order shipped and arrived; `digital_fulfillment` is proof the buyer accessed a digital product. `customer_order_history` is the buyer's past orders with this seller; `prior_transactions` is their broader payment history across the platform, for a fraud defense. `customer_session` is checkout forensics — IP, device fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle evidence — renewals, cancellation, reminders sent. */
     document_type: DisputeEvidenceDocument.DocumentType;
+    /** Audio or video duration in seconds. Null when unavailable or removed by moderation. */
+    duration_seconds: number | null;
     /** The original filename, including its extension. */
     filename: string | null;
+    /** Image or video height in pixels. Null when unavailable or removed by moderation. */
+    height: number | null;
     /** The file's ID, prefixed `file_`. */
     id: string;
     /** The byte size each part (except the last) must be. Present only on create, and only for multipart uploads. */
@@ -20,6 +26,8 @@ export interface DisputeEvidenceDocument {
     multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
     /** The type of this object, always `file`. */
     object: string;
+    /** Whether moderation removed the file. When true, `url` serves a replacement image; filename, size, and content type still describe the original file. */
+    removed_by_moderation: boolean;
     /** The file size in bytes. `null` until the upload has finished. */
     size: number | null;
     /** Headers to send with the upload PUT. Present only on create. */
@@ -28,10 +36,14 @@ export interface DisputeEvidenceDocument {
     upload_status: DisputeEvidenceDocument.UploadStatus;
     /** Presigned URL to PUT the file's bytes to. Present only on create, and only for single-part uploads. */
     upload_url?: (string | null) | undefined;
-    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. `null` until the upload has finished. */
+    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. Null until the upload has finished; a replacement image URL when removed by moderation. */
     url: string | null;
     /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
     visibility: DisputeEvidenceDocument.Visibility;
+    /** Audio waveform URL. Null when unavailable or removed by moderation. */
+    waveform_url: string | null;
+    /** Image or video width in pixels. Null when unavailable or removed by moderation. */
+    width: number | null;
 }
 
 export namespace DisputeEvidenceDocument {

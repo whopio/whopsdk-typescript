@@ -53,10 +53,13 @@ describe("DisputesClient", () => {
                         customer_name: "Dana Whitfield",
                         documents: [
                             {
+                                blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
                                 content_type: null,
                                 created_at: "2026-01-01T12:00:00.000Z",
                                 document_type: "return_policy",
+                                duration_seconds: null,
                                 filename: "customer-order-history.png",
+                                height: 100,
                                 id: "file_xxxxxxxxxxxxxx",
                                 multipart_upload_urls: [
                                     {
@@ -65,10 +68,13 @@ describe("DisputesClient", () => {
                                     },
                                 ],
                                 object: "file",
+                                removed_by_moderation: false,
                                 size: 1024,
                                 upload_status: "pending",
                                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                                 visibility: "public",
+                                waveform_url: null,
+                                width: 100,
                             },
                         ],
                         notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -376,10 +382,13 @@ describe("DisputesClient", () => {
                 customer_name: "Dana Whitfield",
                 documents: [
                     {
+                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
                         content_type: null,
                         created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
+                        duration_seconds: null,
                         filename: "customer-order-history.png",
+                        height: 100,
                         id: "file_xxxxxxxxxxxxxx",
                         multipart_upload_urls: [
                             {
@@ -388,10 +397,13 @@ describe("DisputesClient", () => {
                             },
                         ],
                         object: "file",
+                        removed_by_moderation: false,
                         size: 1024,
                         upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         visibility: "public",
+                        waveform_url: null,
+                        width: 100,
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -596,10 +608,13 @@ describe("DisputesClient", () => {
                 customer_name: "Dana Whitfield",
                 documents: [
                     {
+                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
                         content_type: null,
                         created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
+                        duration_seconds: null,
                         filename: "customer-order-history.png",
+                        height: 100,
                         id: "file_xxxxxxxxxxxxxx",
                         multipart_upload_urls: [
                             {
@@ -608,10 +623,13 @@ describe("DisputesClient", () => {
                             },
                         ],
                         object: "file",
+                        removed_by_moderation: false,
                         size: 1024,
                         upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         visibility: "public",
+                        waveform_url: null,
+                        width: 100,
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -865,10 +883,13 @@ describe("DisputesClient", () => {
                 customer_name: "Dana Whitfield",
                 documents: [
                     {
+                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
                         content_type: null,
                         created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
+                        duration_seconds: null,
                         filename: "customer-order-history.png",
+                        height: 100,
                         id: "file_xxxxxxxxxxxxxx",
                         multipart_upload_urls: [
                             {
@@ -877,10 +898,13 @@ describe("DisputesClient", () => {
                             },
                         ],
                         object: "file",
+                        removed_by_moderation: false,
                         size: 1024,
                         upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         visibility: "public",
+                        waveform_url: null,
+                        width: 100,
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -1157,10 +1181,13 @@ describe("DisputesClient", () => {
                 customer_name: "Dana Whitfield",
                 documents: [
                     {
+                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
                         content_type: null,
                         created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
+                        duration_seconds: null,
                         filename: "customer-order-history.png",
+                        height: 100,
                         id: "file_xxxxxxxxxxxxxx",
                         multipart_upload_urls: [
                             {
@@ -1169,10 +1196,13 @@ describe("DisputesClient", () => {
                             },
                         ],
                         object: "file",
+                        removed_by_moderation: false,
                         size: 1024,
                         upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         visibility: "public",
+                        waveform_url: null,
+                        width: 100,
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",

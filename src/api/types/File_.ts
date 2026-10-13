@@ -3,12 +3,18 @@
 import type * as Whop from "../index.js";
 
 export interface File_ {
-    /** The file's MIME type, e.g. `application/pdf`. */
+    /** BlurHash placeholder for an image or video. Null when unavailable or removed by moderation. */
+    blurhash: string | null;
+    /** The original file's MIME type, preserved when removed by moderation, e.g. `application/pdf`. */
     content_type: string | null;
     /** When the file was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** Audio or video duration in seconds. Null when unavailable or removed by moderation. */
+    duration_seconds: number | null;
     /** The original filename, including its extension. */
     filename: string | null;
+    /** Image or video height in pixels. Null when unavailable or removed by moderation. */
+    height: number | null;
     /** The file's ID, prefixed `file_`. */
     id: string;
     /** The byte size each part (except the last) must be. Present only on create, and only for multipart uploads. */
@@ -18,6 +24,8 @@ export interface File_ {
     multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
     /** The type of this object, always `file`. */
     object: string;
+    /** Whether moderation removed the file. When true, `url` serves a replacement image; filename, size, and content type still describe the original file. */
+    removed_by_moderation: boolean;
     /** The file size in bytes. `null` until the upload has finished. */
     size: number | null;
     /** Headers to send with the upload PUT. Present only on create. */
@@ -26,10 +34,14 @@ export interface File_ {
     upload_status: File_.UploadStatus;
     /** Presigned URL to PUT the file's bytes to. Present only on create, and only for single-part uploads. */
     upload_url?: (string | null) | undefined;
-    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. `null` until the upload has finished. */
+    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. Null until the upload has finished; a replacement image URL when removed by moderation. */
     url: string | null;
     /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
     visibility: Whop.FileVisibility;
+    /** Audio waveform URL. Null when unavailable or removed by moderation. */
+    waveform_url: string | null;
+    /** Image or video width in pixels. Null when unavailable or removed by moderation. */
+    width: number | null;
 }
 
 export namespace File_ {
