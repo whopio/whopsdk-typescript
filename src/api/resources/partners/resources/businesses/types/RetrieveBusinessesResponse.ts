@@ -7,6 +7,8 @@ export interface RetrieveBusinessesResponse {
     account: RetrieveBusinessesResponse.Account | null;
     /** The partner whose blueprint the business deployed. Null unless this is a blueprint referral. */
     blueprint_partner: RetrieveBusinessesResponse.BlueprintPartner | null;
+    /** CPA terms for the referring partner. Omitted for other callers. An offer token requires partner:commission_advance:accept permission. */
+    commission_advance?: (Whop.PartnerAdvance | null) | undefined;
     /** When the partner business was created. */
     created_at: string;
     earnings_usd: RetrieveBusinessesResponse.EarningsUsd;

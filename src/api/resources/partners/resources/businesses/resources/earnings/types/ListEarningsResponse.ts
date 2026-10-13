@@ -93,6 +93,7 @@ export namespace ListEarningsResponse {
                 OnboardingReward: "onboarding_reward",
                 PartnerReward: "partner_reward",
                 VerifiedPartnerReferralPayback: "verified_partner_referral_payback",
+                CommissionAdvance: "commission_advance",
             } as const;
             export type IncomeSource = (typeof IncomeSource)[keyof typeof IncomeSource];
             export const Object_ = {

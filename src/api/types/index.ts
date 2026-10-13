@@ -370,6 +370,7 @@ export * from "./OwnerLevelPoints.js";
 export * from "./PageInfo.js";
 export * from "./Pagination.js";
 export * from "./Partner.js";
+export * from "./PartnerAdvance.js";
 export * from "./PartnerPayoutDuration.js";
 export * from "./PartnerPayoutRate.js";
 export * from "./PartnerPayoutTier.js";

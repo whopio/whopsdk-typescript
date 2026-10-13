@@ -31692,6 +31692,142 @@ await client.partners.businesses.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.partners.businesses.<a href="/src/api/resources/partners/resources/businesses/client/Client.ts">update</a>({ ...params }) -> Whop.UpdateBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Save annual projections for a business referred by the authenticated partner. Projections cannot be changed after saving; repeating the same values is allowed. Public API access requires a partner OAuth token; business API keys are not supported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.partners.businesses.update({
+    id: "id",
+    annual_ads_usd: "120000",
+    annual_processing_usd: "1200000"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.partners.UpdateBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.partners.businesses.<a href="/src/api/resources/partners/resources/businesses/client/Client.ts">acceptCommissionAdvance</a>({ ...params }) -> Whop.AcceptCommissionAdvanceBusinessesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accept the authenticated partner's CPA offer with the reviewed terms and signed offer token. Public API access requires a partner OAuth token; business API keys are not supported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.partners.businesses.acceptCommissionAdvance({
+    id: "id",
+    acknowledgments: ["commission_replacement", "clawback", "term"],
+    expected_amount_usd: "1439.99",
+    offer_token: "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    terms_version: "2026-01-01"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.partners.AcceptCommissionAdvanceBusinessesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `BusinessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Partners Businesses Earnings
 <details><summary><code>client.partners.businesses.earnings.<a href="/src/api/resources/partners/resources/businesses/resources/earnings/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListEarningsResponse.Data.Item, Whop.ListEarningsResponse&gt;</code></summary>
 <dl>

@@ -31,6 +31,45 @@ describe("BusinessesClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "ninaalvarez",
                     },
+                    commission_advance: {
+                        activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        clawed_back_at: null,
+                        deadline_at: "2026-01-01T12:00:00.000Z",
+                        funded_at: null,
+                        offer_token: null,
+                        processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        projected_60_day_activity: {
+                            amount: "-1234.56",
+                            currency: "usd",
+                            decimals: 2,
+                            display_decimals: 2,
+                        },
+                        projected_ads_commissions: {
+                            amount: "-1234.56",
+                            currency: "usd",
+                            decimals: 2,
+                            display_decimals: 2,
+                        },
+                        projected_commissions: {
+                            amount: "-1234.56",
+                            currency: "usd",
+                            decimals: 2,
+                            display_decimals: 2,
+                        },
+                        projected_processing_commissions: {
+                            amount: "-1234.56",
+                            currency: "usd",
+                            decimals: 2,
+                            display_decimals: 2,
+                        },
+                        qualified_at: "2026-01-01T12:00:00.000Z",
+                        recovery_threshold: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        status: "projected",
+                        terms_version: "2026-01-01",
+                    },
                     created_at: "2026-01-01T12:00:00Z",
                     earnings_usd: { completed: "3.00", pending: "1.00", total: "4.00" },
                     first_tier_partner: {
@@ -238,6 +277,30 @@ describe("BusinessesClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "marcuswebb",
             },
+            commission_advance: {
+                activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                clawed_back_at: "clawed_back_at",
+                deadline_at: "2026-01-01T12:00:00.000Z",
+                funded_at: "funded_at",
+                offer_token: "offer_token",
+                processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_processing_commissions: {
+                    amount: "-1234.56",
+                    currency: "usd",
+                    decimals: 2,
+                    display_decimals: 2,
+                },
+                qualified_at: "2026-01-01T12:00:00.000Z",
+                recovery_threshold: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                status: "projected",
+                terms_version: "2026-01-01",
+            },
             created_at: "2026-01-01T12:00:00Z",
             earnings_usd: { completed: "0.00", pending: "0.00", total: "0.00" },
             first_tier_partner: {
@@ -308,5 +371,161 @@ describe("BusinessesClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("update", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { annual_ads_usd: "120000", annual_processing_usd: "1200000" };
+        const rawResponseBody = {
+            commission_advance: {
+                activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                clawed_back_at: "clawed_back_at",
+                deadline_at: "2026-01-01T12:00:00.000Z",
+                funded_at: "funded_at",
+                offer_token: "offer_token",
+                processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_processing_commissions: {
+                    amount: "-1234.56",
+                    currency: "usd",
+                    decimals: 2,
+                    display_decimals: 2,
+                },
+                qualified_at: "2026-01-01T12:00:00.000Z",
+                recovery_threshold: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                status: "projected",
+                terms_version: "2026-01-01",
+            },
+            id: "coma_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/partners/businesses/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.partners.businesses.update({
+            id: "id",
+            annual_ads_usd: "120000",
+            annual_processing_usd: "1200000",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("acceptCommissionAdvance (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {
+            acknowledgments: ["commission_replacement", "clawback", "term"],
+            expected_amount_usd: "1439.99",
+            offer_token:
+                "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            terms_version: "2026-01-01",
+        };
+        const rawResponseBody = {
+            commission_advance: {
+                activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                clawed_back_at: "clawed_back_at",
+                deadline_at: "2026-01-01T12:00:00.000Z",
+                funded_at: "funded_at",
+                offer_token: "offer_token",
+                processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_processing_commissions: {
+                    amount: "-1234.56",
+                    currency: "usd",
+                    decimals: 2,
+                    display_decimals: 2,
+                },
+                qualified_at: "2026-01-01T12:00:00.000Z",
+                recovery_threshold: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                status: "projected",
+                terms_version: "2026-01-01",
+            },
+            id: "coma_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/accept_commission_advance")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.partners.businesses.acceptCommissionAdvance({
+            id: "id",
+            acknowledgments: ["commission_replacement", "clawback", "term"],
+            expected_amount_usd: "1439.99",
+            offer_token:
+                "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            terms_version: "2026-01-01",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("acceptCommissionAdvance (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {
+            acknowledgments: ["commission_replacement", "commission_replacement"],
+            expected_amount_usd: "expected_amount_usd",
+            offer_token: "offer_token",
+            terms_version: "terms_version",
+        };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/accept_commission_advance")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.businesses.acceptCommissionAdvance({
+                id: "id",
+                acknowledgments: ["commission_replacement", "commission_replacement"],
+                expected_amount_usd: "expected_amount_usd",
+                offer_token: "offer_token",
+                terms_version: "terms_version",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });
