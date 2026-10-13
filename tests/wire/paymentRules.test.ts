@@ -20,7 +20,7 @@ describe("PaymentRulesClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     action: "allow",
-                    conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+                    conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
                     created_at: "2026-01-01T12:00:00.000Z",
                     deleted_at: "deleted_at",
                     id: "prule_xxxxxxxxxxxxxx",
@@ -91,7 +91,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -139,8 +139,8 @@ describe("PaymentRulesClient", () => {
             action: "allow",
             conditions: {
                 all: [
-                    { field: "risk_score", operator: "eq", value: 1 },
-                    { field: "risk_score", operator: "eq", value: 1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
                 ],
             },
             name: "x",
@@ -164,12 +164,12 @@ describe("PaymentRulesClient", () => {
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                     ],
                 },
@@ -191,8 +191,8 @@ describe("PaymentRulesClient", () => {
             action: "allow",
             conditions: {
                 all: [
-                    { field: "risk_score", operator: "eq", value: 1 },
-                    { field: "risk_score", operator: "eq", value: 1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
                 ],
             },
             name: "x",
@@ -216,12 +216,12 @@ describe("PaymentRulesClient", () => {
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                     ],
                 },
@@ -243,8 +243,8 @@ describe("PaymentRulesClient", () => {
             action: "allow",
             conditions: {
                 all: [
-                    { field: "risk_score", operator: "eq", value: 1 },
-                    { field: "risk_score", operator: "eq", value: 1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
                 ],
             },
             name: "x",
@@ -268,12 +268,12 @@ describe("PaymentRulesClient", () => {
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                     ],
                 },
@@ -336,7 +336,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -406,7 +406,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -444,7 +444,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -508,7 +508,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -575,7 +575,7 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1.1 }] },
             created_at: "2026-01-01T12:00:00.000Z",
             deleted_at: "deleted_at",
             id: "prule_xxxxxxxxxxxxxx",
@@ -623,8 +623,8 @@ describe("PaymentRulesClient", () => {
             action: "allow",
             conditions: {
                 all: [
-                    { field: "risk_score", operator: "eq", value: 1 },
-                    { field: "risk_score", operator: "eq", value: 1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
+                    { field: "risk_score", operator: "eq", value: 1.1 },
                 ],
             },
         };
@@ -648,12 +648,12 @@ describe("PaymentRulesClient", () => {
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                         {
                             field: "risk_score",
                             operator: "eq",
-                            value: 1,
+                            value: 1.1,
                         },
                     ],
                 },
