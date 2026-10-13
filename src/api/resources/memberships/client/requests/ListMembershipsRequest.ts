@@ -4,19 +4,33 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         product_ids: ["prod_xxxxxxxxxxxxx"],
+ *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
+ *     }
  */
 export interface ListMembershipsRequest {
     /** Narrow to one account (`biz_` tag). With read access to the account this lists all of its memberships; without, only the caller's own memberships in it. */
     account_id?: string;
     /** Narrow to one user's memberships (`user_` tag, or `me` for the caller). A user outside the caller's visible set returns an empty list. */
     user_id?: string;
-    /** Filter by billing state. `canceling` matches active memberships set to cancel at period end; `paused` matches memberships with payment collection paused. */
+    /** Narrow to one member's memberships (`mber_` tag), including memberships bought by another business. A member outside the caller's visible set returns an empty list. */
+    member_id?: string;
+    /** Filter by billing state. `trialing`, `active`, `past_due`, `completed`, `canceled`, and `expired` match the membership's `status`; `active`, `trialing`, and `past_due` exclude memberships set to cancel at period end. The other values are derived buckets that never appear as a `status`: `canceling` matches memberships set to cancel at period end; `paused` matches memberships with payment collection paused; `expiring` matches one-time purchases that have not yet expired; `one_time` matches one-time purchases that never expire; `unclaimed` matches memberships with no buyer user, including memberships bought by another business; `banned` matches memberships whose buyer is banned from the account. */
     status?: Whop.ListMembershipsRequestStatus;
-    /** Filter to memberships of this product (`prod_` tag). Repeat as product_ids[] for several. */
+    /** Filter to memberships matching any of these billing states, with the same meanings as `status`. Repeat the parameter to pass several. Combined with `status` when both are sent. */
+    statuses?: Whop.ListMembershipsRequestStatusesItem | Whop.ListMembershipsRequestStatusesItem[];
+    /** Filter to memberships of this product (`prod_` tag). */
     product_id?: string;
-    /** Filter to memberships of this variant (`plan_` tag). Repeat as plan_ids[] for several. */
+    /** Filter to memberships of any of these products, each prefixed `prod_`. Repeat the parameter to pass several. */
+    product_ids?: string | string[];
+    /** Filter to memberships of this variant (`plan_` tag). */
     plan_id?: string;
+    /** Filter to memberships of any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. */
+    plan_ids?: string | string[];
+    /** Filter to memberships discounted by any of these promo codes, each prefixed `promo_`. Repeat the parameter to pass several. */
+    promo_code_ids?: string | string[];
     /** Only memberships created after this ISO 8601 timestamp. */
     created_after?: string;
     /** Only memberships created before this ISO 8601 timestamp. */

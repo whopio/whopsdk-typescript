@@ -25,6 +25,7 @@ export interface User {
     name: string | null;
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
+    social_links: Whop.UserSocialLink[];
     /** The trading account address and its WebSocket subscriptions. Opt in with `include_trading=true` when retrieving `me`. `null` otherwise, without trading permission, or without an Ethereum wallet. */
     trading: Whop.TradingAccount | null;
     /** The user's unique username */

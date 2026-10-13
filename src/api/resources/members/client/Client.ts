@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { LogsClient } from "../resources/logs/client/Client.js";
+import { NotesClient } from "../resources/notes/client/Client.js";
 
 export declare namespace MembersClient {
     export type Options = BaseClientOptions;
@@ -24,6 +25,7 @@ export declare namespace MembersClient {
 export class MembersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MembersClient.Options>;
     protected _logs: LogsClient | undefined;
+    protected _notes: NotesClient | undefined;
 
     constructor(options: MembersClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -31,6 +33,10 @@ export class MembersClient {
 
     public get logs(): LogsClient {
         return (this._logs ??= new LogsClient(this._options));
+    }
+
+    public get notes(): NotesClient {
+        return (this._notes ??= new NotesClient(this._options));
     }
 
     /**
@@ -47,7 +53,10 @@ export class MembersClient {
      *
      * @example
      *     await client.members.list({
-     *         user_ids: ["user_xxxxxxxxxxxxxx"]
+     *         user_ids: ["user_xxxxxxxxxxxxxx"],
+     *         product_ids: ["prod_xxxxxxxxxxxxx"],
+     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         promo_code_ids: ["promo_xxxxxxxxxxxx"]
      *     })
      */
     public async list(
@@ -61,6 +70,11 @@ export class MembersClient {
                     access_level: accessLevel,
                     status,
                     user_ids: userIds,
+                    most_recent_actions: mostRecentActions,
+                    membership_status: membershipStatus,
+                    product_ids: productIds,
+                    plan_ids: planIds,
+                    promo_code_ids: promoCodeIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,
@@ -76,6 +90,15 @@ export class MembersClient {
                     access_level: accessLevel != null ? accessLevel : undefined,
                     status: status != null ? status : undefined,
                     user_ids: userIds,
+                    most_recent_actions: Array.isArray(mostRecentActions)
+                        ? mostRecentActions.map((item) => item)
+                        : mostRecentActions != null
+                          ? mostRecentActions
+                          : undefined,
+                    membership_status: membershipStatus != null ? membershipStatus : undefined,
+                    product_ids: productIds,
+                    plan_ids: planIds,
+                    promo_code_ids: promoCodeIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,

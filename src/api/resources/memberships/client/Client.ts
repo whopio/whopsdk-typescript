@@ -42,7 +42,11 @@ export class MembershipsClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.memberships.list()
+     *     await client.memberships.list({
+     *         product_ids: ["prod_xxxxxxxxxxxxx"],
+     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
+     *     })
      */
     public async list(
         request: Whop.ListMembershipsRequest = {},
@@ -55,9 +59,14 @@ export class MembershipsClient {
                 const {
                     account_id: accountId,
                     user_id: userId,
+                    member_id: memberId,
                     status,
+                    statuses,
                     product_id: productId,
+                    product_ids: productIds,
                     plan_id: planId,
+                    plan_ids: planIds,
+                    promo_code_ids: promoCodeIds,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     order,
@@ -70,9 +79,18 @@ export class MembershipsClient {
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     user_id: userId,
+                    member_id: memberId,
                     status: status != null ? status : undefined,
+                    statuses: Array.isArray(statuses)
+                        ? statuses.map((item) => item)
+                        : statuses != null
+                          ? statuses
+                          : undefined,
                     product_id: productId,
+                    product_ids: productIds,
                     plan_id: planId,
+                    plan_ids: planIds,
+                    promo_code_ids: promoCodeIds,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     order: order != null ? order : undefined,

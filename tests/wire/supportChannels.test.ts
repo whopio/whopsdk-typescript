@@ -23,8 +23,20 @@ describe("SupportChannelsClient", () => {
                     custom_name: "Project Alpha Team",
                     customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
                     id: "id",
+                    last_message: {
+                        attachments: [{ content_type: "image/jpeg", filename: "document.pdf" }],
+                        content: "Hey, are you available for a **quick call**?",
+                        created_at: "2023-12-01T05:00:00Z",
+                        gifs: [{ slug: "slug" }],
+                        id: "id",
+                        poll: null,
+                        user_id: "user_id",
+                    },
                     last_message_at: "2023-12-01T05:00:00Z",
+                    needs_reply: true,
+                    participated: true,
                     resolved_at: "2023-12-01T05:00:00Z",
+                    unread: true,
                 },
             ],
             page_info: {
@@ -205,8 +217,20 @@ describe("SupportChannelsClient", () => {
             custom_name: "Project Alpha Team",
             customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
             id: "id",
+            last_message: {
+                attachments: [{ content_type: "image/jpeg", filename: "document.pdf" }],
+                content: "Hey, are you available for a **quick call**?",
+                created_at: "2023-12-01T05:00:00Z",
+                gifs: [{ slug: "slug" }],
+                id: "id",
+                poll: { options: [{ id: "id" }] },
+                user_id: "user_id",
+            },
             last_message_at: "2023-12-01T05:00:00Z",
+            needs_reply: true,
+            participated: true,
             resolved_at: "2023-12-01T05:00:00Z",
+            unread: true,
         };
 
         server
@@ -444,8 +468,20 @@ describe("SupportChannelsClient", () => {
             custom_name: "Project Alpha Team",
             customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
             id: "id",
+            last_message: {
+                attachments: [{ content_type: "image/jpeg", filename: "document.pdf" }],
+                content: "Hey, are you available for a **quick call**?",
+                created_at: "2023-12-01T05:00:00Z",
+                gifs: [{ slug: "slug" }],
+                id: "id",
+                poll: { options: [{ id: "id" }] },
+                user_id: "user_id",
+            },
             last_message_at: "2023-12-01T05:00:00Z",
+            needs_reply: true,
+            participated: true,
             resolved_at: "2023-12-01T05:00:00Z",
+            unread: true,
         };
 
         server

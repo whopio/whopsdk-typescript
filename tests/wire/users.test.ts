@@ -101,6 +101,14 @@ describe("UsersClient", () => {
                     id: "user_xxxxxxxxxxxxxx",
                     name: "Marcus Webb",
                     profile_picture: { url: "https://ui-avatars.com/api/" },
+                    social_links: [
+                        {
+                            url: "https://www.instagram.com/tanyacole.details",
+                            username: "tanyacole.details",
+                            verified: true,
+                            website: "x",
+                        },
+                    ],
                     trading: {
                         account_id: null,
                         hyperliquid: null,
@@ -234,6 +242,14 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
+            social_links: [
+                {
+                    url: "https://www.instagram.com/tanyacole.details",
+                    username: "tanyacole.details",
+                    verified: true,
+                    website: "x",
+                },
+            ],
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -357,6 +373,14 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
+            social_links: [
+                {
+                    url: "https://www.instagram.com/tanyacole.details",
+                    username: "tanyacole.details",
+                    verified: true,
+                    website: "x",
+                },
+            ],
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -494,6 +518,14 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
+            social_links: [
+                {
+                    url: "https://www.instagram.com/tanyacole.details",
+                    username: "tanyacole.details",
+                    verified: true,
+                    website: "x",
+                },
+            ],
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -621,6 +653,14 @@ describe("UsersClient", () => {
             id: "user_xxxxxxxxxxxxxx",
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
+            social_links: [
+                {
+                    url: "https://www.instagram.com/tanyacole.details",
+                    username: "tanyacole.details",
+                    verified: true,
+                    website: "x",
+                },
+            ],
             trading: {
                 account_id: "account_id",
                 hyperliquid: {

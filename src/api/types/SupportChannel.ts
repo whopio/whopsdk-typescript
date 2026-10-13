@@ -14,10 +14,18 @@ export interface SupportChannel {
     customer_user: SupportChannel.CustomerUser | null;
     /** The unique identifier for the entity */
     id: string;
+    /** The most recent message in this channel. Null if no messages have been sent, or when listing support channels without `include_last_message`. */
+    last_message: SupportChannel.LastMessage | null;
     /** The timestamp when the most recent message was sent in this channel. Null if no messages have been sent. */
     last_message_at: string | null;
+    /** Whether the customer sent the latest message and the linked support ticket is unresolved. Null if not a support chat. */
+    needs_reply: boolean | null;
+    /** Whether the authenticated user has joined this channel as a participant. Null when the caller is not a user, or when listing support channels without `include_participated`. */
+    participated: boolean | null;
     /** The timestamp when the linked support ticket was marked as resolved. Null if unresolved or not a support chat. */
     resolved_at: string | null;
+    /** Whether this channel has a message from someone else that the authenticated user has not viewed yet. Null when the caller is not a user, or when listing support channels without `include_last_message`. */
+    unread: boolean | null;
 }
 
 export namespace SupportChannel {
@@ -31,5 +39,75 @@ export namespace SupportChannel {
         name: string | null;
         /** The user's unique username shown on their public profile. */
         username: string;
+    }
+
+    /**
+     * The most recent message in this channel. Null if no messages have been sent, or when listing support channels without `include_last_message`.
+     */
+    export interface LastMessage {
+        /** A list of all attachments on this message, including files and media. */
+        attachments: LastMessage.Attachments.Item[];
+        /** The message content formatted as Markdown. Null if the message has no text content. */
+        content: string | null;
+        /** The timestamp when this message was originally created. */
+        created_at: string;
+        /** A list of GIF animations attached to this message. */
+        gifs: LastMessage.Gifs.Item[];
+        /** Represents a unique identifier that is Base64 obfuscated. It is often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`) input value will be accepted as an ID. */
+        id: string;
+        /** A poll attached to this message. Null if the message does not contain a poll. */
+        poll: LastMessage.Poll | null;
+        /** The unique identifier of the user who authored this message. */
+        user_id: string;
+    }
+
+    export namespace LastMessage {
+        export type Attachments = Attachments.Item[];
+
+        export namespace Attachments {
+            /**
+             * Represents an image attachment
+             */
+            export interface Item {
+                /** Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg. */
+                content_type: string | null;
+                /** The original filename of the uploaded attachment, including its file extension. */
+                filename: string | null;
+            }
+        }
+
+        export type Gifs = Gifs.Item[];
+
+        export namespace Gifs {
+            /**
+             * Represents a GIF attachment in a feed post
+             */
+            export interface Item {
+                /** The unique identifier of the GIF */
+                slug: string;
+            }
+        }
+
+        /**
+         * A poll attached to this message. Null if the message does not contain a poll.
+         */
+        export interface Poll {
+            /** The options for the poll */
+            options: Poll.Options.Item[] | null;
+        }
+
+        export namespace Poll {
+            export type Options = Options.Item[];
+
+            export namespace Options {
+                /**
+                 * Represents a single poll option
+                 */
+                export interface Item {
+                    /** The unique identifier for the poll option. */
+                    id: string;
+                }
+            }
+        }
     }
 }

@@ -5,7 +5,10 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         user_ids: ["user_xxxxxxxxxxxxxx"]
+ *         user_ids: ["user_xxxxxxxxxxxxxx"],
+ *         product_ids: ["prod_xxxxxxxxxxxxx"],
+ *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         promo_code_ids: ["promo_xxxxxxxxxxxx"]
  *     }
  */
 export interface ListMembersRequest {
@@ -17,13 +20,23 @@ export interface ListMembersRequest {
     status?: Whop.ListMembersRequestStatus;
     /** Only return members whose users match these `user_` identifiers. */
     user_ids?: string | string[];
+    /** Only return members whose `most_recent_action` is one of these values. */
+    most_recent_actions?: Whop.ListMembersRequestMostRecentActionsItem | Whop.ListMembersRequestMostRecentActionsItem[];
+    /** `active` returns members holding at least one membership that currently grants access; `inactive` returns members holding at least one membership that does not. Combined with `product_ids`, `plan_ids`, or `promo_code_ids`, one membership must match all of them. */
+    membership_status?: Whop.ListMembersRequestMembershipStatus;
+    /** Only return members holding a membership to one of these products, prefixed `prod_`. Unknown IDs match nothing. */
+    product_ids?: string | string[];
+    /** Only return members holding a membership on one of these plans, prefixed `plan_`. Unknown IDs match nothing. */
+    plan_ids?: string | string[];
+    /** Only return members holding a membership bought with one of these promo codes, prefixed `promo_`. Unknown IDs match nothing. */
+    promo_code_ids?: string | string[];
     /** Search members by name or username. An exact email address also matches when the credential holds the member:email:read scope. */
     query?: string;
     /** Only members who joined after this ISO 8601 timestamp. */
     created_after?: string;
     /** Only members who joined before this ISO 8601 timestamp. */
     created_before?: string;
-    /** Sort field. */
+    /** Sort field. `most_recent_action_at` places members without one first when ascending and last when descending. */
     order?: Whop.ListMembersRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListMembersRequestDirection;

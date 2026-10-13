@@ -57,7 +57,21 @@ export class SupportChannelsClient {
             async (
                 request: Whop.ListSupportChannelsRequest,
             ): Promise<core.WithRawResponse<Whop.ListSupportChannelsResponse>> => {
-                const { after, before, first, last, view, open, direction, order, account_id: accountId } = request;
+                const {
+                    after,
+                    before,
+                    first,
+                    last,
+                    view,
+                    open,
+                    customer_user_id: customerUserId,
+                    participated,
+                    include_last_message: includeLastMessage,
+                    include_participated: includeParticipated,
+                    direction,
+                    order,
+                    account_id: accountId,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
@@ -65,6 +79,10 @@ export class SupportChannelsClient {
                     last,
                     view: view != null ? view : undefined,
                     open,
+                    customer_user_id: customerUserId,
+                    participated,
+                    include_last_message: includeLastMessage,
+                    include_participated: includeParticipated,
                     direction: direction != null ? direction : undefined,
                     order: order != null ? order : undefined,
                     account_id: accountId,

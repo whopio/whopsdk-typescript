@@ -21,12 +21,17 @@ describe("MembersClient", () => {
                     access_level: "no_access",
                     account_id: "biz_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
+                    display_name: "Dana Whitfield",
+                    email: "marcus@shinetime.example",
                     id: "mber_xxxxxxxxxxxxxx",
                     joined_at: "2026-01-01T12:00:00.000Z",
                     last_accessed_at: "2026-01-01T12:00:00.000Z",
+                    most_recent_action: "canceling",
+                    most_recent_action_at: "2026-01-01T12:00:00.000Z",
                     phone_number: "+xxxxxxxxxxx",
                     status: "joined",
-                    token_balance: 0,
+                    token_balance: 70.25,
+                    usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -54,6 +59,9 @@ describe("MembersClient", () => {
         const expected = rawResponseBody;
         const page = await client.members.list({
             user_ids: ["user_xxxxxxxxxxxxxx"],
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+            plan_ids: ["plan_xxxxxxxxxxxxx"],
+            promo_code_ids: ["promo_xxxxxxxxxxxx"],
         });
 
         expect(expected.data).toEqual(page.data);
@@ -133,12 +141,17 @@ describe("MembersClient", () => {
             access_level: "no_access",
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            display_name: "Dana Whitfield",
+            email: "marcus@shinetime.example",
             id: "mber_xxxxxxxxxxxxxx",
             joined_at: "2026-01-01T12:00:00.000Z",
             last_accessed_at: "2026-01-01T12:00:00.000Z",
+            most_recent_action: "canceling",
+            most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
             status: "joined",
-            token_balance: 0,
+            token_balance: 70.25,
+            usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
