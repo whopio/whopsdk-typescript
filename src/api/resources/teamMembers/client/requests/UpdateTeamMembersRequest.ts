@@ -9,12 +9,12 @@
 export interface UpdateTeamMembersRequest {
     /** Team member ID — `ausr_` for accepted members, `ausri_` for pending invites. */
     id: string;
-    /** The system role to grant. Custom roles cannot be granted through the API. The Partner role can only be granted to the account's attached, verified partner. */
+    /** The system role to grant. Custom roles cannot be granted through the API. The Partner role provides view-only access. */
     role?: UpdateTeamMembersRequest.Role;
 }
 
 export namespace UpdateTeamMembersRequest {
-    /** The system role to grant. Custom roles cannot be granted through the API. The Partner role can only be granted to the account's attached, verified partner. */
+    /** The system role to grant. Custom roles cannot be granted through the API. The Partner role provides view-only access. */
     export const Role = {
         Owner: "owner",
         Admin: "admin",
