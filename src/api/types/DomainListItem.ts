@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface DomainListItem {
     /** ID of the account the domain belongs to, prefixed `biz_`. */
     account_id: string | null;
+    /** Offering Apple Pay at checkouts served from the domain, managed in checkout settings. `null` when not enrolled or not visible to you. */
+    apple_pay: Whop.DomainApplePay | null;
     /** Whether you can register the hostname and what it costs. Set only when no domain on Whop has it. */
     availability: Whop.DomainAvailability | null;
     /** When the domain was created, as an ISO 8601 timestamp. */
