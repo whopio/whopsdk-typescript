@@ -258,6 +258,7 @@ export * from "./FeeMarkupTypes.js";
 export * from "./File_.js";
 export * from "./FileMultipartUrl.js";
 export * from "./FileVisibility.js";
+export * from "./FinancingAccessChange.js";
 export * from "./FinancingApplication.js";
 export * from "./FinancingRequirement.js";
 export * from "./FinancingTerms.js";

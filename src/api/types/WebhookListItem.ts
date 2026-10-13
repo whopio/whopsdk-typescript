@@ -53,6 +53,7 @@ export namespace WebhookListItem {
             AccountUpdated: "account.updated",
             AccountFinancingApproved: "account.financing_approved",
             AccountFinancingDenied: "account.financing_denied",
+            AccountFinancingDisabled: "account.financing_disabled",
             InvoiceCreated: "invoice.created",
             InvoiceMarkedUncollectible: "invoice.marked_uncollectible",
             InvoicePaid: "invoice.paid",
