@@ -21,6 +21,8 @@ export interface User {
     email: string | null;
     /** User ID, prefixed `user_`. */
     id: string;
+    /** The user's Whop Levels progress, counted across every account they own. Populated only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise, and when none of their accounts are in Whop Levels. */
+    level: Whop.OwnerLevel | null;
     /** The user's display name */
     name: string | null;
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */

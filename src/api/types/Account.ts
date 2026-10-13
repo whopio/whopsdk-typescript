@@ -49,6 +49,8 @@ export interface Account {
     industry_type: string | null;
     /** Prefix used for account invoices. */
     invoice_prefix: string | null;
+    /** The Whop Levels progress of the account's `owner`, counted across every account they own, so all of them show the same level. Computed only on `retrieve` and `me` for callers with `company:basic:read` scope; `null` otherwise, and when the account is not in Whop Levels. */
+    level: Whop.AccountLevel | null;
     /** Account logo image URL. */
     logo_url: string | null;
     /** Arbitrary key/value metadata supplied at account creation. */

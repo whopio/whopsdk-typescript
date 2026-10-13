@@ -158,6 +158,14 @@ describe("AccountsClient", () => {
                     id: "biz_xxxxxxxxxxxxxx",
                     industry_type: "trading",
                     invoice_prefix: "SHINE",
+                    level: {
+                        boosted: true,
+                        current: 1,
+                        points: 41000,
+                        points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                        points_to_next: 59000,
+                        resets_at: "2026-01-01T12:00:00.000Z",
+                    },
                     logo_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     metadata: { external_id: "shop_4417", region: "austin" },
@@ -659,6 +667,14 @@ describe("AccountsClient", () => {
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
             invoice_prefix: "SHINE",
+            level: {
+                boosted: true,
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             metadata: { external_id: "shop_4417", region: "austin" },
@@ -1182,6 +1198,14 @@ describe("AccountsClient", () => {
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
             invoice_prefix: "SHINE",
+            level: {
+                boosted: true,
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             metadata: { external_id: "shop_4417", region: "austin" },
@@ -1632,6 +1656,14 @@ describe("AccountsClient", () => {
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
             invoice_prefix: "SHINE",
+            level: {
+                boosted: true,
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             metadata: { external_id: "shop_4417", region: "austin" },
@@ -2213,6 +2245,14 @@ describe("AccountsClient", () => {
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
             invoice_prefix: "SHINE",
+            level: {
+                boosted: true,
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             metadata: { external_id: "shop_4417", region: "austin" },
@@ -3484,6 +3524,14 @@ describe("AccountsClient", () => {
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
             invoice_prefix: "SHINE",
+            level: {
+                boosted: true,
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             metadata: { external_id: "shop_4417", region: "austin" },
