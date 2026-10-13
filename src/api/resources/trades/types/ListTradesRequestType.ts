@@ -4,5 +4,7 @@ export const ListTradesRequestType = {
     Buy: "buy",
     Close: "close",
     Order: "order",
+    Deposit: "deposit",
+    Withdraw: "withdraw",
 } as const;
 export type ListTradesRequestType = (typeof ListTradesRequestType)[keyof typeof ListTradesRequestType];
