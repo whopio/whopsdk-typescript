@@ -9,4 +9,6 @@
 export interface ResumePaymentsRequest {
     /** The unique identifier of the payment. */
     payment_id: string;
+    /** Where the buyer continues after completing an off-site step. Must be an absolute https URL without credentials (http is allowed for localhost), at most 2,048 characters. Defaults to Whop's hosted verification page. Ignored when the payment is not waiting on authentication. */
+    return_url?: string;
 }
