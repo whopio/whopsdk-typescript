@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface Trade {
     /** The account that owns the trading wallet, prefixed `biz_`. `null` when a user owns it. */
     account_id: string | null;
-    /** The USDT0 that a deposit, or an order short of trading balance, sends from the wallet, or the USDC that a withdraw sends back, in native units, as a decimal string. `null` otherwise, and for a withdraw of `all`. */
+    /** The USDT0 that a deposit, or an order short of trading balance, sends from the wallet, or the USDC that a withdraw sends back, in native units, as a decimal string. A withdraw of `all` shows what it sent once it finishes. `null` otherwise. */
     amount: string | null;
     /** The average fill price of the order, in USD, as a decimal string. `null` when it is not known. */
     average_price: string | null;
