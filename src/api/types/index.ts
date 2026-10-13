@@ -234,6 +234,7 @@ export * from "./DomainRegistrar.js";
 export * from "./DomainRegistration.js";
 export * from "./DomainVerification.js";
 export * from "./DomainWebsite.js";
+export * from "./DomainWebsiteApp.js";
 export * from "./EconomicIntelligence.js";
 export * from "./EconomicIntelligenceInput.js";
 export * from "./EconomicIntelligenceOperation.js";
