@@ -43,4 +43,6 @@ export interface ListDomainsRequest {
     website?: Whop.ListDomainsRequestWebsite;
     /** Only domains with apple_pay in this state, such as `ready`, or `any` for every domain that has apple_pay. */
     apple_pay?: Whop.ListDomainsRequestApplePay;
+    /** Only domains with pixel in this state, such as `ready`, or `any` for every domain that has pixel. */
+    pixel?: Whop.ListDomainsRequestPixel;
 }

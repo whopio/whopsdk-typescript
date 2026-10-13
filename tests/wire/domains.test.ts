@@ -49,6 +49,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    pixel: null,
                     platform: null,
                     registration: null,
                     status: null,
@@ -88,6 +89,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    pixel: null,
                     platform: null,
                     registration: null,
                     status: null,
@@ -127,6 +129,7 @@ describe("DomainsClient", () => {
                     ],
                     metadata: { key: "value" },
                     owned_by: null,
+                    pixel: null,
                     platform: null,
                     registration: null,
                     status: null,
@@ -246,6 +249,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
                 dnssec: false,
@@ -392,6 +396,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { key: "value" },
             owned_by: null,
+            pixel: null,
             platform: null,
             public_record: {
                 dnssec: false,
@@ -509,6 +514,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
                 dnssec: false,
@@ -613,6 +619,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
                 dnssec: false,
@@ -731,6 +738,7 @@ describe("DomainsClient", () => {
             ],
             metadata: { project: "website" },
             owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
                 dnssec: false,
