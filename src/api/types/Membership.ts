@@ -11,6 +11,8 @@ export interface Membership {
     billing_period_days: number | null;
     /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring variants. */
     cancel_at_period_end: boolean;
+    /** The category the member picked for why they canceled. `null` when no category was picked. */
+    cancel_option: Membership.CancelOption | null;
     /** When cancellation was requested, or when the membership was canceled if no request time is recorded, as an ISO 8601 timestamp. `null` when neither is recorded. */
     canceled_at: string | null;
     /** Free-text explanation provided when canceling. `null` when no reason was provided. */
@@ -68,6 +70,17 @@ export interface Membership {
 }
 
 export namespace Membership {
+    /** The category the member picked for why they canceled. `null` when no category was picked. */
+    export const CancelOption = {
+        TooExpensive: "too_expensive",
+        Switching: "switching",
+        MissingFeatures: "missing_features",
+        TechnicalIssues: "technical_issues",
+        BadExperience: "bad_experience",
+        Other: "other",
+        Testing: "testing",
+    } as const;
+    export type CancelOption = (typeof CancelOption)[keyof typeof CancelOption];
     /** How renewals are collected. `charge_automatically` charges the saved payment method each period; `send_invoice` emails the buyer an invoice each period. `null` when not set. */
     export const CollectionMethod = {
         ChargeAutomatically: "charge_automatically",
