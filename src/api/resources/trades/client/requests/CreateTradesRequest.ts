@@ -10,7 +10,7 @@
 export interface CreateTradesRequest {
     /** The account or user whose wallet trades, prefixed `biz_` or `user_`. */
     account_id: string;
-    /** The USDT0 to send from the wallet for a buy, with at most 6 decimals. Required for a buy. */
+    /** For a buy or deposit, the USDT0 to send from the wallet, with at most 6 decimals. For a withdraw, the USDC to send back, at least 1 with at most 6 decimals, or `all`. Required for buy, deposit and withdraw. */
     amount?: string;
     /** Only for an order. Your own ID for the trade, 1 to 128 characters, unique for the account. Sending it again with the same order returns the same trade; with a different order it answers `409`. */
     client_order_id?: string;
@@ -18,7 +18,7 @@ export interface CreateTradesRequest {
     instrument_type?: CreateTradesRequest.InstrumentType;
     /** The cross leverage, from 1 to the market's maximum. Required for a buy and for an order that is not `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
-    /** The perpetual market, for example `BTC`. Required for a buy, close or order. */
+    /** The perpetual market, for example `BTC`. Required for a buy, close or order; not accepted for a deposit or withdraw. */
     market?: string;
     /** Only for an order. Free-form string-to-string annotations: up to 50 keys of at most 40 characters, values up to 500 characters. */
     metadata?: Record<string, string>;
@@ -36,7 +36,7 @@ export interface CreateTradesRequest {
     size?: string;
     /** Only for a market order. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100. */
     slippage_bps?: number;
-    /** `order` places one order from the trading balance and sets cross `leverage` first. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance and sets cross `leverage` first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     type: CreateTradesRequest.Type;
 }
 
@@ -58,11 +58,13 @@ export namespace CreateTradesRequest {
         Sell: "sell",
     } as const;
     export type Side = (typeof Side)[keyof typeof Side];
-    /** `order` places one order from the trading balance and sets cross `leverage` first. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance and sets cross `leverage` first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `buy` bridges `amount` USDT0 to the trading account, sets cross `leverage` on `market`, and places one market buy; if it does not fill, its money goes back to the wallet. `close` closes the position in `market`, if one is open, and sends all withdrawable USDC back to the wallet. */
     export const Type = {
         Buy: "buy",
         Close: "close",
         Order: "order",
+        Deposit: "deposit",
+        Withdraw: "withdraw",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }

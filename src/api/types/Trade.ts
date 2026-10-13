@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface Trade {
     /** The account that owns the trading wallet, prefixed `biz_`. `null` when a user owns it. */
     account_id: string | null;
-    /** The USDT0 that a buy sends from the wallet, in native units, as a decimal string. `null` for other types. */
+    /** The USDT0 that a buy or deposit sends from the wallet, or the USDC that a withdraw sends back, in native units, as a decimal string. `null` for other types and for a withdraw of `all`. */
     amount: string | null;
     /** The average fill price of the buy or order, in USD, as a decimal string. `null` when it is not known. */
     average_price: string | null;
@@ -23,10 +23,10 @@ export interface Trade {
     funds_location: Trade.FundsLocation | null;
     /** Trade ID, prefixed `tint_`. */
     id: string;
-    /** The cross leverage set before a buy or an opening order. `null` for a close or a reduce-only order. */
+    /** The cross leverage set before a buy or an opening order. `null` for a close, deposit, withdraw or reduce-only order. */
     leverage: number | null;
-    /** The perpetual market, for example `BTC`. */
-    market: string;
+    /** The perpetual market, for example `BTC`. `null` for a deposit or withdraw. */
+    market: string | null;
     /** Free-form string-to-string annotations stored on the trade. */
     metadata: Record<string, unknown>;
     object: Trade.Object_;
@@ -44,7 +44,7 @@ export interface Trade {
     status: Trade.Status;
     /** More about the outcome: `partial_fill` (the buy filled only part of its size), `no_position` (the close found no position), `partial_close` (part of the position is still open), or `nothing_to_return` (the close had less than 1 USDC to send back). `null` otherwise. */
     status_detail: Trade.StatusDetail | null;
-    /** `order` places one order from the trading balance. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
     type: Trade.Type;
     /** When the trade last changed, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -68,6 +68,7 @@ export namespace Trade {
         OrderRejected: "order_rejected",
         CloseRejected: "close_rejected",
         ReturnFailed: "return_failed",
+        WithdrawFailed: "withdraw_failed",
     } as const;
     export type FailureCode = (typeof FailureCode)[keyof typeof FailureCode];
     /** Where the money is when the trade did not complete as asked, or after a close: `wallet`, `trading_account`, or `unknown` while a person checks it. `null` otherwise. */
@@ -110,11 +111,13 @@ export namespace Trade {
         NothingToReturn: "nothing_to_return",
     } as const;
     export type StatusDetail = (typeof StatusDetail)[keyof typeof StatusDetail];
-    /** `order` places one order from the trading balance. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
+    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `buy` bridges USDT0 to the trading account, sets the leverage and places one market buy. `close` closes the position in one market, if one is open, and sends all withdrawable USDC back to the wallet. */
     export const Type = {
         Buy: "buy",
         Close: "close",
         Order: "order",
+        Deposit: "deposit",
+        Withdraw: "withdraw",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }
