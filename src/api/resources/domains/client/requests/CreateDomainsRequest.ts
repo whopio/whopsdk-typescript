@@ -13,6 +13,8 @@ export interface CreateDomainsRequest {
     domain: string;
     /** Custom string keys and values. */
     metadata?: Record<string, string>;
+    /** Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking. */
+    pixel?: CreateDomainsRequest.Pixel | null;
     /** Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase. */
     registration?: CreateDomainsRequest.Registration | null;
     /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
@@ -22,6 +24,11 @@ export interface CreateDomainsRequest {
 }
 
 export namespace CreateDomainsRequest {
+    /**
+     * Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking.
+     */
+    export type Pixel = {};
+
     /**
      * Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase.
      */

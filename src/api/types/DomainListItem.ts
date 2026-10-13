@@ -20,6 +20,8 @@ export interface DomainListItem {
     metadata: Record<string, unknown>;
     /** The other account that has proven it owns this hostname. `null` when no other account does. */
     owned_by: Whop.DomainOwner | null;
+    /** Tracking page views on the domain with the Whop pixel. `null` when not tracked or not visible to you. */
+    pixel: Whop.DomainPixel | null;
     /** An address on a zone Whop runs, such as example.whop.site, that follows its app's route. `null` for other domains or when not visible to you. */
     platform: Whop.DomainPlatform | null;
     /** Buying the domain through Whop, renewing it, and running its DNS. `null` when not wanted or not visible to you. */

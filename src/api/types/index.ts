@@ -226,6 +226,7 @@ export * from "./DomainDnsRecord.js";
 export * from "./DomainIssue.js";
 export * from "./DomainListItem.js";
 export * from "./DomainOwner.js";
+export * from "./DomainPixel.js";
 export * from "./DomainPlatform.js";
 export * from "./DomainPublicRecord.js";
 export * from "./DomainRegistrant.js";

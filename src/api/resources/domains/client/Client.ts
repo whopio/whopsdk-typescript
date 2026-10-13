@@ -71,6 +71,7 @@ export class DomainsClient {
                     platform,
                     website,
                     apple_pay: applePay,
+                    pixel,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -90,6 +91,7 @@ export class DomainsClient {
                     platform: platform != null ? platform : undefined,
                     website: website != null ? website : undefined,
                     apple_pay: applePay != null ? applePay : undefined,
+                    pixel: pixel != null ? pixel : undefined,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
