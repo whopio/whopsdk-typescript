@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../core/headers.js";
 import * as core from "../../../../../../core/index.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
@@ -53,6 +54,7 @@ export class BusinessesClient {
             ): Promise<core.WithRawResponse<Whop.partners.ListBusinessesResponse>> => {
                 const {
                     referring_account_id: referringAccountId,
+                    advance_status: advanceStatus,
                     status,
                     has_earnings: hasEarnings,
                     first,
@@ -70,6 +72,7 @@ export class BusinessesClient {
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     referring_account_id: referringAccountId,
+                    advance_status: advanceStatus != null ? advanceStatus : undefined,
                     status: status != null ? status : undefined,
                     has_earnings: hasEarnings,
                     first,
@@ -231,5 +234,168 @@ export class BusinessesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/partners/businesses/{id}");
+    }
+
+    /**
+     * Save annual projections for a business referred by the authenticated partner. Projections cannot be changed after saving; repeating the same values is allowed. Public API access requires a partner OAuth token; business API keys are not supported.
+     *
+     * @param {Whop.partners.UpdateBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.partners.businesses.update({
+     *         id: "id",
+     *         annual_ads_usd: "120000",
+     *         annual_processing_usd: "1200000"
+     *     })
+     */
+    public update(
+        request: Whop.partners.UpdateBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.partners.UpdateBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
+    }
+
+    private async __update(
+        request: Whop.partners.UpdateBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.partners.UpdateBusinessesResponse>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `partners/businesses/${core.url.encodePathParam(id)}`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Whop.partners.UpdateBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/partners/businesses/{id}");
+    }
+
+    /**
+     * Accept the authenticated partner's CPA offer with the reviewed terms and signed offer token. Public API access requires a partner OAuth token; business API keys are not supported.
+     *
+     * @param {Whop.partners.AcceptCommissionAdvanceBusinessesRequest} request
+     * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.partners.businesses.acceptCommissionAdvance({
+     *         id: "id",
+     *         acknowledgments: ["commission_replacement", "clawback", "term"],
+     *         expected_amount_usd: "1439.99",
+     *         offer_token: "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     *         terms_version: "2026-01-01"
+     *     })
+     */
+    public acceptCommissionAdvance(
+        request: Whop.partners.AcceptCommissionAdvanceBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.partners.AcceptCommissionAdvanceBusinessesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__acceptCommissionAdvance(request, requestOptions));
+    }
+
+    private async __acceptCommissionAdvance(
+        request: Whop.partners.AcceptCommissionAdvanceBusinessesRequest,
+        requestOptions?: BusinessesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.partners.AcceptCommissionAdvanceBusinessesResponse>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `partners/businesses/${core.url.encodePathParam(id)}/accept_commission_advance`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Whop.partners.AcceptCommissionAdvanceBusinessesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/partners/businesses/{id}/accept_commission_advance",
+        );
     }
 }

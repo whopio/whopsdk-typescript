@@ -189,6 +189,8 @@ export const PermissionAction = {
     PartnerEmailRead: "partner:email:read",
     PartnerInviteCreate: "partner:invite:create",
     PartnerFeesUpdate: "partner:fees:update",
+    PartnerCommissionAdvanceUpdate: "partner:commission_advance:update",
+    PartnerCommissionAdvanceAccept: "partner:commission_advance:accept",
     PartnerReferralRequestRead: "partner:referral_request:read",
     PartnerReferralRequestCreate: "partner:referral_request:create",
     PartnerReferralRequestAccept: "partner:referral_request:accept",
