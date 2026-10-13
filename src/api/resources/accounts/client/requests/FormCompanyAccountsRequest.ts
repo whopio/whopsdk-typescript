@@ -14,7 +14,6 @@
  *         },
  *         business_name: "Shine Time Auto Detailing",
  *         business_phone: "+15125550142",
- *         business_type: "brick_and_mortar",
  *         business_website: "https://shinetime.example",
  *         entity_suffix: "LLC",
  *         entity_type: "llc",
@@ -39,8 +38,6 @@
  *                 roles: ["president"],
  *                 ssn: "123-45-6789"
  *             }],
- *         industry_group: "automotive",
- *         industry_type: "car_wash_and_detailing_shop",
  *         share_structure: {
  *             number_of_shares: 123,
  *             value: 123
@@ -57,8 +54,6 @@ export interface FormCompanyAccountsRequest {
     business_name: string;
     /** Business phone number in E.164 format, for example `+12125550100`. Required unless `use_registered_agent` is `true`. */
     business_phone?: string;
-    /** High-level business category, from the Whop business taxonomy. Valid values are listed on [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary). */
-    business_type: string;
     /** Company website URL. */
     business_website?: string;
     /** Legal entity ending appended to `business_name`. LLC formations accept `LLC`, `L.L.C`, `L.L.C.` or `Limited Liability Company` and default to `LLC`; C-Corp formations accept `Inc`, `Inc.`, `Incorporated`, `Corp.`, `Corporation`, `C Corp`, `C Corporation`, `CCorp` or `Company` and default to `Inc.`. Unrecognized values fall back to the default for the entity type. */
@@ -71,10 +66,6 @@ export interface FormCompanyAccountsRequest {
     formation_state: FormCompanyAccountsRequest.FormationState;
     /** The company's founders. Exactly one must be marked `is_primary` — the responsible party for the filing. */
     founders: FormCompanyAccountsRequest.Founders.Item[];
-    /** Industry group, from the Whop business taxonomy. Valid values are listed on [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary). */
-    industry_group: string;
-    /** Specific industry vertical, from the Whop business taxonomy. Valid values are listed on [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary). */
-    industry_type: string;
     /** Authorized share structure. Required when `entity_type` is `c_corp`; ignored for LLCs. */
     share_structure?: FormCompanyAccountsRequest.ShareStructure;
     /** Use the registered agent's address as the company address instead of `business_address`. */

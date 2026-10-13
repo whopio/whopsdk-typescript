@@ -45,8 +45,6 @@ export interface Account {
     home_preferences: Account.HomePreferences.Item[];
     /** Account ID, prefixed `biz_`. */
     id: string;
-    /** Account industry group. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
-    industry_group: string | null;
     /** Specific industry vertical for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
     industry_type: string | null;
     /** Prefix used for account invoices. */
