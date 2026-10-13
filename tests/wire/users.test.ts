@@ -99,6 +99,13 @@ describe("UsersClient", () => {
                     },
                     email: "marcus@shinetime.example",
                     id: "user_xxxxxxxxxxxxxx",
+                    level: {
+                        current: 1,
+                        points: 41000,
+                        points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                        points_to_next: 59000,
+                        resets_at: "2026-01-01T12:00:00.000Z",
+                    },
                     name: "Marcus Webb",
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     social_links: [
@@ -240,6 +247,13 @@ describe("UsersClient", () => {
             },
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
+            level: {
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
             social_links: [
@@ -371,6 +385,13 @@ describe("UsersClient", () => {
             },
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
+            level: {
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
             social_links: [
@@ -516,6 +537,13 @@ describe("UsersClient", () => {
             },
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
+            level: {
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
             social_links: [
@@ -651,6 +679,13 @@ describe("UsersClient", () => {
             },
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
+            level: {
+                current: 1,
+                points: 41000,
+                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_to_next: 59000,
+                resets_at: "2026-01-01T12:00:00.000Z",
+            },
             name: "Marcus Webb",
             profile_picture: { url: "https://ui-avatars.com/api/" },
             social_links: [
