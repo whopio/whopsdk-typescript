@@ -39,7 +39,7 @@ export namespace UpdateDomainsRequest {
      * Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities.
      */
     export interface Website {
-        /** App ID, prefixed app_, of the website to serve. The app must belong to the account. */
-        app_id?: string | undefined;
+        /** App ID, prefixed app_, of the website to serve. The app must belong to the account. Leave it out to point the domain at Whop before the website exists; it shows a placeholder until you choose one. Pass `null` to detach the app and keep the domain pointed at Whop. */
+        app_id?: (string | null) | undefined;
     }
 }
