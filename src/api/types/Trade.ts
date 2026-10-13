@@ -23,9 +23,11 @@ export interface Trade {
     funds_location: Trade.FundsLocation | null;
     /** Trade ID, prefixed `tint_`. */
     id: string;
-    /** The cross leverage set before an opening order. `null` for a close, deposit, withdraw or reduce-only order. */
+    /** `perpetual` or `spot` for an order, `perpetual` for a close. `null` for a deposit or withdraw. */
+    instrument_type: Trade.InstrumentType | null;
+    /** The cross leverage set before an opening perpetual order. `null` for a spot order, close, deposit, withdraw or reduce-only order. */
     leverage: number | null;
-    /** The perpetual market, for example `BTC`. `null` for a deposit or withdraw. */
+    /** The market, for example `BTC` for a perpetual or `HYPE/USDC` for spot. `null` for a deposit or withdraw. */
     market: string | null;
     /** Free-form string-to-string annotations stored on the trade. */
     metadata: Record<string, unknown>;
@@ -78,6 +80,12 @@ export namespace Trade {
         Unknown: "unknown",
     } as const;
     export type FundsLocation = (typeof FundsLocation)[keyof typeof FundsLocation];
+    /** `perpetual` or `spot` for an order, `perpetual` for a close. `null` for a deposit or withdraw. */
+    export const InstrumentType = {
+        Perpetual: "perpetual",
+        Spot: "spot",
+    } as const;
+    export type InstrumentType = (typeof InstrumentType)[keyof typeof InstrumentType];
     export const Object_ = {
         Trade: "trade",
     } as const;
