@@ -29,6 +29,8 @@ export interface UpdatePreferencesRequest {
     economic_intelligence_auto_renew?: boolean;
     /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
+    /** Replaces the account's own cancel reasons, shown to members in this order when they cancel. Pass an option's `id` to keep it, for example when renaming it; options without an `id` are added, and options left out are removed. Pass an empty array to go back to Whop's default reasons. Members who already picked an option keep the label they saw. Requires the `company:manage_checkout` scope on your API key. */
+    feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once every 7 days (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
@@ -116,6 +118,33 @@ export namespace UpdatePreferencesRequest {
     } as const;
     export type EconomicIntelligenceDurationKey =
         (typeof EconomicIntelligenceDurationKey)[keyof typeof EconomicIntelligenceDurationKey];
+    export type FeedbackOptions = FeedbackOptions.Item[];
+
+    export namespace FeedbackOptions {
+        export interface Item {
+            /** The category saved as the membership's `cancel_option` when a member picks this option, so reports keep grouping cancellations. */
+            category: Item.Category;
+            /** The ID of an option to keep. Omit it to add a new option. */
+            id?: string | undefined;
+            /** The cancel reason as members see it. */
+            label: string;
+        }
+
+        export namespace Item {
+            /** The category saved as the membership's `cancel_option` when a member picks this option, so reports keep grouping cancellations. */
+            export const Category = {
+                TooExpensive: "too_expensive",
+                Switching: "switching",
+                MissingFeatures: "missing_features",
+                TechnicalIssues: "technical_issues",
+                BadExperience: "bad_experience",
+                Unused: "unused",
+                Other: "other",
+            } as const;
+            export type Category = (typeof Category)[keyof typeof Category];
+        }
+    }
+
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once every 7 days (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     export const PreferredSettlementCurrency = {
         Usd: "usd",

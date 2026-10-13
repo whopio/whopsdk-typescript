@@ -85,6 +85,13 @@ describe("PreferencesClient", () => {
                 },
             ],
             economic_intelligence_previous_period: { ended_at: "2026-01-01T12:00:00.000Z", fee_percentage: 3 },
+            feedback_options: [
+                {
+                    category: "too_expensive",
+                    id: "fo_xxxxxxxxxxxxxx",
+                    label: "I don't get my car detailed often enough",
+                },
+            ],
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "preferred_settlement_currency_changeable_at",
             subscription_failure_behavior: "cancel",
@@ -238,6 +245,9 @@ describe("PreferencesClient", () => {
                 },
             ],
             economic_intelligence_previous_period: { ended_at: "ended_at", fee_percentage: 1.1 },
+            feedback_options: [
+                { category: "too_expensive", id: "fo_xxxxxxxxxxxxxx", label: "The detail missed spots" },
+            ],
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "2026-01-01T12:00:00.000Z",
             subscription_failure_behavior: "cancel",

@@ -7,6 +7,7 @@ export const CancelOptions = {
     MissingFeatures: "missing_features",
     TechnicalIssues: "technical_issues",
     BadExperience: "bad_experience",
+    Unused: "unused",
     Other: "other",
     Testing: "testing",
 } as const;

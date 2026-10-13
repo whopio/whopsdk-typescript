@@ -33,6 +33,8 @@ export interface UpdatePreferencesResponse {
     economic_intelligence_offers: UpdatePreferencesResponse.EconomicIntelligenceOffers.Item[];
     /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
     economic_intelligence_previous_period: UpdatePreferencesResponse.EconomicIntelligencePreviousPeriod | null;
+    /** The account's own cancel reasons, in the order members see them when they cancel. Each is filed under a standard category, saved as the membership's `cancel_option`, so reports keep grouping cancellations. Empty when the account uses Whop's default reasons. */
+    feedback_options: UpdatePreferencesResponse.FeedbackOptions.Item[];
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: UpdatePreferencesResponse.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */
@@ -247,6 +249,33 @@ export namespace UpdatePreferencesResponse {
         ended_at: string;
         /** Percentage of volume charged during the period, such as `3` for 3%. */
         fee_percentage: number;
+    }
+
+    export type FeedbackOptions = FeedbackOptions.Item[];
+
+    export namespace FeedbackOptions {
+        export interface Item {
+            /** The category saved as the membership's `cancel_option` when a member picks this option. */
+            category: Item.Category;
+            /** Feedback option ID, prefixed `fo_`. Pass it as `feedback_option_id` when canceling a membership, or back in `feedback_options` to keep the option when changing the list. */
+            id: string;
+            /** The cancel reason as members see it. Up to 100 characters. */
+            label: string;
+        }
+
+        export namespace Item {
+            /** The category saved as the membership's `cancel_option` when a member picks this option. */
+            export const Category = {
+                TooExpensive: "too_expensive",
+                Switching: "switching",
+                MissingFeatures: "missing_features",
+                TechnicalIssues: "technical_issues",
+                BadExperience: "bad_experience",
+                Unused: "unused",
+                Other: "other",
+            } as const;
+            export type Category = (typeof Category)[keyof typeof Category];
+        }
     }
 
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */

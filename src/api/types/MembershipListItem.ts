@@ -24,6 +24,8 @@ export interface MembershipListItem {
     created_at: string;
     /** The three-letter ISO currency code for this membership's billing. Null if the membership is free. */
     currency: Whop.Currencies | null;
+    /** The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason. */
+    feedback_option: MembershipListItem.FeedbackOption | null;
     /** The recurring renewal price for this membership, formatted with currency symbol and billing interval. Null if the membership is not recurring. */
     formatted_renewal_price: string | null;
     /** The unique identifier for the membership. */
@@ -69,6 +71,14 @@ export namespace MembershipListItem {
         id: string;
         /** The display name of the company shown to customers. */
         title: string;
+    }
+
+    /**
+     * The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason.
+     */
+    export interface FeedbackOption {
+        /** The option's label when the member picked it. Renaming the option later does not change it. */
+        label: string;
     }
 
     /**
