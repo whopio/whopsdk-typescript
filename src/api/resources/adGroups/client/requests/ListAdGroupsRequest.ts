@@ -19,7 +19,7 @@ export interface ListAdGroupsRequest {
     status?: Whop.ListAdGroupsRequestStatus;
     /** Filter ad groups by a title or ID substring. */
     query?: string;
-    /** The field to sort by. Defaults to created_at. Stat columns (spend, impressions, …) rank over the stats_from/stats_to window across the whole list, not just the current page. results, cost_per_result and return_on_ad_spend rank by the same Whop pixel-attributed values the response reports. */
+    /** The field to sort by. Defaults to created_at. Stat columns (spend, impressions, …) rank over the stats_from/stats_to window across the whole list, not just the current page. results, cost_per_result and return_on_ad_spend rank by the same Whop pixel-attributed values the response reports, and link_clicks by the same Whop pixel page views. */
     order?: Whop.ListAdGroupsRequestOrder;
     /** The sort direction. Defaults to desc. */
     direction?: Whop.ListAdGroupsRequestDirection;
