@@ -97,6 +97,8 @@ export interface UpdateAccountsRequest {
     use_logo_as_opengraph_image_fallback?: boolean;
     /** The account's business website, as an `http` or `https` URL of at most 255 characters. Also added to the account's `social_links` as a `website` entry. Pass `null` to clear the website; existing social links are left unchanged. */
     website?: string | null;
+    /** Set to `true` to turn on Whop Partner mode for the account, so its team can refer businesses and the account is paid partner commission on their sales. Recorded once; `false` is rejected. */
+    whop_partner_enabled?: boolean;
     industry_type?: unknown;
 }
 

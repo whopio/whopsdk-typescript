@@ -433,6 +433,7 @@ describe("AccountsClient", () => {
                     volume_usd: 1.1,
                     wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
                     website: "https://shinetimedetail.com",
+                    whop_partner_enabled_at: "whop_partner_enabled_at",
                 },
             ],
             page_info: {
@@ -930,6 +931,7 @@ describe("AccountsClient", () => {
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
             website: "https://shinetimedetail.com",
+            whop_partner_enabled_at: "whop_partner_enabled_at",
         };
 
         server
@@ -1462,6 +1464,7 @@ describe("AccountsClient", () => {
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
             website: "https://shinetimedetail.com",
+            whop_partner_enabled_at: "whop_partner_enabled_at",
         };
 
         server.mockEndpoint().get("/accounts/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -1921,6 +1924,7 @@ describe("AccountsClient", () => {
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
             website: "https://shinetimedetail.com",
+            whop_partner_enabled_at: "whop_partner_enabled_at",
         };
 
         server.mockEndpoint().get("/accounts/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -2511,6 +2515,7 @@ describe("AccountsClient", () => {
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
             website: "https://shinetimedetail.com",
+            whop_partner_enabled_at: "whop_partner_enabled_at",
         };
 
         server
@@ -3791,6 +3796,7 @@ describe("AccountsClient", () => {
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
             website: "https://shinetimedetail.com",
+            whop_partner_enabled_at: "whop_partner_enabled_at",
         };
 
         server
