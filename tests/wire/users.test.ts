@@ -48,7 +48,7 @@ describe("UsersClient", () => {
                                     available: "1500.0",
                                     in_transit: "0",
                                     pending: "0",
-                                    pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                                    pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
                                     reserve: "0",
                                 },
                                 icon_url: "https://assets.whop.com/tokens/usdt.png",
@@ -64,6 +64,23 @@ describe("UsersClient", () => {
                         treasury_pending_usd: "0.00",
                     },
                     balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
+                    balances: [
+                        {
+                            balance: "1500.0",
+                            breakdown: {
+                                available: "1500.0",
+                                in_transit: "0",
+                                pending: "0",
+                                pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
+                                reserve: "0",
+                            },
+                            icon_url: "https://assets.whop.com/tokens/usdt.png",
+                            name: "Tether USD",
+                            price_usd: 1,
+                            symbol: "USDT",
+                            value_usd: "1500.00",
+                        },
+                    ],
                     banner: {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
@@ -116,6 +133,7 @@ describe("UsersClient", () => {
                             website: "x",
                         },
                     ],
+                    total_usd: "6320.75",
                     trading: {
                         account_id: null,
                         hyperliquid: null,
@@ -211,7 +229,7 @@ describe("UsersClient", () => {
                             available: "1500.0",
                             in_transit: "0",
                             pending: "0",
-                            pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                            pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
                             reserve: "0",
                         },
                         icon_url: "https://assets.whop.com/tokens/usdt.png",
@@ -227,6 +245,23 @@ describe("UsersClient", () => {
                 treasury_pending_usd: "0.00",
             },
             balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
+            balances: [
+                {
+                    balance: "1500.0",
+                    breakdown: {
+                        available: "1500.0",
+                        in_transit: "0",
+                        pending: "0",
+                        pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
+                        reserve: "0",
+                    },
+                    icon_url: "https://assets.whop.com/tokens/usdt.png",
+                    name: "Tether USD",
+                    price_usd: 1,
+                    symbol: "USDT",
+                    value_usd: "1500.00",
+                },
+            ],
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -264,6 +299,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -349,7 +385,7 @@ describe("UsersClient", () => {
                             available: "1500.0",
                             in_transit: "0",
                             pending: "0",
-                            pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                            pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
                             reserve: "0",
                         },
                         icon_url: "https://assets.whop.com/tokens/usdt.png",
@@ -365,6 +401,23 @@ describe("UsersClient", () => {
                 treasury_pending_usd: "0.00",
             },
             balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
+            balances: [
+                {
+                    balance: "1500.0",
+                    breakdown: {
+                        available: "1500.0",
+                        in_transit: "0",
+                        pending: "0",
+                        pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
+                        reserve: "0",
+                    },
+                    icon_url: "https://assets.whop.com/tokens/usdt.png",
+                    name: "Tether USD",
+                    price_usd: 1,
+                    symbol: "USDT",
+                    value_usd: "1500.00",
+                },
+            ],
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -402,6 +455,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -501,7 +555,7 @@ describe("UsersClient", () => {
                             available: "1500.0",
                             in_transit: "0",
                             pending: "0",
-                            pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                            pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
                             reserve: "0",
                         },
                         icon_url: "https://assets.whop.com/tokens/usdt.png",
@@ -517,6 +571,23 @@ describe("UsersClient", () => {
                 treasury_pending_usd: "0.00",
             },
             balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
+            balances: [
+                {
+                    balance: "1500.0",
+                    breakdown: {
+                        available: "1500.0",
+                        in_transit: "0",
+                        pending: "0",
+                        pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
+                        reserve: "0",
+                    },
+                    icon_url: "https://assets.whop.com/tokens/usdt.png",
+                    name: "Tether USD",
+                    price_usd: 1,
+                    symbol: "USDT",
+                    value_usd: "1500.00",
+                },
+            ],
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -554,6 +625,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
@@ -643,7 +715,7 @@ describe("UsersClient", () => {
                             available: "1500.0",
                             in_transit: "0",
                             pending: "0",
-                            pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                            pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
                             reserve: "0",
                         },
                         icon_url: "https://assets.whop.com/tokens/usdt.png",
@@ -659,6 +731,23 @@ describe("UsersClient", () => {
                 treasury_pending_usd: "0.00",
             },
             balance_history: { data: [{ t: 1767268800, v: 2400 }], last: 6320.75, max: 6320.75, min: 2400 },
+            balances: [
+                {
+                    balance: "1500.0",
+                    breakdown: {
+                        available: "1500.0",
+                        in_transit: "0",
+                        pending: "0",
+                        pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
+                        reserve: "0",
+                    },
+                    icon_url: "https://assets.whop.com/tokens/usdt.png",
+                    name: "Tether USD",
+                    price_usd: 1,
+                    symbol: "USDT",
+                    value_usd: "1500.00",
+                },
+            ],
             banner: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -696,6 +785,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
                 hyperliquid: {
