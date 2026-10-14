@@ -23,6 +23,8 @@ export interface RetrieveBusinessesResponse {
     owner: RetrieveBusinessesResponse.Owner | null;
     /** The referrer's commission rate for each income source, expressed as a fraction (0.3 = 30%). */
     payout_percentages: RetrieveBusinessesResponse.PayoutPercentages;
+    /** Outstanding invites to claim ownership of this business. Present only to the first-tier partner's whop.com session, or the Whop CLI or MCP with the `partner:handoff` scope, and empty once every invite has been accepted. */
+    pending_owner_invites?: RetrieveBusinessesResponse.PendingOwnerInvites.Item[] | undefined;
     /** When the referral expires. */
     referral_expires_at: string | null;
     /** When the referral became active. */
@@ -163,6 +165,17 @@ export namespace RetrieveBusinessesResponse {
         transfer: number | null;
         /** Share of Whop's profit from withdrawals. */
         withdrawal: number | null;
+    }
+
+    export type PendingOwnerInvites = PendingOwnerInvites.Item[];
+
+    export namespace PendingOwnerInvites {
+        export interface Item {
+            /** The address the invite to claim this business was emailed to. */
+            email: string;
+            /** The invite ID (an ausri_ identifier). Pass it to the resend endpoint. */
+            id: string;
+        }
     }
 
     /**

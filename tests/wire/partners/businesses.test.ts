@@ -320,6 +320,7 @@ describe("BusinessesClient", () => {
                 username: "tanyacole",
             },
             payout_percentages: { ad_spend: 0, card_interchange: 0, sales: 0.3, transfer: 0, withdrawal: 0 },
+            pending_owner_invites: [{ email: "email", id: "id" }],
             referral_expires_at: "2026-01-01T12:00:00Z",
             referral_started_at: "2026-01-01T12:00:00Z",
             second_tier_partner: {
@@ -525,6 +526,259 @@ describe("BusinessesClient", () => {
                 expected_amount_usd: "expected_amount_usd",
                 offer_token: "offer_token",
                 terms_version: "terms_version",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("resendInvite (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { invite_id: "ausri_xxxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            account: {
+                capabilities: {
+                    accept_bank_payments: "active",
+                    accept_bnpl_payments: "active",
+                    accept_card_payments: "active",
+                    bank_deposit: "active",
+                    card_deposit: "active",
+                    card_issuing: "active",
+                    crypto_deposit: "active",
+                    crypto_payout: "active",
+                    instant_payout: "active",
+                    run_ads: "active",
+                    standard_payout: "active",
+                    transfer: "active",
+                },
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                recommended_actions: [
+                    {
+                        action: "theme_business",
+                        blocked_capabilities: ["accept_bnpl_payments"],
+                        cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings/payments/",
+                        cta_label: "Apply",
+                        description: "Let customers pay over time with buy now, pay later.",
+                        icon_url: "https://whop.com/illustrations/orange/piggy-bank.svg",
+                        impact_score: 86,
+                        reasoning:
+                            "Financing lifts conversion on the $249 ceramic coating, the priciest job on the menu.",
+                        status: "optional",
+                        title: "Offer financing at checkout",
+                    },
+                ],
+                required_actions: [
+                    {
+                        action: "deposit_funds",
+                        blocked_capabilities: ["standard_payout"],
+                        cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/balance/",
+                        cta_label: "Verify now",
+                        description: "Complete verification to withdraw your earnings.",
+                        icon_url: "https://whop.com/illustrations/orange/shield.svg",
+                        status: "required",
+                        title: "Complete your identity verification",
+                    },
+                ],
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Gleam Mobile Detailing",
+            },
+            blueprint_partner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Nina Alvarez",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "ninaalvarez",
+            },
+            commission_advance: {
+                activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                clawed_back_at: "clawed_back_at",
+                deadline_at: "2026-01-01T12:00:00.000Z",
+                funded_at: "funded_at",
+                offer_token: "offer_token",
+                processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                projected_processing_commissions: {
+                    amount: "-1234.56",
+                    currency: "usd",
+                    decimals: 2,
+                    display_decimals: 2,
+                },
+                qualified_at: "2026-01-01T12:00:00.000Z",
+                recovery_threshold: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                status: "projected",
+                terms_version: "2026-01-01",
+            },
+            created_at: "2026-01-01T12:00:00Z",
+            earnings_usd: { completed: "3.00", pending: "1.00", total: "4.00" },
+            first_tier_partner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Nina Alvarez",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "ninaalvarez",
+            },
+            id: "coma_xxxxxxxxxxxxxx",
+            my_partner_tier: "first",
+            object: "partner_business",
+            owner: {
+                email: "marcus@shinetime.example",
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Nina Alvarez",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "ninaalvarez",
+            },
+            payout_percentages: { ad_spend: 0.015, card_interchange: 0.2, sales: 0.3, transfer: 0.25, withdrawal: 0.3 },
+            pending_owner_invites: [{ email: "marcus@shinetime.example", id: "ausri_xxxxxxxxxxxxxx" }],
+            referral_expires_at: "2026-01-01T12:00:00Z",
+            referral_started_at: "2026-01-01T12:00:00Z",
+            second_tier_partner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Nina Alvarez",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "ninaalvarez",
+            },
+            status: "active",
+            volume_usd: { attributed: "40.00", awaiting_settlement: "0.00", last_30d: "0.00", settled: "40.00" },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/resend_invite")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.partners.businesses.resendInvite({
+            id: "id",
+            invite_id: "ausri_xxxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("resendInvite (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { invite_id: "invite_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/resend_invite")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.businesses.resendInvite({
+                id: "id",
+                invite_id: "invite_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("resendInvite (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { invite_id: "invite_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/resend_invite")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.businesses.resendInvite({
+                id: "id",
+                invite_id: "invite_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("resendInvite (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { invite_id: "invite_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/resend_invite")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.businesses.resendInvite({
+                id: "id",
+                invite_id: "invite_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("resendInvite (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { invite_id: "invite_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/partners/businesses/id/resend_invite")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.businesses.resendInvite({
+                id: "id",
+                invite_id: "invite_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
