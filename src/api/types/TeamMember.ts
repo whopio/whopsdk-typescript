@@ -9,12 +9,16 @@ export interface TeamMember {
     authorized_role: Whop.TeamMemberAuthorizedRole | null;
     /** When the member joined or the invite was sent, as an ISO 8601 timestamp. */
     created_at: string;
+    /** How many team members report directly to this member. `null` for invites. */
+    direct_reports_count: number | null;
     /** The member's email address. For accepted members, `null` unless the caller holds the `company:authorized_user:email:read` scope; for invites, the invited address. */
     email: string | null;
     /** Team member ID — `ausr_` for accepted members, `ausri_` for pending invites. */
     id: string;
     /** Whether this member is an agent (app-controlled account) rather than a human team member. Always `false` for invites. */
     is_agent: boolean;
+    /** The team member this member reports to, prefixed `ausr_`. `null` when the member reports to the business directly, and for invites. */
+    reports_to_id: string | null;
     /** The member's role on the account. `custom` means a bespoke dashboard-managed role; the API can read but not grant it. */
     role: TeamMember.Role;
     /** `joined` for accepted members, `pending` while the invite is pending. */
