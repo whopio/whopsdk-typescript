@@ -82,7 +82,7 @@ export interface AdCampaign {
     lead_value: number;
     /** Whop pixel-attributed leads, last-click. */
     leads: number;
-    /** Clicks on links in the ad that lead to your destination, as reported by the ad platform. A subset of clicks, which also counts likes, comments, and other interactions with the ad. */
+    /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
     /** The goal the campaign optimizes toward. */
     objective: AdCampaign.Objective | null;

@@ -101,7 +101,7 @@ export interface AdGroup {
     leads: number;
     /** Progress toward the ad platform's learning conversion threshold for this ad group. Null unless it is learning or learning limited and the platform reports valid counts. Reaching the threshold does not determine delivery status. */
     learning_progress: Whop.AdGroupLearningProgress | null;
-    /** Clicks on links in the ad that lead to your destination, as reported by the ad platform. A subset of clicks, which also counts likes, comments, and other interactions with the ad. */
+    /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
     message_apps?: AdGroup.MessageApps.Item[] | undefined;
     /** Minimum the ad group tries to spend each day. `null` when no floor is set. */
