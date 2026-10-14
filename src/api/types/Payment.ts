@@ -15,7 +15,7 @@ export interface Payment {
     billing_reason: Whop.BillingReasons | null;
     /** The checkout configuration the buyer paid through, prefixed `ch_`, or null. */
     checkout_configuration_id: string | null;
-    /** The credential a buyer's surface presents to poll this payment and set its return URL. Only on payments created from a confirmation token, and always null in list responses — retrieve the payment for it. */
+    /** The credential a buyer's surface presents to poll this payment, set its return URL and resume it when the bank asked the customer to authenticate. Only on payments created from a confirmation token or waiting on that authentication, and always null in list responses — retrieve the payment for it. */
     client_secret: string | null;
     /** When the payment was created, as an ISO 8601 timestamp. */
     created_at: string;
