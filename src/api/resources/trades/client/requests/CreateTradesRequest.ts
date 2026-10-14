@@ -14,7 +14,7 @@ export interface CreateTradesRequest {
     amount?: string;
     /** Only for an order. Your own ID for the trade, 1 to 128 characters, unique for the account. Sending it again with the same order returns the same trade; with a different order it answers `409`. */
     client_order_id?: string;
-    /** `perpetual` or `spot`. Required for an order. Spot needs the trading account in Hyperliquid's unified account mode. */
+    /** `perpetual` or `spot`. Required for an order. A spot order first switches the trading account to Hyperliquid's unified account mode, where spot and perpetuals share one USDC balance. */
     instrument_type?: CreateTradesRequest.InstrumentType;
     /** Only for a perpetual order. The cross leverage, from 1 to the market's maximum. Required unless `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
@@ -41,7 +41,7 @@ export interface CreateTradesRequest {
 }
 
 export namespace CreateTradesRequest {
-    /** `perpetual` or `spot`. Required for an order. Spot needs the trading account in Hyperliquid's unified account mode. */
+    /** `perpetual` or `spot`. Required for an order. A spot order first switches the trading account to Hyperliquid's unified account mode, where spot and perpetuals share one USDC balance. */
     export const InstrumentType = {
         Perpetual: "perpetual",
         Spot: "spot",
