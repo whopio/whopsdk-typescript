@@ -50,6 +50,7 @@ describe("SupportedMethodsClient", () => {
                         },
                     ],
                     supports_instant_delivery: false,
+                    supports_paypal_login: false,
                     supports_standard_delivery: true,
                 },
             ],

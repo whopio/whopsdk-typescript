@@ -10,6 +10,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { MethodsClient } from "../resources/methods/client/Client.js";
+import { PaypalLinkSessionsClient } from "../resources/paypalLinkSessions/client/Client.js";
 import { SupportedMethodsClient } from "../resources/supportedMethods/client/Client.js";
 
 export declare namespace PayoutsClient {
@@ -26,6 +27,7 @@ export declare namespace PayoutsClient {
 export class PayoutsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PayoutsClient.Options>;
     protected _methods: MethodsClient | undefined;
+    protected _paypalLinkSessions: PaypalLinkSessionsClient | undefined;
     protected _supportedMethods: SupportedMethodsClient | undefined;
 
     constructor(options: PayoutsClient.Options = {}) {
@@ -34,6 +36,10 @@ export class PayoutsClient {
 
     public get methods(): MethodsClient {
         return (this._methods ??= new MethodsClient(this._options));
+    }
+
+    public get paypalLinkSessions(): PaypalLinkSessionsClient {
+        return (this._paypalLinkSessions ??= new PaypalLinkSessionsClient(this._options));
     }
 
     public get supportedMethods(): SupportedMethodsClient {

@@ -32257,6 +32257,73 @@ await client.payouts.methods.update({
 </dl>
 </details>
 
+## Payouts PaypalLinkSessions
+<details><summary><code>client.payouts.paypalLinkSessions.<a href="/src/api/resources/payouts/resources/paypalLinkSessions/client/Client.ts">create</a>({ ...params }) -> Whop.CreatePaypalLinkSessionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Starts a Log in with PayPal session so PayPal itself can confirm the account holder owns a verified PayPal account. Send the holder to `authorize_url`; after they log in, PayPal returns them to Whop, and Whop redirects the browser to your `return_url` with a `paypal_link_token` query parameter to pass to `POST /payouts/methods`. If the login fails or is canceled, `return_url` receives an `error` query parameter (`paypal_login_canceled` or `paypal_login_failed`) instead. The payout method saved this way pays the email on the PayPal account, and its holder name must match the name on the account's payout setup. PayPal login is rolling out per account: until it is enabled for the account this answers `403 forbidden`, and `supports_paypal_login` on `GET /payouts/supported_methods` is false.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payouts.paypalLinkSessions.create({
+    return_url: "https://example.com/settings/payouts",
+    supported_payout_method_id: "podst_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.payouts.CreatePaypalLinkSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PaypalLinkSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Payouts SupportedMethods
 <details><summary><code>client.payouts.supportedMethods.<a href="/src/api/resources/payouts/resources/supportedMethods/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListSupportedMethodsResponse.Data.Item, Whop.ListSupportedMethodsResponse&gt;</code></summary>
 <dl>

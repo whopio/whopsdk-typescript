@@ -21,7 +21,7 @@ describe("PaymentMethodDomainsClient", () => {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     hostname: "checkout.shinetime.com",
-                    id: "pmd_xxxxxxxxxxxxxx",
+                    id: "dom_xxxxxxxxxxxxxx",
                     provider: "apple",
                     status: "pending",
                     updated_at: "2026-01-01T12:00:00.000Z",
@@ -166,7 +166,7 @@ describe("PaymentMethodDomainsClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             hostname: "checkout.shinetime.com",
-            id: "pmd_xxxxxxxxxxxxxx",
+            id: "dom_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
@@ -341,7 +341,7 @@ describe("PaymentMethodDomainsClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             hostname: "checkout.shinetime.com",
-            id: "pmd_xxxxxxxxxxxxxx",
+            id: "dom_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
@@ -452,7 +452,7 @@ describe("PaymentMethodDomainsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { deleted: true, id: "pmd_xxxxxxxxxxxxxx" };
+        const rawResponseBody = { deleted: true, id: "dom_xxxxxxxxxxxxxx" };
 
         server
             .mockEndpoint()
@@ -563,7 +563,7 @@ describe("PaymentMethodDomainsClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             hostname: "checkout.shinetime.com",
-            id: "pmd_xxxxxxxxxxxxxx",
+            id: "dom_xxxxxxxxxxxxxx",
             provider: "apple",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
