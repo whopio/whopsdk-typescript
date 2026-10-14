@@ -9,6 +9,8 @@
 export interface CreateDomainsRequest {
     /** Account ID, prefixed biz_. Required for user credentials; otherwise defaults to the credential's account. */
     account_id?: string;
+    /** Accept Apple Pay at checkout on the domain. It needs no other capability. Whop registers the domain with Apple: it stays `pending` until Apple answers, then turns `ready`, or `action_required` when Apple couldn't fetch the domain association file. Serve the file, then check the domain to register it again. Pass `null` to turn Apple Pay off: Whop removes the domain from Apple, and the domain stays, like releasing any other capability. */
+    apple_pay?: CreateDomainsRequest.ApplePay | null;
     /** Bare hostname, such as example.com or checkout.example.com. A bought domain must be a root domain. Wildcards, paths, schemes, and ports are not accepted. */
     domain: string;
     /** Custom string keys and values. */
@@ -24,6 +26,11 @@ export interface CreateDomainsRequest {
 }
 
 export namespace CreateDomainsRequest {
+    /**
+     * Accept Apple Pay at checkout on the domain. It needs no other capability. Whop registers the domain with Apple: it stays `pending` until Apple answers, then turns `ready`, or `action_required` when Apple couldn't fetch the domain association file. Serve the file, then check the domain to register it again. Pass `null` to turn Apple Pay off: Whop removes the domain from Apple, and the domain stays, like releasing any other capability.
+     */
+    export type ApplePay = {};
+
     /**
      * Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking.
      */

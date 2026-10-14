@@ -9,6 +9,8 @@
 export interface UpdateDomainsRequest {
     /** Domain ID, prefixed `dom_`, or a hostname such as `example.com`; a bare name looks up `.com`. */
     id: string;
+    /** Accept Apple Pay at checkout on the domain. It needs no other capability. Whop registers the domain with Apple: it stays `pending` until Apple answers, then turns `ready`, or `action_required` when Apple couldn't fetch the domain association file. Serve the file, then check the domain to register it again. Pass `null` to turn Apple Pay off: Whop removes the domain from Apple, and the domain stays, like releasing any other capability. */
+    apple_pay?: UpdateDomainsRequest.ApplePay | null;
     /** Replacement custom string keys and values. */
     metadata?: Record<string, string>;
     /** Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking. */
@@ -22,6 +24,11 @@ export interface UpdateDomainsRequest {
 }
 
 export namespace UpdateDomainsRequest {
+    /**
+     * Accept Apple Pay at checkout on the domain. It needs no other capability. Whop registers the domain with Apple: it stays `pending` until Apple answers, then turns `ready`, or `action_required` when Apple couldn't fetch the domain association file. Serve the file, then check the domain to register it again. Pass `null` to turn Apple Pay off: Whop removes the domain from Apple, and the domain stays, like releasing any other capability.
+     */
+    export type ApplePay = {};
+
     /**
      * Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking.
      */
