@@ -233,6 +233,7 @@ export * from "./DomainPublicRecord.js";
 export * from "./DomainRegistrant.js";
 export * from "./DomainRegistrar.js";
 export * from "./DomainRegistration.js";
+export * from "./DomainStats.js";
 export * from "./DomainVerification.js";
 export * from "./DomainWebsite.js";
 export * from "./DomainWebsiteApp.js";
