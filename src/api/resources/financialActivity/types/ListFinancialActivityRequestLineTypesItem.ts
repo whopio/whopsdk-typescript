@@ -71,6 +71,8 @@ export const ListFinancialActivityRequestLineTypesItem = {
     MiscReversal: "misc_reversal",
     OnboardingReward: "onboarding_reward",
     OnchainDeposit: "onchain_deposit",
+    OnchainInternalTransferIncoming: "onchain_internal_transfer_incoming",
+    OnchainInternalTransferOutgoing: "onchain_internal_transfer_outgoing",
     OnchainSwapSource: "onchain_swap_source",
     OnchainSwapTarget: "onchain_swap_target",
     OnchainWalletTransferIncoming: "onchain_wallet_transfer_incoming",
