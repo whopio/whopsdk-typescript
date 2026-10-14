@@ -281,6 +281,7 @@ export const PermissionAction = {
     AiChatDelete: "ai_chat:delete",
     AiChatUpdate: "ai_chat:update",
     UserNotificationsRead: "user:notifications:read",
+    UserAbuseReportCreate: "user:abuse_report:create",
     UserNotificationsUpdate: "user:notifications:update",
     UserProfileUpdate: "user:profile:update",
 } as const;
