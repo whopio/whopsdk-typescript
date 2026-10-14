@@ -141,6 +141,8 @@ export interface Account {
     wallet: Whop.AccountWallet | null;
     /** The account's business website URL, or `null` if none has been provided. Setting it also adds a `website` entry to `social_links`. */
     website: string | null;
+    /** When the account turned on Whop Partner mode, as an ISO 8601 timestamp. Present on single-account reads and update responses; `null` until the account turns Whop Partner mode on by sending `whop_partner_enabled: true` on update. */
+    whop_partner_enabled_at?: (string | null) | undefined;
 }
 
 export namespace Account {
