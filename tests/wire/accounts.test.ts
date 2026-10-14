@@ -92,7 +92,7 @@ describe("AccountsClient", () => {
                         transfer: "active",
                     },
                     cards: { kind: null, status: "approved" },
-                    collect_vat_id: true,
+                    collect_vat_id: false,
                     company_formation: {
                         documents: [
                             {
@@ -122,6 +122,7 @@ describe("AccountsClient", () => {
                     created_at: "2026-01-01T12:00:00.000Z",
                     description:
                         "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+                    direct_reports_count: 0,
                     dispute_fighter_enabled: false,
                     economic_intelligence: false,
                     email: "marcus@shinetime.example",
@@ -157,7 +158,7 @@ describe("AccountsClient", () => {
                     home_preferences: ["hide_member_count"],
                     id: "biz_xxxxxxxxxxxxxx",
                     industry_type: "trading",
-                    invoice_prefix: "SHINE",
+                    invoice_prefix: "INV",
                     level: {
                         boosted: true,
                         current: 1,
@@ -168,7 +169,7 @@ describe("AccountsClient", () => {
                     },
                     logo_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                    metadata: { external_id: "shop_4417", region: "austin" },
+                    metadata: { external_id: "connected_account_123" },
                     onboarding_type: "platform",
                     opengraph_image_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -269,7 +270,7 @@ describe("AccountsClient", () => {
                             title: "Offer financing at checkout",
                         },
                     ],
-                    require_2fa: true,
+                    require_2fa: false,
                     required_actions: [
                         {
                             action: "deposit_funds",
@@ -360,9 +361,9 @@ describe("AccountsClient", () => {
                         waveform_url: null,
                         width: null,
                     },
-                    show_joined_whops: false,
-                    show_reviews_dtc: false,
-                    show_user_directory: false,
+                    show_joined_whops: true,
+                    show_reviews_dtc: true,
+                    show_user_directory: true,
                     social_links: [
                         {
                             id: "social_1",
@@ -427,7 +428,7 @@ describe("AccountsClient", () => {
                         provider: "hyperliquid",
                         user_id: null,
                     },
-                    use_logo_as_opengraph_image_fallback: true,
+                    use_logo_as_opengraph_image_fallback: false,
                     verification: {},
                     volume_usd: 1.1,
                     wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
@@ -601,7 +602,7 @@ describe("AccountsClient", () => {
                 transfer: "active",
             },
             cards: { kind: "individual", status: "approved" },
-            collect_vat_id: true,
+            collect_vat_id: false,
             company_formation: {
                 documents: [
                     {
@@ -631,6 +632,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            direct_reports_count: 0,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
@@ -666,7 +668,7 @@ describe("AccountsClient", () => {
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
-            invoice_prefix: "SHINE",
+            invoice_prefix: "INV",
             level: {
                 boosted: true,
                 current: 1,
@@ -677,7 +679,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            metadata: { external_id: "shop_4417", region: "austin" },
+            metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -773,7 +775,7 @@ describe("AccountsClient", () => {
                     title: "Offer financing at checkout",
                 },
             ],
-            require_2fa: true,
+            require_2fa: false,
             required_actions: [
                 {
                     action: "deposit_funds",
@@ -854,9 +856,9 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            show_joined_whops: false,
-            show_reviews_dtc: false,
-            show_user_directory: false,
+            show_joined_whops: true,
+            show_reviews_dtc: true,
+            show_user_directory: true,
             social_links: [
                 {
                     id: "social_1",
@@ -923,7 +925,7 @@ describe("AccountsClient", () => {
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
-            use_logo_as_opengraph_image_fallback: true,
+            use_logo_as_opengraph_image_fallback: false,
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
@@ -1132,7 +1134,7 @@ describe("AccountsClient", () => {
                 transfer: "active",
             },
             cards: { kind: "individual", status: "approved" },
-            collect_vat_id: true,
+            collect_vat_id: false,
             company_formation: {
                 documents: [
                     {
@@ -1162,6 +1164,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            direct_reports_count: 0,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
@@ -1197,7 +1200,7 @@ describe("AccountsClient", () => {
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
-            invoice_prefix: "SHINE",
+            invoice_prefix: "INV",
             level: {
                 boosted: true,
                 current: 1,
@@ -1208,7 +1211,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            metadata: { external_id: "shop_4417", region: "austin" },
+            metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1304,7 +1307,7 @@ describe("AccountsClient", () => {
                     title: "Offer financing at checkout",
                 },
             ],
-            require_2fa: true,
+            require_2fa: false,
             required_actions: [
                 {
                     action: "deposit_funds",
@@ -1385,9 +1388,9 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            show_joined_whops: false,
-            show_reviews_dtc: false,
-            show_user_directory: false,
+            show_joined_whops: true,
+            show_reviews_dtc: true,
+            show_user_directory: true,
             social_links: [
                 {
                     id: "social_1",
@@ -1454,7 +1457,7 @@ describe("AccountsClient", () => {
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
-            use_logo_as_opengraph_image_fallback: true,
+            use_logo_as_opengraph_image_fallback: false,
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
@@ -1590,7 +1593,7 @@ describe("AccountsClient", () => {
                 transfer: "active",
             },
             cards: { kind: "individual", status: "approved" },
-            collect_vat_id: true,
+            collect_vat_id: false,
             company_formation: {
                 documents: [
                     {
@@ -1620,6 +1623,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            direct_reports_count: 0,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
@@ -1655,7 +1659,7 @@ describe("AccountsClient", () => {
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
-            invoice_prefix: "SHINE",
+            invoice_prefix: "INV",
             level: {
                 boosted: true,
                 current: 1,
@@ -1666,7 +1670,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            metadata: { external_id: "shop_4417", region: "austin" },
+            metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1762,7 +1766,7 @@ describe("AccountsClient", () => {
                     title: "Offer financing at checkout",
                 },
             ],
-            require_2fa: true,
+            require_2fa: false,
             required_actions: [
                 {
                     action: "deposit_funds",
@@ -1843,9 +1847,9 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            show_joined_whops: false,
-            show_reviews_dtc: false,
-            show_user_directory: false,
+            show_joined_whops: true,
+            show_reviews_dtc: true,
+            show_user_directory: true,
             social_links: [
                 {
                     id: "social_1",
@@ -1912,7 +1916,7 @@ describe("AccountsClient", () => {
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
-            use_logo_as_opengraph_image_fallback: true,
+            use_logo_as_opengraph_image_fallback: false,
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
@@ -2179,7 +2183,7 @@ describe("AccountsClient", () => {
                 transfer: "active",
             },
             cards: { kind: "individual", status: "approved" },
-            collect_vat_id: true,
+            collect_vat_id: false,
             company_formation: {
                 documents: [
                     {
@@ -2209,6 +2213,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            direct_reports_count: 0,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
@@ -2244,7 +2249,7 @@ describe("AccountsClient", () => {
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
-            invoice_prefix: "SHINE",
+            invoice_prefix: "INV",
             level: {
                 boosted: true,
                 current: 1,
@@ -2255,7 +2260,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            metadata: { external_id: "shop_4417", region: "austin" },
+            metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -2351,7 +2356,7 @@ describe("AccountsClient", () => {
                     title: "Offer financing at checkout",
                 },
             ],
-            require_2fa: true,
+            require_2fa: false,
             required_actions: [
                 {
                     action: "deposit_funds",
@@ -2432,9 +2437,9 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            show_joined_whops: false,
-            show_reviews_dtc: false,
-            show_user_directory: false,
+            show_joined_whops: true,
+            show_reviews_dtc: true,
+            show_user_directory: true,
             social_links: [
                 {
                     id: "social_1",
@@ -2501,7 +2506,7 @@ describe("AccountsClient", () => {
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
-            use_logo_as_opengraph_image_fallback: true,
+            use_logo_as_opengraph_image_fallback: false,
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
@@ -3458,7 +3463,7 @@ describe("AccountsClient", () => {
                 transfer: "active",
             },
             cards: { kind: "individual", status: "approved" },
-            collect_vat_id: true,
+            collect_vat_id: false,
             company_formation: {
                 documents: [
                     {
@@ -3488,6 +3493,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            direct_reports_count: 0,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
@@ -3523,7 +3529,7 @@ describe("AccountsClient", () => {
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
             industry_type: "trading",
-            invoice_prefix: "SHINE",
+            invoice_prefix: "INV",
             level: {
                 boosted: true,
                 current: 1,
@@ -3534,7 +3540,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            metadata: { external_id: "shop_4417", region: "austin" },
+            metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -3630,7 +3636,7 @@ describe("AccountsClient", () => {
                     title: "Offer financing at checkout",
                 },
             ],
-            require_2fa: true,
+            require_2fa: false,
             required_actions: [
                 {
                     action: "deposit_funds",
@@ -3711,9 +3717,9 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            show_joined_whops: false,
-            show_reviews_dtc: false,
-            show_user_directory: false,
+            show_joined_whops: true,
+            show_reviews_dtc: true,
+            show_user_directory: true,
             social_links: [
                 {
                     id: "social_1",
@@ -3780,7 +3786,7 @@ describe("AccountsClient", () => {
                 provider: "hyperliquid",
                 user_id: "user_id",
             },
-            use_logo_as_opengraph_image_fallback: true,
+            use_logo_as_opengraph_image_fallback: false,
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },

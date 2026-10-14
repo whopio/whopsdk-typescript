@@ -32,6 +32,8 @@ export interface Account {
     created_at: string;
     /** Account promotional description. */
     description: string | null;
+    /** How many team members report to the business directly, with no manager above them. Present on single-account reads. */
+    direct_reports_count?: number | undefined;
     /** Whether Whop assembles and files dispute evidence for this account. Enabling it opts the account into the success fee charged on disputes it wins. */
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically when its committed period ends. */
