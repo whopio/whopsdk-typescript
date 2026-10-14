@@ -373,11 +373,11 @@ export namespace PaymentMethodListItem {
          */
         export interface UsBankAccount {
             /** The type of bank account (e.g., checking, savings). */
-            account_type: string;
+            account_type: string | null;
             /** The name of the financial institution holding the account. */
-            bank_name: string;
+            bank_name: string | null;
             /** The last four digits of the bank account number. */
-            last4: string;
+            last4: string | null;
         }
     }
 
