@@ -28,6 +28,8 @@ export interface Domain {
     public_record: Whop.DomainPublicRecord | null;
     /** Buying the domain through Whop, renewing it, and running its DNS. `null` when not wanted or not visible to you. */
     registration: Whop.DomainRegistration | null;
+    /** Traffic on the domain. `null` when the domain isn't on Whop or isn't visible to you. */
+    stats: Whop.DomainStats | null;
     /** The most pressing state of the domain's capabilities: `releasing`, then `action_required`, then `pending`, then `ready`. `idle` when it wants nothing. */
     status: Domain.Status | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. */

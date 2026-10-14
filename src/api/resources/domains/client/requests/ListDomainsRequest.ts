@@ -15,7 +15,7 @@ export interface ListDomainsRequest {
     app_id?: string;
     /** Only domains with this status: the most pressing state of their capabilities, or `idle` when they want nothing. */
     status?: Whop.ListDomainsRequestStatus;
-    /** Field to sort by. */
+    /** Field to sort by. Domains with the same value keep their creation order in the same direction. */
     order?: Whop.ListDomainsRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListDomainsRequestDirection;
