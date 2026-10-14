@@ -37,6 +37,7 @@ describe("VerificationsClient", () => {
                     kind: "individual",
                     last_name: "Webb",
                     phone: "+15551234567",
+                    registration_number: "7654321",
                     requested_information: [
                         {
                             errors: [
@@ -183,6 +184,7 @@ describe("VerificationsClient", () => {
             kind: "individual",
             last_name: "Webb",
             phone: "+15551234567",
+            registration_number: "7654321",
             requested_information: [
                 {
                     action_url: "action_url",
@@ -442,6 +444,7 @@ describe("VerificationsClient", () => {
             kind: "individual",
             last_name: "Webb",
             phone: "+15551234567",
+            registration_number: "7654321",
             requested_information: [
                 {
                     action_url: "action_url",
@@ -584,6 +587,7 @@ describe("VerificationsClient", () => {
             kind: "individual",
             last_name: "Webb",
             phone: "+15551234567",
+            registration_number: "7654321",
             requested_information: [
                 {
                     action_url: "action_url",

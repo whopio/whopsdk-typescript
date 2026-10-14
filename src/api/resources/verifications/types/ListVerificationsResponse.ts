@@ -32,9 +32,11 @@ export namespace ListVerificationsResponse {
             last_name?: (string | null) | undefined;
             /** Phone number on the verification profile. */
             phone?: (string | null) | undefined;
+            /** Number the business was registered under in its place of incorporation, such as a state file number in the US or a Company Number in the UK. Business verifications only; `null` until the business verification is approved. */
+            registration_number?: (string | null) | undefined;
             /** What Whop still needs before review can continue — one requirement per entry. Answer with Update Verification; nothing from the response is echoed back. Keys that don't apply are omitted. */
             requested_information?: Item.RequestedInformation.Item[] | undefined;
-            /** Documents for a document-upload verification and their progress. Present only on verifications created by sending `documents`. `pending_upload` documents were not accepted yet — send the full set again with another Create Verification call. */
+            /** Documents for a document-upload verification and their progress. Present only on individual verifications created by sending `documents`. `pending_upload` documents were not accepted yet — send the full set again with another Create Verification call. */
             required_documents?: Item.RequiredDocuments.Item[] | undefined;
             /** Hosted verification session URL for the user to complete identity checks. Expires 7 days after creation. */
             session_url?: (string | null) | undefined;
