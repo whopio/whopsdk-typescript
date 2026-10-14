@@ -968,17 +968,6 @@
             },
             "default": "./dist/cjs/api/resources/teamMembers/exports.js"
         },
-        "./topups": {
-            "import": {
-                "types": "./dist/esm/api/resources/topups/exports.d.mts",
-                "default": "./dist/esm/api/resources/topups/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/topups/exports.d.ts",
-                "default": "./dist/cjs/api/resources/topups/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/topups/exports.js"
-        },
         "./trades": {
             "import": {
                 "types": "./dist/esm/api/resources/trades/exports.d.mts",

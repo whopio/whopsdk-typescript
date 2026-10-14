@@ -5,6 +5,8 @@ export interface CreateDepositsResponse {
     account_id: string | null;
     /** Requested deposit amount. */
     amount?: string | undefined;
+    /** The charge to a saved payment method. Null unless `payment_method_id` was passed. */
+    card: CreateDepositsResponse.Card | null;
     /** URL of the hosted deposit page. Only present for business destinations. */
     hosted_url: string | null;
     /** Available deposit methods for destination. */
@@ -13,6 +15,16 @@ export interface CreateDepositsResponse {
 }
 
 export namespace CreateDepositsResponse {
+    /**
+     * The charge to a saved payment method. Null unless `payment_method_id` was passed.
+     */
+    export interface Card {
+        /** The payment the charge created, prefixed `pay_`. Retrieve it, or listen for `payment.succeeded`, to confirm the funds landed. */
+        payment_id: string;
+        /** The saved payment method that was charged, prefixed `payt_`. */
+        payment_method_id: string;
+    }
+
     /**
      * Available deposit methods for destination.
      */

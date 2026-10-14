@@ -7,8 +7,10 @@
  *     }
  */
 export interface CreateDepositsRequest {
-    /** Amount to prefill on hosted deposit page. Crypto deposits require a $10 minimum. */
+    /** Amount to prefill on hosted deposit page. Crypto deposits require a $10 minimum. With `payment_method_id`, the amount in USD to charge, and required. */
     amount?: number;
     /** Account ID to fund, `biz_` or `user_`. Any business resolves without authentication; a user account resolves only for that same authenticated user. */
     destination: string;
+    /** A saved payment method of the business to charge for `amount`, prefixed `payt_`. Only for a `biz_` destination, and requires authentication with the `payment:charge` scope. A declined charge fails the request with 400. */
+    payment_method_id?: string;
 }

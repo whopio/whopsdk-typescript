@@ -9993,7 +9993,7 @@ await client.courses.update({
 <dl>
 <dd>
 
-Returns the deposit methods for an account or user, including crypto addresses, bank transfer instructions, and, for a business, a hosted deposit page. Bitcoin deposits are converted to USDT on Plasma in the destination's wallet. Business destinations require no authentication.
+Returns the deposit methods for an account or user, including crypto addresses, bank transfer instructions, and, for a business, a hosted deposit page. Bitcoin deposits are converted to USDT on Plasma in the destination's wallet. Business destinations require no authentication. Pass `payment_method_id` to also charge a business's saved payment method for `amount` in USD and add it to the business's balance; that requires authentication with the `payment:charge` scope. The charge has no fees or taxes and does not count as revenue.
 </dd>
 </dl>
 </dd>
@@ -26867,78 +26867,6 @@ await client.teamMembers.update({
 <dd>
 
 **requestOptions:** `TeamMembersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Topups
-<details><summary><code>client.topups.<a href="/src/api/resources/topups/client/Client.ts">create</a>({ ...params }) -> Whop.Topup</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add funds to an account's platform balance by charging a stored payment method. Top-ups have no fees or taxes and do not count as revenue.
-
-Required permissions:
- - `payment:charge`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.topups.create({
-    account_id: "biz_xxxxxxxxxxxxxx",
-    amount: 6.9,
-    currency: "usd",
-    payment_method_id: "pmt_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateTopupsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `TopupsClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -18,6 +18,7 @@ describe("DepositsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: "50.00",
+            card: { payment_id: "pay_xxxxxxxxxxxxxx", payment_method_id: "payt_xxxxxxxxxxxxxx" },
             hosted_url: "https://whop.com/deposit/biz_xxxxxxxxxxxxxx/",
             methods: {
                 bank: {

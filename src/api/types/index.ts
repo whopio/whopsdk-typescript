@@ -514,7 +514,6 @@ export * from "./TaxTypes.js";
 export * from "./TeamMember.js";
 export * from "./TeamMemberAuthorizedRole.js";
 export * from "./TooManyRequestsErrorBody.js";
-export * from "./Topup.js";
 export * from "./Trade.js";
 export * from "./TradingAccount.js";
 export * from "./TradingCumulativeFunding.js";
