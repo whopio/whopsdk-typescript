@@ -24,6 +24,8 @@ export namespace ListSupportedMethodsResponse {
             /** Fields to collect before saving this supported payout method. Present only when supported_payout_method_id narrows the request to one method. */
             required_fields: Item.RequiredFields.Item[] | null;
             supports_instant_delivery: boolean;
+            /** Whether the payer can add this method by logging in to PayPal through `POST /payouts/paypal_link_sessions`, which confirms the PayPal account is verified and owned by the payee. True only for the PayPal method, and only once PayPal login is enabled for the account. */
+            supports_paypal_login?: boolean | undefined;
             supports_standard_delivery: boolean;
         }
 

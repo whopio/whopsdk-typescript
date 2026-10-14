@@ -1243,6 +1243,17 @@
             },
             "default": "./dist/cjs/api/resources/payouts/resources/methods/exports.js"
         },
+        "./payouts/paypalLinkSessions": {
+            "import": {
+                "types": "./dist/esm/api/resources/payouts/resources/paypalLinkSessions/exports.d.mts",
+                "default": "./dist/esm/api/resources/payouts/resources/paypalLinkSessions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/payouts/resources/paypalLinkSessions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/payouts/resources/paypalLinkSessions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/payouts/resources/paypalLinkSessions/exports.js"
+        },
         "./payouts/supportedMethods": {
             "import": {
                 "types": "./dist/esm/api/resources/payouts/resources/supportedMethods/exports.d.mts",

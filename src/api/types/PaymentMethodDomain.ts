@@ -7,7 +7,7 @@ export interface PaymentMethodDomain {
     created_at: string;
     /** Hostname the checkout is served from (e.g. `checkout.example.com`). */
     hostname: string;
-    /** Payment method domain ID, prefixed `pmd_`, or `dom_` when the hostname was already one of the account's domains. */
+    /** Payment method domain ID: the ID of the account's domain for the hostname, prefixed `dom_`, or `pmd_` for some older domains. */
     id: string;
     /** Wallet provider the domain is registered with. */
     provider: PaymentMethodDomain.Provider;
