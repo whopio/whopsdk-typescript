@@ -83,6 +83,71 @@ describe("PartnersClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("feeOptions (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            object: "partner_fee_options",
+            streams: [
+                {
+                    adjustable: true,
+                    commission_percentage: 30,
+                    fee: {
+                        minimum_percentage: 2.4,
+                        percentage: 2.7,
+                        reference_region: "usa",
+                        regions: [{ minimum_percentage: 2.4, percentage: 2.7, region: "usa" }],
+                    },
+                    income_stream: "sales",
+                    unadjustable_reason: "no_merchant_fee",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/partners/fee_options")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.partners.feeOptions();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("feeOptions (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/partners/fee_options")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.feeOptions();
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
     test("leaderboard (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

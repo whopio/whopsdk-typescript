@@ -196,6 +196,7 @@ export const PermissionAction = {
     PartnerReferralRequestAccept: "partner:referral_request:accept",
     PartnerReferralRequestDecline: "partner:referral_request:decline",
     PartnerReferralRequestCancel: "partner:referral_request:cancel",
+    PartnerHandoff: "partner:handoff",
     PartnerCreate: "partner:create",
     StatsRead: "stats:read",
     SupportChatRead: "support_chat:read",

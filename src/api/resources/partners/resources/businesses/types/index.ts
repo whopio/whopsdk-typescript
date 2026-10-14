@@ -5,5 +5,6 @@ export * from "./ListBusinessesRequestOrder.js";
 export * from "./ListBusinessesRequestStatus.js";
 export * from "./ListBusinessesRequestTier.js";
 export * from "./ListBusinessesResponse.js";
+export * from "./ResendInviteBusinessesResponse.js";
 export * from "./RetrieveBusinessesResponse.js";
 export * from "./UpdateBusinessesResponse.js";
