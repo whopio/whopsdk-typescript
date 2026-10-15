@@ -3,6 +3,7 @@
 export const PlatformTrendsReportsRequestBreakdownBy = {
     BusinessType: "business_type",
     IndustryType: "industry_type",
+    ProductCategory: "product_category",
     AccountCountry: "account_country",
     CustomerCountry: "customer_country",
 } as const;

@@ -90,7 +90,7 @@ export class ReportsClient {
     }
 
     /**
-     * Retrieves payments across all of Whop for up to four windows at once, optionally broken down by business type, industry type, account country or customer country. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it.
+     * Retrieves payments across all of Whop for up to four windows at once, optionally broken down by business type, industry type, product category, account country or customer country. The report covers the whole platform, so it takes no `account_id` and any authenticated caller can read it.
      *
      * @param {Whop.stats.PlatformTrendsReportsRequest} request
      * @param {ReportsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -123,6 +123,7 @@ export class ReportsClient {
             convert_to: convertTo,
             business_type: businessType,
             industry_type: industryType,
+            product_category: productCategory,
             account_country: accountCountry,
             customer_country: customerCountry,
             first,
@@ -138,6 +139,7 @@ export class ReportsClient {
             convert_to: convertTo,
             business_type: businessType,
             industry_type: industryType,
+            product_category: productCategory,
             account_country: accountCountry,
             customer_country: customerCountry,
             first,

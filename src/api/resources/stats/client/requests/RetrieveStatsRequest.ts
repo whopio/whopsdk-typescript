@@ -88,6 +88,8 @@ export interface RetrieveStatsRequest {
     business_type?: string;
     /** Filter to one industry type, for example `options_trading`. Pair with `breakdown_by=industry_type` to split by industry type. Available on metrics that list `industry_type`. */
     industry_type?: string;
+    /** Filter to one product category, for example `algo_trading_course`. Pair with `breakdown_by=product_category` to split by product category. Available on metrics that list `product_category`. */
+    product_category?: string;
     /** Filter to one card-issuing bank, named as the processor reports it, for example JPMORGAN CHASE BANK N A, or unknown for payments with no reported bank. Available on metrics that list issuer. */
     issuer?: string;
     /** Funnel only. Time allowed from the first event to the final event: integer minutes, hours, or days, up to 30d. */
