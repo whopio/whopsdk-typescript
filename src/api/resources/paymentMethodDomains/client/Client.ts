@@ -17,11 +17,24 @@ export declare namespace PaymentMethodDomainsClient {
 }
 
 /**
- * A Payment Method Domain registers a hostname with a wallet provider so its payment methods can appear at a checkout served from that domain. The domain proves ownership by hosting the provider's association file — for Apple Pay, at `/.well-known/apple-developer-merchantid-domain-association` — and `status` reports whether verification has completed.
+ * The Payment Method Domains API is deprecated. Add, check, and remove Apple Pay domains with the `apple_pay` capability of the [Domains API](/api-reference/beta/domains/domain) instead. These endpoints keep working and return `Deprecation` and successor `Link` headers. A domain keeps its ID, so `/domains/{id}` takes the `dom_` or `pmd_` ID these endpoints return.
  *
- * Use the Payment Method Domains API to register domains for your account or its connected accounts, retry verification once the association file is hosted, and remove domains that should no longer serve wallet payments. A domain a platform shares with its connected accounts at checkout is listed on the platform's account, not on each connected account.
+ * A Payment Method Domain registers a hostname with a wallet provider so its payment methods can appear at a checkout served from that domain. The domain proves ownership by hosting the provider's association file — for Apple Pay, at `/.well-known/apple-developer-merchantid-domain-association` — and `status` reports whether verification has completed. Embedded surfaces like the [Express Checkout element](/elements/beta/checkout/expressCheckout) only render Apple Pay, Google Pay and PayPal express on a `verified` domain (first-party whop.com pages are pre-approved).
  *
- * Wallet buttons at checkout depend on this: embedded surfaces like the [Express Checkout element](/elements/beta/checkout/expressCheckout) only render Apple Pay, Google Pay and PayPal express on a `verified` domain (first-party whop.com pages are pre-approved). To verify a domain, [create it](/api-reference/beta/payment-method-domains/create-payment-method-domain), host the association file at the path above, then [retry verification](/api-reference/beta/payment-method-domains/verify-payment-method-domain) until `status` is `verified`.
+ * | Payment Method Domains API | Domains API |
+ * | --- | --- |
+ * | `GET /payment_method_domains?status=verified` | `GET /domains?apple_pay=ready`, or `apple_pay=any` for every Apple Pay domain |
+ * | `?hostname=` | `?domain=` |
+ * | `GET /payment_method_domains/{id}` | `GET /domains/{id}` |
+ * | `POST /payment_method_domains` with `hostname` and `account_id` | `POST /domains` with `domain`, `account_id`, and `apple_pay: {}`. If the account already has the domain, `PATCH /domains/{id}` with `apple_pay: {}` |
+ * | `POST /payment_method_domains/{id}/verify` | `POST /domains/{id}/check` |
+ * | `DELETE /payment_method_domains/{id}` | `PATCH /domains/{id}` with `apple_pay: null` |
+ * | `hostname` | `domain` |
+ * | `status: verified` | `apple_pay.state: ready` |
+ * | `status: pending` | `apple_pay.state: pending` while Whop registers the domain, or `action_required` until you host the association file and check the domain |
+ * | `provider` | No field: every Apple Pay domain is registered with Apple |
+ *
+ * Registration runs in the background, so creating or checking a domain returns `pending`: retrieve the domain until `apple_pay.state` is `ready` or `action_required`. The Domains API needs the `domain:read` and `domain:manage` permissions instead of `company:manage_checkout`, so give API keys those scopes. `DELETE /domains/{id}` removes the whole domain, including any website on it, so use `PATCH` to remove only Apple Pay.
  */
 export class PaymentMethodDomainsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentMethodDomainsClient.Options>;
@@ -31,7 +44,9 @@ export class PaymentMethodDomainsClient {
     }
 
     /**
-     * Lists the payment method domains registered for your account and its connected accounts.
+     * @deprecated
+     *
+     * Lists the payment method domains registered for your account and its connected accounts. Deprecated: list domains with `GET /domains` and the `apple_pay` filter instead.
      *
      * @param {Whop.ListPaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -88,7 +103,7 @@ export class PaymentMethodDomainsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-14",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -162,7 +177,9 @@ export class PaymentMethodDomainsClient {
     }
 
     /**
-     * Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not: host the file, then retry with `POST /payment_method_domains/:id/verify`.
+     * @deprecated
+     *
+     * Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not: host the file, then retry with `POST /payment_method_domains/:id/verify`. Deprecated: add Apple Pay with `POST /domains` and `apple_pay: {}` instead.
      *
      * @param {Whop.CreatePaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -196,7 +213,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-14",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -249,7 +266,9 @@ export class PaymentMethodDomainsClient {
     }
 
     /**
-     * Retrieves a payment method domain to check its verification status.
+     * @deprecated
+     *
+     * Retrieves a payment method domain to check its verification status. Deprecated: retrieve the domain with `GET /domains/{id}` instead, using the same ID.
      *
      * @param {Whop.RetrievePaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -282,7 +301,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-14",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -328,7 +347,9 @@ export class PaymentMethodDomainsClient {
     }
 
     /**
-     * Unregisters a payment method domain so its wallet payment methods stop rendering there.
+     * @deprecated
+     *
+     * Unregisters a payment method domain so its wallet payment methods stop rendering there. Deprecated: remove Apple Pay with `PATCH /domains/{id}` and `apple_pay: null` instead. `DELETE /domains/{id}` removes the whole domain, including any website on it.
      *
      * @param {Whop.DeletePaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -361,7 +382,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-14",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -415,7 +436,9 @@ export class PaymentMethodDomainsClient {
     }
 
     /**
-     * Re-attempts provider verification of a pending domain once the association file is hosted. Fails with a `bad_request` explaining what to fix; verifying an already `verified` domain is a no-op.
+     * @deprecated
+     *
+     * Re-attempts provider verification of a pending domain once the association file is hosted. Fails with a `bad_request` explaining what to fix; verifying an already `verified` domain is a no-op. Deprecated: check the domain with `POST /domains/{id}/check` instead.
      *
      * @param {Whop.VerifyPaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -450,7 +473,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-13-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-14",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
