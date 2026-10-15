@@ -36,7 +36,7 @@ export namespace PostPayoutReversedPayload {
         currency: string;
         /** The amount delivered in the destination currency, as a decimal string. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded conversion. */
         destination_amount: string | null;
-        /** Currency the funds are delivered in, taken from the payout method when the payout is created. On a stablecoin payout it follows the settlement payout minted alongside it — the `GET /payouts` row carrying this payout's id as `payout_request_id` — and is `null` only when no settlement payout exists. */
+        /** Currency the funds are delivered in, taken from the payout method when the payout is created. On a payout funded by a conversion request it follows the settlement payout minted alongside it — the `GET /payouts` row carrying this payout's id as `payout_request_id` — and is `null` only when no settlement payout exists. */
         destination_currency: string | null;
         /** Estimated time the funds become available in the destination account. */
         estimated_arrival: string | null;
@@ -54,7 +54,7 @@ export namespace PostPayoutReversedPayload {
         markup_fee: string;
         /** Key-value data attached at creation and echoed on every read. At most 50 keys, key names up to 40 characters, string values up to 500 characters. */
         metadata: Record<string, string>;
-        /** The planned net for the destination, in the payout currency: amount minus fee_amount minus markup_fee when fee_paid_by is `self`; equal to amount when the platform covers the fees. A payout that ends denied, canceled, or failed delivered nothing — most keep the planned figure and `failure` says where the funds are, but a canceled stablecoin payout can report the settled outcome instead: `amount` carries what stayed in the balance, fees are zero because none were charged, and `net_amount` is 0 because nothing was delivered. */
+        /** The planned net for the destination, in the payout currency: amount minus fee_amount minus markup_fee when fee_paid_by is `self`; equal to amount when the platform covers the fees. A payout that ends denied, canceled, or failed delivered nothing — most keep the planned figure and `failure` says where the funds are, but a canceled payout funded by a conversion request can report the settled outcome instead: `amount` carries what stayed in the balance, fees are zero because none were charged, and `net_amount` is 0 because nothing was delivered. */
         net_amount: string;
         /** Free-form notes attached by the payout creator, or `null` when none were provided. Maximum 255 characters. */
         notes: string | null;
@@ -73,7 +73,7 @@ export namespace PostPayoutReversedPayload {
         statement_descriptor: string | null;
         /** Current payout status. */
         status: Data.Status;
-        /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the stablecoin conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */
+        /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */
         status_detail: string;
         /** ACH trace number the recipient's bank can use to locate this payout. Assigned when the payout is submitted to the bank, so it is `null` before then and on payouts not sent over ACH. */
         trace_code: string | null;

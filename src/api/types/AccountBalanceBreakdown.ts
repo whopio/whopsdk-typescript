@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface AccountBalanceBreakdown {
     /** Amount you can spend, send, or withdraw now, in native units, as a decimal string. */
     available: string;
-    /** Amount moving between the account's own destinations, such as a treasury sweep to its crypto wallet or a card top-up. In native units, as a decimal string. */
+    /** Amount moving between the account's own destinations, such as a card top-up. In native units, as a decimal string. */
     in_transit: string;
     /** Amount from recent payments still settling, in native units, as a decimal string. */
     pending: string;

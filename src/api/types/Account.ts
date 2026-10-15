@@ -103,8 +103,6 @@ export interface Account {
     /** Whether the account shows users in the user directory. */
     show_user_directory: boolean;
     social_links: Whop.AccountSocialLink[];
-    /** Whether the account settles on stablecoin rails — its balance is held on-chain as USDT and paid out over crypto, rather than as fiat cash. */
-    stablecoin_rails: boolean;
     /** Whether the account can operate on Whop: `active` or `suspended`. Computed on `list`, `retrieve`, `me`, and `suspend`; `null` otherwise. */
     status: string | null;
     /** Why the account was suspended, as the label shown to the account owner, such as `Suspended - Fraudulent activity`. Computed on `retrieve`, `me`, and `suspend`; `null` otherwise, when `status` is not `suspended`, and when the suspension was recorded without a reason. */

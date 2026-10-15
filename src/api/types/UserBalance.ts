@@ -14,8 +14,8 @@ export interface UserBalance {
     crypto_usd: string;
     /** Fiat pending and in-transit balances, plus in-flight treasury deposits, in USD. */
     pending_usd: string;
-    /** The user's personal balance in USD: cash (available + pending + in-transit + reserve) + crypto + in-flight treasury deposits. Excludes account balances (see businesses_total_usd). */
+    /** The user's personal balance in USD: cash (available + pending + in-transit + reserve) + other holdings + deposits still in flight. Excludes account balances (see businesses_total_usd). */
     total_usd: string;
-    /** Balance-to-wallet USDT0 payouts still in flight, in USD. */
+    /** Balance moves into the user's wallet still in flight, in USD. */
     treasury_pending_usd: string;
 }
