@@ -104,6 +104,7 @@ export namespace PlatformTrendsReportsResponse {
                         new_businesses?: (number | null) | undefined;
                         /** Paid payments. */
                         payments?: (number | null) | undefined;
+                        product_category?: (Item.ProductCategory | null) | undefined;
                         /** Share of customers who paid more than once, as a fraction. */
                         repeat_rate?: (number | null) | undefined;
                     }
@@ -131,6 +132,13 @@ export namespace PlatformTrendsReportsResponse {
                         }
 
                         export interface IndustryType {
+                            /** The value's id, such as `options_trading`. */
+                            id: string;
+                            /** The value's display name. */
+                            name: string;
+                        }
+
+                        export interface ProductCategory {
                             /** The value's id, such as `options_trading`. */
                             id: string;
                             /** The value's display name. */

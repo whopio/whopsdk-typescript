@@ -18,17 +18,17 @@ describe("ReportsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    breakdowns: ["industry_type"],
+                    breakdowns: ["product_category"],
                     columns: [
                         {
                             available_on: ["industry_type"],
-                            key: "industry_type",
-                            name: "Industry type",
+                            key: "product_category",
+                            name: "Product category",
                             type: "property",
                         },
                     ],
                     description:
-                        "Payments across all of Whop, by business type, industry type, account country or customer country.",
+                        "Payments across all of Whop, by business type, industry type, product category, account country or customer country.",
                     key: "platform_trends",
                     path: "/api/v1/stats/reports/platform_trends",
                     window_field: "paid_at",
@@ -105,6 +105,7 @@ describe("ReportsClient", () => {
                                     decimals: 2,
                                     display_decimals: 2,
                                 },
+                                product_category: { id: "education", name: "Education" },
                             },
                         ],
                         window: {
@@ -137,6 +138,7 @@ describe("ReportsClient", () => {
                                     decimals: 2,
                                     display_decimals: 2,
                                 },
+                                product_category: { id: "education", name: "Education" },
                             },
                         ],
                         window: {

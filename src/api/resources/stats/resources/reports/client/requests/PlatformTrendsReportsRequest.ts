@@ -25,6 +25,8 @@ export interface PlatformTrendsReportsRequest {
     business_type?: string;
     /** Only counts payments to businesses in these comma-separated industry types, such as `options_trading`. */
     industry_type?: string;
+    /** Only counts payments for products in these comma-separated product categories, such as `algo_trading_course`. */
+    product_category?: string;
     /** Only counts payments to accounts located in these comma-separated countries, as ISO 3166-1 alpha-2 codes such as `US`. */
     account_country?: string;
     /** Only counts payments from customers in these comma-separated countries, as ISO 3166-1 alpha-2 codes such as `US`. */
