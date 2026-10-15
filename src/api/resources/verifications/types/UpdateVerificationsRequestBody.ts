@@ -73,8 +73,17 @@ export type UpdateVerificationsRequestBody =
           business_tax_identification_number?: string | undefined;
           country?: string | undefined;
           date_of_birth?: string | undefined;
+          documents?:
+              | {
+                    articles_of_incorporation?: string | undefined;
+                    certificate_of_incorporation?: string | undefined;
+                }
+              | undefined;
           first_name?: string | undefined;
+          incorporation_date?: string | undefined;
           last_name?: string | undefined;
+          place_of_incorporation?: string | undefined;
+          registration_number?: string | undefined;
           requested_information?:
               | {
                     address?:
