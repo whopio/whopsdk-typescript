@@ -49,13 +49,13 @@ export interface AccountFees {
     payment_methods: Record<string, Whop.AccountFee>;
     /** Fees on withdrawals, keyed by payout method: `bank_wire`, `same_day_bank`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. Payout fees the parent account covers show as zero when a connected account's fees are read without access to its parent account. */
     payouts: Record<string, Whop.AccountFee>;
-    /** Charged on a Whop Ads auto top-up that is funded from pending balance. */
+    /** Charged when pending, not-yet-settled balance is advanced to fund the account's cards balance. */
     pending_auto_topup: Whop.AccountFee;
     /** Whop's share of every payment, on top of card processing. */
     platform_processing: Whop.AccountFee;
     /** Charged on payouts from a shared pool balance. */
     pool_payout: Whop.AccountFee;
-    /** Charged on revenue shared with the account. */
+    /** Charged on payments where the account shares revenue with revshare affiliates. */
     revshare: Whop.AccountFee;
     /** Charged when tax is calculated on a payment. */
     tax_calculation: Whop.AccountFee;
