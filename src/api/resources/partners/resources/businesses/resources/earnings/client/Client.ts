@@ -26,7 +26,7 @@ export class EarningsClient {
     }
 
     /**
-     * Lists the earnings Whop pays out for one referred business's activity, most recent first.
+     * Lists the earnings Whop pays out for one referred business's activity, most recent first. The original referrer or a caller with company:basic:read on the business credited for the referral can read them.
      *
      * @param {Whop.partners.businesses.ListEarningsRequest} request
      * @param {EarningsClient.RequestOptions} requestOptions - Request-specific configuration.
