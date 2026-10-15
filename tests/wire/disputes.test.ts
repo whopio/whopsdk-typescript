@@ -18,6 +18,7 @@ describe("DisputesClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    acceptable: false,
                     account_id: "biz_xxxxxxxxxxxxxx",
                     amount: 150,
                     buyer: {
@@ -348,6 +349,7 @@ describe("DisputesClient", () => {
         });
 
         const rawResponseBody = {
+            acceptable: false,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -574,6 +576,7 @@ describe("DisputesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            acceptable: false,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -838,6 +841,332 @@ describe("DisputesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("accept (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            acceptable: false,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount: 150,
+            buyer: {
+                email: "marcus@shinetime.example",
+                member_id: "mber_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                user_id: "user_xxxxxxxxxxxxxx",
+                username: "danawhitfield",
+            },
+            created_at: "2026-01-01T12:00:00.000Z",
+            currency: "usd",
+            evidence: {
+                access_activity_log:
+                    "Vehicle checked in 2026-01-04 09:02, released 2026-01-05 16:40. Signed release on file.",
+                billing_address: "4180 Burnet Rd, Austin, TX 78756, US",
+                cancellation_policy_attachment: {
+                    content_type: "image/png",
+                    filename: "booking-confirmation-email.png",
+                    id: "file_xxxxxxxxxxxxxx",
+                    platform: false,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                },
+                cancellation_policy_disclosure: "Shown at checkout and again in the booking confirmation email.",
+                customer_communication_attachment: {
+                    content_type: "image/png",
+                    filename: "booking-confirmation-email.png",
+                    id: "file_xxxxxxxxxxxxxx",
+                    platform: false,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                },
+                customer_email_address: "marcus@shinetime.example",
+                customer_name: "Dana Whitfield",
+                documents: [
+                    {
+                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
+                        content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
+                        document_type: "return_policy",
+                        duration_seconds: null,
+                        filename: "customer-order-history.png",
+                        height: 100,
+                        id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        removed_by_moderation: false,
+                        size: 1024,
+                        upload_status: "pending",
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
+                        waveform_url: null,
+                        width: 100,
+                    },
+                ],
+                notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
+                product_description: "Two-stage paint correction with a three-year ceramic coating.",
+                refund_policy_attachment: {
+                    content_type: "image/png",
+                    filename: "booking-confirmation-email.png",
+                    id: "file_xxxxxxxxxxxxxx",
+                    platform: false,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                },
+                refund_policy_disclosure: "Linked from the booking page and accepted at checkout.",
+                refund_refusal_explanation:
+                    "Work was completed and the vehicle collected, so the deposit is non-refundable.",
+                service_date: "2026-01-01",
+                uncategorized_attachment: {
+                    content_type: "image/png",
+                    filename: "booking-confirmation-email.png",
+                    id: "file_xxxxxxxxxxxxxx",
+                    platform: false,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                },
+            },
+            evidence_due_at: "2026-01-01T12:00:00.000Z",
+            evidence_editable: false,
+            evidence_locked_reason: "submitted",
+            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            id: "dspt_xxxxxxxxxxxxxx",
+            inquiry: false,
+            issuer_comments: [
+                {
+                    received_at: "2026-01-01T12:00:00.000Z",
+                    text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
+                },
+            ],
+            line_items: [
+                {
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Ceramic Coating — Full Vehicle",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    sku: "sku",
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            payment: {
+                amount: 249,
+                card_brand: "visa",
+                card_last4: "4242",
+                created_at: "2026-01-01T12:00:00.000Z",
+                currency: "usd",
+                id: "pay_xxxxxxxxxxxxxx",
+                payment_instrument: {
+                    card: {
+                        brand: "visa",
+                        exp_month: 10,
+                        exp_year: 2031,
+                        issuer_identification_number: "41111111",
+                        last4: "4242",
+                    },
+                    display_name: "Visa •••• 4242",
+                    icons: {
+                        card: {
+                            dark: {
+                                png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                            },
+                            light: {
+                                png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                            },
+                        },
+                        square: {
+                            dark: {
+                                png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                            },
+                            light: {
+                                png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                            },
+                        },
+                    },
+                    installment_count: 1.1,
+                    payment_method_type: "card",
+                },
+                payment_method_type: "card",
+                payment_processor: "payment_processor",
+            },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            reason: "fraudulent",
+            reason_code: "13.1",
+            status: "needs_response",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.disputes.accept({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("accept (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.disputes.accept({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("accept (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.disputes.accept({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("accept (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.disputes.accept({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("accept (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.disputes.accept({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("accept (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/disputes/id/accept")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.disputes.accept({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("submit (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -849,6 +1178,7 @@ describe("DisputesClient", () => {
         });
 
         const rawResponseBody = {
+            acceptable: false,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -1147,6 +1477,7 @@ describe("DisputesClient", () => {
         });
         const rawRequestBody = { documents: [{ document_type: "return_policy" }] };
         const rawResponseBody = {
+            acceptable: false,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
