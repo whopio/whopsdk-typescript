@@ -31773,7 +31773,6 @@ Save annual projections for a business referred by the authenticated partner. Pr
 ```typescript
 await client.partners.businesses.update({
     id: "id",
-    annual_ads_usd: "120000",
     annual_processing_usd: "1200000"
 });
 
@@ -31841,7 +31840,7 @@ Accept the authenticated partner's CPA offer with the reviewed terms and signed 
 await client.partners.businesses.acceptCommissionAdvance({
     id: "id",
     acknowledgments: ["commission_replacement", "clawback", "term"],
-    expected_amount_usd: "1439.99",
+    expected_amount_usd: "1079.99",
     offer_token: "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     terms_version: "2026-01-01"
 });

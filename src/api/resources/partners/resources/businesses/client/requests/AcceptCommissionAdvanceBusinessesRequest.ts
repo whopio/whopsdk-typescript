@@ -5,7 +5,7 @@
  *     {
  *         id: "id",
  *         acknowledgments: ["commission_replacement", "clawback", "term"],
- *         expected_amount_usd: "1439.99",
+ *         expected_amount_usd: "1079.99",
  *         offer_token: "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
  *         terms_version: "2026-01-01"
  *     }
