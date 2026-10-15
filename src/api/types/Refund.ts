@@ -15,6 +15,8 @@ export interface Refund {
     failure_reason: Refund.FailureReason | null;
     /** Refund ID, prefixed `rf_`. */
     id: string;
+    /** Your own key-value data attached when the refund was requested. */
+    metadata: Record<string, unknown> | null;
     /** The refunded amount in the currency the processor moved. */
     original_amount: Whop.Money;
     /** The payment this refund reverses, prefixed `pay_`. */

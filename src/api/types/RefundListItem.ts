@@ -14,6 +14,8 @@ export interface RefundListItem {
     currency: Whop.Currencies;
     /** The unique identifier for the refund. */
     id: string;
+    /** The custom metadata attached when this refund was requested. */
+    metadata: Record<string, unknown> | null;
     /** The original payment that this refund was issued against. Null if the payment is no longer available. */
     payment: RefundListItem.Payment | null;
     /** The payment provider that processed the refund. */
