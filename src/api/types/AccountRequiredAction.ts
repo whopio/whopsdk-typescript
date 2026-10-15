@@ -36,6 +36,7 @@ export namespace AccountRequiredAction {
         AddVatRegistration: "add_vat_registration",
         AcceptPayoutTerms: "accept_payout_terms",
         EnableTwoFactorAuthentication: "enable_two_factor_authentication",
+        RespondToAbuseReport: "respond_to_abuse_report",
     } as const;
     export type Action = (typeof Action)[keyof typeof Action];
     /** required (act now) or pending (under review) */
