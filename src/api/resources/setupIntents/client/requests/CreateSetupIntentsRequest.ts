@@ -17,6 +17,8 @@ export interface CreateSetupIntentsRequest {
     email?: string | null;
     /** Custom metadata to attach to the setup intent. Returned on the setup intent and its webhooks. */
     metadata?: Record<string, string | null> | null;
+    /** Who the saved payment method belongs to. Pass `account_id` to save it on the account itself, which needs `payment:charge` on the account. Pass your own user ID, prefixed `user_`, to save it on the authenticated user. Omit it to save it on the buyer: the caller when it is the buyer, otherwise the user the confirmation token names. Not available with `payment_method_id`, which keeps its current owner, or with `purpose`. */
+    owner_id?: string | null;
     /** An existing payment method to re-verify and save, prefixed `payt_`. Provide this or `confirmation_token`, not both. Not available to a buyer credential. */
     payment_method_id?: string | null;
     /** What the saved payment method will pay for. Set to `ads_billing` when saving a card to pay for Whop Ads on `account_id`: the card is verified by Whop Ads, the merchant that charges it, which helps minimize security declines on ad payments, and it requires `ad_campaign:create` on `account_id`. Omit it for any other payment method. */
