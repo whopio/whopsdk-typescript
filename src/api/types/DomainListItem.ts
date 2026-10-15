@@ -18,7 +18,7 @@ export interface DomainListItem {
     issues: Whop.DomainIssue[];
     /** Custom string keys and values attached to this domain. Empty when the domain isn't yours. */
     metadata: Record<string, unknown>;
-    /** The other account that has proven it owns this hostname. `null` when no other account does. */
+    /** The account that has proven it owns this hostname on Whop, which can be your own. `null` when no account has. */
     owned_by: Whop.DomainOwner | null;
     /** Tracking page views on the domain with the Whop pixel. `null` when not tracked or not visible to you. */
     pixel: Whop.DomainPixel | null;
