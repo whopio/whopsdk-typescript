@@ -5,8 +5,6 @@ export interface CreateDepositsResponse {
     account_id: string | null;
     /** Requested deposit amount. */
     amount?: string | undefined;
-    /** The charge to a saved payment method. Null unless `payment_method_id` was passed. */
-    card: CreateDepositsResponse.Card | null;
     /** URL of the hosted deposit page. Only present for business destinations. */
     hosted_url: string | null;
     /** Available deposit methods for destination. */
@@ -16,21 +14,13 @@ export interface CreateDepositsResponse {
 
 export namespace CreateDepositsResponse {
     /**
-     * The charge to a saved payment method. Null unless `payment_method_id` was passed.
-     */
-    export interface Card {
-        /** The payment the charge created, prefixed `pay_`. Retrieve it, or listen for `payment.succeeded`, to confirm the funds landed. */
-        payment_id: string;
-        /** The saved payment method that was charged, prefixed `payt_`. */
-        payment_method_id: string;
-    }
-
-    /**
      * Available deposit methods for destination.
      */
     export interface Methods {
         /** Bank deposit details. Only present when bank deposits are active for the destination account. */
         bank: Methods.Bank | null;
+        /** The charge to a saved payment method. Null unless `payment_method_id` was passed. */
+        card: Methods.Card | null;
         /** Crypto networks available for this deposit, each with its on-chain deposit address and the tokens accepted on that network. Crypto deposits require a $10 minimum. */
         crypto: Methods.Crypto.Item[];
     }
@@ -84,6 +74,16 @@ export namespace CreateDepositsResponse {
                     }
                 }
             }
+        }
+
+        /**
+         * The charge to a saved payment method. Null unless `payment_method_id` was passed.
+         */
+        export interface Card {
+            /** The payment the charge created, prefixed `pay_`. Retrieve it, or listen for `payment.succeeded`, to confirm the funds landed. */
+            payment_id: string;
+            /** The saved payment method that was charged, prefixed `payt_`. */
+            payment_method_id: string;
         }
 
         export type Crypto = Crypto.Item[];
