@@ -161,7 +161,7 @@ export class BusinessesClient {
     }
 
     /**
-     * Retrieves a single referred business and its referral terms.
+     * Retrieves a single referred business and its referral terms. The original referrer or a caller with company:basic:read on the business credited for the referral can read it.
      *
      * @param {Whop.partners.RetrieveBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
