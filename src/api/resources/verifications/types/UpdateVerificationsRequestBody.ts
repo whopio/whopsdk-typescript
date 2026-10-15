@@ -82,6 +82,45 @@ export type UpdateVerificationsRequestBody =
           first_name?: string | undefined;
           incorporation_date?: string | undefined;
           last_name?: string | undefined;
+          owners?:
+              | {
+                    address?:
+                        | {
+                              city?: (string | null) | undefined;
+                              country?: (string | null) | undefined;
+                              line1?: (string | null) | undefined;
+                              line2?: (string | null) | undefined;
+                              postal_code?: (string | null) | undefined;
+                              state?: (string | null) | undefined;
+                          }
+                        | undefined;
+                    country?: string | undefined;
+                    date_of_birth?: string | undefined;
+                    document_type?: ("id_card" | "drivers" | "residence_permit" | "passport") | undefined;
+                    documents?:
+                        | {
+                              drivers_back?: string | undefined;
+                              drivers_front?: string | undefined;
+                              id_card_back?: string | undefined;
+                              id_card_front?: string | undefined;
+                              passport_front?: string | undefined;
+                              residence_permit_back?: string | undefined;
+                              residence_permit_front?: string | undefined;
+                              selfie?: string | undefined;
+                          }
+                        | undefined;
+                    email?: string | undefined;
+                    first_name?: string | undefined;
+                    id?: string | undefined;
+                    last_name?: string | undefined;
+                    ownership_percentage?: number | undefined;
+                    phone?: string | undefined;
+                    remove?: boolean | undefined;
+                    roles?: ("ubo" | "director" | "representative" | "shareholder")[] | undefined;
+                    tax_identification_number?: string | undefined;
+                    verification_id?: string | undefined;
+                }[]
+              | undefined;
           place_of_incorporation?: string | undefined;
           registration_number?: string | undefined;
           requested_information?:

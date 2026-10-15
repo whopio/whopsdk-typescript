@@ -30,6 +30,8 @@ export namespace ListVerificationsResponse {
             id?: string | undefined;
             kind?: Item.Kind | undefined;
             last_name?: (string | null) | undefined;
+            /** Owners of the business and the progress of each one's own verification. Empty for individual verifications. */
+            owners: Item.Owners.Item[];
             /** Phone number on the verification profile. */
             phone?: (string | null) | undefined;
             /** Number the business was registered under in its place of incorporation, such as a state file number in the US or a Company Number in the UK. Business verifications only; `null` until the business verification is approved. */
@@ -69,6 +71,73 @@ export namespace ListVerificationsResponse {
                 Business: "business",
             } as const;
             export type Kind = (typeof Kind)[keyof typeof Kind];
+            export type Owners = Owners.Item[];
+
+            export namespace Owners {
+                export interface Item {
+                    first_name: string | null;
+                    /** Owner ID, prefixed `own_`. Send it in Update Verification's `owners` to change or remove the owner, including one added in the hosted session. */
+                    id: string;
+                    last_name: string | null;
+                    /** Share of the business the person owns, from 0 to 100. */
+                    ownership_percentage: number | null;
+                    /** The owner's documents and their progress. Empty for an owner added with `verification_id`. */
+                    required_documents: Item.RequiredDocuments.Item[];
+                    /** What the person is to the business. */
+                    roles: Item.Roles.Item[];
+                    /** Where the owner's own verification stands, in the same states as `status`. `action_required` when their documents need sending again. */
+                    status: Item.Status;
+                }
+
+                export namespace Item {
+                    export type RequiredDocuments = RequiredDocuments.Item[];
+
+                    export namespace RequiredDocuments {
+                        export interface Item {
+                            /** Document slot key, such as `id_card_front`, `id_card_back`, or `selfie`. */
+                            document?: string | undefined;
+                            /** Why the previous submission was rejected, when the provider requested new documents or declined the verification. */
+                            rejection_reason?: (string | null) | undefined;
+                            /** `pending_upload` until the document has been relayed for review; `submitted` afterwards. */
+                            status?: Item.Status | undefined;
+                        }
+
+                        export namespace Item {
+                            /** `pending_upload` until the document has been relayed for review; `submitted` afterwards. */
+                            export const Status = {
+                                PendingUpload: "pending_upload",
+                                Submitted: "submitted",
+                            } as const;
+                            export type Status = (typeof Status)[keyof typeof Status];
+                        }
+                    }
+
+                    export type Roles = Roles.Item[];
+
+                    export namespace Roles {
+                        export const Item = {
+                            Ubo: "ubo",
+                            Director: "director",
+                            Representative: "representative",
+                            Shareholder: "shareholder",
+                        } as const;
+                        export type Item = (typeof Item)[keyof typeof Item];
+                    }
+
+                    /** Where the owner's own verification stands, in the same states as `status`. `action_required` when their documents need sending again. */
+                    export const Status = {
+                        NotStarted: "not_started",
+                        Pending: "pending",
+                        Processing: "processing",
+                        ManualReview: "manual_review",
+                        Approved: "approved",
+                        Rejected: "rejected",
+                        ActionRequired: "action_required",
+                    } as const;
+                    export type Status = (typeof Status)[keyof typeof Status];
+                }
+            }
+
             export type RequestedInformation = RequestedInformation.Item[];
 
             export namespace RequestedInformation {
