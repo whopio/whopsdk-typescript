@@ -28467,7 +28467,7 @@ await client.verifications.retrieve({
 <dl>
 <dd>
 
-Updates editable profile details or submits answers for items returned in `requested_information`. Once a verification is `approved` its profile details are locked and can no longer be edited.
+Updates editable profile details or submits answers for items returned in `requested_information`. On a business verification still collecting details, company details and `documents` also go to the verification provider, and the hosted session at `session_url` collects anything still missing. While it's under review, `registration_number`, `incorporation_date`, `place_of_incorporation`, and `documents` are refused. Once a verification is `approved` its profile details are locked and can no longer be edited.
 </dd>
 </dl>
 </dd>
