@@ -37,7 +37,6 @@ export class DomainsClient {
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -133,8 +132,6 @@ export class DomainsClient {
                     switch (_response.error.statusCode) {
                         case 400:
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         case 503:
                             throw new Whop.ServiceUnavailableError(
                                 _response.error.body as Whop.V1ErrorResponse,
@@ -258,7 +255,6 @@ export class DomainsClient {
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -313,8 +309,6 @@ export class DomainsClient {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
