@@ -1320,6 +1320,17 @@
             },
             "default": "./dist/cjs/api/resources/users/resources/preferences/exports.js"
         },
+        "./users/fees": {
+            "import": {
+                "types": "./dist/esm/api/resources/users/resources/fees/exports.d.mts",
+                "default": "./dist/esm/api/resources/users/resources/fees/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/users/resources/fees/exports.d.ts",
+                "default": "./dist/cjs/api/resources/users/resources/fees/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/users/resources/fees/exports.js"
+        },
         "./users/preferences/notifications": {
             "import": {
                 "types": "./dist/esm/api/resources/users/resources/preferences/resources/notifications/exports.d.mts",

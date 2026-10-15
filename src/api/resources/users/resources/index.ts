@@ -1,3 +1,5 @@
+export * from "./fees/client/requests/index.js";
+export * as fees from "./fees/index.js";
 export * from "./oauthGrants/client/requests/index.js";
 export * as oauthGrants from "./oauthGrants/index.js";
 export * from "./oauthGrants/types/index.js";

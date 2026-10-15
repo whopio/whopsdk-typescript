@@ -33313,6 +33313,72 @@ await client.users.preferences.update();
 </dl>
 </details>
 
+## Users Fees
+<details><summary><code>client.users.fees.<a href="/src/api/resources/users/resources/fees/client/Client.ts">retrieve</a>({ ...params }) -> Whop.UserFees</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the fees charged when the user moves money with their personal balance: withdrawals, transfers, bank deposits, and funding cards from pending balance. Each fee has the same shape as in Retrieve Account Fees. You can only retrieve your own fees, and they are read-only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.users.fees.retrieve({
+    user_id: "user_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.users.RetrieveFeesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FeesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Users Preferences Notifications
 <details><summary><code>client.users.preferences.notifications.<a href="/src/api/resources/users/resources/preferences/resources/notifications/client/Client.ts">set</a>({ ...params }) -> Whop.SetNotificationsResponse</code></summary>
 <dl>

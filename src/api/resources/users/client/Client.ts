@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { FeesClient } from "../resources/fees/client/Client.js";
 import { OauthGrantsClient } from "../resources/oauthGrants/client/Client.js";
 import { PasskeysClient } from "../resources/passkeys/client/Client.js";
 import { PreferencesClient } from "../resources/preferences/client/Client.js";
@@ -29,6 +30,7 @@ export class UsersClient {
     protected _oauthGrants: OauthGrantsClient | undefined;
     protected _passkeys: PasskeysClient | undefined;
     protected _preferences: PreferencesClient | undefined;
+    protected _fees: FeesClient | undefined;
 
     constructor(options: UsersClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -44,6 +46,10 @@ export class UsersClient {
 
     public get preferences(): PreferencesClient {
         return (this._preferences ??= new PreferencesClient(this._options));
+    }
+
+    public get fees(): FeesClient {
+        return (this._fees ??= new FeesClient(this._options));
     }
 
     /**
