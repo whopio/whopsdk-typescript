@@ -24,6 +24,8 @@ export interface ListSupportChannelsRequest {
     open?: boolean;
     /** Only return support channels opened by this customer. */
     customer_user_id?: string;
+    /** Only return support channels opened by any of these customers. Maximum 100 IDs per request. */
+    customer_user_ids?: string | string[];
     /** Set to true to only return channels the authenticated user has joined as a participant. Requires a user. */
     participated?: boolean;
     /** Set to true to return `last_message` and `unread` on each channel. Both are `null` otherwise, which keeps large lists fast. */
