@@ -29,7 +29,7 @@ export namespace CreateVerificationsRequestBody {
         country?: string | undefined;
         /** Formatted as `YYYY-MM-DD`. */
         date_of_birth?: string | undefined;
-        /** Identity document being sent, when verifying with `documents`. Decides exactly which file slots to send: `ID_CARD` → `id_card_front` + `id_card_back` + `selfie`; `DRIVERS` → `drivers_front` + `drivers_back` + `selfie`; `RESIDENCE_PERMIT` → `residence_permit_front` + `residence_permit_back` + `selfie`; `PASSPORT` → `passport_front` + `selfie`. See [Identity documents](/developer/verification/identity-documents). */
+        /** Identity document being sent, when verifying with `documents`. Decides exactly which file slots to send: `id_card` → `id_card_front` + `id_card_back` + `selfie`; `drivers` → `drivers_front` + `drivers_back` + `selfie`; `residence_permit` → `residence_permit_front` + `residence_permit_back` + `selfie`; `passport` → `passport_front` + `selfie`. See [Identity documents](/developer/verification/identity-documents). */
         document_type?: CreateVerificationsRequestBodyIndividual.DocumentType | undefined;
         /** Identity document files, each value the file's raw bytes base64-encoded (JPEG, PNG, or PDF, up to 5MB per file before encoding). Sending this object verifies the person from the files in this request instead of a hosted session — individual verifications only, and the request must also carry `document_type`, `first_name`, `last_name`, `date_of_birth`, `country`, `phone`, `tax_identification_number`, and an `address` with `line1`, `city`, `state`, and `postal_code`. Send every slot for your `document_type` — a missing or rejected file fails the whole request and nothing is submitted; review starts automatically once every document is accepted. See [Identity documents](/developer/verification/identity-documents) for a full walkthrough. */
         documents?: CreateVerificationsRequestBodyIndividual.Documents | undefined;
@@ -62,12 +62,12 @@ export namespace CreateVerificationsRequestBody {
             state?: (string | null) | undefined;
         }
 
-        /** Identity document being sent, when verifying with `documents`. Decides exactly which file slots to send: `ID_CARD` → `id_card_front` + `id_card_back` + `selfie`; `DRIVERS` → `drivers_front` + `drivers_back` + `selfie`; `RESIDENCE_PERMIT` → `residence_permit_front` + `residence_permit_back` + `selfie`; `PASSPORT` → `passport_front` + `selfie`. See [Identity documents](/developer/verification/identity-documents). */
+        /** Identity document being sent, when verifying with `documents`. Decides exactly which file slots to send: `id_card` → `id_card_front` + `id_card_back` + `selfie`; `drivers` → `drivers_front` + `drivers_back` + `selfie`; `residence_permit` → `residence_permit_front` + `residence_permit_back` + `selfie`; `passport` → `passport_front` + `selfie`. See [Identity documents](/developer/verification/identity-documents). */
         export const DocumentType = {
-            IdCard: "ID_CARD",
-            Drivers: "DRIVERS",
-            ResidencePermit: "RESIDENCE_PERMIT",
-            Passport: "PASSPORT",
+            IdCard: "id_card",
+            Drivers: "drivers",
+            ResidencePermit: "residence_permit",
+            Passport: "passport",
         } as const;
         export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
 
@@ -75,19 +75,19 @@ export namespace CreateVerificationsRequestBody {
          * Identity document files, each value the file's raw bytes base64-encoded (JPEG, PNG, or PDF, up to 5MB per file before encoding). Sending this object verifies the person from the files in this request instead of a hosted session — individual verifications only, and the request must also carry `document_type`, `first_name`, `last_name`, `date_of_birth`, `country`, `phone`, `tax_identification_number`, and an `address` with `line1`, `city`, `state`, and `postal_code`. Send every slot for your `document_type` — a missing or rejected file fails the whole request and nothing is submitted; review starts automatically once every document is accepted. See [Identity documents](/developer/verification/identity-documents) for a full walkthrough.
          */
         export interface Documents {
-            /** Back of the driver's license, base64-encoded. Required when `document_type` is `DRIVERS`. */
+            /** Back of the driver's license, base64-encoded. Required when `document_type` is `drivers`. */
             drivers_back?: string | undefined;
-            /** Front of the driver's license, base64-encoded. Required when `document_type` is `DRIVERS`. */
+            /** Front of the driver's license, base64-encoded. Required when `document_type` is `drivers`. */
             drivers_front?: string | undefined;
-            /** Back of the ID card, base64-encoded. Required when `document_type` is `ID_CARD`. */
+            /** Back of the ID card, base64-encoded. Required when `document_type` is `id_card`. */
             id_card_back?: string | undefined;
-            /** Front of the ID card, base64-encoded. Required when `document_type` is `ID_CARD`. */
+            /** Front of the ID card, base64-encoded. Required when `document_type` is `id_card`. */
             id_card_front?: string | undefined;
-            /** Photo page of the passport, base64-encoded. Required when `document_type` is `PASSPORT`. */
+            /** Photo page of the passport, base64-encoded. Required when `document_type` is `passport`. */
             passport_front?: string | undefined;
-            /** Back of the residence permit, base64-encoded. Required when `document_type` is `RESIDENCE_PERMIT`. */
+            /** Back of the residence permit, base64-encoded. Required when `document_type` is `residence_permit`. */
             residence_permit_back?: string | undefined;
-            /** Front of the residence permit, base64-encoded. Required when `document_type` is `RESIDENCE_PERMIT`. */
+            /** Front of the residence permit, base64-encoded. Required when `document_type` is `residence_permit`. */
             residence_permit_front?: string | undefined;
             /** Photo of the person's face, base64-encoded. Always required, with every document type. Must be JPEG or PNG. */
             selfie?: string | undefined;
@@ -118,6 +118,8 @@ export namespace CreateVerificationsRequestBody {
         incorporation_date?: string | undefined;
         /** Last name of the business representative, used to prefill the verification session. */
         last_name?: string | undefined;
+        /** Owners of the business, up to 10 per request. Once the company details, the company documents, and the owners are in and every new owner's documents were sent, Create Verification sends the business for review: in the request that completes it, as soon as the last owner's documents finish sending in the background, or when called again after Update Verification. Owners can still be added, changed, or removed while the review waits on them. */
+        owners?: CreateVerificationsRequestBodyBusiness.Owners.Item[] | undefined;
         /** State or region where the business is incorporated. Sent to the verification provider and not returned in the response. */
         place_of_incorporation?: string | undefined;
         /** Number the business was registered under in its place of incorporation, such as a state file number in the US or a Company Number in the UK. Sent to the verification provider; `registration_number` in the response shows the verified number once the business verification is approved. */
@@ -156,6 +158,104 @@ export namespace CreateVerificationsRequestBody {
             articles_of_incorporation?: string | undefined;
             /** File ID of the certificate of incorporation or formation, prefixed `file_`. */
             certificate_of_incorporation?: string | undefined;
+        }
+
+        export type Owners = Owners.Item[];
+
+        export namespace Owners {
+            /**
+             * An owner of the business. Send `verification_id` to add someone with an approved verification on this account or on a member of its team, or a new owner's details and documents to verify them from this request. An owner already on the verification is not added twice, so a retried request is safe.
+             */
+            export interface Item {
+                /** The new owner's home address, with `line1`, `city`, `state`, and `postal_code`. */
+                address?: Item.Address | undefined;
+                /** The new owner's country, as a two-letter ISO 3166-1 code. */
+                country?: string | undefined;
+                /** The new owner's date of birth, formatted as `YYYY-MM-DD`. */
+                date_of_birth?: string | undefined;
+                /** Identity document in `documents`. Decides which slots to send: `id_card` → `id_card_front` + `id_card_back`; `drivers` → `drivers_front` + `drivers_back`; `residence_permit` → `residence_permit_front` + `residence_permit_back`; `passport` → `passport_front`. Every type also takes `selfie`. */
+                document_type?: Item.DocumentType | undefined;
+                /** The owner's identity document and selfie, each the ID of a ready file uploaded with Create File and not yet attached to anything else, prefixed `file_`. Send every slot for `document_type` plus `selfie`. Document files can be a PDF, JPEG, or PNG and the selfie a JPEG or PNG, each up to 10MB. They're sent to the verification provider in the background: the owner reads `processing` until then, and `action_required`, with a `rejection_reason` on each document, if a file couldn't be used. */
+                documents?: Item.Documents | undefined;
+                /** The new owner's email address. */
+                email?: string | undefined;
+                /** The new owner's first name. */
+                first_name?: string | undefined;
+                /** The new owner's last name. */
+                last_name?: string | undefined;
+                /** Share of the business the person owns, from 0 to 100. Across every owner it can't add up to more than 100. */
+                ownership_percentage?: number | undefined;
+                /** The new owner's phone number, with country code. */
+                phone?: string | undefined;
+                /** What the person is to the business: `ubo` for an ultimate beneficial owner, `director`, `representative` for someone who acts for the business, or `shareholder`. Required for a new owner. */
+                roles?: Item.Roles.Item[] | undefined;
+                /** The new owner's government-issued ID number, such as a Social Security Number in the US. */
+                tax_identification_number?: string | undefined;
+                /** ID of an `approved` individual verification to add as this owner, prefixed `idpf_`. It must be the account's own verification or a team member's. Takes only `roles` and `ownership_percentage` alongside it. */
+                verification_id?: string | undefined;
+            }
+
+            export namespace Item {
+                /**
+                 * The new owner's home address, with `line1`, `city`, `state`, and `postal_code`.
+                 */
+                export interface Address {
+                    city?: (string | null) | undefined;
+                    /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. */
+                    country?: (string | null) | undefined;
+                    /** First line of the street address. */
+                    line1?: (string | null) | undefined;
+                    /** Second line of the street address. */
+                    line2?: (string | null) | undefined;
+                    /** Postal or ZIP code. */
+                    postal_code?: (string | null) | undefined;
+                    /** State, province, or region code, for example `CA`. */
+                    state?: (string | null) | undefined;
+                }
+
+                /** Identity document in `documents`. Decides which slots to send: `id_card` → `id_card_front` + `id_card_back`; `drivers` → `drivers_front` + `drivers_back`; `residence_permit` → `residence_permit_front` + `residence_permit_back`; `passport` → `passport_front`. Every type also takes `selfie`. */
+                export const DocumentType = {
+                    IdCard: "id_card",
+                    Drivers: "drivers",
+                    ResidencePermit: "residence_permit",
+                    Passport: "passport",
+                } as const;
+                export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+
+                /**
+                 * The owner's identity document and selfie, each the ID of a ready file uploaded with Create File and not yet attached to anything else, prefixed `file_`. Send every slot for `document_type` plus `selfie`. Document files can be a PDF, JPEG, or PNG and the selfie a JPEG or PNG, each up to 10MB. They're sent to the verification provider in the background: the owner reads `processing` until then, and `action_required`, with a `rejection_reason` on each document, if a file couldn't be used.
+                 */
+                export interface Documents {
+                    /** File ID of the back of the driver's license. Required when `document_type` is `drivers`. */
+                    drivers_back?: string | undefined;
+                    /** File ID of the front of the driver's license. Required when `document_type` is `drivers`. */
+                    drivers_front?: string | undefined;
+                    /** File ID of the back of the ID card. Required when `document_type` is `id_card`. */
+                    id_card_back?: string | undefined;
+                    /** File ID of the front of the ID card. Required when `document_type` is `id_card`. */
+                    id_card_front?: string | undefined;
+                    /** File ID of the passport's photo page. Required when `document_type` is `passport`. */
+                    passport_front?: string | undefined;
+                    /** File ID of the back of the residence permit. Required when `document_type` is `residence_permit`. */
+                    residence_permit_back?: string | undefined;
+                    /** File ID of the front of the residence permit. Required when `document_type` is `residence_permit`. */
+                    residence_permit_front?: string | undefined;
+                    /** File ID of a photo of the owner's face. Always required. Must be a JPEG or PNG. */
+                    selfie?: string | undefined;
+                }
+
+                export type Roles = Roles.Item[];
+
+                export namespace Roles {
+                    export const Item = {
+                        Ubo: "ubo",
+                        Director: "director",
+                        Representative: "representative",
+                        Shareholder: "shareholder",
+                    } as const;
+                    export type Item = (typeof Item)[keyof typeof Item];
+                }
+            }
         }
     }
 }

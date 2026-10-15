@@ -36,6 +36,22 @@ describe("VerificationsClient", () => {
                     id: "idpf_xxxxxxxxxxxx",
                     kind: "individual",
                     last_name: "Webb",
+                    owners: [
+                        {
+                            first_name: "Riley",
+                            id: "own_xxxxxxxxxxxxxx",
+                            last_name: "Owner",
+                            ownership_percentage: 60,
+                            required_documents: [
+                                {
+                                    document: "id_card_front",
+                                    rejection_reason: "Document image was too blurry to read.",
+                                },
+                            ],
+                            roles: ["ubo"],
+                            status: "not_started",
+                        },
+                    ],
                     phone: "+15551234567",
                     registration_number: "7654321",
                     requested_information: [
@@ -183,6 +199,19 @@ describe("VerificationsClient", () => {
             id: "idpf_xxxxxxxxxxxx",
             kind: "individual",
             last_name: "Webb",
+            owners: [
+                {
+                    first_name: "Riley",
+                    id: "own_xxxxxxxxxxxxxx",
+                    last_name: "Owner",
+                    ownership_percentage: 60,
+                    required_documents: [
+                        { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
+                    ],
+                    roles: ["ubo"],
+                    status: "not_started",
+                },
+            ],
             phone: "+15551234567",
             registration_number: "7654321",
             requested_information: [
@@ -443,6 +472,19 @@ describe("VerificationsClient", () => {
             id: "idpf_xxxxxxxxxxxx",
             kind: "individual",
             last_name: "Webb",
+            owners: [
+                {
+                    first_name: "Riley",
+                    id: "own_xxxxxxxxxxxxxx",
+                    last_name: "Owner",
+                    ownership_percentage: 60,
+                    required_documents: [
+                        { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
+                    ],
+                    roles: ["ubo"],
+                    status: "not_started",
+                },
+            ],
             phone: "+15551234567",
             registration_number: "7654321",
             requested_information: [
@@ -586,6 +628,19 @@ describe("VerificationsClient", () => {
             id: "idpf_xxxxxxxxxxxx",
             kind: "individual",
             last_name: "Webb",
+            owners: [
+                {
+                    first_name: "Riley",
+                    id: "own_xxxxxxxxxxxxxx",
+                    last_name: "Owner",
+                    ownership_percentage: 60,
+                    required_documents: [
+                        { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
+                    ],
+                    roles: ["ubo"],
+                    status: "not_started",
+                },
+            ],
             phone: "+15551234567",
             registration_number: "7654321",
             requested_information: [

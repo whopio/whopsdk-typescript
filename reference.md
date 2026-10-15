@@ -28335,7 +28335,7 @@ await client.verifications.list();
 <dl>
 <dd>
 
-Starts a hosted verification session for an account or user, or returns the active session when one already exists; any fields you send prefill it. To skip the hosted session, send `documents` to verify the person from files in this request, `share_token` to reuse a verification another Sumsub account completed, or `verification_id` to reuse one the signed-in user completed on Whop. For a business, `documents` adds company formation documents to the verification and the hosted session collects the rest. Once the account has an `approved` verification, every mode except `verification_id` is rejected — unlink it first to start a new one.
+Starts a hosted verification session for an account or user, or returns the active session when one already exists; any fields you send prefill it. To skip the hosted session, send `documents` to verify the person from files in this request, `share_token` to reuse a verification another Sumsub account completed, or `verification_id` to reuse one the signed-in user completed on Whop. For a business, `documents` and `owners` add company formation documents and owners to the verification, and once everything is in this call sends the business for review — call it again after Update Verification to send it. Until then it stays `pending` and the hosted session collects anything left out. Once the account has an `approved` verification, every mode except `verification_id` is rejected — unlink it first to start a new one.
 </dd>
 </dl>
 </dd>
@@ -28467,7 +28467,7 @@ await client.verifications.retrieve({
 <dl>
 <dd>
 
-Updates editable profile details or submits answers for items returned in `requested_information`. On a business verification still collecting details, company details and `documents` also go to the verification provider, and the hosted session at `session_url` collects anything still missing. While it's under review, `registration_number`, `incorporation_date`, `place_of_incorporation`, and `documents` are refused. Once a verification is `approved` its profile details are locked and can no longer be edited.
+Updates editable profile details or submits answers for items returned in `requested_information`. On a business verification still collecting details, company details, `documents`, and `owners` also go to the verification provider; call Create Verification again to send the business for review once everything is in. Under review, `registration_number`, `incorporation_date`, `place_of_incorporation`, and `documents` are refused. While the review waits on owners, owners can still be added, changed, or removed with `remove`; otherwise only an owner's missing documents can still be sent. Once a verification is `approved` its profile details are locked and can no longer be edited.
 </dd>
 </dl>
 </dd>
