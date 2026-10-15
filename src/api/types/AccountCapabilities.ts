@@ -19,7 +19,7 @@ export interface AccountCapabilities {
     crypto_payout: AccountCapabilities.CryptoPayout;
     /** Instant payouts to an eligible payout destination */
     instant_payout: AccountCapabilities.InstantPayout;
-    /** Launching ad campaigns through Whop Ads. `inactive` while a requested ads services agreement is awaiting the account's signature. */
+    /** Launching ad campaigns through Whop Ads. `inactive` until the account's identity or business is verified, and while a requested ads services agreement is awaiting the account's signature. */
     run_ads: AccountCapabilities.RunAds;
     /** Standard payouts to an external payout destination */
     standard_payout: AccountCapabilities.StandardPayout;
@@ -91,7 +91,7 @@ export namespace AccountCapabilities {
         Pending: "pending",
     } as const;
     export type InstantPayout = (typeof InstantPayout)[keyof typeof InstantPayout];
-    /** Launching ad campaigns through Whop Ads. `inactive` while a requested ads services agreement is awaiting the account's signature. */
+    /** Launching ad campaigns through Whop Ads. `inactive` until the account's identity or business is verified, and while a requested ads services agreement is awaiting the account's signature. */
     export const RunAds = {
         Active: "active",
         Inactive: "inactive",
