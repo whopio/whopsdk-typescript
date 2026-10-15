@@ -33,4 +33,6 @@ export interface ListAccountsRequest {
     volume_max?: number;
     /** For platforms: the parent account ID whose direct connected accounts to return. Requires `payout:account:read` on the parent account. */
     parent_account_id?: string;
+    /** Return only accounts owned by this user (`user_...`), the account's `owner`. Cannot be combined with `parent_account_id`. */
+    owner_id?: string;
 }

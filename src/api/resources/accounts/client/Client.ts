@@ -89,6 +89,7 @@ export class AccountsClient {
                     volume_min: volumeMin,
                     volume_max: volumeMax,
                     parent_account_id: parentAccountId,
+                    owner_id: ownerId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     first,
@@ -104,6 +105,7 @@ export class AccountsClient {
                     volume_min: volumeMin,
                     volume_max: volumeMax,
                     parent_account_id: parentAccountId,
+                    owner_id: ownerId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
