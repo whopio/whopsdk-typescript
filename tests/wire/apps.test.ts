@@ -33,7 +33,7 @@ describe("AppsClient", () => {
                     banner_image: {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
-                    base_url: "https://booking.shinetime.example",
+                    base_url: "https://shine-time-booking-store.whop.site",
                     businesses_created_count: 0,
                     businesses_created_logo_urls: [
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -154,7 +154,7 @@ describe("AppsClient", () => {
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
-            base_url: "https://booking.shinetime.example",
+            base_url: "https://shine-time-booking.whop.site",
             businesses_created_count: 5,
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -430,7 +430,7 @@ describe("AppsClient", () => {
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
-            base_url: "https://booking.shinetime.example",
+            base_url: "https://shine-time-booking.whop.site",
             businesses_created_count: 5,
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -663,7 +663,7 @@ describe("AppsClient", () => {
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
-            base_url: "https://booking.shinetime.example",
+            base_url: "https://shine-time-booking.whop.site",
             businesses_created_count: 5,
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1135,7 +1135,7 @@ describe("AppsClient", () => {
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
-            base_url: "https://booking.shinetime.example",
+            base_url: "https://shine-time-booking.whop.site",
             businesses_created_count: 5,
             businesses_created_logo_urls: [
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
