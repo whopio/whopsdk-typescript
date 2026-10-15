@@ -135,6 +135,8 @@ export interface Account {
     use_logo_as_opengraph_image_fallback: boolean;
     /** Account identity verification status for the `individual` (KYC) and `business` (KYB) profiles. Each is `null` until created, otherwise a `status` of `not_started`, `pending`, `manual_review`, `approved`, or `rejected`. */
     verification: Record<string, unknown>;
+    /** Volume through the account in the last 30 days (GMV from paid receipts), normalized to USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
+    volume_l30d_usd: number | null;
     /** Lifetime volume through the account — sales plus transfers received — normalized to USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
     volume_usd: number | null;
     /** Account primary crypto wallet, or `null` if none has been provisioned. */
