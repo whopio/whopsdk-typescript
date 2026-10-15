@@ -183,6 +183,25 @@ describe("DomainsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.list();
+        }).rejects.toThrow(Whop.TooManyRequestsError);
+    });
+
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/domains").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
@@ -444,6 +463,27 @@ describe("DomainsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("retrieve (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.TooManyRequestsError);
     });
 
     test("delete (1)", async () => {
