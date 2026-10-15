@@ -3,6 +3,8 @@
 export interface CancelPayoutsResponse {
     /** The payout amount in whole currency units, as a decimal string. */
     amount: string;
+    /** Whether `POST /payouts/{id}/cancel` would act on this payout right now: `true` while it is `in_review`, while it is `processing` with nothing yet submitted to the payout provider, or while a submitted payout can still be asked to cancel at the provider. `false` once the money has arrived or the payout has already ended. */
+    cancelable: boolean;
     /** When the payout was created. */
     created_at: string;
     /** Payout currency. */

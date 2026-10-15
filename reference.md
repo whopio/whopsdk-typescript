@@ -21579,7 +21579,7 @@ await client.payouts.retrieve({
 <dl>
 <dd>
 
-Cancels a payout whose `status` is `in_review` and returns the funds, fees included, to the balance. A `requested` payout is still being prepared (its funds may be converting) and returns 409 until it reaches review; from `processing` on, the money is on its way and the response is 409 with error type `not_cancelable`. Canceling an already-canceled payout succeeds and returns it unchanged.
+Cancels a payout before it is sent to the payout provider, or asks the provider to stop one already sent. While the payout is `in_review`, or `processing` with nothing sent yet (see `cancelable`), it is canceled and the funds, fees included, return to the balance. Once sent, the response is 202 with a `cancellation` object, and the payout reads `canceled` only if the provider confirms it stopped. A `requested` payout returns 409 until it reaches review, a payout the provider can no longer stop returns 409 with error type `not_cancelable`, and canceling an already-canceled payout returns it unchanged.
 </dd>
 </dl>
 </dd>
