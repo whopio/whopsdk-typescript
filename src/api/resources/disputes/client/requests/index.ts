@@ -1,3 +1,4 @@
+export type { AcceptDisputesRequest } from "./AcceptDisputesRequest.js";
 export type { ListDisputesRequest } from "./ListDisputesRequest.js";
 export type { RetrieveDisputesRequest } from "./RetrieveDisputesRequest.js";
 export type { SubmitDisputesRequest } from "./SubmitDisputesRequest.js";

@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface Dispute {
+    /** Whether the dispute can be conceded to the customer with `POST /disputes/{id}/accept`. True only for a chargeback still awaiting a response, before `evidence_due_at`, whose payment processor supports accepting disputes. Inquiries are never acceptable. */
+    acceptable: boolean;
     /** The account the dispute was filed against, prefixed `biz_`. */
     account_id: string | null;
     /** The disputed amount, in whole units of `currency`. */
