@@ -372,7 +372,6 @@ describe("AccountsClient", () => {
                             website: "x",
                         },
                     ],
-                    stablecoin_rails: false,
                     status: "active",
                     status_reason: "Suspended - Fraudulent activity",
                     store_page_config: {
@@ -869,7 +868,6 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            stablecoin_rails: false,
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -1403,7 +1401,6 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            stablecoin_rails: false,
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -1864,7 +1861,6 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            stablecoin_rails: false,
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -2456,7 +2452,6 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            stablecoin_rails: false,
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -3738,7 +3733,6 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            stablecoin_rails: false,
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {

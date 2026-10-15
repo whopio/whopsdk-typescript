@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface AccountBalanceToken {
     /** Total amount held in native units, as a decimal string. */
     balance: string;
-    /** Balance split into available, pending, and reserve amounts, as native-unit decimal strings, with the days the pending amount is expected to settle. On-chain crypto is entirely available; good_funds and fiat cash can have pending or reserve portions. */
+    /** Balance split into available, pending, and reserve amounts, as native-unit decimal strings, with the days the pending amount is expected to settle. */
     breakdown: Whop.AccountBalanceBreakdown;
     /** Holding icon URL. */
     icon_url: string | null;

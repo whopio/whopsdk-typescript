@@ -56,7 +56,7 @@ export namespace PostTransferFailedPayload {
         object: Data.Object_;
         /** Business account or user sending the transfer. */
         origin: Data.Origin | null;
-        /** Current transfer status. */
+        /** Current transfer status. A transfer can be created `processing` and settle a few seconds later; poll Retrieve Transfer or listen for the `transfer.completed` and `transfer.failed` webhooks instead of treating the create response as final. `succeeded` and `failed` are final. */
         status: Data.Status;
         /** Recorded time of the current transition. Null when the historical transition time is unknown. */
         status_changed_at: string | null;
@@ -119,7 +119,7 @@ export namespace PostTransferFailedPayload {
             export type Object_ = (typeof Object_)[keyof typeof Object_];
         }
 
-        /** Current transfer status. */
+        /** Current transfer status. A transfer can be created `processing` and settle a few seconds later; poll Retrieve Transfer or listen for the `transfer.completed` and `transfer.failed` webhooks instead of treating the create response as final. `succeeded` and `failed` are final. */
         export const Status = {
             Processing: "processing",
             Succeeded: "succeeded",

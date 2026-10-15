@@ -4,7 +4,7 @@ import type * as Whop from "../../../index.js";
 
 export type CreateTransfersRequestBody =
     /**
-     * Moves credit between two Whop balances and returns a `transfer`. A transfer from a stablecoin-rails account settles on-chain when covered, and still returns a `transfer`. */
+     * Moves credit between two Whop balances and returns a `transfer`. The transfer can come back `processing` and reach `succeeded` or `failed` asynchronously, usually within seconds. */
     | Whop.CreateTransfersRequestBody.Balance
     /**
      * Funds a shareable link anyone with the URL can redeem and returns a `claim_link`. */
