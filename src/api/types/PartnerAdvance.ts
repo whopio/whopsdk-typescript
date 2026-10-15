@@ -3,12 +3,10 @@
 import type * as Whop from "../index.js";
 
 export interface PartnerAdvance {
-    /** Actual processing plus ads spend in the preceding 60 days, in USD. Null when unavailable. */
+    /** Actual payment volume (cards and BNPL) in the preceding 60 days, in USD. Null when unavailable. */
     activity_60_day: Whop.Money | null;
     /** The offered or accepted upfront CPA payment in USD. */
     amount: Whop.Money | null;
-    /** Annual projected Whop Ads spend in USD. */
-    annual_ads: Whop.Money;
     /** Annual projected processing in USD. */
     annual_processing: Whop.Money;
     /** When low activity triggered reversal and normal partner terms resumed. No prior commissions are paid retroactively. */
@@ -21,17 +19,15 @@ export interface PartnerAdvance {
     offer_token: string | null;
     /** Processing required in a rolling 30-day period to qualify, in USD. */
     processing_target: Whop.Money;
-    /** Projected processing plus ads spend over 60 days, in USD. */
+    /** Projected payment volume (cards and BNPL) over 60 days, in USD. */
     projected_60_day_activity: Whop.Money | null;
-    /** Ads commissions projected for the remaining CPA term, in USD. */
-    projected_ads_commissions: Whop.Money | null;
     /** Projected commissions over the remaining CPA term. */
     projected_commissions: Whop.Money | null;
     /** Processing commissions projected for the remaining CPA term, in USD. */
     projected_processing_commissions: Whop.Money | null;
     /** First qualification timestamp. */
     qualified_at: string | null;
-    /** 20% of projected 60-day processing plus ads spend. Performance checks begin 60 days after funding. */
+    /** 20% of projected 60-day payment volume (cards and BNPL). Performance checks begin 60 days after funding. */
     recovery_threshold: Whop.Money | null;
     /** The CPA payment lifecycle state. */
     status: PartnerAdvance.Status;

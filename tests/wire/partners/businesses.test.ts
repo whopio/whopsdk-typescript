@@ -34,7 +34,6 @@ describe("BusinessesClient", () => {
                     commission_advance: {
                         activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         clawed_back_at: null,
                         deadline_at: "2026-01-01T12:00:00.000Z",
@@ -42,12 +41,6 @@ describe("BusinessesClient", () => {
                         offer_token: null,
                         processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         projected_60_day_activity: {
-                            amount: "-1234.56",
-                            currency: "usd",
-                            decimals: 2,
-                            display_decimals: 2,
-                        },
-                        projected_ads_commissions: {
                             amount: "-1234.56",
                             currency: "usd",
                             decimals: 2,
@@ -280,7 +273,6 @@ describe("BusinessesClient", () => {
             commission_advance: {
                 activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 clawed_back_at: "clawed_back_at",
                 deadline_at: "2026-01-01T12:00:00.000Z",
@@ -288,7 +280,6 @@ describe("BusinessesClient", () => {
                 offer_token: "offer_token",
                 processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_processing_commissions: {
                     amount: "-1234.56",
@@ -383,12 +374,11 @@ describe("BusinessesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { annual_ads_usd: "120000", annual_processing_usd: "1200000" };
+        const rawRequestBody = { annual_processing_usd: "1200000" };
         const rawResponseBody = {
             commission_advance: {
                 activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 clawed_back_at: "clawed_back_at",
                 deadline_at: "2026-01-01T12:00:00.000Z",
@@ -396,7 +386,6 @@ describe("BusinessesClient", () => {
                 offer_token: "offer_token",
                 processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_processing_commissions: {
                     amount: "-1234.56",
@@ -423,7 +412,6 @@ describe("BusinessesClient", () => {
 
         const response = await client.partners.businesses.update({
             id: "id",
-            annual_ads_usd: "120000",
             annual_processing_usd: "1200000",
         });
         expect(response).toEqual(rawResponseBody);
@@ -440,7 +428,7 @@ describe("BusinessesClient", () => {
         });
         const rawRequestBody = {
             acknowledgments: ["commission_replacement", "clawback", "term"],
-            expected_amount_usd: "1439.99",
+            expected_amount_usd: "1079.99",
             offer_token:
                 "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             terms_version: "2026-01-01",
@@ -449,7 +437,6 @@ describe("BusinessesClient", () => {
             commission_advance: {
                 activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 clawed_back_at: "clawed_back_at",
                 deadline_at: "2026-01-01T12:00:00.000Z",
@@ -457,7 +444,6 @@ describe("BusinessesClient", () => {
                 offer_token: "offer_token",
                 processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_processing_commissions: {
                     amount: "-1234.56",
@@ -485,7 +471,7 @@ describe("BusinessesClient", () => {
         const response = await client.partners.businesses.acceptCommissionAdvance({
             id: "id",
             acknowledgments: ["commission_replacement", "clawback", "term"],
-            expected_amount_usd: "1439.99",
+            expected_amount_usd: "1079.99",
             offer_token:
                 "eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             terms_version: "2026-01-01",
@@ -598,7 +584,6 @@ describe("BusinessesClient", () => {
             commission_advance: {
                 activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                annual_ads: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 annual_processing: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 clawed_back_at: "clawed_back_at",
                 deadline_at: "2026-01-01T12:00:00.000Z",
@@ -606,7 +591,6 @@ describe("BusinessesClient", () => {
                 offer_token: "offer_token",
                 processing_target: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_60_day_activity: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                projected_ads_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_commissions: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 projected_processing_commissions: {
                     amount: "-1234.56",
