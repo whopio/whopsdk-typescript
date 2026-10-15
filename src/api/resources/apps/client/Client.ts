@@ -17,7 +17,7 @@ export declare namespace AppsClient {
 }
 
 /**
- * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.site` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
+ * An App is software you build on Whop. It can be a hosted web app served at its domains, such as a `whop.site` address or a custom domain, or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
  *
  * Use the Apps API to manage app configuration, deploy an app's working copy and follow the run on the app's `deployment` field, and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests.
  *
