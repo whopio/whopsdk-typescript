@@ -232,7 +232,12 @@ describe("DomainsClient", () => {
                 },
             ],
             metadata: { project: "website" },
-            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            owned_by: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url: "logo_url",
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Rival Shop",
+            },
             pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
@@ -481,7 +486,12 @@ describe("DomainsClient", () => {
                 },
             ],
             metadata: { project: "website" },
-            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            owned_by: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url: "logo_url",
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Rival Shop",
+            },
             pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
@@ -590,7 +600,12 @@ describe("DomainsClient", () => {
                 },
             ],
             metadata: { project: "website" },
-            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            owned_by: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url: "logo_url",
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Rival Shop",
+            },
             pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
@@ -713,7 +728,12 @@ describe("DomainsClient", () => {
                 },
             ],
             metadata: { project: "website" },
-            owned_by: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
+            owned_by: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url: "logo_url",
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Rival Shop",
+            },
             pixel: { state: "pending" },
             platform: { state: "pending" },
             public_record: {
