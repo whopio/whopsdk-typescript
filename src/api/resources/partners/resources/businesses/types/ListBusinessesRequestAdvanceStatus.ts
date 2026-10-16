@@ -8,6 +8,7 @@ export const ListBusinessesRequestAdvanceStatus = {
     ClawedBack: "clawed_back",
     Completed: "completed",
     Expired: "expired",
+    Withdrawn: "withdrawn",
     Offered: "offered",
 } as const;
 export type ListBusinessesRequestAdvanceStatus =

@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface PartnerAdvance {
+    /** Qualifying card and BNPL payment volume in the preceding 30 days, in USD. Available on business detail responses before acceptance. */
+    activity_30_day: Whop.Money | null;
     /** Actual payment volume (cards and BNPL) in the preceding 60 days, in USD. Null when unavailable. */
     activity_60_day: Whop.Money | null;
     /** The offered or accepted upfront CPA payment in USD. */
@@ -13,6 +15,8 @@ export interface PartnerAdvance {
     clawed_back_at: string | null;
     /** End of the nine-month CPA term. Normal commissions resume prospectively without backfill. */
     deadline_at: string | null;
+    /** Estimated advance using the current CPA formula and observed payout rates. Available for unqualified projections on business detail responses. */
+    estimated_amount: Whop.Money | null;
     /** When the CPA payment was funded. */
     funded_at: string | null;
     /** Signed offer valid for 15 minutes. Submit unchanged when accepting. Null unless the caller may accept this offer. */
@@ -45,6 +49,7 @@ export namespace PartnerAdvance {
         ClawedBack: "clawed_back",
         Completed: "completed",
         Expired: "expired",
+        Withdrawn: "withdrawn",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }
