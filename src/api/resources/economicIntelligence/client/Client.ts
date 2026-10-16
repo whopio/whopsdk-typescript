@@ -19,7 +19,9 @@ export declare namespace EconomicIntelligenceClient {
 /**
  * Economic Intelligence is Whop's recommendation engine for an account. Each recommendation is one action: a title the owner sees, a step-by-step brief Whop AI carries out, and the result it expects. Whop generates them from the account's sales, site, ads, and what its owner has said.
  *
- * Use the Economic Intelligence API to list an account's recommendations, request new ones for a specific goal, and follow each one from `queued` to `ready`, then to `executed` once the owner runs it or `superseded` when a newer one replaces it.
+ * Use the Economic Intelligence API to list an account's recommendations, request new ones for a specific goal, and follow each one from `queued` to `ready`, then to `executed` once the owner runs it or `superseded` when a newer one replaces it or you retire it.
+ *
+ * Read `economic_intelligence_offers` from account preferences and send one of its keys as `economic_intelligence_duration_key` to turn it on.
  */
 export class EconomicIntelligenceClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EconomicIntelligenceClient.Options>;
