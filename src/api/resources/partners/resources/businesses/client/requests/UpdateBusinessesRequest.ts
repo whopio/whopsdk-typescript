@@ -3,13 +3,14 @@
 /**
  * @example
  *     {
- *         id: "id",
- *         annual_processing_usd: "1200000"
+ *         id: "id"
  *     }
  */
 export interface UpdateBusinessesRequest {
     /** The partner business ID (a coma_ identifier). */
     id: string;
-    /** Annual projected card and BNPL payment volume on Whop in USD. */
-    annual_processing_usd: string;
+    /** Annual projected card and BNPL processing combined, in USD. */
+    annual_processing_usd?: string;
+    /** Remove unaccepted projections and invalidate the offer. The original CPA term is retained if projections are later added again. */
+    withdraw_projections?: boolean;
 }

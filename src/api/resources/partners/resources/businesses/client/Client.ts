@@ -237,7 +237,7 @@ export class BusinessesClient {
     }
 
     /**
-     * Save annual projections for a business referred by the authenticated partner. Projections cannot be changed after saving; repeating the same values is allowed. Public API access requires a partner OAuth token; business API keys are not supported.
+     * Save annual payment projections for a business referred by the authenticated partner. Unaccepted projections can be replaced with updated annual card and BNPL payment volume. To qualify, payment volume over the last 30 days must reach 5% of the annual payment projection. Ads are excluded from CPA; ordinary ad commissions continue. Pass withdraw_projections: true without projection amounts to remove unaccepted projections. Accepted projections are immutable. Public API access requires a partner OAuth token; business API keys are not supported.
      *
      * @param {Whop.partners.UpdateBusinessesRequest} request
      * @param {BusinessesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -247,8 +247,7 @@ export class BusinessesClient {
      *
      * @example
      *     await client.partners.businesses.update({
-     *         id: "id",
-     *         annual_processing_usd: "1200000"
+     *         id: "id"
      *     })
      */
     public update(
