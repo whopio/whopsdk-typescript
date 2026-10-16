@@ -340,6 +340,107 @@ export class AccountsClient {
     }
 
     /**
+     * @deprecated
+     *
+     * Finds accounts by name among the accounts the credential can list. Support searches cover every company and return only the 50 best matches.
+     *
+     * @param {Whop.SearchAccountsRequest} request
+     * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.accounts.search({
+     *         query: "query"
+     *     })
+     */
+    public async search(
+        request: Whop.SearchAccountsRequest,
+        requestOptions?: AccountsClient.RequestOptions,
+    ): Promise<core.Page<Whop.AccountSearchResult, Whop.SearchAccountsResponse>> {
+        const list = core.HttpResponsePromise.interceptFunction(
+            async (request: Whop.SearchAccountsRequest): Promise<core.WithRawResponse<Whop.SearchAccountsResponse>> => {
+                const { first, after, last, before, query, order, direction } = request;
+                const _queryParams: Record<string, unknown> = {
+                    first,
+                    after,
+                    last,
+                    before,
+                    query,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                };
+                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+                    _authRequest.headers,
+                    this._options?.headers,
+                    mergeOnlyDefinedHeaders({
+                        "Api-Version-Date":
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                        "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+                    }),
+                    requestOptions?.headers,
+                );
+                const _response = await core.fetcher({
+                    url: core.url.join(
+                        (await core.Supplier.get(this._options.baseUrl)) ??
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
+                        "accounts/search",
+                    ),
+                    method: "GET",
+                    headers: _headers,
+                    queryString: core.url
+                        .queryBuilder()
+                        .addMany(_queryParams)
+                        .mergeAdditional(requestOptions?.queryParams)
+                        .build(),
+                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+                    abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
+                });
+                if (_response.ok) {
+                    return { data: _response.body as Whop.SearchAccountsResponse, rawResponse: _response.rawResponse };
+                }
+                if (_response.error.reason === "status-code") {
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                        case 401:
+                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        default:
+                            throw new errors.WhopError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
+                }
+                return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/accounts/search");
+            },
+        );
+        const dataWithRawResponse = await list(request).withRawResponse();
+        return new core.Page<Whop.AccountSearchResult, Whop.SearchAccountsResponse>({
+            response: dataWithRawResponse.data,
+            rawResponse: dataWithRawResponse.rawResponse,
+            hasNextPage: (response) =>
+                response?.page_info.end_cursor != null &&
+                !(typeof response?.page_info.end_cursor === "string" && response?.page_info.end_cursor === ""),
+            getItems: (response) => response?.data ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
+            },
+        });
+    }
+
+    /**
      * Retrieves an account visible to the credential by ID or public route, including its crypto wallet.
      *
      * @param {Whop.RetrieveAccountsRequest} request
