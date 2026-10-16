@@ -39,6 +39,7 @@ export * from "./AccountReserveType.js";
 export * from "./AccountReserveUnlock.js";
 export * from "./AccountReserveUnlockType.js";
 export * from "./AccountResolutionCenterAutoRefundControl.js";
+export * from "./AccountSearchResult.js";
 export * from "./AccountSocialLink.js";
 export * from "./AccountStorePageConfig.js";
 export * from "./AccountSummary.js";

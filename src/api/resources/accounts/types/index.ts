@@ -9,4 +9,7 @@ export * from "./PostAccountFinancingDeniedPayload.js";
 export * from "./PostAccountFinancingDisabledPayload.js";
 export * from "./PostAccountUpdatedPayload.js";
 export * from "./RetryAdsPaymentAccountsResponse.js";
+export * from "./SearchAccountsRequestDirection.js";
+export * from "./SearchAccountsRequestOrder.js";
+export * from "./SearchAccountsResponse.js";
 export * from "./TransferOwnershipAccountsResponse.js";

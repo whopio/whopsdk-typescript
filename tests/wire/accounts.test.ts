@@ -1511,6 +1511,94 @@ describe("AccountsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
+    test("search (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    id: "biz_xxxxxxxxxxxxxx",
+                    route: "biz_xxxxxxxxxxxxxx",
+                    title: "Shine Time Detailing",
+                },
+            ],
+            page_info: {
+                end_cursor: "end_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
+            },
+        };
+
+        server
+            .mockEndpoint({ once: false })
+            .get("/accounts/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = rawResponseBody;
+        const page = await client.accounts.search({
+            query: "query",
+        });
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("search (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/accounts/search").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.accounts.search({
+                query: "query",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("search (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/accounts/search").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.accounts.search({
+                query: "query",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
     test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
