@@ -5,12 +5,7 @@ on:
     types: [opened, reopened, synchronize]
 
 permissions:
-  contents: write
-  pull-requests: write
-
-concurrency:
-  group: auto-merge-${{ github.event.pull_request.number }}
-  cancel-in-progress: false
+  contents: read
 
 jobs:
   arm:
@@ -21,6 +16,12 @@ jobs:
       github.event.pull_request.base.ref == github.event.repository.default_branch &&
       startsWith(github.event.pull_request.head.ref, 'fern-bot/')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    concurrency:
+      group: auto-merge-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
     steps:
       - name: Approve
         env:
@@ -33,3 +34,47 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --auto --squash
+
+  # The merge is made with GITHUB_TOKEN, so its push to main starts no workflow, and the push
+  # trigger would refuse a regeneration anyway. workflow_dispatch is the one event GITHUB_TOKEN
+  # may start; publish-main.yml's own gate makes this a no-op when the version is already out.
+  release:
+    needs: arm
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      actions: write
+      contents: read
+      pull-requests: read
+    concurrency:
+      group: release-after-merge-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - name: Wait for the merge
+        id: merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 160); do
+            state=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json state --jq .state)
+            case "$state" in
+              MERGED)
+                echo "merged=true" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+              CLOSED)
+                echo "::notice::#${PR_NUMBER} closed without merging; nothing to release."
+                exit 0
+                ;;
+            esac
+            sleep 30
+          done
+          echo "::warning::#${PR_NUMBER} did not merge within 80 minutes. Once it merges, run publish-main.yml from main with dry_run unchecked."
+
+      - name: Start the release
+        if: steps.merge.outputs.merged == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run publish-main.yml --repo "$GITHUB_REPOSITORY" --ref main -f dry_run=false
