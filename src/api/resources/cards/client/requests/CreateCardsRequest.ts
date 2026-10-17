@@ -9,6 +9,10 @@ export interface CreateCardsRequest {
     account_id?: string;
     /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts, and whenever a company API key files an account's first card application. */
     assigned_user_id?: string;
+    /** The card's initial billing address. On a company card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required. */
+    billing?: CreateCardsRequest.Billing;
+    /** Details for a company card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not. */
+    cardholder?: CreateCardsRequest.Cardholder;
     /** A display name for the card. */
     name?: string;
     /** Spending limit amount, in dollars. */
@@ -22,6 +26,38 @@ export interface CreateCardsRequest {
 }
 
 export namespace CreateCardsRequest {
+    /**
+     * The card's initial billing address. On a company card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required.
+     */
+    export interface Billing {
+        /** Billing city. */
+        city: string;
+        /** Billing country code, ISO 3166-1 alpha-2. */
+        country_code: string;
+        /** Street address line 1. */
+        line1: string;
+        /** Street address line 2. */
+        line2?: string | undefined;
+        /** Billing postal code. */
+        postal_code: string;
+        /** Billing region or state. Required for an individual card. */
+        region?: string | undefined;
+    }
+
+    /**
+     * Details for a company card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not.
+     */
+    export interface Cardholder {
+        /** The member's email address. Defaults to the email on their user. */
+        email?: string | undefined;
+        /** The member's legal first name. */
+        first_name?: string | undefined;
+        /** The member's legal last name. */
+        last_name?: string | undefined;
+        /** The member's phone number. */
+        phone?: string | undefined;
+    }
+
     /** The window the spend limit applies to. */
     export const SpendLimitFrequency = {
         Daily: "daily",
