@@ -9,8 +9,28 @@
 export interface UpdateMethodsRequest {
     /** Payout method ID, prefixed `potk_`. */
     id: string;
+    /** The payout address to keep on file for this payout method. Only the fields you send are changed; blank fields are ignored. */
+    address?: UpdateMethodsRequest.Address;
     /** Set to `true` to make this the account's default payout method. `false` is not accepted. */
     is_default?: boolean;
     /** New label for the payout method, with at least one non-whitespace character and a maximum of 100 characters. */
     nickname?: string;
+}
+
+export namespace UpdateMethodsRequest {
+    /**
+     * The payout address to keep on file for this payout method. Only the fields you send are changed; blank fields are ignored.
+     */
+    export interface Address {
+        /** The city. */
+        city?: string | undefined;
+        /** The first line of the street address. */
+        line1?: string | undefined;
+        /** The second line of the street address, such as an apartment or suite number. */
+        line2?: string | undefined;
+        /** The postal or ZIP code. */
+        postal_code?: string | undefined;
+        /** The state, province, or region. */
+        state?: string | undefined;
+    }
 }
