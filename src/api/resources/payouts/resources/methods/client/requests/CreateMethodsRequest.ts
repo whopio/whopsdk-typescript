@@ -32,6 +32,8 @@ export namespace CreateMethodsRequest {
      * Creates a recipient payout account linked to the funding ledger as a non-default account, then saves the bank method on it. No Whop user, company, or recipient ledger is created. A valid recipient email is required. Recipient methods cannot be default or recurring methods and cannot use Plaid.
      */
     export interface Recipient {
+        /** The recipient's address in recipient.country. Saved on the recipient payout account and supplied to bank methods that require address fields. Omit to retain the existing address when reusing a recipient. */
+        address?: Recipient.Address | undefined;
         /** ISO 3166-1 alpha-2 or alpha-3 country code. */
         country: string;
         /** Required email for the recipient's MassPay payout account. Trimmed and lowercased. */
@@ -40,5 +42,23 @@ export namespace CreateMethodsRequest {
         first_name: string;
         /** Recipient's last name, at most 120 UTF-8 bytes. The combined full name follows the same 100-character limit as a Whop user name. */
         last_name: string;
+    }
+
+    export namespace Recipient {
+        /**
+         * The recipient's address in recipient.country. Saved on the recipient payout account and supplied to bank methods that require address fields. Omit to retain the existing address when reusing a recipient.
+         */
+        export interface Address {
+            /** The recipient's city. */
+            city: string;
+            /** The recipient's street address. */
+            line1: string;
+            /** Apartment, suite or unit. */
+            line2?: string | undefined;
+            /** The recipient's postal or ZIP code. */
+            postal_code?: string | undefined;
+            /** The recipient's state, province or region. */
+            state?: string | undefined;
+        }
     }
 }
