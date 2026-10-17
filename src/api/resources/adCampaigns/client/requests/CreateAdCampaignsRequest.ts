@@ -4,7 +4,7 @@
  * @example
  *     {
  *         objective: "awareness",
- *         platform: "meta",
+ *         platform: "whop",
  *         title: "Now hiring mobile detailers \u2014 Austin"
  *     }
  */
@@ -76,7 +76,7 @@ export namespace CreateAdCampaignsRequest {
     export type Objective = (typeof Objective)[keyof typeof Objective];
     /** The ad network the campaign runs on. */
     export const Platform = {
-        Meta: "meta",
+        Whop: "whop",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
     export type SpecialAdCategories = SpecialAdCategories.Item[];
