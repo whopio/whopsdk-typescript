@@ -32398,7 +32398,7 @@ await client.payouts.methods.delete({
 <dl>
 <dd>
 
-Changes the label used to identify a saved payout method or makes it the account's default payout method.
+Changes the label used to identify a saved payout method, makes it the account's default payout method, or updates the payout address on file for it. Send `address` on its own: it cannot be combined with `nickname` or `is_default`. Address updates require the `payout:account:update` scope as well, on the same account, and are supported only for bank and wallet payout methods, not recipient payout methods.
 </dd>
 </dl>
 </dd>
