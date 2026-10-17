@@ -170,7 +170,7 @@ describe("AdCampaignsClient", () => {
         });
         const rawRequestBody = {
             objective: "awareness",
-            platform: "meta",
+            platform: "whop",
             title: "Now hiring mobile detailers — Austin",
         };
         const rawResponseBody = {
@@ -263,7 +263,7 @@ describe("AdCampaignsClient", () => {
 
         const response = await client.adCampaigns.create({
             objective: "awareness",
-            platform: "meta",
+            platform: "whop",
             title: "Now hiring mobile detailers \u2014 Austin",
         });
         expect(response).toEqual(rawResponseBody);
@@ -278,7 +278,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "awareness", platform: "meta", title: "title" };
+        const rawRequestBody = { objective: "awareness", platform: "whop", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -293,7 +293,7 @@ describe("AdCampaignsClient", () => {
         await expect(async () => {
             return await client.adCampaigns.create({
                 objective: "awareness",
-                platform: "meta",
+                platform: "whop",
                 title: "title",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -308,7 +308,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "awareness", platform: "meta", title: "title" };
+        const rawRequestBody = { objective: "awareness", platform: "whop", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -323,7 +323,7 @@ describe("AdCampaignsClient", () => {
         await expect(async () => {
             return await client.adCampaigns.create({
                 objective: "awareness",
-                platform: "meta",
+                platform: "whop",
                 title: "title",
             });
         }).rejects.toThrow(Whop.ConflictError);

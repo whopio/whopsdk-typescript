@@ -1013,7 +1013,7 @@ Creates an ad campaign in `draft` status for an account. Nothing runs until you 
 ```typescript
 await client.adCampaigns.create({
     objective: "awareness",
-    platform: "meta",
+    platform: "whop",
     title: "Now hiring mobile detailers \u2014 Austin"
 });
 

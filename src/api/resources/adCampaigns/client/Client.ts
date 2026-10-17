@@ -169,7 +169,7 @@ export class AdCampaignsClient {
      * @example
      *     await client.adCampaigns.create({
      *         objective: "awareness",
-     *         platform: "meta",
+     *         platform: "whop",
      *         title: "Now hiring mobile detailers \u2014 Austin"
      *     })
      */
