@@ -15,7 +15,7 @@ export interface PartnerAdvance {
     clawed_back_at: string | null;
     /** End of the nine-month CPA term. Normal commissions resume prospectively without backfill. */
     deadline_at: string | null;
-    /** Estimated advance using the current CPA formula and observed payout rates. Available for unqualified projections on business detail responses. */
+    /** Estimated advance using the current CPA formula and observed payout rates, or current reference card pricing when qualifying payment history is unavailable. Available for unqualified projections on business detail responses; not a final offer. */
     estimated_amount: Whop.Money | null;
     /** When the CPA payment was funded. */
     funded_at: string | null;
