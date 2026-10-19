@@ -15,8 +15,6 @@ export interface PartnerReferralRequest {
     id: string;
     /** Maximum permitted redemptions, when limited. */
     max_redemptions: number | null;
-    /** The partner's member record this referral was created for, prefixed `mber_`, when their role on that business is held on their member record. `null` otherwise. */
-    member_id: string | null;
     /** Public profile of the requesting partner. */
     partner: Whop.UserSummary;
     /** How the referral request was initiated. */
