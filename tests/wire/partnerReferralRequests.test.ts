@@ -24,6 +24,7 @@ describe("PartnerReferralRequestsClient", () => {
                     created_at: "2026-01-01T12:00:00.000Z",
                     id: "prfr_xxxxxxxxxxxxxx",
                     max_redemptions: 1,
+                    member_id: "member_id",
                     partner: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -173,6 +174,7 @@ describe("PartnerReferralRequestsClient", () => {
             created_at: "2026-01-01T12:00:00.000Z",
             id: "prfr_xxxxxxxxxxxxxx",
             max_redemptions: 1,
+            member_id: "member_id",
             partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -372,6 +374,7 @@ describe("PartnerReferralRequestsClient", () => {
             created_at: "2026-01-01T12:00:00.000Z",
             id: "prfr_xxxxxxxxxxxxxx",
             max_redemptions: 1,
+            member_id: "member_id",
             partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -511,6 +514,7 @@ describe("PartnerReferralRequestsClient", () => {
             created_at: "2026-01-01T12:00:00.000Z",
             id: "prfr_xxxxxxxxxxxxxx",
             max_redemptions: 1,
+            member_id: "member_id",
             partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -677,6 +681,7 @@ describe("PartnerReferralRequestsClient", () => {
             created_at: "2026-01-01T12:00:00.000Z",
             id: "prfr_xxxxxxxxxxxxxx",
             max_redemptions: 1,
+            member_id: "member_id",
             partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
@@ -843,6 +848,7 @@ describe("PartnerReferralRequestsClient", () => {
             created_at: "2026-01-01T12:00:00.000Z",
             id: "prfr_xxxxxxxxxxxxxx",
             max_redemptions: 1,
+            member_id: "member_id",
             partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
