@@ -225,6 +225,7 @@ export * from "./Domain.js";
 export * from "./DomainApplePay.js";
 export * from "./DomainAvailability.js";
 export * from "./DomainDnsRecord.js";
+export * from "./DomainEmail.js";
 export * from "./DomainIssue.js";
 export * from "./DomainListItem.js";
 export * from "./DomainOwner.js";

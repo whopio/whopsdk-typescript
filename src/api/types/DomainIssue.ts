@@ -23,6 +23,7 @@ export namespace DomainIssue {
         Website: "website",
         ApplePay: "apple_pay",
         Pixel: "pixel",
+        Email: "email",
     } as const;
     export type Capability = (typeof Capability)[keyof typeof Capability];
     /** What needs attention, as a stable code. */
@@ -50,6 +51,10 @@ export namespace DomainIssue {
         PixelWaiting: "pixel_waiting",
         PixelUnreachable: "pixel_unreachable",
         PixelQuiet: "pixel_quiet",
+        EmailNeedsWhopDns: "email_needs_whop_dns",
+        EmailUnreachable: "email_unreachable",
+        EmailIdentityInUse: "email_identity_in_use",
+        EmailVerificationFailed: "email_verification_failed",
     } as const;
     export type Code = (typeof Code)[keyof typeof Code];
 }
