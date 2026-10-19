@@ -80,7 +80,7 @@ export interface RetrieveStatsRequest {
     ad_group_ids?: string | string[];
     /** Ad ids (ad_...) to scope the report to; stats are summed across them. Available on metrics that list ad_ids. */
     ad_ids?: string | string[];
-    /** Window used by a snapshot metric. Ordinary snapshots accept 30d as their trailing activity window. Cohorted dispute metrics accept 7d or 28d as the sales-transaction pool; their attribution window is fixed in the metric name. Each metric lists its accepted values in the catalog. */
+    /** Window used by a snapshot metric. Ordinary snapshots accept 30d as their trailing activity window. Cohorted dispute metrics accept 7d or 28d as the sales-transaction pool; their attribution window is fixed in the metric name. Card network program metrics accept 7d, 14d, 28d, or 56d. Each metric lists its accepted values in the catalog. */
     snapshot_window?: Whop.RetrieveStatsRequestSnapshotWindow;
     /** Filter the events metric to one or more full event names, for example payment.completed or pixel.lead. Comma-separated names match any listed event. Use group_by=event for separate groups. Available on metrics that list event. */
     event?: string;

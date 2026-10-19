@@ -2,8 +2,10 @@
 
 export const RetrieveStatsRequestSnapshotWindow = {
     SevenD: "7d",
+    FourteenD: "14d",
     TwentyEightD: "28d",
     ThirtyD: "30d",
+    FiftySixD: "56d",
 } as const;
 export type RetrieveStatsRequestSnapshotWindow =
     (typeof RetrieveStatsRequestSnapshotWindow)[keyof typeof RetrieveStatsRequestSnapshotWindow];
