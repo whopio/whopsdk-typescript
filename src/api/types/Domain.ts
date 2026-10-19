@@ -13,6 +13,8 @@ export interface Domain {
     created_at: string | null;
     /** Normalized hostname, such as checkout.example.com. */
     domain: string;
+    /** Sending and receiving email on the domain through Whop. `null` when not wanted, or when the domain belongs to an account you can't read. */
+    email: Whop.DomainEmail | null;
     /** Domain ID, prefixed `dom_`. `null` when no domain on Whop has this hostname. */
     id: string | null;
     issues: Whop.DomainIssue[];

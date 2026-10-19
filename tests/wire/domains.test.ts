@@ -30,6 +30,7 @@ describe("DomainsClient", () => {
                     },
                     created_at: null,
                     domain: "example.com",
+                    email: null,
                     id: null,
                     issues: [
                         {
@@ -71,6 +72,7 @@ describe("DomainsClient", () => {
                     },
                     created_at: null,
                     domain: "example.co",
+                    email: null,
                     id: null,
                     issues: [
                         {
@@ -112,6 +114,7 @@ describe("DomainsClient", () => {
                     },
                     created_at: null,
                     domain: "example.dev",
+                    email: null,
                     id: null,
                     issues: [
                         {
@@ -234,6 +237,7 @@ describe("DomainsClient", () => {
             },
             created_at: "2026-01-01T12:00:00.000Z",
             domain: "shop.com",
+            email: { state: "pending" },
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
@@ -390,6 +394,7 @@ describe("DomainsClient", () => {
             },
             created_at: null,
             domain: "example.com",
+            email: null,
             id: null,
             issues: [
                 {
@@ -509,6 +514,7 @@ describe("DomainsClient", () => {
             },
             created_at: "2026-01-01T12:00:00.000Z",
             domain: "shop.com",
+            email: { state: "pending" },
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
@@ -623,6 +629,7 @@ describe("DomainsClient", () => {
             },
             created_at: "2026-01-01T12:00:00.000Z",
             domain: "shop.com",
+            email: { state: "pending" },
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {
@@ -751,6 +758,7 @@ describe("DomainsClient", () => {
             },
             created_at: "2026-01-01T12:00:00.000Z",
             domain: "shop.com",
+            email: { state: "pending" },
             id: "dom_xxxxxxxxxxxxxx",
             issues: [
                 {

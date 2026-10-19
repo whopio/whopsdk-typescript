@@ -1,5 +1,6 @@
 export * from "./ListDomainsRequestApplePay.js";
 export * from "./ListDomainsRequestDirection.js";
+export * from "./ListDomainsRequestEmail.js";
 export * from "./ListDomainsRequestOrder.js";
 export * from "./ListDomainsRequestPixel.js";
 export * from "./ListDomainsRequestPlatform.js";
