@@ -231,6 +231,8 @@ export namespace RetrieveFinancialReportsResponse {
                 OnchainDepositOffset: "onchain_deposit_offset",
                 OnchainInternalTransferIncoming: "onchain_internal_transfer_incoming",
                 OnchainInternalTransferOutgoing: "onchain_internal_transfer_outgoing",
+                OnchainPlatformTransferIncoming: "onchain_platform_transfer_incoming",
+                OnchainPlatformTransferOutgoing: "onchain_platform_transfer_outgoing",
                 OnchainSwapOffset: "onchain_swap_offset",
                 OnchainSwapSource: "onchain_swap_source",
                 OnchainSwapTarget: "onchain_swap_target",
