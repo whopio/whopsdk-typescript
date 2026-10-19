@@ -105,6 +105,8 @@ export namespace PlatformTrendsReportsResponse {
                         /** Paid payments. */
                         payments?: (number | null) | undefined;
                         product_category?: (Item.ProductCategory | null) | undefined;
+                        /** Products with a paid payment. */
+                        products?: (number | null) | undefined;
                         /** Share of customers who paid more than once, as a fraction. */
                         repeat_rate?: (number | null) | undefined;
                     }

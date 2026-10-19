@@ -3,6 +3,7 @@
 export const PlatformTrendsReportsRequestOrder = {
     GrossRevenue: "gross_revenue",
     Businesses: "businesses",
+    Products: "products",
     Payments: "payments",
     Customers: "customers",
     Aov: "aov",
