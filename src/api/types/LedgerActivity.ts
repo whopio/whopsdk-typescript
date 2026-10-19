@@ -140,6 +140,8 @@ export namespace LedgerActivity {
         TradingAccountDepositOffset: "trading_account_deposit_offset",
         OnchainWalletTransferOutgoing: "onchain_wallet_transfer_outgoing",
         OnchainWalletTransferIncoming: "onchain_wallet_transfer_incoming",
+        OnchainPlatformTransferOutgoing: "onchain_platform_transfer_outgoing",
+        OnchainPlatformTransferIncoming: "onchain_platform_transfer_incoming",
         OnchainInternalTransferOutgoing: "onchain_internal_transfer_outgoing",
         OnchainInternalTransferIncoming: "onchain_internal_transfer_incoming",
         OnchainSwapSource: "onchain_swap_source",

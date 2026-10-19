@@ -73,6 +73,8 @@ export const ListFinancialActivityRequestLineTypesItem = {
     OnchainDeposit: "onchain_deposit",
     OnchainInternalTransferIncoming: "onchain_internal_transfer_incoming",
     OnchainInternalTransferOutgoing: "onchain_internal_transfer_outgoing",
+    OnchainPlatformTransferIncoming: "onchain_platform_transfer_incoming",
+    OnchainPlatformTransferOutgoing: "onchain_platform_transfer_outgoing",
     OnchainSwapSource: "onchain_swap_source",
     OnchainSwapTarget: "onchain_swap_target",
     OnchainWalletTransferIncoming: "onchain_wallet_transfer_incoming",
