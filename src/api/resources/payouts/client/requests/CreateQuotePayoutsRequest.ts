@@ -10,10 +10,12 @@
 export interface CreateQuotePayoutsRequest {
     /** Account to pay out from, prefixed `biz_`. Provide exactly one of `account_id` or `user_id`. */
     account_id?: string;
-    /** The amount to pay out in the specified currency. */
+    /** The amount to pay out in the specified currency. With `payment_method_id`, the amount to charge the card. */
     amount: number;
     /** The currency to pay out. When omitted, uses `usd` if that balance can cover a withdrawal, otherwise the account's only other funded currency. */
     currency?: string;
+    /** A saved card of the account, prefixed `payt_`, to quote paying this payout from. The quote's `amount` is the card charge, `fee` adds the estimated card fees to the payout fee, and `net_amount` is what the recipient receives. */
+    payment_method_id?: string;
     /** The saved payout method to quote (a potk_ identifier). */
     payout_method_id: string;
     /** Whether the parent platform covers the payout fee instead of the account being paid out. */
