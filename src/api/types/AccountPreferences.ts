@@ -18,6 +18,8 @@ export interface AccountPreferences {
     cards_auto_top_up: boolean;
     /** Whether Whop Card notifications reach this account's team. `true` by default, including when the account has no cards balance. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. */
     cards_notifications: boolean;
+    /** Whether this account covers its connected accounts' negative balances. When a connected account's balance drops below zero (from refunds, disputes, or fees), this account's available balance in the same currency pays it back, up to what is available. Refunds on its connected accounts may also take them negative by up to this account's available balance. `null` when the account has no connected accounts. */
+    covers_connected_account_negative_balances: boolean | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. */
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
