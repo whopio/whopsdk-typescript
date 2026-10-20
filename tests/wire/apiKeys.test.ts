@@ -347,8 +347,8 @@ describe("ApiKeysClient", () => {
             data: [
                 {
                     action: "waitlist_entry:cancel",
-                    allowed_on_api_key: false,
-                    allowed_on_app: false,
+                    allowed_on_api_key: true,
+                    allowed_on_app: true,
                     allowed_on_user: true,
                     category: "category",
                     description: "",

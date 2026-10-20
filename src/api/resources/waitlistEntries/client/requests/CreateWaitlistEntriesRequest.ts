@@ -7,6 +7,8 @@
  *     }
  */
 export interface CreateWaitlistEntriesRequest {
+    /** The account to join on behalf of, prefixed `biz_`. Leave it out to join as yourself. Required with an account credential, which passes its own account and records the account's owner as the user who joined. */
+    buyer_account_id?: string;
     /** Answers to the variant's checkout questions. Every required question must be answered. */
     custom_field_responses?: CreateWaitlistEntriesRequest.CustomFieldResponses.Item[];
     /** Custom key-value pairs to store on the signup. Max 50 keys, 100 chars per key, 500 chars per string value. Ignored when the request returns an existing signup. */

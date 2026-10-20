@@ -29,7 +29,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Lists the waitlist signups you can see. `waitlist_entry:read` returns the user's own signups and `plan:waitlist:read` returns signups to the seller accounts they are authorized on; with both, you get both sets. Account credentials see only their own account's signups.
+     * Lists the waitlist signups you can see. `waitlist_entry:read` returns your own signups, and `plan:waitlist:read` returns signups to the seller accounts you are authorized on; with both, you get both sets. Signups submitted on behalf of an account are not in this list; pass `buyer_account_id` to list them instead, which needs `waitlist_entry:read` on that account. Account credentials see the signups submitted to their own account, and pass their own account as `buyer_account_id` to see the ones it submitted.
      *
      * @param {Whop.ListWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -60,6 +60,7 @@ export class WaitlistEntriesClient {
                     plan_id: planId,
                     account_id: accountId,
                     product_id: productId,
+                    buyer_account_id: buyerAccountId,
                     status,
                     created_before: createdBefore,
                     created_after: createdAfter,
@@ -74,6 +75,7 @@ export class WaitlistEntriesClient {
                     plan_id: planId,
                     account_id: accountId,
                     product_id: productId,
+                    buyer_account_id: buyerAccountId,
                     status: status != null ? status : undefined,
                     created_before: createdBefore,
                     created_after: createdAfter,
@@ -155,7 +157,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Joins a free waitlist variant as the authenticated user. Requires `waitlist_entry:create`. Joining again returns the existing pending signup, or the approved one while its membership is valid. Paid variants are rejected; joining collects no payment method and grants no membership.
+     * Joins a free waitlist variant as the authenticated user, or on behalf of an account with `buyer_account_id`. Requires `waitlist_entry:create`, on that account when one is given. Joining again returns the existing pending signup, or the approved one while its membership is valid. Paid variants are rejected; joining collects no payment method and grants no membership.
      *
      * @param {Whop.CreateWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -337,7 +339,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Retrieves a signup the caller owns, with `waitlist_entry:read`, or one submitted to an account they can read, with `plan:waitlist:read`.
+     * Retrieves your own signup or one submitted on behalf of an account you hold `waitlist_entry:read` on, or one submitted to an account you can read, with `plan:waitlist:read`.
      *
      * @param {Whop.RetrieveWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -503,7 +505,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Withdraws the caller's own pending signup. Requires `waitlist_entry:cancel`. Does not cancel an approved membership.
+     * Withdraws a pending signup: your own, or one submitted on behalf of an account you hold `waitlist_entry:cancel` on. Requires `waitlist_entry:cancel`, on that account for an account's signup. Does not cancel an approved membership.
      *
      * @param {Whop.CancelWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.
