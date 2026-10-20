@@ -9,21 +9,30 @@ export interface DomainRegistration {
     auto_renew: boolean;
     /** When the registration expires unless renewed, as an ISO 8601 timestamp. `null` until it's registered. */
     expires_at: string | null;
+    /** How the domain came to Whop: `registration` when it was bought through Whop, `transfer` when it was moved from another registrar. */
+    method: DomainRegistration.Method;
     /** ID of the saved card charged for the domain, prefixed `payt_`. `null` when none is set. */
     payment_method_id: string | null;
-    /** Where the registration is: awaiting payment, ordering at the registrar, delegating DNS to Whop, held, expired, or releasing. */
+    /** Where the registration is: awaiting payment, ordering at the registrar, transferring from another registrar, delegating DNS to Whop, held, expired, or releasing. */
     phase: DomainRegistration.Phase;
-    /** Link to pay what the domain owes now: its registration, or a yearly renewal. `null` when nothing is owed. */
+    /** Link to pay what the domain owes now: its registration or transfer, or a yearly renewal. `null` when nothing is owed. */
     purchase_url: string | null;
     /** How far registering and keeping the domain has got. */
     state: DomainRegistration.State;
 }
 
 export namespace DomainRegistration {
-    /** Where the registration is: awaiting payment, ordering at the registrar, delegating DNS to Whop, held, expired, or releasing. */
+    /** How the domain came to Whop: `registration` when it was bought through Whop, `transfer` when it was moved from another registrar. */
+    export const Method = {
+        Registration: "registration",
+        Transfer: "transfer",
+    } as const;
+    export type Method = (typeof Method)[keyof typeof Method];
+    /** Where the registration is: awaiting payment, ordering at the registrar, transferring from another registrar, delegating DNS to Whop, held, expired, or releasing. */
     export const Phase = {
         AwaitingPayment: "awaiting_payment",
         Ordering: "ordering",
+        Transferring: "transferring",
         Delegating: "delegating",
         Held: "held",
         Expired: "expired",
