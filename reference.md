@@ -11558,7 +11558,7 @@ Adds a domain to your account with the capabilities you want.
 
 Pass `registration` to buy the domain through Whop; it's the default when you pass no capability. Pay its `amount_due` at `purchase_url`, or pass `registration.payment_method_id` to charge a saved card. Whop then registers it, runs its DNS, and renews it every year while `auto_renew` is on.
 
-Pass `registration.auth_code` to transfer in a domain you own at another registrar or another name.com account. A transfer from another registrar costs its `amount_due` and starts once it's paid; one from another name.com account is free and starts at once. While `registration.phase` is `transferring`, its `issues` say what the transfer needs from you.
+Pass `registration.auth_code` to transfer in a domain you own at another registrar. The transfer starts once its `amount_due` is paid, or at once when `amount_due` is `null`. While `registration.phase` is `transferring`, its `issues` say what the transfer needs from you.
 
 Pass `verification` to connect a domain you registered elsewhere: its `issues` list the TXT and routing records to publish. Pass `website` with an `app_id` to serve that app on the domain.
 
