@@ -38,6 +38,7 @@ import { DmChannelsClient } from "./api/resources/dmChannels/client/Client.js";
 import { DmMembersClient } from "./api/resources/dmMembers/client/Client.js";
 import { DomainsClient } from "./api/resources/domains/client/Client.js";
 import { EconomicIntelligenceClient } from "./api/resources/economicIntelligence/client/Client.js";
+import { EmailAddressesClient } from "./api/resources/emailAddresses/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { ExperiencesClient } from "./api/resources/experiences/client/Client.js";
 import { ExperimentsClient } from "./api/resources/experiments/client/Client.js";
@@ -144,6 +145,7 @@ export class WhopClient {
     protected _dmMembers: DmMembersClient | undefined;
     protected _domains: DomainsClient | undefined;
     protected _economicIntelligence: EconomicIntelligenceClient | undefined;
+    protected _emailAddresses: EmailAddressesClient | undefined;
     protected _events: EventsClient | undefined;
     protected _experiences: ExperiencesClient | undefined;
     protected _experiments: ExperimentsClient | undefined;
@@ -354,6 +356,10 @@ export class WhopClient {
 
     public get economicIntelligence(): EconomicIntelligenceClient {
         return (this._economicIntelligence ??= new EconomicIntelligenceClient(this._options));
+    }
+
+    public get emailAddresses(): EmailAddressesClient {
+        return (this._emailAddresses ??= new EmailAddressesClient(this._options));
     }
 
     public get events(): EventsClient {
