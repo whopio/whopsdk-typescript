@@ -11,6 +11,7 @@ import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { FeesClient } from "../resources/fees/client/Client.js";
 import { FinancingApplicationsClient } from "../resources/financingApplications/client/Client.js";
+import { FinancingProvidersClient } from "../resources/financingProviders/client/Client.js";
 import { PreferencesClient } from "../resources/preferences/client/Client.js";
 import { ReservesClient } from "../resources/reserves/client/Client.js";
 
@@ -31,6 +32,7 @@ export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
     protected _fees: FeesClient | undefined;
     protected _financingApplications: FinancingApplicationsClient | undefined;
+    protected _financingProviders: FinancingProvidersClient | undefined;
     protected _preferences: PreferencesClient | undefined;
     protected _reserves: ReservesClient | undefined;
 
@@ -44,6 +46,10 @@ export class AccountsClient {
 
     public get financingApplications(): FinancingApplicationsClient {
         return (this._financingApplications ??= new FinancingApplicationsClient(this._options));
+    }
+
+    public get financingProviders(): FinancingProvidersClient {
+        return (this._financingProviders ??= new FinancingProvidersClient(this._options));
     }
 
     public get preferences(): PreferencesClient {

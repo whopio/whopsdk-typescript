@@ -30227,6 +30227,86 @@ await client.accounts.financingApplications.submit({
 </dl>
 </details>
 
+## Accounts FinancingProviders
+<details><summary><code>client.accounts.financingProviders.<a href="/src/api/resources/accounts/resources/financingProviders/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.FinancingProvider, Whop.ListFinancingProvidersResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists every financing provider and where it stands for an account: whether checkout offers it, what the merchant can do to turn it on, and why it is off.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.accounts.financingProviders.list({
+    account_id: "account_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.accounts.financingProviders.list({
+    account_id: "account_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.ListFinancingProvidersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingProvidersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Accounts Preferences
 <details><summary><code>client.accounts.preferences.<a href="/src/api/resources/accounts/resources/preferences/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePreferencesResponse</code></summary>
 <dl>
