@@ -303,6 +303,124 @@ export class PaymentsClient {
     }
 
     /**
+     * Totals up the same payments the list returns, so you can build status tabs and filter options without paging through them. Takes the same filters as List Payments.
+     *
+     * @param {Whop.SummaryPaymentsRequest} request
+     * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.payments.summary({
+     *         currencies: ["usd"],
+     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         product_ids: ["prod_xxxxxxxxxxxxx"]
+     *     })
+     */
+    public summary(
+        request: Whop.SummaryPaymentsRequest = {},
+        requestOptions?: PaymentsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.SummaryPaymentsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__summary(request, requestOptions));
+    }
+
+    private async __summary(
+        request: Whop.SummaryPaymentsRequest = {},
+        requestOptions?: PaymentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.SummaryPaymentsResponse>> {
+        const {
+            groups,
+            account_id: accountId,
+            statuses,
+            substatuses,
+            billing_reasons: billingReasons,
+            currencies,
+            plan_ids: planIds,
+            product_ids: productIds,
+            payment_methods: paymentMethods,
+            tracking_states: trackingStates,
+            created_after: createdAfter,
+            created_before: createdBefore,
+            query,
+        } = request;
+        const _queryParams: Record<string, unknown> = {
+            groups: Array.isArray(groups) ? groups.map((item) => item) : groups != null ? groups : undefined,
+            account_id: accountId,
+            statuses: Array.isArray(statuses) ? statuses.map((item) => item) : statuses != null ? statuses : undefined,
+            substatuses: Array.isArray(substatuses)
+                ? substatuses.map((item) => item)
+                : substatuses != null
+                  ? substatuses
+                  : undefined,
+            billing_reasons: Array.isArray(billingReasons)
+                ? billingReasons.map((item) => item)
+                : billingReasons != null
+                  ? billingReasons
+                  : undefined,
+            currencies,
+            plan_ids: planIds,
+            product_ids: productIds,
+            payment_methods: Array.isArray(paymentMethods)
+                ? paymentMethods.map((item) => item)
+                : paymentMethods != null
+                  ? paymentMethods
+                  : undefined,
+            tracking_states: Array.isArray(trackingStates)
+                ? trackingStates.map((item) => item)
+                : trackingStates != null
+                  ? trackingStates
+                  : undefined,
+            created_after: createdAfter != null ? createdAfter : undefined,
+            created_before: createdBefore != null ? createdBefore : undefined,
+            query,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                "payments/summary",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.SummaryPaymentsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/payments/summary");
+    }
+
+    /**
      * Returns one payment, including every purchased line item with its quantity and subtotal. Related records are ids — resolve a variant, membership, member or shipment on its own endpoint, and list this payment's refunds, disputes or Resolution Center cases with `?payment_id=`.
      *
      * @param {Whop.RetrievePaymentsRequest} request

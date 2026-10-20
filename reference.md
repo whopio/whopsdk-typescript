@@ -21315,6 +21315,73 @@ await client.payments.create({
 </dl>
 </details>
 
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">summary</a>({ ...params }) -> Whop.SummaryPaymentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Totals up the same payments the list returns, so you can build status tabs and filter options without paging through them. Takes the same filters as List Payments.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.summary({
+    currencies: ["usd"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    product_ids: ["prod_xxxxxxxxxxxxx"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.SummaryPaymentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PaymentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Payment</code></summary>
 <dl>
 <dd>
