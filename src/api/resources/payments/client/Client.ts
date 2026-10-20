@@ -46,7 +46,11 @@ export class PaymentsClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.payments.list()
+     *     await client.payments.list({
+     *         currencies: ["eur"],
+     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         product_ids: ["prod_xxxxxxxxxxxxx"]
+     *     })
      */
     public async list(
         request: Whop.ListPaymentsRequest = {},
@@ -68,6 +72,20 @@ export class PaymentsClient {
                     plan_id: planId,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    statuses,
+                    substatuses,
+                    billing_reasons: billingReasons,
+                    currencies,
+                    plan_ids: planIds,
+                    product_ids: productIds,
+                    payment_methods: paymentMethods,
+                    tracking_states: trackingStates,
+                    refunded_after: refundedAfter,
+                    refunded_before: refundedBefore,
+                    dispute_alerted_after: disputeAlertedAfter,
+                    dispute_alerted_before: disputeAlertedBefore,
+                    dispute_created_after: disputeCreatedAfter,
+                    dispute_created_before: disputeCreatedBefore,
                     order,
                     direction,
                     first,
@@ -89,6 +107,40 @@ export class PaymentsClient {
                     plan_id: planId,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
+                    statuses: Array.isArray(statuses)
+                        ? statuses.map((item) => item)
+                        : statuses != null
+                          ? statuses
+                          : undefined,
+                    substatuses: Array.isArray(substatuses)
+                        ? substatuses.map((item) => item)
+                        : substatuses != null
+                          ? substatuses
+                          : undefined,
+                    billing_reasons: Array.isArray(billingReasons)
+                        ? billingReasons.map((item) => item)
+                        : billingReasons != null
+                          ? billingReasons
+                          : undefined,
+                    currencies,
+                    plan_ids: planIds,
+                    product_ids: productIds,
+                    payment_methods: Array.isArray(paymentMethods)
+                        ? paymentMethods.map((item) => item)
+                        : paymentMethods != null
+                          ? paymentMethods
+                          : undefined,
+                    tracking_states: Array.isArray(trackingStates)
+                        ? trackingStates.map((item) => item)
+                        : trackingStates != null
+                          ? trackingStates
+                          : undefined,
+                    refunded_after: refundedAfter != null ? refundedAfter : undefined,
+                    refunded_before: refundedBefore != null ? refundedBefore : undefined,
+                    dispute_alerted_after: disputeAlertedAfter != null ? disputeAlertedAfter : undefined,
+                    dispute_alerted_before: disputeAlertedBefore != null ? disputeAlertedBefore : undefined,
+                    dispute_created_after: disputeCreatedAfter != null ? disputeCreatedAfter : undefined,
+                    dispute_created_before: disputeCreatedBefore != null ? disputeCreatedBefore : undefined,
                     order: order != null ? order : undefined,
                     direction: direction != null ? direction : undefined,
                     first,

@@ -185,7 +185,11 @@ describe("PaymentsClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.payments.list();
+        const page = await client.payments.list({
+            currencies: ["eur"],
+            plan_ids: ["plan_xxxxxxxxxxxxx"],
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
