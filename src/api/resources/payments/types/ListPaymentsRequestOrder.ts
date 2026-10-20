@@ -3,5 +3,6 @@
 export const ListPaymentsRequestOrder = {
     CreatedAt: "created_at",
     PaidAt: "paid_at",
+    Amount: "amount",
 } as const;
 export type ListPaymentsRequestOrder = (typeof ListPaymentsRequestOrder)[keyof typeof ListPaymentsRequestOrder];

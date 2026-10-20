@@ -21194,13 +21194,21 @@ Lists payments, newest first. By default, returns sales for the accounts your cr
 <dd>
 
 ```typescript
-const pageableResponse = await client.payments.list();
+const pageableResponse = await client.payments.list({
+    currencies: ["eur"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    product_ids: ["prod_xxxxxxxxxxxxx"]
+});
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.payments.list();
+let page = await client.payments.list({
+    currencies: ["eur"],
+    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    product_ids: ["prod_xxxxxxxxxxxxx"]
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
