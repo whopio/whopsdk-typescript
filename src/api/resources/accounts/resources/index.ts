@@ -1,8 +1,5 @@
 export * from "./fees/client/requests/index.js";
 export * as fees from "./fees/index.js";
-export * from "./financingApplications/client/requests/index.js";
-export * as financingApplications from "./financingApplications/index.js";
-export * from "./financingApplications/types/index.js";
 export * from "./financingProviders/client/requests/index.js";
 export * as financingProviders from "./financingProviders/index.js";
 export * from "./financingProviders/types/index.js";

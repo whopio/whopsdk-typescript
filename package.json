@@ -561,6 +561,17 @@
             },
             "default": "./dist/cjs/api/resources/financialReports/exports.js"
         },
+        "./financingApplications": {
+            "import": {
+                "types": "./dist/esm/api/resources/financingApplications/exports.d.mts",
+                "default": "./dist/esm/api/resources/financingApplications/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/financingApplications/exports.d.ts",
+                "default": "./dist/cjs/api/resources/financingApplications/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/financingApplications/exports.js"
+        },
         "./forumPosts": {
             "import": {
                 "types": "./dist/esm/api/resources/forumPosts/exports.d.mts",
@@ -1066,17 +1077,6 @@
                 "default": "./dist/cjs/api/resources/accounts/resources/fees/exports.js"
             },
             "default": "./dist/cjs/api/resources/accounts/resources/fees/exports.js"
-        },
-        "./accounts/financingApplications": {
-            "import": {
-                "types": "./dist/esm/api/resources/accounts/resources/financingApplications/exports.d.mts",
-                "default": "./dist/esm/api/resources/accounts/resources/financingApplications/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/accounts/resources/financingApplications/exports.d.ts",
-                "default": "./dist/cjs/api/resources/accounts/resources/financingApplications/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/accounts/resources/financingApplications/exports.js"
         },
         "./accounts/financingProviders": {
             "import": {

@@ -49,6 +49,7 @@ import { FeeMarkupsClient } from "./api/resources/feeMarkups/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
 import { FinancialActivityClient } from "./api/resources/financialActivity/client/Client.js";
 import { FinancialReportsClient } from "./api/resources/financialReports/client/Client.js";
+import { FinancingApplicationsClient } from "./api/resources/financingApplications/client/Client.js";
 import { ForumPostsClient } from "./api/resources/forumPosts/client/Client.js";
 import { ForumsClient } from "./api/resources/forums/client/Client.js";
 import { IdentityProfilesClient } from "./api/resources/identityProfiles/client/Client.js";
@@ -156,6 +157,7 @@ export class WhopClient {
     protected _files: FilesClient | undefined;
     protected _financialActivity: FinancialActivityClient | undefined;
     protected _financialReports: FinancialReportsClient | undefined;
+    protected _financingApplications: FinancingApplicationsClient | undefined;
     protected _forumPosts: ForumPostsClient | undefined;
     protected _forums: ForumsClient | undefined;
     protected _identityProfiles: IdentityProfilesClient | undefined;
@@ -400,6 +402,10 @@ export class WhopClient {
 
     public get financialReports(): FinancialReportsClient {
         return (this._financialReports ??= new FinancialReportsClient(this._options));
+    }
+
+    public get financingApplications(): FinancingApplicationsClient {
+        return (this._financingApplications ??= new FinancingApplicationsClient(this._options));
     }
 
     public get forumPosts(): ForumPostsClient {

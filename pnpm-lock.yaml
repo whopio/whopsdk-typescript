@@ -462,8 +462,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  electron-to-chromium@1.5.460:
-    resolution: {integrity: sha512-rRaVC7bNUyGsL+GMtmZfv3AfgG6za7gE9v5bT0PIbjEerddA0IQ+tCK05NFAXqCpNlrxBZqbFqquyxHRQONHTA==}
+  electron-to-chromium@1.5.461:
+    resolution: {integrity: sha512-3WZFARz1By+/rYcqQ0OLj4UcEdhd6tz2LEcDtKBUq7ey77EeJ1OtetY/5hjSUxw7dC5r5mA7FfkhRbqO9vnTCg==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -835,11 +835,11 @@ packages:
     resolution: {integrity: sha512-LgO3D9yZJjApUiuUfl9iFAwrtaX4+lok3wJIqttGoKCHlWUqHqbQpnxCf82L8FjgKsh4iGo78hqJwgL8F6To2A==}
     engines: {node: '>=14.0.0'}
 
-  tldts-core@7.4.18:
-    resolution: {integrity: sha512-KI2PKvCmvQI/xD6ypPqkU0i7oxNXR/O58RLRaHR4svsgVUQ2JE/XC8BtMbG6PSehD27I8sZJRcC1ASnCy6lp3g==}
+  tldts-core@7.4.19:
+    resolution: {integrity: sha512-goNXV6Ho9TIOfpJZanTd6CKG5DyYgYAL+k+22T0SLh8l6+KHIfBUPFuePuSZv05UttIaaLmI9tb7TmGIdK5AkQ==}
 
-  tldts@7.4.18:
-    resolution: {integrity: sha512-somxA8xKAUzlAxl0TX/jMSYIbRNFIVGnI96pVGJPeMc5BsHmfVXn6mOJT6U++ELnl04eGfzpfcEuZe8WiASkXg==}
+  tldts@7.4.19:
+    resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
     hasBin: true
 
   tough-cookie@6.0.2:
@@ -1342,7 +1342,7 @@ snapshots:
     dependencies:
       baseline-browser-mapping: 2.11.30
       caniuse-lite: 1.0.30001817
-      electron-to-chromium: 1.5.460
+      electron-to-chromium: 1.5.461
       node-releases: 2.0.59
       update-browserslist-db: 1.3.4(browserslist@4.29.4)
 
@@ -1381,7 +1381,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  electron-to-chromium@1.5.460: {}
+  electron-to-chromium@1.5.461: {}
 
   emoji-regex@8.0.0: {}
 
@@ -1654,15 +1654,15 @@ snapshots:
 
   tinyrainbow@3.2.0: {}
 
-  tldts-core@7.4.18: {}
+  tldts-core@7.4.19: {}
 
-  tldts@7.4.18:
+  tldts@7.4.19:
     dependencies:
-      tldts-core: 7.4.18
+      tldts-core: 7.4.19
 
   tough-cookie@6.0.2:
     dependencies:
-      tldts: 7.4.18
+      tldts: 7.4.19
 
   ts-loader@9.6.2(typescript@5.9.3)(webpack@5.112.0):
     dependencies:
