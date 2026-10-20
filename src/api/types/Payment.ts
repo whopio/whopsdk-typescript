@@ -7,12 +7,16 @@ export interface Payment {
     account_id: string | null;
     /** What the account keeps: the total less Whop's fees. */
     amount_after_fees: Whop.Money;
+    /** When Whop will capture this authorized card payment automatically unless it is voided first, as an ISO 8601 timestamp. Null when no automatic capture was requested. */
+    auto_capture_at: string | null;
     /** True when Whop refunded the payment automatically, for example on a dispute alert. */
     auto_refunded: boolean;
     /** The billing address the buyer entered, or null. */
     billing_address: Whop.PaymentAddress | null;
     /** Why the charge was created: a first purchase, a renewal, a one-time payment, or a manual charge. */
     billing_reason: Whop.BillingReasons | null;
+    /** When the hold on this authorized card payment expires if it is not captured first, as an ISO 8601 timestamp. Null when the payment was not created for later capture. */
+    capture_expires_at: string | null;
     /** The checkout configuration the buyer paid through, prefixed `ch_`, or null. */
     checkout_configuration_id: string | null;
     /** The credential a buyer's surface presents to poll this payment, set its return URL and resume it when the bank asked the customer to authenticate. Only on payments created from a confirmation token or waiting on that authentication, and always null in list responses — retrieve the payment for it. */
@@ -29,6 +33,8 @@ export interface Payment {
     decline_code: Whop.PaymentDeclineCodes | null;
     /** When an issuer warned that this payment will be disputed, or null. */
     dispute_alerted_at: string | null;
+    /** When the most recent dispute on this payment was opened, as an ISO 8601 timestamp. Null when the payment was never disputed, or without the payment:dispute:read permission. */
+    dispute_created_at: string | null;
     /** Why the most recent attempt failed, in plain words, or null. */
     failure_message: string | null;
     /** For installment methods, how many payments the charge splits into. */
@@ -64,6 +70,10 @@ export interface Payment {
     payments_failed: number;
     /** The variant that was charged, prefixed `plan_`. */
     plan_id: string | null;
+    /** How much has been refunded so far, in the currency presented to the buyer. Zero when nothing has been refunded. */
+    presentment_refunded_amount: Whop.Money | null;
+    /** The sales tax or VAT collected, in the currency presented to the buyer. Null when no tax applied. */
+    presentment_tax_amount: Whop.Money | null;
     /** The account-facing total in the currency presented to the buyer, before conversion into the settlement currency. Excludes buyer fees. */
     presentment_total: Whop.Money | null;
     /** The product the variant belongs to, prefixed `prod_`. Null for a variant with no product. */
@@ -80,6 +90,8 @@ export interface Payment {
     refunded_amount: Whop.Money | null;
     /** When the payment was refunded, or null. */
     refunded_at: string | null;
+    /** When the earliest response is due on a dispute or Resolution Center case awaiting the account's response, as an ISO 8601 timestamp. Null when nothing awaits a response, or without the permission to read that dispute or case. */
+    response_due_at: string | null;
     /** True when the payment is `open` and Whop can attempt the charge again — see `POST /payments/{id}/retry`. */
     retryable: boolean;
     /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available. */

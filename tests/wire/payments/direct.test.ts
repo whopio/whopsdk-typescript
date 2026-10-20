@@ -26,6 +26,7 @@ describe("DirectClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_after_fees: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_capture_at: "auto_capture_at",
             auto_refunded: false,
             billing_address: {
                 city: "Austin",
@@ -37,6 +38,7 @@ describe("DirectClient", () => {
                 state: "TX",
             },
             billing_reason: "subscription_create",
+            capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -46,6 +48,7 @@ describe("DirectClient", () => {
             customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
             dispute_alerted_at: "dispute_alerted_at",
+            dispute_created_at: "dispute_created_at",
             failure_message: "failure_message",
             financing_installments_count: 1.1,
             holds: [
@@ -125,6 +128,8 @@ describe("DirectClient", () => {
             payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
             payments_failed: 0,
             plan_id: "plan_xxxxxxxxxxxxxx",
+            presentment_refunded_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            presentment_tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
@@ -133,6 +138,7 @@ describe("DirectClient", () => {
             refundable: false,
             refunded_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
+            response_due_at: "response_due_at",
             retryable: true,
             risk_score: 1.1,
             risk_signals: { key: "value" },
