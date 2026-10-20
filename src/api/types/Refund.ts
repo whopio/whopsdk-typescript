@@ -9,7 +9,7 @@ export interface Refund {
     amount: Whop.Money | null;
     /** When the refund was requested, as an ISO 8601 timestamp. */
     created_at: string;
-    /** The provider's own explanation of the failure, or null. */
+    /** A merchant-facing explanation of why the refund failed, in the request's language. Null unless the refund failed or was canceled. */
     failure_message: string | null;
     /** Why the refund failed, normalized across providers. Null unless the refund failed or was canceled. */
     failure_reason: Refund.FailureReason | null;
