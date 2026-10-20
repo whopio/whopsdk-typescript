@@ -23,7 +23,7 @@ export interface CreatePayoutsResponse {
     fee_amount: string;
     /** Who bore the payout fee: the account itself, or its parent platform. */
     fee_paid_by: CreatePayoutsResponse.FeePaidBy;
-    /** Payout ID, prefixed `wdrl_` — the id POST returns is the id GET /payouts lists. Conversion requests created before this version keep answering under their `cofr_` id. */
+    /** Payout ID, prefixed `wdrl_` — the id POST returns is the id GET /payouts lists. Conversion requests created before this version keep answering under their `cofr_` id. A payout paid from a card with `payment_method_id` answers under its card payment's `pay_` id until it is submitted. */
     id: string;
     /** Whop's markup on the provider fee, in the payout currency, as a decimal string. `"0.0"` when none applies. */
     markup_fee: string;
