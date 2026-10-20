@@ -242,6 +242,7 @@ export * from "./DomainWebsiteApp.js";
 export * from "./EconomicIntelligence.js";
 export * from "./EconomicIntelligenceInput.js";
 export * from "./EconomicIntelligenceOperation.js";
+export * from "./EmailAddress.js";
 export * from "./EmbedTypes.js";
 export * from "./Entry.js";
 export * from "./EntryStatus.js";
