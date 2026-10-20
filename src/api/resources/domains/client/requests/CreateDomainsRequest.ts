@@ -19,7 +19,7 @@ export interface CreateDomainsRequest {
     metadata?: Record<string, string>;
     /** Track page views on the domain with the Whop pixel. It needs no other capability: it stays `pending` until the pixel records a page view, and turns `action_required` if it goes 7 days without one. Pass `null` to stop tracking. */
     pixel?: CreateDomainsRequest.Pixel | null;
-    /** Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase. */
+    /** Buy the domain through Whop, or transfer in a domain you own elsewhere with `auth_code`, then renew it every year and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase, or to cancel a transfer while its current registrar can still stop it. */
     registration?: CreateDomainsRequest.Registration | null;
     /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
     verification?: CreateDomainsRequest.Verification | null;
@@ -44,9 +44,11 @@ export namespace CreateDomainsRequest {
     export type Pixel = {};
 
     /**
-     * Buy the domain through Whop, renew it every year, and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase.
+     * Buy the domain through Whop, or transfer in a domain you own elsewhere with `auth_code`, then renew it every year and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase, or to cancel a transfer while its current registrar can still stop it.
      */
     export interface Registration {
+        /** Transfer the domain to Whop instead of buying it. This is the transfer authorization code (also called an EPP code) from the domain's current registrar, which you usually find in its domain settings after unlocking the domain. For a domain at name.com, unlock it and copy the code in that name.com account. Whop becomes the domain's registrant, and the domain moves to Whop DNS once the transfer completes, so its current DNS records, including email, stop working. After the transfer, the registry may lock the domain against another transfer for 60 days. While it's `transferring`, pass the same or a new code again to resubmit. Whop never returns the code. */
+        auth_code?: string | undefined;
         /** Whether Whop charges the saved card to renew the domain before it expires. */
         auto_renew?: boolean | undefined;
         /** Saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */

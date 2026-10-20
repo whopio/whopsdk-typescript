@@ -13,6 +13,6 @@ export interface DomainAvailability {
     renewal_price: Whop.Money | null;
     /** How desirable the domain is, from 0 to 100. Short, real-word names on well-known extensions score highest. */
     score: number;
-    /** What moving the domain to Whop costs if you own it elsewhere, including a year of registration. `null` when it's available or can't be transferred. */
+    /** What moving the domain to Whop costs if it's registered elsewhere. `null` when it's available or can't be transferred. */
     transfer_price: Whop.Money | null;
 }
