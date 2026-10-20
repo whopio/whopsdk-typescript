@@ -262,7 +262,7 @@ export class ExternalAccountsClient {
      * @example
      *     await client.externalAccounts.connect({
      *         platform: "meta_business",
-     *         redirect_url: "https://example.com/settings/social-accounts"
+     *         redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings"
      *     })
      */
     public connect(
