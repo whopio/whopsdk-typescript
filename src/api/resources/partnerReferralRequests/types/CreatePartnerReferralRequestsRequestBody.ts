@@ -4,21 +4,26 @@ export type CreatePartnerReferralRequestsRequestBody =
     | {
           account_id: string;
           authorized_user_id?: string | undefined;
+          member_id?: string | undefined;
       }
     | {
           account_url: string;
           authorized_user_id?: string | undefined;
+          member_id?: string | undefined;
       }
     | {
           authorized_user_id?: string | undefined;
+          member_id?: string | undefined;
           target_user_id: string;
       }
     | {
           authorized_user_id?: string | undefined;
+          member_id?: string | undefined;
           target_username: string;
       }
     | {
           authorized_user_id?: string | undefined;
+          member_id?: string | undefined;
           target_email: string;
       }
     /**
@@ -27,6 +32,7 @@ export type CreatePartnerReferralRequestsRequestBody =
           authorized_user_id?: string | undefined;
           code?: string | undefined;
           max_redemptions?: (number | null) | undefined;
+          member_id?: string | undefined;
           partner_id?: string | undefined;
           request_type: "link";
       };
