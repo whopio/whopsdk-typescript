@@ -23,7 +23,7 @@ export interface CancelPayoutsResponse {
     fee_amount: string;
     /** Who bore the payout fee: the account itself, or its parent platform. */
     fee_paid_by: CancelPayoutsResponse.FeePaidBy;
-    /** Payout ID, prefixed `wdrl_` for a payout returned by `GET /payouts` or `cofr_` for a payout request returned by `POST /payouts`. */
+    /** Payout ID, prefixed `wdrl_` for a payout returned by `GET /payouts`, `cofr_` for a payout request returned by `POST /payouts`, or `pay_` for a payout funded by a card payment that has not been submitted yet. */
     id: string;
     /** Whop's markup on the provider fee, in the payout currency, as a decimal string. `"0.0"` when none applies. */
     markup_fee: string;

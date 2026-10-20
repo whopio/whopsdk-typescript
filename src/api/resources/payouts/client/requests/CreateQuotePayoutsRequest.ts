@@ -10,7 +10,7 @@
 export interface CreateQuotePayoutsRequest {
     /** Account to pay out from, prefixed `biz_`. Provide exactly one of `account_id` or `user_id`. */
     account_id?: string;
-    /** The amount to pay out in the specified currency. With `payment_method_id`, the amount to charge the card. */
+    /** The amount to pay out in the specified currency. */
     amount: number;
     /** The currency to pay out. When omitted, uses `usd` if that balance can cover a withdrawal, otherwise the account's only other funded currency. */
     currency?: string;

@@ -20,6 +20,8 @@ export interface CreatePayoutsRequest {
     metadata?: Record<string, string>;
     /** Free-form notes to attach to the payout, with a maximum of 255 characters. Omit or pass `null` for no notes. */
     notes?: string | null;
+    /** A saved card of the account, prefixed `payt_`, to charge for this payout instead of paying from the balance. Requires a `quote_token` from `POST /payouts/quotes` made with the same card and `amount`. Only for business accounts paying a saved recipient in `usd` at `standard` speed. The payout is returned under the card payment's `pay_` id until it is submitted, then `GET /payouts/{id}` returns the submitted payout. */
+    payment_method_id?: string;
     /** The saved payout method to deliver to (a potk_ identifier). */
     payout_method_id: string;
     /** Whether the parent platform covers the payout fee instead of the account being paid out. Omit to use the platform's configured fee coverage policy; pass `false` to opt out of it. `true` is only accepted for accounts that belong to a platform, and requires the platform's policy to cover this payout method's category or a caller authorized to manage the platform's child account fees. */

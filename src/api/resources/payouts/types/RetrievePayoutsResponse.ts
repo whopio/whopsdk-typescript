@@ -27,7 +27,7 @@ export interface RetrievePayoutsResponse {
     fee_amount?: string | undefined;
     /** Who bore the payout fee: the account itself, or its parent platform. Only returned to callers with payout:withdrawal:read on the owning ledger. */
     fee_paid_by?: RetrievePayoutsResponse.FeePaidBy | undefined;
-    /** Payout ID, prefixed `wdrl_` for a payout returned by `GET /payouts` or `cofr_` for a payout request returned by `POST /payouts`. */
+    /** Payout ID, prefixed `wdrl_` for a payout returned by `GET /payouts`, `cofr_` for a payout request returned by `POST /payouts`, or `pay_` for a payout funded by a card payment that has not been submitted yet. */
     id: string;
     /** Whop's markup on the provider fee, in the payout currency, as a decimal string. `"0.0"` when none applies. Only returned to callers with payout:withdrawal:read on the owning ledger. */
     markup_fee?: string | undefined;
