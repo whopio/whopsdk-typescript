@@ -551,6 +551,63 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("summary", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            groups: {
+                currency: { usd: 1 },
+                substatus: {
+                    auto_refunded: 0,
+                    blocked: 0,
+                    canceled: 0,
+                    dispute_closed: 0,
+                    dispute_lost: 0,
+                    dispute_needs_response: 0,
+                    dispute_under_review: 0,
+                    dispute_warning: 0,
+                    dispute_warning_closed: 0,
+                    dispute_warning_needs_response: 0,
+                    dispute_warning_under_review: 0,
+                    dispute_won: 0,
+                    drafted: 0,
+                    failed: 0,
+                    incomplete: 1,
+                    partially_refunded: 0,
+                    past_due: 0,
+                    pending: 0,
+                    price_too_low: 0,
+                    refunded: 0,
+                    requires_capture: 0,
+                    resolution_lost: 0,
+                    resolution_needs_response: 0,
+                    resolution_under_review: 0,
+                    resolution_won: 0,
+                    succeeded: 0,
+                    uncollectible: 0,
+                    unresolved: 0,
+                },
+            },
+            total: 1,
+        };
+
+        server.mockEndpoint().get("/payments/summary").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.payments.summary({
+            currencies: ["usd"],
+            plan_ids: ["plan_xxxxxxxxxxxxx"],
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
