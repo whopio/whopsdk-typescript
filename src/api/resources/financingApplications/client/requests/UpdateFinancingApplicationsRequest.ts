@@ -3,7 +3,6 @@
 /**
  * @example
  *     {
- *         account_id: "account_id",
  *         id: "id",
  *         answers: [{
  *                 requirement_id: "inrqi_xxxxxxxxxxxxxx"
@@ -11,8 +10,6 @@
  *     }
  */
 export interface UpdateFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed `biz_`. */
-    account_id: string;
     /** Financing application ID, prefixed `inrq_`. */
     id: string;
     answers: UpdateFinancingApplicationsRequest.Answers.Item[];

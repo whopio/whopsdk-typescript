@@ -3,13 +3,10 @@
 /**
  * @example
  *     {
- *         account_id: "account_id",
  *         id: "id"
  *     }
  */
 export interface RetrieveFinancingApplicationsRequest {
-    /** Merchant account ID, prefixed `biz_`. */
-    account_id: string;
     /** Financing application ID, prefixed `inrq_`. */
     id: string;
 }

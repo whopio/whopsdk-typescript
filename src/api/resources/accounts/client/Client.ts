@@ -10,7 +10,6 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { FeesClient } from "../resources/fees/client/Client.js";
-import { FinancingApplicationsClient } from "../resources/financingApplications/client/Client.js";
 import { FinancingProvidersClient } from "../resources/financingProviders/client/Client.js";
 import { PreferencesClient } from "../resources/preferences/client/Client.js";
 import { ReservesClient } from "../resources/reserves/client/Client.js";
@@ -25,13 +24,10 @@ export declare namespace AccountsClient {
  * An Account represents a person or business on Whop that can have its own profile, wallet, and account-scoped settings. Use accounts for customers, creators, merchants, sellers, or connected businesses your integration supports.
  *
  * Use the Accounts API to create accounts, list accounts visible to your credentials, retrieve or update an account, suspend or delete a connected account managed by your platform, and retrieve the account associated with the current API key.
- *
- * To accept payment-financing methods, an account applies through a financing application: a request to review the account for payment financing, not a loan or business capital. Create an application, save answers to its requirements, then submit it for review. You can manage applications for your own account and its direct connected accounts.
  */
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
     protected _fees: FeesClient | undefined;
-    protected _financingApplications: FinancingApplicationsClient | undefined;
     protected _financingProviders: FinancingProvidersClient | undefined;
     protected _preferences: PreferencesClient | undefined;
     protected _reserves: ReservesClient | undefined;
@@ -42,10 +38,6 @@ export class AccountsClient {
 
     public get fees(): FeesClient {
         return (this._fees ??= new FeesClient(this._options));
-    }
-
-    public get financingApplications(): FinancingApplicationsClient {
-        return (this._financingApplications ??= new FinancingApplicationsClient(this._options));
     }
 
     public get financingProviders(): FinancingProvidersClient {
