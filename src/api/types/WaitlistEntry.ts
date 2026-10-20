@@ -26,7 +26,7 @@ export interface WaitlistEntry {
     status: WaitlistEntry.Status;
     /** When this signup last changed, as an ISO 8601 timestamp. */
     updated_at: string;
-    /** The user who submitted this signup, prefixed `user_`. */
+    /** The user who submitted this signup, prefixed `user_`. For a signup an account's own credential submitted, the account's owner. */
     user_id: string;
 }
 

@@ -21,6 +21,8 @@ export interface ListWaitlistEntriesRequest {
     account_id?: string;
     /** Only return signups for variants on this product, prefixed `prod_`. */
     product_id?: string;
+    /** List the signups submitted on behalf of this account, prefixed `biz_`, instead of your own and seller signups. Requires `waitlist_entry:read` on the account. The other filters still apply. */
+    buyer_account_id?: string;
     /** Only return signups in this state. Canceled signups are returned only when `status` is `canceled`. */
     status?: Whop.ListWaitlistEntriesRequestStatus;
     /** Only return signups submitted at or before this ISO 8601 timestamp. */
