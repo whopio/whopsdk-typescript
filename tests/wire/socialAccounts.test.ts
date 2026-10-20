@@ -152,7 +152,7 @@ describe("SocialAccountsClient", () => {
         });
         const rawRequestBody = {
             platform: "meta_business",
-            redirect_url: "https://example.com/settings/social-accounts",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         };
         const rawResponseBody = { authorize_url: "https://www.facebook.com/v25.0/dialog/oauth" };
 
@@ -167,7 +167,7 @@ describe("SocialAccountsClient", () => {
 
         const response = await client.socialAccounts.connect({
             platform: "meta_business",
-            redirect_url: "https://example.com/settings/social-accounts",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         });
         expect(response).toEqual(rawResponseBody);
     });

@@ -246,7 +246,7 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = {
             platform: "meta_business",
-            redirect_url: "https://example.com/settings/social-accounts",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         };
         const rawResponseBody = { authorize_url: "https://www.facebook.com/v25.0/dialog/oauth" };
 
@@ -261,7 +261,7 @@ describe("ExternalAccountsClient", () => {
 
         const response = await client.externalAccounts.connect({
             platform: "meta_business",
-            redirect_url: "https://example.com/settings/social-accounts",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         });
         expect(response).toEqual(rawResponseBody);
     });
