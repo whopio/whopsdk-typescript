@@ -80,7 +80,7 @@ describe("AdGroupsClient", () => {
                             category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
-                                "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                                "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
                             title: "Ad issue",
@@ -254,7 +254,7 @@ describe("AdGroupsClient", () => {
                     category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
-                        "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
                     title: "Ad issue",
@@ -731,7 +731,7 @@ describe("AdGroupsClient", () => {
                     category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
-                        "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
                     title: "Ad issue",
@@ -948,7 +948,7 @@ describe("AdGroupsClient", () => {
                     category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
-                        "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
                     title: "Ad issue",
@@ -1140,7 +1140,7 @@ describe("AdGroupsClient", () => {
                             category: "information",
                             id: "adiss_xxxxxxxxxxxxxx",
                             message:
-                                "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                                "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                             resource_id: "ad_xxxxxxxxxxxxxx",
                             resource_type: "ad_campaign",
                             title: "Ad issue",
@@ -1388,7 +1388,7 @@ describe("AdGroupsClient", () => {
                     category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
-                        "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
                     title: "Ad issue",
@@ -1576,7 +1576,7 @@ describe("AdGroupsClient", () => {
                     category: "information",
                     id: "adiss_xxxxxxxxxxxxxx",
                     message:
-                        "Your ad was rejected for unacceptable business practices. Edit the ad's content and resubmit.",
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
                     resource_id: "ad_xxxxxxxxxxxxxx",
                     resource_type: "ad_campaign",
                     title: "Ad issue",
