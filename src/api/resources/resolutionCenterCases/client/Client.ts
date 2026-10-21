@@ -511,7 +511,7 @@ export class ResolutionCenterCasesClient {
     }
 
     /**
-     * Appeals a decision, as the customer, on a case that closed in the merchant's favor. Escalates the case to Whop for platform review. A case can be appealed once.
+     * Appeals a decision, as the customer, on a case that closed in the merchant's favor. Escalates the case to Whop for platform review. A case can be appealed once, within 7 days of the decision.
      *
      * @param {Whop.AppealResolutionCenterCasesRequest} request
      * @param {ResolutionCenterCasesClient.RequestOptions} requestOptions - Request-specific configuration.
