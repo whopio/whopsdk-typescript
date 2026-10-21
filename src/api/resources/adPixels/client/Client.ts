@@ -19,7 +19,7 @@ export declare namespace AdPixelsClient {
 /**
  * An Ad Pixel connects a pixel you own on an ad platform to a business whose campaigns you claimed through the advertiser supplier program. Whop sends that pixel the conversions credited to your claimed campaigns for that business, using the access token you provide.
  *
- * Use the Ad Pixels API to add one pixel per business, list or retrieve your pixels, replace an access token the ad platform rejected, and remove a pixel to stop deliveries.
+ * Use the Ad Pixels API to add one pixel per business on each ad platform, list or retrieve your pixels, replace an access token the ad platform rejected, and remove a pixel to stop deliveries.
  */
 export class AdPixelsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AdPixelsClient.Options>;
@@ -126,7 +126,7 @@ export class AdPixelsClient {
     }
 
     /**
-     * Add your pixel for a business whose campaigns you claimed. Whop checks the access token with the ad platform, then sends the pixel the conversions credited to your claimed campaigns for that business. Each business takes one pixel, and each pixel can serve one business.
+     * Add your pixel for a business whose campaigns you claimed. Whop checks the access token with the ad platform, then sends the pixel the conversions credited to your claimed campaigns for that business. Each business takes one pixel per ad platform, and each pixel can serve one business.
      *
      * @param {Whop.CreateAdPixelsRequest} request
      * @param {AdPixelsClient.RequestOptions} requestOptions - Request-specific configuration.

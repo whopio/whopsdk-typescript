@@ -10,6 +10,6 @@
 export interface UpdateAdPixelsRequest {
     /** Ad pixel ID, prefixed `adpx_`. */
     id: string;
-    /** An access token that can send events to the pixel on the ad platform. Whop never returns it. */
+    /** An access token that can send events to the pixel on the ad platform: a Meta Conversions API access token or a TikTok Events API access token. Whop never returns it. */
     access_token: string;
 }

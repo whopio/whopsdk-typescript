@@ -7,7 +7,7 @@ export interface AdPixel {
     created_at: string;
     /** Why the ad platform rejected the last delivery. Null unless `status` is `errored`. */
     error_message: string | null;
-    /** The pixel's ID on the ad platform. */
+    /** The pixel's ID on the ad platform: the Meta pixel or dataset ID, or the TikTok pixel code. */
     external_id: string;
     /** Ad pixel ID, prefixed `adpx_`. */
     id: string;
@@ -25,6 +25,7 @@ export namespace AdPixel {
     /** The ad platform the pixel belongs to. */
     export const Platform = {
         Meta: "meta",
+        Tiktok: "tiktok",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
     /** `active` receives conversions. `errored` stopped because the ad platform rejected the access token; update the token to resume. `disabled` was turned off by Whop. */
