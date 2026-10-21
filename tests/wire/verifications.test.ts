@@ -56,6 +56,8 @@ describe("VerificationsClient", () => {
                     registration_number: "7654321",
                     requested_information: [
                         {
+                            alternative_document_label:
+                                "IRS EIN letter (CP 575 or 147C) that shows your business's legal name and your EIN on the same letter",
                             errors: [
                                 { code: "document_not_readable", reason: "The uploaded image was too blurry to read." },
                             ],
@@ -217,6 +219,8 @@ describe("VerificationsClient", () => {
             requested_information: [
                 {
                     action_url: "action_url",
+                    alternative_document_label:
+                        "IRS EIN letter (CP 575 or 147C) that shows your business's legal name and your EIN on the same letter",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
@@ -490,6 +494,8 @@ describe("VerificationsClient", () => {
             requested_information: [
                 {
                     action_url: "action_url",
+                    alternative_document_label:
+                        "IRS EIN letter (CP 575 or 147C) that shows your business's legal name and your EIN on the same letter",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
@@ -646,6 +652,8 @@ describe("VerificationsClient", () => {
             requested_information: [
                 {
                     action_url: "action_url",
+                    alternative_document_label:
+                        "IRS EIN letter (CP 575 or 147C) that shows your business's legal name and your EIN on the same letter",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
