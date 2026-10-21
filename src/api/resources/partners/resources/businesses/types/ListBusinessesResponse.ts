@@ -22,6 +22,8 @@ export namespace ListBusinessesResponse {
             commission_advance_projections_allowed?: boolean | undefined;
             /** When the partner business was created. */
             created_at: string;
+            /** How the partner closed this business, in their own words. Null until the partner saves one. */
+            deal_closed_reason: string | null;
             earnings_usd: Item.EarningsUsd;
             /** The partner who referred the business owner onto Whop (first tier). Null if there is no active first-tier partner. */
             first_tier_partner: Item.FirstTierPartner | null;

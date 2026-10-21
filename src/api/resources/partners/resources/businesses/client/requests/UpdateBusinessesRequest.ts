@@ -11,6 +11,8 @@ export interface UpdateBusinessesRequest {
     id: string;
     /** Annual projected card and BNPL processing combined, in USD. */
     annual_processing_usd?: string;
+    /** How the partner closed this business. Send it on its own to save it; the response is then the business ID and the saved reason. */
+    deal_closed_reason?: string | null;
     /** Remove unaccepted projections and invalidate the offer. The original CPA term is retained if projections are later added again. */
     withdraw_projections?: boolean;
 }
