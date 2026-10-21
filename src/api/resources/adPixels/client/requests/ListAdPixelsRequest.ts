@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListAdPixelsRequest {
-    /** Only return the pixel for this business, prefixed `biz_`. */
+    /** Only return the pixels for this business, prefixed `biz_`. */
     account_id?: string;
     /** Number of results to return from the start of the range. */
     first?: number;

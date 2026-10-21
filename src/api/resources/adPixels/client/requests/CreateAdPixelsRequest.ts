@@ -10,11 +10,11 @@
  *     }
  */
 export interface CreateAdPixelsRequest {
-    /** An access token that can send events to the pixel on the ad platform. Whop never returns it. */
+    /** An access token that can send events to the pixel on the ad platform: a Meta Conversions API access token or a TikTok Events API access token. Whop never returns it. */
     access_token: string;
     /** The business whose claimed campaigns send conversions to this pixel, prefixed `biz_`. You must have claimed at least one of its campaigns. */
     account_id: string;
-    /** The pixel's ID on the ad platform. */
+    /** The pixel's ID on the ad platform: the Meta pixel or dataset ID, or the TikTok pixel code. */
     external_id: string;
     /** The ad platform the pixel belongs to. */
     platform: CreateAdPixelsRequest.Platform;
@@ -24,6 +24,7 @@ export namespace CreateAdPixelsRequest {
     /** The ad platform the pixel belongs to. */
     export const Platform = {
         Meta: "meta",
+        Tiktok: "tiktok",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }
