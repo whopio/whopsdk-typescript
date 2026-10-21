@@ -62,6 +62,7 @@ export class DisputesClient {
                     created_before: createdBefore,
                     created_after: createdAfter,
                     query,
+                    include_connected_accounts: includeConnectedAccounts,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -76,6 +77,7 @@ export class DisputesClient {
                     created_before: createdBefore,
                     created_after: createdAfter,
                     query,
+                    include_connected_accounts: includeConnectedAccounts,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -179,6 +181,7 @@ export class DisputesClient {
             created_before: createdBefore,
             created_after: createdAfter,
             query,
+            include_connected_accounts: includeConnectedAccounts,
         } = request;
         const _queryParams: Record<string, unknown> = {
             groups: Array.isArray(groups) ? groups.map((item) => item) : groups != null ? groups : undefined,
@@ -188,6 +191,7 @@ export class DisputesClient {
             created_before: createdBefore,
             created_after: createdAfter,
             query,
+            include_connected_accounts: includeConnectedAccounts,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
