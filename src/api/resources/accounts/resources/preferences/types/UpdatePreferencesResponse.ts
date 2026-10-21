@@ -39,7 +39,7 @@ export interface UpdatePreferencesResponse {
     feedback_options: UpdatePreferencesResponse.FeedbackOptions.Item[];
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: UpdatePreferencesResponse.PreferredSettlementCurrency | null;
-    /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once every 7 days. `null` when it may change now. */
+    /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once a day. `null` when it may change now. */
     preferred_settlement_currency_changeable_at: string | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: UpdatePreferencesResponse.SubscriptionFailureBehavior;
