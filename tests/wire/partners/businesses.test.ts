@@ -67,6 +67,7 @@ describe("BusinessesClient", () => {
                     },
                     commission_advance_projections_allowed: false,
                     created_at: "2026-01-01T12:00:00Z",
+                    deal_closed_reason: "deal_closed_reason",
                     earnings_usd: { completed: "3.00", pending: "1.00", total: "4.00" },
                     first_tier_partner: {
                         id: "user_xxxxxxxxxxxxxx",
@@ -300,6 +301,7 @@ describe("BusinessesClient", () => {
             commission_advance_projections_allowed: false,
             commission_advance_rate: "commission_advance_rate",
             created_at: "2026-01-01T12:00:00Z",
+            deal_closed_reason: "deal_closed_reason",
             earnings_usd: { completed: "0.00", pending: "0.00", total: "0.00" },
             first_tier_partner: {
                 id: "user_xxxxxxxxxxxxxx",
@@ -617,6 +619,7 @@ describe("BusinessesClient", () => {
             },
             commission_advance_projections_allowed: false,
             created_at: "2026-01-01T12:00:00Z",
+            deal_closed_reason: "deal_closed_reason",
             earnings_usd: { completed: "3.00", pending: "1.00", total: "4.00" },
             first_tier_partner: {
                 id: "user_xxxxxxxxxxxxxx",
