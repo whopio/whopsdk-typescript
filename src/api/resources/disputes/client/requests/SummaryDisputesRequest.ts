@@ -19,4 +19,6 @@ export interface SummaryDisputesRequest {
     created_before?: string;
     /** Only disputes opened after this ISO 8601 timestamp. */
     created_after?: string;
+    /** Search disputes by dispute ID, payment ID, user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
+    query?: string;
 }
