@@ -56,6 +56,7 @@ import { IdentityProfilesClient } from "./api/resources/identityProfiles/client/
 import { InvoicesClient } from "./api/resources/invoices/client/Client.js";
 import { LeadsClient } from "./api/resources/leads/client/Client.js";
 import { LedgerAccountsClient } from "./api/resources/ledgerAccounts/client/Client.js";
+import { LivestreamsClient } from "./api/resources/livestreams/client/Client.js";
 import { MediaClient } from "./api/resources/media/client/Client.js";
 import { MembersClient } from "./api/resources/members/client/Client.js";
 import { MembershipsClient } from "./api/resources/memberships/client/Client.js";
@@ -164,6 +165,7 @@ export class WhopClient {
     protected _invoices: InvoicesClient | undefined;
     protected _leads: LeadsClient | undefined;
     protected _ledgerAccounts: LedgerAccountsClient | undefined;
+    protected _livestreams: LivestreamsClient | undefined;
     protected _media: MediaClient | undefined;
     protected _members: MembersClient | undefined;
     protected _memberships: MembershipsClient | undefined;
@@ -430,6 +432,10 @@ export class WhopClient {
 
     public get ledgerAccounts(): LedgerAccountsClient {
         return (this._ledgerAccounts ??= new LedgerAccountsClient(this._options));
+    }
+
+    public get livestreams(): LivestreamsClient {
+        return (this._livestreams ??= new LivestreamsClient(this._options));
     }
 
     public get media(): MediaClient {

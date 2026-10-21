@@ -638,6 +638,17 @@
             },
             "default": "./dist/cjs/api/resources/ledgerAccounts/exports.js"
         },
+        "./livestreams": {
+            "import": {
+                "types": "./dist/esm/api/resources/livestreams/exports.d.mts",
+                "default": "./dist/esm/api/resources/livestreams/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/livestreams/exports.d.ts",
+                "default": "./dist/cjs/api/resources/livestreams/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/livestreams/exports.js"
+        },
         "./media": {
             "import": {
                 "types": "./dist/esm/api/resources/media/exports.d.mts",
