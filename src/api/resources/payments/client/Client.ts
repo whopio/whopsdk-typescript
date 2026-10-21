@@ -66,6 +66,7 @@ export class PaymentsClient {
                     currency,
                     user_id: userId,
                     query,
+                    include_connected_accounts: includeConnectedAccounts,
                     member_id: memberId,
                     membership_id: membershipId,
                     product_id: productId,
@@ -101,6 +102,7 @@ export class PaymentsClient {
                     currency,
                     user_id: userId,
                     query,
+                    include_connected_accounts: includeConnectedAccounts,
                     member_id: memberId,
                     membership_id: membershipId,
                     product_id: productId,
@@ -343,6 +345,7 @@ export class PaymentsClient {
             created_after: createdAfter,
             created_before: createdBefore,
             query,
+            include_connected_accounts: includeConnectedAccounts,
         } = request;
         const _queryParams: Record<string, unknown> = {
             groups: Array.isArray(groups) ? groups.map((item) => item) : groups != null ? groups : undefined,
@@ -374,6 +377,7 @@ export class PaymentsClient {
             created_after: createdAfter != null ? createdAfter : undefined,
             created_before: createdBefore != null ? createdBefore : undefined,
             query,
+            include_connected_accounts: includeConnectedAccounts,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
