@@ -3,15 +3,14 @@
 /**
  * @example
  *     {
- *         amount: 6762.41,
  *         payout_method_id: "potk_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateQuotePayoutsRequest {
     /** Account to pay out from, prefixed `biz_`. Provide exactly one of `account_id` or `user_id`. */
     account_id?: string;
-    /** The amount to pay out in the specified currency. */
-    amount: number;
+    /** The amount to pay out in the specified currency, fees included. Provide exactly one of `amount` or `recipient_amount`. */
+    amount?: number;
     /** The currency to pay out. When omitted, uses `usd` if that balance can cover a withdrawal, otherwise the account's only other funded currency. */
     currency?: string;
     /** A saved card of the account, prefixed `payt_`, to quote paying this payout from. The quote's `amount` is the card charge, `fee` adds the estimated card fees to the payout fee, and `net_amount` is what the recipient receives. */
@@ -20,6 +19,8 @@ export interface CreateQuotePayoutsRequest {
     payout_method_id: string;
     /** Whether the parent platform covers the payout fee instead of the account being paid out. */
     platform_covers_fees?: boolean;
+    /** The amount the recipient should receive, with fees added on top. When the payout method pays out in `currency`, the quote's `destination_amount` covers it; otherwise its `net_amount` does. Provide exactly one of `amount` or `recipient_amount`. */
+    recipient_amount?: number;
     /** How fast the funds should arrive. */
     speed?: CreateQuotePayoutsRequest.Speed;
     /** Text that appears on the recipient's bank statement. Must be 5-22 alphanumeric characters (A-Z, a-z, 0-9). Omit or pass `null` to use the default descriptor. */
