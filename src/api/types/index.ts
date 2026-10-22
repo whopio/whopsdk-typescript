@@ -568,6 +568,8 @@ export * from "./Visibility.js";
 export * from "./VisibilityFilter.js";
 export * from "./WaitlistEntry.js";
 export * from "./WaitlistEntryCustomFieldResponse.js";
+export * from "./WaitlistEntryProduct.js";
+export * from "./WaitlistEntryVariant.js";
 export * from "./Webhook.js";
 export * from "./WebhookDelivery.js";
 export * from "./WebhookEvent.js";

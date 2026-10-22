@@ -7,6 +7,8 @@ export interface WaitlistEntry {
     account_id: string;
     /** Why the last approval attempt failed, or `null` when none has. `plan_unavailable` — the variant, product, or seller account was deleted. `already_member` — the user already has a membership on a one-per-user product. `checkout_failed` — checkout failed, usually a declined payment, and the signup was denied. `unknown` — another failure; retry. Cleared when approval is requeued. */
     approval_failure_reason: WaitlistEntry.ApprovalFailureReason | null;
+    /** The account the signup was submitted on behalf of, or `null` when the user signed up for themselves. */
+    buyer_account: Whop.StorefrontAccount | null;
     /** The account the signup was submitted on behalf of, prefixed `biz_`, or `null` when the user signed up for themselves. */
     buyer_account_id: string | null;
     /** When this signup was submitted, as an ISO 8601 timestamp. */
@@ -20,14 +22,20 @@ export interface WaitlistEntry {
     metadata: Record<string, unknown>;
     /** The variant this signup belongs to, prefixed `plan_`. */
     plan_id: string;
+    /** The product this signup belongs to, or `null` when the variant has no product. */
+    product: Whop.WaitlistEntryProduct | null;
     /** The product this signup belongs to, prefixed `prod_`, or `null` when the variant has no product. */
     product_id: string | null;
     /** The signup's current state. Approval runs asynchronously, so a signup stays `pending` until processing completes. `approved` alone does not prove an active membership; check `membership_id`. */
     status: WaitlistEntry.Status;
     /** When this signup last changed, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** The user who submitted this signup. For a signup an account's own credential submitted, the account's owner. */
+    user: Whop.UserSummary;
     /** The user who submitted this signup, prefixed `user_`. For a signup an account's own credential submitted, the account's owner. */
     user_id: string;
+    /** The variant this signup belongs to. */
+    variant: Whop.WaitlistEntryVariant;
 }
 
 export namespace WaitlistEntry {
