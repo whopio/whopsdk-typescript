@@ -25,6 +25,8 @@ export interface UpdatePreferencesRequest {
     cards_notifications?: boolean;
     /** Whether this account covers its connected accounts' negative balances. When a connected account's balance drops below zero (from refunds, disputes, or fees), this account's available balance in the same currency pays it back, up to what is available. Only accounts with connected accounts can set it. Requires the `payout:account:update` scope on your API key. */
     covers_connected_account_negative_balances?: boolean;
+    /** Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are saved as unset. Pass null to clear them, which turns tracking off. Tracking is off unless `enabled` is `true`. Requires the `company:manage_checkout` scope on your API key. */
+    customer_tracking?: UpdatePreferencesRequest.CustomerTracking | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. Requires the `payment:dispute` scope on your API key. */
     dispute_fighter_enabled?: boolean;
     /** `false` stops renewing: Economic Intelligence stays on until the end of the current week, and stopping before the first renewal charges the rest of that week at the `7_days` offer's fee. `true` keeps it renewing again before then, or turns it on like the `weekly` offer. Can't be combined with `economic_intelligence_duration_key`. Requires the `company:update` scope on your API key. */
@@ -109,6 +111,24 @@ export namespace UpdatePreferencesRequest {
         api_key?: (string | null) | undefined;
         /** The exact shop domain configured in Triple Whale's Settings → Store (for Shopify this is the `.myshopify.com` domain; for a custom sales platform it's whatever domain Triple Whale assigned when the shop was set up there). A leading `https://` and trailing `/` are stripped, and what remains must be a bare hostname with no path or spaces. Validated against Triple Whale — the API key must have access to it — before it is stored. Changing it on a connected integration backfills the account's ad spend onto the new shop. Omit to keep the stored domain; there is no way to clear a stored value, only to overwrite it with a new domain. */
         shop_domain?: string | undefined;
+    }
+
+    /**
+     * Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are saved as unset. Pass null to clear them, which turns tracking off. Tracking is off unless `enabled` is `true`. Requires the `company:manage_checkout` scope on your API key.
+     */
+    export interface CustomerTracking {
+        /** Accent color, as a `#rrggbb` hex color. Unset uses the default. */
+        accent_color?: (string | null) | undefined;
+        /** Turns the public tracking page and guest lookup on. Unset is off. */
+        enabled?: (boolean | null) | undefined;
+        /** Show the business name on the tracking page and Element. Unset shows it. */
+        show_business_name?: (boolean | null) | undefined;
+        /** Show the account logo on the tracking page and Element. Unset shows it. */
+        show_logo?: (boolean | null) | undefined;
+        /** Customer support email address. */
+        support_email?: (string | null) | undefined;
+        /** HTTPS customer support URL. */
+        support_url?: (string | null) | undefined;
     }
 
     /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */

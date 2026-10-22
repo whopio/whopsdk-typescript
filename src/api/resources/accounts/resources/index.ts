@@ -1,3 +1,5 @@
+export * from "./customerTracking/client/requests/index.js";
+export * as customerTracking from "./customerTracking/index.js";
 export * from "./fees/client/requests/index.js";
 export * as fees from "./fees/index.js";
 export * from "./financingProviders/client/requests/index.js";

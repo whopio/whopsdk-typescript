@@ -1089,6 +1089,17 @@
             },
             "default": "./dist/cjs/api/resources/webhooks/exports.js"
         },
+        "./accounts/customerTracking": {
+            "import": {
+                "types": "./dist/esm/api/resources/accounts/resources/customerTracking/exports.d.mts",
+                "default": "./dist/esm/api/resources/accounts/resources/customerTracking/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/accounts/resources/customerTracking/exports.d.ts",
+                "default": "./dist/cjs/api/resources/accounts/resources/customerTracking/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/accounts/resources/customerTracking/exports.js"
+        },
         "./accounts/fees": {
             "import": {
                 "types": "./dist/esm/api/resources/accounts/resources/fees/exports.d.mts",

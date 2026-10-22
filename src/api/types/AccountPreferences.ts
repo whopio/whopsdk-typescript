@@ -20,6 +20,8 @@ export interface AccountPreferences {
     cards_notifications: boolean;
     /** Whether this account covers its connected accounts' negative balances. When a connected account's balance drops below zero (from refunds, disputes, or fees), this account's available balance in the same currency pays it back, up to what is available. Refunds on its connected accounts may also take them negative by up to this account's available balance. `null` when the account has no connected accounts. */
     covers_connected_account_negative_balances: boolean | null;
+    /** The saved customer tracking settings for the hosted tracking page and Element, exactly as saved. `null` until set; tracking is off unless `enabled` is `true`. */
+    customer_tracking: Whop.CustomerTrackingPreferences | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. */
     dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
