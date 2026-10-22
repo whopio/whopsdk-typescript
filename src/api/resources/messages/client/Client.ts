@@ -18,6 +18,8 @@ export declare namespace MessagesClient {
 
 /**
  * A Message contains Markdown and optional attachments, a poll or a reply. Read history, synchronize edits and deletions, or fetch a window around a message. Existing permissions govern sending, editing, pinning and deletion.
+ *
+ * Add or remove an emoji reaction, list who reacted, and vote once on a message poll. Messages include aggregate reaction and vote counts and whether you reacted or voted, without exposing other voters.
  */
 export class MessagesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MessagesClient.Options>;
