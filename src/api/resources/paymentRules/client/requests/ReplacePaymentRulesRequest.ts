@@ -60,6 +60,7 @@ export namespace ReplacePaymentRulesRequest {
                     RiskScore: "risk_score",
                     AmountInUsd: "amount_in_usd",
                     CardCountry: "card_country",
+                    CardBrand: "card_brand",
                     CardBin: "card_bin",
                     CustomerEmail: "customer_email",
                     IpAddress: "ip_address",
