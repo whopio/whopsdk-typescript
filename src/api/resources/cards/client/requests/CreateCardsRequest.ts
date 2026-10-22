@@ -7,12 +7,14 @@
 export interface CreateCardsRequest {
     /** The owning account ID (a biz_ identifier). Provide this or user_id. */
     account_id?: string;
-    /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts, and whenever a company API key files an account's first card application. */
+    /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts. When this call files the card application, the member applies with their identity; a company API key that sends neither this nor kind is refused. */
     assigned_user_id?: string;
     /** The card's initial billing address. On a company card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required. */
     billing?: CreateCardsRequest.Billing;
     /** Details for a company card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not. */
     cardholder?: CreateCardsRequest.Cardholder;
+    /** Who the card application verifies, set only on the call that files it; sending it once the account has an application is a 400. `business` applies as the account with its approved KYB. `individual` applies as a person: assigned_user_id when given, otherwise the account owner, using the identity verified on the account. Omit it to apply as the business when its KYB is approved, and as an individual otherwise. */
+    kind?: CreateCardsRequest.Kind;
     /** A display name for the card. */
     name?: string;
     /** Spending limit amount, in dollars. */
@@ -58,6 +60,12 @@ export namespace CreateCardsRequest {
         phone?: string | undefined;
     }
 
+    /** Who the card application verifies, set only on the call that files it; sending it once the account has an application is a 400. `business` applies as the account with its approved KYB. `individual` applies as a person: assigned_user_id when given, otherwise the account owner, using the identity verified on the account. Omit it to apply as the business when its KYB is approved, and as an individual otherwise. */
+    export const Kind = {
+        Individual: "individual",
+        Business: "business",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     /** The window the spend limit applies to. */
     export const SpendLimitFrequency = {
         Daily: "daily",
