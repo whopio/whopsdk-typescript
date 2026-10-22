@@ -17,6 +17,8 @@ export interface DomainRegistration {
     phase: DomainRegistration.Phase;
     /** Link to pay what the domain owes now: its registration or transfer, or a yearly renewal. `null` when nothing is owed. */
     purchase_url: string | null;
+    /** What each yearly renewal costs at the registrar's current price. Set when the response is a single domain; `null` in lists, while the domain is being released, or when the price can't be read right now. */
+    renewal_price: Whop.Money | null;
     /** How far registering and keeping the domain has got. */
     state: DomainRegistration.State;
 }
