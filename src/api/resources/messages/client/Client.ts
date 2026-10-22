@@ -16,6 +16,9 @@ export declare namespace MessagesClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A Message contains Markdown and optional attachments, a poll or a reply. Read history, synchronize edits and deletions, or fetch a window around a message. Existing permissions govern sending, editing, pinning and deletion.
+ */
 export class MessagesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MessagesClient.Options>;
 
