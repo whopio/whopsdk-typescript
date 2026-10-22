@@ -23,9 +23,9 @@ export interface ListPaymentsRequest {
     currency?: string;
     /** Only payments made by this buyer, prefixed `user_`. This filters sales the caller can read, so `me` is not accepted; list the caller's own purchases with `GET /memberships?user_id=me`. */
     user_id?: string;
-    /** Search payments by user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
+    /** Search payments by payment ID, dispute ID, user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;
-    /** Only for searches: with `query`, also search the account's connected accounts. Requires `account_id` and `query`, and is a 400 without either; it never lists connected accounts' payments on its own. Matches on payment, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`). Free-text queries such as a name search only the named account. Connected accounts' payments are returned only for connected accounts you can read payments on. */
+    /** Only for searches: with `query`, also search the account's connected accounts. Requires `account_id` and `query`, and is a 400 without either; it never lists connected accounts' payments on its own. Matches on payment, dispute, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`). Free-text queries such as a name search only the named account. Connected accounts' payments are returned only for connected accounts you can read payments on. */
     include_connected_accounts?: boolean;
     /** Only payments made by this member, prefixed `mber_`. */
     member_id?: string;
