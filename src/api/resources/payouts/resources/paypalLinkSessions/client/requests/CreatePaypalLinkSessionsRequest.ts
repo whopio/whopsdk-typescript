@@ -12,7 +12,7 @@ export interface CreatePaypalLinkSessionsRequest {
     account_id?: string;
     /** Currency the PayPal payout method will deliver payouts in. */
     destination_currency?: string;
-    /** Where to send the holder once the PayPal login finishes. Must be an `https` URL; it receives `paypal_link_token` on success or `error` on failure. */
+    /** Where to send the holder once the PayPal login finishes. Must be an `https` URL whose host is a domain added to the account, or to its platform, with `POST /domains` and `verification: {}`; the domain doesn't need to finish verifying. Whop's own pages and `https://localhost` are also accepted; they're the only options for a `user_id` session. It receives `paypal_link_token` on success or `error` on failure. */
     return_url: string;
     /** The PayPal supported payout method to connect (a `podst_` identifier whose `supports_paypal_login` is true). */
     supported_payout_method_id: string;
