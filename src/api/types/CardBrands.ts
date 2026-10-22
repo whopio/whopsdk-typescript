@@ -47,6 +47,10 @@ export const CardBrands = {
     Nyce: "nyce",
     Pulse: "pulse",
     Star: "star",
+    Eftpos: "eftpos",
+    Alelo: "alelo",
+    Edenred: "edenred",
+    Sodexo: "sodexo",
     Unknown: "unknown",
 } as const;
 export type CardBrands = (typeof CardBrands)[keyof typeof CardBrands];
