@@ -302,6 +302,142 @@ describe("ShipmentsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("lookup (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", email: "marcus@shinetime.example" };
+        const rawResponseBody = {
+            payment_id: "pay_xxxxxxxxxxxxxx",
+            shipment: {
+                account_id: "biz_xxxxxxxxxxxxxx",
+                carrier: "ups",
+                checkpoints: [
+                    {
+                        location: "PHILADELPHIA, PA",
+                        message: "Picked up",
+                        status: "unknown",
+                        timestamp: "2026-01-01T12:00:00.000Z",
+                    },
+                ],
+                created_at: "2026-01-01T12:00:00.000Z",
+                id: "ship_xxxxxxxxxxxxxx",
+                payment_id: "pay_xxxxxxxxxxxxxx",
+                status: "unknown",
+                tracking_number: "1Z999AA10123456784",
+                tracking_url: "https://track.aftership.com/xxxxxxxxxxxxxxxxxx",
+                updated_at: "2026-01-01T12:00:00.000Z",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/shipments/lookup")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.shipments.lookup({
+            account_id: "biz_xxxxxxxxxxxxxx",
+            email: "marcus@shinetime.example",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("lookup (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { account_id: "account_id", email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/shipments/lookup")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.shipments.lookup({
+                account_id: "account_id",
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("lookup (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { account_id: "account_id", email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/shipments/lookup")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.shipments.lookup({
+                account_id: "account_id",
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("lookup (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { account_id: "account_id", email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/shipments/lookup")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.shipments.lookup({
+                account_id: "account_id",
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

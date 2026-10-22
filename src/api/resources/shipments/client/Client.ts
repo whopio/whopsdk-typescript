@@ -235,6 +235,86 @@ export class ShipmentsClient {
     }
 
     /**
+     * Finds the delivery for a purchase from an account with customer tracking turned on, using exactly one order or tracking number plus the buyer's current receipt email. No authentication is required and no sign-in or session is created. Email matching ignores case and surrounding whitespace, but dots and +tags must match. Every miss returns the same 404: an unknown account, tracking turned off, a wrong number or email, an unpaid order or a purchase with nothing to ship. `shipment` is `null` while a paid physical purchase has no tracking yet. Limited to 30 attempts per five minutes per client IP. Responses are never cached or replayed with Idempotency-Key.
+     *
+     * @param {Whop.LookupShipmentsRequest} request
+     * @param {ShipmentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.shipments.lookup({
+     *         account_id: "biz_xxxxxxxxxxxxxx",
+     *         email: "marcus@shinetime.example"
+     *     })
+     */
+    public lookup(
+        request: Whop.LookupShipmentsRequest,
+        requestOptions?: ShipmentsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.ShipmentLookup> {
+        return core.HttpResponsePromise.fromPromise(this.__lookup(request, requestOptions));
+    }
+
+    private async __lookup(
+        request: Whop.LookupShipmentsRequest,
+        requestOptions?: ShipmentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.ShipmentLookup>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                "shipments/lookup",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.ShipmentLookup, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/shipments/lookup");
+    }
+
+    /**
      * Retrieves a shipment by its ID, or by the ID of the payment it fulfills.
      *
      * @param {Whop.RetrieveShipmentsRequest} request

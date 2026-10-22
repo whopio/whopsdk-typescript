@@ -26607,6 +26607,72 @@ await client.shipments.create({
 </dl>
 </details>
 
+<details><summary><code>client.shipments.<a href="/src/api/resources/shipments/client/Client.ts">lookup</a>({ ...params }) -> Whop.ShipmentLookup</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Finds the delivery for a purchase from an account with customer tracking turned on, using exactly one order or tracking number plus the buyer's current receipt email. No authentication is required and no sign-in or session is created. Email matching ignores case and surrounding whitespace, but dots and +tags must match. Every miss returns the same 404: an unknown account, tracking turned off, a wrong number or email, an unpaid order or a purchase with nothing to ship. `shipment` is `null` while a paid physical purchase has no tracking yet. Limited to 30 attempts per five minutes per client IP. Responses are never cached or replayed with Idempotency-Key.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.shipments.lookup({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    email: "marcus@shinetime.example"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.LookupShipmentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ShipmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.shipments.<a href="/src/api/resources/shipments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Shipment</code></summary>
 <dl>
 <dd>
@@ -31108,6 +31174,72 @@ await client.webhooks.test({
 </dl>
 </details>
 
+## Accounts CustomerTracking
+<details><summary><code>client.accounts.customerTracking.<a href="/src/api/resources/accounts/resources/customerTracking/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountCustomerTracking</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the branding and support contacts the account's hosted customer tracking page and tracking Element display. Public by design, so no authentication is required. Returns 404 unless the account has turned customer tracking on in its preferences. Responses are never cached.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.customerTracking.retrieve({
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.RetrieveCustomerTrackingRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerTrackingClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Accounts Fees
 <details><summary><code>client.accounts.fees.<a href="/src/api/resources/accounts/resources/fees/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountFees</code></summary>
 <dl>
@@ -31407,7 +31539,7 @@ Required scopes depend on the preferences being updated:
 | `cards_auto_top_up`, `cards_notifications`, `covers_connected_account_negative_balances` | `payout:account:update` |
 | `dispute_fighter_enabled` | `payment:dispute` |
 | `economic_intelligence_duration_key`, `economic_intelligence_auto_renew` | `company:update` |
-| `feedback_options` | `company:manage_checkout` |
+| `feedback_options`, `customer_tracking` | `company:manage_checkout` |
 
 When updating preferences from multiple rows, all corresponding scopes are required for the account.
 </dd>
