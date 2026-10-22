@@ -20,6 +20,13 @@ describe("WaitlistEntriesClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     approval_failure_reason: "plan_unavailable",
+                    buyer_account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
+                        title: "Shine Time Auto Detailing",
+                    },
                     buyer_account_id: "buyer_account_id",
                     created_at: "2026-01-01T12:00:00.000Z",
                     custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -27,10 +34,27 @@ describe("WaitlistEntriesClient", () => {
                     membership_id: "membership_id",
                     metadata: { key: "value" },
                     plan_id: "plan_xxxxxxxxxxxxxx",
+                    product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
                     product_id: "prod_xxxxxxxxxxxxxx",
                     status: "pending",
                     updated_at: "2026-01-01T12:00:00.000Z",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
                     user_id: "user_xxxxxxxxxxxxxx",
+                    variant: {
+                        billing_period: 30,
+                        description: null,
+                        id: "plan_xxxxxxxxxxxxxx",
+                        initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        plan_type: "renewal",
+                        renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        title: null,
+                        trial_period_days: null,
+                    },
                 },
             ],
             page_info: {
@@ -147,6 +171,13 @@ describe("WaitlistEntriesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
+            buyer_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -154,10 +185,27 @@ describe("WaitlistEntriesClient", () => {
             membership_id: "membership_id",
             metadata: { key: "value" },
             plan_id: "plan_xxxxxxxxxxxxxx",
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user_id: "user_xxxxxxxxxxxxxx",
+            variant: {
+                billing_period: 30,
+                description: "description",
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                trial_period_days: 1.1,
+            },
         };
 
         server
@@ -495,6 +543,13 @@ describe("WaitlistEntriesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
+            buyer_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -502,10 +557,27 @@ describe("WaitlistEntriesClient", () => {
             membership_id: "membership_id",
             metadata: { key: "value" },
             plan_id: "plan_xxxxxxxxxxxxxx",
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user_id: "user_xxxxxxxxxxxxxx",
+            variant: {
+                billing_period: 30,
+                description: "description",
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                trial_period_days: 1.1,
+            },
         };
 
         server
@@ -616,6 +688,13 @@ describe("WaitlistEntriesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
+            buyer_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -623,10 +702,27 @@ describe("WaitlistEntriesClient", () => {
             membership_id: "membership_id",
             metadata: { key: "value" },
             plan_id: "plan_xxxxxxxxxxxxxx",
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user_id: "user_xxxxxxxxxxxxxx",
+            variant: {
+                billing_period: 30,
+                description: "description",
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                trial_period_days: 1.1,
+            },
         };
 
         server
@@ -764,6 +860,13 @@ describe("WaitlistEntriesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
+            buyer_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -771,10 +874,27 @@ describe("WaitlistEntriesClient", () => {
             membership_id: "membership_id",
             metadata: { key: "value" },
             plan_id: "plan_xxxxxxxxxxxxxx",
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user_id: "user_xxxxxxxxxxxxxx",
+            variant: {
+                billing_period: 30,
+                description: "description",
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                trial_period_days: 1.1,
+            },
         };
 
         server
@@ -912,6 +1032,13 @@ describe("WaitlistEntriesClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
+            buyer_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
@@ -919,10 +1046,27 @@ describe("WaitlistEntriesClient", () => {
             membership_id: "membership_id",
             metadata: { key: "value" },
             plan_id: "plan_xxxxxxxxxxxxxx",
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user_id: "user_xxxxxxxxxxxxxx",
+            variant: {
+                billing_period: 30,
+                description: "description",
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                trial_period_days: 1.1,
+            },
         };
 
         server
