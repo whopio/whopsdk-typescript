@@ -151,7 +151,7 @@ describe("PromoCodesClient", () => {
             promo_type: "percentage",
         };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -290,7 +290,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -373,7 +373,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -475,7 +475,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",

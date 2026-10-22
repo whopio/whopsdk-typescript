@@ -13,6 +13,7 @@ import { AiChatsClient } from "./api/resources/aiChats/client/Client.js";
 import { ApiKeysClient } from "./api/resources/apiKeys/client/Client.js";
 import { ApiLogsClient } from "./api/resources/apiLogs/client/Client.js";
 import { AppBuildsClient } from "./api/resources/appBuilds/client/Client.js";
+import { AppInstallationsClient } from "./api/resources/appInstallations/client/Client.js";
 import { AppsClient } from "./api/resources/apps/client/Client.js";
 import { AudiencesClient } from "./api/resources/audiences/client/Client.js";
 import { AuthorizedUsersClient } from "./api/resources/authorizedUsers/client/Client.js";
@@ -122,6 +123,7 @@ export class WhopClient {
     protected _apiKeys: ApiKeysClient | undefined;
     protected _apiLogs: ApiLogsClient | undefined;
     protected _appBuilds: AppBuildsClient | undefined;
+    protected _appInstallations: AppInstallationsClient | undefined;
     protected _apps: AppsClient | undefined;
     protected _audiences: AudiencesClient | undefined;
     protected _authorizedUsers: AuthorizedUsersClient | undefined;
@@ -260,6 +262,10 @@ export class WhopClient {
 
     public get appBuilds(): AppBuildsClient {
         return (this._appBuilds ??= new AppBuildsClient(this._options));
+    }
+
+    public get appInstallations(): AppInstallationsClient {
+        return (this._appInstallations ??= new AppInstallationsClient(this._options));
     }
 
     public get apps(): AppsClient {

@@ -106,6 +106,8 @@ export const PermissionAction = {
     DeveloperManageWebhook: "developer:manage_webhook",
     DeveloperLogsRead: "developer:logs:read",
     DeveloperManageBuilds: "developer:manage_builds",
+    DeveloperAppInstallationRead: "developer:app_installation:read",
+    DeveloperAppInstallationUpdate: "developer:app_installation:update",
     DeveloperUpdateApp: "developer:update_app",
     DeveloperUpdateAppAuthorization: "developer:update_app_authorization",
     EventCreate: "event:create",

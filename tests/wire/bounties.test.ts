@@ -34,7 +34,7 @@ describe("BountiesClient", () => {
                     discussion_feed_id: "discussion_feed_id",
                     discussion_post_id: "discussion_post_id",
                     experience_id: "exp_xxxxxxxxxxxxxx",
-                    funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+                    funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     gross_paid_out_amount: 0,
                     gross_reward_amount: 15,
                     hosting_account: {
@@ -224,7 +224,7 @@ describe("BountiesClient", () => {
             discussion_feed_id: "discussion_feed_id",
             discussion_post_id: "discussion_post_id",
             experience_id: "exp_xxxxxxxxxxxxxx",
-            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
@@ -435,7 +435,7 @@ describe("BountiesClient", () => {
             discussion_feed_id: "discussion_feed_id",
             discussion_post_id: "discussion_post_id",
             experience_id: "exp_xxxxxxxxxxxxxx",
-            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
@@ -568,7 +568,7 @@ describe("BountiesClient", () => {
             discussion_feed_id: "discussion_feed_id",
             discussion_post_id: "discussion_post_id",
             experience_id: "exp_xxxxxxxxxxxxxx",
-            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
@@ -715,7 +715,7 @@ describe("BountiesClient", () => {
             discussion_feed_id: "discussion_feed_id",
             discussion_post_id: "discussion_post_id",
             experience_id: "exp_xxxxxxxxxxxxxx",
-            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {

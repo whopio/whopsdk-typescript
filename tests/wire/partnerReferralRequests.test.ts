@@ -18,7 +18,7 @@ describe("PartnerReferralRequestsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     authorized_user_id: "authorized_user_id",
                     code: "code",
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -168,7 +168,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -368,7 +368,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -508,7 +508,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -675,7 +675,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -842,7 +842,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
