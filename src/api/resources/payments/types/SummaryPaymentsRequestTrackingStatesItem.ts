@@ -12,6 +12,7 @@ export const SummaryPaymentsRequestTrackingStatesItem = {
     Cancelled: "cancelled",
     Error: "error",
     NeedsTracking: "needs_tracking",
+    MissingTracking: "missing_tracking",
 } as const;
 export type SummaryPaymentsRequestTrackingStatesItem =
     (typeof SummaryPaymentsRequestTrackingStatesItem)[keyof typeof SummaryPaymentsRequestTrackingStatesItem];
