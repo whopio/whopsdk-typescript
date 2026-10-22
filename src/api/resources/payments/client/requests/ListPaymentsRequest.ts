@@ -17,6 +17,8 @@ export interface ListPaymentsRequest {
     account_id?: string;
     /** Only payments in this lifecycle state. */
     status?: Whop.ListPaymentsRequestStatus;
+    /** Only payments whose most recently attached kept shipment is in this tracking state. `missing_tracking` selects paid payments with a captured shipping address and no kept shipment, excluding fully refunded payments. `needs_tracking` selects payments with an open pre-shipment funds hold and no kept shipment. Shipment states do not imply a payment or refund state. Requires `shipment:basic:read` as well as `payment:basic:read`; user-wide lists include only accounts readable under both scopes. Only supported with `mode=account_sales`. */
+    tracking_status?: Whop.ListPaymentsRequestTrackingStatus;
     /** Only payments charged for this reason. `subscription_cycle` also matches renewals recorded as `subscription_update`. */
     billing_reason?: Whop.ListPaymentsRequestBillingReason;
     /** Only payments presented in this three-letter currency, such as `usd`. */

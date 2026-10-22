@@ -42,6 +42,7 @@ export class PaymentsClient {
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -62,6 +63,7 @@ export class PaymentsClient {
                     mode,
                     account_id: accountId,
                     status,
+                    tracking_status: trackingStatus,
                     billing_reason: billingReason,
                     currency,
                     user_id: userId,
@@ -98,6 +100,7 @@ export class PaymentsClient {
                     mode: mode != null ? mode : undefined,
                     account_id: accountId,
                     status: status != null ? status : undefined,
+                    tracking_status: trackingStatus != null ? trackingStatus : undefined,
                     billing_reason: billingReason != null ? billingReason : undefined,
                     currency,
                     user_id: userId,
@@ -192,6 +195,8 @@ export class PaymentsClient {
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        case 403:
+                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,

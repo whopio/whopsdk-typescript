@@ -246,6 +246,25 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/payments").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.payments.list();
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

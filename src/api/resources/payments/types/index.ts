@@ -9,6 +9,7 @@ export * from "./ListPaymentsRequestStatus.js";
 export * from "./ListPaymentsRequestStatusesItem.js";
 export * from "./ListPaymentsRequestSubstatusesItem.js";
 export * from "./ListPaymentsRequestTrackingStatesItem.js";
+export * from "./ListPaymentsRequestTrackingStatus.js";
 export * from "./ListPaymentsResponse.js";
 export * from "./PostPaymentAuthorizedPayload.js";
 export * from "./PostPaymentCanceledPayload.js";
