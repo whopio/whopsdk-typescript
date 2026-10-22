@@ -18,7 +18,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
                     attributes: {},
                     billing_period: 30,
@@ -104,7 +104,7 @@ describe("PlansClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
             attributes: { key: "value" },
             billing_period: 30,
@@ -212,7 +212,7 @@ describe("PlansClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
             attributes: { key: "value" },
             billing_period: 30,
@@ -309,7 +309,7 @@ describe("PlansClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
             attributes: { key: "value" },
             billing_period: 30,

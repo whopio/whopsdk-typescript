@@ -18,7 +18,7 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     amount: 249,
                     available_actions: ["accept"],
                     buyer: {
@@ -178,7 +178,7 @@ describe("ResolutionCenterCasesClient", () => {
             receipt_id: "pay_xxxxxxxxxxxxxx",
         };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -398,7 +398,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -522,7 +522,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -677,7 +677,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
         const rawRequestBody = { message: "The coating is already flaking on the hood two weeks later." };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -809,7 +809,7 @@ describe("ResolutionCenterCasesClient", () => {
             message: "The ceramic coating was applied and the vehicle was collected on 2026-01-05.",
         };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -1050,7 +1050,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
         const rawRequestBody = { message: "Here are the before and after photos from the Burnet Rd bay." };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -1180,7 +1180,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {
@@ -1307,7 +1307,7 @@ describe("ResolutionCenterCasesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
             available_actions: ["accept"],
             buyer: {

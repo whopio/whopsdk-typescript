@@ -4970,6 +4970,212 @@ await client.appBuilds.promote({
 </dl>
 </details>
 
+## App Installations
+<details><summary><code>client.appInstallations.<a href="/src/api/resources/appInstallations/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.AppInstallation, Whop.ListAppInstallationsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists app installations, newest first. An app's API key lists the accounts that installed it. An account lists the apps installed on it; a user passes that account's `account_id`. The developer of an app lists every installation of it by passing `app_id`. Uninstalled apps, deleted apps and deleted accounts are left out.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.appInstallations.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.appInstallations.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListAppInstallationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AppInstallationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.appInstallations.<a href="/src/api/resources/appInstallations/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AppInstallation</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves an app installation, with the metadata the app stores on it. The app, its developer and the account it's installed on can retrieve it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.appInstallations.retrieve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveAppInstallationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AppInstallationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.appInstallations.<a href="/src/api/resources/appInstallations/client/Client.ts">update</a>({ ...params }) -> Whop.AppInstallation</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the `metadata` and `external_id` your app keeps on an installation. Only the metadata keys you send change, so separate jobs can each keep their own keys.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.appInstallations.update({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateAppInstallationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AppInstallationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Apps
 <details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.AppListItem, Whop.ListAppsResponse&gt;</code></summary>
 <dl>
