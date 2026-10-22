@@ -374,7 +374,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 6762.41, payout_method_id: "potk_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { payout_method_id: "potk_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             destination_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -406,7 +406,6 @@ describe("PayoutsClient", () => {
             .build();
 
         const response = await client.payouts.createQuote({
-            amount: 6762.41,
             payout_method_id: "potk_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
@@ -421,7 +420,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawRequestBody = { payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -435,7 +434,6 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.createQuote({
-                amount: 1.1,
                 payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -450,7 +448,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawRequestBody = { payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -464,7 +462,6 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.createQuote({
-                amount: 1.1,
                 payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -479,7 +476,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawRequestBody = { payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -493,7 +490,6 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.createQuote({
-                amount: 1.1,
                 payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -508,7 +504,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawRequestBody = { payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -522,7 +518,6 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.createQuote({
-                amount: 1.1,
                 payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.ConflictError);

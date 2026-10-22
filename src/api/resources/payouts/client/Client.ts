@@ -270,7 +270,6 @@ export class PayoutsClient {
      *
      * @example
      *     await client.payouts.createQuote({
-     *         amount: 6762.41,
      *         payout_method_id: "potk_xxxxxxxxxxxxxx"
      *     })
      */
