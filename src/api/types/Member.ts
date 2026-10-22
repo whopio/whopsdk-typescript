@@ -11,6 +11,8 @@ export interface Member {
     created_at: string;
     /** The name to show for this member: the user's name, or their username when they have not set one. The buying business's name when `user` is `null`. */
     display_name: string;
+    /** The user's gross income across Whop, in USD, refreshed periodically. `null` when the user hides their earnings or the buyer is another business. */
+    earnings_usd: Whop.UserEarningsAmount | null;
     /** The user's email address. `null` without `member:email:read` on the account, when the buyer is another business, or when the user has no assigned email. */
     email: string | null;
     /** Member ID, prefixed `mber_`. */
