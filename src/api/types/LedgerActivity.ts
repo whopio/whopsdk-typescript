@@ -556,14 +556,14 @@ export namespace LedgerActivity {
         /** Lowercase currency code converted from (swap sources only). */
         from_currency?: (string | null) | undefined;
         id: string;
-        /** Memo attached to the transfer or payout source, or null when none was provided (on payout sources requires payout:withdrawal:read). */
+        /** Memo attached to the transfer, payout, or bank_deposit source, or null when none was provided (on payout sources requires payout:withdrawal:read). */
         notes?: (string | null) | undefined;
         object: string;
-        /** Name of the entity processing the payout (payout sources only; requires payout:withdrawal:read). */
+        /** On payout sources, the name of the entity processing the payout (requires payout:withdrawal:read). On bank_deposit sources, the name of the account that sent the deposit. */
         payer_name?: (string | null) | undefined;
         /** Total charged by the payment source. */
         payment_amount?: (Whop.Money | null) | undefined;
-        /** Payment method used by the payment source. */
+        /** Payment method used by the payment source. On bank_deposit sources, the transfer rail: `wire`, `ach`, or `rtp`. */
         payment_method_type?: (string | null) | undefined;
         /** Processor used by the payment source. */
         payment_processor?: (string | null) | undefined;
@@ -577,7 +577,7 @@ export namespace LedgerActivity {
         reason?: (string | null) | undefined;
         /** Whether this payout is currently held for manual risk review (payout sources only; requires payout:withdrawal:read). */
         risk_review_hold?: (boolean | null) | undefined;
-        /** Sender wallet address or onramp provider identifier (onchain_transaction sources only). */
+        /** On onchain_transaction sources, the sender wallet address or onramp provider identifier. On bank_deposit sources, the last four digits of the sending bank account, such as `••••1547`. */
         sender_address?: (string | null) | undefined;
         /** Lifecycle status. On payout sources this is the payout status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated). */
         status?: (string | null) | undefined;
