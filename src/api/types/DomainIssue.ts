@@ -24,6 +24,7 @@ export namespace DomainIssue {
         ApplePay: "apple_pay",
         Pixel: "pixel",
         Email: "email",
+        Transfer: "transfer",
     } as const;
     export type Capability = (typeof Capability)[keyof typeof Capability];
     /** What needs attention, as a stable code. */

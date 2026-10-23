@@ -47,4 +47,6 @@ export interface ListDomainsRequest {
     pixel?: Whop.ListDomainsRequestPixel;
     /** Only domains with email in this state, such as `ready`, or `any` for every domain that has email. */
     email?: Whop.ListDomainsRequestEmail;
+    /** Only domains with transfer in this state, such as `ready`, or `any` for every domain that has transfer. */
+    transfer?: Whop.ListDomainsRequestTransfer;
 }

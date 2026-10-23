@@ -55,6 +55,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    transfer: null,
                     updated_at: null,
                     verification: null,
                     website: null,
@@ -97,6 +98,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    transfer: null,
                     updated_at: null,
                     verification: null,
                     website: null,
@@ -139,6 +141,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    transfer: null,
                     updated_at: null,
                     verification: null,
                     website: null,
@@ -294,6 +297,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
             website: {
@@ -438,6 +442,7 @@ describe("DomainsClient", () => {
             registration: null,
             stats: null,
             status: null,
+            transfer: null,
             updated_at: null,
             verification: null,
             website: null,
@@ -573,6 +578,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
             website: {
@@ -690,6 +696,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
             website: {
@@ -821,6 +828,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
             website: {

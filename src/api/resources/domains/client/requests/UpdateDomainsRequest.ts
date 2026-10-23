@@ -19,6 +19,8 @@ export interface UpdateDomainsRequest {
     pixel?: UpdateDomainsRequest.Pixel | null;
     /** Buy the domain through Whop, or transfer in a domain you own elsewhere with `auth_code`, then renew it every year and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase, or to cancel a transfer while its current registrar can still stop it. */
     registration?: UpdateDomainsRequest.Registration | null;
+    /** Move a domain registered through Whop to another Whop account. Turning it on returns a code in `transfer.code`; the receiving account enters it as `registration.auth_code` on its own copy of the domain. Whop then removes the domain's email, email addresses and Apple Pay from this account, moves the registration with its expiry, stops charging this account to renew it, and removes the domain from this account. Pass `null` to turn it off and invalidate the code, until another account has entered it. */
+    transfer?: UpdateDomainsRequest.Transfer | null;
     /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
     verification?: UpdateDomainsRequest.Verification | null;
     /** Serve a Whop website on the domain. Pass `null` to stop serving it; the domain keeps its other capabilities. */
@@ -45,12 +47,28 @@ export namespace UpdateDomainsRequest {
      * Buy the domain through Whop, or transfer in a domain you own elsewhere with `auth_code`, then renew it every year and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase, or to cancel a transfer while its current registrar can still stop it.
      */
     export interface Registration {
-        /** Transfer the domain to Whop instead of buying it. This is the transfer authorization code (also called an EPP code) from the domain's current registrar, which you usually find in its domain settings after unlocking the domain. Whop becomes the domain's registrant, and the domain moves to Whop DNS once the transfer completes, so its current DNS records, including email, stop working. After the transfer, the registry may lock the domain against another transfer for 60 days. While it's `transferring`, pass the same or a new code again to resubmit. Whop never returns the code. */
+        /** Transfer the domain to Whop instead of buying it. This is the transfer authorization code (also called an EPP code) from the domain's current registrar, which you usually find in its domain settings after unlocking the domain. Whop becomes the domain's registrant, and the domain moves to Whop DNS once the transfer completes, so its current DNS records, including email, stop working. After the transfer, the registry may lock the domain against another transfer for 60 days. While it's `transferring`, pass the same or a new code again to resubmit. Whop never returns the code. To take a domain from another Whop account instead, pass the `whop_dt_` code from its `transfer`: the domain moves without a payment, keeps its expiry and Whop DNS, and can't be cancelled once entered. */
         auth_code?: string | undefined;
         /** Whether Whop charges the saved card to renew the domain before it expires. */
         auto_renew?: boolean | undefined;
         /** Saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
         payment_method_id?: (string | null) | undefined;
+    }
+
+    /**
+     * Move a domain registered through Whop to another Whop account. Turning it on returns a code in `transfer.code`; the receiving account enters it as `registration.auth_code` on its own copy of the domain. Whop then removes the domain's email, email addresses and Apple Pay from this account, moves the registration with its expiry, stops charging this account to renew it, and removes the domain from this account. Pass `null` to turn it off and invalidate the code, until another account has entered it.
+     */
+    export interface Transfer {
+        /** Where the domain moves. `internal` moves it to another Whop account. */
+        destination?: Transfer.Destination | undefined;
+    }
+
+    export namespace Transfer {
+        /** Where the domain moves. `internal` moves it to another Whop account. */
+        export const Destination = {
+            Internal: "internal",
+        } as const;
+        export type Destination = (typeof Destination)[keyof typeof Destination];
     }
 
     /**
