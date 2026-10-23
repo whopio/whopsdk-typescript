@@ -69,7 +69,7 @@ export namespace PostPayoutCreatedPayload {
         source: Data.Source | null;
         /** Payout delivery speed. */
         speed: Data.Speed;
-        /** Text that appears on the recipient's bank statement, or `null` if no descriptor was set. When set, 5-22 alphanumeric characters (A-Z, a-z, 0-9). */
+        /** The payment description sent with the payout, or `null` if no descriptor was set. When set, 5-80 printable ASCII characters. */
         statement_descriptor: string | null;
         /** Current payout status. */
         status: Data.Status;

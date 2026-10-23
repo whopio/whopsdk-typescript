@@ -52,7 +52,7 @@ export interface RetrievePayoutsResponse {
     source?: (RetrievePayoutsResponse.Source | null) | undefined;
     /** Payout delivery speed. */
     speed: RetrievePayoutsResponse.Speed;
-    /** Text that appears on the recipient's bank statement, or `null` if no descriptor was set. When set, 5-22 alphanumeric characters (A-Z, a-z, 0-9). Only returned to callers with payout:withdrawal:read on the owning ledger. */
+    /** The payment description sent with the payout, or `null` if no descriptor was set. When set, 5-80 printable ASCII characters. Only returned to callers with payout:withdrawal:read on the owning ledger. */
     statement_descriptor?: (string | null) | undefined;
     /** Current payout status. */
     status: RetrievePayoutsResponse.Status;
