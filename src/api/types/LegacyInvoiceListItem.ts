@@ -5,11 +5,11 @@ import type * as Whop from "../index.js";
 /**
  * An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.
  */
-export interface InvoiceListItem {
+export interface LegacyInvoiceListItem {
     /** The datetime the invoice was created. */
     created_at: string;
     /** The plan that this invoice charges for. */
-    current_plan: InvoiceListItem.CurrentPlan;
+    current_plan: LegacyInvoiceListItem.CurrentPlan;
     /** The deadline by which payment is expected. Null if the invoice is collected automatically. */
     due_date: string | null;
     /** The email address of the customer this invoice is addressed to. Null if no email is on file. */
@@ -19,7 +19,7 @@ export interface InvoiceListItem {
     /** The unique identifier for the invoice. */
     id: string;
     /** Optional line items that break down the invoice total into individual charges. */
-    line_items: InvoiceListItem.LineItems.Item[];
+    line_items: LegacyInvoiceListItem.LineItems.Item[];
     /** The sequential invoice number for display purposes. */
     number: string;
     /** Whether a payment on this invoice is still clearing. True while a delayed payment method such as ACH or SEPA settles, during which the invoice stays open and is not marked past due. */
@@ -27,10 +27,10 @@ export interface InvoiceListItem {
     /** The current payment status of the invoice, such as draft, open, paid, or void. */
     status: Whop.InvoiceStatuses;
     /** The user this invoice is addressed to. Null if the user account has been removed. */
-    user: InvoiceListItem.User | null;
+    user: LegacyInvoiceListItem.User | null;
 }
 
-export namespace InvoiceListItem {
+export namespace LegacyInvoiceListItem {
     /**
      * The plan that this invoice charges for.
      */

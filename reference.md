@@ -16467,7 +16467,7 @@ const response = page.response;
 </details>
 
 ## Invoices
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.InvoiceListItem, Whop.ListInvoicesResponse&gt;</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Invoice, Whop.ListInvoicesResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16479,10 +16479,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Returns a paginated list of invoices for an account, with optional filtering by product, status, collection method, and creation date.
-
-Required permissions:
- - `invoice:basic:read`
+Lists receipt-backed invoices for accounts the caller can read. Legacy invoices are excluded.
 </dd>
 </dl>
 </dd>
@@ -16497,25 +16494,13 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.invoices.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+const pageableResponse = await client.invoices.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.invoices.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+let page = await client.invoices.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -16569,13 +16554,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create an invoice for a customer. The invoice can be charged automatically using a stored payment method, or sent to the customer for manual payment.
-
-Required permissions:
- - `invoice:create`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Creates a draft invoice backed by a receipt, with saved items, quantities, prices, and recipients. Issue the draft to resolve final tax and open the invoice. The pay_ ID stays the same when paid.
 </dd>
 </dl>
 </dd>
@@ -16592,11 +16571,7 @@ Required permissions:
 ```typescript
 await client.invoices.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    collection_method: "send_invoice",
-    plan: {},
-    product: {
-        title: "title"
-    }
+    items: []
 });
 
 ```
@@ -16645,13 +16620,7 @@ await client.invoices.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing invoice.
-
-Required permissions:
- - `invoice:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Retrieves a receipt-backed invoice by its pay_ ID.
 </dd>
 </dl>
 </dd>
@@ -16667,7 +16636,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.retrieve({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16704,74 +16673,6 @@ await client.invoices.retrieve({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">delete</a>({ ...params }) -> boolean</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a draft invoice.
-
-Required permissions:
- - `invoice:update`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.invoices.delete({
-    id: "inv_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.DeleteInvoicesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `InvoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">update</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
@@ -16784,13 +16685,7 @@ await client.invoices.delete({
 <dl>
 <dd>
 
-Update a draft invoice's details.
-
-Required permissions:
- - `invoice:update`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Updates draft invoice items and billing fields. Recipient-only updates are also allowed on unpaid invoices. Edit customer contact details through the member API.
 </dd>
 </dl>
 </dd>
@@ -16806,7 +16701,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.update({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16843,7 +16738,7 @@ await client.invoices.update({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markPaid</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">issue</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -16855,10 +16750,7 @@ await client.invoices.update({
 <dl>
 <dd>
 
-Mark an open invoice as paid when payment was collected outside of Whop.
-
-Required permissions:
- - `invoice:update`
+Resolves final tax and opens a draft invoice. Issuing an open invoice again retains its totals.
 </dd>
 </dl>
 </dd>
@@ -16873,8 +16765,8 @@ Required permissions:
 <dd>
 
 ```typescript
-await client.invoices.markPaid({
-    id: "inv_xxxxxxxxxxxxxx"
+await client.invoices.issue({
+    id: "id"
 });
 
 ```
@@ -16891,7 +16783,7 @@ await client.invoices.markPaid({
 <dl>
 <dd>
 
-**request:** `Whop.MarkPaidInvoicesRequest` 
+**request:** `Whop.IssueInvoicesRequest` 
     
 </dd>
 </dl>
@@ -16911,7 +16803,7 @@ await client.invoices.markPaid({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markUncollectible</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markUncollectible</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -16923,10 +16815,7 @@ await client.invoices.markPaid({
 <dl>
 <dd>
 
-Mark an open invoice as uncollectible when payment is not expected.
-
-Required permissions:
- - `invoice:update`
+Marks an open invoice as uncollectible. Reminders stop, but the customer can still pay it.
 </dd>
 </dl>
 </dd>
@@ -16942,7 +16831,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.markUncollectible({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16979,7 +16868,7 @@ await client.invoices.markUncollectible({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">resend</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">void</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -16991,78 +16880,7 @@ await client.invoices.markUncollectible({
 <dl>
 <dd>
 
-Resend the notification email for an existing invoice to the customer.
-
-Required permissions:
- - `invoice:update`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.invoices.resend({
-    id: "inv_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.ResendInvoicesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `InvoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">void</a>({ ...params }) -> boolean</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Void an open invoice so it can no longer be paid. Voiding is permanent and cannot be undone.
-
-Required permissions:
- - `invoice:update`
+Voids a draft or unpaid invoice.
 </dd>
 </dl>
 </dd>
@@ -17078,7 +16896,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.void({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```

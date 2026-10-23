@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "inv_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface VoidInvoicesRequest {
-    /** The unique identifier of the invoice to void. */
+    /** The invoice's pay_ ID. */
     id: string;
 }
