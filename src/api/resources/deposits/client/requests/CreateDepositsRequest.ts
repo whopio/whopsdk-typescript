@@ -11,6 +11,14 @@ export interface CreateDepositsRequest {
     amount?: number;
     /** Account ID to fund, `biz_` or `user_`. Any business resolves without authentication; a user account resolves only for that same authenticated user. */
     destination: string;
+    /** Custom metadata to attach to the payment the charge creates. Ignored unless `payment_method_id` is provided. */
+    metadata?: Record<string, CreateDepositsRequest.Metadata.Value | null> | null;
     /** A saved payment method of the business to charge for `amount`, prefixed `payt_`. Save one with Create setup intent and `owner_id` set to the account. Only for a `biz_` destination, and requires authentication with the `payment:charge` scope. A declined charge fails the request with 400. */
     payment_method_id?: string;
+}
+
+export namespace CreateDepositsRequest {
+    export namespace Metadata {
+        export type Value = string | number | boolean;
+    }
 }

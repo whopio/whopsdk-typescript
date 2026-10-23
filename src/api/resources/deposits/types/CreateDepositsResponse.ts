@@ -80,6 +80,8 @@ export namespace CreateDepositsResponse {
          * The charge to a saved payment method. Null unless `payment_method_id` was passed.
          */
         export interface Card {
+            /** The custom metadata attached to the payment the charge created. Null if none was passed. */
+            metadata: Record<string, string | null> | null;
             /** The payment the charge created, prefixed `pay_`. Retrieve it, or listen for `payment.succeeded`, to confirm the funds landed. */
             payment_id: string;
             /** The saved payment method that was charged, prefixed `payt_`. */

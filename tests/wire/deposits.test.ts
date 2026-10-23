@@ -35,7 +35,11 @@ describe("DepositsClient", () => {
                         },
                     ],
                 },
-                card: { payment_id: "pay_xxxxxxxxxxxxxx", payment_method_id: "payt_xxxxxxxxxxxxxx" },
+                card: {
+                    metadata: { attempt_id: "att_8f2k1" },
+                    payment_id: "pay_xxxxxxxxxxxxxx",
+                    payment_method_id: "payt_xxxxxxxxxxxxxx",
+                },
                 crypto: [
                     {
                         deposit_address: "soladdr",
