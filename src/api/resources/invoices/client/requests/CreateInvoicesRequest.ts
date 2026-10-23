@@ -28,7 +28,7 @@ export interface CreateInvoicesRequest {
     member_id?: string | null;
     /** Up to 50 caller-owned string key/value pairs. */
     metadata?: Record<string, string>;
-    /** A saved payment method belonging to the member. */
+    /** A saved payment method belonging to the member. Issuing the invoice charges it. */
     payment_method_id?: string | null;
     /** Email addresses saved for invoice delivery, independent of the billed customer. Saving them sends no email. Defaults to the customer email when omitted on create. Can be updated on draft, open, or uncollectible invoices. */
     recipient_emails?: string[];
