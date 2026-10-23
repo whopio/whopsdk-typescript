@@ -25,7 +25,9 @@ export namespace PaymentRuleField {
         CardFunding: "card_funding",
         CardBin: "card_bin",
         CustomerEmail: "customer_email",
+        EmailDomain: "email_domain",
         IpAddress: "ip_address",
+        IpCountry: "ip_country",
     } as const;
     export type Field = (typeof Field)[keyof typeof Field];
     export type Operators = Operators.Item[];

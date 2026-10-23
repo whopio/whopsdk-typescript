@@ -64,7 +64,9 @@ export namespace ReplacePaymentRulesRequest {
                     CardFunding: "card_funding",
                     CardBin: "card_bin",
                     CustomerEmail: "customer_email",
+                    EmailDomain: "email_domain",
                     IpAddress: "ip_address",
+                    IpCountry: "ip_country",
                 } as const;
                 export type Field = (typeof Field)[keyof typeof Field];
                 /** How the payment attribute is compared to the value. */
