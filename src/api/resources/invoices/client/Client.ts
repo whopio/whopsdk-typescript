@@ -16,6 +16,11 @@ export declare namespace InvoicesClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * An Invoice is a receipt with an invoice number. Create a draft from variant-backed items, set its recipient and due date, and edit it until it is sent. Its `pay_` ID is also the payment ID when collected.
+ *
+ * Draft creation does not create access or charge the buyer. The recipient's contact details live on the account's member. Financial fields and caller metadata can only be edited in draft.
+ */
 export class InvoicesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<InvoicesClient.Options>;
 
@@ -24,10 +29,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Returns a paginated list of invoices for an account, with optional filtering by product, status, collection method, and creation date.
-     *
-     * Required permissions:
-     *  - `invoice:basic:read`
+     * Lists receipt-backed invoices for accounts the caller can read. Legacy invoices are excluded.
      *
      * @param {Whop.ListInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -36,62 +38,47 @@ export class InvoicesClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.invoices.list({
-     *         first: 42,
-     *         last: 42,
-     *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z",
-     *         account_id: "biz_xxxxxxxxxxxxxx"
-     *     })
+     *     await client.invoices.list()
      */
     public async list(
         request: Whop.ListInvoicesRequest = {},
         requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.Page<Whop.InvoiceListItem, Whop.ListInvoicesResponse>> {
+    ): Promise<core.Page<Whop.Invoice, Whop.ListInvoicesResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListInvoicesRequest): Promise<core.WithRawResponse<Whop.ListInvoicesResponse>> => {
                 const {
-                    after,
-                    before,
-                    first,
-                    last,
-                    direction,
-                    product_ids: productIds,
-                    collection_methods: collectionMethods,
-                    statuses,
-                    order,
-                    created_before: createdBefore,
-                    created_after: createdAfter,
                     account_id: accountId,
+                    status,
+                    overdue,
+                    member_id: memberId,
+                    product_id: productId,
+                    created_after: createdAfter,
+                    created_before: createdBefore,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
-                    direction: direction != null ? direction : undefined,
-                    product_ids: productIds,
-                    collection_methods: Array.isArray(collectionMethods)
-                        ? collectionMethods.map((item) => item)
-                        : collectionMethods != null
-                          ? collectionMethods
-                          : undefined,
-                    statuses: Array.isArray(statuses)
-                        ? statuses.map((item) => item)
-                        : statuses != null
-                          ? statuses
-                          : undefined,
-                    order: order != null ? order : undefined,
-                    created_before: createdBefore != null ? createdBefore : undefined,
-                    created_after: createdAfter != null ? createdAfter : undefined,
                     account_id: accountId,
+                    status: status != null ? status : undefined,
+                    overdue,
+                    member_id: memberId,
+                    product_id: productId,
+                    created_after: createdAfter != null ? createdAfter : undefined,
+                    created_before: createdBefore != null ? createdBefore : undefined,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                    first,
+                    after,
+                    last,
+                    before,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -99,7 +86,7 @@ export class InvoicesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -139,15 +126,6 @@ export class InvoicesClient {
                             throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         case 404:
                             throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -160,7 +138,7 @@ export class InvoicesClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.InvoiceListItem, Whop.ListInvoicesResponse>({
+        return new core.Page<Whop.Invoice, Whop.ListInvoicesResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -174,13 +152,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Create an invoice for a customer. The invoice can be charged automatically using a stored payment method, or sent to the customer for manual payment.
-     *
-     * Required permissions:
-     *  - `invoice:create`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `payment:basic:read`
+     * Creates a draft invoice backed by a receipt, with saved items, quantities, prices, and recipients. Issue the draft to resolve final tax and open the invoice. The pay_ ID stays the same when paid.
      *
      * @param {Whop.CreateInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -188,21 +160,14 @@ export class InvoicesClient {
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.invoices.create({
      *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         collection_method: "send_invoice",
-     *         plan: {},
-     *         product: {
-     *             title: "title"
-     *         }
+     *         items: []
      *     })
      */
     public create(
@@ -221,7 +186,7 @@ export class InvoicesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -257,14 +222,8 @@ export class InvoicesClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -278,30 +237,20 @@ export class InvoicesClient {
     }
 
     /**
-     * Retrieves the details of an existing invoice.
-     *
-     * Required permissions:
-     *  - `invoice:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `payment:basic:read`
+     * Retrieves a receipt-backed invoice by its pay_ ID.
      *
      * @param {Whop.RetrieveInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.invoices.retrieve({
-     *         id: "inv_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retrieve(
@@ -321,7 +270,7 @@ export class InvoicesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -348,20 +297,12 @@ export class InvoicesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -375,107 +316,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Delete a draft invoice.
-     *
-     * Required permissions:
-     *  - `invoice:update`
-     *
-     * @param {Whop.DeleteInvoicesRequest} request
-     * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.invoices.delete({
-     *         id: "inv_xxxxxxxxxxxxxx"
-     *     })
-     */
-    public delete(
-        request: Whop.DeleteInvoicesRequest,
-        requestOptions?: InvoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<boolean> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
-    }
-
-    private async __delete(
-        request: Whop.DeleteInvoicesRequest,
-        requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<boolean>> {
-        const { id } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                `invoices/${core.url.encodePathParam(id)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as boolean, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/invoices/{id}");
-    }
-
-    /**
-     * Update a draft invoice's details.
-     *
-     * Required permissions:
-     *  - `invoice:update`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `payment:basic:read`
+     * Updates draft invoice items and billing fields. Recipient-only updates are also allowed on unpaid invoices. Edit customer contact details through the member API.
      *
      * @param {Whop.UpdateInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -483,16 +324,12 @@ export class InvoicesClient {
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.invoices.update({
-     *         id: "inv_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public update(
@@ -512,7 +349,7 @@ export class InvoicesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -548,14 +385,6 @@ export class InvoicesClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -569,47 +398,42 @@ export class InvoicesClient {
     }
 
     /**
-     * Mark an open invoice as paid when payment was collected outside of Whop.
+     * Resolves final tax and opens a draft invoice. Issuing an open invoice again retains its totals.
      *
-     * Required permissions:
-     *  - `invoice:update`
-     *
-     * @param {Whop.MarkPaidInvoicesRequest} request
+     * @param {Whop.IssueInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.invoices.markPaid({
-     *         id: "inv_xxxxxxxxxxxxxx"
+     *     await client.invoices.issue({
+     *         id: "id"
      *     })
      */
-    public markPaid(
-        request: Whop.MarkPaidInvoicesRequest,
+    public issue(
+        request: Whop.IssueInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<boolean> {
-        return core.HttpResponsePromise.fromPromise(this.__markPaid(request, requestOptions));
+    ): core.HttpResponsePromise<Whop.Invoice> {
+        return core.HttpResponsePromise.fromPromise(this.__issue(request, requestOptions));
     }
 
-    private async __markPaid(
-        request: Whop.MarkPaidInvoicesRequest,
+    private async __issue(
+        request: Whop.IssueInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<boolean>> {
+    ): Promise<core.WithRawResponse<Whop.Invoice>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -619,7 +443,7 @@ export class InvoicesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
                         .api,
-                `invoices/${core.url.encodePathParam(id)}/mark_paid`,
+                `invoices/${core.url.encodePathParam(id)}/issue`,
             ),
             method: "POST",
             headers: _headers,
@@ -631,7 +455,7 @@ export class InvoicesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as boolean, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Invoice, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -644,12 +468,8 @@ export class InvoicesClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -659,14 +479,11 @@ export class InvoicesClient {
             }
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/invoices/{id}/mark_paid");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/invoices/{id}/issue");
     }
 
     /**
-     * Mark an open invoice as uncollectible when payment is not expected.
-     *
-     * Required permissions:
-     *  - `invoice:update`
+     * Marks an open invoice as uncollectible. Reminders stop, but the customer can still pay it.
      *
      * @param {Whop.MarkUncollectibleInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -674,36 +491,33 @@ export class InvoicesClient {
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.invoices.markUncollectible({
-     *         id: "inv_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public markUncollectible(
         request: Whop.MarkUncollectibleInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<boolean> {
+    ): core.HttpResponsePromise<Whop.Invoice> {
         return core.HttpResponsePromise.fromPromise(this.__markUncollectible(request, requestOptions));
     }
 
     private async __markUncollectible(
         request: Whop.MarkUncollectibleInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<boolean>> {
+    ): Promise<core.WithRawResponse<Whop.Invoice>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -725,7 +539,7 @@ export class InvoicesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as boolean, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Invoice, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -736,14 +550,8 @@ export class InvoicesClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -762,104 +570,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Resend the notification email for an existing invoice to the customer.
-     *
-     * Required permissions:
-     *  - `invoice:update`
-     *
-     * @param {Whop.ResendInvoicesRequest} request
-     * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.invoices.resend({
-     *         id: "inv_xxxxxxxxxxxxxx"
-     *     })
-     */
-    public resend(
-        request: Whop.ResendInvoicesRequest,
-        requestOptions?: InvoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<boolean> {
-        return core.HttpResponsePromise.fromPromise(this.__resend(request, requestOptions));
-    }
-
-    private async __resend(
-        request: Whop.ResendInvoicesRequest,
-        requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<boolean>> {
-        const { id } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                `invoices/${core.url.encodePathParam(id)}/resend`,
-            ),
-            method: "POST",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as boolean, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/invoices/{id}/resend");
-    }
-
-    /**
-     * Void an open invoice so it can no longer be paid. Voiding is permanent and cannot be undone.
-     *
-     * Required permissions:
-     *  - `invoice:update`
+     * Voids a draft or unpaid invoice.
      *
      * @param {Whop.VoidInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -867,36 +578,33 @@ export class InvoicesClient {
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.invoices.void({
-     *         id: "inv_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public void(
         request: Whop.VoidInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): core.HttpResponsePromise<boolean> {
+    ): core.HttpResponsePromise<Whop.Invoice> {
         return core.HttpResponsePromise.fromPromise(this.__void(request, requestOptions));
     }
 
     private async __void(
         request: Whop.VoidInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<boolean>> {
+    ): Promise<core.WithRawResponse<Whop.Invoice>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -918,7 +626,7 @@ export class InvoicesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as boolean, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Invoice, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -929,14 +637,8 @@ export class InvoicesClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

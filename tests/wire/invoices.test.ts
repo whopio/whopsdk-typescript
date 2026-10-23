@@ -18,26 +18,60 @@ describe("InvoicesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    created_at: "2023-12-01T05:00:00Z",
-                    current_plan: { currency: "usd", formatted_price: "$10.00", id: "plan_xxxxxxxxxxxxx" },
-                    due_date: "2023-12-01T05:00:00Z",
-                    email_address: "customer@example.com",
-                    fetch_invoice_token: "eyJhbGciOiJIUzI1NiJ9...",
-                    id: "inv_xxxxxxxxxxxxxx",
+                    account_id: "biz_xxxxxxxxxxxxxx",
+                    amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    billing_address: {
+                        city: "Austin",
+                        country: "US",
+                        line1: "1114 Bouldin Ave",
+                        line2: "Unit B",
+                        name: "Dana Whitfield",
+                        postal_code: "78704",
+                        state: "TX",
+                    },
+                    buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    buyer_fee_percentage: 0,
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    customer_name: "Dana",
+                    due_at: "due_at",
+                    email_address: "marcus@shinetime.example",
+                    id: "pay_xxxxxxxxxxxxxx",
+                    invoice_prefix: "invoice_prefix",
                     line_items: [
-                        { label: "Platform subscription", position: 42, quantity: 6.9, total: 6.9, unit_price: 6.9 },
+                        {
+                            discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            id: "li_xxxxxxxxxxxxxx",
+                            label: "Ceramic Coating Package",
+                            plan_id: "plan_xxxxxxxxxxxxxx",
+                            product_id: "prod_xxxxxxxxxxxxxx",
+                            quantity: 1,
+                            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
                     ],
-                    number: "#0001",
-                    payment_processing: true,
+                    mailing_address_id: "mailing_address_id",
+                    member_id: "mber_xxxxxxxxxxxxxx",
+                    metadata: { key: "value" },
+                    number: "#xxxxxxxx",
+                    object: "invoice",
+                    overdue: false,
+                    paid_at: "paid_at",
+                    payment_method_id: "payment_method_id",
+                    recipient_emails: ["marcus@shinetime.example"],
                     status: "draft",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    totals_status: "estimated",
+                    updated_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -50,13 +84,7 @@ describe("InvoicesClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.invoices.list({
-            first: 42,
-            last: 42,
-            created_before: "2023-12-01T05:00:00Z",
-            created_after: "2023-12-01T05:00:00Z",
-            account_id: "biz_xxxxxxxxxxxxxx",
-        });
+        const page = await client.invoices.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -140,63 +168,6 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.list();
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.list();
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.list();
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -206,50 +177,55 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", items: [] };
         const rawResponseBody = {
-            automatically_finalizes_at: "2023-12-01T05:00:00Z",
-            charge_buyer_fee: true,
-            collection_method: "send_invoice",
-            company: { id: "biz_xxxxxxxxxxxxxx" },
-            created_at: "2023-12-01T05:00:00Z",
-            current_plan: {
-                currency: "usd",
-                description: "Monthly access to all premium analytics dashboards and data exports.",
-                formatted_price: "$10.00",
-                id: "plan_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
-            customer_name: "Jane Doe",
-            due_date: "2023-12-01T05:00:00Z",
-            email_address: "customer@example.com",
-            fetch_invoice_token: "eyJhbGciOiJIUzI1NiJ9...",
-            id: "inv_xxxxxxxxxxxxxx",
-            line_items: [{ label: "Platform subscription", position: 42, quantity: 6.9, total: 6.9, unit_price: 6.9 }],
-            mailing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                phone: "phone",
-                postal_code: "postal_code",
-                state: "state",
-            },
-            member: { id: "id" },
-            number: "#0001",
-            pay_online_url: "pay_online_url",
-            payment: { id: "pay_xxxxxxxxxxxxxx" },
-            payment_processing: true,
-            product: { id: "prod_xxxxxxxxxxxxx", title: "Pickaxe Analytics" },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
             status: "draft",
-            subscription_billing_anchor_at: "2023-12-01T05:00:00Z",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
         };
 
         server
@@ -263,11 +239,7 @@ describe("InvoicesClient", () => {
 
         const response = await client.invoices.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            collection_method: "send_invoice",
-            plan: {},
-            product: {
-                title: "title",
-            },
+            items: [],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -281,12 +253,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
+        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -301,11 +268,14 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
+                items: [
+                    {
+                        key: "value",
+                    },
+                    {
+                        key: "value",
+                    },
+                ],
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -319,12 +289,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
+        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -339,11 +304,14 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
+                items: [
+                    {
+                        key: "value",
+                    },
+                    {
+                        key: "value",
+                    },
+                ],
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -357,12 +325,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
+        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -377,11 +340,14 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
+                items: [
+                    {
+                        key: "value",
+                    },
+                    {
+                        key: "value",
+                    },
+                ],
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -395,12 +361,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
+        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -408,134 +369,23 @@ describe("InvoicesClient", () => {
             .post("/invoices")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(404)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
+                items: [
+                    {
+                        key: "value",
+                    },
+                    {
+                        key: "value",
+                    },
+                ],
             });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("create (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.create({
-                account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("create (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.create({
-                account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("create (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {
-            account_id: "account_id",
-            collection_method: "send_invoice",
-            plan: {},
-            product: { title: "title" },
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.create({
-                account_id: "account_id",
-                collection_method: "send_invoice",
-                plan: {},
-                product: {
-                    title: "title",
-                },
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -549,81 +399,64 @@ describe("InvoicesClient", () => {
         });
 
         const rawResponseBody = {
-            automatically_finalizes_at: "2023-12-01T05:00:00Z",
-            charge_buyer_fee: true,
-            collection_method: "send_invoice",
-            company: { id: "biz_xxxxxxxxxxxxxx" },
-            created_at: "2023-12-01T05:00:00Z",
-            current_plan: {
-                currency: "usd",
-                description: "Monthly access to all premium analytics dashboards and data exports.",
-                formatted_price: "$10.00",
-                id: "plan_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
-            customer_name: "Jane Doe",
-            due_date: "2023-12-01T05:00:00Z",
-            email_address: "customer@example.com",
-            fetch_invoice_token: "eyJhbGciOiJIUzI1NiJ9...",
-            id: "inv_xxxxxxxxxxxxxx",
-            line_items: [{ label: "Platform subscription", position: 42, quantity: 6.9, total: 6.9, unit_price: 6.9 }],
-            mailing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                phone: "phone",
-                postal_code: "postal_code",
-                state: "state",
-            },
-            member: { id: "id" },
-            number: "#0001",
-            pay_online_url: "pay_online_url",
-            payment: { id: "pay_xxxxxxxxxxxxxx" },
-            payment_processing: true,
-            product: { id: "prod_xxxxxxxxxxxxx", title: "Pickaxe Analytics" },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
             status: "draft",
-            subscription_billing_anchor_at: "2023-12-01T05:00:00Z",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
         };
 
-        server
-            .mockEndpoint()
-            .get("/invoices/inv_xxxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/invoices/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.invoices.retrieve({
-            id: "inv_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -644,7 +477,7 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -665,7 +498,7 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("retrieve (5)", async () => {
+    test("retrieve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -686,242 +519,6 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("retrieve (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retrieve (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retrieve (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/invoices/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
-    test("delete (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = true;
-
-        server
-            .mockEndpoint()
-            .delete("/invoices/inv_xxxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.invoices.delete({
-            id: "inv_xxxxxxxxxxxxxx",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("delete (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("delete (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("delete (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("delete (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("delete (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("delete (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("delete (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -933,48 +530,58 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            automatically_finalizes_at: "2023-12-01T05:00:00Z",
-            charge_buyer_fee: true,
-            collection_method: "send_invoice",
-            company: { id: "biz_xxxxxxxxxxxxxx" },
-            created_at: "2023-12-01T05:00:00Z",
-            current_plan: {
-                currency: "usd",
-                description: "Monthly access to all premium analytics dashboards and data exports.",
-                formatted_price: "$10.00",
-                id: "plan_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
-            customer_name: "Jane Doe",
-            due_date: "2023-12-01T05:00:00Z",
-            email_address: "customer@example.com",
-            fetch_invoice_token: "eyJhbGciOiJIUzI1NiJ9...",
-            id: "inv_xxxxxxxxxxxxxx",
-            line_items: [{ label: "Platform subscription", position: 42, quantity: 6.9, total: 6.9, unit_price: 6.9 }],
-            mailing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                phone: "phone",
-                postal_code: "postal_code",
-                state: "state",
-            },
-            member: { id: "id" },
-            number: "#0001",
-            pay_online_url: "pay_online_url",
-            payment: { id: "pay_xxxxxxxxxxxxxx" },
-            payment_processing: true,
-            product: { id: "prod_xxxxxxxxxxxxx", title: "Pickaxe Analytics" },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
             status: "draft",
-            subscription_billing_anchor_at: "2023-12-01T05:00:00Z",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
         };
 
         server
             .mockEndpoint()
-            .patch("/invoices/inv_xxxxxxxxxxxxxx")
+            .patch("/invoices/id")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -982,7 +589,7 @@ describe("InvoicesClient", () => {
             .build();
 
         const response = await client.invoices.update({
-            id: "inv_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -1071,119 +678,7 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("update (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/invoices/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("update (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/invoices/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("update (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/invoices/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("update (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/invoices/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
-    test("markPaid (1)", async () => {
+    test("issue (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1193,23 +688,71 @@ describe("InvoicesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = true;
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
+            status: "draft",
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
 
         server
             .mockEndpoint()
-            .post("/invoices/inv_xxxxxxxxxxxxxx/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.invoices.markPaid({
-            id: "inv_xxxxxxxxxxxxxx",
+        const response = await client.invoices.issue({
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("markPaid (2)", async () => {
+    test("issue (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1223,20 +766,20 @@ describe("InvoicesClient", () => {
 
         server
             .mockEndpoint()
-            .post("/invoices/id/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
             .statusCode(400)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.invoices.markPaid({
+            return await client.invoices.issue({
                 id: "id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("markPaid (3)", async () => {
+    test("issue (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1250,20 +793,20 @@ describe("InvoicesClient", () => {
 
         server
             .mockEndpoint()
-            .post("/invoices/id/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.invoices.markPaid({
+            return await client.invoices.issue({
                 id: "id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("markPaid (4)", async () => {
+    test("issue (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1277,20 +820,20 @@ describe("InvoicesClient", () => {
 
         server
             .mockEndpoint()
-            .post("/invoices/id/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.invoices.markPaid({
+            return await client.invoices.issue({
                 id: "id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("markPaid (5)", async () => {
+    test("issue (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1304,20 +847,20 @@ describe("InvoicesClient", () => {
 
         server
             .mockEndpoint()
-            .post("/invoices/id/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.invoices.markPaid({
+            return await client.invoices.issue({
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("markPaid (6)", async () => {
+    test("issue (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1331,71 +874,17 @@ describe("InvoicesClient", () => {
 
         server
             .mockEndpoint()
-            .post("/invoices/id/mark_paid")
+            .post("/invoices/id/issue")
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.invoices.markPaid({
+            return await client.invoices.issue({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("markPaid (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/mark_paid")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.markPaid({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("markPaid (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/mark_paid")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.markPaid({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("markUncollectible (1)", async () => {
@@ -1408,18 +897,66 @@ describe("InvoicesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = true;
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
+            status: "draft",
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
 
         server
             .mockEndpoint()
-            .post("/invoices/inv_xxxxxxxxxxxxxx/mark_uncollectible")
+            .post("/invoices/id/mark_uncollectible")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.invoices.markUncollectible({
-            id: "inv_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -1521,7 +1058,7 @@ describe("InvoicesClient", () => {
             .mockEndpoint()
             .post("/invoices/id/mark_uncollectible")
             .respondWith()
-            .statusCode(404)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -1529,303 +1066,7 @@ describe("InvoicesClient", () => {
             return await client.invoices.markUncollectible({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("markUncollectible (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/mark_uncollectible")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.markUncollectible({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("markUncollectible (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/mark_uncollectible")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.markUncollectible({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("markUncollectible (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/mark_uncollectible")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.markUncollectible({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
-    test("resend (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = true;
-
-        server
-            .mockEndpoint()
-            .post("/invoices/inv_xxxxxxxxxxxxxx/resend")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.invoices.resend({
-            id: "inv_xxxxxxxxxxxxxx",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("resend (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("resend (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("resend (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("resend (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("resend (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("resend (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("resend (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/invoices/id/resend")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.invoices.resend({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("void (1)", async () => {
@@ -1838,18 +1079,60 @@ describe("InvoicesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = true;
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
+            status: "draft",
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
 
-        server
-            .mockEndpoint()
-            .post("/invoices/inv_xxxxxxxxxxxxxx/void")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.invoices.void({
-            id: "inv_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -1929,75 +1212,12 @@ describe("InvoicesClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.invoices.void({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("void (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("void (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("void (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/invoices/id/void").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.invoices.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });
