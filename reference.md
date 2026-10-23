@@ -7280,7 +7280,7 @@ await client.cards.list();
 <dl>
 <dd>
 
-Issues a virtual card, or applies for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
+Issues a virtual card, or applies for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved. An account whose application was denied or canceled applies again the same way, replacing that application.
 </dd>
 </dl>
 </dd>
