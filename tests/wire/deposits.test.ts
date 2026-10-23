@@ -31,7 +31,7 @@ describe("DepositsClient", () => {
                             deposit_reference: "SHINE-1042",
                             rails: ["ach"],
                             routing_number: "021214891",
-                            swift_bic: "CRBAUS33",
+                            swift_bic: "CHASUS33XXX",
                         },
                     ],
                 },
