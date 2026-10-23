@@ -6246,26 +6246,20 @@ describe("FeesClient", () => {
                     percentage: 2.9,
                     region: "usa",
                     regions: {
-                        key: {
+                        in: {
                             default: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 2.9,
                             },
-                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            maximum: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            minimum: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            percentage: null,
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 2.9,
                             reset: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 2.9,
                             },
-                            source: null,
+                            source: "default",
                         },
                     },
                     reset: {
@@ -14948,26 +14942,20 @@ describe("FeesClient", () => {
                     percentage: 2.9,
                     region: "usa",
                     regions: {
-                        key: {
+                        in: {
                             default: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 2.9,
                             },
-                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                            maximum: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            minimum: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            percentage: null,
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 2.9,
                             reset: {
-                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 2.9,
                             },
-                            source: null,
+                            source: "default",
                         },
                     },
                     reset: {
