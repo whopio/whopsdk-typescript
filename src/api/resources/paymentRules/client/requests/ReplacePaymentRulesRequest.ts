@@ -61,6 +61,7 @@ export namespace ReplacePaymentRulesRequest {
                     AmountInUsd: "amount_in_usd",
                     CardCountry: "card_country",
                     CardBrand: "card_brand",
+                    CardFunding: "card_funding",
                     CardBin: "card_bin",
                     CustomerEmail: "customer_email",
                     IpAddress: "ip_address",
