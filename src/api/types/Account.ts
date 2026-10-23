@@ -30,6 +30,8 @@ export interface Account {
     country: string | null;
     /** When the account was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** Distinct customers with a paid receipt at the account in the last 30 days, refreshed every few hours. Computed only on `retrieve` for callers with `stats:read` on the account; `null` otherwise, and when the count is unavailable. */
+    customers_l30d: number | null;
     /** Account promotional description. */
     description: string | null;
     /** How many team members report to the business directly, with no manager above them. Present on single-account reads. */
