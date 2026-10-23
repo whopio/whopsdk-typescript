@@ -10,6 +10,6 @@
 export interface UpdateAdPixelsRequest {
     /** Ad pixel ID, prefixed `adpx_`. */
     id: string;
-    /** An access token that can send events to the pixel on the ad platform: a Meta Conversions API access token or a TikTok Events API access token. Whop never returns it. */
+    /** A credential that can send events to the pixel on the ad platform: a Meta Conversions API access token, a TikTok Events API access token, or for `google`, the JSON key of a Google Cloud service account. The service account needs Standard access to the Google Ads account, and its project needs the Google Ads API and the Data Manager API turned on and Explorer access or higher to the Google Ads API. Use a service account made only for Whop, with no roles in its project. Whop never returns it. */
     access_token: string;
 }
