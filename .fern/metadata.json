@@ -25,7 +25,7 @@
             }
         }
     },
-    "originGitCommit": "0560e6a97334bccb4faf2534e6f09cf9183afca7",
+    "originGitCommit": "fd942c6a778cc22519bb33aefa8c3f9ba99625f0",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "2.6.0",
