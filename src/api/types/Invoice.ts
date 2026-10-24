@@ -8,6 +8,8 @@ export interface Invoice {
     billing_address: Whop.PaymentAddress | null;
     buyer_fee_amount: Whop.Money;
     buyer_fee_percentage: number;
+    /** A signed link that opens this invoice in a checkout session so the buyer can pay it: pass it as `link` to `POST /checkout_sessions`. Present once the invoice is issued and open; null while it is a draft, once it is paid or void, for an invoice with no product, and when you lack `payment:charge`. */
+    checkout_link: string | null;
     created_at: string;
     customer_name: string | null;
     due_at: string | null;
