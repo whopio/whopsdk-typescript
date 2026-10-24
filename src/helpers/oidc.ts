@@ -3,8 +3,10 @@
  *
  * `oidcToken` returns a function the client's `token` option accepts. The client calls it before
  * each request; it exchanges an identity token for a short-lived Whop access token, reuses that
- * token until shortly before it expires, and then exchanges a fresh identity token. Nothing about
- * it depends on generated client code, so it survives the client being regenerated.
+ * token until a random point 2 to 10 minutes before it expires, so processes that started together
+ * don't renew together, and then exchanges a fresh identity token. If that renewal fails, it keeps
+ * using the current token while it has more than 30 seconds left and tries again after a backoff.
+ * Nothing about it depends on generated client code, so it survives the client being regenerated.
  *
  * ```ts
  * import { WhopClient } from "@whop/sdk";
@@ -22,7 +24,12 @@ export const DEFAULT_OIDC_AUDIENCE = "https://api.whop.com";
 const DEFAULT_BASE_URL = "https://api.whop.com/api/v1";
 const GRANT_TYPE = "urn:ietf:params:oauth:grant-type:token-exchange";
 const ID_TOKEN_TYPE = "urn:ietf:params:oauth:token-type:id_token";
-const RENEW_BEFORE_EXPIRY_MS = 60_000;
+const RENEW_LEAD_MIN_MS = 2 * 60_000;
+const RENEW_LEAD_MAX_MS = 10 * 60_000;
+const EXPIRY_MARGIN_MS = 30_000;
+const FIRST_BACKOFF_MS = 2_000;
+const MAX_BACKOFF_MS = 60_000;
+const JITTER_FACTOR = 0.2;
 const HTTP_TIMEOUT_MS = 10_000;
 const GOOGLE_METADATA_IDENTITY_URL =
     "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity";
@@ -58,36 +65,77 @@ export interface IdentityTokenOptions {
 export class OidcTokenError extends Error {
     readonly status: number | undefined;
     readonly code: string | undefined;
+    /**
+     * When `oidcToken`'s function will exchange again. Until then it returns the current access token
+     * while that has more than 30 seconds left, and this error once it doesn't. Every error the
+     * function returns has it.
+     */
+    readonly retryAt: Date | undefined;
+    /** The error that failed the exchange when it wasn't an `OidcTokenError`, such as a network error. */
+    readonly cause?: unknown;
 
-    constructor(message: string, { status, code }: { status?: number; code?: string } = {}) {
+    constructor(
+        message: string,
+        { status, code, retryAt, cause }: { status?: number; code?: string; retryAt?: Date; cause?: unknown } = {},
+    ) {
         super(message);
         this.name = "OidcTokenError";
         this.status = status;
         this.code = code;
+        this.retryAt = retryAt;
+        if (cause !== undefined) {
+            this.cause = cause;
+        }
     }
 }
 
 /**
  * A `token` for the client that exchanges your provider's identity token for a Whop access token,
- * and renews it before it expires. Concurrent requests share one exchange.
+ * and renews it before it expires. Concurrent requests share one exchange and its result.
+ *
+ * After a failed exchange, it doesn't exchange again until the error's `retryAt`: the time the API
+ * sent in `Retry-After` or `RateLimit-Reset`, up to a minute away, or otherwise 2 seconds, doubling
+ * with each failure in a row up to a minute. Until then requests get the current access token while
+ * it has more than 30 seconds left, and the error once it doesn't.
  */
 export function oidcToken(options: OidcTokenOptions): () => Promise<string> {
     if (!options.roleId) {
         throw new OidcTokenError("Pass the role to assume as `roleId`.");
     }
 
-    let current: { token: string; renewAt: number } | undefined;
+    let current: AccessToken | undefined;
     let pending: Promise<string> | undefined;
+    let failure: Failure | undefined;
+
+    const validToken = (): string | undefined =>
+        current !== undefined && Date.now() < current.expiresAt - EXPIRY_MARGIN_MS ? current.token : undefined;
 
     return () => {
-        if (current !== undefined && Date.now() < current.renewAt) {
+        const now = Date.now();
+        if (current !== undefined && now < current.renewAt) {
             return Promise.resolve(current.token);
         }
+        if (failure !== undefined && now < failure.retryAt) {
+            const token = validToken();
+            return token === undefined ? Promise.reject(failure.error) : Promise.resolve(token);
+        }
         pending ??= exchange(options)
-            .then((exchanged) => {
-                current = exchanged;
-                return exchanged.token;
-            })
+            .then(
+                (exchanged) => {
+                    current = exchanged;
+                    failure = undefined;
+                    return exchanged.token;
+                },
+                (error: unknown) => {
+                    const failed = failureOf(error, (failure?.count ?? 0) + 1);
+                    failure = failed;
+                    const token = validToken();
+                    if (token === undefined) {
+                        throw failed.error;
+                    }
+                    return token;
+                },
+            )
             .finally(() => {
                 pending = undefined;
             });
@@ -152,7 +200,19 @@ export function googleCloudIdentityToken(options: IdentityTokenOptions = {}): ()
     };
 }
 
-async function exchange(options: OidcTokenOptions): Promise<{ token: string; renewAt: number }> {
+interface AccessToken {
+    token: string;
+    renewAt: number;
+    expiresAt: number;
+}
+
+interface Failure {
+    error: OidcTokenError;
+    retryAt: number;
+    count: number;
+}
+
+async function exchange(options: OidcTokenOptions): Promise<AccessToken> {
     const subjectToken = await options.identityToken();
     const baseUrl = (options.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, "");
     return withTimeout("The token exchange", async (signal) => {
@@ -175,13 +235,52 @@ async function exchange(options: OidcTokenOptions): Promise<{ token: string; ren
             throw new OidcTokenError(body?.error?.message ?? `The token exchange failed with ${response.status}.`, {
                 status: response.status,
                 code: body?.error?.code,
+                retryAt: retryAtFromHeaders(response.headers),
             });
         }
         if (typeof body?.access_token !== "string" || typeof body.expires_in !== "number") {
             throw new OidcTokenError("The token exchange returned no access token.", { status: response.status });
         }
-        return { token: body.access_token, renewAt: Date.now() + body.expires_in * 1000 - RENEW_BEFORE_EXPIRY_MS };
+        return accessToken(body.access_token, body.expires_in * 1000);
     });
+}
+
+function accessToken(token: string, lifetimeMs: number): AccessToken {
+    const lead = RENEW_LEAD_MIN_MS + Math.random() * (RENEW_LEAD_MAX_MS - RENEW_LEAD_MIN_MS);
+    const expiresAt = Date.now() + lifetimeMs;
+    return { token, renewAt: expiresAt - Math.min(lead, lifetimeMs / 2), expiresAt };
+}
+
+function failureOf(error: unknown, count: number): Failure {
+    if (error instanceof OidcTokenError && error.retryAt !== undefined) {
+        return { error, retryAt: error.retryAt.getTime(), count };
+    }
+    const backoff = Math.min(FIRST_BACKOFF_MS * 2 ** (count - 1), MAX_BACKOFF_MS);
+    const retryAt = new Date(Date.now() + backoff * (1 + (Math.random() - 0.5) * JITTER_FACTOR));
+    const cached =
+        error instanceof OidcTokenError
+            ? new OidcTokenError(error.message, { status: error.status, code: error.code, retryAt })
+            : new OidcTokenError(error instanceof Error ? error.message : String(error), { retryAt, cause: error });
+    return { error: cached, retryAt: retryAt.getTime(), count };
+}
+
+function retryAtFromHeaders(headers: Headers): Date | undefined {
+    const delay = [retryAfterDelay(headers.get("Retry-After")), resetDelay(headers.get("RateLimit-Reset"))].find(
+        (candidate) => candidate > 0,
+    );
+    return delay === undefined ? undefined : new Date(Date.now() + Math.min(delay, MAX_BACKOFF_MS));
+}
+
+function retryAfterDelay(value: string | null): number {
+    if (value === null) {
+        return Number.NaN;
+    }
+    const seconds = Number(value);
+    return Number.isNaN(seconds) ? Date.parse(value) - Date.now() : seconds * 1000;
+}
+
+function resetDelay(epochSeconds: string | null): number {
+    return epochSeconds === null ? Number.NaN : Number(epochSeconds) * 1000 - Date.now();
 }
 
 async function withTimeout<T>(request: string, send: (signal: AbortSignal) => Promise<T>): Promise<T> {
