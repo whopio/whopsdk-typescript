@@ -31,6 +31,8 @@ describe("InvoicesClient", () => {
                     },
                     buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     buyer_fee_percentage: 0,
+                    checkout_link:
+                        "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     customer_name: "Dana",
                     due_at: "due_at",
@@ -192,6 +194,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
@@ -412,6 +416,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
@@ -543,6 +549,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
@@ -702,6 +710,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
@@ -911,6 +921,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
@@ -1093,6 +1105,8 @@ describe("InvoicesClient", () => {
             },
             buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
             due_at: "due_at",
