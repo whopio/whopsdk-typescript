@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import {
     DEFAULT_OIDC_AUDIENCE,
     githubActionsIdentityToken,
@@ -19,6 +19,23 @@ function exchangeFetch(...tokens: string[]) {
     return vi.fn(async (_url: RequestInfo | URL, _init?: RequestInit) =>
         jsonResponse(200, { access_token: queue.shift(), token_type: "Bearer", expires_in: 3600 }),
     );
+}
+
+function rejectOnAbort(signal: AbortSignal | null | undefined, reject: (reason: unknown) => void) {
+    signal?.addEventListener("abort", () => reject(signal.reason));
+}
+
+async function stalledResponse(_url: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+    return new Promise((_resolve, reject) => rejectOnAbort(init?.signal, reject));
+}
+
+async function stalledBody(_url: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+    const body = new ReadableStream({
+        start(controller) {
+            rejectOnAbort(init?.signal, (reason) => controller.error(reason));
+        },
+    });
+    return new Response(body, { status: 200, headers: { "Content-Type": "application/json" } });
 }
 
 describe("oidcToken", () => {
@@ -131,7 +148,7 @@ describe("oidcToken", () => {
             maxRetries: 0,
         });
 
-        await whop.users.retrieve("user_xxxxxxxxxxxxx");
+        await whop.users.retrieve({ id: "user_xxxxxxxxxxxxx" });
 
         const apiCall = fetch.mock.calls.find(([url]) => String(url).includes("/users/"));
         expect(new Headers(apiCall?.[1]?.headers).get("Authorization")).toBe("Bearer whop-token-1");
@@ -183,5 +200,84 @@ describe("googleCloudIdentityToken", () => {
             "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https%3A%2F%2Fexample.com",
         );
         expect(new Headers(init?.headers).get("Metadata-Flavor")).toBe("Google");
+    });
+});
+
+describe("request timeouts", () => {
+    let timeout: MockInstance<typeof AbortSignal.timeout>;
+
+    beforeEach(() => {
+        const abortSignalTimeout = AbortSignal.timeout.bind(AbortSignal);
+        timeout = vi.spyOn(AbortSignal, "timeout").mockImplementation(() => abortSignalTimeout(1));
+    });
+
+    afterEach(() => {
+        vi.restoreAllMocks();
+        vi.unstubAllEnvs();
+    });
+
+    it("gives up on a stalled exchange after 10 seconds, and retries on the next request", async () => {
+        const fetch = vi
+            .fn()
+            .mockImplementationOnce(stalledResponse)
+            .mockResolvedValueOnce(jsonResponse(200, { access_token: "whop-token-1", expires_in: 3600 }));
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch });
+
+        const error = await token().catch((caught: unknown) => caught);
+        expect(error).toBeInstanceOf(OidcTokenError);
+        expect(error).toMatchObject({
+            status: undefined,
+            code: undefined,
+            message: "The token exchange timed out after 10 seconds.",
+        });
+        expect(timeout).toHaveBeenCalledWith(10_000);
+
+        await expect(token()).resolves.toBe("whop-token-1");
+    });
+
+    it("gives up on a token exchange whose response body stalls", async () => {
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch: vi.fn(stalledBody) });
+
+        const error = await token().catch((caught: unknown) => caught);
+        expect(error).toBeInstanceOf(OidcTokenError);
+        expect(error).toMatchObject({ status: undefined, message: "The token exchange timed out after 10 seconds." });
+    });
+
+    it("fails the client's request instead of waiting on a stalled exchange", async () => {
+        const fetch = vi.fn(stalledResponse);
+        const whop = new WhopClient({
+            token: oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch }),
+            fetch,
+            maxRetries: 0,
+        });
+
+        await expect(whop.users.retrieve({ id: "user_xxxxxxxxxxxxx" })).rejects.toBeInstanceOf(OidcTokenError);
+    });
+
+    it("gives up on a GitHub Actions identity token request that does not respond within 10 seconds", async () => {
+        vi.stubEnv("ACTIONS_ID_TOKEN_REQUEST_URL", "https://pipelines.actions.githubusercontent.com/abc/idtoken");
+        vi.stubEnv("ACTIONS_ID_TOKEN_REQUEST_TOKEN", "request-token");
+
+        const error = await githubActionsIdentityToken({ fetch: vi.fn(stalledBody) })().catch(
+            (caught: unknown) => caught,
+        );
+        expect(error).toBeInstanceOf(OidcTokenError);
+        expect(error).toMatchObject({
+            status: undefined,
+            message: "The GitHub Actions identity token request timed out after 10 seconds.",
+        });
+        expect(timeout).toHaveBeenCalledWith(10_000);
+    });
+
+    it("gives up on a Google Cloud metadata server that does not respond within 10 seconds", async () => {
+        const error = await googleCloudIdentityToken({ fetch: vi.fn(stalledResponse) })().catch(
+            (caught: unknown) => caught,
+        );
+        expect(error).toBeInstanceOf(OidcTokenError);
+        expect(error).toMatchObject({
+            status: undefined,
+            message: "The identity token request to the Google Cloud metadata server timed out after 10 seconds.",
+        });
+        expect(timeout).toHaveBeenCalledWith(10_000);
     });
 });
