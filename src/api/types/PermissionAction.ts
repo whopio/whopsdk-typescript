@@ -247,6 +247,7 @@ export const PermissionAction = {
     WebhookReceiveAds: "webhook_receive:ads",
     WebhookReceiveProducts: "webhook_receive:products",
     WebhookReceivePlans: "webhook_receive:plans",
+    WebhookReceiveDomains: "webhook_receive:domains",
     WebhookReceiveShipments: "webhook_receive:shipments",
     WebhookReceiveMembers: "webhook_receive:members",
     WebhookReceiveExports: "webhook_receive:exports",
