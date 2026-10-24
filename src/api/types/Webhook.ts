@@ -27,6 +27,8 @@ export interface Webhook {
     /** ID of the resource (account or app) this webhook is attached to. */
     resource_id: string;
     testable_events: Webhook.TestableEvents.Item[];
+    /** A label for this webhook endpoint, such as `Production`, shown in the dashboard. `null` if no title was set. */
+    title: string | null;
     /** Destination URL where webhook payloads are delivered via HTTP POST. */
     url: string;
     /** Secret key used to sign webhook payloads for verification. Include this in your HMAC validation logic. Returned on the create response and to interactive dashboard sessions; `null` for API-key and OAuth callers on later reads. */
