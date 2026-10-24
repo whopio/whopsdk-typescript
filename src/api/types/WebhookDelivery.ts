@@ -17,8 +17,19 @@ export interface WebhookDelivery {
     response_code: number;
     /** When the webhook was sent, as an ISO 8601 timestamp. */
     sent_at: string;
+    /** Outcome of this delivery attempt: `success` when the endpoint returned a 2xx response, `error` otherwise. */
+    status: WebhookDelivery.Status;
     /** Whether the endpoint acknowledged this attempt with a 2xx response. */
     success: boolean;
     /** Total time taken to send the webhook request, in seconds. */
     total_time: number;
+}
+
+export namespace WebhookDelivery {
+    /** Outcome of this delivery attempt: `success` when the endpoint returned a 2xx response, `error` otherwise. */
+    export const Status = {
+        Success: "success",
+        Error: "error",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }
