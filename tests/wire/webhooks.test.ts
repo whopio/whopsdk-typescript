@@ -684,12 +684,14 @@ describe("WebhooksClient", () => {
                     response_body: { ok: true },
                     response_code: 200,
                     sent_at: "2026-01-01T12:00:00.000Z",
+                    status: "success",
                     success: true,
                     total_time: 0.31,
                 },
             ],
             page_info: {
-                end_cursor: "WyJjdXJzb3IiLDFd",
+                end_cursor:
+                    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "start_cursor",
@@ -707,6 +709,7 @@ describe("WebhooksClient", () => {
         const expected = rawResponseBody;
         const page = await client.webhooks.listDeliveries({
             id: "id",
+            resource_id: "pay_xxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -716,6 +719,33 @@ describe("WebhooksClient", () => {
     });
 
     test("listDeliveries (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/webhooks/id/deliveries")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.webhooks.listDeliveries({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("listDeliveries (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -742,7 +772,7 @@ describe("WebhooksClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("listDeliveries (3)", async () => {
+    test("listDeliveries (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -769,7 +799,7 @@ describe("WebhooksClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("listDeliveries (4)", async () => {
+    test("listDeliveries (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,

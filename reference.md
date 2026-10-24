@@ -30727,7 +30727,7 @@ await client.webhooks.update({
 <dl>
 <dd>
 
-Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt.
+Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt. Filtered queries use a bounded read budget, so a page may be partial or empty. Continue with `page_info.end_cursor` while `page_info.has_next_page` is `true`.
 </dd>
 </dl>
 </dd>
@@ -30743,7 +30743,8 @@ Returns a paginated list of delivery attempts for a webhook, ordered by most rec
 
 ```typescript
 const pageableResponse = await client.webhooks.listDeliveries({
-    id: "id"
+    id: "id",
+    resource_id: "pay_xxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -30751,7 +30752,8 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.webhooks.listDeliveries({
-    id: "id"
+    id: "id",
+    resource_id: "pay_xxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
