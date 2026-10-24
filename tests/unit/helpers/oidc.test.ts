@@ -68,6 +68,22 @@ async function stalledBody(_url: RequestInfo | URL, init?: RequestInit): Promise
     return new Response(body, { status: 200, headers: { "Content-Type": "application/json" } });
 }
 
+function deferred<T>() {
+    let resolve: (value: T) => void = () => undefined;
+    const promise = new Promise<T>((settle) => {
+        resolve = settle;
+    });
+    return { promise, resolve };
+}
+
+const hung = () => new Promise<string>(() => undefined);
+
+const flush = () => new Promise<void>((resolve) => setImmediate(resolve));
+
+function withoutWaiting<T>(call: Promise<T>): Promise<T | "still waiting"> {
+    return Promise.race([call, flush().then(() => "still waiting" as const)]);
+}
+
 describe("oidcToken", () => {
     beforeEach(() => {
         vi.useFakeTimers({ toFake: ["Date"] });
@@ -109,7 +125,7 @@ describe("oidcToken", () => {
         expect(fetch.mock.calls[0][0]).toBe("https://sandbox-api.whop.com/api/v1/access_tokens/exchange");
     });
 
-    it("reuses the access token until shortly before it expires, then exchanges a fresh identity token", async () => {
+    it("reuses the access token until shortly before it expires, then exchanges a fresh identity token in the background", async () => {
         vi.spyOn(Math, "random").mockReturnValue(0);
         const fetch = exchangeFetch("whop-token-1", "whop-token-2");
         const identityToken = vi.fn().mockReturnValueOnce("id-token-1").mockReturnValueOnce("id-token-2");
@@ -118,9 +134,12 @@ describe("oidcToken", () => {
         await expect(token()).resolves.toBe("whop-token-1");
         vi.setSystemTime(secondsFromNow(58 * 60 - 1));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(1);
 
         vi.setSystemTime(secondsFromNow(58 * 60));
+        await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         await expect(token()).resolves.toBe("whop-token-2");
         expect(identityToken).toHaveBeenCalledTimes(2);
         expect(JSON.parse(String(fetch.mock.calls[1][1]?.body)).subject_token).toBe("id-token-2");
@@ -140,8 +159,14 @@ describe("oidcToken", () => {
 
         await token();
         vi.setSystemTime(secondsFromNow(renewsAfterSeconds - 0.001));
-        await expect(token()).resolves.toBe("whop-token-1");
+        await token();
+        await flush();
+        expect(fetch).toHaveBeenCalledTimes(1);
+
         vi.setSystemTime(secondsFromNow(renewsAfterSeconds));
+        await token();
+        await flush();
+        expect(fetch).toHaveBeenCalledTimes(2);
         await expect(token()).resolves.toBe("whop-token-2");
     });
 
@@ -155,8 +180,14 @@ describe("oidcToken", () => {
 
         await token();
         vi.setSystemTime(secondsFromNow(149.999));
-        await expect(token()).resolves.toBe("whop-token-1");
+        await token();
+        await flush();
+        expect(fetch).toHaveBeenCalledTimes(1);
+
         vi.setSystemTime(secondsFromNow(150));
+        await token();
+        await flush();
+        expect(fetch).toHaveBeenCalledTimes(2);
         await expect(token()).resolves.toBe("whop-token-2");
     });
 
@@ -295,12 +326,15 @@ describe("oidcToken", () => {
         elapsed += 54 * 60;
         vi.setSystemTime(secondsFromNow(elapsed));
         await token();
+        await flush();
         const exchanges = fetch.mock.calls.length;
         vi.setSystemTime(secondsFromNow(elapsed + 1.999));
         await token();
+        await flush();
         expect(fetch.mock.calls.length).toBe(exchanges);
         vi.setSystemTime(secondsFromNow(elapsed + 2));
         await token();
+        await flush();
         expect(fetch.mock.calls.length).toBe(exchanges + 1);
     });
 
@@ -386,15 +420,19 @@ describe("oidcToken", () => {
         await token();
         vi.setSystemTime(secondsFromNow(58 * 60));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(2);
 
         vi.setSystemTime(secondsFromNow(58 * 60 + 1.799));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(2);
 
         vi.setSystemTime(secondsFromNow(58 * 60 + 1.8));
-        await expect(token()).resolves.toBe("whop-token-2");
+        await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(3);
+        await expect(token()).resolves.toBe("whop-token-2");
     });
 
     it("fails with the last renewal's error and its retryAt once the token is 30 seconds from expiring", async () => {
@@ -405,12 +443,15 @@ describe("oidcToken", () => {
         await token();
         vi.setSystemTime(secondsFromNow(58 * 60));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         vi.setSystemTime(secondsFromNow(58 * 60 + 59.999));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(2);
 
         vi.setSystemTime(secondsFromNow(59 * 60));
         await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
         expect(fetch).toHaveBeenCalledTimes(3);
         vi.setSystemTime(secondsFromNow(59 * 60 + 29.999));
         await expect(token()).resolves.toBe("whop-token-1");
@@ -433,7 +474,7 @@ describe("oidcToken", () => {
         await expect(token()).rejects.toMatchObject({ status: 503, retryAt: secondsFromNow(59 * 60 + 32) });
     });
 
-    it("gives concurrent requests the current token when the renewal they share fails", async () => {
+    it("gives concurrent requests past the renewal point the current token while one renewal runs and fails", async () => {
         vi.spyOn(Math, "random").mockReturnValue(0);
         const fetch = renewalFetch(unavailable);
         const token = oidcToken({ roleId: ROLE_ID, identityToken: async () => "id-token", fetch });
@@ -446,6 +487,72 @@ describe("oidcToken", () => {
             "whop-token-1",
             "whop-token-1",
         ]);
+        await flush();
+        expect(fetch).toHaveBeenCalledTimes(2);
+    });
+
+    it("returns the current token at once past the renewal point while a slow renewal runs", async () => {
+        vi.spyOn(Math, "random").mockReturnValue(0);
+        const renewal = deferred<Response>();
+        const fetch = vi
+            .fn()
+            .mockResolvedValueOnce(jsonResponse(200, { access_token: "whop-token-1", expires_in: 3600 }))
+            .mockReturnValueOnce(renewal.promise);
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch });
+
+        await token();
+        vi.setSystemTime(secondsFromNow(58 * 60));
+        await expect(withoutWaiting(token())).resolves.toBe("whop-token-1");
+        vi.setSystemTime(secondsFromNow(59 * 60 + 29.999));
+        await expect(withoutWaiting(token())).resolves.toBe("whop-token-1");
+        expect(fetch).toHaveBeenCalledTimes(2);
+
+        renewal.resolve(jsonResponse(200, { access_token: "whop-token-2", expires_in: 3600 }));
+        await flush();
+        await expect(token()).resolves.toBe("whop-token-2");
+        expect(fetch).toHaveBeenCalledTimes(2);
+    });
+
+    it("makes requests with no valid token wait for the renewal in flight, and gives them its token", async () => {
+        vi.spyOn(Math, "random").mockReturnValue(0);
+        const renewal = deferred<Response>();
+        const fetch = vi
+            .fn()
+            .mockResolvedValueOnce(jsonResponse(200, { access_token: "whop-token-1", expires_in: 3600 }))
+            .mockReturnValueOnce(renewal.promise);
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch });
+
+        await token();
+        vi.setSystemTime(secondsFromNow(58 * 60));
+        await token();
+        vi.setSystemTime(secondsFromNow(59 * 60 + 30));
+        const waiting = Promise.all([token(), token()]);
+        await expect(withoutWaiting(waiting)).resolves.toBe("still waiting");
+
+        renewal.resolve(jsonResponse(200, { access_token: "whop-token-2", expires_in: 3600 }));
+        await expect(waiting).resolves.toEqual(["whop-token-2", "whop-token-2"]);
+        expect(fetch).toHaveBeenCalledTimes(2);
+    });
+
+    it("gives requests with no valid token the one error of the renewal they wait for", async () => {
+        vi.spyOn(Math, "random").mockReturnValue(0.5);
+        const renewal = deferred<Response>();
+        const fetch = vi
+            .fn()
+            .mockResolvedValueOnce(jsonResponse(200, { access_token: "whop-token-1", expires_in: 3600 }))
+            .mockReturnValueOnce(renewal.promise);
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch });
+
+        await token();
+        vi.setSystemTime(secondsFromNow(59 * 60 + 30));
+        const waiting = Promise.all([token(), token()].map((call) => call.catch((caught: unknown) => caught)));
+        await expect(withoutWaiting(waiting)).resolves.toBe("still waiting");
+
+        renewal.resolve(unavailable());
+        const [first, second] = await waiting;
+        expect(first).toBeInstanceOf(OidcTokenError);
+        expect(first).toMatchObject({ status: 503, retryAt: secondsFromNow(59 * 60 + 32) });
+        expect(second).toBe(first);
         expect(fetch).toHaveBeenCalledTimes(2);
     });
 
@@ -600,5 +707,83 @@ describe("request timeouts", () => {
             message: "The identity token request to the Google Cloud metadata server timed out after 10 seconds.",
         });
         expect(timeout).toHaveBeenCalledWith(10_000);
+    });
+});
+
+describe("renewal deadline", () => {
+    beforeEach(() => {
+        vi.useFakeTimers({ toFake: ["Date", "setTimeout", "clearTimeout"] });
+        vi.setSystemTime(NOW);
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+        vi.restoreAllMocks();
+    });
+
+    it.each([
+        { outcome: "succeeds", fetch: () => exchangeFetch("whop-token-1") },
+        { outcome: "fails", fetch: () => failingFetch(unavailable) },
+    ])("leaves no timer running once an exchange $outcome", async ({ fetch }) => {
+        const token = oidcToken({ roleId: ROLE_ID, identityToken: () => "id-token", fetch: fetch() });
+
+        await token().catch(() => undefined);
+
+        expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it("fails an exchange whose identity token source hangs after 30 seconds, and exchanges again after the backoff", async () => {
+        vi.spyOn(Math, "random").mockReturnValue(0.5);
+        const identityToken = vi.fn().mockReturnValueOnce(hung()).mockReturnValue("id-token");
+        const fetch = exchangeFetch("whop-token-1");
+        const token = oidcToken({ roleId: ROLE_ID, identityToken, fetch });
+
+        const result = token().catch((caught: unknown) => caught);
+        await vi.advanceTimersByTimeAsync(29_999);
+        await expect(withoutWaiting(result)).resolves.toBe("still waiting");
+
+        await vi.advanceTimersByTimeAsync(1);
+        const error = await result;
+        expect(error).toBeInstanceOf(OidcTokenError);
+        expect(error).toMatchObject({
+            status: undefined,
+            message: "The token renewal timed out after 30 seconds.",
+            retryAt: secondsFromNow(32),
+        });
+        expect(fetch).not.toHaveBeenCalled();
+
+        vi.setSystemTime(secondsFromNow(32));
+        await expect(token()).resolves.toBe("whop-token-1");
+        expect(identityToken).toHaveBeenCalledTimes(2);
+    });
+
+    it("keeps returning the current token while a hung identity token source runs out the deadline, then renews after the backoff", async () => {
+        vi.spyOn(Math, "random").mockReturnValue(0);
+        const identityToken = vi
+            .fn()
+            .mockReturnValueOnce("id-token")
+            .mockReturnValueOnce(hung())
+            .mockReturnValue("id-token");
+        const fetch = exchangeFetch("whop-token-1", "whop-token-2");
+        const token = oidcToken({ roleId: ROLE_ID, identityToken, fetch });
+
+        await token();
+        vi.setSystemTime(secondsFromNow(58 * 60));
+        await expect(withoutWaiting(token())).resolves.toBe("whop-token-1");
+        await vi.advanceTimersByTimeAsync(29_999);
+        await expect(withoutWaiting(token())).resolves.toBe("whop-token-1");
+        expect(identityToken).toHaveBeenCalledTimes(2);
+
+        await vi.advanceTimersByTimeAsync(1);
+        vi.setSystemTime(secondsFromNow(58 * 60 + 31.799));
+        await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
+        expect(identityToken).toHaveBeenCalledTimes(2);
+
+        vi.setSystemTime(secondsFromNow(58 * 60 + 31.8));
+        await expect(token()).resolves.toBe("whop-token-1");
+        await flush();
+        expect(identityToken).toHaveBeenCalledTimes(3);
+        await expect(token()).resolves.toBe("whop-token-2");
     });
 });

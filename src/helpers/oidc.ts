@@ -4,8 +4,10 @@
  * `oidcToken` returns a function the client's `token` option accepts. The client calls it before
  * each request; it exchanges an identity token for a short-lived Whop access token, reuses that
  * token until a random point 2 to 10 minutes before it expires, so processes that started together
- * don't renew together, and then exchanges a fresh identity token. If that renewal fails, it keeps
- * using the current token while it has more than 30 seconds left and tries again after a backoff.
+ * don't renew together, and then exchanges a fresh identity token in the background. Requests keep
+ * the current token while it has more than 30 seconds left, so only a request without one waits for
+ * the exchange. If the renewal fails, or the identity token and the exchange together take longer
+ * than 30 seconds, it tries again after a backoff.
  * Nothing about it depends on generated client code, so it survives the client being regenerated.
  *
  * ```ts
@@ -31,6 +33,7 @@ const FIRST_BACKOFF_MS = 2_000;
 const MAX_BACKOFF_MS = 60_000;
 const JITTER_FACTOR = 0.2;
 const HTTP_TIMEOUT_MS = 10_000;
+const RENEWAL_TIMEOUT_MS = 30_000;
 const GOOGLE_METADATA_IDENTITY_URL =
     "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity";
 
@@ -39,7 +42,7 @@ export interface OidcTokenOptions {
     roleId: string;
     /**
      * Returns an identity token from your cloud provider. It is called again for every exchange, so
-     * return a fresh token rather than a stored one.
+     * return a fresh token rather than a stored one. Its time counts toward the exchange's 30 seconds.
      */
     identityToken: () => string | Promise<string>;
     /** The API's base URL, for example `https://sandbox-api.whop.com/api/v1`. Defaults to production. */
@@ -91,12 +94,15 @@ export class OidcTokenError extends Error {
 
 /**
  * A `token` for the client that exchanges your provider's identity token for a Whop access token,
- * and renews it before it expires. Concurrent requests share one exchange and its result.
+ * and renews it before it expires. One exchange runs at a time. Past the renewal point, requests get
+ * the current access token at once while it has more than 30 seconds left and the renewal runs in
+ * the background; requests without such a token wait for the exchange and share its result.
  *
  * After a failed exchange, it doesn't exchange again until the error's `retryAt`: the time the API
  * sent in `Retry-After` or `RateLimit-Reset`, up to a minute away, or otherwise 2 seconds, doubling
  * with each failure in a row up to a minute. Until then requests get the current access token while
- * it has more than 30 seconds left, and the error once it doesn't.
+ * it has more than 30 seconds left, and the error once it doesn't. An exchange that takes longer than
+ * 30 seconds, counting the identity token, fails the same way.
  */
 export function oidcToken(options: OidcTokenOptions): () => Promise<string> {
     if (!options.roleId) {
@@ -110,36 +116,43 @@ export function oidcToken(options: OidcTokenOptions): () => Promise<string> {
     const validToken = (): string | undefined =>
         current !== undefined && Date.now() < current.expiresAt - EXPIRY_MARGIN_MS ? current.token : undefined;
 
+    const renew = (): Promise<string> => {
+        if (pending === undefined) {
+            pending = withDeadline(exchange(options))
+                .then(
+                    (exchanged) => {
+                        current = exchanged;
+                        failure = undefined;
+                        return exchanged.token;
+                    },
+                    (error: unknown) => {
+                        failure = failureOf(error, (failure?.count ?? 0) + 1);
+                        throw failure.error;
+                    },
+                )
+                .finally(() => {
+                    pending = undefined;
+                });
+            pending.catch(() => undefined);
+        }
+        return pending;
+    };
+
     return () => {
         const now = Date.now();
         if (current !== undefined && now < current.renewAt) {
             return Promise.resolve(current.token);
         }
-        if (failure !== undefined && now < failure.retryAt) {
-            const token = validToken();
-            return token === undefined ? Promise.reject(failure.error) : Promise.resolve(token);
+        const token = validToken();
+        if (failure === undefined || now >= failure.retryAt) {
+            const renewal = renew();
+            if (token === undefined) {
+                return renewal;
+            }
+        } else if (token === undefined) {
+            return Promise.reject(failure.error);
         }
-        pending ??= exchange(options)
-            .then(
-                (exchanged) => {
-                    current = exchanged;
-                    failure = undefined;
-                    return exchanged.token;
-                },
-                (error: unknown) => {
-                    const failed = failureOf(error, (failure?.count ?? 0) + 1);
-                    failure = failed;
-                    const token = validToken();
-                    if (token === undefined) {
-                        throw failed.error;
-                    }
-                    return token;
-                },
-            )
-            .finally(() => {
-                pending = undefined;
-            });
-        return pending;
+        return Promise.resolve(token);
     };
 }
 
@@ -281,6 +294,21 @@ function retryAfterDelay(value: string | null): number {
 
 function resetDelay(epochSeconds: string | null): number {
     return epochSeconds === null ? Number.NaN : Number(epochSeconds) * 1000 - Date.now();
+}
+
+async function withDeadline<T>(work: Promise<T>): Promise<T> {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const deadline = new Promise<never>((_resolve, reject) => {
+        timer = setTimeout(
+            () => reject(new OidcTokenError(`The token renewal timed out after ${RENEWAL_TIMEOUT_MS / 1000} seconds.`)),
+            RENEWAL_TIMEOUT_MS,
+        );
+    });
+    try {
+        return await Promise.race([work, deadline]);
+    } finally {
+        clearTimeout(timer);
+    }
 }
 
 async function withTimeout<T>(request: string, send: (signal: AbortSignal) => Promise<T>): Promise<T> {
