@@ -31,6 +31,7 @@ describe("WebhooksClient", () => {
                     id: "hook_xxxxxxxxxxxxxx",
                     last_failure_at: "2026-01-01T12:00:00.000Z",
                     resource_id: "biz_xxxxxxxxxxxxxx",
+                    title: "title",
                     url: "https://example.com/shine-time/whop",
                     webhook_secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                 },
@@ -161,6 +162,7 @@ describe("WebhooksClient", () => {
             last_failure_at: "2026-01-01T12:00:00.000Z",
             resource_id: "biz_xxxxxxxxxxxxxx",
             testable_events: ["account.updated"],
+            title: "Production",
             url: "https://example.com/hooks",
             webhook_secret: "ws_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         };
@@ -345,6 +347,7 @@ describe("WebhooksClient", () => {
             last_failure_at: "2026-01-01T12:00:00.000Z",
             resource_id: "biz_xxxxxxxxxxxxxx",
             testable_events: ["account.updated"],
+            title: "Production",
             url: "https://example.com/hooks",
             webhook_secret: "ws_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         };
@@ -528,6 +531,7 @@ describe("WebhooksClient", () => {
             last_failure_at: "2026-01-01T12:00:00.000Z",
             resource_id: "biz_xxxxxxxxxxxxxx",
             testable_events: ["account.updated"],
+            title: "Production",
             url: "https://example.com/hooks",
             webhook_secret: "ws_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         };

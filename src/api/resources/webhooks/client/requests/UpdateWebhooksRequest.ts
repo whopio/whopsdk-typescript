@@ -17,6 +17,8 @@ export interface UpdateWebhooksRequest {
     enabled?: boolean;
     /** The events to send the webhook for, in dot form (for example `payment.succeeded`). */
     events?: UpdateWebhooksRequest.Events.Item[];
+    /** A label for the webhook, shown in the dashboard. Up to 255 characters. Pass `null` or an empty string to remove it. */
+    title?: string | null;
     /** The URL to send the webhook to. */
     url?: string;
 }

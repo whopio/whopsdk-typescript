@@ -17,6 +17,8 @@ export interface CreateWebhooksRequest {
     events?: CreateWebhooksRequest.Events.Item[];
     /** The account or app to create the webhook for. Defaults to the current account. */
     resource_id?: string | null;
+    /** A label for the webhook, shown in the dashboard. Up to 255 characters. */
+    title?: string | null;
     /** The URL to send the webhook to. */
     url: string;
 }
