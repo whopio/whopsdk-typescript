@@ -33,6 +33,8 @@ export interface ResendInviteBusinessesResponse {
     referral_expires_at: string | null;
     /** When the referral became active. */
     referral_started_at: string | null;
+    /** The partner business whose team member made this referral, the one its commission is paid to. Null for a solo partner's referral. */
+    referring_business?: (ResendInviteBusinessesResponse.ReferringBusiness | null) | undefined;
     /** The second-tier partner who earns on this business (referred the first-tier partner). Null if there is no active second-tier partner. */
     second_tier_partner: ResendInviteBusinessesResponse.SecondTierPartner | null;
     /** Current referral status. */
@@ -180,6 +182,20 @@ export namespace ResendInviteBusinessesResponse {
             /** The invite ID (an ausri_ identifier). Pass it to the resend endpoint. */
             id: string;
         }
+    }
+
+    /**
+     * The partner business whose team member made this referral, the one its commission is paid to. Null for a solo partner's referral.
+     */
+    export interface ReferringBusiness {
+        /** Referred account ID. */
+        id: string;
+        /** Referred account logo URL. */
+        logo_url: string | null;
+        /** Referred account route. */
+        route: string;
+        /** Referred account display name. */
+        title: string;
     }
 
     /**

@@ -94,6 +94,13 @@ describe("BusinessesClient", () => {
                     },
                     referral_expires_at: "2026-01-01T12:00:00Z",
                     referral_started_at: "2026-01-01T12:00:00Z",
+                    referring_business: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "biz_xxxxxxxxxxxxxx",
+                        title: "Gleam Mobile Detailing",
+                    },
                     second_tier_partner: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Nina Alvarez",
@@ -323,6 +330,7 @@ describe("BusinessesClient", () => {
             pending_owner_invites: [{ email: "email", id: "id" }],
             referral_expires_at: "2026-01-01T12:00:00Z",
             referral_started_at: "2026-01-01T12:00:00Z",
+            referring_business: { id: "id", logo_url: "logo_url", route: "route", title: "title" },
             second_tier_partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Marcus Webb",
@@ -641,6 +649,13 @@ describe("BusinessesClient", () => {
             pending_owner_invites: [{ email: "marcus@shinetime.example", id: "ausri_xxxxxxxxxxxxxx" }],
             referral_expires_at: "2026-01-01T12:00:00Z",
             referral_started_at: "2026-01-01T12:00:00Z",
+            referring_business: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "biz_xxxxxxxxxxxxxx",
+                title: "Gleam Mobile Detailing",
+            },
             second_tier_partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Nina Alvarez",
