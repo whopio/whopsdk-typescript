@@ -40,6 +40,8 @@ export namespace ListBusinessesResponse {
             referral_expires_at: string | null;
             /** When the referral became active. */
             referral_started_at: string | null;
+            /** The partner business whose team member made this referral, the one its commission is paid to. Null for a solo partner's referral. */
+            referring_business?: (Item.ReferringBusiness | null) | undefined;
             /** The second-tier partner who earns on this business (referred the first-tier partner). Null if there is no active second-tier partner. */
             second_tier_partner: Item.SecondTierPartner | null;
             /** Current referral status. */
@@ -171,6 +173,20 @@ export namespace ListBusinessesResponse {
                 transfer: number | null;
                 /** Share of Whop's profit from withdrawals. */
                 withdrawal: number | null;
+            }
+
+            /**
+             * The partner business whose team member made this referral, the one its commission is paid to. Null for a solo partner's referral.
+             */
+            export interface ReferringBusiness {
+                /** Referred account ID. */
+                id: string;
+                /** Referred account logo URL. */
+                logo_url: string | null;
+                /** Referred account route. */
+                route: string;
+                /** Referred account display name. */
+                title: string;
             }
 
             /**
