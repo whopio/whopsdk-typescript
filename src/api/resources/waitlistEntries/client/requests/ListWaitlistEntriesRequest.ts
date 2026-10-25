@@ -25,6 +25,8 @@ export interface ListWaitlistEntriesRequest {
     buyer_account_id?: string;
     /** Only return signups in this state. Canceled signups are returned only when `status` is `canceled`. */
     status?: Whop.ListWaitlistEntriesRequestStatus;
+    /** Search signups by the user's name or username, or the name of the account they were submitted on behalf of. An account ID, prefixed `biz_`, matches signups submitted on behalf of that account, and an exact email address matches that user's signups. */
+    query?: string;
     /** Only return signups submitted at or before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only return signups submitted at or after this ISO 8601 timestamp. */
