@@ -15,6 +15,10 @@ export interface CreateVariantsRequest {
     attributes?: Record<string, unknown> | null;
     /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
     billing_period?: number | null;
+    /** How long the retention discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. Required when `offer_cancel_discount` is true. */
+    cancel_discount_intervals?: number | null;
+    /** Percentage taken off each discounted renewal, as a whole number from 1 to 100. Required when `offer_cancel_discount` is true. */
+    cancel_discount_percentage?: number | null;
     /** Checkout styling overrides for this variant. */
     checkout_styling?: Record<string, unknown> | null;
     /** The three-letter ISO currency code for the variant's pricing. Defaults to USD. */
@@ -33,6 +37,8 @@ export interface CreateVariantsRequest {
     internal_notes?: string | null;
     /** Custom key-value pairs to store on the variant. Included in webhook payloads for payment and membership events. Max 50 keys, 100 chars per key, 500 chars per string value. The reserved keys `custom_cta` (a checkout call-to-action button label — one of the product custom CTA values, e.g. `subscribe`, `get_offer`) and `custom_cta_url` (a URL the button links to; web or `tel:`) override the product's call to action for this variant and are validated on save. */
     metadata?: Record<string, unknown> | null;
+    /** Whether to offer a retention discount when a customer attempts to cancel. */
+    offer_cancel_discount?: boolean | null;
     /** Override the default tax classification for this specific variant. */
     override_tax_type?: string;
     /** Explicit payment method configuration for the variant. When not provided, the account's defaults apply. Send at least one of `enabled` or `disabled`; an omitted one is empty. */
@@ -47,7 +53,7 @@ export interface CreateVariantsRequest {
     renewal_price?: number | null;
     /** Stock keeping unit for this variant. Maximum 100 characters. Free text, not enforced unique. */
     sku?: string | null;
-    /** Installment payments required before the subscription pauses. */
+    /** Installment payments required before the subscription pauses, from 2 to 115. Only valid on `renewal` variants. */
     split_pay_required_payments?: number | null;
     /** The maximum number of units available for purchase. Ignored when unlimited_stock is true. */
     stock?: number | null;

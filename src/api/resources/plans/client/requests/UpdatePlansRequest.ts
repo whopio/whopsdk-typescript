@@ -31,6 +31,7 @@ export interface UpdatePlansRequest {
     release_method?: string;
     renewal_price?: number | null;
     sku?: string | null;
+    split_pay_required_payments?: number | null;
     stock?: number | null;
     strike_through_initial_price?: number | null;
     strike_through_renewal_price?: number | null;

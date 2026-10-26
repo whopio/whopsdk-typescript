@@ -17,9 +17,9 @@ export interface UpdateVariantsRequest {
     attributes?: Record<string, unknown> | null;
     /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
     billing_period?: number | null;
-    /** How many renewals the retention discount applies to. Required when `offer_cancel_discount` is true. */
+    /** How long the retention discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. Required when `offer_cancel_discount` is true. */
     cancel_discount_intervals?: number | null;
-    /** Percentage taken off each discounted renewal. Required when `offer_cancel_discount` is true. */
+    /** Percentage taken off each discounted renewal, as a whole number from 1 to 100. Required when `offer_cancel_discount` is true. */
     cancel_discount_percentage?: number | null;
     /** Checkout styling overrides for this variant. */
     checkout_styling?: Record<string, unknown> | null;
@@ -51,6 +51,8 @@ export interface UpdateVariantsRequest {
     renewal_price?: number | null;
     /** Stock keeping unit for this variant. Maximum 100 characters. Free text, not enforced unique. */
     sku?: string | null;
+    /** Installment payments required before the subscription pauses, from 2 to 115. Only valid on `renewal` variants. */
+    split_pay_required_payments?: number | null;
     /** The maximum number of units available for purchase. Ignored when unlimited_stock is true. */
     stock?: number | null;
     /** A comparison price displayed with a strikethrough for the initial price. */
