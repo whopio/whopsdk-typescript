@@ -31,6 +31,10 @@ export interface ListBusinessesRequest {
     created_before?: string;
     /** Only return partner businesses created after this timestamp. */
     created_after?: string;
+    /** Only return partner businesses whose first paid sale above zero happened before this timestamp. */
+    first_sale_before?: string;
+    /** Only return partner businesses whose first paid sale above zero happened after this timestamp. Combined with first_sale_before, this is the net new set: businesses that processed their first $1 inside the window. */
+    first_sale_after?: string;
     /** Filter to referrals attributed to this user. For first-tier referrals, this is the referred account owner; for second-tier referrals, this is the partner you recruited. */
     referred_user_id?: string;
     /** Filter by the referred user's exact username. Ignored when `referred_user_id` is present. */
