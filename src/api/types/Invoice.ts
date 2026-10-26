@@ -26,6 +26,7 @@ export interface Invoice {
     paid_at: string | null;
     payment_method_id: string | null;
     recipient_emails: string[];
+    scheduled_send_at: string | null;
     status: Invoice.Status;
     subtotal: Whop.Money;
     tax_amount: Whop.Money | null;
