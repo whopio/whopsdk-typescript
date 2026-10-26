@@ -328,6 +328,7 @@ export * from "./ListAppBuildsRequestCreatedAfter.js";
 export * from "./ListAppBuildsRequestCreatedBefore.js";
 export * from "./Livestream.js";
 export * from "./LocationTargetingOption.js";
+export * from "./Market.js";
 export * from "./MarketplaceStatuses.js";
 export * from "./MediaAsset.js";
 export * from "./MediaAssetFile.js";

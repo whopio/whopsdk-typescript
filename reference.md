@@ -33962,6 +33962,82 @@ await client.stats.timeSeries.retrieve({
 </dl>
 </details>
 
+## Trades Markets
+<details><summary><code>client.trades.markets.<a href="/src/api/resources/trades/resources/markets/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Market, Whop.ListMarketsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the markets you can trade, sorted by `id` and then `instrument_type`: Hyperliquid's main-exchange perpetuals that still trade, and spot markets for the assets Whop wallets hold, named by symbol: `BTC`, `ETH`, `SOL`, and `XAUT` (gold). A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market, and there is no endpoint to retrieve one. Send a perpetual's `id` as `market` when you create a trade. No authentication is required. Each IP address can make 60 requests a minute.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.trades.markets.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.trades.markets.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.trades.ListMarketsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MarketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Users OauthGrants
 <details><summary><code>client.users.oauthGrants.<a href="/src/api/resources/users/resources/oauthGrants/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.OauthGrant, Whop.ListOauthGrantsResponse&gt;</code></summary>
 <dl>
