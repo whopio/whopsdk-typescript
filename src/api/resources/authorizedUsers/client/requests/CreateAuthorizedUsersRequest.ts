@@ -40,7 +40,7 @@ export namespace CreateAuthorizedUsersRequest {
         signature?: (string | null) | undefined;
         /** The 6-digit code from the authenticator app or SMS. */
         totp_code?: (string | null) | undefined;
-        /** Reuse an existing elevated session (for SMS/email 2FA users). */
+        /** Ignored. Kept so existing API clients that send it keep working. */
         use_finance_session?: (boolean | null) | undefined;
     }
 }
