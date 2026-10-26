@@ -77,6 +77,7 @@ export namespace AccountPaymentControls {
             Venmo: "venmo",
             AmazonPay: "amazon_pay",
             Link: "link",
+            WechatPay: "wechat_pay",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
     }
