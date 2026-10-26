@@ -94,7 +94,6 @@ describe("MembershipsClient", () => {
 
         const expected = rawResponseBody;
         const page = await client.memberships.list({
-            discord_id: "123456789012345678",
             product_ids: ["prod_xxxxxxxxxxxxx"],
             plan_ids: ["plan_xxxxxxxxxxxxx"],
             promo_code_ids: ["promo_xxxxxxxxxxxxxx"],
