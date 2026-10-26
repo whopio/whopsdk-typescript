@@ -25,7 +25,7 @@ export interface Member {
     most_recent_action: Member.MostRecentAction | null;
     /** When `most_recent_action` took effect, as an ISO 8601 timestamp. `null` when `most_recent_action` is `null`. */
     most_recent_action_at: string | null;
-    /** The member's phone number, or `null`. Their account number when they have shared one with this seller; otherwise the most recent number collected (or verified) at checkout. */
+    /** The member's phone number: the most recent number collected (or verified) at checkout, otherwise their account number when they have shared one with this seller. `null` without `member:phone:read` on the account, or when there is neither. */
     phone_number: string | null;
     /** `joined` while the member is part of the account, `left` after they leave. */
     status: Member.Status;

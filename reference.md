@@ -18092,6 +18092,7 @@ Lists every membership the caller can read: an account API key its account's; a 
 
 ```typescript
 const pageableResponse = await client.memberships.list({
+    external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
     plan_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
@@ -18102,6 +18103,7 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.memberships.list({
+    external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
     plan_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
