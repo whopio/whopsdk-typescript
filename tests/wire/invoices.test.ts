@@ -61,6 +61,7 @@ describe("InvoicesClient", () => {
                     paid_at: "paid_at",
                     payment_method_id: "payment_method_id",
                     recipient_emails: ["marcus@shinetime.example"],
+                    scheduled_send_at: "scheduled_send_at",
                     status: "draft",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -224,6 +225,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -446,6 +448,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -579,6 +582,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -877,6 +881,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -1088,6 +1093,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -1218,6 +1224,299 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("send (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
+            status: "draft",
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/send")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.invoices.send({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("send (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/send")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.send({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("send (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/send")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.send({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("send (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/send")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.send({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("unschedule (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            buyer_fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            buyer_fee_percentage: 0,
+            checkout_link:
+                "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            customer_name: "Dana",
+            due_at: "due_at",
+            email_address: "marcus@shinetime.example",
+            id: "pay_xxxxxxxxxxxxxx",
+            invoice_prefix: "invoice_prefix",
+            line_items: [
+                {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                    subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    unit_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            mailing_address_id: "mailing_address_id",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            number: "#xxxxxxxx",
+            object: "invoice",
+            overdue: false,
+            paid_at: "paid_at",
+            payment_method_id: "payment_method_id",
+            recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
+            status: "draft",
+            subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            totals_status: "estimated",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/unschedule")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.invoices.unschedule({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("unschedule (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/unschedule")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.unschedule({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("unschedule (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/unschedule")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.unschedule({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("void (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1272,6 +1571,7 @@ describe("InvoicesClient", () => {
             paid_at: "paid_at",
             payment_method_id: "payment_method_id",
             recipient_emails: ["marcus@shinetime.example"],
+            scheduled_send_at: "scheduled_send_at",
             status: "draft",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
