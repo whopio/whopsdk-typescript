@@ -16738,6 +16738,71 @@ await client.invoices.update({
 </dl>
 </details>
 
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">generatePdf</a>({ ...params }) -> Whop.InvoicePdf</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generates the invoice as a PDF and returns a short-lived link to download it. A draft renders with its current estimated totals. The buyer's name, email address and billing details appear only when you have `member:basic:read`, `member:email:read` and `payment:basic:read` respectively. Each call generates a new file and link, so this endpoint does not replay `Idempotency-Key` responses.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.invoices.generatePdf({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.GeneratePdfInvoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">issue</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>

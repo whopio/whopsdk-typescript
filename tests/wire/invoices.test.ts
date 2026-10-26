@@ -686,6 +686,143 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
+    test("generatePdf (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            expires_at: "2026-01-01T12:00:00.000Z",
+            url: "https://content.whop.com/exports/2026-01-01/pdfs/receipt_pay_xxxxxxxxxxxxxx.pdf",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/generate_pdf")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.invoices.generatePdf({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generatePdf (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/generate_pdf")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("generatePdf (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/generate_pdf")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("generatePdf (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/generate_pdf")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("generatePdf (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/invoices/id/generate_pdf")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.invoices.generatePdf({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("issue (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
