@@ -61,12 +61,28 @@ export namespace LegacyInvoice {
     export interface Company {
         /** The unique identifier for the company. */
         id: string;
+        /** The company's logo. */
+        logo: Company.Logo | null;
+        /** The display name of the company shown to customers. */
+        title: string;
+    }
+
+    export namespace Company {
+        /**
+         * The company's logo.
+         */
+        export interface Logo {
+            /** A pre-optimized URL for rendering this attachment on the client. This should be used for displaying attachments in apps. */
+            url: string | null;
+        }
     }
 
     /**
      * The plan that this invoice charges for.
      */
     export interface CurrentPlan {
+        /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time plans. */
+        billing_period: number | null;
         /** The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary amounts on the plan are denominated in this currency. */
         currency: Whop.Currencies;
         /** A text description of the plan visible to customers. Maximum 1000 characters. Null if no description is set. */
@@ -75,6 +91,14 @@ export namespace LegacyInvoice {
         formatted_price: string;
         /** The unique identifier for the plan. */
         id: string;
+        /** The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99). For one-time plans, this is the full price. For renewal plans, this is charged on top of the first renewal_price. */
+        initial_price: number;
+        /** The billing model for this plan: 'renewal' for recurring subscriptions or 'one_time' for single payments. */
+        plan_type: Whop.PlanTypes;
+        /** The recurring price charged every billing_period in the plan's base_currency (e.g., 9.99 for $9.99/period). Zero for one-time plans. */
+        renewal_price: number;
+        /** Free trial days before first renewal charge. `null` if no trial is configured or the user has already used a trial for this plan. */
+        trial_period_days: number | null;
     }
 
     export type LineItems = LineItems.Item[];
