@@ -33975,7 +33975,14 @@ await client.stats.timeSeries.retrieve({
 <dl>
 <dd>
 
-Lists the markets you can trade, sorted by `id` and then `instrument_type`: Hyperliquid's main-exchange perpetuals that still trade, and spot markets for the assets Whop wallets hold, named by symbol: `BTC`, `ETH`, `SOL`, and `XAUT` (gold). A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market, and there is no endpoint to retrieve one. Send a perpetual's `id` as `market` when you create a trade. No authentication is required. Each IP address can make 60 requests a minute.
+Returns every market you can trade on Whop.
+
+- **Spot:** listed by symbol: `BTC`, `ETH`, `SOL` and `XAUT` (gold).
+- **Perpetuals:** such as `BTC`. Send the `id` as `market` when you create a trade.
+
+The same symbol can appear twice, once as a perpetual and once as spot, so use `id` together with `instrument_type` to tell them apart. Results are sorted by `id`, then `instrument_type`.
+
+This endpoint is public: no API key is needed, and each IP address can make up to 60 requests a minute.
 </dd>
 </dl>
 </dd>

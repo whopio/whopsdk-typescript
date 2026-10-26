@@ -21,28 +21,61 @@ describe("MarketsClient", () => {
                     id: "BTC",
                     instrument_type: "perpetual",
                     max_leverage: 40,
-                    price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    price: { amount: "80155.500000", currency: "usd", decimals: 6, display_decimals: 6 },
                     size_decimals: 5,
                 },
+                {
+                    id: "BTC",
+                    instrument_type: "spot",
+                    max_leverage: null,
+                    price: { amount: "80065.50000000", currency: "usd", decimals: 8, display_decimals: 8 },
+                    size_decimals: 5,
+                },
+                {
+                    id: "ETH",
+                    instrument_type: "perpetual",
+                    max_leverage: 25,
+                    price: { amount: "2322.350000", currency: "usd", decimals: 6, display_decimals: 6 },
+                    size_decimals: 4,
+                },
+                {
+                    id: "ETH",
+                    instrument_type: "spot",
+                    max_leverage: null,
+                    price: { amount: "2320.65000000", currency: "usd", decimals: 8, display_decimals: 8 },
+                    size_decimals: 4,
+                },
+                {
+                    id: "SOL",
+                    instrument_type: "perpetual",
+                    max_leverage: 20,
+                    price: { amount: "101.325000", currency: "usd", decimals: 6, display_decimals: 6 },
+                    size_decimals: 2,
+                },
+                {
+                    id: "SOL",
+                    instrument_type: "spot",
+                    max_leverage: null,
+                    price: { amount: "101.23500000", currency: "usd", decimals: 8, display_decimals: 8 },
+                    size_decimals: 3,
+                },
+                {
+                    id: "XAUT",
+                    instrument_type: "spot",
+                    max_leverage: null,
+                    price: { amount: "4012.85000000", currency: "usd", decimals: 8, display_decimals: 8 },
+                    size_decimals: 2,
+                },
             ],
-            page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
+            page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
         };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/trades/markets")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/trades/markets").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const expected = rawResponseBody;
         const page = await client.trades.markets.list();
 
         expect(expected.data).toEqual(page.data);
-        expect(page.hasNextPage()).toBe(true);
-        const nextPage = await page.getNextPage();
-        expect(expected.data).toEqual(nextPage.data);
     });
 
     test("list (2)", async () => {
