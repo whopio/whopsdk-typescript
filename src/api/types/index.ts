@@ -456,6 +456,8 @@ export * from "./ProductListItem.js";
 export * from "./ProductPublicPlan.js";
 export * from "./ProductTaxCodeProductTypes.js";
 export * from "./PromoCode.js";
+export * from "./PromoCodeAffiliate.js";
+export * from "./PromoCodeAffiliateUser.js";
 export * from "./PromoCodeListItem.js";
 export * from "./PromoCodeProduct.js";
 export * from "./PromoCodeStatus.js";
