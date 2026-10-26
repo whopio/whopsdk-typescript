@@ -20,7 +20,7 @@ export interface CreateInvoicesRequest {
     due_at?: string | null;
     /** Resolve or create the member for this email, creating a Whop user when none exists. Mutually exclusive with member_id. */
     email_address?: string | null;
-    /** The one-time variants being invoiced, all in the same currency. Each variant may appear once; use quantity for multiple units. Product and price come from each variant. Multiple items require unlimited stock and compatible payment, tax, and access settings. */
+    /** The variants being invoiced, all in the same currency. Each variant may appear once; use quantity for multiple units. Product and price come from each variant; a recurring variant must belong to a product, bills its renewal price and, once the invoice is paid, renews as a subscription charged to the payment method that paid it. With several items, every item that has a product must be a regular product, and all items need compatible payment, tax, and access settings. */
     items: CreateInvoicesRequest.Items.Item[];
     /** An address associated with the member. Mutually exclusive with billing_address. */
     mailing_address_id?: string | null;
