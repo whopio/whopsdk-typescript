@@ -258,6 +258,7 @@ export const PermissionAction = {
     WebhookReceiveDisputes: "webhook_receive:disputes",
     WebhookReceiveResolutions: "webhook_receive:resolutions",
     WebhookReceiveAppPayments: "webhook_receive:app_payments",
+    WebhookReceiveAppInstallations: "webhook_receive:app_installations",
     WebhookReceiveAppMemberships: "webhook_receive:app_memberships",
     ShipmentCreate: "shipment:create",
     ShipmentBasicRead: "shipment:basic:read",

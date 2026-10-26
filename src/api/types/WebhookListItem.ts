@@ -136,6 +136,8 @@ export namespace WebhookListItem {
             AdGroupUpdated: "ad_group.updated",
             AdCreated: "ad.created",
             AdUpdated: "ad.updated",
+            AppInstallationCreated: "app_installation.created",
+            AppInstallationDeleted: "app_installation.deleted",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",
