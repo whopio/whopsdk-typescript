@@ -43,6 +43,7 @@ export class MembershipsClient {
      *
      * @example
      *     await client.memberships.list({
+     *         external_account: "discord_123456789012345678",
      *         product_ids: ["prod_xxxxxxxxxxxxx"],
      *         plan_ids: ["plan_xxxxxxxxxxxxx"],
      *         promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
@@ -60,6 +61,7 @@ export class MembershipsClient {
                     account_id: accountId,
                     user_id: userId,
                     member_id: memberId,
+                    external_account: externalAccount,
                     status,
                     statuses,
                     product_id: productId,
@@ -80,6 +82,7 @@ export class MembershipsClient {
                     account_id: accountId,
                     user_id: userId,
                     member_id: memberId,
+                    external_account: externalAccount,
                     status: status != null ? status : undefined,
                     statuses: Array.isArray(statuses)
                         ? statuses.map((item) => item)
