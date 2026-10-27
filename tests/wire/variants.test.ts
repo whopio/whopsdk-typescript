@@ -20,6 +20,7 @@ describe("VariantsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
                     billing_type: "renewal",
@@ -164,6 +165,7 @@ describe("VariantsClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             billing_type: "renewal",
@@ -332,6 +334,7 @@ describe("VariantsClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             billing_type: "renewal",
@@ -482,6 +485,7 @@ describe("VariantsClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             billing_type: "renewal",

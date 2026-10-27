@@ -21,7 +21,7 @@ export namespace PaymentInput {
      * The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `variant_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission.
      */
     export interface Variant {
-        /** Whether more than one unit can be purchased in an order. */
+        /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
         allow_multiple_quantity?: (boolean | null) | undefined;
         /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for connected accounts with a parent account. */
         application_fee_amount?: (number | null) | undefined;

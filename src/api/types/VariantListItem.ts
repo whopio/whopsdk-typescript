@@ -7,6 +7,8 @@ export interface VariantListItem {
     account: Whop.AccountSummary | null;
     /** Whether adaptive pricing is enabled for this variant. Raw setting — does not check processor compatibility or feature flags. */
     adaptive_pricing_enabled: boolean;
+    /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
+    allow_multiple_quantity: boolean;
     /** Attribute values that distinguish this variant within its product, as a map of attribute name to value, e.g. `{"color": "Blue", "size": "Large"}`. Names are snake_case identifiers and come back in alphabetical order. Every attributed variant on a product carries the same attribute names and a distinct set of values; the product lists the full option set as `variant_attributes`. `null` when the variant has no attributes. */
     attributes: Record<string, string | null> | null;
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */

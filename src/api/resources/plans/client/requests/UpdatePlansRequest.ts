@@ -12,6 +12,7 @@ export interface UpdatePlansRequest {
     /** Variant ID, prefixed `plan_`. */
     id: string;
     adaptive_pricing_enabled?: boolean | null;
+    allow_multiple_quantity?: boolean;
     attributes?: Record<string, unknown> | null;
     billing_period?: number | null;
     cancel_discount_intervals?: number | null;

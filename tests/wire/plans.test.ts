@@ -20,6 +20,7 @@ describe("PlansClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: {},
                     billing_period: 30,
                     billing_type: "renewal",
@@ -106,6 +107,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { key: "value" },
             billing_period: 30,
             billing_type: "renewal",
@@ -214,6 +216,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { key: "value" },
             billing_period: 30,
             billing_type: "renewal",
@@ -311,6 +314,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             adaptive_pricing_enabled: true,
+            allow_multiple_quantity: false,
             attributes: { key: "value" },
             billing_period: 30,
             billing_type: "renewal",

@@ -11,6 +11,8 @@ export interface CreateVariantsRequest {
     account_id?: string;
     /** Whether this variant accepts local currency payments via adaptive pricing. */
     adaptive_pricing_enabled?: boolean | null;
+    /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
+    allow_multiple_quantity?: boolean;
     /** Attribute values that make this variant one variant of its product, as a map of attribute name to value, e.g. `{"size": "Large", "color": "Blue"}`. Names are normalized to snake_case identifiers (`Ring Size` becomes `ring_size`) and come back in alphabetical order. Every variant on a product must carry the same attribute names and a distinct set of values. Send `null` to make the variant an ordinary pricing option again. */
     attributes?: Record<string, unknown> | null;
     /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
