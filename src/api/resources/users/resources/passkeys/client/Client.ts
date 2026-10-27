@@ -128,7 +128,7 @@ export class PasskeysClient {
     }
 
     /**
-     * Registers a passkey for the authenticated user from the attestation a browser produced for a `registration` challenge. Mint that challenge first with `POST /users/me/passkeys/challenge`; it is single-use and expires 5 minutes after it is issued. Requires a user session.
+     * Registers a passkey for the authenticated user from the attestation a browser produced for a `registration` challenge. Mint that challenge first with `POST /users/me/passkeys/challenge` and run the ceremony with its `creation_options`; it is single-use and expires 5 minutes after it is issued. Send back the `user_handle` the options carried: registering with it replaces the account's passkeys made before Whop issued options, which can only be deleted. Requires a user session.
      *
      * @param {Whop.users.CreatePasskeysRequest} request
      * @param {PasskeysClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -215,7 +215,7 @@ export class PasskeysClient {
     }
 
     /**
-     * Mints the challenge a browser needs to run a WebAuthn ceremony against the authenticated user's own passkeys. A `registration` challenge enrolls a new passkey; a `deletion` challenge is bound to the one passkey named by `passkey_id` and proves the user still holds it. Challenges are single-use and expire 5 minutes after they are issued, so send a fresh `Idempotency-Key` per ceremony — a replayed key returns the original challenge, which may already have expired. Requires a user session.
+     * Mints the challenge and WebAuthn options a browser needs to run a ceremony against the authenticated user's own passkeys. A `registration` challenge enrolls a new passkey; a `deletion` challenge is bound to the one passkey named by `passkey_id` and proves the user still holds it. The options are in wire snake_case: convert the keys to camelCase before passing them to the browser. Challenges are single-use and expire 5 minutes after they are issued, so send a fresh `Idempotency-Key` per ceremony — a replayed key returns the original challenge, which may already have expired. Requires a user session.
      *
      * @param {Whop.users.ChallengePasskeysRequest} request
      * @param {PasskeysClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -236,14 +236,14 @@ export class PasskeysClient {
     public challenge(
         request: Whop.users.ChallengePasskeysRequest,
         requestOptions?: PasskeysClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.users.ChallengePasskeysResponse> {
+    ): core.HttpResponsePromise<Whop.PasskeyChallenge> {
         return core.HttpResponsePromise.fromPromise(this.__challenge(request, requestOptions));
     }
 
     private async __challenge(
         request: Whop.users.ChallengePasskeysRequest,
         requestOptions?: PasskeysClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.users.ChallengePasskeysResponse>> {
+    ): Promise<core.WithRawResponse<Whop.PasskeyChallenge>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -274,7 +274,7 @@ export class PasskeysClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.users.ChallengePasskeysResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.PasskeyChallenge, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
