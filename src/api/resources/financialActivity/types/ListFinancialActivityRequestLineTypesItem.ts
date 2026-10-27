@@ -96,6 +96,7 @@ export const ListFinancialActivityRequestLineTypesItem = {
     PaymentReferralReversal: "payment_referral_reversal",
     PaymentRefund: "payment_refund",
     PaymentRefundReversal: "payment_refund_reversal",
+    PaymentReturnFee: "payment_return_fee",
     PaymentRevshare: "payment_revshare",
     PaymentRevsharePayout: "payment_revshare_payout",
     PaymentRevshareRefund: "payment_revshare_refund",

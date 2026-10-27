@@ -262,6 +262,7 @@ export namespace RetrieveFinancialReportsResponse {
                 PaymentRefund: "payment_refund",
                 PaymentRefundFee: "payment_refund_fee",
                 PaymentRefundReversal: "payment_refund_reversal",
+                PaymentReturnFee: "payment_return_fee",
                 PaymentRevshare: "payment_revshare",
                 PaymentRevsharePayout: "payment_revshare_payout",
                 PaymentRevshareRefund: "payment_revshare_refund",

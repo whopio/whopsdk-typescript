@@ -17,6 +17,482 @@ describe("FeesClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            ach_dispute: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            ach_return: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
             bank_deposit: {
                 adjustable: true,
                 category: "payments",
@@ -7442,6 +7918,482 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             revshare: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            sepa_dispute: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            sepa_return: {
                 adjustable: true,
                 category: "payments",
                 default: {
@@ -8713,6 +9665,482 @@ describe("FeesClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            ach_dispute: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            ach_return: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
             bank_deposit: {
                 adjustable: true,
                 category: "payments",
@@ -16138,6 +17566,482 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             revshare: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            sepa_dispute: {
+                adjustable: true,
+                category: "payments",
+                default: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                ends_at: "2026-01-01T12:00:00.000Z",
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                maximum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                minimum: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                percentage: 2.4,
+                region: "usa",
+                regions: {
+                    ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    br: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 30,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        percentage: 8,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 8,
+                        },
+                        source: "default",
+                    },
+                    ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.4,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                    cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
+                    },
+                    mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
+                    },
+                    pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
+                    uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 1.5,
+                        },
+                        percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
+                    },
+                },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
+                source: "default",
+                unadjustable_reason: "not_permitted",
+            },
+            sepa_return: {
                 adjustable: true,
                 category: "payments",
                 default: {

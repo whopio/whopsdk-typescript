@@ -109,6 +109,7 @@ export namespace LedgerActivity {
         PlatformCoveredDispute: "platform_covered_dispute",
         DisputeAlertFee: "dispute_alert_fee",
         DisputeRepresentmentFee: "dispute_representment_fee",
+        PaymentReturnFee: "payment_return_fee",
         DisputeHoldAdjustment: "dispute_hold_adjustment",
         DisputeHoldBlocked: "dispute_hold_blocked",
         PspDisputePayable: "psp_dispute_payable",
