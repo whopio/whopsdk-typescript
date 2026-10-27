@@ -40,6 +40,7 @@ export namespace CreateExportsRequest {
         People: "people",
         Plans: "plans",
         Products: "products",
+        ReceiptInvoices: "receipt_invoices",
         ResolutionCenterCases: "resolution_center_cases",
         Shipments: "shipments",
         SocialAccounts: "social_accounts",
