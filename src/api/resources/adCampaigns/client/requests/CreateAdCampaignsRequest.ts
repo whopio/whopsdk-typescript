@@ -23,8 +23,8 @@ export interface CreateAdCampaignsRequest {
     budget_type?: CreateAdCampaignsRequest.BudgetType;
     /** The kind of campaign to create. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
     campaign_type?: CreateAdCampaignsRequest.CampaignType;
-    /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). Only for campaigns that own the budget. */
-    desired_cost_per_result?: number;
+    /** The cost per result, in USD, you want this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. Ad groups set cost and bid caps with their own `desired_cost_per_result`. Omit or send `null` for no target. */
+    desired_cost_per_result?: number | null;
     /** When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
     ends_at?: string;
     /** The goal the campaign optimizes toward. */
