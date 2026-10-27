@@ -56,6 +56,7 @@ export namespace PaymentFee {
         ApplicationFee: "application_fee",
         HighRiskMerchantFee: "high_risk_merchant_fee",
         EconomicIntelligencePercentageFee: "economic_intelligence_percentage_fee",
+        PaymentReturnFee: "payment_return_fee",
     } as const;
     export type Origin = (typeof Origin)[keyof typeof Origin];
     /** The family the fee belongs to: `whop_fee`, `processing_fee`, `affiliate_program_fee`, or `other_fee`. */

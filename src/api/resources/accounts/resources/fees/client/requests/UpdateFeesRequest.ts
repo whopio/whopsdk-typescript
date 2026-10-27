@@ -10,6 +10,10 @@ export interface UpdateFeesRequest {
     /** Account ID, prefixed `biz_`. */
     account_id: string;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
+    ach_dispute?: UpdateFeesRequest.AchDispute;
+    /** The fields of a fee the caller may change. Only the keys sent are replaced. */
+    ach_return?: UpdateFeesRequest.AchReturn;
+    /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     bank_deposit?: UpdateFeesRequest.BankDeposit;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     billing?: UpdateFeesRequest.Billing;
@@ -62,6 +66,10 @@ export interface UpdateFeesRequest {
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     revshare?: UpdateFeesRequest.Revshare;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
+    sepa_dispute?: UpdateFeesRequest.SepaDispute;
+    /** The fields of a fee the caller may change. Only the keys sent are replaced. */
+    sepa_return?: UpdateFeesRequest.SepaReturn;
+    /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     tax_calculation?: UpdateFeesRequest.TaxCalculation;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     tax_service?: UpdateFeesRequest.TaxService;
@@ -72,6 +80,52 @@ export interface UpdateFeesRequest {
 }
 
 export namespace UpdateFeesRequest {
+    /**
+     * The fields of a fee the caller may change. Only the keys sent are replaced.
+     */
+    export interface AchDispute {
+        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        fixed?: (number | null) | undefined;
+        /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+        percentage?: (number | null) | undefined;
+        /** Changes for the other regions the fee varies by, keyed by region. Only accepted on a fee whose `regions` is non-empty. */
+        regions?: Record<string, AchDispute.Regions.Value> | undefined;
+    }
+
+    export namespace AchDispute {
+        export namespace Regions {
+            export interface Value {
+                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                fixed?: (number | null) | undefined;
+                /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+                percentage?: (number | null) | undefined;
+            }
+        }
+    }
+
+    /**
+     * The fields of a fee the caller may change. Only the keys sent are replaced.
+     */
+    export interface AchReturn {
+        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        fixed?: (number | null) | undefined;
+        /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+        percentage?: (number | null) | undefined;
+        /** Changes for the other regions the fee varies by, keyed by region. Only accepted on a fee whose `regions` is non-empty. */
+        regions?: Record<string, AchReturn.Regions.Value> | undefined;
+    }
+
+    export namespace AchReturn {
+        export namespace Regions {
+            export interface Value {
+                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                fixed?: (number | null) | undefined;
+                /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+                percentage?: (number | null) | undefined;
+            }
+        }
+    }
+
     /**
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
@@ -752,6 +806,52 @@ export namespace UpdateFeesRequest {
     }
 
     export namespace Revshare {
+        export namespace Regions {
+            export interface Value {
+                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                fixed?: (number | null) | undefined;
+                /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+                percentage?: (number | null) | undefined;
+            }
+        }
+    }
+
+    /**
+     * The fields of a fee the caller may change. Only the keys sent are replaced.
+     */
+    export interface SepaDispute {
+        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        fixed?: (number | null) | undefined;
+        /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+        percentage?: (number | null) | undefined;
+        /** Changes for the other regions the fee varies by, keyed by region. Only accepted on a fee whose `regions` is non-empty. */
+        regions?: Record<string, SepaDispute.Regions.Value> | undefined;
+    }
+
+    export namespace SepaDispute {
+        export namespace Regions {
+            export interface Value {
+                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                fixed?: (number | null) | undefined;
+                /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+                percentage?: (number | null) | undefined;
+            }
+        }
+    }
+
+    /**
+     * The fields of a fee the caller may change. Only the keys sent are replaced.
+     */
+    export interface SepaReturn {
+        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        fixed?: (number | null) | undefined;
+        /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
+        percentage?: (number | null) | undefined;
+        /** Changes for the other regions the fee varies by, keyed by region. Only accepted on a fee whose `regions` is non-empty. */
+        regions?: Record<string, SepaReturn.Regions.Value> | undefined;
+    }
+
+    export namespace SepaReturn {
         export namespace Regions {
             export interface Value {
                 /** The new amount per event in US dollars. `null` clears the custom amount. */

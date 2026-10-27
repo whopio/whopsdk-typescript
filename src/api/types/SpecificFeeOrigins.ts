@@ -36,5 +36,6 @@ export const SpecificFeeOrigins = {
     ApplicationFee: "application_fee",
     HighRiskMerchantFee: "high_risk_merchant_fee",
     EconomicIntelligencePercentageFee: "economic_intelligence_percentage_fee",
+    PaymentReturnFee: "payment_return_fee",
 } as const;
 export type SpecificFeeOrigins = (typeof SpecificFeeOrigins)[keyof typeof SpecificFeeOrigins];
