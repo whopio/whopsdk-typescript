@@ -652,7 +652,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Issues a draft and emails it to its recipients, with reminders after the due date. A draft with a `payment_method_id` is charged instead of emailed, which requires `payment:charge`, and its recipients get the payment link if the charge fails. Sending an open invoice emails it again, up to three emails a day including the first send. With `send_at`, the draft is sent at that time instead, and cannot be edited, except its recipients, until it is sent or unscheduled. Each email, reminders included, is sent separately to the customer email shown on the invoice and to each address in `recipient_emails`, so recipients never see each other's addresses.
+     * Issues a draft and emails it to its recipients, with reminders after the due date. A draft with a `payment_method_id` needs `payment:charge`: when its `due_at` is still ahead, it is emailed now and charged to that method on `due_at` (see `scheduled_charge_at`); otherwise it is charged right away instead of emailed. Voiding the invoice, marking it uncollectible, or paying it first cancels the scheduled charge, and its recipients get the payment link if a charge fails. Sending an open invoice emails it again, up to three emails a day including the first send. With `send_at`, the draft is sent at that time instead, and cannot be edited, except its recipients, until it is sent or unscheduled. Each email, reminders included, is sent separately to the customer email shown on the invoice and to each address in `recipient_emails`, so recipients never see each other's addresses.
      *
      * @param {Whop.SendInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
