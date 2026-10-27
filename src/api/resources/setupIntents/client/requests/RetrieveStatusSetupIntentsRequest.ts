@@ -9,4 +9,6 @@
 export interface RetrieveStatusSetupIntentsRequest {
     /** The unique identifier of the setup intent. */
     setup_intent_id: string;
+    /** The setup's own `client_secret`, for a caller without a secret key. */
+    client_secret?: string;
 }
