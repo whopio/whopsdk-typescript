@@ -34,6 +34,7 @@ describe("VerificationsClient", () => {
                     email: "marcus@shinetime.example",
                     first_name: "Marcus",
                     id: "idpf_xxxxxxxxxxxx",
+                    incorporation_date: "2021-03-15",
                     kind: "individual",
                     last_name: "Webb",
                     owners: [
@@ -55,6 +56,7 @@ describe("VerificationsClient", () => {
                         },
                     ],
                     phone: "+15551234567",
+                    place_of_incorporation: "Delaware",
                     registration_number: "7654321",
                     requested_information: [
                         {
@@ -201,6 +203,7 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
@@ -219,6 +222,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {
@@ -478,6 +482,7 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
@@ -496,6 +501,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {
@@ -638,6 +644,7 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
@@ -656,6 +663,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {
