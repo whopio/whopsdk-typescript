@@ -24,6 +24,7 @@ describe("AccountsClient", () => {
                             balance: "1500.0",
                             breakdown: {
                                 available: "1500.0",
+                                finishing_settlement: "0",
                                 in_transit: "0",
                                 pending: "0",
                                 pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
@@ -536,6 +537,7 @@ describe("AccountsClient", () => {
                     balance: "1500.0",
                     breakdown: {
                         available: "1500.0",
+                        finishing_settlement: "0",
                         in_transit: "0",
                         pending: "0",
                         pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
@@ -1070,6 +1072,7 @@ describe("AccountsClient", () => {
                     balance: "1500.0",
                     breakdown: {
                         available: "1500.0",
+                        finishing_settlement: "0",
                         in_transit: "0",
                         pending: "0",
                         pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
@@ -1619,6 +1622,7 @@ describe("AccountsClient", () => {
                     balance: "1500.0",
                     breakdown: {
                         available: "1500.0",
+                        finishing_settlement: "0",
                         in_transit: "0",
                         pending: "0",
                         pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
@@ -2211,6 +2215,7 @@ describe("AccountsClient", () => {
                     balance: "1500.0",
                     breakdown: {
                         available: "1500.0",
+                        finishing_settlement: "0",
                         in_transit: "0",
                         pending: "0",
                         pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
@@ -3493,6 +3498,7 @@ describe("AccountsClient", () => {
                     balance: "1500.0",
                     breakdown: {
                         available: "1500.0",
+                        finishing_settlement: "0",
                         in_transit: "0",
                         pending: "0",
                         pending_settlements: [{ amount: "0.0", date: "2026-01-01" }],
