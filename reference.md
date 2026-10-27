@@ -10331,6 +10331,71 @@ await client.deposits.create({
 </dl>
 </details>
 
+<details><summary><code>client.deposits.<a href="/src/api/resources/deposits/client/Client.ts">reverse</a>({ ...params }) -> Whop.LedgerActivity</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a bank deposit back to the bank account that wired it and takes it back out of the balance. Identify the deposit by its `vbt_` ID, the `source.id` of its row in the account's financial activity. The available balance has to cover the deposit minus the deposit fee, which is refunded. Returns the reversal's own row in the financial activity: a `topup_reversal` debit for the full deposit amount, whose `source` is the bank deposit. The source's `status` is `reversal_in_progress` until the money is back with the sender, then `reversed`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.deposits.reverse({
+    id: "vbt_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ReverseDepositsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DepositsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Dispute alerts
 <details><summary><code>client.disputeAlerts.<a href="/src/api/resources/disputeAlerts/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.DisputeAlert, Whop.ListDisputeAlertsResponse&gt;</code></summary>
 <dl>

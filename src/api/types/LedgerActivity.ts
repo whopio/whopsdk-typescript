@@ -580,7 +580,7 @@ export namespace LedgerActivity {
         risk_review_hold?: (boolean | null) | undefined;
         /** On onchain_transaction sources, the sender wallet address or onramp provider identifier. On bank_deposit sources, the last four digits of the sending bank account, such as `••••1547`. */
         sender_address?: (string | null) | undefined;
-        /** Lifecycle status. On payout sources this is the payout status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated). */
+        /** Lifecycle status. On payout sources this is the payout status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated); on bank_deposit sources it is succeeded, reversal_in_progress or reversed (ungated). */
         status?: (string | null) | undefined;
         /** Amount received in to_currency as a decimal string (swap sources only). */
         to_amount?: (string | null) | undefined;
