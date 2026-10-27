@@ -3,6 +3,8 @@
 export interface RetrieveSwapsResponse {
     /** Account that owns the swap: a business ID prefixed `biz_`, or the user ID for a personal account. */
     account_id: string;
+    /** The from_token amount the swap was created to spend, as a decimal string. A swap created with `all` reports the wallet balance it read. Null for a fiat pair. */
+    amount: string | null;
     /** Latest error returned for a failed swap. */
     error?: (string | null) | undefined;
     /** Swap ID. */
