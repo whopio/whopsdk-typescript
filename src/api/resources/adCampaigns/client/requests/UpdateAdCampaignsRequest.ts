@@ -25,6 +25,8 @@ export interface UpdateAdCampaignsRequest {
     budget_type?: UpdateAdCampaignsRequest.BudgetType;
     /** Accepted only when it matches the campaign's current type, so a read can be sent back unchanged. The type is fixed at creation. */
     campaign_type?: UpdateAdCampaignsRequest.CampaignType;
+    /** The cost per result, in USD, you want this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. Ad groups set cost and bid caps with their own `desired_cost_per_result`. `null` clears it. */
+    desired_cost_per_result?: number | null;
     /** When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
     ends_at?: string;
     /** Regulated categories the campaign falls under. Editable on any campaign, draft or launched; pass an empty array to clear. */
