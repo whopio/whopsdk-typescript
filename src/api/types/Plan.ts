@@ -11,6 +11,8 @@ export interface Plan {
     attributes: Record<string, string | null> | null;
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
+    /** Billing model for this variant. */
+    billing_type: Plan.BillingType;
     /** How long the cancellation discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_intervals: number | null;
     /** Cancellation discount as a whole-number percentage. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
@@ -54,8 +56,6 @@ export interface Plan {
     offer_cancel_discount: boolean | null;
     /** Payment method configuration (`enabled`, `disabled`, `include_platform_defaults`); `null` when variant uses default settings. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Billing model for this variant. */
-    plan_type: Plan.PlanType;
     /** Product this variant belongs to; `null` for standalone variants. */
     product: Record<string, unknown> | null;
     /** URL where customers can purchase this variant directly. */
@@ -91,6 +91,12 @@ export interface Plan {
 }
 
 export namespace Plan {
+    /** Billing model for this variant. */
+    export const BillingType = {
+        Renewal: "renewal",
+        OneTime: "one_time",
+    } as const;
+    export type BillingType = (typeof BillingType)[keyof typeof BillingType];
     /** Three-letter ISO 4217 code of the currency every price on this variant is stated in, lowercase: the variant's own currency, or the `presentment_currency` the read asked for when the variant can be converted into it. */
     export const Currency = {
         Usd: "usd",
@@ -185,12 +191,6 @@ export namespace Plan {
         Xau: "xau",
     } as const;
     export type Currency = (typeof Currency)[keyof typeof Currency];
-    /** Billing model for this variant. */
-    export const PlanType = {
-        Renewal: "renewal",
-        OneTime: "one_time",
-    } as const;
-    export type PlanType = (typeof PlanType)[keyof typeof PlanType];
     /** Sales method for this variant. */
     export const ReleaseMethod = {
         BuyNow: "buy_now",

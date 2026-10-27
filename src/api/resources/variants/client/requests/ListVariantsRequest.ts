@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         release_methods: ["buy_now"],
  *         visibilities: ["visible"],
- *         plan_types: ["renewal"],
+ *         billing_types: ["renewal"],
  *         product_ids: ["prod_xxxxxxxxxxxxxx"],
  *         presentment_currency: "auto",
  *         ip_address: "203.0.113.7",
@@ -26,7 +26,7 @@ export interface ListVariantsRequest {
     /** Filter to only variants matching these visibility states. */
     visibilities?: string | string[];
     /** Filter to only variants matching these billing types. */
-    plan_types?: string | string[];
+    billing_types?: string | string[];
     /** Filter to only variants belonging to these product identifiers. When `account_id` is omitted, this is required and the response is publicly readable: only visible, non-invoice variants are returned. */
     product_ids?: string | string[];
     /** Only return variants created before this timestamp. */

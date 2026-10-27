@@ -11,6 +11,7 @@ export interface CreatePlansRequest {
     adaptive_pricing_enabled?: boolean | null;
     attributes?: Record<string, unknown> | null;
     billing_period?: number | null;
+    billing_type?: string;
     cancel_discount_intervals?: number | null;
     cancel_discount_percentage?: number | null;
     checkout_styling?: Record<string, unknown> | null;
@@ -25,7 +26,6 @@ export interface CreatePlansRequest {
     offer_cancel_discount?: boolean | null;
     override_tax_type?: string;
     payment_method_configuration?: CreatePlansRequest.PaymentMethodConfiguration | null;
-    plan_type?: string;
     product_id?: string;
     release_method?: string;
     renewal_price?: number | null;
