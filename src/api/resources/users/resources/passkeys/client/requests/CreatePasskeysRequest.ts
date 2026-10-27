@@ -18,4 +18,8 @@ export interface CreatePasskeysRequest {
     credential_id: string;
     /** A name for this passkey, usually the device it lives on. 255 characters or fewer. */
     nickname: string;
+    /** The `getTransports()` result from the registration response. Values Whop does not recognize are dropped. */
+    transports?: string[];
+    /** The `creation_options.user.id` the passkey was created with. Must match the challenge's options. */
+    user_handle?: string;
 }
