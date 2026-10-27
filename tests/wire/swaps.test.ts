@@ -19,6 +19,7 @@ describe("SwapsClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
+                    amount: "0.052341",
                     error: "Swap reverted: quoted price moved beyond the slippage tolerance",
                     id: "vault-swap-cwal_xxxxxxxxxxxxxx",
                     object: "swap",
@@ -66,6 +67,7 @@ describe("SwapsClient", () => {
         const rawRequestBody = { from_token: "usd", to_token: "cad" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            amount: "100.0",
             amount_in: 131.4,
             amount_out: 180,
             amount_out_expected: "98.9",
@@ -315,6 +317,7 @@ describe("SwapsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            amount: "0.052341",
             error: "Swap reverted: quoted price moved beyond the slippage tolerance",
             id: "vault-swap-cwal_xxxxxxxxxxxxxx",
             object: "swap",

@@ -3,6 +3,8 @@
 export interface CreateSwapsResponse {
     /** Account that owns the swap: a business ID prefixed `biz_`, or the user ID for a personal account. */
     account_id: string;
+    /** Crypto pairs only: the from_token amount the swap spends, as a decimal string. A request for `all` returns the wallet balance it read. */
+    amount?: (string | null) | undefined;
     /** Fiat pairs only: amount of the source currency converted. Null while a stablecoin repayment is processing. */
     amount_in?: (number | null) | undefined;
     /** Fiat pairs only: amount credited in the destination currency. Null while a stablecoin repayment is processing. */
