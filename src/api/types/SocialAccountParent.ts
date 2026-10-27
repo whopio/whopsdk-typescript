@@ -29,6 +29,7 @@ export namespace SocialAccountParent {
         Telegram: "telegram",
         Linkedin: "linkedin",
         Snapchat: "snapchat",
+        Klaviyo: "klaviyo",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }

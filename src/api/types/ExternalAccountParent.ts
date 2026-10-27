@@ -27,6 +27,7 @@ export namespace ExternalAccountParent {
         Facebook: "facebook",
         Linkedin: "linkedin",
         Snapchat: "snapchat",
+        Klaviyo: "klaviyo",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }
