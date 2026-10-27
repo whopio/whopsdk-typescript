@@ -176,7 +176,7 @@ export * from "./ChatChannel.js";
 export * from "./ChatChannelListItem.js";
 export * from "./CheckoutConfiguration.js";
 export * from "./CheckoutConfigurationListItem.js";
-export * from "./CheckoutConfigurationPlan.js";
+export * from "./CheckoutConfigurationVariant.js";
 export * from "./CheckoutFonts.js";
 export * from "./CheckoutModes.js";
 export * from "./CheckoutSessionPaymentMethodConfiguration.js";

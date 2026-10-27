@@ -13,7 +13,7 @@ export interface CreatePaymentQuotesRequest extends Whop.PaymentInput {
     address?: CreatePaymentQuotesRequest.Address | null;
     /** The buyer's IP address, when your server makes the call on their behalf. Locates the buyer when neither address carries a country and no `presentment_country` is sent. A quote located this way (`located_by` is `ip_address`) is a preview: a payment refuses it with `quote_preview_only`, so quote again with the buyer's address before paying. Also where `presentment_currency` `auto` and `recommended_currencies` find the buyer's local currency, and where a payment method must be able to collect it. */
     ip_address?: string | null;
-    /** What the buyer is purchasing. Each entry names an existing variant by plan_id. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
+    /** What the buyer is purchasing. Each entry names an existing variant by `variant_id`. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
     line_items?: CreatePaymentQuotesRequest.LineItems.Item[];
     /** The country to price the purchase for, as an ISO 3166-1 alpha-2 code such as `JP`, when the buyer chose one: a store's country picker. Prices in the currency `auto` would pick for a buyer in that country, so send it instead of `presentment_currency`, never with it. Whether a payment method can collect that currency is still judged where the buyer is: by `ip_address`, and by this country only without one. With no address that carries a country, tax is estimated for this country (`located_by` is `presentment_country`) at the country level, and a quote located this way is a preview a payment refuses with `quote_preview_only`. Send it only once the buyer has chosen a country: without it, an `ip_address` estimates more precisely, such as for a US state. For a country Whop has no currency for, the quote is priced as `auto` for the buyer's `ip_address`, and tax is still estimated for the country. */
     presentment_country?: string | null;
@@ -50,10 +50,10 @@ export namespace CreatePaymentQuotesRequest {
 
     export namespace LineItems {
         export interface Item {
-            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
-            plan_id: string;
             /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
             quantity?: (number | null) | undefined;
+            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
+            variant_id: string;
         }
     }
 

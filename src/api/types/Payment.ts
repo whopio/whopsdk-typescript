@@ -68,8 +68,6 @@ export interface Payment {
     payment_rule_matches: Whop.PaymentRuleMatch[];
     /** How many charge attempts have failed on this payment. */
     payments_failed: number;
-    /** The variant that was charged, prefixed `plan_`. */
-    plan_id: string | null;
     /** How much has been refunded so far, in the currency presented to the buyer. Zero when nothing has been refunded. */
     presentment_refunded_amount: Whop.Money | null;
     /** The sales tax or VAT collected, in the currency presented to the buyer. Null when no tax applied. */
@@ -129,6 +127,8 @@ export interface Payment {
     usd_total: Whop.Money | null;
     /** The buyer. Null when the payment belongs to a company buyer rather than a user. */
     user: Whop.UserSummary | null;
+    /** The variant that was charged, prefixed `plan_`. */
+    variant_id: string | null;
     /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none. */
     verification_checks: Whop.PaymentVerificationChecks | null;
     /** True when the payment can be voided or canceled. The request is rejected if the payment is no longer eligible — see `POST /payments/{id}/void`. */

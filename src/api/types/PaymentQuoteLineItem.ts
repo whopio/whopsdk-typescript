@@ -5,8 +5,6 @@ import type * as Whop from "../index.js";
 export interface PaymentQuoteLineItem {
     /** The promo code's share on this line. Zero without a code. */
     discount: Whop.Money;
-    /** The variant this line prices, prefixed `plan_`. Null when the purchase describes the variant by `plan` and no variant with those attributes exists yet: the payment that consumes the quote creates it, and the line names it from then on. */
-    plan_id: string | null;
     /** How many units of the variant the line covers. */
     quantity: number;
     /** The line's price before the promo code's share and tax; `subtotal` minus `discount` is what the line comes to after the discount. The lines' subtotals sum to the quote's `subtotal`. */
@@ -15,4 +13,6 @@ export interface PaymentQuoteLineItem {
     tax_amount: Whop.Money;
     /** `subtotal` minus `discount`, plus `tax_amount` when tax is added on top, or without it when the price already includes it. */
     total: Whop.Money;
+    /** The variant this line prices, prefixed `plan_`. Null when the purchase describes the variant by `variant` and no variant with those attributes exists yet: the payment that consumes the quote creates it, and the line names it from then on. */
+    variant_id: string | null;
 }

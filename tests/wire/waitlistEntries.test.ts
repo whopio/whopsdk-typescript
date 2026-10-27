@@ -33,7 +33,6 @@ describe("WaitlistEntriesClient", () => {
                     id: "entry_xxxxxxxxxxxxxx",
                     membership_id: "membership_id",
                     metadata: { key: "value" },
-                    plan_id: "plan_xxxxxxxxxxxxxx",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
                     product_id: "prod_xxxxxxxxxxxxxx",
                     status: "pending",
@@ -47,14 +46,15 @@ describe("WaitlistEntriesClient", () => {
                     user_id: "user_xxxxxxxxxxxxxx",
                     variant: {
                         billing_period: 30,
+                        billing_type: "renewal",
                         description: null,
                         id: "plan_xxxxxxxxxxxxxx",
                         initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        plan_type: "renewal",
                         renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         title: null,
                         trial_period_days: null,
                     },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
                 },
             ],
             page_info: {
@@ -167,7 +167,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { variant_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
@@ -184,7 +184,6 @@ describe("WaitlistEntriesClient", () => {
             id: "entry_xxxxxxxxxxxxxx",
             membership_id: "membership_id",
             metadata: { key: "value" },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
@@ -198,14 +197,15 @@ describe("WaitlistEntriesClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
             variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 description: "description",
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 trial_period_days: 1.1,
             },
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -218,7 +218,7 @@ describe("WaitlistEntriesClient", () => {
             .build();
 
         const response = await client.waitlistEntries.create({
-            plan_id: "plan_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -232,7 +232,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -246,7 +246,7 @@ describe("WaitlistEntriesClient", () => {
 
         await expect(async () => {
             return await client.waitlistEntries.create({
-                plan_id: "plan_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -260,7 +260,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -274,7 +274,7 @@ describe("WaitlistEntriesClient", () => {
 
         await expect(async () => {
             return await client.waitlistEntries.create({
-                plan_id: "plan_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -288,7 +288,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -302,7 +302,7 @@ describe("WaitlistEntriesClient", () => {
 
         await expect(async () => {
             return await client.waitlistEntries.create({
-                plan_id: "plan_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -316,7 +316,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -330,7 +330,7 @@ describe("WaitlistEntriesClient", () => {
 
         await expect(async () => {
             return await client.waitlistEntries.create({
-                plan_id: "plan_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -344,7 +344,7 @@ describe("WaitlistEntriesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -358,7 +358,7 @@ describe("WaitlistEntriesClient", () => {
 
         await expect(async () => {
             return await client.waitlistEntries.create({
-                plan_id: "plan_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -373,7 +373,7 @@ describe("WaitlistEntriesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
-        const rawResponseBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_id", queued: true };
+        const rawResponseBody = { account_id: "biz_xxxxxxxxxxxxxx", queued: true, variant_id: "variant_id" };
 
         server
             .mockEndpoint()
@@ -556,7 +556,6 @@ describe("WaitlistEntriesClient", () => {
             id: "entry_xxxxxxxxxxxxxx",
             membership_id: "membership_id",
             metadata: { key: "value" },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
@@ -570,14 +569,15 @@ describe("WaitlistEntriesClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
             variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 description: "description",
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 trial_period_days: 1.1,
             },
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -701,7 +701,6 @@ describe("WaitlistEntriesClient", () => {
             id: "entry_xxxxxxxxxxxxxx",
             membership_id: "membership_id",
             metadata: { key: "value" },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
@@ -715,14 +714,15 @@ describe("WaitlistEntriesClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
             variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 description: "description",
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 trial_period_days: 1.1,
             },
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -873,7 +873,6 @@ describe("WaitlistEntriesClient", () => {
             id: "entry_xxxxxxxxxxxxxx",
             membership_id: "membership_id",
             metadata: { key: "value" },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
@@ -887,14 +886,15 @@ describe("WaitlistEntriesClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
             variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 description: "description",
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 trial_period_days: 1.1,
             },
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1045,7 +1045,6 @@ describe("WaitlistEntriesClient", () => {
             id: "entry_xxxxxxxxxxxxxx",
             membership_id: "membership_id",
             metadata: { key: "value" },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Persevering actuating local..." },
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "pending",
@@ -1059,14 +1058,15 @@ describe("WaitlistEntriesClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
             variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 description: "description",
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 trial_period_days: 1.1,
             },
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server

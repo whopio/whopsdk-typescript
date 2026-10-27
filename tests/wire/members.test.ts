@@ -66,7 +66,7 @@ describe("MembersClient", () => {
         const page = await client.members.list({
             user_ids: ["user_xxxxxxxxxxxxxx"],
             product_ids: ["prod_xxxxxxxxxxxxx"],
-            plan_ids: ["plan_xxxxxxxxxxxxx"],
+            variant_ids: ["plan_xxxxxxxxxxxxx"],
             promo_code_ids: ["promo_xxxxxxxxxxxx"],
         });
 

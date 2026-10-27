@@ -49,7 +49,7 @@ export class PaymentsClient {
      * @example
      *     await client.payments.list({
      *         currencies: ["eur"],
-     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         variant_ids: ["plan_xxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"]
      *     })
      */
@@ -72,14 +72,14 @@ export class PaymentsClient {
                     member_id: memberId,
                     membership_id: membershipId,
                     product_id: productId,
-                    plan_id: planId,
+                    variant_id: variantId,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     statuses,
                     substatuses,
                     billing_reasons: billingReasons,
                     currencies,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     product_ids: productIds,
                     payment_methods: paymentMethods,
                     tracking_states: trackingStates,
@@ -109,7 +109,7 @@ export class PaymentsClient {
                     member_id: memberId,
                     membership_id: membershipId,
                     product_id: productId,
-                    plan_id: planId,
+                    variant_id: variantId,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
                     statuses: Array.isArray(statuses)
@@ -128,7 +128,7 @@ export class PaymentsClient {
                           ? billingReasons
                           : undefined,
                     currencies,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     product_ids: productIds,
                     payment_methods: Array.isArray(paymentMethods)
                         ? paymentMethods.map((item) => item)
@@ -159,7 +159,7 @@ export class PaymentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -257,7 +257,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -321,7 +321,7 @@ export class PaymentsClient {
      * @example
      *     await client.payments.summary({
      *         currencies: ["usd"],
-     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         variant_ids: ["plan_xxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"]
      *     })
      */
@@ -343,7 +343,7 @@ export class PaymentsClient {
             substatuses,
             billing_reasons: billingReasons,
             currencies,
-            plan_ids: planIds,
+            variant_ids: variantIds,
             product_ids: productIds,
             payment_methods: paymentMethods,
             tracking_states: trackingStates,
@@ -373,7 +373,7 @@ export class PaymentsClient {
                   ? billingReasons
                   : undefined,
             currencies,
-            plan_ids: planIds,
+            variant_ids: variantIds,
             product_ids: productIds,
             payment_methods: Array.isArray(paymentMethods)
                 ? paymentMethods.map((item) => item)
@@ -401,7 +401,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -475,7 +475,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -555,7 +555,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -640,7 +640,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -720,7 +720,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -798,7 +798,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -881,7 +881,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -967,7 +967,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1046,7 +1046,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1127,7 +1127,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1218,7 +1218,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1306,7 +1306,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
