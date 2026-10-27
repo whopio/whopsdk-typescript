@@ -4653,6 +4653,49 @@ describe("FeesClient", () => {
             },
             parent_account_id: "biz_xxxxxxxxxxxxxx",
             payment_methods: {
+                acss_debit: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 addi: {
                     adjustable: false,
                     category: "payments",
@@ -4881,6 +4924,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                bacs_debit: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 bancolombia: {
                     adjustable: false,
                     category: "payments",
@@ -4920,6 +5006,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 2.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                bancontact: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -5124,6 +5253,49 @@ describe("FeesClient", () => {
                         },
                     },
                     reset: { fixed: null, percentage: 15 },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                cashapp: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -5490,6 +5662,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                klarna_pay_now: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 kriya: {
                     adjustable: false,
                     category: "payments",
@@ -5566,6 +5781,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 4.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                link: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -5689,6 +5947,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 4.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                mobilepay: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -6603,6 +6904,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                swish: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 tabby: {
                     adjustable: false,
                     category: "payments",
@@ -6784,6 +7128,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 1.5,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                vipps: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -14301,6 +14688,49 @@ describe("FeesClient", () => {
             },
             parent_account_id: "biz_xxxxxxxxxxxxxx",
             payment_methods: {
+                acss_debit: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 addi: {
                     adjustable: false,
                     category: "payments",
@@ -14529,6 +14959,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                bacs_debit: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 bancolombia: {
                     adjustable: false,
                     category: "payments",
@@ -14568,6 +15041,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 2.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                bancontact: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -14772,6 +15288,49 @@ describe("FeesClient", () => {
                         },
                     },
                     reset: { fixed: null, percentage: 15 },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                cashapp: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -15138,6 +15697,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                klarna_pay_now: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 kriya: {
                     adjustable: false,
                     category: "payments",
@@ -15214,6 +15816,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 4.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                link: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -15337,6 +15982,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 4.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                mobilepay: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -16251,6 +16939,49 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+                swish: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 tabby: {
                     adjustable: false,
                     category: "payments",
@@ -16432,6 +17163,49 @@ describe("FeesClient", () => {
                     reset: {
                         fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 1.5,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                vipps: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 2.7,
+                    region: null,
+                    regions: {
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.7,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
