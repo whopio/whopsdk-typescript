@@ -9,6 +9,7 @@ import type * as Whop from "../../../../index.js";
 export interface CreatePlansRequest {
     account_id?: string;
     adaptive_pricing_enabled?: boolean | null;
+    allow_multiple_quantity?: boolean;
     attributes?: Record<string, unknown> | null;
     billing_period?: number | null;
     billing_type?: string;
