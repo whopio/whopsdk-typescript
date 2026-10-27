@@ -10,7 +10,7 @@ export interface ProductListItem {
     /** When the product was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** Buyable variant to show and check out with. The configured default when that variant is buyable, otherwise the first buyable variant in product-page order. `null` when none is buyable. */
-    default_plan: Whop.ProductPublicPlan | null;
+    default_variant: Whop.ProductPublicVariant | null;
     /** Written description displayed on the product page. `null` if none is set. */
     description: string | null;
     /** External identifier stored on the product for your own reference. */

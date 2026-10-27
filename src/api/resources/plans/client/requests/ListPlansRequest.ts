@@ -12,7 +12,7 @@ export interface ListPlansRequest {
     order?: Whop.ListPlansRequestOrder;
     release_methods?: string | string[];
     visibilities?: string | string[];
-    plan_types?: string | string[];
+    billing_types?: string | string[];
     product_ids?: string | string[];
     created_before?: string;
     created_after?: string;

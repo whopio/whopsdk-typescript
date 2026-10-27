@@ -22,6 +22,7 @@ describe("VariantsClient", () => {
                     adaptive_pricing_enabled: true,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -62,7 +63,6 @@ describe("VariantsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
@@ -100,7 +100,7 @@ describe("VariantsClient", () => {
         const page = await client.variants.list({
             release_methods: ["buy_now"],
             visibilities: ["visible"],
-            plan_types: ["renewal"],
+            billing_types: ["renewal"],
             product_ids: ["prod_xxxxxxxxxxxxxx"],
             presentment_currency: "auto",
             ip_address: "203.0.113.7",
@@ -166,6 +166,7 @@ describe("VariantsClient", () => {
             adaptive_pricing_enabled: true,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
+            billing_type: "renewal",
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
             checkout_styling: {
@@ -209,7 +210,6 @@ describe("VariantsClient", () => {
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
             offer_cancel_discount: true,
             payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
-            plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
@@ -334,6 +334,7 @@ describe("VariantsClient", () => {
             adaptive_pricing_enabled: true,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
+            billing_type: "renewal",
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
             checkout_styling: {
@@ -377,7 +378,6 @@ describe("VariantsClient", () => {
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
             offer_cancel_discount: true,
             payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
-            plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
@@ -484,6 +484,7 @@ describe("VariantsClient", () => {
             adaptive_pricing_enabled: true,
             attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
+            billing_type: "renewal",
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
             checkout_styling: {
@@ -527,7 +528,6 @@ describe("VariantsClient", () => {
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
             offer_cancel_discount: true,
             payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
-            plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",

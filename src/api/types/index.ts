@@ -462,7 +462,7 @@ export * from "./ProductAffiliateUser.js";
 export * from "./ProductGalleryImage.js";
 export * from "./ProductLegacy.js";
 export * from "./ProductListItem.js";
-export * from "./ProductPublicPlan.js";
+export * from "./ProductPublicVariant.js";
 export * from "./ProductTaxCodeProductTypes.js";
 export * from "./PromoCode.js";
 export * from "./PromoCodeAffiliate.js";

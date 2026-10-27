@@ -29458,7 +29458,7 @@ Lists an account's variants. To list a product's public, buyable variants withou
 const pageableResponse = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
-    plan_types: ["renewal"],
+    billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
     ip_address: "203.0.113.7",
@@ -29472,7 +29472,7 @@ for await (const item of pageableResponse) {
 let page = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
-    plan_types: ["renewal"],
+    billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
     ip_address: "203.0.113.7",

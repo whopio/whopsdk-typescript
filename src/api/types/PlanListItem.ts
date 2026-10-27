@@ -11,6 +11,8 @@ export interface PlanListItem {
     attributes: Record<string, string | null> | null;
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
+    /** Billing model for this variant. */
+    billing_type: PlanListItem.BillingType;
     /** How long the cancellation discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_intervals: number | null;
     /** Cancellation discount as a whole-number percentage. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
@@ -48,8 +50,6 @@ export interface PlanListItem {
     offer_cancel_discount: boolean | null;
     /** Payment method configuration (`enabled`, `disabled`, `include_platform_defaults`); `null` when variant uses default settings. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Billing model for this variant. */
-    plan_type: PlanListItem.PlanType;
     /** Product this variant belongs to; `null` for standalone variants. */
     product: Record<string, unknown> | null;
     /** URL where customers can purchase this variant directly. */
@@ -84,11 +84,11 @@ export interface PlanListItem {
 
 export namespace PlanListItem {
     /** Billing model for this variant. */
-    export const PlanType = {
+    export const BillingType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
-    export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+    export type BillingType = (typeof BillingType)[keyof typeof BillingType];
     /** Sales method for this variant. */
     export const ReleaseMethod = {
         BuyNow: "buy_now",

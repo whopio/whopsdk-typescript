@@ -15,6 +15,8 @@ export interface CreateVariantsRequest {
     attributes?: Record<string, unknown> | null;
     /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
     billing_period?: number | null;
+    /** Variant billing type, such as `one_time` or `renewal`. */
+    billing_type?: string;
     /** How long the retention discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. Required when `offer_cancel_discount` is true. */
     cancel_discount_intervals?: number | null;
     /** Percentage taken off each discounted renewal, as a whole number from 1 to 100. Required when `offer_cancel_discount` is true. */
@@ -43,8 +45,6 @@ export interface CreateVariantsRequest {
     override_tax_type?: string;
     /** Explicit payment method configuration for the variant. When not provided, the account's defaults apply. Send at least one of `enabled` or `disabled`; an omitted one is empty. */
     payment_method_configuration?: CreateVariantsRequest.PaymentMethodConfiguration | null;
-    /** Variant billing type, such as `one_time` or `renewal`. */
-    plan_type?: string;
     /** The unique identifier of the product to attach this variant to. */
     product_id?: string;
     /** Sales method for this variant. */
