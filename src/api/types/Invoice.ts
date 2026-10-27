@@ -26,6 +26,8 @@ export interface Invoice {
     paid_at: string | null;
     payment_method_id: string | null;
     recipient_emails: string[];
+    /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp. Set to `due_at` when an invoice with a `payment_method_id` is sent before it is due; `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
+    scheduled_charge_at: string | null;
     scheduled_send_at: string | null;
     status: Invoice.Status;
     subtotal: Whop.Money;
