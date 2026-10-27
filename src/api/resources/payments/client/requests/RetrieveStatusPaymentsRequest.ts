@@ -9,4 +9,6 @@
 export interface RetrieveStatusPaymentsRequest {
     /** The unique identifier of the payment. */
     payment_id: string;
+    /** The payment's own `client_secret`, for a caller without a secret key. */
+    client_secret?: string;
 }
