@@ -6,7 +6,7 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         currencies: ["usd"],
- *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"]
  *     }
  */
@@ -24,7 +24,7 @@ export interface SummaryPaymentsRequest {
     /** Only payments presented in any of these three-letter currencies. Repeat the parameter to pass several. */
     currencies?: string | string[];
     /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. */
-    plan_ids?: string | string[];
+    variant_ids?: string | string[];
     /** Only payments for any of these products, each prefixed `prod_`. Repeat the parameter to pass several. */
     product_ids?: string | string[];
     /** Only payments paid with any of these methods. Repeat the parameter to pass several. */

@@ -22,12 +22,12 @@ export interface CreatePromoCodesRequest {
     expires_at?: string | null;
     new_users_only: boolean;
     one_per_customer?: boolean;
-    plan_ids?: string[];
     product_id?: string | null;
     promo_duration_months: number;
     promo_type: CreatePromoCodesRequest.PromoType;
     stock?: number | null;
     unlimited_stock?: boolean;
+    variant_ids?: string[];
 }
 
 export namespace CreatePromoCodesRequest {

@@ -6,7 +6,7 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         currencies: ["eur"],
- *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"]
  *     }
  */
@@ -36,7 +36,7 @@ export interface ListPaymentsRequest {
     /** Only payments for this product, prefixed `prod_`. */
     product_id?: string;
     /** Only payments priced by this variant, prefixed `plan_`. */
-    plan_id?: string;
+    variant_id?: string;
     /** Only payments created before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only payments created after this ISO 8601 timestamp. */
@@ -49,8 +49,8 @@ export interface ListPaymentsRequest {
     billing_reasons?: Whop.ListPaymentsRequestBillingReasonsItem | Whop.ListPaymentsRequestBillingReasonsItem[];
     /** Only payments presented in any of these three-letter currencies. Repeat the parameter to pass several. Combined with `currency` when both are sent. */
     currencies?: string | string[];
-    /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. Combined with `plan_id` when both are sent. */
-    plan_ids?: string | string[];
+    /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. Combined with `variant_id` when both are sent. */
+    variant_ids?: string | string[];
     /** Only payments for any of these products, each prefixed `prod_`. Repeat the parameter to pass several. Combined with `product_id` when both are sent. */
     product_ids?: string | string[];
     /** Only payments paid with any of these methods: a card brand such as `amex`, a wallet such as `apple_pay`, or a payment method type such as `paypal`. Repeat the parameter to pass several. */

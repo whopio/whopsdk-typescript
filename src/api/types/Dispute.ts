@@ -35,8 +35,6 @@ export interface Dispute {
     line_items: Whop.ReceiptLineItem[];
     /** The payment being disputed. */
     payment: Whop.DisputePayment;
-    /** The variant the disputed payment was made on, prefixed `plan_`. */
-    plan_id: string | null;
     /** The product the disputed payment was for, prefixed `prod_`. */
     product_id: string | null;
     /** Why the customer says they are disputing, normalized across processors and card networks. `other` covers a processor reason Whop has not categorized yet. */
@@ -47,6 +45,8 @@ export interface Dispute {
     status: Dispute.Status;
     /** When the dispute was last changed, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** The variant the disputed payment was made on, prefixed `plan_`. */
+    variant_id: string | null;
 }
 
 export namespace Dispute {

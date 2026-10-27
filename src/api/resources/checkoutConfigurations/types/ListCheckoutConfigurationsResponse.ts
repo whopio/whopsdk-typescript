@@ -28,8 +28,6 @@ export namespace ListCheckoutConfigurationsResponse {
             mode: Item.Mode;
             /** Payment method overrides for this checkout. `null` when it uses the variant or platform defaults. */
             payment_method_configuration?: (Item.PaymentMethodConfiguration | null) | undefined;
-            /** Variant used for payment checkout. `null` in setup mode. */
-            plan?: (Item.Plan | null) | undefined;
             /** Checkout URL you can send to customers. */
             purchase_url?: (string | null) | undefined;
             /** URL customers are sent to after checkout, or `null` when no redirect is configured. */
@@ -38,6 +36,8 @@ export namespace ListCheckoutConfigurationsResponse {
             three_ds_level?: (Item.ThreeDsLevel | null) | undefined;
             /** When the checkout configuration was last updated, as an ISO 8601 timestamp. */
             updated_at: string;
+            /** Variant used for payment checkout. `null` in setup mode. */
+            variant?: (Item.Variant | null) | undefined;
         }
 
         export namespace Item {
@@ -72,14 +72,24 @@ export namespace ListCheckoutConfigurationsResponse {
                 include_platform_defaults?: boolean | undefined;
             }
 
+            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
+            export const ThreeDsLevel = {
+                MandateChallenge: "mandate_challenge",
+                MandateIfRequired: "mandate_if_required",
+                FrictionlessIfRequired: "frictionless_if_required",
+            } as const;
+            export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
+
             /**
              * Variant used for payment checkout. `null` in setup mode.
              */
-            export interface Plan {
+            export interface Variant {
                 /** Whether this variant accepts local currency payments via adaptive pricing. */
                 adaptive_pricing_enabled: boolean;
                 /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
                 billing_period: number | null;
+                /** Billing model for the variant. */
+                billing_type: Variant.BillingType;
                 /** Three-letter ISO currency code for the variant's prices. */
                 currency: string;
                 /** Access duration in days for expiration-based variants. */
@@ -88,27 +98,25 @@ export namespace ListCheckoutConfigurationsResponse {
                 id: string;
                 /** Initial purchase price in the variant currency. */
                 initial_price: number;
-                /** Billing model for the variant. */
-                plan_type: Plan.PlanType;
                 /** Sales method for the variant. */
-                release_method: Plan.ReleaseMethod;
+                release_method: Variant.ReleaseMethod;
                 /** Recurring price charged each billing period. */
                 renewal_price: number;
                 /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
-                three_ds_level: Plan.ThreeDsLevel | null;
+                three_ds_level: Variant.ThreeDsLevel | null;
                 /** Free trial days before the first renewal charge. */
                 trial_period_days: number | null;
                 /** Whether the variant is visible to customers or hidden from public view. */
-                visibility: Plan.Visibility;
+                visibility: Variant.Visibility;
             }
 
-            export namespace Plan {
+            export namespace Variant {
                 /** Billing model for the variant. */
-                export const PlanType = {
+                export const BillingType = {
                     Renewal: "renewal",
                     OneTime: "one_time",
                 } as const;
-                export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+                export type BillingType = (typeof BillingType)[keyof typeof BillingType];
                 /** Sales method for the variant. */
                 export const ReleaseMethod = {
                     BuyNow: "buy_now",
@@ -131,14 +139,6 @@ export namespace ListCheckoutConfigurationsResponse {
                 } as const;
                 export type Visibility = (typeof Visibility)[keyof typeof Visibility];
             }
-
-            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
-            export const ThreeDsLevel = {
-                MandateChallenge: "mandate_challenge",
-                MandateIfRequired: "mandate_if_required",
-                FrictionlessIfRequired: "frictionless_if_required",
-            } as const;
-            export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
         }
     }
 

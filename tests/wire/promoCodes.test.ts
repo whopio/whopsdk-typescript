@@ -69,7 +69,7 @@ describe("PromoCodesClient", () => {
         const page = await client.promoCodes.list({
             account_id: "account_id",
             product_ids: ["prod_xxxxxxxxxxxxxx"],
-            plan_ids: ["plan_xxxxxxxxxxxxxx"],
+            variant_ids: ["plan_xxxxxxxxxxxxxx"],
         });
 
         expect(expected.data).toEqual(page.data);

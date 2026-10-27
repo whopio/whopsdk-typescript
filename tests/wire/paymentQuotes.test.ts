@@ -37,11 +37,11 @@ describe("PaymentQuotesClient", () => {
             line_items: [
                 {
                     discount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    plan_id: "plan_xxxxxxxxxxxxxx",
                     quantity: 1,
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
                 },
             ],
             located_by: "shipping_address",
@@ -252,11 +252,11 @@ describe("PaymentQuotesClient", () => {
             line_items: [
                 {
                     discount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    plan_id: "plan_xxxxxxxxxxxxxx",
                     quantity: 1,
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
                 },
             ],
             located_by: "shipping_address",

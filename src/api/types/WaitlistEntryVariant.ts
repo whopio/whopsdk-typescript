@@ -5,14 +5,14 @@ import type * as Whop from "../index.js";
 export interface WaitlistEntryVariant {
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
+    /** Billing model for this variant: `one_time` or `renewal`. */
+    billing_type: WaitlistEntryVariant.BillingType;
     /** Customer-visible variant description. Maximum 1000 characters. `null` if no description is set. */
     description: string | null;
     /** Variant ID, prefixed `plan_`. */
     id: string;
     /** What checkout charges up front. `amount` is `"0.00"` when the first charge is free, such as a trial. */
     initial_price: Whop.Money;
-    /** Billing model for this variant: `one_time` or `renewal`. */
-    plan_type: WaitlistEntryVariant.PlanType;
     /** The recurring charge every `billing_period` days. `amount` is `"0.00"` for one-time variants. */
     renewal_price: Whop.Money;
     /** Variant display name shown to customers. `null` if no title has been set. */
@@ -23,9 +23,9 @@ export interface WaitlistEntryVariant {
 
 export namespace WaitlistEntryVariant {
     /** Billing model for this variant: `one_time` or `renewal`. */
-    export const PlanType = {
+    export const BillingType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
-    export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+    export type BillingType = (typeof BillingType)[keyof typeof BillingType];
 }

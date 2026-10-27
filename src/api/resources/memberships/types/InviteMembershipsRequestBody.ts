@@ -2,10 +2,10 @@
 
 export type InviteMembershipsRequestBody =
     | {
-          plan_id: string;
           user_id: string;
+          variant_id: string;
       }
     | {
           email: string;
-          plan_id: string;
+          variant_id: string;
       };

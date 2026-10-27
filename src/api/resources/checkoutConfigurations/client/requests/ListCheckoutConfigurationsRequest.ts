@@ -12,7 +12,7 @@ export interface ListCheckoutConfigurationsRequest {
     /** Account ID, prefixed `biz_`. */
     account_id: string;
     /** Only return checkout configurations for this variant ID, prefixed `plan_`. */
-    plan_id?: string;
+    variant_id?: string;
     /** Only return checkout configurations created before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only return checkout configurations created after this ISO 8601 timestamp. */

@@ -8065,7 +8065,7 @@ Creates a reusable checkout configuration for an existing or inline variant. Sen
 ```typescript
 await client.checkoutConfigurations.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    plan_id: "plan_xxxxxxxxxxxxx"
+    variant_id: "plan_xxxxxxxxxxxxx"
 });
 
 ```
@@ -18008,7 +18008,7 @@ Lists the members of an account. A member is one buyer's relationship with the a
 const pageableResponse = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -18019,7 +18019,7 @@ for await (const item of pageableResponse) {
 let page = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -18159,7 +18159,7 @@ Lists every membership the caller can read: an account API key its account's; a 
 const pageableResponse = await client.memberships.list({
     external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -18170,7 +18170,7 @@ for await (const item of pageableResponse) {
 let page = await client.memberships.list({
     external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -18242,8 +18242,8 @@ Emails one recipient an invitation to a free variant's membership. The invitatio
 
 ```typescript
 await client.memberships.invite({
-    plan_id: "plan_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxxx",
+    variant_id: "plan_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -21007,7 +21007,7 @@ await client.paymentMethods.deletePaymentMethod({
 <dl>
 <dd>
 
-Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`. Cart entries must name existing variants with `plan_id`.
+Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`. Cart entries must name existing variants with `variant_id`.
 </dd>
 </dl>
 </dd>
@@ -21757,7 +21757,7 @@ Lists payments, newest first. By default, returns sales for the accounts your cr
 ```typescript
 const pageableResponse = await client.payments.list({
     currencies: ["eur"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -21767,7 +21767,7 @@ for await (const item of pageableResponse) {
 // Or you can manually iterate page-by-page
 let page = await client.payments.list({
     currencies: ["eur"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -21905,7 +21905,7 @@ Totals up the same payments the list returns, so you can build status tabs and f
 ```typescript
 await client.payments.summary({
     currencies: ["usd"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 
@@ -24417,7 +24417,7 @@ Lists an account's promo codes.
 const pageableResponse = await client.promoCodes.list({
     account_id: "account_id",
     product_ids: ["prod_xxxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxxx"]
+    variant_ids: ["plan_xxxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -24427,7 +24427,7 @@ for await (const item of pageableResponse) {
 let page = await client.promoCodes.list({
     account_id: "account_id",
     product_ids: ["prod_xxxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxxx"]
+    variant_ids: ["plan_xxxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -30280,7 +30280,7 @@ Joins a free waitlist variant as the authenticated user, or on behalf of an acco
 
 ```typescript
 await client.waitlistEntries.create({
-    plan_id: "plan_xxxxxxxxxxxxxx"
+    variant_id: "plan_xxxxxxxxxxxxxx"
 });
 
 ```

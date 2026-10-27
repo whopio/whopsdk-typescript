@@ -60,7 +60,6 @@ describe("MembershipsClient", () => {
                     most_recent_action: "canceled_on",
                     most_recent_action_at: "2026-01-01T12:00:00.000Z",
                     phone_number: "+xxxxxxxxxxx",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
                     product: {
                         id: "prod_xxxxxxxxxxxxxx",
                         logo_url:
@@ -75,6 +74,7 @@ describe("MembershipsClient", () => {
                     status: "trialing",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user_id: "user_xxxxxxxxxxxxxx",
+                    variant_id: "plan_xxxxxxxxxxxxxx",
                 },
             ],
             page_info: {
@@ -97,7 +97,7 @@ describe("MembershipsClient", () => {
         const page = await client.memberships.list({
             external_account: "discord_123456789012345678",
             product_ids: ["prod_xxxxxxxxxxxxx"],
-            plan_ids: ["plan_xxxxxxxxxxxxx"],
+            variant_ids: ["plan_xxxxxxxxxxxxx"],
             promo_code_ids: ["promo_xxxxxxxxxxxxxx"],
         });
 
@@ -192,7 +192,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_xxxxxxxxxxxxxx", user_id: "user_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { user_id: "user_xxxxxxxxxxxxxx", variant_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = { invitation_sent: true };
 
         server
@@ -205,8 +205,8 @@ describe("MembershipsClient", () => {
             .build();
 
         const response = await client.memberships.invite({
-            plan_id: "plan_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -220,7 +220,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id", user_id: "user_id" };
+        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -234,8 +234,8 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                plan_id: "plan_id",
                 user_id: "user_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -249,7 +249,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id", user_id: "user_id" };
+        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -263,8 +263,8 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                plan_id: "plan_id",
                 user_id: "user_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -278,7 +278,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id", user_id: "user_id" };
+        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -292,8 +292,8 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                plan_id: "plan_id",
                 user_id: "user_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -307,7 +307,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id", user_id: "user_id" };
+        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -321,8 +321,8 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                plan_id: "plan_id",
                 user_id: "user_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -336,7 +336,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { plan_id: "plan_id", user_id: "user_id" };
+        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -350,8 +350,8 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                plan_id: "plan_id",
                 user_id: "user_id",
+                variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -409,7 +409,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -424,6 +423,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server.mockEndpoint().get("/memberships/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -529,7 +529,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -544,6 +543,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -671,7 +671,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -686,6 +685,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -873,7 +873,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -888,6 +887,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -961,7 +961,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -976,6 +975,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1229,7 +1229,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -1244,6 +1243,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1398,7 +1398,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -1413,6 +1412,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1571,7 +1571,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -1586,6 +1585,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1740,7 +1740,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -1755,6 +1754,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1965,7 +1965,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -1980,6 +1979,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -2130,7 +2130,6 @@ describe("MembershipsClient", () => {
             most_recent_action: "canceled_on",
             most_recent_action_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product: {
                 id: "prod_xxxxxxxxxxxxxx",
                 logo_url:
@@ -2145,6 +2144,7 @@ describe("MembershipsClient", () => {
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server

@@ -10,5 +10,5 @@ export interface ApproveAllWaitlistEntriesRequest {
     /** The seller account whose pending signups to approve, prefixed `biz_`. */
     account_id: string;
     /** Only approve signups for this variant, prefixed `plan_`. Omit to include every waitlist variant on the account. */
-    plan_id?: string;
+    variant_id?: string;
 }

@@ -116,13 +116,13 @@ describe("DisputesClient", () => {
                         {
                             id: "li_xxxxxxxxxxxxxx",
                             label: "Ceramic Coating Package",
-                            plan_id: "plan_xxxxxxxxxxxxxx",
-                            plan_title: "Ceramic Coating — Full Vehicle",
                             product_id: "prod_xxxxxxxxxxxxxx",
                             product_title: "Ceramic Coating Package",
                             quantity: 1,
                             sku: null,
                             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            variant_id: "plan_xxxxxxxxxxxxxx",
+                            variant_title: "Ceramic Coating — Full Vehicle",
                         },
                     ],
                     payment: {
@@ -177,12 +177,12 @@ describe("DisputesClient", () => {
                         payment_method_type: "card",
                         payment_processor: null,
                     },
-                    plan_id: "plan_xxxxxxxxxxxxxx",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     reason: "fraudulent",
                     reason_code: "13.1",
                     status: "needs_response",
                     updated_at: "2026-01-01T12:00:00.000Z",
+                    variant_id: "plan_xxxxxxxxxxxxxx",
                 },
             ],
             page_info: {
@@ -446,13 +446,13 @@ describe("DisputesClient", () => {
                 {
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
+                    variant_title: "Ceramic Coating — Full Vehicle",
                 },
             ],
             payment: {
@@ -507,12 +507,12 @@ describe("DisputesClient", () => {
                 payment_method_type: "card",
                 payment_processor: "payment_processor",
             },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
             updated_at: "2026-01-01T12:00:00.000Z",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server.mockEndpoint().get("/disputes/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -673,13 +673,13 @@ describe("DisputesClient", () => {
                 {
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
+                    variant_title: "Ceramic Coating — Full Vehicle",
                 },
             ],
             payment: {
@@ -734,12 +734,12 @@ describe("DisputesClient", () => {
                 payment_method_type: "card",
                 payment_processor: "payment_processor",
             },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
             updated_at: "2026-01-01T12:00:00.000Z",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -949,13 +949,13 @@ describe("DisputesClient", () => {
                 {
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
+                    variant_title: "Ceramic Coating — Full Vehicle",
                 },
             ],
             payment: {
@@ -1010,12 +1010,12 @@ describe("DisputesClient", () => {
                 payment_method_type: "card",
                 payment_processor: "payment_processor",
             },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
             updated_at: "2026-01-01T12:00:00.000Z",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1275,13 +1275,13 @@ describe("DisputesClient", () => {
                 {
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
+                    variant_title: "Ceramic Coating — Full Vehicle",
                 },
             ],
             payment: {
@@ -1336,12 +1336,12 @@ describe("DisputesClient", () => {
                 payment_method_type: "card",
                 payment_processor: "payment_processor",
             },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
             updated_at: "2026-01-01T12:00:00.000Z",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server
@@ -1574,13 +1574,13 @@ describe("DisputesClient", () => {
                 {
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
-                    plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    variant_id: "plan_xxxxxxxxxxxxxx",
+                    variant_title: "Ceramic Coating — Full Vehicle",
                 },
             ],
             payment: {
@@ -1635,12 +1635,12 @@ describe("DisputesClient", () => {
                 payment_method_type: "card",
                 payment_processor: "payment_processor",
             },
-            plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
             updated_at: "2026-01-01T12:00:00.000Z",
+            variant_id: "plan_xxxxxxxxxxxxxx",
         };
 
         server

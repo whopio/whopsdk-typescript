@@ -16,7 +16,7 @@ export interface ListWaitlistEntriesRequest {
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** Only return signups for this variant, prefixed `plan_`. */
-    plan_id?: string;
+    variant_id?: string;
     /** Only return signups submitted to this seller account, prefixed `biz_`. */
     account_id?: string;
     /** Only return signups for variants on this product, prefixed `prod_`. */

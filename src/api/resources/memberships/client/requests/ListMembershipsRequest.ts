@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         external_account: "discord_123456789012345678",
  *         product_ids: ["prod_xxxxxxxxxxxxx"],
- *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
  *     }
  */
@@ -29,9 +29,9 @@ export interface ListMembershipsRequest {
     /** Filter to memberships of any of these products, each prefixed `prod_`. Repeat the parameter to pass several. */
     product_ids?: string | string[];
     /** Filter to memberships of this variant (`plan_` tag). */
-    plan_id?: string;
+    variant_id?: string;
     /** Filter to memberships of any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. */
-    plan_ids?: string | string[];
+    variant_ids?: string | string[];
     /** Filter to memberships discounted by any of these promo codes, each prefixed `promo_`. Repeat the parameter to pass several. */
     promo_code_ids?: string | string[];
     /** Only memberships created after this ISO 8601 timestamp. */

@@ -55,7 +55,7 @@ export class MembersClient {
      *     await client.members.list({
      *         user_ids: ["user_xxxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"],
-     *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+     *         variant_ids: ["plan_xxxxxxxxxxxxx"],
      *         promo_code_ids: ["promo_xxxxxxxxxxxx"]
      *     })
      */
@@ -73,7 +73,7 @@ export class MembersClient {
                     most_recent_actions: mostRecentActions,
                     membership_status: membershipStatus,
                     product_ids: productIds,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     promo_code_ids: promoCodeIds,
                     query,
                     created_after: createdAfter,
@@ -97,7 +97,7 @@ export class MembersClient {
                           : undefined,
                     membership_status: membershipStatus != null ? membershipStatus : undefined,
                     product_ids: productIds,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     promo_code_ids: promoCodeIds,
                     query,
                     created_after: createdAfter,
@@ -115,7 +115,7 @@ export class MembersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -211,7 +211,7 @@ export class MembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

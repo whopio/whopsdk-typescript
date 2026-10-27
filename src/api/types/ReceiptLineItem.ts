@@ -7,10 +7,6 @@ export interface ReceiptLineItem {
     id: string | null;
     /** The item's name as shown at checkout — the product title, else the variant title. */
     label: string | null;
-    /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
-    plan_id: string | null;
-    /** The variant's current title, or `null` when the variant has been deleted or has no title. */
-    plan_title: string | null;
     /** The product the variant belongs to, prefixed `prod_`. On a payment that predates item snapshots this falls back to the variant's product, so it can be set where the parent's own `product_id` is null. Null for a variant with no product. */
     product_id: string | null;
     /** The product's current title, or `null` when the item has no product. */
@@ -21,4 +17,8 @@ export interface ReceiptLineItem {
     sku: string | null;
     /** The recorded amount for this item's full quantity, before discounts, tax, and fees, in its purchase currency. Returns `null` when no item amount was recorded. */
     subtotal: Whop.Money | null;
+    /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
+    variant_id: string | null;
+    /** The variant's current title, or `null` when the variant has been deleted or has no title. */
+    variant_title: string | null;
 }

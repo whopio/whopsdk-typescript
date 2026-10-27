@@ -35,24 +35,24 @@ describe("CheckoutConfigurationsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan: {
+                    purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+                    redirect_url: "https://shinetime.example/thanks",
+                    three_ds_level: "mandate_challenge",
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    variant: {
                         adaptive_pricing_enabled: true,
                         billing_period: 30,
+                        billing_type: "renewal",
                         currency: "usd",
                         expiration_days: 365,
                         id: "plan_xxxxxxxxxxxxxx",
                         initial_price: 0,
-                        plan_type: "renewal",
                         release_method: "buy_now",
                         renewal_price: 59,
                         three_ds_level: null,
                         trial_period_days: 7,
                         visibility: "visible",
                     },
-                    purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-                    redirect_url: "https://shinetime.example/thanks",
-                    three_ds_level: "mandate_challenge",
-                    updated_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
             page_info: {
@@ -145,7 +145,7 @@ describe("CheckoutConfigurationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_xxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", variant_id: "plan_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             affiliate_code: "tanyacole",
@@ -160,24 +160,24 @@ describe("CheckoutConfigurationsClient", () => {
             metadata: { key: "value" },
             mode: "payment",
             payment_method_configuration: { disabled: ["paypal"], enabled: ["card"], include_platform_defaults: true },
-            plan: {
+            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+            redirect_url: "https://shinetime.example/thanks",
+            three_ds_level: "mandate_challenge",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            variant: {
                 adaptive_pricing_enabled: true,
                 billing_period: 30,
+                billing_type: "renewal",
                 currency: "usd",
                 expiration_days: 365,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: 249,
-                plan_type: "renewal",
                 release_method: "buy_now",
                 renewal_price: 0,
                 three_ds_level: "mandate_challenge",
                 trial_period_days: 7,
                 visibility: "visible",
             },
-            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-            redirect_url: "https://shinetime.example/thanks",
-            three_ds_level: "mandate_challenge",
-            updated_at: "2026-01-01T12:00:00.000Z",
         };
 
         server
@@ -191,7 +191,7 @@ describe("CheckoutConfigurationsClient", () => {
 
         const response = await client.checkoutConfigurations.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -272,24 +272,24 @@ describe("CheckoutConfigurationsClient", () => {
             metadata: { booking_source: "front_desk" },
             mode: "payment",
             payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
-            plan: {
+            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
+            redirect_url: "https://shinetime.example/thanks",
+            three_ds_level: "mandate_challenge",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            variant: {
                 adaptive_pricing_enabled: true,
                 billing_period: 30,
+                billing_type: "renewal",
                 currency: "usd",
                 expiration_days: 365,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: 0,
-                plan_type: "renewal",
                 release_method: "buy_now",
                 renewal_price: 59,
                 three_ds_level: "mandate_challenge",
                 trial_period_days: 7,
                 visibility: "visible",
             },
-            purchase_url: "https://whop.com/checkout/ch_xxxxxxxxxxxxxx/",
-            redirect_url: "https://shinetime.example/thanks",
-            three_ds_level: "mandate_challenge",
-            updated_at: "2026-01-01T12:00:00.000Z",
         };
 
         server

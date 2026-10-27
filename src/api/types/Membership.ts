@@ -49,8 +49,6 @@ export interface Membership {
     most_recent_action_at: string | null;
     /** The buyer's phone number recorded for this membership, or `null`. The number collected (or verified) at checkout when the seller's phone collection is on; falls back to the buyer's account number when they have shared one with this seller. */
     phone_number: string | null;
-    /** The variant the buyer purchased, prefixed `plan_`. */
-    plan_id: string;
     /** The product this membership grants access to. */
     product: Whop.MembershipProduct;
     /** The product this membership grants access to, prefixed `prod_`. */
@@ -69,6 +67,8 @@ export interface Membership {
     updated_at: string;
     /** The buyer, prefixed `user_`. `null` when the buyer is another business or the membership is unclaimed. */
     user_id: string | null;
+    /** The variant the buyer purchased, prefixed `plan_`. */
+    variant_id: string;
 }
 
 export namespace Membership {

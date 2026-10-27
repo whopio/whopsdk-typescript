@@ -9,8 +9,6 @@ export interface InvoiceLineItem {
     id: string | null;
     /** The item's name as shown at checkout — the product title, else the variant title. */
     label: string | null;
-    /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
-    plan_id: string | null;
     /** The product the variant belongs to, prefixed `prod_`. Null for a variant with no product. */
     product_id: string | null;
     /** How many units were bought. */
@@ -21,4 +19,6 @@ export interface InvoiceLineItem {
     tax_amount: Whop.Money | null;
     /** The price of one unit before discounts, in the payment's `currency`. Null when the payment recorded no price. */
     unit_amount: Whop.Money | null;
+    /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
+    variant_id: string | null;
 }
