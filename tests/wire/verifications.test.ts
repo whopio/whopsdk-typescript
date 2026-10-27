@@ -38,10 +38,12 @@ describe("VerificationsClient", () => {
                     last_name: "Webb",
                     owners: [
                         {
+                            date_of_birth: "1985-06-01",
                             first_name: "Riley",
                             id: "own_xxxxxxxxxxxxxx",
                             last_name: "Owner",
                             ownership_percentage: 60,
+                            rejected_checks: ["details"],
                             required_documents: [
                                 {
                                     document: "id_card_front",
@@ -203,10 +205,12 @@ describe("VerificationsClient", () => {
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],
@@ -478,10 +482,12 @@ describe("VerificationsClient", () => {
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],
@@ -636,10 +642,12 @@ describe("VerificationsClient", () => {
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],

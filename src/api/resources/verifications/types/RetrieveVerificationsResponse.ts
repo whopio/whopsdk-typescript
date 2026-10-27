@@ -67,12 +67,16 @@ export namespace RetrieveVerificationsResponse {
 
     export namespace Owners {
         export interface Item {
+            /** The owner's date of birth on file, formatted as `YYYY-MM-DD`. */
+            date_of_birth: string | null;
             first_name: string | null;
             /** Owner ID, prefixed `own_`. Send it in Update Verification's `owners` to change or remove the owner, including one added in the hosted session. */
             id: string;
             last_name: string | null;
             /** Share of the business the person owns, from 0 to 100. */
             ownership_percentage: number | null;
+            /** What the provider rejected when the owner's verification was sent back: `details` (their name, date of birth, or other details don't match their ID), `identity_document`, or `selfie`. Fix only these with Update Verification. Empty otherwise. */
+            rejected_checks: Item.RejectedChecks.Item[];
             /** The owner's documents and their progress. Empty for an owner added with `verification_id`. */
             required_documents: Item.RequiredDocuments.Item[];
             /** What the person is to the business. */
@@ -82,6 +86,17 @@ export namespace RetrieveVerificationsResponse {
         }
 
         export namespace Item {
+            export type RejectedChecks = RejectedChecks.Item[];
+
+            export namespace RejectedChecks {
+                export const Item = {
+                    Details: "details",
+                    IdentityDocument: "identity_document",
+                    Selfie: "selfie",
+                } as const;
+                export type Item = (typeof Item)[keyof typeof Item];
+            }
+
             export type RequiredDocuments = RequiredDocuments.Item[];
 
             export namespace RequiredDocuments {

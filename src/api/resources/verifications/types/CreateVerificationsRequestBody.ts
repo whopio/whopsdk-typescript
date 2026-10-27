@@ -240,7 +240,7 @@ export namespace CreateVerificationsRequestBody {
                     residence_permit_back?: string | undefined;
                     /** File ID of the front of the residence permit. Required when `document_type` is `residence_permit`. */
                     residence_permit_front?: string | undefined;
-                    /** File ID of a photo of the owner's face. Always required. Must be a JPEG or PNG. */
+                    /** File ID of a photo of the owner's face. Must be a JPEG or PNG. Required, except on Update Verification for an owner whose selfie already passed. */
                     selfie?: string | undefined;
                 }
 
