@@ -50,7 +50,7 @@ export namespace CreateVerificationsRequestBody {
          */
         export interface Address {
             city?: (string | null) | undefined;
-            /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. */
+            /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. An address in a [sanctioned country or region](/trust-and-safety/trust-safety-overview/sanctioned-countries) is rejected with the error code `address_country_sanctioned`. */
             country?: (string | null) | undefined;
             /** First line of the street address. */
             line1?: (string | null) | undefined;
@@ -138,7 +138,7 @@ export namespace CreateVerificationsRequestBody {
          */
         export interface Address {
             city?: (string | null) | undefined;
-            /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. */
+            /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. An address in a [sanctioned country or region](/trust-and-safety/trust-safety-overview/sanctioned-countries) is rejected with the error code `address_country_sanctioned`. */
             country?: (string | null) | undefined;
             /** First line of the street address. */
             line1?: (string | null) | undefined;
@@ -201,7 +201,7 @@ export namespace CreateVerificationsRequestBody {
                  */
                 export interface Address {
                     city?: (string | null) | undefined;
-                    /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. */
+                    /** Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`. An address in a [sanctioned country or region](/trust-and-safety/trust-safety-overview/sanctioned-countries) is rejected with the error code `address_country_sanctioned`. */
                     country?: (string | null) | undefined;
                     /** First line of the street address. */
                     line1?: (string | null) | undefined;
