@@ -44,7 +44,7 @@ export namespace PostAdCampaignUpdatedPayload {
         campaign_type: Data.CampaignType;
         /** When the campaign was created, as an ISO 8601 timestamp. */
         created_at: string;
-        /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
+        /** Whether the campaign's ads are delivering right now, and if not, why. Content review is in_review; a campaign waiting to start is processing. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;
         /** Google only: the target cost per conversion in USD when `bid_type` is `average_target`. `null` otherwise. */
         desired_cost_per_result?: (number | null) | undefined;
@@ -96,7 +96,7 @@ export namespace PostAdCampaignUpdatedPayload {
             Search: "search",
         } as const;
         export type CampaignType = (typeof CampaignType)[keyof typeof CampaignType];
-        /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
+        /** Whether the campaign's ads are delivering right now, and if not, why. Content review is in_review; a campaign waiting to start is processing. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
             PaymentFailed: "payment_failed",
             InAppeal: "in_appeal",
@@ -105,6 +105,7 @@ export namespace PostAdCampaignUpdatedPayload {
             NoAdGroups: "no_ad_groups",
             NoAds: "no_ads",
             Paused: "paused",
+            InReview: "in_review",
             Learning: "learning",
             Processing: "processing",
             Issues: "issues",
