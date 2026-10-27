@@ -22,7 +22,7 @@ export interface ExternalAccount {
     scopes: string[];
     /** The URL where the external account can be accessed on the platform. Null while a Whop-owned account is still being provisioned. */
     url: string | null;
-    /** The username of the external account on the platform. Null while a Whop-owned account is still being provisioned. */
+    /** The username of the external account on the platform. Null while a Whop-owned account is still being provisioned, and on platforms without usernames, such as Klaviyo. */
     username: string | null;
     /** Whether the external account is verified on the platform. */
     verified: boolean;
@@ -45,6 +45,7 @@ export namespace ExternalAccount {
         Facebook: "facebook",
         Linkedin: "linkedin",
         Snapchat: "snapchat",
+        Klaviyo: "klaviyo",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }
