@@ -33,6 +33,8 @@ export interface PaymentBankTransfer {
     expires_at?: string | undefined;
     /** The rail's own step-by-step payment text, when it supplies one. */
     instructions?: string | undefined;
+    /** The SWIFT/BIC of the intermediary bank the buyer's bank should route the transfer through, when the buyer named the bank they are sending from. */
+    intermediary_bic?: string | undefined;
     /** The reference the buyer must attach to the transfer so it can be matched to this payment. */
     reference?: string | undefined;
     /** The receiving bank's routing number for US transfers. */
