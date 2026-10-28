@@ -29982,7 +29982,7 @@ await client.variants.calculateTax({
 </details>
 
 ## Verifications
-<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">list</a>({ ...params }) -> Whop.ListVerificationsResponse</code></summary>
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListVerificationsResponse.Data.Item, Whop.ListVerificationsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -29994,7 +29994,7 @@ await client.variants.calculateTax({
 <dl>
 <dd>
 
-Lists the verifications for an account or user, including their status and any required actions.
+Lists the verifications for an account or user, including their status and any required actions. Platforms list their own and every subaccount's verifications at once with `include_subaccounts`; each one's `account_ids` names its account, and a verification shared by several accounts appears once for each.
 </dd>
 </dl>
 </dd>
@@ -30009,7 +30009,19 @@ Lists the verifications for an account or user, including their status and any r
 <dd>
 
 ```typescript
-await client.verifications.list();
+const pageableResponse = await client.verifications.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.verifications.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
 
 ```
 </dd>
