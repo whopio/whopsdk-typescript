@@ -126,6 +126,7 @@ export class ReportsClient {
             product_category: productCategory,
             account_country: accountCountry,
             customer_country: customerCountry,
+            blueprint,
             first,
             after,
         } = request;
@@ -142,6 +143,7 @@ export class ReportsClient {
             product_category: productCategory,
             account_country: accountCountry,
             customer_country: customerCountry,
+            blueprint,
             first,
             after,
         };
