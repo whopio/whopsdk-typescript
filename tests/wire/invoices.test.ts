@@ -840,7 +840,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -898,6 +898,7 @@ describe("InvoicesClient", () => {
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -918,12 +919,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(400)
             .jsonBody(rawResponseBody)
@@ -945,12 +947,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
@@ -972,12 +975,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
@@ -999,12 +1003,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
@@ -1026,12 +1031,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/issue")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(409)
             .jsonBody(rawResponseBody)

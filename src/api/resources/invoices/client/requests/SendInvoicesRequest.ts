@@ -9,6 +9,8 @@
 export interface SendInvoicesRequest {
     /** The invoice's pay_ ID. */
     id: string;
+    /** When to charge the draft's `payment_method_id`, as an ISO 8601 timestamp in the future and no earlier than `send_at`. Only for a draft with a `payment_method_id` and a total above zero. Omit to charge on `due_at` if it is still ahead when the draft is sent, or right away otherwise. A scheduled send that runs after `charge_at` charges right away. */
+    charge_at?: string | null;
     /** When to send the draft, as an ISO 8601 timestamp in the future. Omit to send now. */
     send_at?: string | null;
 }

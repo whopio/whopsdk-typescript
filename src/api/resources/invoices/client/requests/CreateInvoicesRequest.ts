@@ -28,7 +28,7 @@ export interface CreateInvoicesRequest {
     member_id?: string | null;
     /** Up to 50 caller-owned string key/value pairs. */
     metadata?: Record<string, string>;
-    /** A saved payment method belonging to the member, prefixed `payt_`. Sending the invoice emails it now and charges this method on `due_at`, or right away when there is no `due_at` or it has passed. Issuing the invoice without sending it charges right away. */
+    /** A saved payment method belonging to the member, prefixed `payt_`. Sending or issuing the invoice charges this method at the `charge_at` passed to that call, otherwise on `due_at`, or right away when there is no `due_at` or it has passed. Sending also emails the invoice now when the charge is later; issuing does not. */
     payment_method_id?: string | null;
     /** Email addresses saved for invoice delivery, independent of the billed customer. Saving them sends no email. Defaults to the customer email when omitted on create. Can be updated on draft, open, or uncollectible invoices. */
     recipient_emails?: string[];
