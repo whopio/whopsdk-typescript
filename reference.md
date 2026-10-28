@@ -24335,7 +24335,7 @@ await client.products.update({
 <dl>
 <dd>
 
-Submits a product to the whop.com marketplace for review. The product moves to `pending_review`; a Whop reviewer approves it before it goes live. Requires a logo, a headline, and at least one gallery image or video; the request fails naming whichever is missing.
+Submits an App Store app's product for review. The product moves to `pending_review`; a Whop reviewer approves it before it goes live. Other products can no longer be listed on the whop.com marketplace, so the request fails with `discover_listing_discontinued`.
 </dd>
 </dl>
 </dd>
