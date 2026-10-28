@@ -31,6 +31,8 @@ export interface PlatformTrendsReportsRequest {
     account_country?: string;
     /** Only counts payments from customers in these comma-separated countries, as ISO 3166-1 alpha-2 codes such as `US`. */
     customer_country?: string;
+    /** Only counts payments to businesses with an app created from one of these comma-separated blueprint app IDs, such as `app_xxxxxxxxxxxxxx`. */
+    blueprint?: string;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
