@@ -9,4 +9,6 @@
 export interface IssueInvoicesRequest {
     /** The invoice's pay_ ID. */
     id: string;
+    /** When to charge the draft's `payment_method_id`, as an ISO 8601 timestamp in the future. Only for a draft with a `payment_method_id` and a total above zero. Omit to charge on `due_at` if it is still ahead, or right away otherwise. */
+    charge_at?: string | null;
 }
