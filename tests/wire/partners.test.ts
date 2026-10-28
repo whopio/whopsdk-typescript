@@ -410,6 +410,7 @@ describe("PartnersClient", () => {
         });
 
         const rawResponseBody = {
+            account_id: "account_id",
             certification_complete: false,
             joined_at: "2026-01-01T12:00:00.000Z",
             payout_rates: [

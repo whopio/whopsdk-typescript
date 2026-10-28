@@ -15,7 +15,7 @@ describe("PermissionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { data: [{ action: "waitlist_entry:read", granted: false }] };
+        const rawResponseBody = { data: [{ action: "access_pass:basic:export", granted: false }] };
 
         server.mockEndpoint().get("/permissions").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 

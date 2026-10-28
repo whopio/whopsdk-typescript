@@ -410,7 +410,10 @@ export class PartnersClient {
         request: Whop.RetrievePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.Partner>> {
-        const { id } = request;
+        const { id, account_id: accountId } = request;
+        const _queryParams: Record<string, unknown> = {
+            account_id: accountId,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -430,7 +433,11 @@ export class PartnersClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
