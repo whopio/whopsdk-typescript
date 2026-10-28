@@ -47,6 +47,7 @@ export namespace ExternalAccount {
         Snapchat: "snapchat",
         Klaviyo: "klaviyo",
         Quickbooks: "quickbooks",
+        Aimerce: "aimerce",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }

@@ -11,7 +11,7 @@ export interface ListExternalAccountsRequest {
     account_id?: string;
     /** The User that the external accounts are connected to. Provide either this or account_id. */
     user_id?: string;
-    /** Only return external accounts for the platform that is specified. */
+    /** Only return external accounts for the platform that is specified. An `aimerce` account is returned only with this filter, which requires the `company:manage_checkout` scope instead of `social_account:read`. */
     platform?: Whop.ListExternalAccountsRequestPlatform;
     /** Only return external accounts linked with this trust level, such as `oauth` for accounts connected through OAuth. */
     trust_level?: Whop.ListExternalAccountsRequestTrustLevel;
