@@ -3,6 +3,8 @@
 import type * as Whop from "../../../index.js";
 
 export interface RetrieveVerificationsResponse {
+    /** Accounts this verification was read for, each prefixed `biz_`: the account you listed by, the account or subaccount it belongs to with `include_subaccounts`, or every account you can read that it belongs to when retrieved by ID. Usually one. Empty for a personal verification. */
+    account_ids: string[];
     /** Address on the verification profile. `null` when no address is set. */
     address?: (RetrieveVerificationsResponse.Address | null) | undefined;
     /** Legal business name. */
@@ -20,15 +22,19 @@ export interface RetrieveVerificationsResponse {
     first_name?: (string | null) | undefined;
     /** Verification profile ID, prefixed `idpf_`. */
     id?: string | undefined;
+    /** Date the business was incorporated, formatted as `YYYY-MM-DD`, as on file for the business verification. Business verifications only; `null` until it is sent. */
+    incorporation_date?: (string | null) | undefined;
     kind?: RetrieveVerificationsResponse.Kind | undefined;
     last_name?: (string | null) | undefined;
     /** Owners of the business and the progress of each one's own verification. Empty for individual verifications. */
     owners: RetrieveVerificationsResponse.Owners.Item[];
     /** Phone number on the verification profile. */
     phone?: (string | null) | undefined;
-    /** Number the business was registered under in its place of incorporation, such as a state file number in the US or a Company Number in the UK. Business verifications only; `null` until the business verification is approved. */
+    /** State or region where the business is incorporated, as on file for the business verification. Business verifications only; `null` until it is sent. */
+    place_of_incorporation?: (string | null) | undefined;
+    /** Number the business was registered under in its place of incorporation, such as a state file number in the US or a Company Number in the UK. Business verifications only; as on file for the business verification, or `null` until it is sent. */
     registration_number?: (string | null) | undefined;
-    /** What Whop still needs before review can continue — one requirement per entry. Answer with Update Verification; nothing from the response is echoed back. Keys that don't apply are omitted. */
+    /** What Whop still needs before review can continue — one requirement per entry. Answer with Update Verification; nothing from the response is echoed back. Keys that don't apply are omitted. For a business verification created with `documents` or `owners`, this includes the company details and documents still missing before it can be sent for review; each owner's documents are listed under that owner. */
     requested_information?: RetrieveVerificationsResponse.RequestedInformation.Item[] | undefined;
     /** Documents for a document-upload verification and their progress. Present only on individual verifications created by sending `documents`. `pending_upload` documents were not accepted yet — send the full set again with another Create Verification call. */
     required_documents?: RetrieveVerificationsResponse.RequiredDocuments.Item[] | undefined;
@@ -67,12 +73,16 @@ export namespace RetrieveVerificationsResponse {
 
     export namespace Owners {
         export interface Item {
+            /** The owner's date of birth on file, formatted as `YYYY-MM-DD`. */
+            date_of_birth: string | null;
             first_name: string | null;
             /** Owner ID, prefixed `own_`. Send it in Update Verification's `owners` to change or remove the owner, including one added in the hosted session. */
             id: string;
             last_name: string | null;
             /** Share of the business the person owns, from 0 to 100. */
             ownership_percentage: number | null;
+            /** What the provider rejected when the owner's verification was sent back: `details` (their name, date of birth, or other details don't match their ID), `identity_document`, or `selfie`. Fix only these with Update Verification. Empty otherwise. */
+            rejected_checks: Item.RejectedChecks.Item[];
             /** The owner's documents and their progress. Empty for an owner added with `verification_id`. */
             required_documents: Item.RequiredDocuments.Item[];
             /** What the person is to the business. */
@@ -82,6 +92,17 @@ export namespace RetrieveVerificationsResponse {
         }
 
         export namespace Item {
+            export type RejectedChecks = RejectedChecks.Item[];
+
+            export namespace RejectedChecks {
+                export const Item = {
+                    Details: "details",
+                    IdentityDocument: "identity_document",
+                    Selfie: "selfie",
+                } as const;
+                export type Item = (typeof Item)[keyof typeof Item];
+            }
+
             export type RequiredDocuments = RequiredDocuments.Item[];
 
             export namespace RequiredDocuments {

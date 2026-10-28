@@ -9,8 +9,12 @@ import type * as Whop from "../../../../index.js";
 export interface CreatePlansRequest {
     account_id?: string;
     adaptive_pricing_enabled?: boolean | null;
+    allow_multiple_quantity?: boolean;
     attributes?: Record<string, unknown> | null;
     billing_period?: number | null;
+    billing_type?: string;
+    cancel_discount_intervals?: number | null;
+    cancel_discount_percentage?: number | null;
     checkout_styling?: Record<string, unknown> | null;
     currency?: string;
     custom_fields?: CreatePlansRequest.CustomFields.Item[] | null;
@@ -20,9 +24,9 @@ export interface CreatePlansRequest {
     initial_price?: number | null;
     internal_notes?: string | null;
     metadata?: Record<string, unknown> | null;
+    offer_cancel_discount?: boolean | null;
     override_tax_type?: string;
     payment_method_configuration?: CreatePlansRequest.PaymentMethodConfiguration | null;
-    plan_type?: string;
     product_id?: string;
     release_method?: string;
     renewal_price?: number | null;

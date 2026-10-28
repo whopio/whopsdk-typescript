@@ -44,7 +44,7 @@ export class PromoCodesClient {
      *     await client.promoCodes.list({
      *         account_id: "account_id",
      *         product_ids: ["prod_xxxxxxxxxxxxxx"],
-     *         plan_ids: ["plan_xxxxxxxxxxxxxx"]
+     *         variant_ids: ["plan_xxxxxxxxxxxxxx"]
      *     })
      */
     public async list(
@@ -57,7 +57,7 @@ export class PromoCodesClient {
                     account_id: accountId,
                     status,
                     product_ids: productIds,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     order,
@@ -71,7 +71,7 @@ export class PromoCodesClient {
                     account_id: accountId,
                     status: status != null ? status : undefined,
                     product_ids: productIds,
-                    plan_ids: planIds,
+                    variant_ids: variantIds,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
                     order: order != null ? order : undefined,
@@ -87,7 +87,7 @@ export class PromoCodesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -188,7 +188,7 @@ export class PromoCodesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -266,7 +266,7 @@ export class PromoCodesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -338,7 +338,7 @@ export class PromoCodesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -407,7 +407,7 @@ export class PromoCodesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -482,7 +482,7 @@ export class PromoCodesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

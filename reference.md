@@ -1193,7 +1193,7 @@ await client.adCampaigns.delete({
 <dl>
 <dd>
 
-Updates an ad campaign's settings, or launches a draft campaign by setting `status` to `active`. The objective and desired cost per result are fixed at creation and cannot be changed.
+Updates an ad campaign's settings, or launches a draft campaign by setting `status` to `active`. The objective is fixed at creation and cannot be changed.
 </dd>
 </dl>
 </dd>
@@ -2907,6 +2907,73 @@ await client.adPixels.update({
 </details>
 
 ## Ads
+<details><summary><code>client.ads.<a href="/src/api/resources/ads/client/Client.ts">reportStats</a>({ ...params }) -> Whop.AdStat</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Records a runner's stats for one of their ads in one hour, and pays them for the spend. Send the ad's totals so far for an hour that started in the last 24 hours; they replace what the ad held for that hour, and its ad group's and campaign's hours are rebuilt from their ads. The spend can go up but never down. Reporting on a campaign starts with the hour of its first recorded report; earlier hours are refused. Spend over what is left of a budget (the runner's share of the day, the campaign's daily budget or the ad group's budget) is refused with the most the ad can record. Takes the runner's Whop session or a user OAuth token with `ad_campaign:update`. A token without that scope gets a 403, and anyone not holding the ad's campaign gets a 404.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.ads.reportStats({
+    ad_id: "ad_xxxxxxxxxxxxxx",
+    hour_started_at: "2026-01-01T12:00:00Z",
+    spend: 1.1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ReportStatsAdsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AdsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.ads.<a href="/src/api/resources/ads/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Ad, Whop.ListAdsResponse&gt;</code></summary>
 <dl>
 <dd>
@@ -8065,7 +8132,7 @@ Creates a reusable checkout configuration for an existing or inline variant. Sen
 ```typescript
 await client.checkoutConfigurations.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    plan_id: "plan_xxxxxxxxxxxxx"
+    variant_id: "plan_xxxxxxxxxxxxx"
 });
 
 ```
@@ -10312,6 +10379,71 @@ await client.deposits.create({
 <dd>
 
 **request:** `Whop.CreateDepositsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DepositsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.deposits.<a href="/src/api/resources/deposits/client/Client.ts">reverse</a>({ ...params }) -> Whop.LedgerActivity</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a bank deposit back to the bank account that wired it and takes it back out of the balance. Identify the deposit by its `vbt_` ID, the `source.id` of its row in the account's financial activity. The available balance has to cover the deposit minus the deposit fee, which is refunded. Returns the reversal's own row in the financial activity: a `topup_reversal` debit for the full deposit amount, whose `source` is the bank deposit. The source's `status` is `reversal_in_progress` until the money is back with the sender, then `reversed`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.deposits.reverse({
+    id: "vbt_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ReverseDepositsRequest` 
     
 </dd>
 </dl>
@@ -14351,7 +14483,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates or returns a Whop-managed Facebook page or TikTok account for an account.
+Creates or returns a Whop-managed Facebook page or TikTok account for an account, or connects the account's existing Klaviyo account with a private API key.
 </dd>
 </dl>
 </dd>
@@ -16467,7 +16599,7 @@ const response = page.response;
 </details>
 
 ## Invoices
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.InvoiceListItem, Whop.ListInvoicesResponse&gt;</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Invoice, Whop.ListInvoicesResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16479,10 +16611,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Returns a paginated list of invoices for an account, with optional filtering by product, status, collection method, and creation date.
-
-Required permissions:
- - `invoice:basic:read`
+Lists receipt-backed invoices for accounts the caller can read. Legacy invoices are excluded.
 </dd>
 </dl>
 </dd>
@@ -16497,25 +16626,13 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.invoices.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+const pageableResponse = await client.invoices.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.invoices.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+let page = await client.invoices.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -16569,13 +16686,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create an invoice for a customer. The invoice can be charged automatically using a stored payment method, or sent to the customer for manual payment.
-
-Required permissions:
- - `invoice:create`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Creates a draft invoice backed by a receipt, with saved items, quantities, prices, and recipients. Issue the draft to resolve final tax and open the invoice. The pay_ ID stays the same when paid.
 </dd>
 </dl>
 </dd>
@@ -16592,11 +16703,7 @@ Required permissions:
 ```typescript
 await client.invoices.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    collection_method: "send_invoice",
-    plan: {},
-    product: {
-        title: "title"
-    }
+    items: []
 });
 
 ```
@@ -16645,13 +16752,7 @@ await client.invoices.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing invoice.
-
-Required permissions:
- - `invoice:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Retrieves a receipt-backed invoice by its pay_ ID.
 </dd>
 </dl>
 </dd>
@@ -16667,7 +16768,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.retrieve({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16704,74 +16805,6 @@ await client.invoices.retrieve({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">delete</a>({ ...params }) -> boolean</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a draft invoice.
-
-Required permissions:
- - `invoice:update`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.invoices.delete({
-    id: "inv_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.DeleteInvoicesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `InvoicesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">update</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
@@ -16784,13 +16817,7 @@ await client.invoices.delete({
 <dl>
 <dd>
 
-Update a draft invoice's details.
-
-Required permissions:
- - `invoice:update`
- - `member:email:read`
- - `member:basic:read`
- - `payment:basic:read`
+Updates draft invoice items and billing fields. Recipient-only updates are also allowed on unpaid invoices. Edit customer contact details through the member API.
 </dd>
 </dl>
 </dd>
@@ -16806,7 +16833,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.update({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16843,7 +16870,7 @@ await client.invoices.update({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markPaid</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">generatePdf</a>({ ...params }) -> Whop.InvoicePdf</code></summary>
 <dl>
 <dd>
 
@@ -16855,10 +16882,7 @@ await client.invoices.update({
 <dl>
 <dd>
 
-Mark an open invoice as paid when payment was collected outside of Whop.
-
-Required permissions:
- - `invoice:update`
+Generates the invoice as a PDF and returns a short-lived link to download it. A draft shows its estimated totals. The buyer's name and email need `member:basic:read` and `member:email:read`, and the Pay now link on an open invoice needs `payment:charge`. Each call generates a new file and link, so this endpoint does not replay `Idempotency-Key` responses.
 </dd>
 </dl>
 </dd>
@@ -16873,8 +16897,8 @@ Required permissions:
 <dd>
 
 ```typescript
-await client.invoices.markPaid({
-    id: "inv_xxxxxxxxxxxxxx"
+await client.invoices.generatePdf({
+    id: "id"
 });
 
 ```
@@ -16891,7 +16915,7 @@ await client.invoices.markPaid({
 <dl>
 <dd>
 
-**request:** `Whop.MarkPaidInvoicesRequest` 
+**request:** `Whop.GeneratePdfInvoicesRequest` 
     
 </dd>
 </dl>
@@ -16911,7 +16935,7 @@ await client.invoices.markPaid({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markUncollectible</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">issue</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -16923,10 +16947,72 @@ await client.invoices.markPaid({
 <dl>
 <dd>
 
-Mark an open invoice as uncollectible when payment is not expected.
+Resolves final tax and opens a draft invoice. An invoice with a `payment_method_id` is then charged to it off-session, as `POST /payments` charges a saved payment method. Issuing an open invoice again retains its totals and charges nothing.
+</dd>
+</dl>
+</dd>
+</dl>
 
-Required permissions:
- - `invoice:update`
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.invoices.issue({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.IssueInvoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">markUncollectible</a>({ ...params }) -> Whop.Invoice</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Marks an open invoice as uncollectible. Reminders stop, but the customer can still pay it.
 </dd>
 </dl>
 </dd>
@@ -16942,7 +17028,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.markUncollectible({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -16979,7 +17065,7 @@ await client.invoices.markUncollectible({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">resend</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">send</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -16991,10 +17077,7 @@ await client.invoices.markUncollectible({
 <dl>
 <dd>
 
-Resend the notification email for an existing invoice to the customer.
-
-Required permissions:
- - `invoice:update`
+Issues a draft and emails it to its recipients, with reminders after the due date. A draft with a `payment_method_id` needs `payment:charge`: when its `due_at` is still ahead, it is emailed now and charged to that method on `due_at` (see `scheduled_charge_at`); otherwise it is charged right away instead of emailed. Voiding the invoice, marking it uncollectible, or paying it first cancels the scheduled charge, and its recipients get the payment link if a charge fails. Sending an open invoice emails it again, up to three emails a day including the first send. With `send_at`, the draft is sent at that time instead, and cannot be edited, except its recipients, until it is sent or unscheduled. Each email, reminders included, is sent separately to the customer email shown on the invoice and to each address in `recipient_emails`, so recipients never see each other's addresses.
 </dd>
 </dl>
 </dd>
@@ -17009,8 +17092,8 @@ Required permissions:
 <dd>
 
 ```typescript
-await client.invoices.resend({
-    id: "inv_xxxxxxxxxxxxxx"
+await client.invoices.send({
+    id: "id"
 });
 
 ```
@@ -17027,7 +17110,7 @@ await client.invoices.resend({
 <dl>
 <dd>
 
-**request:** `Whop.ResendInvoicesRequest` 
+**request:** `Whop.SendInvoicesRequest` 
     
 </dd>
 </dl>
@@ -17047,7 +17130,7 @@ await client.invoices.resend({
 </dl>
 </details>
 
-<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">void</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">unschedule</a>({ ...params }) -> Whop.Invoice</code></summary>
 <dl>
 <dd>
 
@@ -17059,10 +17142,72 @@ await client.invoices.resend({
 <dl>
 <dd>
 
-Void an open invoice so it can no longer be paid. Voiding is permanent and cannot be undone.
+Cancels a draft's scheduled send, so it can be edited again. An invoice with no scheduled send is returned unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
 
-Required permissions:
- - `invoice:update`
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.invoices.unschedule({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UnscheduleInvoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `InvoicesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.invoices.<a href="/src/api/resources/invoices/client/Client.ts">void</a>({ ...params }) -> Whop.Invoice</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Voids a draft or unpaid invoice.
 </dd>
 </dl>
 </dd>
@@ -17078,7 +17223,7 @@ Required permissions:
 
 ```typescript
 await client.invoices.void({
-    id: "inv_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -17930,7 +18075,7 @@ Lists the members of an account. A member is one buyer's relationship with the a
 const pageableResponse = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -17941,7 +18086,7 @@ for await (const item of pageableResponse) {
 let page = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -18079,8 +18224,9 @@ Lists every membership the caller can read: an account API key its account's; a 
 
 ```typescript
 const pageableResponse = await client.memberships.list({
+    external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -18089,8 +18235,9 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.memberships.list({
+    external_account: "discord_123456789012345678",
     product_ids: ["prod_xxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     promo_code_ids: ["promo_xxxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -18162,8 +18309,8 @@ Emails one recipient an invitation to a free variant's membership. The invitatio
 
 ```typescript
 await client.memberships.invite({
-    plan_id: "plan_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxxx",
+    variant_id: "plan_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -20927,7 +21074,7 @@ await client.paymentMethods.deletePaymentMethod({
 <dl>
 <dd>
 
-Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`. Cart entries must name existing variants with `plan_id`.
+Prices a purchase the way a payment for it will be charged. The body is the `PaymentInput` a payment takes plus where the buyer is, which a seller that collects no tax on the purchase can leave out. The purchase is priced from exactly what you send: no buyer is looked up, so no stored registration or purchase history applies. Pass the quote's `id` as `quote_id` when you create the payment to charge exactly the purchase, promo code, and tax shown here. A quote is priced once and may be consumed by one payment before `expires_at`. Cart entries must name existing variants with `variant_id`.
 </dd>
 </dl>
 </dd>
@@ -21677,7 +21824,7 @@ Lists payments, newest first. By default, returns sales for the accounts your cr
 ```typescript
 const pageableResponse = await client.payments.list({
     currencies: ["eur"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
@@ -21687,7 +21834,7 @@ for await (const item of pageableResponse) {
 // Or you can manually iterate page-by-page
 let page = await client.payments.list({
     currencies: ["eur"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
@@ -21825,7 +21972,7 @@ Totals up the same payments the list returns, so you can build status tabs and f
 ```typescript
 await client.payments.summary({
     currencies: ["usd"],
-    plan_ids: ["plan_xxxxxxxxxxxxx"],
+    variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
 
@@ -22395,7 +22542,7 @@ await client.payments.void({
 <dl>
 <dd>
 
-Charges the saved card again, with the buyer present, for a payment their bank declined until they authenticate (such as with 3DS). Retrieve the payment afterward to get the bank's challenge from `next_action`; once the buyer completes it, they land on `return_url`, or on Whop's hosted verification page if none was given. Only the buyer can call this, with the payment's `client_secret`, an OAuth token for their own account with the `member:payment_methods:use` scope, or the token from a verified `payment` session intent. An API key gets a `403`. Has no effect on a payment that is not waiting on authentication.
+Charges the saved card again, with the buyer present, for a payment their bank declined until they authenticate (such as with 3DS). Retrieve the payment afterward to get the bank's challenge from `next_action`; once the buyer completes it, they land on `return_url`, or on Whop's hosted verification page if none was given. Only the buyer can call this, with the payment's `client_secret` in the body, an OAuth token for their own account with the `member:payment_methods:use` scope, or the token from a verified `payment` session intent. An API key gets a `403`. Has no effect on a payment that is not waiting on authentication.
 </dd>
 </dl>
 </dd>
@@ -22460,7 +22607,7 @@ await client.payments.resume({
 <dl>
 <dd>
 
-Changes where the buyer lands after completing an off-site step, up until they return. Accepts either a secret key or the payment's own `client_secret`, so the surface that knows the final destination can set it.
+Changes where the buyer lands after completing an off-site step, up until they return. Accepts either a secret key or the payment's own `client_secret` in the body, so the surface that knows the final destination can set it.
 </dd>
 </dl>
 </dd>
@@ -22526,7 +22673,7 @@ await client.payments.updateReturnUrl({
 <dl>
 <dd>
 
-Retrieves how far a payment has got and what the buyer must do next, if anything. A payment is collected in the background, so poll this rather than reading the create response. Accepts either a secret key or the payment's own `client_secret`, so the surface collecting the payment can poll it directly.
+Retrieves how far a payment has got and what the buyer must do next, if anything. A payment is collected in the background, so poll this rather than reading the create response. Accepts either a secret key or the payment's own `client_secret` as a query parameter, so the surface collecting the payment can poll it directly.
 </dd>
 </dl>
 </dd>
@@ -24337,7 +24484,7 @@ Lists an account's promo codes.
 const pageableResponse = await client.promoCodes.list({
     account_id: "account_id",
     product_ids: ["prod_xxxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxxx"]
+    variant_ids: ["plan_xxxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -24347,7 +24494,7 @@ for await (const item of pageableResponse) {
 let page = await client.promoCodes.list({
     account_id: "account_id",
     product_ids: ["prod_xxxxxxxxxxxxxx"],
-    plan_ids: ["plan_xxxxxxxxxxxxxx"]
+    variant_ids: ["plan_xxxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -26342,7 +26489,7 @@ await client.setupIntents.retrieve({
 <dl>
 <dd>
 
-Changes where the buyer lands after completing an off-site step, up until they return. Accepts either a secret key or the setup's own `client_secret`, so the surface that knows the final destination can set it.
+Changes where the buyer lands after completing an off-site step, up until they return. Accepts either a secret key or the setup's own `client_secret` in the body, so the surface that knows the final destination can set it.
 </dd>
 </dl>
 </dd>
@@ -26408,7 +26555,7 @@ await client.setupIntents.updateReturnUrl({
 <dl>
 <dd>
 
-Retrieves how far a setup has got and what the buyer must do next, if anything. Collection runs in the background, so poll this rather than reading the create response. Accepts either a secret key or the setup's own `client_secret`, so the surface collecting the payment method can poll it directly.
+Retrieves how far a setup has got and what the buyer must do next, if anything. Collection runs in the background, so poll this rather than reading the create response. Accepts either a secret key or the setup's own `client_secret` as a query parameter, so the surface collecting the payment method can poll it directly.
 </dd>
 </dl>
 </dd>
@@ -28203,7 +28350,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Adds a member to an account's team with a system role. Identify them by exactly one of `user_id` or `email`. If the person has not yet accepted — or the email does not belong to a Whop account yet — an invitation is sent instead and the response is `202` with an `object` of `team_member_invite`. If they already have a pending invite, the request fails with a `400`. Granting the `workforce` role is also allowed with the `bounty:create` scope.
+Adds a member to an account's team with a system role. Identify them by exactly one of `user_id` or `email`. If the person has not yet accepted, or the email does not belong to a Whop account yet, an invitation is sent instead and the response is `202` with the pending team member, whose `status` is `pending` and whose id is prefixed `ausri_`. If they already have a pending invite, the request fails with a `400`. Granting the `workforce` role is also allowed with the `bounty:create` scope.
 </dd>
 </dl>
 </dd>
@@ -28220,7 +28367,8 @@ Adds a member to an account's team with a system role. Identify them by exactly 
 ```typescript
 await client.teamMembers.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    role: "owner"
+    role: "sales_manager",
+    user_id: "user_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -29442,7 +29590,7 @@ Lists an account's variants. To list a product's public, buyable variants withou
 const pageableResponse = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
-    plan_types: ["renewal"],
+    billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
     ip_address: "203.0.113.7",
@@ -29456,7 +29604,7 @@ for await (const item of pageableResponse) {
 let page = await client.variants.list({
     release_methods: ["buy_now"],
     visibilities: ["visible"],
-    plan_types: ["renewal"],
+    billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
     presentment_currency: "auto",
     ip_address: "203.0.113.7",
@@ -29834,7 +29982,7 @@ await client.variants.calculateTax({
 </details>
 
 ## Verifications
-<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">list</a>({ ...params }) -> Whop.ListVerificationsResponse</code></summary>
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListVerificationsResponse.Data.Item, Whop.ListVerificationsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -29846,7 +29994,7 @@ await client.variants.calculateTax({
 <dl>
 <dd>
 
-Lists the verifications for an account or user, including their status and any required actions.
+Lists the verifications for an account or user, including their status and any required actions. Platforms list their own and every subaccount's verifications at once with `include_subaccounts`; each one's `account_ids` names its account, and a verification shared by several accounts appears once for each.
 </dd>
 </dl>
 </dd>
@@ -29861,7 +30009,19 @@ Lists the verifications for an account or user, including their status and any r
 <dd>
 
 ```typescript
-await client.verifications.list();
+const pageableResponse = await client.verifications.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.verifications.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
 
 ```
 </dd>
@@ -30199,7 +30359,7 @@ Joins a free waitlist variant as the authenticated user, or on behalf of an acco
 
 ```typescript
 await client.waitlistEntries.create({
-    plan_id: "plan_xxxxxxxxxxxxxx"
+    variant_id: "plan_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -30909,7 +31069,7 @@ await client.webhooks.update({
 <dl>
 <dd>
 
-Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt.
+Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt. Filtered queries use a bounded read budget, so a page may be partial or empty. Continue with `page_info.end_cursor` while `page_info.has_next_page` is `true`.
 </dd>
 </dl>
 </dd>
@@ -30925,7 +31085,8 @@ Returns a paginated list of delivery attempts for a webhook, ordered by most rec
 
 ```typescript
 const pageableResponse = await client.webhooks.listDeliveries({
-    id: "id"
+    id: "id",
+    resource_id: "pay_xxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -30933,7 +31094,8 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.webhooks.listDeliveries({
-    id: "id"
+    id: "id",
+    resource_id: "pay_xxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -34142,6 +34304,89 @@ await client.stats.timeSeries.retrieve({
 </dl>
 </details>
 
+## Trades Markets
+<details><summary><code>client.trades.markets.<a href="/src/api/resources/trades/resources/markets/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Market, Whop.ListMarketsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns every market you can trade on Whop.
+
+- **Spot:** listed by symbol: `BTC`, `ETH`, `SOL` and `XAUT` (gold).
+- **Perpetuals:** such as `BTC`. Send the `id` as `market` when you create a trade.
+
+The same symbol can appear twice, once as a perpetual and once as spot, so use `id` together with `instrument_type` to tell them apart. Results are sorted by `id`, then `instrument_type`.
+
+This endpoint is public: no API key is needed, and each IP address can make up to 60 requests a minute.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.trades.markets.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.trades.markets.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.trades.ListMarketsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MarketsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Users OauthGrants
 <details><summary><code>client.users.oauthGrants.<a href="/src/api/resources/users/resources/oauthGrants/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.OauthGrant, Whop.ListOauthGrantsResponse&gt;</code></summary>
 <dl>
@@ -34373,7 +34618,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Registers a passkey for the authenticated user from the attestation a browser produced for a `registration` challenge. Mint that challenge first with `POST /users/me/passkeys/challenge`; it is single-use and expires 5 minutes after it is issued. Requires a user session.
+Registers a passkey for the authenticated user from the attestation a browser produced for a `registration` challenge. Mint that challenge first with `POST /users/me/passkeys/challenge` and run the ceremony with its `creation_options`; it is single-use and expires 5 minutes after it is issued. Send back the `user_handle` the options carried: registering with it replaces the account's passkeys made before Whop issued options, which can only be deleted. Requires a user session that has completed step-up verification.
 </dd>
 </dl>
 </dd>
@@ -34429,7 +34674,7 @@ await client.users.passkeys.create({
 </dl>
 </details>
 
-<details><summary><code>client.users.passkeys.<a href="/src/api/resources/users/resources/passkeys/client/Client.ts">challenge</a>({ ...params }) -> Whop.ChallengePasskeysResponse</code></summary>
+<details><summary><code>client.users.passkeys.<a href="/src/api/resources/users/resources/passkeys/client/Client.ts">challenge</a>({ ...params }) -> Whop.PasskeyChallenge</code></summary>
 <dl>
 <dd>
 
@@ -34441,7 +34686,7 @@ await client.users.passkeys.create({
 <dl>
 <dd>
 
-Mints the challenge a browser needs to run a WebAuthn ceremony against the authenticated user's own passkeys. A `registration` challenge enrolls a new passkey; a `deletion` challenge is bound to the one passkey named by `passkey_id` and proves the user still holds it. Challenges are single-use and expire 5 minutes after they are issued, so send a fresh `Idempotency-Key` per ceremony — a replayed key returns the original challenge, which may already have expired. Requires a user session.
+Mints the challenge and WebAuthn options a browser needs to run a ceremony against the authenticated user's own passkeys. A `registration` challenge enrolls a new passkey; a `deletion` challenge is bound to the one passkey named by `passkey_id` and proves the user still holds it. The options are in wire snake_case: convert the keys to camelCase before passing them to the browser. Challenges are single-use and expire 5 minutes after they are issued, so send a fresh `Idempotency-Key` per ceremony — a replayed key returns the original challenge, which may already have expired. Requires a user session. A `registration` challenge also requires step-up verification, so the user completes it before the browser ceremony.
 </dd>
 </dl>
 </dd>

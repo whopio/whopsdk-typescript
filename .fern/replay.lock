@@ -3372,5 +3372,401 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.87.2
-current_generation: 7f769969b193173af241883da3c5ce71b4ce2ec0
+  - commit_sha: 381da7efd768a12caa042c0dd9bb9a721ff90147
+    tree_hash: e155bc83f2b5400948b576b78190c9c59a8c646b
+    timestamp: 2026-10-23T18:22:42.449Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 451b6860fce2c5d8ed42fd41a499360f850ddd81
+    tree_hash: 83307641c0f06f55564a17ce45893e76c0551371
+    timestamp: 2026-10-23T19:31:38.122Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 1276255a774e920e685a5d1d80951ce31dc58971
+    tree_hash: 4e81cd902cb13a992af6b3f4bb69398d6f9d58d3
+    timestamp: 2026-10-23T20:42:05.063Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 20a0836c9b9c944e65dc2ff6eb945cc94a17ec35
+    tree_hash: e3c7a7141ad80e1d256c6ab2ff6178823a511979
+    timestamp: 2026-10-23T20:56:41.477Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: dac00dd49251bd7f304729d4ccb426a52cddb1af
+    tree_hash: ba05b9f94eb4c317a9325694cd7b38ddac33a442
+    timestamp: 2026-10-23T21:30:19.679Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 98ec2c2890c07fafbe36431c10887ea67ba0c1b0
+    tree_hash: 811861214012436f58a37c08a7ba1e08c4661574
+    timestamp: 2026-10-23T23:02:08.109Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: cb699ccd5b029b677c711ae21714a4bd9bca897f
+    tree_hash: 5d1278c763d8451ebb1c0f05370322673dbcb0cd
+    timestamp: 2026-10-23T23:37:44.179Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: a2490de7a4614ae02339b3270ffbf84efab5e2e2
+    tree_hash: e8debd9c5d213cebb90fc37b7e60298c0410d889
+    timestamp: 2026-10-24T00:42:36.660Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 1d3a8d43a4e0cc790940b8dc896d7d0f908d20f2
+    tree_hash: 483584950973daf7e38f6129192507dc71ad7ccd
+    timestamp: 2026-10-24T04:16:52.711Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 98426dd1afd0424a2b3eebc5b5539a00356e209d
+    tree_hash: 5ffe22c49c44c10718d33242dbfdf52b1fe17b7b
+    timestamp: 2026-10-24T18:42:58.658Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 03c8a588f408bd99196e0923dc8f8e6b2ff03bc1
+    tree_hash: a3ffba4eb8b264204eb8473596802cef2a443359
+    timestamp: 2026-10-24T22:47:31.953Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 957926f5cae7f1343b626776828fbd936c981a27
+    tree_hash: 177f3be7edea3a406da5a7f354b5049face0ca94
+    timestamp: 2026-10-24T22:59:14.529Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 3a8f5f1420b56ecdcdeb6f56f328c3215dc77749
+    tree_hash: 9f92774939d1fd3d439e50d3ff3fc5071e354ac9
+    timestamp: 2026-10-24T23:10:37.245Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c910db363cfe9a86179559f0c724b55c2e675190
+    tree_hash: 65e7f7ac8a3f57ea7456af8be1ccb6c6e434f006
+    timestamp: 2026-10-24T23:35:15.529Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 2d7a5dceb56198ffcd4620b867a399cbfc1dbe6e
+    tree_hash: 949d43c2290d5a646051ea3f0df7cdf5a7b77dc8
+    timestamp: 2026-10-25T02:01:11.721Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c61f955d7ad507318e7dc2fcfc9118489f694043
+    tree_hash: be7d6b07549bae55c45d08b75b57325decdecfb3
+    timestamp: 2026-10-25T16:19:45.365Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: aed67a7f07a446a256d7714c7137c04caf03472a
+    tree_hash: a7576f48f447dc29c8f3d796fd0d63ca9d2ad4b7
+    timestamp: 2026-10-25T21:18:03.210Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 2f4d9d46737100d7ca575c8e86912afe042cb051
+    tree_hash: 2d596d791d526e354d29ecfbd12be602b7dd89d4
+    timestamp: 2026-10-26T05:56:30.638Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 0e80f87b83c18e26d8e1d3a4701828b363fab17e
+    tree_hash: e83aeb35cade869f748f717a76ea6a5c32f29dc3
+    timestamp: 2026-10-26T06:33:56.719Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 6c2c45b70be5532945bf859851d2eb8ddc9e1724
+    tree_hash: a15b6db982cc1049d91125d7853937608c58ad69
+    timestamp: 2026-10-26T07:12:44.032Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: bd8d708dd083d957c5dc72c1de918a0c0d108dd4
+    tree_hash: 776ca8a7f1b3cfefca79e757d850d1fa2591fd05
+    timestamp: 2026-10-26T17:16:10.863Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 08615a9a1592d50eef4dbf02b97ddd1aa0e0c019
+    tree_hash: 36f97830bb6f571ad7e7c71313aca08260f69804
+    timestamp: 2026-10-26T17:28:53.525Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: ba7e378ecfa23728004f045b3065a67d0612ed0f
+    tree_hash: 35c6673f3193f38138fe73d0c9befed8e4ffa770
+    timestamp: 2026-10-26T18:31:58.022Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c4cf6812182b44e87485d7293c15186c00f7cea7
+    tree_hash: 2ace55c24a7bcdcf16c67f74ab97eba4603f6a39
+    timestamp: 2026-10-26T18:44:16.739Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 4a53db71b9381a2839ce7b59f082a6d93a4e8d95
+    tree_hash: 9efb39116da2e5e65ae0fbfe4d02cf8401f06f4a
+    timestamp: 2026-10-26T19:05:17.013Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 1d2a18abe3f25b4bb03d9409cccac763170459ef
+    tree_hash: f7b5bdc94516d428d007503879da1167f6ccdfa5
+    timestamp: 2026-10-26T19:57:15.127Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 35c4efaf20cb1894a0c21b8c6aa9e2dc13321b11
+    tree_hash: 0212853d39bf706942b25e1f8da67791549043df
+    timestamp: 2026-10-26T20:10:17.245Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: d1968fb352df41c91637f69a73a8dcf82a852da9
+    tree_hash: 457deb6d44d85033de9108872c4c5ca1d62d5dae
+    timestamp: 2026-10-26T20:22:36.548Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: ec6342881469463bfbe1a1531acd71450bfb07ee
+    tree_hash: ea227b0295b4e9e7745a3597a5c871d8b0c8b38d
+    timestamp: 2026-10-26T21:26:05.628Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: b119ea3269f12d3503f610f3c62d6658ddfd327b
+    tree_hash: 733a0efea8e43fb8e6e0a1b9e60fcd5e730fb5a8
+    timestamp: 2026-10-26T21:38:06.879Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: f14ad583ecdd81c2379675bfabc5fd32bdbd9d1d
+    tree_hash: 69237f79f1ce554558727bd5b28951514dc4e87d
+    timestamp: 2026-10-26T21:51:15.300Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 088c1bcdcf219de9e037f34d7112aae3f88f7979
+    tree_hash: 9e9c9ce985a19faf2d44e058e9196c2c0553d60e
+    timestamp: 2026-10-26T22:23:48.776Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: bec23f21517b2332c49c2dcadf8c28a1b479156f
+    tree_hash: 4a1be0d50f3e4332c083766d94c72cd167523115
+    timestamp: 2026-10-26T23:04:27.845Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: ad405ea9cbad316c5174948240bdbb78de4e7e2d
+    tree_hash: 93630276d3ed743307f33da13a6efba5ef589701
+    timestamp: 2026-10-26T23:21:57.119Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 97b4c66352c72a2b6ed89e0c41ebeaded916620f
+    tree_hash: 2b4ee1349511387233114b602296cdf5ec9eb15d
+    timestamp: 2026-10-26T23:33:43.014Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: ddb37b53e8e92d6605cefdc65a48c5105dd9d693
+    tree_hash: edece14c81fbfe1b96cebc84fdddc7e396fe2a52
+    timestamp: 2026-10-27T02:04:25.934Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: b22ef084d30c1577cf6928866d0a9a3701198697
+    tree_hash: 3befa563dc71e45eb7bac4112ccd54c81f181f88
+    timestamp: 2026-10-27T02:16:17.229Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 9d8781113fbca89543737c136542d180d0ff8647
+    tree_hash: 96e5e02b34a9f9215e53cc2572ffd91eb554bcd6
+    timestamp: 2026-10-27T02:30:17.255Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 2c45661d8809b0f0b6454b704fb3dba820c9ff6a
+    tree_hash: d1a728ec0203884949e10e5233007f8e5d619bf8
+    timestamp: 2026-10-27T04:58:51.992Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: fdb3c09db95c7fd0ce9504facbbba5251fa264cd
+    tree_hash: 78ea0f5a8f04b5cf3f08948b142f47e3f335f392
+    timestamp: 2026-10-27T05:18:20.810Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 2e05353e0171069ceca55aa060e60e18cf0dd364
+    tree_hash: f37d54277a0bc895cfb32adf28b3a4214454dc46
+    timestamp: 2026-10-27T05:29:23.905Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: aeb8534a895b9d5e909de0c3ffececc343d13a03
+    tree_hash: aeb202a0c38b6a9e9808cd799a6d7a8f3e4e9124
+    timestamp: 2026-10-27T06:09:50.761Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c07aca9aa9c0baedfb2ea7ae606589dc70c057d6
+    tree_hash: 5eebf32f920897821070696a5eb2b48273b82c45
+    timestamp: 2026-10-27T06:24:46.519Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c89eaaab6dc14ce1aee1397953b80bce93cf0535
+    tree_hash: b41106bd8e0d5a2b6877f5dc46e6772f39f28ff5
+    timestamp: 2026-10-27T06:35:54.040Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: f7ece630e5a9ac99dbc61f710eb1bb6ee3891ce0
+    tree_hash: 01e600053ab7bbec7efcac81d79846363a2d55b3
+    timestamp: 2026-10-27T10:33:34.477Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: a8f803884e789d833b83cc6eee6688e94e6c9786
+    tree_hash: ca28d41a6424b7f283a690b02960dd2127f59859
+    timestamp: 2026-10-27T11:07:09.392Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 9129c349eb1251095a441211101814138c7c5d2f
+    tree_hash: c1d93c6075919b1d1e9880a7a375348caa67419e
+    timestamp: 2026-10-27T17:31:23.577Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 3d9301b741370cc73a283c3fdf4ceb954fa28c92
+    tree_hash: 44a0ca16d8248bf209d9e627fe554a23b7825c95
+    timestamp: 2026-10-27T17:44:18.631Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 8fdc30372e3859c4f9c9e0b26ed635eee18d888a
+    tree_hash: 50106ff5a8d6eb9293380c541851a1b8aded6b4a
+    timestamp: 2026-10-27T18:19:10.308Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: b269afece568d51f40097c453ef8d42a5632b731
+    tree_hash: 6eb3e14ab849e174772162c80152a3c7dbea43cf
+    timestamp: 2026-10-27T18:32:18.610Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 38568ed1f1b4cf0eed16d99daa7c805b193f381c
+    tree_hash: 307fe7b8e283ae68d2dd8c157eaf6aed2233abf5
+    timestamp: 2026-10-27T20:09:52.682Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: c7ef08b41fbd4ef70696c9cde12323a54023d7cc
+    tree_hash: c42ec497370ab055667eab24f1e7c07b2ba2e408
+    timestamp: 2026-10-27T20:30:18.762Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: aabfa1d273e9e8d253ea8961554c7da8a0f68f95
+    tree_hash: 7f408f1d5c5c86c2da4edb41654ee2a0d895ce9c
+    timestamp: 2026-10-27T20:54:37.111Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 0e8f5a6720dea7f392ef445046512c7afa112020
+    tree_hash: f794edbc69ce2664c120dff99a9dba14aae8b2d5
+    timestamp: 2026-10-27T21:07:26.548Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 6798a8a0589f5679622e08e0f7b8c75d7474420e
+    tree_hash: 13f0e46e3c888150f279e17b7e35c24d161f3536
+    timestamp: 2026-10-27T21:24:15.780Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 82bec6eb4526861dd61c70493566386fbadf0809
+    tree_hash: 6a6462b768beab4a4bec33a1368e369f4806f3ac
+    timestamp: 2026-10-27T21:49:39.752Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 7c0ceb7167a55ffa4d0e75458332aacaa90a3325
+    tree_hash: e5be906d7743d91df22eeaa02e08b52616b0eb25
+    timestamp: 2026-10-27T22:01:52.500Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: e870be84ba9eb2cccb93ccd3c456431d09ee2cc0
+    tree_hash: d03f46610816641fdeecb24148ad4efc0fea718d
+    timestamp: 2026-10-27T22:24:46.791Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: a865d44c963889c4e2e94e2a94b019f0a50a2287
+    tree_hash: d32f98717c4877bdfcae5c1f0d7137011fff8a3b
+    timestamp: 2026-10-27T22:54:44.066Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 17a077b793356a365dfe416e1d3b7ff88256883c
+    tree_hash: ab3da4ad2ff0145e6a2b17287c75535755d5760d
+    timestamp: 2026-10-27T23:33:06.455Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 85ae4c7cc005170f6dfff188402d82c7e45a3ecd
+    tree_hash: a6d2744a4d8a1dfe54b2a78e6be4f15092009289
+    timestamp: 2026-10-27T23:57:46.997Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: d0be1c68370d58bcb8eb10c596a28abc410e1bbb
+    tree_hash: d9f9199e574d4e3edccd1b8795d99a4d68f8761d
+    timestamp: 2026-10-28T02:03:26.069Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: f3df88fcbd3397bf4acd4e22546a6038ff4392fb
+    tree_hash: 5adeb3c89fc96c93e5bbf21ce4af7f727165e230
+    timestamp: 2026-10-28T02:16:21.801Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: d2d39ee41f0c981330315264ed78ff439cf60017
+    tree_hash: d613a8174f6fc244c4ce6dc6ae2f1f4d67798749
+    timestamp: 2026-10-28T03:59:44.071Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 81bfcfd5f4130462024e085051533db03bd0336a
+    tree_hash: 4c95eb5eb9d61b94c786de38fc05ae64da2da9d5
+    timestamp: 2026-10-28T04:59:31.961Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+  - commit_sha: 9eace0e4280f04c800fb93e6320770808f2f3c69
+    tree_hash: 0691bd3f73d208ea5e868858d3e68403f369016e
+    timestamp: 2026-10-28T05:32:14.748Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.87.2
+current_generation: 9eace0e4280f04c800fb93e6320770808f2f3c69
 patches: []

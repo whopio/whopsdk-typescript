@@ -20,8 +20,6 @@ export interface CheckoutConfiguration {
     mode: CheckoutConfiguration.Mode;
     /** Payment method overrides for this checkout. `null` when it uses the variant or platform defaults. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Variant used for payment checkout. `null` in setup mode. */
-    plan: Whop.CheckoutConfigurationPlan | null;
     /** Checkout URL you can send to customers. */
     purchase_url: string | null;
     /** URL customers are sent to after checkout, or `null` when no redirect is configured. */
@@ -30,6 +28,8 @@ export interface CheckoutConfiguration {
     three_ds_level: CheckoutConfiguration.ThreeDsLevel | null;
     /** When the checkout configuration was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** Variant used for payment checkout. `null` in setup mode. */
+    variant: Whop.CheckoutConfigurationVariant | null;
 }
 
 export namespace CheckoutConfiguration {

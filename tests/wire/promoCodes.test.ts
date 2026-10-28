@@ -18,6 +18,15 @@ describe("PromoCodesClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    affiliate: {
+                        id: "aff_xxxxxxxxxxxxxx",
+                        user: {
+                            id: "user_xxxxxxxxxxxxxx",
+                            name: "Jack Sharkey the 3rd",
+                            profile_pic: "https://ui-avatars.com/api/",
+                            username: "newpromoaffiliate",
+                        },
+                    },
                     amount_off: 0.1,
                     churned_users_only: false,
                     code: "welcome",
@@ -60,7 +69,7 @@ describe("PromoCodesClient", () => {
         const page = await client.promoCodes.list({
             account_id: "account_id",
             product_ids: ["prod_xxxxxxxxxxxxxx"],
-            plan_ids: ["plan_xxxxxxxxxxxxxx"],
+            variant_ids: ["plan_xxxxxxxxxxxxxx"],
         });
 
         expect(expected.data).toEqual(page.data);
@@ -152,6 +161,15 @@ describe("PromoCodesClient", () => {
         };
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            affiliate: {
+                id: "aff_xxxxxxxxxxxxxx",
+                user: {
+                    id: "user_xxxxxxxxxxxxxx",
+                    name: "Jack Sharkey the 3rd",
+                    profile_pic: "https://ui-avatars.com/api/",
+                    username: "newpromoaffiliate",
+                },
+            },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -291,6 +309,15 @@ describe("PromoCodesClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            affiliate: {
+                id: "aff_xxxxxxxxxxxxxx",
+                user: {
+                    id: "user_xxxxxxxxxxxxxx",
+                    name: "Jack Sharkey the 3rd",
+                    profile_pic: "https://ui-avatars.com/api/",
+                    username: "newpromoaffiliate",
+                },
+            },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -374,6 +401,15 @@ describe("PromoCodesClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            affiliate: {
+                id: "aff_xxxxxxxxxxxxxx",
+                user: {
+                    id: "user_xxxxxxxxxxxxxx",
+                    name: "Jack Sharkey the 3rd",
+                    profile_pic: "https://ui-avatars.com/api/",
+                    username: "newpromoaffiliate",
+                },
+            },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",
@@ -476,6 +512,15 @@ describe("PromoCodesClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            affiliate: {
+                id: "aff_xxxxxxxxxxxxxx",
+                user: {
+                    id: "user_xxxxxxxxxxxxxx",
+                    name: "Jack Sharkey the 3rd",
+                    profile_pic: "https://ui-avatars.com/api/",
+                    username: "newpromoaffiliate",
+                },
+            },
             amount_off: 0.25,
             churned_users_only: false,
             code: "affiliate25",

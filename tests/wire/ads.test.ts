@@ -5,6 +5,193 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("AdsClient", () => {
+    test("reportStats (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_xxxxxxxxxxxxxx", hour_started_at: "2026-01-01T12:00:00Z", spend: 1.1 };
+        const rawResponseBody = {
+            ad_campaign_id: "adcamp_xxxxxxxxxxxxxx",
+            ad_group_id: "adgrp_xxxxxxxxxxxxxx",
+            ad_id: "ad_xxxxxxxxxxxxxx",
+            clicks: 150,
+            hour_started_at: "2026-01-01T12:00:00.000Z",
+            impressions: 6000,
+            spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.ads.reportStats({
+            ad_id: "ad_xxxxxxxxxxxxxx",
+            hour_started_at: "2026-01-01T12:00:00Z",
+            spend: 1.1,
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("reportStats (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_id", hour_started_at: "2024-01-15T09:30:00Z", spend: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportStats({
+                ad_id: "ad_id",
+                hour_started_at: "2024-01-15T09:30:00Z",
+                spend: 1.1,
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("reportStats (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_id", hour_started_at: "2024-01-15T09:30:00Z", spend: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportStats({
+                ad_id: "ad_id",
+                hour_started_at: "2024-01-15T09:30:00Z",
+                spend: 1.1,
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("reportStats (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_id", hour_started_at: "2024-01-15T09:30:00Z", spend: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportStats({
+                ad_id: "ad_id",
+                hour_started_at: "2024-01-15T09:30:00Z",
+                spend: 1.1,
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("reportStats (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_id", hour_started_at: "2024-01-15T09:30:00Z", spend: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportStats({
+                ad_id: "ad_id",
+                hour_started_at: "2024-01-15T09:30:00Z",
+                spend: 1.1,
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("reportStats (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { ad_id: "ad_id", hour_started_at: "2024-01-15T09:30:00Z", spend: 1.1 };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_stats")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportStats({
+                ad_id: "ad_id",
+                hour_started_at: "2024-01-15T09:30:00Z",
+                spend: 1.1,
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

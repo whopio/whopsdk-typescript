@@ -44,7 +44,7 @@ export interface CreatePayoutsResponse {
     source: CreatePayoutsResponse.Source | null;
     /** Payout delivery speed. */
     speed: CreatePayoutsResponse.Speed;
-    /** Text that appears on the recipient's bank statement, or `null` if no descriptor was set. When set, 5-22 alphanumeric characters (A-Z, a-z, 0-9). */
+    /** The payment description sent with the payout, or `null` if no descriptor was set. When set, 5-80 printable ASCII characters. */
     statement_descriptor: string | null;
     /** Current payout status, in the same vocabulary as GET /payouts. */
     status: CreatePayoutsResponse.Status;

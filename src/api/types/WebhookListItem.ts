@@ -26,6 +26,8 @@ export interface WebhookListItem {
     last_failure_at: string | null;
     /** ID of the resource (account or app) this webhook is attached to. */
     resource_id: string;
+    /** A label for this webhook endpoint, such as `Production`, shown in the dashboard. `null` if no title was set. */
+    title: string | null;
     /** Destination URL where webhook payloads are delivered via HTTP POST. */
     url: string;
     /** Secret key used to sign webhook payloads for verification. Include this in your HMAC validation logic. Returned on the create response and to interactive dashboard sessions; `null` for API-key and OAuth callers on later reads. */
@@ -99,6 +101,9 @@ export namespace WebhookListItem {
             CardApplicationApproved: "card_application.approved",
             CardApplicationDenied: "card_application.denied",
             CourseLessonInteractionCompleted: "course_lesson_interaction.completed",
+            DomainCreated: "domain.created",
+            DomainUpdated: "domain.updated",
+            DomainDeleted: "domain.deleted",
             PayoutMethodCreated: "payout_method.created",
             VerificationSucceeded: "verification.succeeded",
             IdentityProfileApproved: "identity_profile.approved",
@@ -131,6 +136,8 @@ export namespace WebhookListItem {
             AdGroupUpdated: "ad_group.updated",
             AdCreated: "ad.created",
             AdUpdated: "ad.updated",
+            AppInstallationCreated: "app_installation.created",
+            AppInstallationDeleted: "app_installation.deleted",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",

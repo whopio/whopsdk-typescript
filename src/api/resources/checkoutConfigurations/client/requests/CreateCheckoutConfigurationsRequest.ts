@@ -6,7 +6,7 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         account_id: "biz_xxxxxxxxxxxxxx",
- *         plan_id: "plan_xxxxxxxxxxxxx"
+ *         variant_id: "plan_xxxxxxxxxxxxx"
  *     }
  */
 export interface CreateCheckoutConfigurationsRequest {
@@ -22,14 +22,14 @@ export interface CreateCheckoutConfigurationsRequest {
     mode?: CreateCheckoutConfigurationsRequest.Mode;
     /** Payment method overrides for this checkout. `null` uses the variant or platform defaults. */
     payment_method_configuration?: CreateCheckoutConfigurationsRequest.PaymentMethodConfiguration | null;
-    /** Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `plan_id`. */
-    plan?: CreateCheckoutConfigurationsRequest.Plan | null;
-    /** Existing variant ID, prefixed `plan_`. Mutually exclusive with `plan`. */
-    plan_id?: string | null;
     /** URL customers are sent to after checkout. */
     redirect_url?: string | null;
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
     three_ds_level?: CreateCheckoutConfigurationsRequest.ThreeDsLevel | null;
+    /** Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `variant_id`. */
+    variant?: CreateCheckoutConfigurationsRequest.Variant | null;
+    /** Existing variant ID, prefixed `plan_`. Mutually exclusive with `variant`. */
+    variant_id?: string | null;
 }
 
 export namespace CreateCheckoutConfigurationsRequest {
@@ -52,14 +52,24 @@ export namespace CreateCheckoutConfigurationsRequest {
         include_platform_defaults?: boolean | undefined;
     }
 
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
+    export const ThreeDsLevel = {
+        MandateChallenge: "mandate_challenge",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
+    } as const;
+    export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
+
     /**
-     * Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `plan_id`.
+     * Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `variant_id`.
      */
-    export interface Plan {
+    export interface Variant {
         /** Account ID for the inline variant, prefixed `biz_`. Defaults to the account resolved from the request. */
         account_id?: (string | null) | undefined;
         /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
         billing_period?: (number | null) | undefined;
+        /** Billing model for the variant. */
+        billing_type?: (Variant.BillingType | null) | undefined;
         /** Three-letter ISO currency code for the variant's prices. */
         currency?: (string | null) | undefined;
         /** Customer-visible variant description. */
@@ -75,19 +85,17 @@ export namespace CreateCheckoutConfigurationsRequest {
         /** Tax classification override for this variant. */
         override_tax_type?: (string | null) | undefined;
         /** Payment method overrides for the inline variant. `null` uses platform defaults. */
-        payment_method_configuration?: (Plan.PaymentMethodConfiguration | null) | undefined;
-        /** Billing model for the variant. */
-        plan_type?: (Plan.PlanType | null) | undefined;
+        payment_method_configuration?: (Variant.PaymentMethodConfiguration | null) | undefined;
         /** Product ID the inline variant should belong to, prefixed `prod_`. */
         product_id?: (string | null) | undefined;
         /** Sales method for the variant. */
-        release_method?: (Plan.ReleaseMethod | null) | undefined;
+        release_method?: (Variant.ReleaseMethod | null) | undefined;
         /** Recurring price charged each billing period. */
         renewal_price?: (number | null) | undefined;
         /** Units available for purchase. */
         stock?: (number | null) | undefined;
         /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
-        three_ds_level?: (Plan.ThreeDsLevel | null) | undefined;
+        three_ds_level?: (Variant.ThreeDsLevel | null) | undefined;
         /** Variant display name shown to customers. */
         title?: (string | null) | undefined;
         /** Free trial days before the first renewal charge. */
@@ -95,10 +103,17 @@ export namespace CreateCheckoutConfigurationsRequest {
         /** Whether the variant has unlimited stock. */
         unlimited_stock?: (boolean | null) | undefined;
         /** Whether the variant is visible to customers or hidden from public view. */
-        visibility?: (Plan.Visibility | null) | undefined;
+        visibility?: (Variant.Visibility | null) | undefined;
     }
 
-    export namespace Plan {
+    export namespace Variant {
+        /** Billing model for the variant. */
+        export const BillingType = {
+            Renewal: "renewal",
+            OneTime: "one_time",
+        } as const;
+        export type BillingType = (typeof BillingType)[keyof typeof BillingType];
+
         /**
          * Payment method overrides for the inline variant. `null` uses platform defaults.
          */
@@ -111,12 +126,6 @@ export namespace CreateCheckoutConfigurationsRequest {
             include_platform_defaults?: boolean | undefined;
         }
 
-        /** Billing model for the variant. */
-        export const PlanType = {
-            Renewal: "renewal",
-            OneTime: "one_time",
-        } as const;
-        export type PlanType = (typeof PlanType)[keyof typeof PlanType];
         /** Sales method for the variant. */
         export const ReleaseMethod = {
             BuyNow: "buy_now",
@@ -139,12 +148,4 @@ export namespace CreateCheckoutConfigurationsRequest {
         } as const;
         export type Visibility = (typeof Visibility)[keyof typeof Visibility];
     }
-
-    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
-    export const ThreeDsLevel = {
-        MandateChallenge: "mandate_challenge",
-        MandateIfRequired: "mandate_if_required",
-        FrictionlessIfRequired: "frictionless_if_required",
-    } as const;
-    export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
 }

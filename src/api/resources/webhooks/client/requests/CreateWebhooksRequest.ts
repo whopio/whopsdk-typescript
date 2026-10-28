@@ -17,6 +17,8 @@ export interface CreateWebhooksRequest {
     events?: CreateWebhooksRequest.Events.Item[];
     /** The account or app to create the webhook for. Defaults to the current account. */
     resource_id?: string | null;
+    /** A label for the webhook, shown in the dashboard. Up to 255 characters. */
+    title?: string | null;
     /** The URL to send the webhook to. */
     url: string;
 }
@@ -72,6 +74,9 @@ export namespace CreateWebhooksRequest {
             CardApplicationApproved: "card_application.approved",
             CardApplicationDenied: "card_application.denied",
             CourseLessonInteractionCompleted: "course_lesson_interaction.completed",
+            DomainCreated: "domain.created",
+            DomainUpdated: "domain.updated",
+            DomainDeleted: "domain.deleted",
             PayoutMethodCreated: "payout_method.created",
             VerificationSucceeded: "verification.succeeded",
             IdentityProfileApproved: "identity_profile.approved",
@@ -104,6 +109,8 @@ export namespace CreateWebhooksRequest {
             AdGroupUpdated: "ad_group.updated",
             AdCreated: "ad.created",
             AdUpdated: "ad.updated",
+            AppInstallationCreated: "app_installation.created",
+            AppInstallationDeleted: "app_installation.deleted",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",

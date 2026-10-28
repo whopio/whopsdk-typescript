@@ -2,17 +2,17 @@
 
 import type * as Whop from "../index.js";
 
-export interface ProductPublicPlan {
+export interface ProductPublicVariant {
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
+    /** Billing model for this variant: `one_time` or `renewal`. */
+    billing_type: ProductPublicVariant.BillingType;
     /** Access duration in days for expiration-based variants. `null` for variants without an expiration. */
     expiration_days: number | null;
     /** Variant ID, prefixed `plan_`. */
     id: string;
     /** What checkout charges up front. `amount` is `"0.00"` when the first charge is free, such as a trial. */
     initial_price: Whop.Money;
-    /** Billing model for this variant: `one_time` or `renewal`. */
-    plan_type: ProductPublicPlan.PlanType;
     /** The recurring charge every `billing_period` days. `amount` is `"0.00"` for one-time variants. */
     renewal_price: Whop.Money;
     /** Variant display name shown to customers. `null` if no title has been set. */
@@ -20,16 +20,16 @@ export interface ProductPublicPlan {
     /** Whether the variant has unlimited stock. */
     unlimited_stock: boolean;
     /** Where this variant can be seen. `visible` variants appear on the product page. */
-    visibility: ProductPublicPlan.Visibility;
+    visibility: ProductPublicVariant.Visibility;
 }
 
-export namespace ProductPublicPlan {
+export namespace ProductPublicVariant {
     /** Billing model for this variant: `one_time` or `renewal`. */
-    export const PlanType = {
+    export const BillingType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
-    export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+    export type BillingType = (typeof BillingType)[keyof typeof BillingType];
     /** Where this variant can be seen. `visible` variants appear on the product page. */
     export const Visibility = {
         Visible: "visible",

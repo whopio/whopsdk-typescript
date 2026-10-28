@@ -28,7 +28,7 @@ export interface CreateDirectRequest extends Whop.PaymentInput {
     billing_details: CreateDirectRequest.BillingDetails;
     /** Whether to capture the payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. */
     capture?: boolean | null;
-    /** What the buyer is purchasing. Each entry names an existing variant by plan_id. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
+    /** What the buyer is purchasing. Each entry names an existing variant by `variant_id`. Several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
     line_items?: CreateDirectRequest.LineItems.Item[];
     /** The member to charge, prefixed `mber_`. When omitted the buyer is resolved from `billing_details.email`. */
     member_id?: string | null;
@@ -38,7 +38,11 @@ export interface CreateDirectRequest extends Whop.PaymentInput {
     off_session?: boolean | null;
     /** The payment method to charge, as the raw details the caller holds. Raw details are accepted only on the vault host, where Whop's vault tokenizes them in transit; the official SDKs route this operation there. Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host. */
     payment_method: CreateDirectRequest.PaymentMethod;
-    /** A payment quote from `POST /payment_quotes`, prefixed `pq_`. The payment charges exactly the quote: its purchase (its variants and quantities, or the `plan` it priced), which this body may then omit, its promo code, and its tax, the quote's `tax_amount` rather than a figure calculated now. Omit it, or send null, to have tax calculated when the payment is charged. The quote must belong to `account_id`. A purchase field you omit or send as null takes the quote's value; the buyer's email, the addresses and the payment method are this request's own, never the quote's. Whatever you do send must describe the quoted purchase: the same variants, quantities and promo code. A quote that priced `plan` takes only the same `plan` you sent to `POST /payment_quotes` (or omit the purchase to take the quoted one), never `plan_id` or `line_items`, and a quote that priced variants by id never takes `plan`. Unless the quote located no buyer (`located_by` is null), the address the payment carries (its shipping address, else its billing address) must put the buyer where the quote priced tax, by country, state and postal code; otherwise the payment is refused with 400 before the payment method is used. A quote located by IP address or by the country the buyer chose (`located_by` is `ip_address` or `presentment_country`) is a preview and cannot be paid. A quote is consumed by one payment: a declined payment keeps it and can be retried; a new payment needs a new quote. A quote cannot be charged by a processor that doesn't take quotes, such as a seller's own connected PayPal account; such a payment is refused before the payment method is used. A quote priced in a `presentment_currency` is charged in that currency at the quote's `exchange_rate`. A payment refused over its quote carries an error `code`. `quote_expired`: the quote has expired; quote again. `quote_tax_unavailable`: the quote could not price tax; quote again, or omit `quote_id`. `quote_preview_only`: the quote was located by IP address or by the country the buyer chose; quote again with the buyer's address. `quote_in_use` (409): another payment holds the quote. `quote_mismatch`: the purchase or the buyer's address is not the one quoted. `quote_rate_expired`: the exchange rate the quote was priced at has moved too far to charge; quote again. `payment_method_currency_unsupported`: the payment method cannot pay in the quote's currency; use another method, or quote again in another currency. `quote_processor_unsupported`: the payment would be processed by a processor that doesn't take quotes, such as a seller's own connected PayPal account; use another method, or omit `quote_id` to have tax calculated when the payment is charged. */
+    /** Deprecated: send `variant`, which takes `billing_type` in place of `plan_type`. Accepted only from callers pinned to an API version before 2026-10-27-2. */
+    plan?: CreateDirectRequest.Plan;
+    /** Deprecated: send `variant_id`. Accepted only from callers pinned to an API version before 2026-10-27-2. */
+    plan_id?: string;
+    /** A payment quote from `POST /payment_quotes`, prefixed `pq_`. The payment charges exactly the quote: its purchase (its variants and quantities, or the `variant` it priced), which this body may then omit, its promo code, and its tax, the quote's `tax_amount` rather than a figure calculated now. Omit it, or send null, to have tax calculated when the payment is charged. The quote must belong to `account_id`. A purchase field you omit or send as null takes the quote's value; the buyer's email, the addresses and the payment method are this request's own, never the quote's. Whatever you do send must describe the quoted purchase: the same variants, quantities and promo code. A quote that priced `variant` takes only the same `variant` you sent to `POST /payment_quotes` (or omit the purchase to take the quoted one), never `variant_id` or `line_items`, and a quote that priced variants by id never takes `variant`. Unless the quote located no buyer (`located_by` is null), the address the payment carries (its shipping address, else its billing address) must put the buyer where the quote priced tax, by country, state and postal code; otherwise the payment is refused with 400 before the payment method is used. A quote located by IP address or by the country the buyer chose (`located_by` is `ip_address` or `presentment_country`) is a preview and cannot be paid. A quote is consumed by one payment: a declined payment keeps it and can be retried; a new payment needs a new quote. A quote cannot be charged by a processor that doesn't take quotes, such as a seller's own connected PayPal account; such a payment is refused before the payment method is used. A quote priced in a `presentment_currency` is charged in that currency at the quote's `exchange_rate`. A payment refused over its quote carries an error `code`. `quote_expired`: the quote has expired; quote again. `quote_tax_unavailable`: the quote could not price tax; quote again, or omit `quote_id`. `quote_preview_only`: the quote was located by IP address or by the country the buyer chose; quote again with the buyer's address. `quote_in_use` (409): another payment holds the quote. `quote_mismatch`: the purchase or the buyer's address is not the one quoted. `quote_rate_expired`: the exchange rate the quote was priced at has moved too far to charge; quote again. `payment_method_currency_unsupported`: the payment method cannot pay in the quote's currency; use another method, or quote again in another currency. `quote_processor_unsupported`: the payment would be processed by a processor that doesn't take quotes, such as a seller's own connected PayPal account; use another method, or omit `quote_id` to have tax calculated when the payment is charged. */
     quote_id?: string | null;
     /** Where the buyer continues after completing an off-site step such as 3D Secure. An absolute https URL without credentials, at most 2,048 characters. */
     return_url?: string | null;
@@ -87,10 +91,10 @@ export namespace CreateDirectRequest {
 
     export namespace LineItems {
         export interface Item {
-            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
-            plan_id: string;
             /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
             quantity?: (number | null) | undefined;
+            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
+            variant_id: string;
         }
     }
 
@@ -136,6 +140,212 @@ export namespace CreateDirectRequest {
             Card: "card",
         } as const;
         export type Type = (typeof Type)[keyof typeof Type];
+    }
+
+    /**
+     * Deprecated: send `variant`, which takes `billing_type` in place of `plan_type`. Accepted only from callers pinned to an API version before 2026-10-27-2.
+     */
+    export interface Plan {
+        /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
+        allow_multiple_quantity?: (boolean | null) | undefined;
+        /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for connected accounts with a parent account. */
+        application_fee_amount?: (number | null) | undefined;
+        /** Recurring billing interval in days. */
+        billing_period?: (number | null) | undefined;
+        /** Currency code for the variant prices. */
+        currency: Plan.Currency;
+        /** Variant description. */
+        description?: (string | null) | undefined;
+        /** Days until access expires. */
+        expiration_days?: (number | null) | undefined;
+        /** Create a new variant instead of reusing a matching variant. */
+        force_create_new_plan?: (boolean | null) | undefined;
+        /** Additional amount charged on the first purchase, in the variant currency. For recurring variants without a trial, the first charge includes this amount plus renewal_price. */
+        initial_price?: (number | null) | undefined;
+        /** Internal notes for the account. */
+        internal_notes?: (string | null) | undefined;
+        /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+        override_tax_type?: (Plan.OverrideTaxType | null) | undefined;
+        /** Billing model for the variant. */
+        plan_type?: (Plan.PlanType | null) | undefined;
+        /** Find or create a product by external identifier. Mutually exclusive with product_id. */
+        product?: (Plan.Product | null) | undefined;
+        /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
+        product_id?: (string | null) | undefined;
+        /** Recurring price in the variant currency. */
+        renewal_price?: (number | null) | undefined;
+        /** Variant title. */
+        title?: (string | null) | undefined;
+        /** Free trial days before renewal. */
+        trial_period_days?: (number | null) | undefined;
+        /** Whether the variant is visible to customers. */
+        visibility?: (Plan.Visibility | null) | undefined;
+    }
+
+    export namespace Plan {
+        /** Currency code for the variant prices. */
+        export const Currency = {
+            Usd: "usd",
+            Sgd: "sgd",
+            Inr: "inr",
+            Aud: "aud",
+            Brl: "brl",
+            Cad: "cad",
+            Dkk: "dkk",
+            Eur: "eur",
+            Nok: "nok",
+            Gbp: "gbp",
+            Sek: "sek",
+            Chf: "chf",
+            Hkd: "hkd",
+            Huf: "huf",
+            Jpy: "jpy",
+            Mxn: "mxn",
+            Myr: "myr",
+            Pln: "pln",
+            Czk: "czk",
+            Nzd: "nzd",
+            Aed: "aed",
+            Eth: "eth",
+            Ape: "ape",
+            Cop: "cop",
+            Ron: "ron",
+            Thb: "thb",
+            Bgn: "bgn",
+            Idr: "idr",
+            Dop: "dop",
+            Php: "php",
+            Try: "try",
+            Krw: "krw",
+            Twd: "twd",
+            Vnd: "vnd",
+            Pkr: "pkr",
+            Clp: "clp",
+            Uyu: "uyu",
+            Ars: "ars",
+            Zar: "zar",
+            Dzd: "dzd",
+            Tnd: "tnd",
+            Mad: "mad",
+            Kes: "kes",
+            Kwd: "kwd",
+            Jod: "jod",
+            All: "all",
+            Xcd: "xcd",
+            Amd: "amd",
+            Bsd: "bsd",
+            Bhd: "bhd",
+            Bob: "bob",
+            Bam: "bam",
+            Khr: "khr",
+            Crc: "crc",
+            Xof: "xof",
+            Egp: "egp",
+            Etb: "etb",
+            Gmd: "gmd",
+            Ghs: "ghs",
+            Gtq: "gtq",
+            Gyd: "gyd",
+            Ils: "ils",
+            Jmd: "jmd",
+            Mop: "mop",
+            Mga: "mga",
+            Mur: "mur",
+            Mdl: "mdl",
+            Mnt: "mnt",
+            Nad: "nad",
+            Ngn: "ngn",
+            Mkd: "mkd",
+            Omr: "omr",
+            Pyg: "pyg",
+            Pen: "pen",
+            Qar: "qar",
+            Rwf: "rwf",
+            Sar: "sar",
+            Rsd: "rsd",
+            Lkr: "lkr",
+            Tzs: "tzs",
+            Ttd: "ttd",
+            Uzs: "uzs",
+            Rub: "rub",
+            Btc: "btc",
+            Cny: "cny",
+            Usdt: "usdt",
+            Kzt: "kzt",
+            Awg: "awg",
+            WhopUsd: "whop_usd",
+            Xau: "xau",
+        } as const;
+        export type Currency = (typeof Currency)[keyof typeof Currency];
+        /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+        export const OverrideTaxType = {
+            Exclusive: "exclusive",
+            Inclusive: "inclusive",
+            Unspecified: "unspecified",
+        } as const;
+        export type OverrideTaxType = (typeof OverrideTaxType)[keyof typeof OverrideTaxType];
+        /** Billing model for the variant. */
+        export const PlanType = {
+            Renewal: "renewal",
+            OneTime: "one_time",
+        } as const;
+        export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+
+        /**
+         * Find or create a product by external identifier. Mutually exclusive with product_id.
+         */
+        export interface Product {
+            /** Whether to collect a shipping address at checkout. */
+            collect_shipping_address?: (boolean | null) | undefined;
+            /** Custom card statement descriptor for the product, starting with WHOP*. */
+            custom_statement_descriptor?: (string | null) | undefined;
+            /** Product description. */
+            description?: (string | null) | undefined;
+            /** Your unique identifier for the product. */
+            external_identifier: string;
+            /** Percentage of revenue paid to global affiliates. */
+            global_affiliate_percentage?: (number | null) | undefined;
+            /** Global affiliate program status. */
+            global_affiliate_status?: (Product.GlobalAffiliateStatus | null) | undefined;
+            /** Product headline. */
+            headline?: (string | null) | undefined;
+            /** Product tax code identifier. */
+            product_tax_code_id?: (string | null) | undefined;
+            /** Where to redirect the buyer after purchase. */
+            redirect_purchase_url?: (string | null) | undefined;
+            /** Product route. */
+            route?: (string | null) | undefined;
+            /** Product title. */
+            title: string;
+            /** Product visibility. Defaults to hidden. */
+            visibility?: Product.Visibility | undefined;
+        }
+
+        export namespace Product {
+            /** Global affiliate program status. */
+            export const GlobalAffiliateStatus = {
+                Enabled: "enabled",
+                Disabled: "disabled",
+            } as const;
+            export type GlobalAffiliateStatus = (typeof GlobalAffiliateStatus)[keyof typeof GlobalAffiliateStatus];
+            /** Product visibility. Defaults to hidden. */
+            export const Visibility = {
+                Visible: "visible",
+                Hidden: "hidden",
+                Archived: "archived",
+                QuickLink: "quick_link",
+            } as const;
+            export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+        }
+
+        /** Whether the variant is visible to customers. */
+        export const Visibility = {
+            Visible: "visible",
+            Hidden: "hidden",
+            Archived: "archived",
+            QuickLink: "quick_link",
+        } as const;
+        export type Visibility = (typeof Visibility)[keyof typeof Visibility];
     }
 
     /** Attests that the buyer was told the card will be saved for later charges. `off_session` for merchant-initiated charges, `on_session` for buyer-present ones. */

@@ -4,7 +4,8 @@
  * @example
  *     {
  *         account_id: "biz_xxxxxxxxxxxxxx",
- *         role: "owner"
+ *         role: "sales_manager",
+ *         user_id: "user_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateTeamMembersRequest {

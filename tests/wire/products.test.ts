@@ -25,12 +25,12 @@ describe("ProductsClient", () => {
                     },
                     average_review_rating: 0,
                     created_at: "2026-01-01T12:00:00.000Z",
-                    default_plan: {
+                    default_variant: {
                         billing_period: 30,
+                        billing_type: "renewal",
                         expiration_days: null,
                         id: "plan_xxxxxxxxxxxxxx",
                         initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                        plan_type: "renewal",
                         renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         title: null,
                         unlimited_stock: true,
@@ -142,12 +142,12 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
-            default_plan: {
+            default_variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 expiration_days: 1.1,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 unlimited_stock: true,
@@ -183,8 +183,10 @@ describe("ProductsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -225,7 +227,6 @@ describe("ProductsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
@@ -335,12 +336,12 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
-            default_plan: {
+            default_variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 expiration_days: 1.1,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 unlimited_stock: true,
@@ -376,8 +377,10 @@ describe("ProductsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -418,7 +421,6 @@ describe("ProductsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
@@ -548,12 +550,12 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
-            default_plan: {
+            default_variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 expiration_days: 1.1,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 unlimited_stock: true,
@@ -589,8 +591,10 @@ describe("ProductsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -631,7 +635,6 @@ describe("ProductsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
@@ -741,12 +744,12 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
-            default_plan: {
+            default_variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 expiration_days: 1.1,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 unlimited_stock: true,
@@ -782,8 +785,10 @@ describe("ProductsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -824,7 +829,6 @@ describe("ProductsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
@@ -958,12 +962,12 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
-            default_plan: {
+            default_variant: {
                 billing_period: 30,
+                billing_type: "renewal",
                 expiration_days: 1.1,
                 id: "plan_xxxxxxxxxxxxxx",
                 initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                plan_type: "renewal",
                 renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 title: "title",
                 unlimited_stock: true,
@@ -999,8 +1003,10 @@ describe("ProductsClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     adaptive_pricing_enabled: true,
+                    allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
+                    billing_type: "renewal",
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
                     checkout_styling: {
@@ -1041,7 +1047,6 @@ describe("ProductsClient", () => {
                         enabled: ["card"],
                         include_platform_defaults: true,
                     },
-                    plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",

@@ -302,7 +302,35 @@ describe("PasskeysClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { challenge_type: "registration" };
-        const rawResponseBody = { challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            creation_options: {
+                attestation: "none",
+                authenticator_selection: {
+                    require_resident_key: true,
+                    resident_key: "required",
+                    user_verification: "required",
+                },
+                challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                exclude_credentials: [{ id: "bGFwdG9wLWNyZWRlbnRpYWw", transports: ["ble"], type: "public-key" }],
+                extensions: { cred_props: true },
+                pub_key_cred_params: [{ alg: -257, type: "public-key" }],
+                rp: { id: "localhost", name: "Whop" },
+                timeout: 300000,
+                user: {
+                    display_name: "Jack Sharkey the 1st",
+                    id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    name: "marcus@shinetime.example",
+                },
+            },
+            request_options: {
+                allow_credentials: [{ id: "bGFwdG9wLWNyZWRlbnRpYWw", transports: ["ble"], type: "public-key" }],
+                challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                rp_id: "localhost",
+                timeout: 300000,
+                user_verification: "required",
+            },
+        };
 
         server
             .mockEndpoint()

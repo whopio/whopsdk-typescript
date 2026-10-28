@@ -17,6 +17,8 @@ export interface UpdateWebhooksRequest {
     enabled?: boolean;
     /** The events to send the webhook for, in dot form (for example `payment.succeeded`). */
     events?: UpdateWebhooksRequest.Events.Item[];
+    /** A label for the webhook, shown in the dashboard. Up to 255 characters. Pass `null` or an empty string to remove it. */
+    title?: string | null;
     /** The URL to send the webhook to. */
     url?: string;
 }
@@ -72,6 +74,9 @@ export namespace UpdateWebhooksRequest {
             CardApplicationApproved: "card_application.approved",
             CardApplicationDenied: "card_application.denied",
             CourseLessonInteractionCompleted: "course_lesson_interaction.completed",
+            DomainCreated: "domain.created",
+            DomainUpdated: "domain.updated",
+            DomainDeleted: "domain.deleted",
             PayoutMethodCreated: "payout_method.created",
             VerificationSucceeded: "verification.succeeded",
             IdentityProfileApproved: "identity_profile.approved",
@@ -104,6 +109,8 @@ export namespace UpdateWebhooksRequest {
             AdGroupUpdated: "ad_group.updated",
             AdCreated: "ad.created",
             AdUpdated: "ad.updated",
+            AppInstallationCreated: "app_installation.created",
+            AppInstallationDeleted: "app_installation.deleted",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",

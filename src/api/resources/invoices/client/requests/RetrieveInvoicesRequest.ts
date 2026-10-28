@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "inv_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetrieveInvoicesRequest {
-    /** The unique identifier of the invoice, or a secure token. */
+    /** The invoice's pay_ ID. */
     id: string;
 }

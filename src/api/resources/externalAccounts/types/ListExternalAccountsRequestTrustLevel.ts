@@ -2,6 +2,7 @@
 
 export const ListExternalAccountsRequestTrustLevel = {
     Oauth: "oauth",
+    ApiKey: "api_key",
     Verified: "verified",
     Authorized: "authorized",
     Claimed: "claimed",

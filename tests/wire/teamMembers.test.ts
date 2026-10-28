@@ -19,7 +19,7 @@ describe("TeamMembersClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    authorized_role: { id: "id", name: "name" },
+                    authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
                     created_at: "2026-01-01T12:00:00.000Z",
                     direct_reports_count: 0,
                     email: "marcus@shinetime.example",
@@ -157,10 +157,14 @@ describe("TeamMembersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", role: "owner" };
+        const rawRequestBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            role: "sales_manager",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            authorized_role: { id: "id", name: "name" },
+            authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",
@@ -189,7 +193,8 @@ describe("TeamMembersClient", () => {
 
         const response = await client.teamMembers.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            role: "owner",
+            role: "sales_manager",
+            user_id: "user_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -293,7 +298,7 @@ describe("TeamMembersClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            authorized_role: { id: "id", name: "name" },
+            authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",
@@ -459,7 +464,7 @@ describe("TeamMembersClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            authorized_role: { id: "id", name: "name" },
+            authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",

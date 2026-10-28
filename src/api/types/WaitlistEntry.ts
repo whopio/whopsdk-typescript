@@ -20,8 +20,6 @@ export interface WaitlistEntry {
     membership_id: string | null;
     /** Custom key-value metadata associated with this signup. */
     metadata: Record<string, unknown>;
-    /** The variant this signup belongs to, prefixed `plan_`. */
-    plan_id: string;
     /** The product this signup belongs to, or `null` when the variant has no product. */
     product: Whop.WaitlistEntryProduct | null;
     /** The product this signup belongs to, prefixed `prod_`, or `null` when the variant has no product. */
@@ -36,6 +34,8 @@ export interface WaitlistEntry {
     user_id: string;
     /** The variant this signup belongs to. */
     variant: Whop.WaitlistEntryVariant;
+    /** The variant this signup belongs to, prefixed `plan_`. */
+    variant_id: string;
 }
 
 export namespace WaitlistEntry {

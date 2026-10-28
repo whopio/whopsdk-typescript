@@ -11,7 +11,7 @@ export interface TeamMember {
     created_at: string;
     /** How many team members report directly to this member. `null` for invites. */
     direct_reports_count: number | null;
-    /** The member's email address. For accepted members, `null` unless the caller holds the `company:authorized_user:email:read` scope; for invites, the invited address. */
+    /** The member's email address. For an invite sent to an email with no Whop account yet, the invited address; for accepted members and invites to an existing Whop account, `null` unless the caller holds the `company:authorized_user:email:read` scope. */
     email: string | null;
     /** Team member ID — `ausr_` for accepted members, `mber_` for members whose role is held on their member record, `ausri_` for pending invites. */
     id: string;

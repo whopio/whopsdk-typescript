@@ -25,8 +25,6 @@ export interface ResolutionCenterCase {
     outcome: ResolutionCenterCase.Outcome | null;
     /** The payment the case was opened against. */
     payment: Whop.ResolutionPayment;
-    /** The variant the payment was made on, prefixed `plan_`. */
-    plan_id: string | null;
     /** The product the payment was for, prefixed `prod_`. */
     product_id: string | null;
     /** What the customer says went wrong. Shares the `/disputes` vocabulary, so a case that later becomes a chargeback reports the same complaint. */
@@ -39,6 +37,8 @@ export interface ResolutionCenterCase {
     status: ResolutionCenterCase.Status;
     /** When the case was last changed, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** The variant the payment was made on, prefixed `plan_`. */
+    variant_id: string | null;
 }
 
 export namespace ResolutionCenterCase {

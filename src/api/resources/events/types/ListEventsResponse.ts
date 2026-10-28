@@ -88,9 +88,9 @@ export namespace ListEventsResponse {
                 /** The saved audience this event came from. Present on the identify events an audience ingest writes for each of its members. */
                 audience?: (Related.Audience | null) | undefined;
                 payment?: (Related.Payment | null) | undefined;
-                plan?: (Related.Plan | null) | undefined;
                 product?: (Related.Product | null) | undefined;
                 user?: (Related.User | null) | undefined;
+                variant?: (Related.Variant | null) | undefined;
             }
 
             export namespace Related {
@@ -168,15 +168,6 @@ export namespace ListEventsResponse {
                     provider?: (string | null) | undefined;
                 }
 
-                export interface Plan {
-                    billing_period?: (number | null) | undefined;
-                    currency?: (string | null) | undefined;
-                    id?: string | undefined;
-                    initial_price?: (number | null) | undefined;
-                    renewal_price?: (number | null) | undefined;
-                    title?: (string | null) | undefined;
-                }
-
                 export interface Product {
                     id?: string | undefined;
                     route?: (string | null) | undefined;
@@ -188,6 +179,15 @@ export namespace ListEventsResponse {
                     id?: string | undefined;
                     name?: (string | null) | undefined;
                     username?: (string | null) | undefined;
+                }
+
+                export interface Variant {
+                    billing_period?: (number | null) | undefined;
+                    currency?: (string | null) | undefined;
+                    id?: string | undefined;
+                    initial_price?: (number | null) | undefined;
+                    renewal_price?: (number | null) | undefined;
+                    title?: (string | null) | undefined;
                 }
             }
 

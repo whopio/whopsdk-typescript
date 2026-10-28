@@ -54,7 +54,7 @@ export class CheckoutConfigurationsClient {
             ): Promise<core.WithRawResponse<Whop.ListCheckoutConfigurationsResponse>> => {
                 const {
                     account_id: accountId,
-                    plan_id: planId,
+                    variant_id: variantId,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     order,
@@ -64,7 +64,7 @@ export class CheckoutConfigurationsClient {
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
-                    plan_id: planId,
+                    variant_id: variantId,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     order: order != null ? order : undefined,
@@ -78,7 +78,7 @@ export class CheckoutConfigurationsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -164,7 +164,7 @@ export class CheckoutConfigurationsClient {
      * @example
      *     await client.checkoutConfigurations.create({
      *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         plan_id: "plan_xxxxxxxxxxxxx"
+     *         variant_id: "plan_xxxxxxxxxxxxx"
      *     })
      */
     public create(
@@ -183,7 +183,7 @@ export class CheckoutConfigurationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -264,7 +264,7 @@ export class CheckoutConfigurationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -341,7 +341,7 @@ export class CheckoutConfigurationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-15-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

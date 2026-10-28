@@ -2,12 +2,16 @@
 
 import type * as Whop from "../../../index.js";
 
-/**
- * The connection type for PublicInvoice.
- */
 export interface ListInvoicesResponse {
-    /** A list of nodes. */
-    data: Whop.InvoiceListItem[];
-    /** Information to aid in pagination. */
-    page_info: Whop.PageInfo;
+    data: Whop.Invoice[];
+    page_info: ListInvoicesResponse.PageInfo;
+}
+
+export namespace ListInvoicesResponse {
+    export interface PageInfo {
+        end_cursor: string | null;
+        has_next_page: boolean;
+        has_previous_page: boolean;
+        start_cursor: string | null;
+    }
 }

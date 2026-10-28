@@ -10,6 +10,8 @@
 export interface UpdateReturnUrlSetupIntentsRequest {
     /** The unique identifier of the setup intent. */
     setup_intent_id: string;
+    /** The setup's own `client_secret`, for a caller without a secret key. */
+    client_secret?: string;
     /** Where the buyer continues after completing an off-site step. Must be an absolute https URL without credentials (http is allowed for localhost), at most 2,048 characters. */
     return_url: string;
 }

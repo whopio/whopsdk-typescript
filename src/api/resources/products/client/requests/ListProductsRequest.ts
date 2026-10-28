@@ -17,7 +17,7 @@ export interface ListProductsRequest {
     /** Only return marketplace products assigned to this category route, such as `trading`. */
     marketplace_category_route?: string;
     /** Filter to products with a buyable variant of these billing models, such as `one_time` or `renewal`. */
-    plan_types?: Whop.ListProductsRequestPlanTypesItem | Whop.ListProductsRequestPlanTypesItem[];
+    billing_types?: Whop.ListProductsRequestBillingTypesItem | Whop.ListProductsRequestBillingTypesItem[];
     /** Only return products whose advertised buyable variant has a displayed price of at least this amount. Recurring variants use renewal price. */
     price_minimum?: number;
     /** Only return products whose advertised buyable variant has a displayed price of at most this amount. Recurring variants use renewal price. */

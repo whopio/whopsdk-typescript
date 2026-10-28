@@ -6,29 +6,31 @@
 export interface PaymentInput {
     /** The account the purchase belongs to, prefixed `biz_`. */
     account_id: string;
-    /** The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
-    plan?: PaymentInput.Plan | undefined;
-    /** The variant purchased, prefixed `plan_`. It must belong to the account. Mutually exclusive with `plan` and `line_items`. */
-    plan_id?: string | undefined;
     /** The promo code as the buyer typed it, matched within the account regardless of case and surrounding spaces, as checkout matches it. It must be valid for the variant. Send it or `promo_code_id`, not both; an empty or whitespace-only string counts as not sent. A code the account does not have, or one that is no longer active, is refused before anything is written, with the error code `promo_invalid`. A code this purchase cannot use, such as one with no uses left or one restricted to other variants, products or buyers, is refused with `promo_invalid` too, and the error's message says why. */
     promo_code?: (string | null) | undefined;
     /** An active promo code to apply, prefixed `promo_`. It must belong to the account and be valid for the variant. Send it or `promo_code`, not both. A code this purchase cannot use is refused with the error code `promo_invalid`, and the error's message says why. */
     promo_code_id?: (string | null) | undefined;
+    /** The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `variant_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
+    variant?: PaymentInput.Variant | undefined;
+    /** The variant purchased, prefixed `plan_`. It must belong to the account. Mutually exclusive with `variant` and `line_items`. */
+    variant_id?: string | undefined;
 }
 
 export namespace PaymentInput {
     /**
-     * The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission.
+     * The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `variant_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission.
      */
-    export interface Plan {
-        /** Whether more than one unit can be purchased in an order. */
+    export interface Variant {
+        /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
         allow_multiple_quantity?: (boolean | null) | undefined;
         /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for connected accounts with a parent account. */
         application_fee_amount?: (number | null) | undefined;
         /** Recurring billing interval in days. */
         billing_period?: (number | null) | undefined;
+        /** Billing model for the variant. */
+        billing_type?: (Variant.BillingType | null) | undefined;
         /** Currency code for the variant prices. */
-        currency: Plan.Currency;
+        currency: Variant.Currency;
         /** Variant description. */
         description?: (string | null) | undefined;
         /** Days until access expires. */
@@ -40,11 +42,9 @@ export namespace PaymentInput {
         /** Internal notes for the account. */
         internal_notes?: (string | null) | undefined;
         /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
-        override_tax_type?: (Plan.OverrideTaxType | null) | undefined;
-        /** Billing model for the variant. */
-        plan_type?: (Plan.PlanType | null) | undefined;
+        override_tax_type?: (Variant.OverrideTaxType | null) | undefined;
         /** Find or create a product by external identifier. Mutually exclusive with product_id. */
-        product?: (Plan.Product | null) | undefined;
+        product?: (Variant.Product | null) | undefined;
         /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
         product_id?: (string | null) | undefined;
         /** Recurring price in the variant currency. */
@@ -54,10 +54,16 @@ export namespace PaymentInput {
         /** Free trial days before renewal. */
         trial_period_days?: (number | null) | undefined;
         /** Whether the variant is visible to customers. */
-        visibility?: (Plan.Visibility | null) | undefined;
+        visibility?: (Variant.Visibility | null) | undefined;
     }
 
-    export namespace Plan {
+    export namespace Variant {
+        /** Billing model for the variant. */
+        export const BillingType = {
+            Renewal: "renewal",
+            OneTime: "one_time",
+        } as const;
+        export type BillingType = (typeof BillingType)[keyof typeof BillingType];
         /** Currency code for the variant prices. */
         export const Currency = {
             Usd: "usd",
@@ -159,12 +165,6 @@ export namespace PaymentInput {
             Unspecified: "unspecified",
         } as const;
         export type OverrideTaxType = (typeof OverrideTaxType)[keyof typeof OverrideTaxType];
-        /** Billing model for the variant. */
-        export const PlanType = {
-            Renewal: "renewal",
-            OneTime: "one_time",
-        } as const;
-        export type PlanType = (typeof PlanType)[keyof typeof PlanType];
 
         /**
          * Find or create a product by external identifier. Mutually exclusive with product_id.

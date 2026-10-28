@@ -10,3 +10,6 @@ export * from "./ListDomainsRequestTransfer.js";
 export * from "./ListDomainsRequestVerification.js";
 export * from "./ListDomainsRequestWebsite.js";
 export * from "./ListDomainsResponse.js";
+export * from "./PostDomainCreatedPayload.js";
+export * from "./PostDomainDeletedPayload.js";
+export * from "./PostDomainUpdatedPayload.js";

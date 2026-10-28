@@ -28,19 +28,19 @@ export namespace CreateAuthorizedUsersRequest {
      * Re-authentication proof required to perform this sensitive action.
      */
     export interface Elevation {
-        /** The WebAuthn authenticator data (base64). */
+        /** Ignored. Kept so existing API clients that send a passkey assertion keep working. */
         authenticator_data?: (string | null) | undefined;
-        /** The WebAuthn client data JSON (base64). */
+        /** Ignored. Kept so existing API clients that send a passkey assertion keep working. */
         client_data_json?: (string | null) | undefined;
-        /** The WebAuthn credential ID (base64). */
+        /** Ignored. Kept so existing API clients that send a passkey assertion keep working. */
         credential_id?: (string | null) | undefined;
         /** The 6-digit code emailed to the user. */
         email_code?: (string | null) | undefined;
-        /** The WebAuthn signature (base64). */
+        /** Ignored. Kept so existing API clients that send a passkey assertion keep working. */
         signature?: (string | null) | undefined;
         /** The 6-digit code from the authenticator app or SMS. */
         totp_code?: (string | null) | undefined;
-        /** Reuse an existing elevated session (for SMS/email 2FA users). */
+        /** Ignored. Kept so existing API clients that send it keep working. */
         use_finance_session?: (boolean | null) | undefined;
     }
 }

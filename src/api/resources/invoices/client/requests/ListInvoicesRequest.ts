@@ -4,35 +4,24 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         first: 42,
- *         last: 42,
- *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z",
- *         account_id: "biz_xxxxxxxxxxxxxx"
- *     }
+ *     {}
  */
 export interface ListInvoicesRequest {
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
-    direction?: Whop.Direction;
-    /** Filter invoices to only those associated with these specific product identifiers. */
-    product_ids?: string | string[];
-    /** Filter invoices by their collection method. */
-    collection_methods?: Whop.InvoiceCollectionMethods | Whop.InvoiceCollectionMethods[];
-    /** Filter invoices by their current status. */
-    statuses?: Whop.InvoiceStatuses | Whop.InvoiceStatuses[];
-    order?: Whop.InvoicesSortableColumns;
-    /** Only return invoices created before this timestamp. */
-    created_before?: string;
-    /** Only return invoices created after this timestamp. */
-    created_after?: string;
-    /** The unique identifier of the company to list invoices for. */
     account_id?: string;
+    status?: Whop.ListInvoicesRequestStatus;
+    overdue?: boolean;
+    member_id?: string;
+    product_id?: string;
+    created_after?: string;
+    created_before?: string;
+    order?: Whop.ListInvoicesRequestOrder;
+    direction?: Whop.ListInvoicesRequestDirection;
+    /** Number of results to return from the start of the range. */
+    first?: number;
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
+    after?: string;
+    /** Number of results to return from the end of the range. */
+    last?: number;
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
+    before?: string;
 }

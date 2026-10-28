@@ -12,6 +12,7 @@ export interface UpdatePlansRequest {
     /** Variant ID, prefixed `plan_`. */
     id: string;
     adaptive_pricing_enabled?: boolean | null;
+    allow_multiple_quantity?: boolean;
     attributes?: Record<string, unknown> | null;
     billing_period?: number | null;
     cancel_discount_intervals?: number | null;
@@ -31,6 +32,7 @@ export interface UpdatePlansRequest {
     release_method?: string;
     renewal_price?: number | null;
     sku?: string | null;
+    split_pay_required_payments?: number | null;
     stock?: number | null;
     strike_through_initial_price?: number | null;
     strike_through_renewal_price?: number | null;

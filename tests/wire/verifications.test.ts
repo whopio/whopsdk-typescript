@@ -18,6 +18,7 @@ describe("VerificationsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account_ids: ["biz_xxxxxxxxxxxxxx"],
                     address: {
                         city: "Austin",
                         country: "US",
@@ -34,14 +35,17 @@ describe("VerificationsClient", () => {
                     email: "marcus@shinetime.example",
                     first_name: "Marcus",
                     id: "idpf_xxxxxxxxxxxx",
+                    incorporation_date: "2021-03-15",
                     kind: "individual",
                     last_name: "Webb",
                     owners: [
                         {
+                            date_of_birth: "1985-06-01",
                             first_name: "Riley",
                             id: "own_xxxxxxxxxxxxxx",
                             last_name: "Owner",
                             ownership_percentage: 60,
+                            rejected_checks: ["details"],
                             required_documents: [
                                 {
                                     document: "id_card_front",
@@ -53,6 +57,7 @@ describe("VerificationsClient", () => {
                         },
                     ],
                     phone: "+15551234567",
+                    place_of_incorporation: "Delaware",
                     registration_number: "7654321",
                     requested_information: [
                         {
@@ -107,12 +112,29 @@ describe("VerificationsClient", () => {
                     updated_at: "2026-06-02T12:00:00.000Z",
                 },
             ],
+            page_info: {
+                end_cursor: "end_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
+            },
         };
 
-        server.mockEndpoint().get("/verifications").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/verifications")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
-        const response = await client.verifications.list();
-        expect(response).toEqual(rawResponseBody);
+        const expected = rawResponseBody;
+        const page = await client.verifications.list();
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
     });
 
     test("list (2)", async () => {
@@ -183,6 +205,7 @@ describe("VerificationsClient", () => {
         });
         const rawRequestBody = { kind: "individual" };
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",
@@ -199,14 +222,17 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],
@@ -215,6 +241,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {
@@ -458,6 +485,7 @@ describe("VerificationsClient", () => {
         });
 
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",
@@ -474,14 +502,17 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],
@@ -490,6 +521,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {
@@ -616,6 +648,7 @@ describe("VerificationsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",
@@ -632,14 +665,17 @@ describe("VerificationsClient", () => {
             email: "marcus@shinetime.example",
             first_name: "Marcus",
             id: "idpf_xxxxxxxxxxxx",
+            incorporation_date: "2021-03-15",
             kind: "individual",
             last_name: "Webb",
             owners: [
                 {
+                    date_of_birth: "1985-06-01",
                     first_name: "Riley",
                     id: "own_xxxxxxxxxxxxxx",
                     last_name: "Owner",
                     ownership_percentage: 60,
+                    rejected_checks: ["details"],
                     required_documents: [
                         { document: "id_card_front", rejection_reason: "Document image was too blurry to read." },
                     ],
@@ -648,6 +684,7 @@ describe("VerificationsClient", () => {
                 },
             ],
             phone: "+15551234567",
+            place_of_incorporation: "Delaware",
             registration_number: "7654321",
             requested_information: [
                 {

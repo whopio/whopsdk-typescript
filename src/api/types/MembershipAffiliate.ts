@@ -9,6 +9,8 @@ export interface MembershipAffiliate {
     commission_amount: Whop.Money | null;
     /** The percentage commission in percentage points, so `20` means 20%, or `null` for a flat fee. */
     commission_percentage: number | null;
+    /** How the commission rate was set: `custom` for a rate set for this affiliate, `member` for the member affiliate rate of the plan or product, `global` for the product's global affiliate rate, or `marketplace` for a Whop marketplace referral. */
+    commission_source: MembershipAffiliate.CommissionSource;
     /** Whether the commission is a percentage or a flat fee. */
     commission_type: MembershipAffiliate.CommissionType;
     /** Whether this membership pays affiliate commissions. `false` means the affiliate is kept on the membership but is no longer paid. */
@@ -26,6 +28,14 @@ export namespace MembershipAffiliate {
         AllPayments: "all_payments",
     } as const;
     export type AppliesToPayments = (typeof AppliesToPayments)[keyof typeof AppliesToPayments];
+    /** How the commission rate was set: `custom` for a rate set for this affiliate, `member` for the member affiliate rate of the plan or product, `global` for the product's global affiliate rate, or `marketplace` for a Whop marketplace referral. */
+    export const CommissionSource = {
+        Custom: "custom",
+        Member: "member",
+        Marketplace: "marketplace",
+        Global: "global",
+    } as const;
+    export type CommissionSource = (typeof CommissionSource)[keyof typeof CommissionSource];
     /** Whether the commission is a percentage or a flat fee. */
     export const CommissionType = {
         FlatFee: "flat_fee",

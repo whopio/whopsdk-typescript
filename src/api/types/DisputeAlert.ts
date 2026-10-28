@@ -32,6 +32,8 @@ export interface DisputeAlert {
     product_id: string | null;
     /** When the issuer filed the report, as an ISO 8601 timestamp. Earlier than `created_at`, which is when Whop received it. */
     reported_at: string;
+    /** The network program that sent the alert, which `type` alone doesn't tell apart. `ethoca` for Mastercard Ethoca, `cdrn` for Visa Verifi CDRN, `rdr` for Visa RDR, `tc40` / `safe` for a Visa / Mastercard fraud report, `paypal` for a PayPal alert. `null` when the network didn't say. */
+    source: DisputeAlert.Source | null;
     /** When the reported transaction was made, as an ISO 8601 timestamp — falls back to when the matched payment was made if the issuer's own report didn't carry one. Should not be `null` in practice; treat one as a data issue rather than expected behavior. */
     transaction_at: string | null;
     /** What the issuer sent. `early_fraud_warning` is a fraud report on a settled payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback, and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice from the issuer's alert network, which Whop pays for and passes on as a fee. `rapid_dispute_resolution` is a Visa RDR case the network already closed by refunding the payment — nothing is left to act on. */
@@ -41,6 +43,16 @@ export interface DisputeAlert {
 }
 
 export namespace DisputeAlert {
+    /** The network program that sent the alert, which `type` alone doesn't tell apart. `ethoca` for Mastercard Ethoca, `cdrn` for Visa Verifi CDRN, `rdr` for Visa RDR, `tc40` / `safe` for a Visa / Mastercard fraud report, `paypal` for a PayPal alert. `null` when the network didn't say. */
+    export const Source = {
+        Ethoca: "ethoca",
+        Cdrn: "cdrn",
+        Rdr: "rdr",
+        Tc40: "tc40",
+        Safe: "safe",
+        Paypal: "paypal",
+    } as const;
+    export type Source = (typeof Source)[keyof typeof Source];
     /** What the issuer sent. `early_fraud_warning` is a fraud report on a settled payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback, and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice from the issuer's alert network, which Whop pays for and passes on as a fee. `rapid_dispute_resolution` is a Visa RDR case the network already closed by refunding the payment — nothing is left to act on. */
     export const Type = {
         EarlyFraudWarning: "early_fraud_warning",

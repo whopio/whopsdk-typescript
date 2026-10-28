@@ -2,160 +2,60 @@
 
 import type * as Whop from "../index.js";
 
-/**
- * An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.
- */
 export interface Invoice {
-    /** The date and time when the invoice will be automatically finalized. For charge_automatically, triggers an automatic charge. For send_invoice, sends the invoice email at the specified time. */
-    automatically_finalizes_at: string | null;
-    /** Whether the invoice includes a buyer processing fee on top of the plan price. */
-    charge_buyer_fee: boolean;
-    /** The method used to collect payment for this invoice, such as automatic charging or manual payment. */
-    collection_method: Whop.InvoiceCollectionMethods;
-    /** The company that issued this invoice. */
-    company: Invoice.Company;
-    /** The datetime the invoice was created. */
+    account_id: string;
+    amount_due: Whop.Money;
+    billing_address: Whop.PaymentAddress | null;
+    buyer_fee_amount: Whop.Money;
+    buyer_fee_percentage: number;
+    /** A signed link that opens this invoice in a checkout session so the buyer can pay it: pass it as `link` to `POST /checkout_sessions`. Present once the invoice is issued and open; null while it is a draft, once it is paid or void, and when you lack `payment:charge`. */
+    checkout_link: string | null;
     created_at: string;
-    /** The plan that this invoice charges for. */
-    current_plan: Invoice.CurrentPlan;
-    /** The full name of the customer this invoice is addressed to. Null if no name is on file. */
     customer_name: string | null;
-    /** The deadline by which payment is expected. Null if the invoice is collected automatically. */
-    due_date: string | null;
-    /** The email address of the customer this invoice is addressed to. Null if no email is on file. */
+    due_at: string | null;
     email_address: string | null;
-    /** A signed token that allows fetching invoice data publicly without authentication. */
-    fetch_invoice_token: string;
-    /** The unique identifier for the invoice. */
     id: string;
-    /** Optional line items that break down the invoice total into individual charges. */
-    line_items: Invoice.LineItems.Item[];
-    /** The billing/mailing address associated with this invoice, if one was provided at creation time. */
-    mailing_address: Invoice.MailingAddress | null;
-    /** The member that the invoice was created for. Null when the invoice is addressed to an email address with no member record behind it. */
-    member: Invoice.Member | null;
-    /** The sequential invoice number for display purposes. */
+    invoice_prefix: string | null;
+    line_items: Whop.InvoiceLineItem[];
+    mailing_address_id: string | null;
+    member_id: string | null;
+    metadata: Record<string, string>;
     number: string;
-    /** The checkout URL where the customer can pay this invoice online, with their email address pre-filled and locked. */
-    pay_online_url: string | null;
-    /** The payment that settled this invoice. Null while the invoice is unpaid, when the invoice was marked paid manually, and on a subscription renewal invoice, where the settling payment cannot yet be identified. */
-    payment: Invoice.Payment | null;
-    /** Whether a payment on this invoice is still clearing. True while a delayed payment method such as ACH or SEPA settles, during which the invoice stays open and is not marked past due. */
-    payment_processing: boolean;
-    /** The product that this invoice was generated for. */
-    product: Invoice.Product;
-    /** The current payment status of the invoice, such as draft, open, paid, or void. */
-    status: Whop.InvoiceStatuses;
-    /** The date that defines when the subscription billing cycle starts. When set on a renewal plan invoice, all future billing periods anchor to this date. */
-    subscription_billing_anchor_at: string | null;
-    /** The datetime the invoice was last updated. */
+    object: Invoice.Object_;
+    overdue: boolean;
+    paid_at: string | null;
+    payment_method_id: string | null;
+    recipient_emails: string[];
+    /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp. Set to `due_at` when an invoice with a `payment_method_id` is sent before it is due; `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
+    scheduled_charge_at: string | null;
+    scheduled_send_at: string | null;
+    status: Invoice.Status;
+    subtotal: Whop.Money;
+    tax_amount: Whop.Money | null;
+    total: Whop.Money;
+    totals_status: Invoice.TotalsStatus;
     updated_at: string;
-    /** The user this invoice is addressed to. Null if the user account has been removed. */
-    user: Invoice.User | null;
 }
 
 export namespace Invoice {
-    /**
-     * The company that issued this invoice.
-     */
-    export interface Company {
-        /** The unique identifier for the company. */
-        id: string;
-    }
-
-    /**
-     * The plan that this invoice charges for.
-     */
-    export interface CurrentPlan {
-        /** The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary amounts on the plan are denominated in this currency. */
-        currency: Whop.Currencies;
-        /** A text description of the plan visible to customers. Maximum 1000 characters. Null if no description is set. */
-        description: string | null;
-        /** The formatted price (including currency) for the plan. */
-        formatted_price: string;
-        /** The unique identifier for the plan. */
-        id: string;
-    }
-
-    export type LineItems = LineItems.Item[];
-
-    export namespace LineItems {
-        /**
-         * A line item on an invoice, representing a single charge with a label, quantity, and unit price.
-         */
-        export interface Item {
-            /** The label or description for this line item. */
-            label: string;
-            /** The display order of this line item within the invoice. */
-            position: number;
-            /** The quantity of this line item. */
-            quantity: number;
-            /** The computed total for this line item (quantity * unit_price). */
-            total: number;
-            /** The unit price for this line item. Negative for a credit or deduction. */
-            unit_price: number;
-        }
-    }
-
-    /**
-     * The billing/mailing address associated with this invoice, if one was provided at creation time.
-     */
-    export interface MailingAddress {
-        /** The city of the address. */
-        city: string | null;
-        /** The country of the address. */
-        country: string | null;
-        /** The line 1 of the address. */
-        line1: string | null;
-        /** The line 2 of the address. */
-        line2: string | null;
-        /** The name of the customer. */
-        name: string | null;
-        /** The phone number of the customer. */
-        phone: string | null;
-        /** The postal code of the address. */
-        postal_code: string | null;
-        /** The state of the address. */
-        state: string | null;
-    }
-
-    /**
-     * The member that the invoice was created for. Null when the invoice is addressed to an email address with no member record behind it.
-     */
-    export interface Member {
-        /** The unique identifier for the company member. */
-        id: string;
-    }
-
-    /**
-     * The payment that settled this invoice. Null while the invoice is unpaid, when the invoice was marked paid manually, and on a subscription renewal invoice, where the settling payment cannot yet be identified.
-     */
-    export interface Payment {
-        /** The unique identifier for the payment. */
-        id: string;
-    }
-
-    /**
-     * The product that this invoice was generated for.
-     */
-    export interface Product {
-        /** The unique identifier for the product. */
-        id: string;
-        /** The display name of the product shown to customers on the product page and in search results. */
-        title: string;
-    }
-
-    /**
-     * The user this invoice is addressed to. Null if the user account has been removed.
-     */
-    export interface User {
-        /** The user's email address. Requires the member:email:read permission to access. Null if not authorized. */
-        email: string | null;
-        /** The unique identifier for the user. */
-        id: string;
-        /** The user's display name shown on their public profile. */
-        name: string | null;
-        /** The user's unique username shown on their public profile. */
-        username: string;
-    }
+    export const Object_ = {
+        Invoice: "invoice",
+    } as const;
+    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export const Status = {
+        Draft: "draft",
+        Open: "open",
+        Authorized: "authorized",
+        Paid: "paid",
+        Pending: "pending",
+        Uncollectible: "uncollectible",
+        Unresolved: "unresolved",
+        Void: "void",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
+    export const TotalsStatus = {
+        Estimated: "estimated",
+        Final: "final",
+    } as const;
+    export type TotalsStatus = (typeof TotalsStatus)[keyof typeof TotalsStatus];
 }

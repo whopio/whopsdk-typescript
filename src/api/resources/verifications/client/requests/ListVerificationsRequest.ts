@@ -11,6 +11,16 @@ export interface ListVerificationsRequest {
     account_id?: string;
     /** The caller's own user ID, prefixed `user_`, to list personal verifications. Provide this or `account_id`. */
     user_id?: string;
+    /** Also cover the account's subaccounts. Requires `account_id`, and is a 400 without it. Lists the verifications of the account and every subaccount in account order, oldest account first, paging forward; `status`, `order`, `direction`, `last` and `before` are a 400. Leaves out removed subaccounts and ones you can't read verifications on. A page can hold fewer than `first` verifications while `has_next_page` is `true`; keep following `end_cursor`. On a subaccount, lists only that account's verifications. */
+    include_subaccounts?: boolean;
+    /** Number of results to return from the start of the range. */
+    first?: number;
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
+    after?: string;
+    /** Number of results to return from the end of the range. */
+    last?: number;
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
+    before?: string;
     /** Field used to sort returned verifications. */
     order?: Whop.ListVerificationsRequestOrder;
     /** Sort direction for returned verifications. */

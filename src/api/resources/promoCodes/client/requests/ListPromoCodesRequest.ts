@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         account_id: "account_id",
  *         product_ids: ["prod_xxxxxxxxxxxxxx"],
- *         plan_ids: ["plan_xxxxxxxxxxxxxx"]
+ *         variant_ids: ["plan_xxxxxxxxxxxxxx"]
  *     }
  */
 export interface ListPromoCodesRequest {
@@ -18,7 +18,7 @@ export interface ListPromoCodesRequest {
     /** Only promo codes scoped to these product IDs. */
     product_ids?: string | string[];
     /** Only promo codes scoped to these variant IDs. */
-    plan_ids?: string | string[];
+    variant_ids?: string | string[];
     /** Only promo codes created before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only promo codes created after this ISO 8601 timestamp. */

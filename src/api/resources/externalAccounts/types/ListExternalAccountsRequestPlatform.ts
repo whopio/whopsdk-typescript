@@ -10,6 +10,7 @@ export const ListExternalAccountsRequestPlatform = {
     Telegram: "telegram",
     Linkedin: "linkedin",
     Snapchat: "snapchat",
+    Klaviyo: "klaviyo",
 } as const;
 export type ListExternalAccountsRequestPlatform =
     (typeof ListExternalAccountsRequestPlatform)[keyof typeof ListExternalAccountsRequestPlatform];

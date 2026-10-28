@@ -6,7 +6,7 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         currencies: ["eur"],
- *         plan_ids: ["plan_xxxxxxxxxxxxx"],
+ *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"]
  *     }
  */
@@ -27,7 +27,7 @@ export interface ListPaymentsRequest {
     user_id?: string;
     /** Search payments by payment ID, dispute ID, user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;
-    /** Only for searches: with `query`, also search the account's connected accounts. Requires `account_id` and `query`, and is a 400 without either; it never lists connected accounts' payments on its own. Matches on payment, dispute, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`). Free-text queries such as a name search only the named account. Connected accounts' payments are returned only for connected accounts you can read payments on. */
+    /** Also cover the account's connected accounts. Requires `account_id`, and is a 400 without it. Without `query`, lists the payments of the account and every connected account, newest first by `created_at` only; another `order` is a 400. The listing is cut off after 10 seconds, which a rare filter on an account with little recent activity can reach; add a `query` to narrow it. With `query`, matches on payment, dispute, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`); free-text queries such as a name search only the named account. Connected accounts' payments are returned only for connected accounts you can read payments on. */
     include_connected_accounts?: boolean;
     /** Only payments made by this member, prefixed `mber_`. */
     member_id?: string;
@@ -36,7 +36,7 @@ export interface ListPaymentsRequest {
     /** Only payments for this product, prefixed `prod_`. */
     product_id?: string;
     /** Only payments priced by this variant, prefixed `plan_`. */
-    plan_id?: string;
+    variant_id?: string;
     /** Only payments created before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only payments created after this ISO 8601 timestamp. */
@@ -49,8 +49,8 @@ export interface ListPaymentsRequest {
     billing_reasons?: Whop.ListPaymentsRequestBillingReasonsItem | Whop.ListPaymentsRequestBillingReasonsItem[];
     /** Only payments presented in any of these three-letter currencies. Repeat the parameter to pass several. Combined with `currency` when both are sent. */
     currencies?: string | string[];
-    /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. Combined with `plan_id` when both are sent. */
-    plan_ids?: string | string[];
+    /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. Combined with `variant_id` when both are sent. */
+    variant_ids?: string | string[];
     /** Only payments for any of these products, each prefixed `prod_`. Repeat the parameter to pass several. Combined with `product_id` when both are sent. */
     product_ids?: string | string[];
     /** Only payments paid with any of these methods: a card brand such as `amex`, a wallet such as `apple_pay`, or a payment method type such as `paypal`. Repeat the parameter to pass several. */

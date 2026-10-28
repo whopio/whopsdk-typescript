@@ -7,11 +7,15 @@ export interface VariantListItem {
     account: Whop.AccountSummary | null;
     /** Whether adaptive pricing is enabled for this variant. Raw setting — does not check processor compatibility or feature flags. */
     adaptive_pricing_enabled: boolean;
+    /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
+    allow_multiple_quantity: boolean;
     /** Attribute values that distinguish this variant within its product, as a map of attribute name to value, e.g. `{"color": "Blue", "size": "Large"}`. Names are snake_case identifiers and come back in alphabetical order. Every attributed variant on a product carries the same attribute names and a distinct set of values; the product lists the full option set as `variant_attributes`. `null` when the variant has no attributes. */
     attributes: Record<string, string | null> | null;
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
-    /** Billing intervals the cancellation discount applies to (`0` forever, `1` first payment, or a month count). `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
+    /** Billing model for this variant. */
+    billing_type: VariantListItem.BillingType;
+    /** How long the cancellation discount lasts: `0` forever, `1` the next payment only, or a number of calendar months from when the customer accepts it. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_intervals: number | null;
     /** Cancellation discount as a whole-number percentage. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_percentage: number | null;
@@ -48,8 +52,6 @@ export interface VariantListItem {
     offer_cancel_discount: boolean | null;
     /** Payment method configuration (`enabled`, `disabled`, `include_platform_defaults`); `null` when variant uses default settings. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Billing model for this variant. */
-    plan_type: VariantListItem.PlanType;
     /** Product this variant belongs to; `null` for standalone variants. */
     product: Record<string, unknown> | null;
     /** URL where customers can purchase this variant directly. */
@@ -84,11 +86,11 @@ export interface VariantListItem {
 
 export namespace VariantListItem {
     /** Billing model for this variant. */
-    export const PlanType = {
+    export const BillingType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
-    export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+    export type BillingType = (typeof BillingType)[keyof typeof BillingType];
     /** Sales method for this variant. */
     export const ReleaseMethod = {
         BuyNow: "buy_now",

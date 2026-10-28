@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface PromoCodeListItem {
+    /** Affiliate credited with referrals that use the promo code, or `null` when no affiliate is attached. */
+    affiliate: Whop.PromoCodeAffiliate | null;
     /** Discount amount. Percentage discounts are represented as a decimal fraction. */
     amount_off: number;
     /** Whether the promo code is restricted to churned customers. */

@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "inv_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface MarkUncollectibleInvoicesRequest {
-    /** The unique identifier of the invoice to mark as uncollectible. */
+    /** The invoice's pay_ ID. */
     id: string;
 }
