@@ -15,6 +15,8 @@ export interface Trade {
     completed_at: string | null;
     /** When the trade was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** ID Whop sends to the exchange with this trade's order, so the exchange's order updates can be matched to the trade. On Hyperliquid, the order's `cloid` reported in `orderUpdates`, a `0x`-prefixed 32-character hex string. Not the caller's `client_order_id`. `null` for a deposit or withdraw. */
+    external_order_id: string | null;
     /** Why the trade failed, or `null`. */
     failure_code: Trade.FailureCode | null;
     /** The size the order filled, in units of the market, as a decimal string. `null` until it fills. */
