@@ -3,6 +3,8 @@
 import type * as Whop from "../../../index.js";
 
 export interface UpdateVerificationsResponse {
+    /** Accounts this verification was read for, each prefixed `biz_`: the account you listed by, the account or subaccount it belongs to with `include_subaccounts`, or every account you can read that it belongs to when retrieved by ID. Usually one. Empty for a personal verification. */
+    account_ids: string[];
     /** Address on the verification profile. `null` when no address is set. */
     address?: (UpdateVerificationsResponse.Address | null) | undefined;
     /** Legal business name. */

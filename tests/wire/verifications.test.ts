@@ -18,6 +18,7 @@ describe("VerificationsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account_ids: ["biz_xxxxxxxxxxxxxx"],
                     address: {
                         city: "Austin",
                         country: "US",
@@ -111,12 +112,29 @@ describe("VerificationsClient", () => {
                     updated_at: "2026-06-02T12:00:00.000Z",
                 },
             ],
+            page_info: {
+                end_cursor: "end_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
+            },
         };
 
-        server.mockEndpoint().get("/verifications").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/verifications")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
-        const response = await client.verifications.list();
-        expect(response).toEqual(rawResponseBody);
+        const expected = rawResponseBody;
+        const page = await client.verifications.list();
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
     });
 
     test("list (2)", async () => {
@@ -187,6 +205,7 @@ describe("VerificationsClient", () => {
         });
         const rawRequestBody = { kind: "individual" };
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",
@@ -466,6 +485,7 @@ describe("VerificationsClient", () => {
         });
 
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",
@@ -628,6 +648,7 @@ describe("VerificationsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            account_ids: ["biz_xxxxxxxxxxxxxx"],
             address: {
                 city: "Austin",
                 country: "US",

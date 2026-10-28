@@ -29,7 +29,7 @@ export class VerificationsClient {
     }
 
     /**
-     * Lists the verifications for an account or user, including their status and any required actions.
+     * Lists the verifications for an account or user, including their status and any required actions. Platforms list their own and every subaccount's verifications at once with `include_subaccounts`; each one's `account_ids` names its account, and a verification shared by several accounts appears once for each.
      *
      * @param {Whop.ListVerificationsRequest} request
      * @param {VerificationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -43,76 +43,106 @@ export class VerificationsClient {
      * @example
      *     await client.verifications.list()
      */
-    public list(
+    public async list(
         request: Whop.ListVerificationsRequest = {},
         requestOptions?: VerificationsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.ListVerificationsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
-    }
-
-    private async __list(
-        request: Whop.ListVerificationsRequest = {},
-        requestOptions?: VerificationsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.ListVerificationsResponse>> {
-        const { account_id: accountId, user_id: userId, order, direction } = request;
-        const _queryParams: Record<string, unknown> = {
-            account_id: accountId,
-            user_id: userId,
-            order: order != null ? order : undefined,
-            direction: direction != null ? direction : undefined,
-        };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                "verifications",
-            ),
-            method: "GET",
-            headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.ListVerificationsResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
+    ): Promise<core.Page<Whop.ListVerificationsResponse.Data.Item, Whop.ListVerificationsResponse>> {
+        const list = core.HttpResponsePromise.interceptFunction(
+            async (
+                request: Whop.ListVerificationsRequest,
+            ): Promise<core.WithRawResponse<Whop.ListVerificationsResponse>> => {
+                const {
+                    account_id: accountId,
+                    user_id: userId,
+                    include_subaccounts: includeSubaccounts,
+                    first,
+                    after,
+                    last,
+                    before,
+                    order,
+                    direction,
+                } = request;
+                const _queryParams: Record<string, unknown> = {
+                    account_id: accountId,
+                    user_id: userId,
+                    include_subaccounts: includeSubaccounts,
+                    first,
+                    after,
+                    last,
+                    before,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                };
+                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+                    _authRequest.headers,
+                    this._options?.headers,
+                    mergeOnlyDefinedHeaders({
+                        "Api-Version-Date":
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-27-3",
+                        "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+                    }),
+                    requestOptions?.headers,
+                );
+                const _response = await core.fetcher({
+                    url: core.url.join(
+                        (await core.Supplier.get(this._options.baseUrl)) ??
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
+                        "verifications",
+                    ),
+                    method: "GET",
+                    headers: _headers,
+                    queryString: core.url
+                        .queryBuilder()
+                        .addMany(_queryParams)
+                        .mergeAdditional(requestOptions?.queryParams)
+                        .build(),
+                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+                    abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
+                });
+                if (_response.ok) {
+                    return {
+                        data: _response.body as Whop.ListVerificationsResponse,
                         rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/verifications");
+                    };
+                }
+                if (_response.error.reason === "status-code") {
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                        case 401:
+                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        case 403:
+                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                        default:
+                            throw new errors.WhopError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
+                }
+                return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/verifications");
+            },
+        );
+        const dataWithRawResponse = await list(request).withRawResponse();
+        return new core.Page<Whop.ListVerificationsResponse.Data.Item, Whop.ListVerificationsResponse>({
+            response: dataWithRawResponse.data,
+            rawResponse: dataWithRawResponse.rawResponse,
+            hasNextPage: (response) =>
+                response?.page_info.end_cursor != null &&
+                !(typeof response?.page_info.end_cursor === "string" && response?.page_info.end_cursor === ""),
+            getItems: (response) => response?.data ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
+            },
+        });
     }
 
     /**
