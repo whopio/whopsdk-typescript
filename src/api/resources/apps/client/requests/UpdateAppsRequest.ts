@@ -33,6 +33,8 @@ export interface UpdateAppsRequest {
     oauth_client_type?: UpdateAppsRequest.OauthClientType;
     /** The URL path to the app's OpenAPI spec file (requires the ai_chat capability). */
     openapi_path?: string | null;
+    /** Five-field cron expression, read in UTC, on which Whop runs the production web build's `scheduled()` export once for every installation, with the installation in `ctx.props.app_installation`. It must fire at least once and no more often than every 15 minutes. Slots are skipped while the app has no production web build with a server entry. Set to `null` or an empty string to stop the per-install schedule. */
+    per_install_schedule?: string | null;
     /** The app build (`abld_` tag) to serve as the Android production build, or `null` to unassign it. Same rules as `production_web_build_id`. */
     production_android_build_id?: string | null;
     /** The app build (`abld_` tag) to serve as the iOS production build, or `null` to unassign it. Same rules as `production_web_build_id`. */
@@ -45,6 +47,8 @@ export interface UpdateAppsRequest {
     required_scopes?: string[];
     /** The subdomain route where the app's hosted web builds are served. */
     route?: string;
+    /** Five-field cron expression, read in UTC, on which Whop runs the production web build's `scheduled()` export once per slot, such as `* /15 * * * *`. It must fire at least once. Slots are skipped while the app has no production web build with a server entry. Set to `null` or an empty string to stop the global schedule. */
+    schedule?: string | null;
     /** Secrets to add or overwrite on the app, as an object of string values. Keys not included are left untouched; pass null or an empty string as the value to delete a secret. Encrypted at rest and injected into the app's hosted server runtime. */
     secrets?: Record<string, unknown>;
     /** The URL path to the app's skills directory (requires the ai_chat capability). */

@@ -197,6 +197,7 @@ describe("AppsClient", () => {
             oauth_client_type: "public",
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
+            per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
@@ -236,6 +237,7 @@ describe("AppsClient", () => {
             ],
             required_scopes: ["read_user"],
             route: "shine-time-booking",
+            schedule: "0 * * * *",
             secrets: { BOOKING_CALENDAR_ID: "cal_9f21" },
             skills_path: "/skills",
             status: "live",
@@ -473,6 +475,7 @@ describe("AppsClient", () => {
             oauth_client_type: "public",
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
+            per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
@@ -512,6 +515,7 @@ describe("AppsClient", () => {
             ],
             required_scopes: ["read_user"],
             route: "shine-time-booking",
+            schedule: "0 * * * *",
             secrets: { BOOKING_CALENDAR_ID: "cal_9f21" },
             skills_path: "/skills",
             status: "live",
@@ -706,6 +710,7 @@ describe("AppsClient", () => {
             oauth_client_type: "public",
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
+            per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
@@ -745,6 +750,7 @@ describe("AppsClient", () => {
             ],
             required_scopes: ["read_user"],
             route: "shine-time-booking",
+            schedule: "0 * * * *",
             secrets: { BOOKING_CALENDAR_ID: "cal_9f21" },
             skills_path: "/skills",
             status: "live",
@@ -1178,6 +1184,7 @@ describe("AppsClient", () => {
             oauth_client_type: "public",
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
+            per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
@@ -1217,6 +1224,7 @@ describe("AppsClient", () => {
             ],
             required_scopes: ["read_user"],
             route: "shine-time-booking",
+            schedule: "0 * * * *",
             secrets: { BOOKING_CALENDAR_ID: "cal_9f21" },
             skills_path: "/skills",
             status: "live",
