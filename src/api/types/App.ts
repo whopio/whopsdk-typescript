@@ -63,6 +63,8 @@ export interface App {
     per_install_schedule: string | null;
     /** A short-lived signed pass scoping the caller to this app's gated preview hosts — every build preview and the live dev-server sandbox. Add it to a preview host as the `__whop_preview` query param (or `x-whop-preview-token` header). `null` unless the caller is a team member who can read the app's developer settings. */
     preview_token: string | null;
+    /** Product category a business built from this app as a template sells, such as `pressure_washing`, or `null` when none has been set. */
+    product_category: string | null;
     /** ID of the app's product listing on the Whop app store, or `null` when the app has no associated product. */
     product_id: string | null;
     /** The approved build currently served on Android, or `null` when none is deployed. */
