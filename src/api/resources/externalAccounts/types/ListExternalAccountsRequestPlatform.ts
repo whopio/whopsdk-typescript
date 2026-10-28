@@ -11,6 +11,7 @@ export const ListExternalAccountsRequestPlatform = {
     Linkedin: "linkedin",
     Snapchat: "snapchat",
     Klaviyo: "klaviyo",
+    Quickbooks: "quickbooks",
 } as const;
 export type ListExternalAccountsRequestPlatform =
     (typeof ListExternalAccountsRequestPlatform)[keyof typeof ListExternalAccountsRequestPlatform];
