@@ -52,6 +52,7 @@ describe("AppsClient", () => {
                     name: "Shine Time Booking",
                     openapi_path: "/openapi.json",
                     origin: "https://whopappdomain0000001.apps.whop.com",
+                    product_category: "pressure_washing",
                     route: "shine-time-booking-store",
                     skills_path: "/skills",
                     status: "live",
@@ -199,6 +200,7 @@ describe("AppsClient", () => {
             origin: "https://whopappdomain0000001.apps.whop.com",
             per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
+            product_category: "product_category",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -477,6 +479,7 @@ describe("AppsClient", () => {
             origin: "https://whopappdomain0000001.apps.whop.com",
             per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
+            product_category: "product_category",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -712,6 +715,7 @@ describe("AppsClient", () => {
             origin: "https://whopappdomain0000001.apps.whop.com",
             per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
+            product_category: "product_category",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -1186,6 +1190,7 @@ describe("AppsClient", () => {
             origin: "https://whopappdomain0000001.apps.whop.com",
             per_install_schedule: "*/15 * * * *",
             preview_token: "whop_preview_pass_example",
+            product_category: "product_category",
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",

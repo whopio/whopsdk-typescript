@@ -44,6 +44,8 @@ export interface AppListItem {
     openapi_path: string | null;
     /** Full origin URL of the app's proxied domain, for example https://ab1c2d3e4f.apps.whop.com. */
     origin: string | null;
+    /** Product category a business built from this app as a template sells, such as `pressure_washing`, or `null` when none has been set. */
+    product_category: string | null;
     /**
      * Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed.
      * DEPRECATED: Read `domains` instead.

@@ -21,6 +21,8 @@ export interface ListAppsRequest {
     recommended?: boolean;
     /** A search string matched against app names. */
     query?: string;
+    /** Only return apps whose `product_category` is this product category, such as `pressure_washing`. An unknown product category is rejected. */
+    product_category?: string;
     /** The field to sort apps by. Defaults to discoverable_at, showing the most recently published apps first. `template_usage` ranks Whop-verified apps first, then by how many businesses created apps from each app as a template. `template_recent_sales` ranks them by how many of those businesses processed a payment in the last 24 hours, recounted hourly, breaking ties by `template_usage`. */
     order?: Whop.ListAppsRequestOrder;
     /** Sort direction. */
