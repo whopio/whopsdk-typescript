@@ -9,4 +9,6 @@
 export interface RetrievePartnersRequest {
     /** The authenticated partner's user ID, prefixed user_, or me. Other users' profiles are not accessible. */
     id: string;
+    /** Return `payout_rates` for this business, prefixed `biz_`, instead of the caller's own: the business's rate rows, else the platform defaults. Requires company:basic:read on that business, which every team member holds. The rest of the profile stays the caller's. */
+    account_id?: string;
 }

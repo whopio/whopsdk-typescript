@@ -346,14 +346,14 @@ describe("ApiKeysClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    action: "waitlist_entry:cancel",
+                    action: "access_pass:basic:export",
                     allowed_on_api_key: true,
                     allowed_on_app: true,
-                    allowed_on_user: true,
-                    category: "category",
-                    description: "",
+                    allowed_on_user: false,
+                    category: "Products",
+                    description: "Download the account's product list as a CSV.",
                     granted_to_system_roles: ["owner"],
-                    name: "waitlist_entry:cancel",
+                    name: "Export products",
                 },
             ],
             page_info: {
