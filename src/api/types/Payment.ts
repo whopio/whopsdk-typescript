@@ -42,7 +42,7 @@ export interface Payment {
     holds: Whop.PaymentHold[];
     /** Payment ID, prefixed `pay_`. */
     id: string;
-    /** The buyer's IP address at checkout, as identified by Whop's fraud screening. Null when the payment was not screened at checkout, such as a subscription renewal or a charge made without the buyer present. */
+    /** The buyer's IP address at checkout: the one Whop's fraud screening identified, otherwise the one Whop captured from the buyer's browser at checkout. Null when the buyer was not present at checkout, such as a subscription renewal or a charge made without the buyer present. */
     ip_address: string | null;
     /** When the most recent charge attempt ran, or null. */
     last_payment_attempt_at: string | null;
@@ -127,10 +127,14 @@ export interface Payment {
     usd_total: Whop.Money | null;
     /** The buyer. Null when the payment belongs to a company buyer rather than a user. */
     user: Whop.UserSummary | null;
+    /** The buyer's browser user agent at checkout. Null when the buyer was not present at checkout, such as a subscription renewal, or without the member:basic:read permission. */
+    user_agent: string | null;
     /** The variant that was charged, prefixed `plan_`. */
     variant_id: string | null;
     /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none. */
     verification_checks: Whop.PaymentVerificationChecks | null;
     /** True when the payment can be voided or canceled. The request is rejected if the payment is no longer eligible — see `POST /payments/{id}/void`. */
     voidable: boolean;
+    /** The Whop pixel's visitor ID for the buyer's browser at checkout, prefixed `wuid_`. Null when the checkout page had no Whop pixel, when the buyer was not present at checkout, or without the member:basic:read permission. */
+    wuid: string | null;
 }
