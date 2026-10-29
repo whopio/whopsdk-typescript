@@ -72,22 +72,12 @@ export interface Ad {
     /** The number of impressions. */
     impressions: number;
     issues: Whop.AdPlatformIssue[];
-    /** The instant lead form shown when someone taps this ad. `null` when the ad group's conversion_location is not an instant-form destination. */
-    lead_form?: (Whop.AdLeadForm | null) | undefined;
-    /** The ad platform's ID for the instant form the ad uses. Set when the ad references an existing form via `lead_form_id`, or once a form built from `lead_form` has been created on the platform. */
-    lead_form_id?: (string | null) | undefined;
     /** USD value attributed to lead events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
     lead_value: number;
     /** Whop pixel-attributed leads, last-click. */
     leads: number;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
-    /** Welcome message for click-to-message ads, shown when the conversation opens. `null` when the ad has none. */
-    messaging_config?: (Whop.AdMessagingConfig | null) | undefined;
-    /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */
-    multi_advertiser_ads?: boolean | undefined;
-    /** The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null` elsewhere and for non-carousel ads. */
-    music?: (Whop.AdMusic | null) | undefined;
     /** The ad platform this ad runs on. */
     platform: Ad.Platform;
     /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
