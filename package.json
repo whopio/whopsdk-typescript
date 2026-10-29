@@ -1166,17 +1166,6 @@
             },
             "default": "./dist/cjs/api/resources/bounties/resources/submissions/exports.js"
         },
-        "./externalAccounts/partners": {
-            "import": {
-                "types": "./dist/esm/api/resources/externalAccounts/resources/partners/exports.d.mts",
-                "default": "./dist/esm/api/resources/externalAccounts/resources/partners/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/externalAccounts/resources/partners/exports.d.ts",
-                "default": "./dist/cjs/api/resources/externalAccounts/resources/partners/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/externalAccounts/resources/partners/exports.js"
-        },
         "./financialReports/breakdown": {
             "import": {
                 "types": "./dist/esm/api/resources/financialReports/resources/breakdown/exports.d.mts",

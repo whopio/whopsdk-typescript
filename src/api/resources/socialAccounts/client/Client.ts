@@ -84,7 +84,7 @@ export class SocialAccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -174,7 +174,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -252,7 +252,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -333,7 +333,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -376,273 +376,6 @@ export class SocialAccountsClient {
     /**
      * @deprecated
      *
-     * Deprecated compatibility endpoint. List partners with `GET /external_accounts/{external_account_id}/partners` instead.
-     *
-     * @param {Whop.PartnersSocialAccountsRequest} request
-     * @param {SocialAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.socialAccounts.partners({
-     *         id: "id"
-     *     })
-     */
-    public async partners(
-        request: Whop.PartnersSocialAccountsRequest,
-        requestOptions?: SocialAccountsClient.RequestOptions,
-    ): Promise<core.Page<Whop.SocialAccount, Whop.PartnersSocialAccountsResponse>> {
-        const list = core.HttpResponsePromise.interceptFunction(
-            async (
-                request: Whop.PartnersSocialAccountsRequest,
-            ): Promise<core.WithRawResponse<Whop.PartnersSocialAccountsResponse>> => {
-                const { id, account_id: accountId, first, after } = request;
-                const _queryParams: Record<string, unknown> = {
-                    account_id: accountId,
-                    first,
-                    after,
-                };
-                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-                    _authRequest.headers,
-                    this._options?.headers,
-                    mergeOnlyDefinedHeaders({
-                        "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
-                        "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-                    }),
-                    requestOptions?.headers,
-                );
-                const _response = await core.fetcher({
-                    url: core.url.join(
-                        (await core.Supplier.get(this._options.baseUrl)) ??
-                            (
-                                (await core.Supplier.get(this._options.environment)) ??
-                                environments.WhopEnvironment.Production
-                            ).api,
-                        `social_accounts/${core.url.encodePathParam(id)}/partners`,
-                    ),
-                    method: "GET",
-                    headers: _headers,
-                    queryString: core.url
-                        .queryBuilder()
-                        .addMany(_queryParams)
-                        .mergeAdditional(requestOptions?.queryParams)
-                        .build(),
-                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                    fetchFn: this._options?.fetch,
-                    logging: this._options.logging,
-                });
-                if (_response.ok) {
-                    return {
-                        data: _response.body as Whop.PartnersSocialAccountsResponse,
-                        rawResponse: _response.rawResponse,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-                }
-                return handleNonStatusCodeError(
-                    _response.error,
-                    _response.rawResponse,
-                    "GET",
-                    "/social_accounts/{id}/partners",
-                );
-            },
-        );
-        const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.SocialAccount, Whop.PartnersSocialAccountsResponse>({
-            response: dataWithRawResponse.data,
-            rawResponse: dataWithRawResponse.rawResponse,
-            hasNextPage: (response) =>
-                response?.page_info.end_cursor != null &&
-                !(typeof response?.page_info.end_cursor === "string" && response?.page_info.end_cursor === ""),
-            getItems: (response) => response?.data ?? [],
-            loadPage: (response) => {
-                return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
-            },
-        });
-    }
-
-    /**
-     * @deprecated
-     *
-     * Deprecated compatibility endpoint. Add partners with `POST /external_accounts/{external_account_id}/partners` instead.
-     *
-     * @param {Whop.AddPartnerSocialAccountsRequest} request
-     * @param {SocialAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.ConflictError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.socialAccounts.addPartner({
-     *         id: "id",
-     *         username: "@luverahealth"
-     *     })
-     */
-    public addPartner(
-        request: Whop.AddPartnerSocialAccountsRequest,
-        requestOptions?: SocialAccountsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.SocialAccount> {
-        return core.HttpResponsePromise.fromPromise(this.__addPartner(request, requestOptions));
-    }
-
-    private async __addPartner(
-        request: Whop.AddPartnerSocialAccountsRequest,
-        requestOptions?: SocialAccountsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.SocialAccount>> {
-        const { id, ..._body } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                `social_accounts/${core.url.encodePathParam(id)}/partners`,
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.SocialAccount, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 409:
-                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/social_accounts/{id}/partners",
-        );
-    }
-
-    /**
-     * @deprecated
-     *
-     * Deprecated compatibility endpoint. Remove partners with `DELETE /external_accounts/{external_account_id}/partners/{id}` instead.
-     *
-     * @param {Whop.RemovePartnerSocialAccountsRequest} request
-     * @param {SocialAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.socialAccounts.removePartner({
-     *         id: "id",
-     *         partner_id: "partner_id"
-     *     })
-     */
-    public removePartner(
-        request: Whop.RemovePartnerSocialAccountsRequest,
-        requestOptions?: SocialAccountsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.RemovePartnerSocialAccountsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__removePartner(request, requestOptions));
-    }
-
-    private async __removePartner(
-        request: Whop.RemovePartnerSocialAccountsRequest,
-        requestOptions?: SocialAccountsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.RemovePartnerSocialAccountsResponse>> {
-        const { id, partner_id: partnerId, account_id: accountId } = request;
-        const _queryParams: Record<string, unknown> = {
-            account_id: accountId,
-        };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                `social_accounts/${core.url.encodePathParam(id)}/partners/${core.url.encodePathParam(partnerId)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as Whop.RemovePartnerSocialAccountsResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.WhopError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "DELETE",
-            "/social_accounts/{id}/partners/{partner_id}",
-        );
-    }
-
-    /**
-     * @deprecated
-     *
      * Deprecated compatibility endpoint. Refresh external accounts with `POST /external_accounts/{id}/refresh` instead.
      *
      * @param {Whop.RefreshSocialAccountsRequest} request
@@ -674,7 +407,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
