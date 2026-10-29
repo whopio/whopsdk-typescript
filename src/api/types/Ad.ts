@@ -61,9 +61,6 @@ export interface Ad {
     /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: Ad.DeliveryStatus;
     descriptions: Whop.AdText[];
-    /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
-    existing_post_id: string | null;
-    external_accounts: Whop.AdEntityReference[];
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
     headlines: Whop.AdText[];
@@ -78,14 +75,8 @@ export interface Ad {
     leads: number;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
-    /** The ad platform this ad runs on. */
-    platform: Ad.Platform;
-    /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
+    /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post. `null` until the network has created the post. */
     post_id: string | null;
-    /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
-    post_source: Ad.PostSource | null;
-    /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
-    post_thumbnail_url: string | null;
     primary_texts: Whop.AdText[];
     /** USD value of pixel-attributed purchases. */
     purchase_value: number;
@@ -117,8 +108,6 @@ export interface Ad {
     submitted_applications: number;
     /** Display title of the ad. */
     title: string | null;
-    /** The languages a Meta ad runs in besides its own. Each viewer sees the version for their language, or the ad's own copy. `null` when the ad runs in one language. */
-    translations?: (Whop.AdTranslations | null) | undefined;
     /** Unique clicks divided by impressions, between 0 and 1. */
     unique_click_through_rate: number | null;
     /** People who clicked, reported by the Whop pixel, counted once per person. */
@@ -191,19 +180,6 @@ export namespace Ad {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-    /** The ad platform this ad runs on. */
-    export const Platform = {
-        Meta: "meta",
-        Tiktok: "tiktok",
-        Google: "google",
-    } as const;
-    export type Platform = (typeof Platform)[keyof typeof Platform];
-    /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
-    export const PostSource = {
-        Facebook: "facebook",
-        Instagram: "instagram",
-    } as const;
-    export type PostSource = (typeof PostSource)[keyof typeof PostSource];
     /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
     export const ResultEvent = {
         Purchase: "purchase",

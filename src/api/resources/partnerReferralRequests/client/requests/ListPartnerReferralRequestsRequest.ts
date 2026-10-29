@@ -17,6 +17,12 @@ export interface ListPartnerReferralRequestsRequest {
     status?: Whop.ListPartnerReferralRequestsRequestStatus;
     /** Only requests initiated in this way. */
     request_type?: Whop.ListPartnerReferralRequestsRequestRequestType;
+    /** Only requests created for this team membership, prefixed `ausr_`. */
+    authorized_user_id?: string;
+    /** Only requests that credit this member record, prefixed `mber_`. A request created for a team membership also credits its holder's member record. */
+    member_id?: string;
+    /** When true, only personal requests, created for neither a team membership nor a member record. When false, only requests created for one. */
+    personal?: boolean;
     /** Field used to sort requests. */
     order?: Whop.ListPartnerReferralRequestsRequestOrder;
     /** Sort direction. */

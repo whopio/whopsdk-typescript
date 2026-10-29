@@ -70,7 +70,6 @@ describe("AdCampaignsClient", () => {
                     leads: 132,
                     link_clicks: 4400,
                     objective: "awareness",
-                    platform: "meta",
                     purchase_value: 7920,
                     purchases: 44,
                     reach: 0,
@@ -167,11 +166,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            objective: "awareness",
-            platform: "whop",
-            title: "Now hiring mobile detailers — Austin",
-        };
+        const rawRequestBody = { objective: "traffic", title: "Now hiring mobile detailers — Austin" };
         const rawResponseBody = {
             added_to_cart_value: 12650,
             added_to_carts: 165,
@@ -225,7 +220,6 @@ describe("AdCampaignsClient", () => {
             leads: 132,
             link_clicks: 4400,
             objective: "awareness",
-            platform: "meta",
             purchase_value: 7920,
             purchases: 44,
             reach: 0,
@@ -260,8 +254,7 @@ describe("AdCampaignsClient", () => {
             .build();
 
         const response = await client.adCampaigns.create({
-            objective: "awareness",
-            platform: "whop",
+            objective: "traffic",
             title: "Now hiring mobile detailers \u2014 Austin",
         });
         expect(response).toEqual(rawResponseBody);
@@ -276,7 +269,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "awareness", platform: "whop", title: "title" };
+        const rawRequestBody = { objective: "traffic", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -290,8 +283,7 @@ describe("AdCampaignsClient", () => {
 
         await expect(async () => {
             return await client.adCampaigns.create({
-                objective: "awareness",
-                platform: "whop",
+                objective: "traffic",
                 title: "title",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -306,7 +298,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "awareness", platform: "whop", title: "title" };
+        const rawRequestBody = { objective: "traffic", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -320,8 +312,7 @@ describe("AdCampaignsClient", () => {
 
         await expect(async () => {
             return await client.adCampaigns.create({
-                objective: "awareness",
-                platform: "whop",
+                objective: "traffic",
                 title: "title",
             });
         }).rejects.toThrow(Whop.ConflictError);
@@ -390,7 +381,6 @@ describe("AdCampaignsClient", () => {
             leads: 132,
             link_clicks: 4400,
             objective: "awareness",
-            platform: "meta",
             purchase_value: 7920,
             purchases: 44,
             reach: 0,
@@ -560,7 +550,6 @@ describe("AdCampaignsClient", () => {
             leads: 132,
             link_clicks: 4400,
             objective: "awareness",
-            platform: "meta",
             purchase_value: 7920,
             purchases: 44,
             reach: 0,
@@ -665,7 +654,6 @@ describe("AdCampaignsClient", () => {
                     leads: 132,
                     link_clicks: 4400,
                     objective: "awareness",
-                    platform: "meta",
                     purchase_value: 7920,
                     purchases: 44,
                     reach: 0,
@@ -854,7 +842,6 @@ describe("AdCampaignsClient", () => {
             leads: 132,
             link_clicks: 4400,
             objective: "awareness",
-            platform: "meta",
             purchase_value: 7920,
             purchases: 44,
             reach: 0,
@@ -983,7 +970,6 @@ describe("AdCampaignsClient", () => {
             leads: 132,
             link_clicks: 4400,
             objective: "awareness",
-            platform: "meta",
             purchase_value: 7920,
             purchases: 44,
             reach: 0,

@@ -40,28 +40,17 @@ export namespace PostAdUpdatedPayload {
         /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;
         descriptions: Whop.AdText[];
-        /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
-        existing_post_id: string | null;
-        external_accounts: Whop.AdEntityReference[];
         headlines: Whop.AdText[];
         /** Unique identifier for the ad, prefixed `ad_`. */
         id: string;
         issues: Whop.AdPlatformIssue[];
-        /** The ad platform this ad runs on. */
-        platform: Data.Platform;
-        /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
+        /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post. `null` until the network has created the post. */
         post_id: string | null;
-        /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
-        post_source: Data.PostSource | null;
-        /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
-        post_thumbnail_url: string | null;
         primary_texts: Whop.AdText[];
         /** Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and `rejected` come from ad review. */
         status: Data.Status;
         /** Display title of the ad. */
         title: string | null;
-        /** The languages a Meta ad runs in besides its own. Each viewer sees the version for their language, or the ad's own copy. `null` when the ad runs in one language. */
-        translations?: (Whop.AdTranslations | null) | undefined;
         /** When the ad was last updated, as an ISO 8601 timestamp. */
         updated_at: string;
         /** The URL the ad links to, without its query string. Parameters belong in `url_parameters`; any you send on `url` are moved there. */
@@ -126,19 +115,6 @@ export namespace PostAdUpdatedPayload {
             Active: "active",
         } as const;
         export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-        /** The ad platform this ad runs on. */
-        export const Platform = {
-            Meta: "meta",
-            Tiktok: "tiktok",
-            Google: "google",
-        } as const;
-        export type Platform = (typeof Platform)[keyof typeof Platform];
-        /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
-        export const PostSource = {
-            Facebook: "facebook",
-            Instagram: "instagram",
-        } as const;
-        export type PostSource = (typeof PostSource)[keyof typeof PostSource];
         /** Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and `rejected` come from ad review. */
         export const Status = {
             Active: "active",

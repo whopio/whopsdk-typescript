@@ -53,10 +53,8 @@ export namespace PostAdCampaignUpdatedPayload {
         /** Unique identifier for the ad campaign, prefixed `adcamp_`. */
         id: string;
         issues: Whop.AdPlatformIssue[];
-        /** The goal the campaign optimizes toward. */
+        /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
         objective: Data.Objective | null;
-        /** The ad network the campaign runs on. */
-        platform: Data.Platform;
         special_ad_categories: Data.SpecialAdCategories.Item[];
         /** Google only: when the campaign starts delivering, as an ISO 8601 timestamp. `null` starts it as soon as it launches. */
         starts_at?: (string | null) | undefined;
@@ -113,7 +111,7 @@ export namespace PostAdCampaignUpdatedPayload {
             Active: "active",
         } as const;
         export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-        /** The goal the campaign optimizes toward. */
+        /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
         export const Objective = {
             Awareness: "awareness",
             Traffic: "traffic",
@@ -122,13 +120,6 @@ export namespace PostAdCampaignUpdatedPayload {
             Sales: "sales",
         } as const;
         export type Objective = (typeof Objective)[keyof typeof Objective];
-        /** The ad network the campaign runs on. */
-        export const Platform = {
-            Meta: "meta",
-            Tiktok: "tiktok",
-            Google: "google",
-        } as const;
-        export type Platform = (typeof Platform)[keyof typeof Platform];
         export type SpecialAdCategories = SpecialAdCategories.Item[];
 
         export namespace SpecialAdCategories {
