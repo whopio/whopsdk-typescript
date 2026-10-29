@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveAuthorizedUsersRequest {
-    /** The unique identifier of the authorized user to retrieve. */
+    /** The unique identifier of the authorized user to retrieve. Team member IDs may start with `ausr_` or `mber_`; treat them as opaque. */
     id: string;
 }
