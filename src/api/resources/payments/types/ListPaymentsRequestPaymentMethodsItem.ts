@@ -100,6 +100,7 @@ export const ListPaymentsRequestPaymentMethodsItem = {
     IdBankTransfer: "id_bank_transfer",
     Ideal: "ideal",
     Interac: "interac",
+    InternationalBankWire: "international_bank_wire",
     KakaoPay: "kakao_pay",
     Klarna: "klarna",
     KlarnaPayNow: "klarna_pay_now",
