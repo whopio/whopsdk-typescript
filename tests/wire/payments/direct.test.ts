@@ -168,6 +168,7 @@ describe("DirectClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            user_agent: "user_agent",
             variant_id: "plan_xxxxxxxxxxxxxx",
             verification_checks: {
                 address_line1: "PASS",
@@ -178,6 +179,7 @@ describe("DirectClient", () => {
                 zip_code: "PASS",
             },
             voidable: false,
+            wuid: "wuid",
         };
 
         server
