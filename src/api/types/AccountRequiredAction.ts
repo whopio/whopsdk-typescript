@@ -26,6 +26,7 @@ export namespace AccountRequiredAction {
         SubmitInformationRequest: "submit_information_request",
         UpdateAutomaticWithdrawalMethod: "update_automatic_withdrawal_method",
         ReauthorizePayoutMethods: "reauthorize_payout_methods",
+        UpdatePayoutMethod: "update_payout_method",
         UpdatePayoutProfile: "update_payout_profile",
         CardUsageReview: "card_usage_review",
         VerifyIdentity: "verify_identity",
