@@ -7,17 +7,17 @@ export interface TeamMember {
     account_id: string;
     /** Custom role assigned to this member, or `null` when the member has a system role. */
     authorized_role: Whop.TeamMemberAuthorizedRole | null;
-    /** When the member joined or the invite was sent, as an ISO 8601 timestamp. */
+    /** When the member joined the team or the invite was sent, as an ISO 8601 timestamp. A member who was a customer first keeps the date they were given their role. */
     created_at: string;
     /** How many team members report directly to this member. `null` for invites. */
     direct_reports_count: number | null;
     /** The member's email address. For an invite sent to an email with no Whop account yet, the invited address; for accepted members and invites to an existing Whop account, `null` unless the caller holds the `company:authorized_user:email:read` scope. */
     email: string | null;
-    /** Team member ID — `ausr_` for accepted members, `mber_` for members whose role is held on their member record, `ausri_` for pending invites. */
+    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_`. Treat it as opaque: both member prefixes are accepted wherever a team member ID is. */
     id: string;
     /** Whether this member is an agent (app-controlled account) rather than a human team member. Always `false` for invites. */
     is_agent: boolean;
-    /** The team member this member reports to, prefixed `ausr_`, or `mber_` when that manager's role is held on their member record. `null` when the member reports to the business directly, and for invites. */
+    /** The ID of the team member this member reports to, starting with `ausr_` or `mber_`; treat it as opaque. `null` when the member reports to the business directly, and for invites. */
     reports_to_id: string | null;
     /** The member's role on the account. `custom` means a bespoke dashboard-managed role; the API can read but not grant it. */
     role: TeamMember.Role;
