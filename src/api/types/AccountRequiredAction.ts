@@ -34,6 +34,7 @@ export namespace AccountRequiredAction {
         SignFormationDocuments: "sign_formation_documents",
         ConfigureTaxRemitter: "configure_tax_remitter",
         AddVatRegistration: "add_vat_registration",
+        ConfirmTaxDetails: "confirm_tax_details",
         AcceptPayoutTerms: "accept_payout_terms",
         EnableTwoFactorAuthentication: "enable_two_factor_authentication",
         RespondToAbuseReport: "respond_to_abuse_report",

@@ -5,7 +5,7 @@ export interface AccountTaxIdentifier {
     id: string;
     /** Tax ID type. */
     tax_id_type: AccountTaxIdentifier.TaxIdType;
-    /** Tax ID value. */
+    /** Tax ID value, for example `DE123456789`. See the [tax IDs guide](/developer/guides/tax-ids). */
     tax_id_value: string;
 }
 

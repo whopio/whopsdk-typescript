@@ -81,7 +81,7 @@ export interface UpdateAccountsRequest {
     target_audience?: string | null;
     /** US state codes (50 states plus `DC`) where the account collects tax. Replaces the full set on update. Only settable when `tax_remitted_by` is `self`. */
     tax_collection_enabled_states?: UpdateAccountsRequest.TaxCollectionEnabledStates.Item[];
-    /** Account tax/VAT registrations to add or update. When `tax_remitted_by` is `self`, tax is calculated and collected only in the countries where the account holds a registration. */
+    /** Tax IDs to add to the account, or to replace when the account already has one of that type. When `tax_remitted_by` is `self`, tax outside the US is calculated and collected only in the countries where the account has a tax ID. US collection follows `tax_collection_enabled_states`. */
     tax_identifiers?: UpdateAccountsRequest.TaxIdentifiers.Item[];
     /** Determines whether Whop or the account calculates and remits tax. The account must provide a supported-country business address when it self-remits. */
     tax_remitted_by?: UpdateAccountsRequest.TaxRemittedBy;
@@ -350,14 +350,14 @@ export namespace UpdateAccountsRequest {
 
     export namespace TaxIdentifiers {
         export interface Item {
-            /** Tax ID type, for example `eu_vat`, `gb_vat`, or `us_ein`. */
+            /** Tax ID type, for example `eu_vat`, `gb_vat`, or `us_ein`. See the [tax IDs guide](/developer/guides/tax-ids) for an example of each type. */
             tax_id_type: Item.TaxIdType;
-            /** Tax ID value, for example `DE123456789`. */
+            /** Tax ID value, for example `DE123456789`. An `eu_vat` number must start with its two-letter country code (Greece uses `EL`); spaces, dots, and dashes are removed and letters are uppercased. See the [tax IDs guide](/developer/guides/tax-ids). */
             tax_id_value: string;
         }
 
         export namespace Item {
-            /** Tax ID type, for example `eu_vat`, `gb_vat`, or `us_ein`. */
+            /** Tax ID type, for example `eu_vat`, `gb_vat`, or `us_ein`. See the [tax IDs guide](/developer/guides/tax-ids) for an example of each type. */
             export const TaxIdType = {
                 AdNrt: "ad_nrt",
                 AoTin: "ao_tin",

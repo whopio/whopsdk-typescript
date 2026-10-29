@@ -81,14 +81,14 @@ export namespace CreatePaymentQuotesRequest {
 
     export namespace TaxIds {
         export interface Item {
-            /** The registration type. */
+            /** The registration type. See the [tax IDs guide](/developer/guides/tax-ids) for an example of each type. */
             type: Item.Type;
-            /** The registration number as issued. */
+            /** The registration number as issued. An `eu_vat` number must start with its two-letter country code (Greece uses `EL`). See the [tax IDs guide](/developer/guides/tax-ids). */
             value: string;
         }
 
         export namespace Item {
-            /** The registration type. */
+            /** The registration type. See the [tax IDs guide](/developer/guides/tax-ids) for an example of each type. */
             export const Type = {
                 AdNrt: "ad_nrt",
                 AoTin: "ao_tin",
