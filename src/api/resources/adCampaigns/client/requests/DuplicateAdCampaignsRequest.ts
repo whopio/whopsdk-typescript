@@ -11,6 +11,4 @@ export interface DuplicateAdCampaignsRequest {
     id: string;
     /** Number of copies to create (1-10). Defaults to 1. */
     count?: number;
-    /** Whether the copied ads keep the original posts' engagement (likes, comments, shares). Defaults to false. */
-    preserve_engagement?: boolean;
 }

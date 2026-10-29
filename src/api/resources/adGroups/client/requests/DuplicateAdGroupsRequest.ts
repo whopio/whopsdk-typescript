@@ -11,8 +11,6 @@ export interface DuplicateAdGroupsRequest {
     id: string;
     /** Number of copies to create (1-10). Defaults to 1. */
     count?: number;
-    /** Whether the copied ads keep the original posts' engagement (likes, comments, shares). Defaults to false. */
-    preserve_engagement?: boolean;
     /** Campaign to duplicate into. Must belong to the same account and be compatible with the ad group's targeting and goals. Defaults to the ad group's own campaign. */
     target_ad_campaign_id?: string;
 }

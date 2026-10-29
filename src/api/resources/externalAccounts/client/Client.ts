@@ -9,9 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
-import { LeadFormsClient } from "../resources/leadForms/client/Client.js";
 import { PartnersClient } from "../resources/partners/client/Client.js";
-import { PostsClient } from "../resources/posts/client/Client.js";
 
 export declare namespace ExternalAccountsClient {
     export type Options = BaseClientOptions;
@@ -20,15 +18,13 @@ export declare namespace ExternalAccountsClient {
 }
 
 /**
- * An External Account represents an account on another platform linked to a Whop account or user, such as a Facebook page, Instagram account, TikTok account, or Klaviyo account. You connect it through OAuth or an API key, or Whop creates it for you. A connected social profile lets Whop run [ads](/api-reference/beta/ads/ad) under that profile's identity and promote its existing posts. External account IDs are prefixed `sacc_`.
+ * An External Account represents an account on another platform linked to a Whop account or user, such as a Facebook page, Instagram account, TikTok account, or Klaviyo account. You connect it through OAuth or an API key, or Whop creates it for you. External account IDs are prefixed `sacc_`.
  *
- * Use the External Accounts API to list connected accounts, [connect a profile through OAuth](/api-reference/beta/external-accounts/connect-an-external-account), [create a Whop-managed Facebook page or TikTok account, or connect a Klaviyo account with its API key](/api-reference/beta/external-accounts/create-an-external-account), disconnect an external account, list a connected profile's posts or a Facebook page's lead forms, and manage the creators an Instagram account runs partnership ads with.
+ * Use the External Accounts API to list connected accounts, [connect a profile through OAuth](/api-reference/beta/external-accounts/connect-an-external-account), [create a Whop-managed Facebook page or TikTok account, or connect a Klaviyo account with its API key](/api-reference/beta/external-accounts/create-an-external-account), disconnect an external account, and manage the creators an Instagram account runs partnership ads with.
  */
 export class ExternalAccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ExternalAccountsClient.Options>;
     protected _partners: PartnersClient | undefined;
-    protected _leadForms: LeadFormsClient | undefined;
-    protected _posts: PostsClient | undefined;
 
     constructor(options: ExternalAccountsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -36,14 +32,6 @@ export class ExternalAccountsClient {
 
     public get partners(): PartnersClient {
         return (this._partners ??= new PartnersClient(this._options));
-    }
-
-    public get leadForms(): LeadFormsClient {
-        return (this._leadForms ??= new LeadFormsClient(this._options));
-    }
-
-    public get posts(): PostsClient {
-        return (this._posts ??= new PostsClient(this._options));
     }
 
     /**
@@ -102,7 +90,7 @@ export class ExternalAccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -200,7 +188,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -287,7 +275,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -375,7 +363,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -465,7 +453,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

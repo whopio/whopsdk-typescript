@@ -1177,28 +1177,6 @@
             },
             "default": "./dist/cjs/api/resources/externalAccounts/resources/partners/exports.js"
         },
-        "./externalAccounts/leadForms": {
-            "import": {
-                "types": "./dist/esm/api/resources/externalAccounts/resources/leadForms/exports.d.mts",
-                "default": "./dist/esm/api/resources/externalAccounts/resources/leadForms/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/externalAccounts/resources/leadForms/exports.d.ts",
-                "default": "./dist/cjs/api/resources/externalAccounts/resources/leadForms/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/externalAccounts/resources/leadForms/exports.js"
-        },
-        "./externalAccounts/posts": {
-            "import": {
-                "types": "./dist/esm/api/resources/externalAccounts/resources/posts/exports.d.mts",
-                "default": "./dist/esm/api/resources/externalAccounts/resources/posts/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/externalAccounts/resources/posts/exports.d.ts",
-                "default": "./dist/cjs/api/resources/externalAccounts/resources/posts/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/externalAccounts/resources/posts/exports.js"
-        },
         "./financialReports/breakdown": {
             "import": {
                 "types": "./dist/esm/api/resources/financialReports/resources/breakdown/exports.d.mts",
