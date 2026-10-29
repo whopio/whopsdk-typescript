@@ -1,4 +1,5 @@
 export * from "./ConnectSocialAccountsResponse.js";
+export * from "./CreateSocialAccountsRequestBody.js";
 export * from "./DeleteSocialAccountsResponse.js";
 export * from "./LeadFormsSocialAccountsResponse.js";
 export * from "./ListSocialAccountsRequestDirection.js";

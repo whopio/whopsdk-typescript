@@ -235,6 +235,34 @@ describe("ExternalAccountsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("create (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { platform: "facebook" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/external_accounts")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(503)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.externalAccounts.create({
+                platform: "facebook",
+            });
+        }).rejects.toThrow(Whop.ServiceUnavailableError);
+    });
+
     test("connect (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

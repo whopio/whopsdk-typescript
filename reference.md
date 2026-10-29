@@ -14515,7 +14515,7 @@ await client.externalAccounts.create({
 <dl>
 <dd>
 
-**request:** `Whop.CreateExternalAccountsRequest` 
+**request:** `Whop.CreateExternalAccountsRequestBody` 
     
 </dd>
 </dl>
@@ -27071,7 +27071,7 @@ await client.socialAccounts.create({
 <dl>
 <dd>
 
-**request:** `Whop.CreateSocialAccountsRequest` 
+**request:** `Whop.CreateSocialAccountsRequestBody` 
     
 </dd>
 </dl>

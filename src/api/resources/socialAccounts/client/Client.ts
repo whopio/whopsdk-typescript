@@ -146,7 +146,7 @@ export class SocialAccountsClient {
      *
      * Deprecated compatibility endpoint. Create external accounts with `POST /external_accounts` instead.
      *
-     * @param {Whop.CreateSocialAccountsRequest} request
+     * @param {Whop.CreateSocialAccountsRequestBody} request
      * @param {SocialAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.ConflictError}
@@ -159,14 +159,14 @@ export class SocialAccountsClient {
      *     })
      */
     public create(
-        request: Whop.CreateSocialAccountsRequest,
+        request: Whop.CreateSocialAccountsRequestBody,
         requestOptions?: SocialAccountsClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.SocialAccount> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: Whop.CreateSocialAccountsRequest,
+        request: Whop.CreateSocialAccountsRequestBody,
         requestOptions?: SocialAccountsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.SocialAccount>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
