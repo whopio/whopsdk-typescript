@@ -571,6 +571,92 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
+        const rawRequestBody = { current_period_end: "2027-01-15T00:00:00Z" };
+        const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
+            affiliate: {
+                applies_to_payments: "first_payment",
+                commission_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                commission_percentage: 1.1,
+                commission_source: "custom",
+                commission_type: "flat_fee",
+                enabled: true,
+                id: "id",
+                user_id: "user_id",
+            },
+            billing_period_days: 30,
+            cancel_at_period_end: true,
+            cancel_option: "too_expensive",
+            canceled_at: "2026-01-01T12:00:00.000Z",
+            cancellation_reason: "Too expensive",
+            collection_method: "charge_automatically",
+            created_at: "2026-01-01T12:00:00.000Z",
+            current_period_end: "2026-01-01T12:00:00.000Z",
+            current_period_start: "2026-01-01T12:00:00.000Z",
+            expires_at: "2026-01-01T12:00:00.000Z",
+            feedback_option: { label: "The wash club costs more than I can spend" },
+            id: "mem_xxxxxxxxxxxxxx",
+            initial_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            license_key: "WHOP-XXXX-XXXX-XXXX",
+            manage_url: "https://whop.com/billing/manage/mber_xxxxxxxxxxxxxx",
+            member: {
+                access_level: "no_access",
+                last_accessed_at: "2026-01-01T12:00:00.000Z",
+                position: 1767268800000,
+            },
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { key: "value" },
+            most_recent_action: "canceled_on",
+            most_recent_action_at: "2026-01-01T12:00:00.000Z",
+            phone_number: "+xxxxxxxxxxx",
+            product: {
+                id: "prod_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                title: "Ceramic Coating Package",
+            },
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
+            renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            split_pay_current_payments: 1,
+            split_pay_required_payments: 1,
+            status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+            variant_id: "plan_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/memberships/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.memberships.update({
+            id: "id",
+            current_period_end: "2027-01-15T00:00:00Z",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("update (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
@@ -590,7 +676,7 @@ describe("MembershipsClient", () => {
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("update (3)", async () => {
+    test("update (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
