@@ -9,7 +9,6 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
-import { PartnersClient } from "../resources/partners/client/Client.js";
 
 export declare namespace ExternalAccountsClient {
     export type Options = BaseClientOptions;
@@ -20,18 +19,13 @@ export declare namespace ExternalAccountsClient {
 /**
  * An External Account represents an account on another platform linked to a Whop account or user, such as a Facebook page, Instagram account, TikTok account, or Klaviyo account. You connect it through OAuth or an API key, or Whop creates it for you. External account IDs are prefixed `sacc_`.
  *
- * Use the External Accounts API to list connected accounts, [connect a profile through OAuth](/api-reference/beta/external-accounts/connect-an-external-account), [create a Whop-managed Facebook page or TikTok account, or connect a Klaviyo account with its API key](/api-reference/beta/external-accounts/create-an-external-account), disconnect an external account, and manage the creators an Instagram account runs partnership ads with.
+ * Use the External Accounts API to list connected accounts, [connect a profile through OAuth](/api-reference/beta/external-accounts/connect-an-external-account), [create a Whop-managed Facebook page or TikTok account, or connect a Klaviyo account with its API key](/api-reference/beta/external-accounts/create-an-external-account), and disconnect an external account.
  */
 export class ExternalAccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ExternalAccountsClient.Options>;
-    protected _partners: PartnersClient | undefined;
 
     constructor(options: ExternalAccountsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
-    }
-
-    public get partners(): PartnersClient {
-        return (this._partners ??= new PartnersClient(this._options));
     }
 
     /**
@@ -90,7 +84,7 @@ export class ExternalAccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -188,7 +182,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -275,7 +269,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -363,7 +357,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -453,7 +447,7 @@ export class ExternalAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
