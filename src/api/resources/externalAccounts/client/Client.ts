@@ -169,12 +169,13 @@ export class ExternalAccountsClient {
     /**
      * Creates or returns a Whop-managed Facebook page or TikTok account for an account, or connects the account's existing Klaviyo account with a private API key.
      *
-     * @param {Whop.CreateExternalAccountsRequest} request
+     * @param {Whop.CreateExternalAccountsRequestBody} request
      * @param {ExternalAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -184,14 +185,14 @@ export class ExternalAccountsClient {
      *     })
      */
     public create(
-        request: Whop.CreateExternalAccountsRequest,
+        request: Whop.CreateExternalAccountsRequestBody,
         requestOptions?: ExternalAccountsClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.ExternalAccount> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: Whop.CreateExternalAccountsRequest,
+        request: Whop.CreateExternalAccountsRequestBody,
         requestOptions?: ExternalAccountsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ExternalAccount>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -235,6 +236,11 @@ export class ExternalAccountsClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

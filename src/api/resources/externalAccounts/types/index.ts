@@ -1,4 +1,5 @@
 export * from "./ConnectExternalAccountsResponse.js";
+export * from "./CreateExternalAccountsRequestBody.js";
 export * from "./DeleteExternalAccountsResponse.js";
 export * from "./ListExternalAccountsRequestDirection.js";
 export * from "./ListExternalAccountsRequestOrder.js";
