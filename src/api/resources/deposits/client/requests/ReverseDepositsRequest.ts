@@ -7,7 +7,7 @@
  *     }
  */
 export interface ReverseDepositsRequest {
-    /** The ID of the deposit to reverse: a bank deposit, prefixed `vbt_`, or a card deposit's payment, prefixed `pay_`. */
+    /** A bank deposit ID, prefixed `vbt_`, or a card deposit's payment ID, prefixed `pay_`. */
     id: string;
     /** The business that received the deposit, prefixed `biz_`. Pass this or `user_id`. */
     account_id?: string;
