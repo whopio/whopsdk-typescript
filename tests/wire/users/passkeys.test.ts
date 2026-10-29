@@ -121,6 +121,7 @@ describe("PasskeysClient", () => {
             client_data_json: "Y2xpZW50LWRhdGE",
             credential_id: "bmV3LWNyZWRlbnRpYWw",
             nickname: "Work laptop",
+            user_handle: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         };
         const rawResponseBody = {
             created_at: "2026-01-01T12:00:00.000Z",
@@ -144,6 +145,7 @@ describe("PasskeysClient", () => {
             client_data_json: "Y2xpZW50LWRhdGE",
             credential_id: "bmV3LWNyZWRlbnRpYWw",
             nickname: "Work laptop",
+            user_handle: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -162,6 +164,7 @@ describe("PasskeysClient", () => {
             client_data_json: "client_data_json",
             credential_id: "credential_id",
             nickname: "nickname",
+            user_handle: "user_handle",
         };
         const rawResponseBody = { key: "value" };
 
@@ -180,6 +183,7 @@ describe("PasskeysClient", () => {
                 client_data_json: "client_data_json",
                 credential_id: "credential_id",
                 nickname: "nickname",
+                user_handle: "user_handle",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -198,6 +202,7 @@ describe("PasskeysClient", () => {
             client_data_json: "client_data_json",
             credential_id: "credential_id",
             nickname: "nickname",
+            user_handle: "user_handle",
         };
         const rawResponseBody = { key: "value" };
 
@@ -216,6 +221,7 @@ describe("PasskeysClient", () => {
                 client_data_json: "client_data_json",
                 credential_id: "credential_id",
                 nickname: "nickname",
+                user_handle: "user_handle",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -234,6 +240,7 @@ describe("PasskeysClient", () => {
             client_data_json: "client_data_json",
             credential_id: "credential_id",
             nickname: "nickname",
+            user_handle: "user_handle",
         };
         const rawResponseBody = { key: "value" };
 
@@ -252,6 +259,7 @@ describe("PasskeysClient", () => {
                 client_data_json: "client_data_json",
                 credential_id: "credential_id",
                 nickname: "nickname",
+                user_handle: "user_handle",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -270,6 +278,7 @@ describe("PasskeysClient", () => {
             client_data_json: "client_data_json",
             credential_id: "credential_id",
             nickname: "nickname",
+            user_handle: "user_handle",
         };
         const rawResponseBody = { key: "value" };
 
@@ -288,6 +297,7 @@ describe("PasskeysClient", () => {
                 client_data_json: "client_data_json",
                 credential_id: "credential_id",
                 nickname: "nickname",
+                user_handle: "user_handle",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

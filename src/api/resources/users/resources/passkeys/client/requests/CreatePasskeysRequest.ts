@@ -6,7 +6,8 @@
  *         attestation_object: "YXR0ZXN0YXRpb24",
  *         client_data_json: "Y2xpZW50LWRhdGE",
  *         credential_id: "bmV3LWNyZWRlbnRpYWw",
- *         nickname: "Work laptop"
+ *         nickname: "Work laptop",
+ *         user_handle: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
  *     }
  */
 export interface CreatePasskeysRequest {
@@ -21,5 +22,5 @@ export interface CreatePasskeysRequest {
     /** The `getTransports()` result from the registration response. Values Whop does not recognize are dropped. */
     transports?: string[];
     /** The `creation_options.user.id` the passkey was created with. Must match the challenge's options. */
-    user_handle?: string;
+    user_handle: string;
 }
