@@ -20,7 +20,7 @@ export interface CreateAdCampaignsRequest {
     budget_optimization?: CreateAdCampaignsRequest.BudgetOptimization;
     /** Whether the budget is spent per day (`daily`) or over the campaign's full run (`lifetime`). Defaults to `daily`. */
     budget_type?: CreateAdCampaignsRequest.BudgetType;
-    /** The kind of campaign to create. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
+    /** The kind of campaign to create. `standard` runs image and video ads; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
     campaign_type?: CreateAdCampaignsRequest.CampaignType;
     /** The cost per result, in USD, you want this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. Ad groups set cost and bid caps with their own `desired_cost_per_result`. Omit or send `null` for no target. */
     desired_cost_per_result?: number | null;
@@ -56,7 +56,7 @@ export namespace CreateAdCampaignsRequest {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-    /** The kind of campaign to create. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
+    /** The kind of campaign to create. `standard` runs image and video ads; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
     export const CampaignType = {
         Standard: "standard",
         Search: "search",

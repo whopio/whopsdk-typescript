@@ -1,4 +1,3 @@
-export * from "./CreateAdsRequestXAdsPlatform.js";
 export * from "./DeleteAdsResponse.js";
 export * from "./DuplicateAdsResponse.js";
 export * from "./ListAdsRequestAttributionModel.js";
@@ -8,4 +7,3 @@ export * from "./ListAdsRequestStatus.js";
 export * from "./ListAdsResponse.js";
 export * from "./PostAdUpdatedPayload.js";
 export * from "./RetrieveAdsRequestAttributionModel.js";
-export * from "./UpdateAdsRequestXAdsPlatform.js";

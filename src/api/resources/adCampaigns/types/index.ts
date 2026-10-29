@@ -9,4 +9,3 @@ export * from "./ListAdCampaignsResponse.js";
 export * from "./PostAdCampaignPaymentFailedPayload.js";
 export * from "./PostAdCampaignUpdatedPayload.js";
 export * from "./RetrieveAdCampaignsRequestAttributionModel.js";
-export * from "./UpdateAdCampaignsRequestXAdsPlatform.js";

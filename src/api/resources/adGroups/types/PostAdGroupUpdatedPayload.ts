@@ -62,7 +62,7 @@ export namespace PostAdGroupUpdatedPayload {
         issues: Whop.AdPlatformIssue[];
         keywords?: Whop.AdGroupKeyword[] | undefined;
         languages: string[];
-        /** Progress toward the ad platform's learning conversion threshold for this ad group. Null unless it is learning or learning limited and the platform reports valid counts. Reaching the threshold does not determine delivery status. */
+        /** Progress toward the conversions this ad group's learning phase needs. Null unless it is learning or learning limited and valid counts are available. Reaching the threshold does not determine delivery status. */
         learning_progress: Whop.AdGroupLearningProgress | null;
         /** Locations targeted and excluded. */
         regions: Whop.AdGroupRegions;

@@ -76,7 +76,7 @@ describe("AdConversionValueRulesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             adjustment_type: "fixed",
             events: [{ event_name: "purchase" }],
-            targets: [{ platform: "tiktok", scope: "business" }],
+            targets: [{ scope: "business" }],
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -118,7 +118,6 @@ describe("AdConversionValueRulesClient", () => {
             ],
             targets: [
                 {
-                    platform: "tiktok",
                     scope: "business",
                 },
             ],
@@ -139,10 +138,7 @@ describe("AdConversionValueRulesClient", () => {
             account_id: "account_id",
             adjustment_type: "fixed",
             events: [{ event_name: "purchase" }, { event_name: "purchase" }],
-            targets: [
-                { platform: "tiktok", scope: "business" },
-                { platform: "tiktok", scope: "business" },
-            ],
+            targets: [{ scope: "business" }, { scope: "business" }],
         };
         const rawResponseBody = { key: "value" };
 
@@ -169,11 +165,9 @@ describe("AdConversionValueRulesClient", () => {
                 ],
                 targets: [
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                 ],
@@ -194,10 +188,7 @@ describe("AdConversionValueRulesClient", () => {
             account_id: "account_id",
             adjustment_type: "fixed",
             events: [{ event_name: "purchase" }, { event_name: "purchase" }],
-            targets: [
-                { platform: "tiktok", scope: "business" },
-                { platform: "tiktok", scope: "business" },
-            ],
+            targets: [{ scope: "business" }, { scope: "business" }],
         };
         const rawResponseBody = { key: "value" };
 
@@ -224,11 +215,9 @@ describe("AdConversionValueRulesClient", () => {
                 ],
                 targets: [
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                 ],
@@ -249,10 +238,7 @@ describe("AdConversionValueRulesClient", () => {
             account_id: "account_id",
             adjustment_type: "fixed",
             events: [{ event_name: "purchase" }, { event_name: "purchase" }],
-            targets: [
-                { platform: "tiktok", scope: "business" },
-                { platform: "tiktok", scope: "business" },
-            ],
+            targets: [{ scope: "business" }, { scope: "business" }],
         };
         const rawResponseBody = { key: "value" };
 
@@ -279,11 +265,9 @@ describe("AdConversionValueRulesClient", () => {
                 ],
                 targets: [
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                     {
-                        platform: "tiktok",
                         scope: "business",
                     },
                 ],
