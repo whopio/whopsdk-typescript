@@ -38,6 +38,8 @@ export namespace PostCardUpdatedPayload {
         expiration_year: string | null;
         /** Card ID, prefixed `icrd_`. */
         id: string;
+        /** `true` once the issuer has issued the card. `false` for an invited card still waiting on its cardholder's onboarding or review, or one the issuer declined; it has no card number until it is issued. */
+        issued: boolean;
         /** Last four digits of the card number. `null` for pending invitation cards. */
         last4: string | null;
         /** The spending limit configuration. */
