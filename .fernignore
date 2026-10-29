@@ -4,7 +4,9 @@
 # @whop/sdk when a merge to main lands a package.json version that is not yet on npm.
 # scripts/rename-to-esm-files.js is Fern's own and is deliberately not listed.
 #
-# src/helpers holds unwrapWebhook, the one hand-written helper in this SDK — the Standard
+# src/helpers holds the hand-written helpers. oidcToken (oidc.ts) is a `token` supplier that
+# trades a cloud provider's OIDC identity token for a short-lived Whop access token and renews
+# it; it uses only fetch, never generated client code. unwrapWebhook is the Standard
 # Webhooks signature verifier. It restores the verification half of
 # `client.webhooks.unwrap`, which the Stainless-generated package shipped through 0.0.42
 # and Fern cannot generate: Fern generates from OpenAPI paths and `unwrap` was never a
