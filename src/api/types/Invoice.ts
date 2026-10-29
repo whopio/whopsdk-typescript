@@ -8,7 +8,7 @@ export interface Invoice {
     billing_address: Whop.PaymentAddress | null;
     buyer_fee_amount: Whop.Money;
     buyer_fee_percentage: number;
-    /** A signed link that opens this invoice in a checkout session so the buyer can pay it: pass it as `link` to `POST /checkout_sessions`. Present while the invoice is open; null in any other status, for an invoice billed to a business buyer or whose membership was canceled, and when you lack `payment:charge`. */
+    /** A signed link that opens this invoice in a checkout session so the buyer can pay it: pass it as `link` to `POST /checkout_sessions`. Present while the invoice is open; null in any other status, for an invoice billed to a business buyer or whose membership was canceled, and unless you have `payment:charge`, or `invoice:create` or `invoice:update` on an invoice with no `payment_method_id`. */
     checkout_link: string | null;
     created_at: string;
     customer_name: string | null;
