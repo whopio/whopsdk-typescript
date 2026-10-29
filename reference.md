@@ -1127,7 +1127,7 @@ await client.adCampaigns.retrieve({
 <dl>
 <dd>
 
-Deletes an ad campaign and archives it on the ad platform (cascades to ad groups and ads).
+Deletes an ad campaign with its ad groups and ads, and stops their delivery.
 </dd>
 </dl>
 </dd>
@@ -1550,7 +1550,6 @@ await client.adConversionValueRules.create({
             event_name: "purchase"
         }],
     targets: [{
-            platform: "tiktok",
             scope: "business"
         }]
 });
@@ -2059,136 +2058,6 @@ await client.adGroups.create({
 </dl>
 </details>
 
-<details><summary><code>client.adGroups.<a href="/src/api/resources/adGroups/client/Client.ts">estimateReach</a>({ ...params }) -> Whop.ReachEstimate</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Estimates how many people a draft targeting spec can reach, before an ad group is created. The body takes the same targeting fields as creating an ad group, and nothing is persisted.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.adGroups.estimateReach({
-    platform: "meta"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.EstimateReachAdGroupsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AdGroupsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.adGroups.<a href="/src/api/resources/adGroups/client/Client.ts">searchTargetingOptions</a>({ ...params }) -> Whop.SearchTargetingOptionsAdGroupsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Searches the ad platform's targeting taxonomy for options to target an ad group with. Each result comes back in the exact shape the ad-group body accepts for its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages` as-is.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.adGroups.searchTargetingOptions({
-    platform: "meta"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.SearchTargetingOptionsAdGroupsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AdGroupsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.adGroups.<a href="/src/api/resources/adGroups/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AdGroup</code></summary>
 <dl>
 <dd>
@@ -2266,7 +2135,7 @@ await client.adGroups.retrieve({
 <dl>
 <dd>
 
-Deletes an ad group, removing it from the ad platform so it stops delivering.
+Deletes an ad group and stops its delivery.
 </dd>
 </dl>
 </dd>

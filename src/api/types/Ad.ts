@@ -61,7 +61,7 @@ export interface Ad {
     /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: Ad.DeliveryStatus;
     descriptions: Whop.AdText[];
-    /** Platform-reported impressions divided by reach. */
+    /** Impressions divided by reach. */
     frequency: number | null;
     headlines: Whop.AdText[];
     /** Unique identifier for the ad, prefixed `ad_`. */
@@ -75,8 +75,6 @@ export interface Ad {
     leads: number;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
-    /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post. `null` until the network has created the post. */
-    post_id: string | null;
     primary_texts: Whop.AdText[];
     /** USD value of pixel-attributed purchases. */
     purchase_value: number;
@@ -116,7 +114,7 @@ export interface Ad {
     updated_at: string;
     /** The URL the ad links to, without its query string. Parameters belong in `url_parameters`; any you send on `url` are moved there. */
     url: string | null;
-    /** Every query parameter appended to the URL, keyed by parameter name — including any you sent on `url` itself. Whop adds its own click-attribution parameters on top; those are reserved and rejected if you set them. Which keys are reserved depends on the ad's network — Meta: utm_meta_ad_id, utm_meta_adset_id, utm_meta_campaign_id, utm_source, utm_placement, utm_medium, utm_content, utm_adset, utm_whop, wacid, wasid, waid, tw_source, tw_adid; TikTok: waid, wasid, wacid, ad_id, adset_id, campaign_id, utm_source, utm_medium, utm_placement, utm_whop, tw_source, tw_adid. */
+    /** Every query parameter appended to the URL, keyed by parameter name — including any you sent on `url` itself. Whop adds its own click-attribution parameters; those are reserved, and setting one returns an error that names it. */
     url_parameters: Record<string, unknown>;
     /** USD value attributed to view-content events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
     viewed_content_value: number;

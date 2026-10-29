@@ -40,7 +40,7 @@ export namespace PostAdCampaignUpdatedPayload {
         budget_optimization: Data.BudgetOptimization | null;
         /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). */
         budget_type: Data.BudgetType | null;
-        /** The kind of campaign, fixed at creation. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. */
+        /** The kind of campaign, fixed at creation. `standard` runs image and video ads; `search` shows text ads on search results for the ad groups' keywords. */
         campaign_type: Data.CampaignType;
         /** When the campaign was created, as an ISO 8601 timestamp. */
         created_at: string;
@@ -48,16 +48,16 @@ export namespace PostAdCampaignUpdatedPayload {
         delivery_status: Data.DeliveryStatus;
         /** The cost per result, in USD, the advertiser wants this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. `null` when no target is set. */
         desired_cost_per_result?: (number | null) | undefined;
-        /** Google only: when the campaign stops delivering, as an ISO 8601 timestamp. `null` runs it until paused. */
-        ends_at?: (string | null) | undefined;
+        /** When the campaign stops delivering, as an ISO 8601 timestamp. `null` when it runs until paused, or when its ad groups set their own schedule. */
+        ends_at: string | null;
         /** Unique identifier for the ad campaign, prefixed `adcamp_`. */
         id: string;
         issues: Whop.AdPlatformIssue[];
         /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
         objective: Data.Objective | null;
         special_ad_categories: Data.SpecialAdCategories.Item[];
-        /** Google only: when the campaign starts delivering, as an ISO 8601 timestamp. `null` starts it as soon as it launches. */
-        starts_at?: (string | null) | undefined;
+        /** When the campaign starts delivering, as an ISO 8601 timestamp. `null` when it starts as soon as it launches, or when its ad groups set their own schedule. */
+        starts_at: string | null;
         /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
         status: Data.Status;
         /** Display name of the ad campaign. */
@@ -86,7 +86,7 @@ export namespace PostAdCampaignUpdatedPayload {
             Lifetime: "lifetime",
         } as const;
         export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-        /** The kind of campaign, fixed at creation. `standard` is the ad network's standard campaign; `search` shows text ads on search results for the ad groups' keywords. */
+        /** The kind of campaign, fixed at creation. `standard` runs image and video ads; `search` shows text ads on search results for the ad groups' keywords. */
         export const CampaignType = {
             Standard: "standard",
             Search: "search",

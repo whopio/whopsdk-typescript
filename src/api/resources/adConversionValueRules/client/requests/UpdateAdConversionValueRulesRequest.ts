@@ -65,13 +65,15 @@ export namespace UpdateAdConversionValueRulesRequest {
 
     export namespace Targets {
         export interface Item {
-            platform: Item.Platform;
+            /** Limits the target to one network. Omit it to cover every network Whop runs the target on. */
+            platform?: Item.Platform | undefined;
             /** Campaign, ad group, or ad ID. Null for a business target. */
             resource_id?: (string | null) | undefined;
             scope: Item.Scope;
         }
 
         export namespace Item {
+            /** Limits the target to one network. Omit it to cover every network Whop runs the target on. */
             export const Platform = {
                 Tiktok: "tiktok",
                 Meta: "meta",

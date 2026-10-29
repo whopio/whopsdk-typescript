@@ -78,7 +78,7 @@ export interface AdGroup {
     devices: Whop.AdGroupDevices;
     /** When the ad group stops delivering, as an ISO 8601 timestamp. `null` when it runs until paused. */
     ends_at: string | null;
-    /** Platform-reported impressions divided by reach. */
+    /** Impressions divided by reach. */
     frequency: number | null;
     /** Unique identifier for the ad group, prefixed `adgrp_`. */
     id: string;
@@ -91,7 +91,7 @@ export interface AdGroup {
     lead_value: number;
     /** Whop pixel-attributed leads, last-click. */
     leads: number;
-    /** Progress toward the ad platform's learning conversion threshold for this ad group. Null unless it is learning or learning limited and the platform reports valid counts. Reaching the threshold does not determine delivery status. */
+    /** Progress toward the conversions this ad group's learning phase needs. Null unless it is learning or learning limited and valid counts are available. Reaching the threshold does not determine delivery status. */
     learning_progress: Whop.AdGroupLearningProgress | null;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;

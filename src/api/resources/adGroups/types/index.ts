@@ -1,4 +1,3 @@
-export * from "./CreateAdGroupsRequestXAdsPlatform.js";
 export * from "./DeleteAdGroupsResponse.js";
 export * from "./DuplicateAdGroupsResponse.js";
 export * from "./ListAdGroupsRequestAttributionModel.js";
@@ -8,9 +7,3 @@ export * from "./ListAdGroupsRequestStatus.js";
 export * from "./ListAdGroupsResponse.js";
 export * from "./PostAdGroupUpdatedPayload.js";
 export * from "./RetrieveAdGroupsRequestAttributionModel.js";
-export * from "./SearchTargetingOptionsAdGroupsRequestLocationTypesItem.js";
-export * from "./SearchTargetingOptionsAdGroupsRequestPlatform.js";
-export * from "./SearchTargetingOptionsAdGroupsRequestSpecialAdCategoriesItem.js";
-export * from "./SearchTargetingOptionsAdGroupsRequestTypesItem.js";
-export * from "./SearchTargetingOptionsAdGroupsResponse.js";
-export * from "./UpdateAdGroupsRequestXAdsPlatform.js";
