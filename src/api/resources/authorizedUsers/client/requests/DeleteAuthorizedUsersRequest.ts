@@ -8,7 +8,7 @@
  *     }
  */
 export interface DeleteAuthorizedUsersRequest {
-    /** The ID of the authorized user or user to remove. */
+    /** The ID of the authorized user or user to remove. Team member IDs may start with `ausr_` or `mber_`; treat them as opaque. */
     id: string;
     /** The ID of the company the authorized user belongs to. Optional if the authorized user ID is provided. */
     account_id?: string;
