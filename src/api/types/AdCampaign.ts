@@ -84,10 +84,8 @@ export interface AdCampaign {
     leads: number;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
-    /** The goal the campaign optimizes toward. */
+    /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
     objective: AdCampaign.Objective | null;
-    /** The ad network the campaign runs on. */
-    platform: AdCampaign.Platform;
     /** USD value of pixel-attributed purchases. */
     purchase_value: number;
     /** Whop pixel-attributed purchases, last-click. */
@@ -178,7 +176,7 @@ export namespace AdCampaign {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-    /** The goal the campaign optimizes toward. */
+    /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
     export const Objective = {
         Awareness: "awareness",
         Traffic: "traffic",
@@ -187,13 +185,6 @@ export namespace AdCampaign {
         Sales: "sales",
     } as const;
     export type Objective = (typeof Objective)[keyof typeof Objective];
-    /** The ad network the campaign runs on. */
-    export const Platform = {
-        Meta: "meta",
-        Tiktok: "tiktok",
-        Google: "google",
-    } as const;
-    export type Platform = (typeof Platform)[keyof typeof Platform];
     /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
     export const ResultEvent = {
         Purchase: "purchase",

@@ -64,8 +64,6 @@ export namespace PostAdGroupUpdatedPayload {
         languages: string[];
         /** Progress toward the ad platform's learning conversion threshold for this ad group. Null unless it is learning or learning limited and the platform reports valid counts. Reaching the threshold does not determine delivery status. */
         learning_progress: Whop.AdGroupLearningProgress | null;
-        /** The ad platform this ad group runs on. */
-        platform: Data.Platform;
         /** Locations targeted and excluded. */
         regions: Whop.AdGroupRegions;
         /** When the ad group starts delivering, as an ISO 8601 timestamp. `null` when it starts as soon as it's active. */
@@ -111,13 +109,6 @@ export namespace PostAdGroupUpdatedPayload {
             Active: "active",
         } as const;
         export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-        /** The ad platform this ad group runs on. */
-        export const Platform = {
-            Meta: "meta",
-            Tiktok: "tiktok",
-            Google: "google",
-        } as const;
-        export type Platform = (typeof Platform)[keyof typeof Platform];
         /** Whether the ad group is enabled. `active` and `paused` are set by you; `rejected` means it failed ad review; `duplicating` is a copy still being filled in. */
         export const Status = {
             Active: "active",

@@ -3,8 +3,7 @@
 /**
  * @example
  *     {
- *         objective: "awareness",
- *         platform: "whop",
+ *         objective: "traffic",
  *         title: "Now hiring mobile detailers \u2014 Austin"
  *     }
  */
@@ -29,8 +28,6 @@ export interface CreateAdCampaignsRequest {
     ends_at?: string;
     /** The goal the campaign optimizes toward. */
     objective: CreateAdCampaignsRequest.Objective;
-    /** The ad network the campaign runs on. */
-    platform: CreateAdCampaignsRequest.Platform;
     /** Regulated categories the campaign falls under. Ads in these categories are subject to extra targeting restrictions. */
     special_ad_categories?: CreateAdCampaignsRequest.SpecialAdCategories.Item[];
     /** When the campaign starts delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
@@ -67,18 +64,12 @@ export namespace CreateAdCampaignsRequest {
     export type CampaignType = (typeof CampaignType)[keyof typeof CampaignType];
     /** The goal the campaign optimizes toward. */
     export const Objective = {
-        Awareness: "awareness",
         Traffic: "traffic",
         Engagement: "engagement",
         Leads: "leads",
         Sales: "sales",
     } as const;
     export type Objective = (typeof Objective)[keyof typeof Objective];
-    /** The ad network the campaign runs on. */
-    export const Platform = {
-        Whop: "whop",
-    } as const;
-    export type Platform = (typeof Platform)[keyof typeof Platform];
     export type SpecialAdCategories = SpecialAdCategories.Item[];
 
     export namespace SpecialAdCategories {

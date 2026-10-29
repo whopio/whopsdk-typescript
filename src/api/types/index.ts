@@ -85,7 +85,6 @@ export * from "./AdPixel.js";
 export * from "./AdPlatformIssue.js";
 export * from "./AdStat.js";
 export * from "./AdText.js";
-export * from "./AdTranslations.js";
 export * from "./Affiliate.js";
 export * from "./AffiliateAppliesToPayments.js";
 export * from "./AffiliateAppliesToProducts.js";
