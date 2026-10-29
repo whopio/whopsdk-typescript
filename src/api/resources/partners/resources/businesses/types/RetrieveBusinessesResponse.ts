@@ -9,9 +9,11 @@ export interface RetrieveBusinessesResponse {
     blueprint_partner: RetrieveBusinessesResponse.BlueprintPartner | null;
     /** CPA terms for the referring partner. Omitted for other callers. An offer token requires partner:commission_advance:accept permission. */
     commission_advance?: (Whop.PartnerAdvance | null) | undefined;
+    /** The most the referring organization advances per business, in USD. Returned only with commission_advance_rate. */
+    commission_advance_cap?: Whop.Money | undefined;
     /** Whether this referral meets the partner and ownership requirements for saving commission advance projections. Returned only to the referring partner; existing advance terms and update permissions still apply. */
     commission_advance_projections_allowed?: boolean | undefined;
-    /** Estimated upfront advance per USD of annual card and BNPL payments, including advance share and remaining term. Multiply annual payments by this rate, cap at 2500 USD, and round down to cents. Uses observed commissions or, without history, reference US card fees minus estimated percentage costs times the partner share. Null when projections or pricing are unavailable. Only returned to the referring partner. Qualification and final offers use actual activity. */
+    /** Estimated upfront advance per USD of annual card and BNPL payments, including advance share and remaining term. Multiply annual payments by this rate, cap at commission_advance_cap, and round down to cents. Uses observed commissions or, without history, reference US card fees minus estimated percentage costs times the partner share. Null when projections or pricing are unavailable. Only returned to the referring partner. Qualification and final offers use actual activity. */
     commission_advance_rate?: (string | null) | undefined;
     /** When the partner business was created. */
     created_at: string;
