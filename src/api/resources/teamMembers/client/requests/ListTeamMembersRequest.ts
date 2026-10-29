@@ -19,7 +19,7 @@ export interface ListTeamMembersRequest {
     role?: Whop.ListTeamMembersRequestRole;
     /** Only return members whose name or username contains this text, and invites whose email contains it. */
     query?: string;
-    /** Only return the direct reports of this team member, prefixed `ausr_`. Pass the account ID, prefixed `biz_`, for the members who report to the business directly. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
+    /** Only return the direct reports of this team member, whose ID may start with `ausr_` or `mber_`. Pass the account ID, prefixed `biz_`, for the members who report to the business directly. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
     reports_to_id?: string;
     /** Only return members with at least this many direct reports. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
     direct_reports_min?: number;
