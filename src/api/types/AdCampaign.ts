@@ -86,8 +86,6 @@ export interface AdCampaign {
     link_clicks: number;
     /** The goal the campaign optimizes toward. */
     objective: AdCampaign.Objective | null;
-    /** The event the campaign optimizes for when a single goal is set campaign-wide. `null` when each ad group sets its own optimization_goal. */
-    optimization_goal: string | null;
     /** The ad network the campaign runs on. */
     platform: AdCampaign.Platform;
     /** USD value of pixel-attributed purchases. */

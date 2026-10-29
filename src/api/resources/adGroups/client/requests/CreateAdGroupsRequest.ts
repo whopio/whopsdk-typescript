@@ -24,47 +24,20 @@ export interface CreateAdGroupsRequest {
     /** Whether budget_amount is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
     budget_type?: CreateAdGroupsRequest.BudgetType;
     conversion_event?: Whop.ConversionEvent | null;
-    /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. The lead form itself is set on the ad. */
-    conversion_location?: CreateAdGroupsRequest.ConversionLocation;
     /** Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget. */
     delivery_schedule?: CreateAdGroupsRequest.DeliverySchedule | null;
     /** Age, gender, and automatic-audience targeting. */
     demographics?: Whop.AdGroupDemographicsBody;
     /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). */
     desired_cost_per_result?: number;
-    /** Interest, behavior, and demographic targeting, using categories from the ad platform's targeting taxonomy. Entries across interests, behaviors, and demographics are OR'd together (anyone matching any entry is reached), matching Ads Manager's detailed-targeting box. At most 100 entries per section. Can't be combined with demographics.automatic, and unavailable to campaigns with special_ad_categories. Send the complete intended state — a section you omit is cleared. */
-    detailed_targeting?: Whop.AdGroupDetailedTargetingBody;
     /** Device platforms and operating systems to target. */
     devices?: Whop.AdGroupDevicesBody;
-    /** Whether the ad platform automatically mixes and matches this ad group's creatives and copy to find the best-performing combinations. Meta has deprecated it and rejects `true`; ad groups already using it keep it, and it can't be changed afterward. */
-    dynamic_creative?: boolean;
     /** When the ad group stops delivering, as an ISO 8601 timestamp. Omit to run until paused. */
     ends_at?: string;
-    /** Cap on how often one person sees ads from this ad group. Only available when the ad group optimizes for reach or ThruPlay. Under a campaign budget every ad group must use the same cap, which applies across the whole campaign, and only with the awareness objective (reach or ThruPlay ad groups) or engagement (ThruPlay). Fixed once the campaign launches; `null` clears it before then. */
-    frequency_cap?: CreateAdGroupsRequest.FrequencyCap | null;
     /** Search terms the ad group's ads can show for, and terms they never show for. Only search campaigns take keywords, and each of their ad groups needs at least one before launch. Replaces the stored list; omit to keep it. */
     keywords?: CreateAdGroupsRequest.Keywords.Item[];
     /** Languages to target, as ISO 639 codes such as `en` or `es`. Empty or omitted targets all languages. */
     languages?: string[];
-    /** Apps the conversation opens in. Required when setting `conversion_location` to `messaging`, and rejected unless the ad group's conversion location is `messaging`. */
-    message_apps?: CreateAdGroupsRequest.MessageApps.Item[];
-    /** Minimum the ad group tries to spend each day. */
-    minimum_daily_spend?: number;
-    /** The result the ad group's delivery is optimized to get the most of. */
-    optimization_goal?: CreateAdGroupsRequest.OptimizationGoal;
-    /**
-     * `automatic` to let the ad platform choose placements, or the list of platforms and positions to target. Omit a platform's positions to target all of them.
-     *
-     * Valid positions per platform:
-     *
-     * - `facebook`: `feed`, `right_hand_column`, `marketplace`, `search`, `profile_feed`, `notification`, `story`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `biz_disco_feed`
-     * - `instagram`: `stream`, `story`, `explore`, `explore_home`, `reels`, `profile_feed`, `profile_reels`, `ig_search`
-     * - `messenger`: `story`
-     * - `audience_network`: `classic`, `rewarded_video`
-     * - `threads`: `threads_stream`
-     * - `whatsapp`: `status`
-     */
-    placements?: CreateAdGroupsRequest.Placements;
     /** Locations to target and exclude. */
     regions?: Whop.AdGroupRegionsBody;
     /** When the ad group starts delivering, as an ISO 8601 timestamp. Omit to start as soon as it's active. */
@@ -89,19 +62,6 @@ export namespace CreateAdGroupsRequest {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-    /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. The lead form itself is set on the ad. */
-    export const ConversionLocation = {
-        Website: "website",
-        Profile: "profile",
-        InstagramAndFacebook: "instagram_and_facebook",
-        InstagramProfile: "instagram_profile",
-        Messaging: "messaging",
-        OnAd: "on_ad",
-        InstantForms: "instant_forms",
-        InstantFormsAndMessenger: "instant_forms_and_messenger",
-        WebsiteAndInstantForms: "website_and_instant_forms",
-    } as const;
-    export type ConversionLocation = (typeof ConversionLocation)[keyof typeof ConversionLocation];
 
     /**
      * Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget.
@@ -202,16 +162,6 @@ export namespace CreateAdGroupsRequest {
         }
     }
 
-    /**
-     * Cap on how often one person sees ads from this ad group. Only available when the ad group optimizes for reach or ThruPlay. Under a campaign budget every ad group must use the same cap, which applies across the whole campaign, and only with the awareness objective (reach or ThruPlay ad groups) or engagement (ThruPlay). Fixed once the campaign launches; `null` clears it before then.
-     */
-    export interface FrequencyCap {
-        /** Most times one person can be shown ads from this ad group within the window. */
-        maximum_impressions?: number | undefined;
-        /** Length of the rolling window, in days. */
-        per_days?: number | undefined;
-    }
-
     export type Keywords = Keywords.Item[];
 
     export namespace Keywords {
@@ -235,57 +185,6 @@ export namespace CreateAdGroupsRequest {
         }
     }
 
-    export type MessageApps = MessageApps.Item[];
-
-    export namespace MessageApps {
-        export const Item = {
-            Messenger: "messenger",
-            Instagram: "instagram",
-            Whatsapp: "whatsapp",
-        } as const;
-        export type Item = (typeof Item)[keyof typeof Item];
-    }
-
-    /** The result the ad group's delivery is optimized to get the most of. */
-    export const OptimizationGoal = {
-        Conversions: "conversions",
-        LinkClicks: "link_clicks",
-        LandingPageViews: "landing_page_views",
-        Reach: "reach",
-        Impressions: "impressions",
-        Engagement: "engagement",
-        Conversations: "conversations",
-        VideoViews: "video_views",
-        TwoSecondViews: "two_second_views",
-        PageLikes: "page_likes",
-        SocialProfile: "social_profile",
-        AdRecallLift: "ad_recall_lift",
-        EventResponses: "event_responses",
-        RemindersSet: "reminders_set",
-        LeadGeneration: "lead_generation",
-        QualityLead: "quality_lead",
-        Value: "value",
-        ProfileAndPageEngagement: "profile_and_page_engagement",
-    } as const;
-    export type OptimizationGoal = (typeof OptimizationGoal)[keyof typeof OptimizationGoal];
-    /**
-     * `automatic` to let the ad platform choose placements, or the list of platforms and positions to target. Omit a platform's positions to target all of them.
-     *
-     * Valid positions per platform:
-     *
-     * - `facebook`: `feed`, `right_hand_column`, `marketplace`, `search`, `profile_feed`, `notification`, `story`, `instream_video`, `facebook_reels`, `facebook_reels_overlay`, `biz_disco_feed`
-     * - `instagram`: `stream`, `story`, `explore`, `explore_home`, `reels`, `profile_feed`, `profile_reels`, `ig_search`
-     * - `messenger`: `story`
-     * - `audience_network`: `classic`, `rewarded_video`
-     * - `threads`: `threads_stream`
-     * - `whatsapp`: `status`
-     */
-    export type Placements =
-        | "automatic"
-        | {
-              platform: "facebook" | "instagram" | "messenger" | "audience_network" | "threads" | "whatsapp";
-              positions?: string[] | undefined;
-          }[];
     /** Initial status (default: `active`). */
     export const Status = {
         Active: "active",

@@ -34,8 +34,6 @@ export interface AdGroup {
     /** Whop pixel-attributed contact events, last-click. */
     contacts: number;
     conversion_event: Whop.ConversionEvent | null;
-    /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. */
-    conversion_location?: (AdGroup.ConversionLocation | null) | undefined;
     /** Spend divided by attributed add-to-cart events; null when they are not the goal and none are attributed. */
     cost_per_added_to_cart: number | null;
     /** Spend divided by clicks; 0 when there are no clicks. */
@@ -76,18 +74,12 @@ export interface AdGroup {
     demographics: Whop.AdGroupDemographics;
     /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). `null` for `minimum_cost` bidding. */
     desired_cost_per_result: number | null;
-    /** Interest, behavior, and demographic targeting, using categories from the ad platform's targeting taxonomy. Entries across interests, behaviors, and demographics are OR'd together (anyone matching any entry is reached), matching Ads Manager's detailed-targeting box. Can't be combined with automatic audience targeting. Special ad category campaigns are limited to approved interests. */
-    detailed_targeting: Whop.AdGroupDetailedTargeting;
     /** Device platforms and operating systems targeted. */
     devices: Whop.AdGroupDevices;
-    /** Whether the ad platform automatically mixes and matches this ad group's creatives and copy to find the best-performing combinations. */
-    dynamic_creative?: boolean | undefined;
     /** When the ad group stops delivering, as an ISO 8601 timestamp. `null` when it runs until paused. */
     ends_at: string | null;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
-    /** Cap on how often one person sees ads from this ad group, or from the whole campaign under a campaign budget, where every ad group shares it. Only available when the ad group optimizes for reach or ThruPlay; `null` when uncapped. */
-    frequency_cap: Whop.AdGroupFrequencyCap | null;
     /** Unique identifier for the ad group, prefixed `adgrp_`. */
     id: string;
     /** The number of impressions. */
@@ -103,12 +95,6 @@ export interface AdGroup {
     learning_progress: Whop.AdGroupLearningProgress | null;
     /** Page views on your destination from people who clicked the ad, recorded by the Whop pixel. Counted the same way on every ad platform. */
     link_clicks: number;
-    message_apps?: AdGroup.MessageApps.Item[] | undefined;
-    /** Minimum the ad group tries to spend each day. `null` when no floor is set. */
-    minimum_daily_spend?: (number | null) | undefined;
-    /** The result the ad group's delivery is optimized to get the most of. */
-    optimization_goal: AdGroup.OptimizationGoal | null;
-    placements: Whop.AdGroupPlacement[];
     /** The ad platform this ad group runs on. */
     platform: AdGroup.Platform;
     /** USD value of pixel-attributed purchases. */
@@ -171,19 +157,6 @@ export namespace AdGroup {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-    /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. */
-    export const ConversionLocation = {
-        Website: "website",
-        Profile: "profile",
-        InstagramAndFacebook: "instagram_and_facebook",
-        InstagramProfile: "instagram_profile",
-        Messaging: "messaging",
-        OnAd: "on_ad",
-        InstantForms: "instant_forms",
-        InstantFormsAndMessenger: "instant_forms_and_messenger",
-        WebsiteAndInstantForms: "website_and_instant_forms",
-    } as const;
-    export type ConversionLocation = (typeof ConversionLocation)[keyof typeof ConversionLocation];
     /** Whether ads in this ad group are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     export const DeliveryStatus = {
         InAppeal: "in_appeal",
@@ -203,40 +176,6 @@ export namespace AdGroup {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-    export type MessageApps = MessageApps.Item[];
-
-    export namespace MessageApps {
-        /** Apps the conversation opens in when `conversion_location` is `messaging`. Empty for other conversion locations. */
-        export const Item = {
-            Messenger: "messenger",
-            Instagram: "instagram",
-            Whatsapp: "whatsapp",
-        } as const;
-        export type Item = (typeof Item)[keyof typeof Item];
-    }
-
-    /** The result the ad group's delivery is optimized to get the most of. */
-    export const OptimizationGoal = {
-        Conversions: "conversions",
-        LinkClicks: "link_clicks",
-        LandingPageViews: "landing_page_views",
-        Reach: "reach",
-        Impressions: "impressions",
-        Engagement: "engagement",
-        Conversations: "conversations",
-        VideoViews: "video_views",
-        TwoSecondViews: "two_second_views",
-        PageLikes: "page_likes",
-        SocialProfile: "social_profile",
-        AdRecallLift: "ad_recall_lift",
-        EventResponses: "event_responses",
-        RemindersSet: "reminders_set",
-        LeadGeneration: "lead_generation",
-        QualityLead: "quality_lead",
-        Value: "value",
-        ProfileAndPageEngagement: "profile_and_page_engagement",
-    } as const;
-    export type OptimizationGoal = (typeof OptimizationGoal)[keyof typeof OptimizationGoal];
     /** The ad platform this ad group runs on. */
     export const Platform = {
         Meta: "meta",
