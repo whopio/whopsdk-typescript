@@ -105,6 +105,7 @@ export const PermissionAction = {
     DeveloperManageApiKey: "developer:manage_api_key",
     DeveloperManageBuilds: "developer:manage_builds",
     DeveloperManageOauth: "developer:manage_oauth",
+    DeveloperManageOidcTrust: "developer:manage_oidc_trust",
     DeveloperManageWebhook: "developer:manage_webhook",
     DeveloperUpdateApp: "developer:update_app",
     DeveloperUpdateAppAuthorization: "developer:update_app_authorization",
