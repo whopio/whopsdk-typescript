@@ -6,6 +6,6 @@ export interface ApiKeyGrant {
     actions: Whop.ApiKeyGrantAction[];
     /** ID of the resource the actions apply to. */
     resource_id: string;
-    /** The type of resource the actions apply to, such as `account`, `product`, or `app`. */
+    /** The type of resource the actions apply to, such as `account`, `product`, `app`, or `user`. */
     resource_type: string;
 }

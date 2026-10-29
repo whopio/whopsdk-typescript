@@ -10,7 +10,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface ListApiKeysRequest {
-    /** The account (`biz_`) or app (`app_`) tag to list API keys for. */
+    /** The account (`biz_`), app (`app_`), or your own user (`user_`) tag to list API keys for. */
     resource_id: string;
     /** The type of resource that owns the API keys. */
     resource_type: Whop.ListApiKeysRequestResourceType;

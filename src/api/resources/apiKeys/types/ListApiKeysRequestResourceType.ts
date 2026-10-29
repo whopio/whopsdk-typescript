@@ -3,6 +3,7 @@
 export const ListApiKeysRequestResourceType = {
     Account: "account",
     App: "app",
+    User: "user",
 } as const;
 export type ListApiKeysRequestResourceType =
     (typeof ListApiKeysRequestResourceType)[keyof typeof ListApiKeysRequestResourceType];
