@@ -2787,7 +2787,7 @@ await client.adPixels.update({
 <dl>
 <dd>
 
-Records a runner's stats for one of their ads in one hour, and pays them for the spend. Send the ad's totals so far for an hour that started in the last 24 hours; they replace what the ad held for that hour, and its ad group's and campaign's hours are rebuilt from their ads. The spend can go up but never down. Reporting on a campaign starts with the hour of its first recorded report; earlier hours are refused. Spend over what is left of a budget (the runner's share of the day, the campaign's daily budget or the ad group's budget) is refused with the most the ad can record. Takes the runner's Whop session or a user OAuth token with `ad_campaign:update`. A token without that scope gets a 403, and anyone not holding the ad's campaign gets a 404.
+Records a runner's stats for one of their ads in one hour, and pays them for the spend. Send the ad's totals so far for an hour that started in the last 24 hours; they replace what the ad held for that hour, and its ad group's and campaign's hours are rebuilt from their ads. The spend can go up but never down. Reporting on a campaign starts with the hour of its first recorded report; earlier hours are refused. Spend over what is left of a budget (the runner's share of the day, the campaign's daily budget or the ad group's budget) is refused with the most the ad can record. Takes the runner's Whop session, a user API key, or a user OAuth token with `ad_campaign:update`. A token without that scope gets a 403, and anyone not holding the ad's campaign gets a 404.
 </dd>
 </dl>
 </dd>
@@ -4100,7 +4100,7 @@ await client.aiChats.update({
 <dl>
 <dd>
 
-Lists the API keys of an account or app, newest first. Responses never include the full secret — only its obfuscated form.
+Lists the API keys of an account, app, or your own user, newest first. Responses never include the full secret — only its obfuscated form.
 </dd>
 </dl>
 </dd>
@@ -4181,7 +4181,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an API key for an account or app. The response is the only place the full `secret_key` is returned — store it immediately. Requires a user session; API keys cannot manage API keys.
+Creates an API key for an account, an app, or your own user. A user API key acts as you and can only grant `ad_campaign:update`, `ad_pixel:manage`, `member:journey:read`. The response is the only place the full `secret_key` is returned — store it immediately. Requires a user session; API keys cannot manage API keys.
 </dd>
 </dl>
 </dd>
