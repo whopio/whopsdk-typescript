@@ -227,82 +227,6 @@ describe("SocialAccountsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("leadForms", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = {
-            data: [
-                {
-                    completion: {
-                        button_text: "See our work",
-                        button_type: null,
-                        description: "We book coatings two days out, so pick a slot when we ring.",
-                        file_url: null,
-                        headline: "Thanks — we will call you today",
-                        phone_number: null,
-                        url: "https://shinetime.example/gallery",
-                    },
-                    created_at: "2026-01-01T12:00:00.000Z",
-                    disclaimer: {
-                        body: "Ceramic coating requires the vehicle for two days.",
-                        checkboxes: [{ checked_by_default: false, key: "consent_1", required: true, text: "I agree" }],
-                        title: "Before you submit",
-                    },
-                    form_type: "more_volume",
-                    id: "24839",
-                    intro: {
-                        description: "Tell us about your vehicle and we will send a fixed price.",
-                        headline: "Get a ceramic coating quote",
-                    },
-                    locale: "en_US",
-                    name: "Ceramic coating quote requests",
-                    privacy_policy_link_text: "Shine Time privacy policy",
-                    privacy_policy_url: "https://shinetime.example/privacy",
-                    question_labels: ["Email"],
-                    questions: [
-                        {
-                            format: "multiple_choice",
-                            label: "What vehicle are we detailing?",
-                            options: [
-                                {
-                                    key: "ceramic_coating",
-                                    logic: {
-                                        action: "go_to_question",
-                                        target_end_page_index: 0,
-                                        target_question_index: 3,
-                                    },
-                                    value: "Ceramic coating",
-                                },
-                            ],
-                            type: "custom",
-                        },
-                    ],
-                },
-            ],
-        };
-
-        server
-            .mockEndpoint()
-            .get("/social_accounts/id/lead_forms")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.socialAccounts.leadForms({
-            id: "id",
-            account_id: "account_id",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
     test("partners", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -468,53 +392,6 @@ describe("SocialAccountsClient", () => {
             partner_id: "partner_id",
         });
         expect(response).toEqual(rawResponseBody);
-    });
-
-    test("posts", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = {
-            data: [
-                {
-                    call_to_action: "learn_more",
-                    caption: "Ceramic coating in action",
-                    destination_url: "https://shinetime.example/book",
-                    embed_url: "https://www.facebook.com/plugins/post.php",
-                    id: "media_1",
-                    media_url: "https://shinetime.example/ceramic-coating-reel.mp4",
-                    restrictions: ["lead_form_ineligible"],
-                    thumbnail_url: "https://shinetime.example/ceramic-coating-poster.jpg",
-                    video_id: "18000000000000000",
-                },
-            ],
-            page_info: { end_cursor: "end_cursor", has_next_page: false },
-        };
-
-        server
-            .mockEndpoint({ once: false })
-            .get("/social_accounts/id/posts")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const expected = rawResponseBody;
-        const page = await client.socialAccounts.posts({
-            id: "id",
-            account_id: "account_id",
-        });
-
-        expect(expected.data).toEqual(page.data);
-        expect(page.hasNextPage()).toBe(true);
-        const nextPage = await page.getNextPage();
-        expect(expected.data).toEqual(nextPage.data);
     });
 
     test("refresh (1)", async () => {

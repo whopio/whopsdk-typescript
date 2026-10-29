@@ -1,9 +1,7 @@
 export type { AddPartnerSocialAccountsRequest } from "./AddPartnerSocialAccountsRequest.js";
 export { ConnectSocialAccountsRequest } from "./ConnectSocialAccountsRequest.js";
 export type { DeleteSocialAccountsRequest } from "./DeleteSocialAccountsRequest.js";
-export type { LeadFormsSocialAccountsRequest } from "./LeadFormsSocialAccountsRequest.js";
 export type { ListSocialAccountsRequest } from "./ListSocialAccountsRequest.js";
 export type { PartnersSocialAccountsRequest } from "./PartnersSocialAccountsRequest.js";
-export type { PostsSocialAccountsRequest } from "./PostsSocialAccountsRequest.js";
 export type { RefreshSocialAccountsRequest } from "./RefreshSocialAccountsRequest.js";
 export type { RemovePartnerSocialAccountsRequest } from "./RemovePartnerSocialAccountsRequest.js";
