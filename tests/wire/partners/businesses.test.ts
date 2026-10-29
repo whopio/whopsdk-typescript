@@ -305,6 +305,7 @@ describe("BusinessesClient", () => {
                 status: "projected",
                 terms_version: "2026-01-01",
             },
+            commission_advance_cap: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             commission_advance_projections_allowed: false,
             commission_advance_rate: "commission_advance_rate",
             created_at: "2026-01-01T12:00:00Z",
