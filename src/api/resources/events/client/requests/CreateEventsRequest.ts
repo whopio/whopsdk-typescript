@@ -34,8 +34,6 @@ export interface CreateEventsRequest {
     event_name: string;
     /** When the event occurred. Defaults to now. */
     event_time?: string | null;
-    /** The variant associated with the event. */
-    plan_id?: string | null;
     /** The product associated with the event. */
     product_id?: string | null;
     /** The referring URL. */
@@ -52,6 +50,8 @@ export interface CreateEventsRequest {
     user?: CreateEventsRequest.User | null;
     /** Monetary value associated with the event. */
     value?: number | null;
+    /** The variant associated with the event. */
+    variant_id?: string | null;
 }
 
 export namespace CreateEventsRequest {
