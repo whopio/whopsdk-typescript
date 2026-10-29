@@ -19,6 +19,10 @@ describe("SupportedMethodsClient", () => {
             data: [
                 {
                     delivery_type: "cash_pickup",
+                    fee_structure: {
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4,
+                    },
                     icon_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-bank-deposit",
                     id: "podst_xxxxxxxxxxxxxx",
                     name: "SEPA Bank Transfer",
