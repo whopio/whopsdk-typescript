@@ -13,6 +13,8 @@ export interface UpdateUsersRequest {
     account_id?: string;
     banner?: UpdateUsersRequest.Banner | null;
     bio?: string;
+    /** The user's date of birth as an ISO 8601 date, like `1998-04-23`. The user must be at least 13. Global profile only; refused with `account_id`. */
+    date_of_birth?: string;
     name?: string;
     profile_picture?: UpdateUsersRequest.ProfilePicture;
     username?: string;

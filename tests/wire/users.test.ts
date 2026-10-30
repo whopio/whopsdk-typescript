@@ -89,6 +89,7 @@ describe("UsersClient", () => {
                     bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
                     cards: { kind: null, status: "approved" },
                     created_at: "2026-01-01T12:00:00.000Z",
+                    date_of_birth: "date_of_birth",
                     earnings_usd: {
                         first_earned_at: "2026-01-01T12:00:00.000Z",
                         owned_accounts: {
@@ -295,6 +296,7 @@ describe("UsersClient", () => {
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
+            date_of_birth: "date_of_birth",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
                 owned_accounts: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
@@ -461,6 +463,7 @@ describe("UsersClient", () => {
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
+            date_of_birth: "date_of_birth",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
                 owned_accounts: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
@@ -641,6 +644,7 @@ describe("UsersClient", () => {
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
+            date_of_birth: "date_of_birth",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
                 owned_accounts: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
@@ -811,6 +815,7 @@ describe("UsersClient", () => {
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
             created_at: "2026-01-01T12:00:00.000Z",
+            date_of_birth: "date_of_birth",
             earnings_usd: {
                 first_earned_at: "2026-01-01T12:00:00.000Z",
                 owned_accounts: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
