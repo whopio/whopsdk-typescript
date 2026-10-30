@@ -4,7 +4,7 @@
  * Age, gender, and automatic-audience targeting.
  */
 export interface AdGroupDemographicsBody {
-    /** Turn on automatic audience targeting: delivery can reach beyond the ages, genders, and detailed targeting you set, treating them as suggestions. */
+    /** Turn on automatic audience targeting: delivery can reach beyond the ages and genders you set, treating them as suggestions. */
     automatic?: boolean | undefined;
     /** Gender to target. */
     gender?: AdGroupDemographicsBody.Gender | undefined;
