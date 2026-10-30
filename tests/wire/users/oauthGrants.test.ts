@@ -140,7 +140,7 @@ describe("OauthGrantsClient", () => {
         const rawRequestBody = {
             client_id: "app_xxxxxxxxxxxxxx",
             redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
-            requested_scopes: ["profile"],
+            requested_scopes: ["openid"],
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -165,7 +165,7 @@ describe("OauthGrantsClient", () => {
         const response = await client.users.oauthGrants.create({
             client_id: "app_xxxxxxxxxxxxxx",
             redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
-            requested_scopes: ["profile"],
+            requested_scopes: ["openid"],
         });
         expect(response).toEqual(rawResponseBody);
     });

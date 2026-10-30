@@ -234,7 +234,7 @@ describe("AppsClient", () => {
                 {
                     is_required: true,
                     justification: "Creates apps on behalf of the installing company.",
-                    permission_action: { action: "company:basic:read", name: "company:basic:read" },
+                    permission_action: { action: "company:basic:read", name: "Read business information" },
                 },
             ],
             required_scopes: ["read_user"],
@@ -513,7 +513,7 @@ describe("AppsClient", () => {
                 {
                     is_required: true,
                     justification: "Creates apps on behalf of the installing company.",
-                    permission_action: { action: "company:basic:read", name: "company:basic:read" },
+                    permission_action: { action: "company:basic:read", name: "Read business information" },
                 },
             ],
             required_scopes: ["read_user"],
@@ -749,7 +749,7 @@ describe("AppsClient", () => {
                 {
                     is_required: true,
                     justification: "Creates apps on behalf of the installing company.",
-                    permission_action: { action: "company:basic:read", name: "company:basic:read" },
+                    permission_action: { action: "company:basic:read", name: "Read business information" },
                 },
             ],
             required_scopes: ["read_user"],
@@ -1224,7 +1224,7 @@ describe("AppsClient", () => {
                 {
                     is_required: true,
                     justification: "Creates apps on behalf of the installing company.",
-                    permission_action: { action: "company:basic:read", name: "company:basic:read" },
+                    permission_action: { action: "company:basic:read", name: "Read business information" },
                 },
             ],
             required_scopes: ["read_user"],

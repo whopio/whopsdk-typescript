@@ -151,7 +151,7 @@ export class OauthGrantsClient {
      *     await client.users.oauthGrants.create({
      *         client_id: "app_xxxxxxxxxxxxxx",
      *         redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
-     *         requested_scopes: ["profile"]
+     *         requested_scopes: ["openid"]
      *     })
      */
     public create(
