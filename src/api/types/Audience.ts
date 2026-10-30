@@ -9,7 +9,7 @@ export interface Audience {
     auto_refresh: boolean;
     /** When the audience was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** Processing error message. `null` unless processing is partial or failed. */
+    /** Why a `pending` audience hasn't started, or why a `partial` or `failed` one isn't fully built. `null` when there is nothing to report. */
     error_message: string | null;
     /** Saved Whop People filters that define membership, using the same keys as `GET /people`. `null` for uploaded lists, engagement audiences, and lookalikes. */
     filters: Record<string, unknown> | null;
@@ -35,7 +35,7 @@ export interface Audience {
     source_audience_id: string | null;
     /** Membership source: an uploaded CSV, Whop People filters, or social engagement. Engagement audiences can no longer be created. */
     source_type: Audience.SourceType;
-    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     status: Audience.Status;
     /** Total members detected in the source — CSV rows for uploaded lists, matching people for automatic audiences. Always 0 for lookalikes and engagement audiences. */
     total_rows: number;
@@ -57,7 +57,7 @@ export namespace Audience {
         Engagement: "engagement",
     } as const;
     export type SourceType = (typeof SourceType)[keyof typeof SourceType];
-    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     export const Status = {
         Pending: "pending",
         Processing: "processing",
