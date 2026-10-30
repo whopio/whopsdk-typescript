@@ -16,6 +16,8 @@ export interface User {
     cards: Whop.AccountCards | null;
     /** When the user was created, as an ISO 8601 timestamp */
     created_at: string;
+    /** The user's date of birth as an ISO 8601 date, like `1998-04-23`. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or when the user has not set one. */
+    date_of_birth: string | null;
     /** The user's gross USD income over time, including a Partner commission breakdown. Populated only on single-user self reads for callers with balance-read scope; `null` otherwise. */
     earnings_usd: Whop.UserEarnings | null;
     /** The user's email address. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or while the account has no confirmed email yet. */
