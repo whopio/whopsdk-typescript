@@ -18,7 +18,7 @@ describe("ExternalAccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    error: "You don't have permission to share this account. Ask an admin of its Meta Business Portfolio to grant you full control, then share it again.",
+                    error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
                     external_id: "1234567891",
                     id: "sacc_xxxxxxxxxxxxxx",
                     name: "Shine Time Auto Detailing",
@@ -114,7 +114,7 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = { platform: "facebook" };
         const rawResponseBody = {
-            error: "You don't have permission to share this account. Ask an admin of its Meta Business Portfolio to grant you full control, then share it again.",
+            error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
             external_id: "1234567891",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Shine Time Auto Detailing",
@@ -553,7 +553,7 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            error: "You don't have permission to share this account. Ask an admin of its Meta Business Portfolio to grant you full control, then share it again.",
+            error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
             external_id: "1234567891",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Shine Time Auto Detailing",
