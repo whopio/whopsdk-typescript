@@ -273,10 +273,10 @@ describe("ExternalAccountsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
-            platform: "meta_business",
+            platform: "tiktok",
             redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         };
-        const rawResponseBody = { authorize_url: "https://www.facebook.com/v25.0/dialog/oauth" };
+        const rawResponseBody = { authorize_url: "https://accounts.snapchat.com/login/oauth2/authorize" };
 
         server
             .mockEndpoint()
@@ -288,7 +288,7 @@ describe("ExternalAccountsClient", () => {
             .build();
 
         const response = await client.externalAccounts.connect({
-            platform: "meta_business",
+            platform: "tiktok",
             redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         });
         expect(response).toEqual(rawResponseBody);
@@ -303,7 +303,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
+        const rawRequestBody = { platform: "tiktok", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -317,7 +317,7 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.connect({
-                platform: "meta_business",
+                platform: "tiktok",
                 redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -332,7 +332,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
+        const rawRequestBody = { platform: "tiktok", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -346,7 +346,7 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.connect({
-                platform: "meta_business",
+                platform: "tiktok",
                 redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -361,7 +361,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
+        const rawRequestBody = { platform: "tiktok", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -375,7 +375,7 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.connect({
-                platform: "meta_business",
+                platform: "tiktok",
                 redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.ConflictError);

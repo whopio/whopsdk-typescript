@@ -151,10 +151,10 @@ describe("SocialAccountsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
-            platform: "meta_business",
+            platform: "tiktok",
             redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         };
-        const rawResponseBody = { authorize_url: "https://www.facebook.com/v25.0/dialog/oauth" };
+        const rawResponseBody = { authorize_url: "https://accounts.snapchat.com/login/oauth2/authorize" };
 
         server
             .mockEndpoint()
@@ -166,7 +166,7 @@ describe("SocialAccountsClient", () => {
             .build();
 
         const response = await client.socialAccounts.connect({
-            platform: "meta_business",
+            platform: "tiktok",
             redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
         });
         expect(response).toEqual(rawResponseBody);
@@ -181,7 +181,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
+        const rawRequestBody = { platform: "tiktok", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -195,7 +195,7 @@ describe("SocialAccountsClient", () => {
 
         await expect(async () => {
             return await client.socialAccounts.connect({
-                platform: "meta_business",
+                platform: "tiktok",
                 redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.ConflictError);
