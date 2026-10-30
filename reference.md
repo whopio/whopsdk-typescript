@@ -1528,7 +1528,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates one rule covering every selected target and event combination. Active rules cannot overlap for the same platform and event. Customer prices and Whop revenue stay unchanged.
+Creates one rule covering every selected target and event combination. Active rules cannot overlap for the same target and event. Customer prices and Whop revenue stay unchanged.
 </dd>
 </dl>
 </dd>
@@ -5753,7 +5753,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a custom audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
+Creates a custom audience from a customer list or your account's Whop People data, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
 </dd>
 </dl>
 </dd>
@@ -5769,18 +5769,7 @@ Creates a custom audience from a customer list, your account's Whop People data,
 
 ```typescript
 await client.audiences.create({
-    account_id: "biz_xxxxxxxxxxxxxx",
-    engagement: {
-        include: [{
-                object: "facebook_page",
-                event: "engaged",
-                external_account_id: "sacc_xxxxxxxxxxxxxx",
-                retention_days: 30
-            }],
-        platform: "meta"
-    },
-    name: "Page engagers",
-    source_type: "engagement"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```

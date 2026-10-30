@@ -5,12 +5,10 @@ import type * as Whop from "../index.js";
 export interface Audience {
     /** Whether the audience targets a defined group of people or people similar to an existing audience. */
     audience_type: Audience.AudienceType;
-    /** Whether Whop rebuilds membership from saved People filters twice a day. When `false`, People audiences keep the members matched at creation. Always `false` for uploaded lists, lookalikes, and engagement audiences. Engagement membership is maintained by Meta. */
+    /** Whether Whop rebuilds membership from saved People filters twice a day. When `false`, People audiences keep the members matched at creation. Always `false` for uploaded lists, lookalikes, and engagement audiences. */
     auto_refresh: boolean;
     /** When the audience was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** Social engagement rules maintained by the ad platform. `null` for other audience sources. */
-    engagement: Whop.AudienceEngagement | null;
     /** Processing error message. `null` unless processing is partial or failed. */
     error_message: string | null;
     /** Saved Whop People filters that define membership, using the same keys as `GET /people`. `null` for uploaded lists, engagement audiences, and lookalikes. */
@@ -35,9 +33,9 @@ export interface Audience {
     progress_percent: number;
     /** For lookalikes: the audience this lookalike was built from. `null` for custom audiences. */
     source_audience_id: string | null;
-    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. */
+    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. Engagement audiences can no longer be created. */
     source_type: Audience.SourceType;
-    /** Current state of audience creation. For engagement audiences, `ready` means the rules were created on Meta; membership may still be populating. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     status: Audience.Status;
     /** Total members detected in the source — CSV rows for uploaded lists, matching people for automatic audiences. Always 0 for lookalikes and engagement audiences. */
     total_rows: number;
@@ -52,14 +50,14 @@ export namespace Audience {
         Lookalike: "lookalike",
     } as const;
     export type AudienceType = (typeof AudienceType)[keyof typeof AudienceType];
-    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. */
+    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. Engagement audiences can no longer be created. */
     export const SourceType = {
         CsvUpload: "csv_upload",
         PeopleFilter: "people_filter",
         Engagement: "engagement",
     } as const;
     export type SourceType = (typeof SourceType)[keyof typeof SourceType];
-    /** Current state of audience creation. For engagement audiences, `ready` means the rules were created on Meta; membership may still be populating. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     export const Status = {
         Pending: "pending",
         Processing: "processing",
