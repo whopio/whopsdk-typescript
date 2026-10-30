@@ -32,6 +32,8 @@ export * from "./AccountPartner.js";
 export * from "./AccountPartnerReward.js";
 export * from "./AccountPaymentControls.js";
 export * from "./AccountPreferences.js";
+export * from "./AccountProcessingOfferLevel.js";
+export * from "./AccountProcessingOfferRegionalRate.js";
 export * from "./AccountRecommendedAction.js";
 export * from "./AccountRequiredAction.js";
 export * from "./AccountReserve.js";

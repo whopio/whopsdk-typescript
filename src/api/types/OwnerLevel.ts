@@ -5,12 +5,23 @@ import type * as Whop from "../index.js";
 export interface OwnerLevel {
     /** Current level, from `0` before the first threshold up to `10`. */
     current: number;
+    levels: Whop.AccountProcessingOfferLevel[];
+    /** Charged Whop Ads spend this calendar month across every account the owner owns, in USD. */
+    monthly_ads_spend: Whop.Money;
+    /** Effective Whop Card spend this calendar month across every account the owner owns, in USD. */
+    monthly_card_spend: Whop.Money;
+    /** Qualifying spend this calendar month across every account the owner owns, in USD: Whop Ads spend, Whop Card spend, and a tenth of perpetual trading volume. */
+    monthly_qualifying_spend: Whop.Money;
+    /** Perpetual trading notional volume this calendar month across every account the owner owns, in USD. */
+    monthly_trading_volume: Whop.Money;
     /** Points earned this month across every account the owner owns. */
     points: number;
     /** This month's points, split by where they were earned. */
     points_by_source: Whop.OwnerLevelPoints;
     /** Points still needed this month to reach the next level, or `null` at level `10`. */
     points_to_next: number | null;
+    /** The standard US and Canada card processing percentage at `current`, before any account's custom rate. */
+    processing_rate_percentage: number;
     /** When this month's points reset to zero, as an ISO 8601 timestamp. */
     resets_at: string;
 }
