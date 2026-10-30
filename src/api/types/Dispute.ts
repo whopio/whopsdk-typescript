@@ -25,8 +25,10 @@ export interface Dispute {
     evidence_locked_reason: Dispute.EvidenceLockedReason | null;
     /** When the evidence was submitted to the processor, as an ISO 8601 timestamp. */
     evidence_submitted_at: string | null;
-    /** The dispute fee charged to the seller, in the currency it was collected in. `null` when no fee was charged, such as for an inquiry or a Visa RDR resolution. */
+    /** The dispute fee charged to the account, in the currency it was collected in. `null` when `fee_charged` is false. */
     fee: Whop.Money | null;
+    /** Whether Whop charged the account a dispute fee for this one. `false` when the payment was fully refunded before the dispute was opened, for a Visa RDR resolution, and for an inquiry. */
+    fee_charged: boolean;
     /** Dispute ID, prefixed `dspt_`. */
     id: string;
     /** Whether this is a pre-dispute inquiry rather than a formal chargeback. Inquiries follow the same lifecycle but move no funds unless one escalates. */
