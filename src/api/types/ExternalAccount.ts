@@ -13,8 +13,8 @@ export interface ExternalAccount {
     name: string | null;
     /** The external account this one belongs to on the platform, such as the Facebook page that owns an Instagram account. Null when the external account stands on its own, or when it is a partner. */
     parent_external_account: Whop.ExternalAccountParent | null;
-    /** Where a partner creator's permission to run partnership ads stands. `pending` until the creator approves it in the Instagram app, `approved` once they have, and `revoked` once it no longer holds. Null when the external account isn't a partner. */
-    partnership_status: ExternalAccount.PartnershipStatus | null;
+    /** Always `null`. Partnership ads are no longer available. */
+    partnership_status: string | null;
     /** The platform the external account exists on. */
     platform: ExternalAccount.Platform;
     /** The URL where the profile picture of the external account can be accessed. */
@@ -29,13 +29,6 @@ export interface ExternalAccount {
 }
 
 export namespace ExternalAccount {
-    /** Where a partner creator's permission to run partnership ads stands. `pending` until the creator approves it in the Instagram app, `approved` once they have, and `revoked` once it no longer holds. Null when the external account isn't a partner. */
-    export const PartnershipStatus = {
-        Pending: "pending",
-        Approved: "approved",
-        Revoked: "revoked",
-    } as const;
-    export type PartnershipStatus = (typeof PartnershipStatus)[keyof typeof PartnershipStatus];
     /** The platform the external account exists on. */
     export const Platform = {
         X: "x",
