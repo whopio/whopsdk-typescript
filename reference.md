@@ -17582,6 +17582,71 @@ await client.members.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.members.<a href="/src/api/resources/members/client/Client.ts">update</a>({ ...params }) -> Whop.Member</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sets the name the account uses for a member. Every invoice for this member shows it as the customer name, paid invoices included, in place of the user's own name. It does not change the user's Whop profile.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.members.update({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Memberships
 <details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Membership, Whop.ListMembershipsResponse&gt;</code></summary>
 <dl>
