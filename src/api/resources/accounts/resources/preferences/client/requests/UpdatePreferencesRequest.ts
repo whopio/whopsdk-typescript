@@ -19,8 +19,6 @@ export interface UpdatePreferencesRequest {
     ads_scheduling_timezone?: string;
     /** Connects or disconnects the Triple Whale integration, or changes the shop it reports to. Requires the `ad_campaign:create` scope on your API key. Connecting requires a `shop_domain` to report spend against. */
     ads_triple_whale_integration?: UpdatePreferencesRequest.AdsTripleWhaleIntegration;
-    /** Adds a fee to every checkout as a percentage of the price, such as `7.5` for 7.5%, which the account keeps; Whop waives its take rate on sales that carry it. At least 5, up to the most Whop allows for buyer fees, with at most two decimal places. Pass `null` to stop charging it on new purchases; subscriptions keep the rate they started with. Requires the `company:manage_checkout` scope on your API key. */
-    buyer_fee_percentage?: number | null;
     /** Whether incoming funds are automatically moved to the account's cards balance. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
     cards_auto_top_up?: boolean;
     /** Whether Whop Card notifications reach this account's team. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
