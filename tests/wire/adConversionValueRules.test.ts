@@ -27,14 +27,7 @@ describe("AdConversionValueRulesClient", () => {
                     metadata: { key: "value" },
                     percentage_change: 1.1,
                     status: "active",
-                    targets: [
-                        {
-                            platform: "tiktok",
-                            resource_id: null,
-                            resource_title: "Shine Time Auto Detailing",
-                            scope: "business",
-                        },
-                    ],
+                    targets: [{ resource_id: null, resource_title: "Shine Time Auto Detailing", scope: "business" }],
                     updated_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
@@ -88,14 +81,7 @@ describe("AdConversionValueRulesClient", () => {
             metadata: { key: "value" },
             percentage_change: 1.1,
             status: "active",
-            targets: [
-                {
-                    platform: "tiktok",
-                    resource_id: "resource_id",
-                    resource_title: "Shine Time Auto Detailing",
-                    scope: "business",
-                },
-            ],
+            targets: [{ resource_id: "resource_id", resource_title: "Shine Time Auto Detailing", scope: "business" }],
             updated_at: "2026-01-01T12:00:00.000Z",
         };
 
@@ -295,14 +281,7 @@ describe("AdConversionValueRulesClient", () => {
             metadata: { key: "value" },
             percentage_change: 1.1,
             status: "active",
-            targets: [
-                {
-                    platform: "tiktok",
-                    resource_id: "resource_id",
-                    resource_title: "Shine Time Auto Detailing",
-                    scope: "business",
-                },
-            ],
+            targets: [{ resource_id: "resource_id", resource_title: "Shine Time Auto Detailing", scope: "business" }],
             updated_at: "2026-01-01T12:00:00.000Z",
         };
 
@@ -366,14 +345,7 @@ describe("AdConversionValueRulesClient", () => {
             metadata: { key: "value" },
             percentage_change: 1.1,
             status: "active",
-            targets: [
-                {
-                    platform: "tiktok",
-                    resource_id: "resource_id",
-                    resource_title: "Shine Time Auto Detailing",
-                    scope: "business",
-                },
-            ],
+            targets: [{ resource_id: "resource_id", resource_title: "Shine Time Auto Detailing", scope: "business" }],
             updated_at: "2026-01-01T12:00:00.000Z",
         };
 
@@ -412,14 +384,7 @@ describe("AdConversionValueRulesClient", () => {
             metadata: { key: "value" },
             percentage_change: 1.1,
             status: "active",
-            targets: [
-                {
-                    platform: "tiktok",
-                    resource_id: "resource_id",
-                    resource_title: "Shine Time Auto Detailing",
-                    scope: "business",
-                },
-            ],
+            targets: [{ resource_id: "resource_id", resource_title: "Shine Time Auto Detailing", scope: "business" }],
             updated_at: "2026-01-01T12:00:00.000Z",
         };
 
@@ -484,14 +449,7 @@ describe("AdConversionValueRulesClient", () => {
             metadata: { key: "value" },
             percentage_change: 1.1,
             status: "active",
-            targets: [
-                {
-                    platform: "tiktok",
-                    resource_id: "resource_id",
-                    resource_title: "Shine Time Auto Detailing",
-                    scope: "business",
-                },
-            ],
+            targets: [{ resource_id: "resource_id", resource_title: "Shine Time Auto Detailing", scope: "business" }],
             updated_at: "2026-01-01T12:00:00.000Z",
         };
 

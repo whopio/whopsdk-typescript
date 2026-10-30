@@ -21,25 +21,6 @@ describe("AudiencesClient", () => {
                     audience_type: "custom",
                     auto_refresh: false,
                     created_at: "2026-01-01T12:00:00.000Z",
-                    engagement: {
-                        exclude: [
-                            {
-                                object: "facebook_page",
-                                event: "engaged",
-                                external_account_id: "sacc_xxxxxxxxxxxxxx",
-                                retention_days: 30,
-                            },
-                        ],
-                        include: [
-                            {
-                                object: "facebook_page",
-                                event: "engaged",
-                                external_account_id: "sacc_xxxxxxxxxxxxxx",
-                                retention_days: 30,
-                            },
-                        ],
-                        platform: "meta",
-                    },
                     error_message: "412 of 1,000 rows had no email or phone number, so the list could not be matched.",
                     filters: { country: "US", last_seen_within_days: 30 },
                     id: "adaud_xxxxxxxxxxxxxx",
@@ -116,45 +97,11 @@ describe("AudiencesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            engagement: {
-                include: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                platform: "meta",
-            },
-            name: "Page engagers",
-            source_type: "engagement",
-        };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             audience_type: "custom",
             auto_refresh: false,
             created_at: "2026-01-01T12:00:00.000Z",
-            engagement: {
-                exclude: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                include: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                platform: "meta",
-            },
             error_message: "412 of 1,000 rows had no email or phone number, so the list could not be matched.",
             filters: { country: "US", last_seen_within_days: 30 },
             id: "adaud_xxxxxxxxxxxxxx",
@@ -185,19 +132,6 @@ describe("AudiencesClient", () => {
 
         const response = await client.audiences.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            engagement: {
-                include: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                platform: "meta",
-            },
-            name: "Page engagers",
-            source_type: "engagement",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -320,25 +254,6 @@ describe("AudiencesClient", () => {
             audience_type: "custom",
             auto_refresh: false,
             created_at: "2026-01-01T12:00:00.000Z",
-            engagement: {
-                exclude: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                include: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                platform: "meta",
-            },
             error_message: "412 of 1,000 rows had no email or phone number, so the list could not be matched.",
             filters: { country: "US", last_seen_within_days: 30 },
             id: "adaud_xxxxxxxxxxxxxx",
@@ -415,25 +330,6 @@ describe("AudiencesClient", () => {
             audience_type: "custom",
             auto_refresh: false,
             created_at: "2026-01-01T12:00:00.000Z",
-            engagement: {
-                exclude: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                include: [
-                    {
-                        object: "facebook_page",
-                        event: "engaged",
-                        external_account_id: "sacc_xxxxxxxxxxxxxx",
-                        retention_days: 30,
-                    },
-                ],
-                platform: "meta",
-            },
             error_message: "412 of 1,000 rows had no email or phone number, so the list could not be matched.",
             filters: { country: "US", last_seen_within_days: 30 },
             id: "adaud_xxxxxxxxxxxxxx",

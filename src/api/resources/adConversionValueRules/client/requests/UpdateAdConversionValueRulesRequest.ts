@@ -10,7 +10,7 @@ export interface UpdateAdConversionValueRulesRequest {
     /** Conversion value rule ID, prefixed `adcvr_`. */
     id: string;
     adjustment_type?: UpdateAdConversionValueRulesRequest.AdjustmentType;
-    /** Events adjusted on every selected target. Every platform must support every selected event. */
+    /** Events adjusted on every selected target. A network that doesn't support a named custom event leaves it out. */
     events?: UpdateAdConversionValueRulesRequest.Events.Item[];
     fixed_value?: UpdateAdConversionValueRulesRequest.FixedValue | null;
     metadata?: Record<string, string>;
@@ -18,7 +18,7 @@ export interface UpdateAdConversionValueRulesRequest {
     percentage_change?: number | null;
     /** Exact IDs of active rules whose overlapping selections will be replaced. Other selections keep their values; remaining selections may split into separate rules. Broader rules remain as fallbacks for other items. Rules left with no selections are paused. Stale or incomplete conflict selections fail. */
     replace_rule_ids?: string[];
-    /** Targets sharing one scope. Every selected event applies to every target. At most 500 target and event combinations. */
+    /** Targets sharing one scope. Each target covers every network Whop runs it on, and every selected event applies to every target. At most 500 target, network, and event combinations. */
     targets?: UpdateAdConversionValueRulesRequest.Targets.Item[];
 }
 
@@ -32,7 +32,7 @@ export namespace UpdateAdConversionValueRulesRequest {
 
     export namespace Events {
         export interface Item {
-            /** Exact custom event name. Required for custom events; `null` for standard events. Google does not support named custom events. */
+            /** Exact custom event name. Required for custom events; `null` for standard events. */
             custom_name?: (string | null) | undefined;
             event_name: Item.EventName;
         }
@@ -65,21 +65,12 @@ export namespace UpdateAdConversionValueRulesRequest {
 
     export namespace Targets {
         export interface Item {
-            /** Limits the target to one network. Omit it to cover every network Whop runs the target on. */
-            platform?: Item.Platform | undefined;
             /** Campaign, ad group, or ad ID. Null for a business target. */
             resource_id?: (string | null) | undefined;
             scope: Item.Scope;
         }
 
         export namespace Item {
-            /** Limits the target to one network. Omit it to cover every network Whop runs the target on. */
-            export const Platform = {
-                Tiktok: "tiktok",
-                Meta: "meta",
-                Google: "google",
-            } as const;
-            export type Platform = (typeof Platform)[keyof typeof Platform];
             export const Scope = {
                 Business: "business",
                 Campaign: "campaign",

@@ -17,9 +17,9 @@ export declare namespace AudiencesClient {
 }
 
 /**
- * An Audience is a reusable group of people to include or exclude when targeting ads. Build custom audiences from customer lists, Whop People data, or social engagement, and create lookalikes to reach people similar to an existing audience.
+ * An Audience is a reusable group of people to include or exclude when targeting ads. Build custom audiences from customer lists or Whop People data, and create lookalikes to reach people similar to an existing audience.
  *
- * Use the Audiences API to create audiences, add people to an uploaded customer list, rename or refilter an audience, and monitor asynchronous processing. Engagement sources on Meta include videos, lead forms, Instagram profiles, and Facebook pages, and their membership updates on Meta; Whop People audiences can refresh automatically or keep a snapshot.
+ * Use the Audiences API to create audiences, add people to an uploaded customer list, rename or refilter an audience, and monitor asynchronous processing. Whop People audiences can refresh automatically or keep a snapshot.
  */
 export class AudiencesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AudiencesClient.Options>;
@@ -71,7 +71,7 @@ export class AudiencesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-4",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -131,7 +131,7 @@ export class AudiencesClient {
     }
 
     /**
-     * Creates a custom audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
+     * Creates a custom audience from a customer list or your account's Whop People data, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
      *
      * @param {Whop.CreateAudiencesRequest} request
      * @param {AudiencesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -144,18 +144,7 @@ export class AudiencesClient {
      *
      * @example
      *     await client.audiences.create({
-     *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         engagement: {
-     *             include: [{
-     *                     object: "facebook_page",
-     *                     event: "engaged",
-     *                     external_account_id: "sacc_xxxxxxxxxxxxxx",
-     *                     retention_days: 30
-     *                 }],
-     *             platform: "meta"
-     *         },
-     *         name: "Page engagers",
-     *         source_type: "engagement"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
@@ -174,7 +163,7 @@ export class AudiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-4",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -253,7 +242,7 @@ export class AudiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-4",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -321,7 +310,7 @@ export class AudiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-4",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -399,7 +388,7 @@ export class AudiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-3",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-10-29-4",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
