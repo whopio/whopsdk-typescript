@@ -80,6 +80,8 @@ export namespace CreatePaymentsRequest {
     export interface PaymentMethod {
         /** Required when `type` is `card_present`. */
         card_present?: PaymentMethod.CardPresent | undefined;
+        /** Options for a `paypal` payment method. */
+        paypal?: PaymentMethod.Paypal | undefined;
         /** The kind of payment method; the member named after it carries its details. */
         type: PaymentMethod.Type;
     }
@@ -100,6 +102,14 @@ export namespace CreatePaymentsRequest {
                 Android: "android",
             } as const;
             export type Platform = (typeof Platform)[keyof typeof Platform];
+        }
+
+        /**
+         * Options for a `paypal` payment method.
+         */
+        export interface Paypal {
+            /** Has PayPal ask the buyer for a shipping address. Tax is recalculated for each address the buyer picks before they approve, so the total they approve is the total charged, and the address they confirm is returned on the payment as `shipping_address`. Cannot be combined with `shipping_address`. Defaults to false. */
+            request_shipping?: boolean | undefined;
         }
 
         /** The kind of payment method; the member named after it carries its details. */
