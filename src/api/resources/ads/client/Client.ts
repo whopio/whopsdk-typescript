@@ -29,7 +29,7 @@ export class AdsClient {
     }
 
     /**
-     * Records a runner's stats for one of their ads in one hour, and pays them for the spend. Send the ad's totals so far for an hour that started in the last 24 hours; they replace what the ad held for that hour, and its ad group's and campaign's hours are rebuilt from their ads. The spend can go up but never down. Reporting on a campaign starts with the hour of its first recorded report; earlier hours are refused. Spend over what is left of a budget (the runner's share of the day, the campaign's daily budget or the ad group's budget) is refused with the most the ad can record. Takes the runner's Whop session, a user API key, or a user OAuth token with `ad_campaign:update`. A token without that scope gets a 403, and anyone not holding the ad's campaign gets a 404.
+     * Records a runner's stats for one of their ads in one hour, and pays them for the spend. Send the ad's totals so far for an hour that started in the last 24 hours; they replace what the ad held for that hour, and its ad group's and campaign's hours are rebuilt from their ads. The spend can go up but never down. Reporting on a campaign starts with the hour of its first recorded report; earlier hours are refused. The spend is recorded and paid exactly as sent, with no markup added, so send it with the runner's markup already applied. Takes the runner's Whop session, a user API key, or a user OAuth token with `ad_campaign:update`. A token without that scope gets a 403, and anyone not holding the ad's campaign gets a 404.
      *
      * @param {Whop.ReportStatsAdsRequest} request
      * @param {AdsClient.RequestOptions} requestOptions - Request-specific configuration.

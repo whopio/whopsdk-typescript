@@ -17,7 +17,7 @@ export interface ReportStatsAdsRequest {
     hour_started_at: string;
     /** The ad's impressions in the hour so far. Zero when left out. */
     impressions?: ReportStatsAdsRequest.Impressions;
-    /** USD spent on the ad in the hour so far, to the cent. */
+    /** The USD to be paid for the ad's hour so far, to the cent: what the ad spent plus any markup, such as 105.00 for 100.00 spent with a 5% markup. */
     spend: ReportStatsAdsRequest.Spend;
 }
 
@@ -31,7 +31,7 @@ export namespace ReportStatsAdsRequest {
      */
     export type Impressions = number | string;
     /**
-     * USD spent on the ad in the hour so far, to the cent.
+     * The USD to be paid for the ad's hour so far, to the cent: what the ad spent plus any markup, such as 105.00 for 100.00 spent with a 5% markup.
      */
     export type Spend = number | string;
 }
