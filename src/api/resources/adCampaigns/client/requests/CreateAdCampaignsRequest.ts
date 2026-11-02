@@ -10,8 +10,6 @@
 export interface CreateAdCampaignsRequest {
     /** The account to create the campaign under. Defaults to the account-scoped key's own account. */
     account_id?: string;
-    /** How delivery bids in the ad auction: `minimum_cost` gets the most results for the budget, `average_target` holds an average cost per result, `maximum_target` never bids above a cap. Only for campaigns that own the budget. */
-    bid_type?: CreateAdCampaignsRequest.BidType;
     /** The campaign's budget in USD, which is what it is stored and billed in. Required when budget_optimization is `ad_campaign` (or send budget_amount_local instead); omit when each ad group sets its own budget. */
     budget_amount?: number;
     /** The campaign's budget stated in the account's ads reporting currency (`budget_currency` on the response) instead of USD. Converted to USD at the current exchange rate and stored as budget_amount. Provide this or budget_amount, not both. */
@@ -37,13 +35,6 @@ export interface CreateAdCampaignsRequest {
 }
 
 export namespace CreateAdCampaignsRequest {
-    /** How delivery bids in the ad auction: `minimum_cost` gets the most results for the budget, `average_target` holds an average cost per result, `maximum_target` never bids above a cap. Only for campaigns that own the budget. */
-    export const BidType = {
-        MinimumCost: "minimum_cost",
-        AverageTarget: "average_target",
-        MaximumTarget: "maximum_target",
-    } as const;
-    export type BidType = (typeof BidType)[keyof typeof BidType];
     /** Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group individually (`ad_group`). Defaults to `ad_group`. */
     export const BudgetOptimization = {
         AdCampaign: "ad_campaign",
