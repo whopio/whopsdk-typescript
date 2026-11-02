@@ -26,7 +26,9 @@ export interface CreateInvoicesRequest {
     mailing_address_id?: string | null;
     /** The billed customer, a member of the account. Changing email recipients does not change this buyer. */
     member_id?: string | null;
-    /** Up to 50 caller-owned string key/value pairs. */
+    /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. Trimmed; `null` or blank clears it. Can be updated on draft, open, or uncollectible invoices. */
+    memo?: string | null;
+    /** Up to 50 caller-owned string key/value pairs. The `invoice_memo` key is reserved and ignored; set `memo` instead. */
     metadata?: Record<string, string>;
     /** A saved payment method belonging to the member, prefixed `payt_`. Sending or issuing the invoice charges this method at the `charge_at` passed to that call, otherwise on `due_at`, or right away when there is no `due_at` or it has passed. Sending also emails the invoice now when the charge is later; issuing does not. Setting it needs `payment:charge`. */
     payment_method_id?: string | null;

@@ -316,7 +316,7 @@ export class InvoicesClient {
     }
 
     /**
-     * Updates draft invoice items and billing fields. Recipient-only updates are also allowed on unpaid invoices. Edit customer contact details through the member API. A draft with no saved payment method and no scheduled send needs `invoice:update`, `invoice:create`, or `payment:charge`; every other update, and setting `payment_method_id`, needs `payment:charge`.
+     * Updates draft invoice items and billing fields. Updates of only `recipient_emails` and `memo` are also allowed on unpaid invoices. Edit customer contact details through the member API. A draft with no saved payment method and no scheduled send needs `invoice:update`, `invoice:create`, or `payment:charge`; every other update, and setting `payment_method_id`, needs `payment:charge`.
      *
      * @param {Whop.UpdateInvoicesRequest} request
      * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
