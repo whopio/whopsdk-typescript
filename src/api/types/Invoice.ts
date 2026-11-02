@@ -19,6 +19,8 @@ export interface Invoice {
     line_items: Whop.InvoiceLineItem[];
     mailing_address_id: string | null;
     member_id: string | null;
+    /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. `null` when none is set. */
+    memo: string | null;
     metadata: Record<string, string>;
     number: string;
     object: Invoice.Object_;
