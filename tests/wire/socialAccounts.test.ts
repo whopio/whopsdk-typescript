@@ -152,9 +152,9 @@ describe("SocialAccountsClient", () => {
         });
         const rawRequestBody = {
             platform: "tiktok",
-            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings",
         };
-        const rawResponseBody = { authorize_url: "https://accounts.snapchat.com/login/oauth2/authorize" };
+        const rawResponseBody = { authorize_url: "https://appcenter.intuit.com/connect/oauth2" };
 
         server
             .mockEndpoint()
@@ -167,7 +167,7 @@ describe("SocialAccountsClient", () => {
 
         const response = await client.socialAccounts.connect({
             platform: "tiktok",
-            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings",
+            redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings",
         });
         expect(response).toEqual(rawResponseBody);
     });

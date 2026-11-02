@@ -4,37 +4,26 @@
  * @example
  *     {
  *         platform: "tiktok",
- *         redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings"
+ *         redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings"
  *     }
  */
 export interface ConnectExternalAccountsRequest {
     /** The Account (biz_ identifier) to connect the external account for. An account-scoped API key may omit this to default to its own account. Omit for user profile connections. */
     account_id?: string;
-    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `snapchat` for Snapchat Public Profiles. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, omit `scopes`, and the user picks the company in QuickBooks. */
+    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. */
     platform: ConnectExternalAccountsRequest.Platform;
     /** Where to send the user once they finish connecting their accounts. Must be an `https` URL on whop.com; any other host is rejected. On success, the user is redirected with an `external_account_connected` query param naming the platform; if the connection fails, with an `external_account_error` query param instead. The same values also arrive as `social_account_connected` / `social_account_error`. */
     redirect_url: string;
-    /** The connection purpose. For `snapchat`, `advertise` is required and connects company advertising assets. For `linkedin`, `tiktok`, `youtube`, and `x`, omit scopes to connect the authenticated user’s profile. For `quickbooks`, omit scopes; the connection belongs to the account in `account_id`. Profile connections still request the platform permissions needed to read the profile. */
-    scopes?: ConnectExternalAccountsRequest.Scopes.Item[];
 }
 
 export namespace ConnectExternalAccountsRequest {
-    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `snapchat` for Snapchat Public Profiles. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, omit `scopes`, and the user picks the company in QuickBooks. */
+    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. */
     export const Platform = {
         Tiktok: "tiktok",
         Linkedin: "linkedin",
         Youtube: "youtube",
         X: "x",
-        Snapchat: "snapchat",
         Quickbooks: "quickbooks",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
-    export type Scopes = Scopes.Item[];
-
-    export namespace Scopes {
-        export const Item = {
-            Advertise: "advertise",
-        } as const;
-        export type Item = (typeof Item)[keyof typeof Item];
-    }
 }

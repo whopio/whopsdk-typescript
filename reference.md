@@ -13952,7 +13952,7 @@ Starts an OAuth connection flow and returns an `authorize_url` to send the user 
 ```typescript
 await client.externalAccounts.connect({
     platform: "tiktok",
-    redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings"
+    redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings"
 });
 
 ```
@@ -26638,7 +26638,7 @@ Deprecated compatibility endpoint. Connect external accounts with `POST /externa
 ```typescript
 await client.socialAccounts.connect({
     platform: "tiktok",
-    redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/ads/settings"
+    redirect_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings"
 });
 
 ```
