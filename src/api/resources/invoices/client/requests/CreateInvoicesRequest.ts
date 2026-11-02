@@ -12,7 +12,7 @@ export interface CreateInvoicesRequest {
     account_id: string;
     /** Create a billing address linked to this member. */
     billing_address?: CreateInvoicesRequest.BillingAddress | null;
-    /** The buyer's adjustable fee in percentage points, with at most two decimal places. */
+    /** The buyer's adjustable fee in percentage points, with at most two decimal places: `0` for none, or between 5 and 100. The account keeps it, and Whop waives its take rate on the invoice. */
     buyer_fee_percentage?: number;
     /** The contact name when creating an email-only member. */
     customer_name?: string | null;

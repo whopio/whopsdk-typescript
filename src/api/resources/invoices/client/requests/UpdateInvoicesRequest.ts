@@ -11,7 +11,7 @@ export interface UpdateInvoicesRequest {
     id: string;
     /** Create a billing address linked to this member. */
     billing_address?: UpdateInvoicesRequest.BillingAddress | null;
-    /** The buyer's adjustable fee in percentage points, with at most two decimal places. */
+    /** The buyer's adjustable fee in percentage points, with at most two decimal places: `0` for none, or between 5 and 100. The account keeps it, and Whop waives its take rate on the invoice. */
     buyer_fee_percentage?: number;
     /** When payment is due, as an ISO 8601 timestamp. */
     due_at?: string | null;
