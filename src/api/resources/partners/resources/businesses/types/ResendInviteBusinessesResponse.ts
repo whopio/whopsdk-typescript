@@ -7,7 +7,7 @@ export interface ResendInviteBusinessesResponse {
     account: ResendInviteBusinessesResponse.Account | null;
     /** The partner whose blueprint the business deployed. Null unless this is a blueprint referral. */
     blueprint_partner: ResendInviteBusinessesResponse.BlueprintPartner | null;
-    /** CPA terms for the referring partner. Omitted for other callers. An offer token requires partner:commission_advance:accept permission. */
+    /** CPA terms for the referring partner. Read with referring_account_id, the business's owner sees every rep's terms and a manager sees those of the reps below them, read-only. Omitted for other callers. An offer token is only for the referring partner and requires partner:commission_advance:accept permission. */
     commission_advance?: (Whop.PartnerAdvance | null) | undefined;
     /** Whether this referral meets the partner and ownership requirements for saving commission advance projections. Returned only to the referring partner; existing advance terms and update permissions still apply. */
     commission_advance_projections_allowed?: boolean | undefined;

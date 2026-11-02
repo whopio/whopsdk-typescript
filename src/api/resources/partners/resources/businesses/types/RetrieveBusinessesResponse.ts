@@ -7,7 +7,7 @@ export interface RetrieveBusinessesResponse {
     account: RetrieveBusinessesResponse.Account | null;
     /** The partner whose blueprint the business deployed. Null unless this is a blueprint referral. */
     blueprint_partner: RetrieveBusinessesResponse.BlueprintPartner | null;
-    /** CPA terms for the referring partner. Omitted for other callers. An offer token requires partner:commission_advance:accept permission. */
+    /** CPA terms for the referring partner. Read with referring_account_id, the business's owner sees every rep's terms and a manager sees those of the reps below them, read-only. Omitted for other callers. An offer token is only for the referring partner and requires partner:commission_advance:accept permission. */
     commission_advance?: (Whop.PartnerAdvance | null) | undefined;
     /** The most the referring organization advances per business, in USD. Returned only with commission_advance_rate. */
     commission_advance_cap?: Whop.Money | undefined;
