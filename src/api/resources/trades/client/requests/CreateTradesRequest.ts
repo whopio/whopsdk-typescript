@@ -14,15 +14,15 @@ export interface CreateTradesRequest {
     amount?: string;
     /** Only for an order. Your own ID for the trade, 1 to 128 characters, unique for the account. Sending it again with the same order returns the same trade; with a different order it answers `409`. */
     client_order_id?: string;
-    /** `perpetual` or `spot`. Required for an order. A spot order first switches the trading account to Hyperliquid's unified account mode, where spot and perpetuals share one USDC balance. */
+    /** `perpetual` or `spot`. Required for an order. A spot order is a market order that swaps in the wallet and does not use the trading balance. */
     instrument_type?: CreateTradesRequest.InstrumentType;
     /** Only for a perpetual order. The cross leverage, from 1 to the market's maximum. Required unless `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
-    /** The market: a perpetual such as `BTC`, or for spot a pair priced in USDC such as `HYPE/USDC`. Required for an order or close, and a close takes only a perpetual; not accepted for a deposit or withdraw. */
+    /** The market: a perpetual such as `BTC`, or for spot an asset the wallet can swap into, such as `BTC` or `XAUT`. Required for an order or close, and a close takes only a perpetual; not accepted for a deposit or withdraw. */
     market?: string;
     /** Only for an order. Free-form string-to-string annotations: up to 50 keys of at most 40 characters, values up to 500 characters. */
     metadata?: Record<string, string>;
-    /** Only for an order. The order value in USD, as a decimal string; the size is rounded down to the market's decimals. Send exactly one of `size` or `notional`. */
+    /** Only for an order. The order value in USD, as a decimal string; the size is rounded down to the market's decimals. Send exactly one of `size` or `notional`; a spot buy takes `notional`, the USDT0 to spend. */
     notional?: string;
     /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
     order_type?: CreateTradesRequest.OrderType;
@@ -32,16 +32,16 @@ export interface CreateTradesRequest {
     reduce_only?: boolean;
     /** `buy` or `sell`. Required for an order. */
     side?: CreateTradesRequest.Side;
-    /** Only for an order. The size in units of the market, as a decimal string, with at most the market's size decimals. Send exactly one of `size` or `notional`. The order must be worth at least 10 USD, unless reduce-only. */
+    /** Only for an order. The size in units of the market, as a decimal string, with at most the market's size decimals. Send exactly one of `size` or `notional`; a spot sell takes `size`. A perpetual order must be worth at least 10 USD, unless reduce-only. */
     size?: string;
-    /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100. */
+    /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100 for a perpetual, and to the swap route's own default for spot. */
     slippage_bps?: number;
-    /** `order` places one order from the trading balance, setting cross `leverage` first on a perpetual; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order. A perpetual order trades from the trading balance, setting cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. A spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: CreateTradesRequest.Type;
 }
 
 export namespace CreateTradesRequest {
-    /** `perpetual` or `spot`. Required for an order. A spot order first switches the trading account to Hyperliquid's unified account mode, where spot and perpetuals share one USDC balance. */
+    /** `perpetual` or `spot`. Required for an order. A spot order is a market order that swaps in the wallet and does not use the trading balance. */
     export const InstrumentType = {
         Perpetual: "perpetual",
         Spot: "spot",
@@ -59,7 +59,7 @@ export namespace CreateTradesRequest {
         Sell: "sell",
     } as const;
     export type Side = (typeof Side)[keyof typeof Side];
-    /** `order` places one order from the trading balance, setting cross `leverage` first on a perpetual; when the balance is short, it bridges the USDT0 it needs from the wallet first. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order. A perpetual order trades from the trading balance, setting cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. A spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     export const Type = {
         Close: "close",
         Order: "order",

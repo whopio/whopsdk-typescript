@@ -39,13 +39,6 @@ describe("MarketsClient", () => {
                     size_decimals: 4,
                 },
                 {
-                    id: "ETH",
-                    instrument_type: "spot",
-                    max_leverage: null,
-                    price: { amount: "2320.65000000", currency: "usd", decimals: 8, display_decimals: 8 },
-                    size_decimals: 4,
-                },
-                {
                     id: "SOL",
                     instrument_type: "perpetual",
                     max_leverage: 20,
