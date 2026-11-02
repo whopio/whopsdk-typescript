@@ -26,7 +26,8 @@ describe("EarningsClient", () => {
                         title: "Gleam Mobile Detailing",
                     },
                     cancelation_reason: "payment_refunded",
-                    commission_amount_usd: "1.00",
+                    commission_amount_usd: "3.00",
+                    covered_by_commission_advance: false,
                     created_at: "2026-01-01T12:00:00Z",
                     financial_activity: [
                         {
@@ -70,7 +71,7 @@ describe("EarningsClient", () => {
                     },
                     second_tier: false,
                     status: "awaiting_settlement",
-                    transaction_amount_usd: "10.00",
+                    transaction_amount_usd: "30.00",
                 },
             ],
             page_info: {
