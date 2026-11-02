@@ -18,6 +18,8 @@ export namespace ListEarningsResponse {
             cancelation_reason: string | null;
             /** What the referrer earns, in USD. Null until the earning settles. */
             commission_amount_usd: string | null;
+            /** Whether an upfront commission advance replaces this commission, including covered earnings that are still awaiting settlement. */
+            covered_by_commission_advance: boolean;
             created_at: string;
             /** Income and cost lines behind this earning's commission. Null for earnings settled before this data was recorded. */
             financial_activity: Item.FinancialActivity.Item[] | null;
@@ -29,7 +31,7 @@ export namespace ListEarningsResponse {
             /** The referrer's share of Whop's gross profit, as a fraction (0.3 = 30%). Null until the earning settles. */
             payout_percentage: number | null;
             product: Item.Product | null;
-            /** Estimated commission while awaiting settlement. Null when no estimate is available or the earning has settled. */
+            /** Estimated commission while awaiting settlement. Zero when a funded commission advance covers the earning. Null when no estimate is available or the earning has settled. */
             projected_commission_amount_usd: Whop.Money | null;
             /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the withdrawal for withdrawal earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings. */
             resource: Item.Resource | null;
