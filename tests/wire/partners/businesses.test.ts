@@ -319,6 +319,7 @@ describe("BusinessesClient", () => {
             },
             id: "coma_xxxxxxxxxxxxxx",
             my_partner_tier: "first",
+            my_payout_percentages: { ad_spend: 0, card_interchange: 0, sales: 0.3, transfer: 0, withdrawal: 0 },
             object: "partner_business",
             owner: {
                 email: "marcus@shinetime.example",
@@ -638,6 +639,7 @@ describe("BusinessesClient", () => {
             },
             id: "coma_xxxxxxxxxxxxxx",
             my_partner_tier: "first",
+            my_payout_percentages: { ad_spend: 0, card_interchange: 0, sales: 0.3, transfer: 0, withdrawal: 0.3 },
             object: "partner_business",
             owner: {
                 email: "marcus@shinetime.example",

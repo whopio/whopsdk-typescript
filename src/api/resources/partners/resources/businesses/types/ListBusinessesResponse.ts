@@ -34,7 +34,7 @@ export namespace ListBusinessesResponse {
             object: Item.Object_;
             /** The owner of the referred business. */
             owner: Item.Owner | null;
-            /** The referrer's commission rate for each income source, expressed as a fraction (0.3 = 30%). */
+            /** The commission rate this referral pays for each income source, as a fraction (0.3 = 30%). A solo partner earns it directly; the team of a referring partner business splits it by their shares. */
             payout_percentages: Item.PayoutPercentages;
             /** When the referral expires. */
             referral_expires_at: string | null;
@@ -160,7 +160,7 @@ export namespace ListBusinessesResponse {
             }
 
             /**
-             * The referrer's commission rate for each income source, expressed as a fraction (0.3 = 30%).
+             * The commission rate this referral pays for each income source, as a fraction (0.3 = 30%). A solo partner earns it directly; the team of a referring partner business splits it by their shares.
              */
             export interface PayoutPercentages {
                 /** Share of the referred business's Whop Ads spend. */

@@ -22,10 +22,12 @@ export interface ResendInviteBusinessesResponse {
     id: string;
     /** Which tier the caller earns on for this business: `first` (they referred the owner), `second` (they referred the first-tier partner), or `blueprint` (the business deployed a site from their blueprint). */
     my_partner_tier: ResendInviteBusinessesResponse.MyPartnerTier;
+    /** The caller's own cut of each income source on this business, as a fraction of the same base as `payout_percentages` (0.12 = 12%). A solo partner's cut is the whole rate. On a referring partner business's deal it is the caller's team share of the rate: a closer earns their share, a manager earns their share minus the share of the person below them, and a deal participant earns their cut. Null when the caller earns nothing on this business, as with an account API key. */
+    my_payout_percentages: ResendInviteBusinessesResponse.MyPayoutPercentages | null;
     object: ResendInviteBusinessesResponse.Object_;
     /** The owner of the referred business. */
     owner: ResendInviteBusinessesResponse.Owner | null;
-    /** The referrer's commission rate for each income source, expressed as a fraction (0.3 = 30%). */
+    /** The commission rate this referral pays for each income source, as a fraction (0.3 = 30%). A solo partner earns it directly; the team of a referring partner business splits it by their shares. */
     payout_percentages: ResendInviteBusinessesResponse.PayoutPercentages;
     /** Outstanding invites to claim ownership of this business. Present only to the first-tier partner's whop.com session, or the Whop CLI or MCP with the `partner:handoff` scope, and empty once every invite has been accepted. */
     pending_owner_invites?: ResendInviteBusinessesResponse.PendingOwnerInvites.Item[] | undefined;
@@ -126,6 +128,23 @@ export namespace ResendInviteBusinessesResponse {
         Blueprint: "blueprint",
     } as const;
     export type MyPartnerTier = (typeof MyPartnerTier)[keyof typeof MyPartnerTier];
+
+    /**
+     * The caller's own cut of each income source on this business, as a fraction of the same base as `payout_percentages` (0.12 = 12%). A solo partner's cut is the whole rate. On a referring partner business's deal it is the caller's team share of the rate: a closer earns their share, a manager earns their share minus the share of the person below them, and a deal participant earns their cut. Null when the caller earns nothing on this business, as with an account API key.
+     */
+    export interface MyPayoutPercentages {
+        /** The caller's share of the referred business's Whop Ads spend. */
+        ad_spend: number | null;
+        /** The caller's share of Whop's profit from card interchange. */
+        card_interchange: number | null;
+        /** The caller's share of Whop's profit from product sales. */
+        sales: number | null;
+        /** The caller's share of Whop's profit from platform balance transfers. */
+        transfer: number | null;
+        /** The caller's share of Whop's profit from withdrawals. */
+        withdrawal: number | null;
+    }
+
     export const Object_ = {
         PartnerBusiness: "partner_business",
     } as const;
@@ -158,7 +177,7 @@ export namespace ResendInviteBusinessesResponse {
     }
 
     /**
-     * The referrer's commission rate for each income source, expressed as a fraction (0.3 = 30%).
+     * The commission rate this referral pays for each income source, as a fraction (0.3 = 30%). A solo partner earns it directly; the team of a referring partner business splits it by their shares.
      */
     export interface PayoutPercentages {
         /** Share of the referred business's Whop Ads spend. */
