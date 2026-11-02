@@ -7,8 +7,6 @@ export interface AdCampaign {
     added_to_cart_value: number;
     /** Whop pixel-attributed add-to-cart events, last-click. */
     added_to_carts: number;
-    /** How delivery bids in the ad auction: `minimum_cost` gets the most results for the budget, `average_target` holds an average cost per result, and `maximum_target` never bids above a cap. */
-    bid_type?: (AdCampaign.BidType | null) | undefined;
     /** The campaign's budget in USD, which is what it is stored and billed in. `null` when each ad group sets its own budget instead. */
     budget_amount: number | null;
     /** The same budget stated in `budget_currency` at today's exchange rate, for display in the account's ads reporting currency. `null` when `budget_amount` is. */
@@ -132,13 +130,6 @@ export interface AdCampaign {
 }
 
 export namespace AdCampaign {
-    /** How delivery bids in the ad auction: `minimum_cost` gets the most results for the budget, `average_target` holds an average cost per result, and `maximum_target` never bids above a cap. */
-    export const BidType = {
-        MinimumCost: "minimum_cost",
-        AverageTarget: "average_target",
-        MaximumTarget: "maximum_target",
-    } as const;
-    export type BidType = (typeof BidType)[keyof typeof BidType];
     /** Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group individually (`ad_group`). */
     export const BudgetOptimization = {
         AdCampaign: "ad_campaign",
