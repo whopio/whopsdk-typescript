@@ -5,9 +5,9 @@ import type * as Whop from "../index.js";
 export interface Trade {
     /** The account that owns the trading wallet, prefixed `biz_`. `null` when a user owns it. */
     account_id: string | null;
-    /** The USDT0 that a deposit, or an order short of trading balance, sends from the wallet, or the USDC that a withdraw sends back, in native units, as a decimal string. A withdraw of `all` shows what it sent once it finishes. `null` otherwise. */
+    /** The USDT0 that a deposit, a spot buy, or a perpetual order short of trading balance, sends from the wallet, or the USDC that a withdraw sends back, in native units, as a decimal string. A withdraw of `all` shows what it sent once it finishes. `null` otherwise. */
     amount: string | null;
-    /** The average fill price of the order, in USD, as a decimal string. `null` when it is not known. */
+    /** The average fill price of the order, in USD, as a decimal string. For spot, the price the swap was quoted at. `null` when it is not known. */
     average_price: string | null;
     /** The caller's own ID for the trade, unique for the account. `null` when none was sent. */
     client_order_id: string | null;
@@ -19,7 +19,7 @@ export interface Trade {
     external_order_id: string | null;
     /** Why the trade failed, or `null`. */
     failure_code: Trade.FailureCode | null;
-    /** The size the order filled, in units of the market, as a decimal string. `null` until it fills. */
+    /** The size the order filled, in units of the market, as a decimal string. For a spot buy, the amount the swap was quoted to deliver. `null` until it fills. */
     filled_size: string | null;
     /** Where the money is when the trade did not complete as asked: `wallet`, `trading_account`, or `unknown` while a person checks it. `null` otherwise. */
     funds_location: Trade.FundsLocation | null;
@@ -29,7 +29,7 @@ export interface Trade {
     instrument_type: Trade.InstrumentType | null;
     /** The cross leverage set before an opening perpetual order. `null` for a spot order, close, deposit, withdraw or reduce-only order. */
     leverage: number | null;
-    /** The market, for example `BTC` for a perpetual or `HYPE/USDC` for spot. `null` for a deposit or withdraw. */
+    /** The market, for example `BTC` for a perpetual or `XAUT` for spot. `null` for a deposit or withdraw. */
     market: string | null;
     /** Free-form string-to-string annotations stored on the trade. */
     metadata: Record<string, unknown>;
@@ -48,7 +48,7 @@ export interface Trade {
     status: Trade.Status;
     /** `partial_fill` when the order filled only part of its size. `null` otherwise. */
     status_detail: Trade.StatusDetail | null;
-    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order: a perpetual order trades from the trading balance, a spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: Trade.Type;
     /** When the trade last changed, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -118,7 +118,7 @@ export namespace Trade {
         PartialFill: "partial_fill",
     } as const;
     export type StatusDetail = (typeof StatusDetail)[keyof typeof StatusDetail];
-    /** `order` places one order from the trading balance. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
+    /** `order` places one order: a perpetual order trades from the trading balance, a spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     export const Type = {
         Close: "close",
         Order: "order",
