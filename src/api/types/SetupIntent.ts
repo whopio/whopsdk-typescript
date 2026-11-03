@@ -19,7 +19,7 @@ export interface SetupIntent {
     member_id: string | null;
     /** Your own key-value data attached when the setup intent was created. */
     metadata: Record<string, unknown> | null;
-    /** The method behind this setup shaped for display: a buyer-facing name, the standard icon set, and the card's brand, last four, issuer identification number, and expiry when it was a card. Null until a method was collected. */
+    /** The method behind this setup shaped for display: a buyer-facing name, the standard icon set, and the card's brand, last four, issuer identification number, expiry, and network transaction id when it was a card. Null until a method was collected. */
     payment_instrument: Whop.PaymentInstrument | null;
     /** The saved payment method, prefixed `payt_`, ready to charge with Create Payment. Null until the setup has `succeeded`. */
     payment_method_id: string | null;

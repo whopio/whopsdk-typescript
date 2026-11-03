@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface PaymentInstrument {
-    /** Card payments only: the card's network, last four, and issuer identification number. */
+    /** Card payments only: the card's network, last four, issuer identification number, expiry, and network transaction id. */
     card: Whop.PaymentInstrumentCard | null;
     /** Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the method's own name ("Klarna"). */
     display_name: string;
