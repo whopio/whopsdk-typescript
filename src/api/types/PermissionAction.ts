@@ -273,6 +273,7 @@ export const PermissionAction = {
     WebhookReceiveDisputes: "webhook_receive:disputes",
     WebhookReceiveDomains: "webhook_receive:domains",
     WebhookReceiveEntries: "webhook_receive:entries",
+    WebhookReceiveEvents: "webhook_receive:events",
     WebhookReceiveExports: "webhook_receive:exports",
     WebhookReceiveFinancialActivity: "webhook_receive:financial_activity",
     WebhookReceiveIdentityProfiles: "webhook_receive:identity_profiles",
