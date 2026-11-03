@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface TradingHyperliquidAccount {
     /** Lowercase wallet address that holds the Hyperliquid account. */
     address: string;
+    /** USDT0 in the Whop wallet on Plasma that a `deposit` trade can move into this account, as a decimal string. `null` when the chain could not be read. */
+    depositable: string | null;
     websocket_subscriptions: Whop.TradingWebsocketSubscription[];
     /** Hyperliquid WebSocket URL to connect to directly for live updates. */
     websocket_url: string;

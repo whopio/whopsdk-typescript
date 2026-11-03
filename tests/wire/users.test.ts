@@ -341,6 +341,7 @@ describe("UsersClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
+                    depositable: "depositable",
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
@@ -508,6 +509,7 @@ describe("UsersClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
+                    depositable: "depositable",
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
@@ -689,6 +691,7 @@ describe("UsersClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
+                    depositable: "depositable",
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
@@ -860,6 +863,7 @@ describe("UsersClient", () => {
                 account_id: "account_id",
                 hyperliquid: {
                     address: "address",
+                    depositable: "depositable",
                     websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
                     websocket_url: "websocket_url",
                 },
