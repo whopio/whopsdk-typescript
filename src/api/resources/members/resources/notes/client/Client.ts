@@ -48,12 +48,20 @@ export class NotesClient {
             async (
                 request: Whop.members.ListNotesRequest,
             ): Promise<core.WithRawResponse<Whop.members.ListNotesResponse>> => {
-                const { member_id: memberId, first, after, last, before } = request;
+                const {
+                    member_id: memberId,
+                    first,
+                    after,
+                    last,
+                    before,
+                    include_total_count: includeTotalCount,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     first,
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

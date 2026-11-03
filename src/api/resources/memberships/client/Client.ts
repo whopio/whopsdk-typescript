@@ -77,6 +77,7 @@ export class MembershipsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -102,6 +103,7 @@ export class MembershipsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

@@ -95,6 +95,7 @@ export class PaymentsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     mode: mode != null ? mode : undefined,
@@ -152,6 +153,7 @@ export class PaymentsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

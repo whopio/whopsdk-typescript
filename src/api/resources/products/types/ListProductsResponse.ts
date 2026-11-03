@@ -13,5 +13,9 @@ export namespace ListProductsResponse {
         has_next_page: boolean;
         has_previous_page: boolean;
         start_cursor: string | null;
+        /** Number of results matching the filters, across every page. Counting stops at 10,000. `null` when `include_total_count` isn't `true`, or when the count ran out of time. */
+        total_count: number | null;
+        /** Whether counting stopped at the limit. `true` means `total_count` is 10,000 or more. */
+        total_count_capped: boolean;
     }
 }
