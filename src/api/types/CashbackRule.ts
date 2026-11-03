@@ -19,7 +19,7 @@ export interface CashbackRule {
     merchant_name: string | null;
     /** Cashback rate in basis points. 100 means 1%, and 10000 means 100%. */
     rate_bps: number;
-    /** Connected account ID, prefixed `biz_`. Null designates all direct connected accounts of the funding platform. */
+    /** Subaccount ID, prefixed `biz_`. Null designates all direct subaccounts of the funding platform. */
     scoped_account_id: string | null;
     /** Inclusive start of the rule's eligibility window, as an ISO 8601 timestamp. */
     starts_at: string;

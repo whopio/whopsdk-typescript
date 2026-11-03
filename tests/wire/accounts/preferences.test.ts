@@ -68,7 +68,7 @@ describe("PreferencesClient", () => {
             },
             cards_auto_top_up: false,
             cards_notifications: true,
-            covers_connected_account_negative_balances: true,
+            covers_subaccount_negative_balances: true,
             customer_tracking: {
                 accent_color: "accent_color",
                 enabled: true,
@@ -238,7 +238,7 @@ describe("PreferencesClient", () => {
             },
             cards_auto_top_up: false,
             cards_notifications: true,
-            covers_connected_account_negative_balances: true,
+            covers_subaccount_negative_balances: true,
             customer_tracking: {
                 accent_color: "accent_color",
                 enabled: true,

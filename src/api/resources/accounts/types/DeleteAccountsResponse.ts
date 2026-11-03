@@ -3,6 +3,6 @@
 export interface DeleteAccountsResponse {
     /** Always true. */
     deleted: boolean;
-    /** ID of the deleted connected account. */
+    /** ID of the deleted subaccount. */
     id: string;
 }

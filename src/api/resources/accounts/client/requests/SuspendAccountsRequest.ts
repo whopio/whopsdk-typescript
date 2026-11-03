@@ -7,6 +7,6 @@
  *     }
  */
 export interface SuspendAccountsRequest {
-    /** Connected account ID, prefixed `biz_`. */
+    /** Subaccount ID, prefixed `biz_`. */
     id: string;
 }

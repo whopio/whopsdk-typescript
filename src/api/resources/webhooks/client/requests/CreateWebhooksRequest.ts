@@ -9,7 +9,7 @@
 export interface CreateWebhooksRequest {
     /** The dated API version (Api-Version-Date) to pin this webhook's payloads to. Omit to leave the webhook unpinned, tracking the current payload shape. */
     api_version_date?: string | null;
-    /** Whether to send events for child resources. For example, if the webhook is created for an account, enabling this sends events only from its connected accounts. */
+    /** Whether to send events for child resources. For example, if the webhook is created for an account, enabling this sends events only from its subaccounts. */
     child_resource_events?: boolean;
     /** Whether or not the webhook is enabled. Defaults to `true`. */
     enabled?: boolean;

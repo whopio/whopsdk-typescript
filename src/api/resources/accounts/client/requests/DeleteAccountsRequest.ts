@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteAccountsRequest {
-    /** Connected account ID, prefixed `biz_`. */
+    /** Subaccount ID, prefixed `biz_`. */
     id: string;
 }

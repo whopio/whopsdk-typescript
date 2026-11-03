@@ -21,9 +21,9 @@ export interface UpdateFeesRequest {
     buyer?: UpdateFeesRequest.Buyer;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     card_processing?: UpdateFeesRequest.CardProcessing;
-    /** Default markups for connected accounts. Available on accounts without a parent, even before any accounts connect. */
+    /** Default markups for subaccounts. Available on accounts without a parent, even before any accounts connect. */
     child_markups?: UpdateFeesRequest.ChildMarkups;
-    /** Changes to the payout fees this account covers for connected accounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true. */
+    /** Changes to the payout fees this account covers for subaccounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true. */
     covered_payout_fees?: UpdateFeesRequest.CoveredPayoutFees;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     cross_border?: UpdateFeesRequest.CrossBorder;
@@ -47,7 +47,7 @@ export interface UpdateFeesRequest {
     high_risk?: UpdateFeesRequest.HighRisk;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     marketplace?: UpdateFeesRequest.Marketplace;
-    /** Markups on this connected account, set by the platform it is connected to. */
+    /** Markups on this subaccount, set by the platform it is connected to. */
     markups?: UpdateFeesRequest.Markups;
     /** Why the fees are changing, recorded with the change. Required when a Whop Verified Partner edits the fee schedule; ignored for markups. */
     notes?: string;
@@ -219,10 +219,10 @@ export namespace UpdateFeesRequest {
     }
 
     /**
-     * Default markups for connected accounts. Available on accounts without a parent, even before any accounts connect.
+     * Default markups for subaccounts. Available on accounts without a parent, even before any accounts connect.
      */
     export interface ChildMarkups {
-        /** The markup on card purchases settled by the connected account. `null` clears the custom markup. */
+        /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (ChildMarkups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (ChildMarkups.CryptoSwaps | null) | undefined;
@@ -238,7 +238,7 @@ export namespace UpdateFeesRequest {
 
     export namespace ChildMarkups {
         /**
-         * The markup on card purchases settled by the connected account. `null` clears the custom markup.
+         * The markup on card purchases settled by the subaccount. `null` clears the custom markup.
          */
         export interface CardSpend {
             /** The amount the platform adds per event, in US dollars. */
@@ -303,7 +303,7 @@ export namespace UpdateFeesRequest {
     }
 
     /**
-     * Changes to the payout fees this account covers for connected accounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true.
+     * Changes to the payout fees this account covers for subaccounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true.
      */
     export interface CoveredPayoutFees {
         all?: boolean | undefined;
@@ -568,10 +568,10 @@ export namespace UpdateFeesRequest {
     }
 
     /**
-     * Markups on this connected account, set by the platform it is connected to.
+     * Markups on this subaccount, set by the platform it is connected to.
      */
     export interface Markups {
-        /** The markup on card purchases settled by the connected account. `null` clears the custom markup. */
+        /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (Markups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (Markups.CryptoSwaps | null) | undefined;
@@ -587,7 +587,7 @@ export namespace UpdateFeesRequest {
 
     export namespace Markups {
         /**
-         * The markup on card purchases settled by the connected account. `null` clears the custom markup.
+         * The markup on card purchases settled by the subaccount. `null` clears the custom markup.
          */
         export interface CardSpend {
             /** The amount the platform adds per event, in US dollars. */

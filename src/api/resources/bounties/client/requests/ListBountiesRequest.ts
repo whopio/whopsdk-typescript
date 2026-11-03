@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListBountiesRequest {
-    /** Scope the list to this account (`biz_` tag). Requires read access to the account; account API keys may pass their own account or a connected account. */
+    /** Scope the list to this account (`biz_` tag). Requires read access to the account; account API keys may pass their own account or a subaccount. */
     account_id?: string;
     /** List the bounties this user participated in (`user_` tag). Must be the authenticated user. */
     user_id?: string;

@@ -9,17 +9,17 @@ export interface CreateAccountsRequest {
     affiliate_code?: string | null;
     /** The blueprint App ID, prefixed `app_`. Creates a hosted website for the account and queues its deployment asynchronously; the Account response does not report deployment completion. */
     blueprint_id?: string | null;
-    /** The ISO 3166-1 alpha-2 country code where the account's business is located (e.g. `US`). Defaults to the parent account's country for connected accounts. */
+    /** The ISO 3166-1 alpha-2 country code where the account's business is located (e.g. `US`). Defaults to the parent account's country for subaccounts. */
     country?: string;
     /** Whether Whop assembles and files dispute evidence for this account. Enabling it opts into the success fee charged on disputes it wins. Requires payment:dispute. Omit to preserve the existing setting or creation default. */
     dispute_fighter_enabled?: boolean;
-    /** The email address of the account owner. Required when creating a connected account. */
+    /** The email address of the account owner. Required when creating a subaccount. */
     email?: string;
     /** Arbitrary key/value metadata to store on the account. */
     metadata?: Record<string, unknown>;
     /** Whether payment orchestration is enabled for this account. Requires payout:account:update. Omit to preserve the existing setting or creation default. */
     orchestration_enabled?: boolean;
-    /** Whether Whop sends transactional emails to customers on behalf of the connected account. */
+    /** Whether Whop sends transactional emails to customers on behalf of the subaccount. */
     send_customer_emails?: boolean;
     /** The display name of the account. Defaults to `metadata.external_id` or the owner's email when omitted. */
     title?: string;
