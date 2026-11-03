@@ -314,6 +314,7 @@ export * from "./MemberStatuses.js";
 export * from "./Membership.js";
 export * from "./MembershipAffiliate.js";
 export * from "./MembershipCancellationModes.js";
+export * from "./MembershipExternalAccount.js";
 export * from "./MembershipFeedbackOption.js";
 export * from "./MembershipLegacy.js";
 export * from "./MembershipListItem.js";

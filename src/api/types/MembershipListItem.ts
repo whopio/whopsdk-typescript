@@ -24,6 +24,8 @@ export interface MembershipListItem {
     created_at: string;
     /** The three-letter ISO currency code for this membership's billing. Null if the membership is free. */
     currency: Whop.Currencies | null;
+    /** The member's accounts on outside platforms, such as Discord and Telegram. Empty when the member has none linked. Null in webhooks. */
+    external_accounts: MembershipListItem.ExternalAccounts.Item[] | null;
     /** The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason. */
     feedback_option: MembershipListItem.FeedbackOption | null;
     /** The recurring renewal price for this membership, formatted with currency symbol and billing interval. Null if the membership is not recurring. */
@@ -71,6 +73,22 @@ export namespace MembershipListItem {
         id: string;
         /** The display name of the company shown to customers. */
         title: string;
+    }
+
+    export type ExternalAccounts = ExternalAccounts.Item[];
+
+    export namespace ExternalAccounts {
+        /**
+         * A member's account on an outside platform, such as Discord or Telegram.
+         */
+        export interface Item {
+            /** The member's user ID on the platform, such as a Discord user ID. Prefixed with the platform (`discord_<external_id>`), it is the `external_account` value List Memberships filters by. */
+            external_id: string;
+            /** The platform the member's account is on: `discord` or `telegram`. */
+            platform: string;
+            /** The member's username on the platform. Null when Whop doesn't know it, such as for a membership imported with only a Discord ID. */
+            username: string | null;
+        }
     }
 
     /**
