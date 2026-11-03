@@ -37,6 +37,8 @@ export interface UpdatePreferencesRequest {
     feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once a day (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
+    /** Whether Whop emails customers after a purchase asking them to leave a review. Set it to `false` to stop these emails, including ones already scheduled. Requires the `company:update` scope on your API key. */
+    review_request_emails?: boolean;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
     subscription_failure_behavior?: UpdatePreferencesRequest.SubscriptionFailureBehavior;
 }
