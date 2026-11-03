@@ -90,7 +90,7 @@ export interface PaymentLegacy {
     refunds: PaymentLegacy.Refunds.Item[];
     /** The resolution center cases opened by the customer on this payment. Null if the actor in context does not have the payment:resolution_center_case:read permission. */
     resolutions: PaymentLegacy.Resolutions.Item[] | null;
-    /** True when the payment status is `open` and its membership is in one of the retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or when it is a failed initial billing-engine payment on a `drafted` membership with an unlimited-stock plan; otherwise false. Used to decide if Whop can attempt the charge again. */
+    /** True when the payment is `open`, its processor can be charged again, its membership is `active`, `trialing`, or `past_due` (or it is a failed initial payment on a `drafted` membership), it is not paid through an invoice link, and its one manual retry is not used up. Used to decide if the payment can be retried by hand. A retry can still be refused when the company cannot accept payments. */
     retryable: boolean;
     /** Whop's in-house fraud risk score for this payment, from 0 (lowest risk) to 100 (highest risk). Null when the payment has not been scored or scoring has not yet completed. */
     risk_score: number | null;
