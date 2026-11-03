@@ -24,7 +24,7 @@ export interface CreateInvoicesRequest {
     items: CreateInvoicesRequest.Items.Item[];
     /** An address associated with the member. Mutually exclusive with billing_address. */
     mailing_address_id?: string | null;
-    /** The billed customer, a member of the account. Changing email recipients does not change this buyer. */
+    /** The billed customer, a member of the account, prefixed `mber_`. It can't change once the draft is created. Changing email recipients does not change this buyer. */
     member_id?: string | null;
     /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. Trimmed; `null` or blank clears it. Can be updated on draft, open, or uncollectible invoices. */
     memo?: string | null;
