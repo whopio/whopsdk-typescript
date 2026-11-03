@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface InvoiceLineItem {
+    /** Text shown under the item on the invoice, its email, and its PDF, read from the variant's `description`. A custom charge sets it with the item's `description`; a product variant keeps its own. Null when the variant has none or has since been deleted. */
+    description: string | null;
     /** The promo discount applied to this item, in the payment's `currency`. Null when no discount was recorded. */
     discount_amount: Whop.Money | null;
     /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */

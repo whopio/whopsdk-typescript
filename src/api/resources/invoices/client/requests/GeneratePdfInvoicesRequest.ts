@@ -9,4 +9,6 @@
 export interface GeneratePdfInvoicesRequest {
     /** The invoice's pay_ ID. */
     id: string;
+    /** Whether to print each line item's `description` under it. Defaults to `true`. */
+    include_descriptions?: boolean;
 }
