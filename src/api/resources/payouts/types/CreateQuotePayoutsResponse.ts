@@ -22,6 +22,8 @@ export interface CreateQuotePayoutsResponse {
     quote_token: string;
     /** An optional payout method to connect for estimated savings. The quote still uses the requested saved method. */
     recommended_method: CreateQuotePayoutsResponse.RecommendedMethod | null;
+    /** Server time when the response was prepared, as an ISO 8601 timestamp. Subtract it from `expires_at` to get the remaining quote lifetime without relying on your own clock. */
+    server_time: string;
 }
 
 export namespace CreateQuotePayoutsResponse {
