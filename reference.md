@@ -10404,7 +10404,7 @@ await client.disputes.accept({
 <dl>
 <dd>
 
-Sends a dispute's evidence to the payment processor. This is final — it cannot be edited or sent again.
+Sends a dispute's evidence to the payment processor. The filing runs in the background: the dispute moves to `under_review` and `evidence_submitted_at` is set once the processor accepts the packet, and it stays `needs_response` if the processor rejects it. This is final — it cannot be edited or sent again.
 </dd>
 </dl>
 </dd>
