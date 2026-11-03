@@ -251,6 +251,11 @@ describe("AccountsClient", () => {
                         undated_pending_reason: null,
                         withdrawal_schedule: { day: null, frequency: "manual", next_payout_date: null },
                     },
+                    payment_method_configuration: {
+                        disabled: ["card"],
+                        enabled: ["card"],
+                        include_platform_defaults: true,
+                    },
                     platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
                     privacy_policy: {
                         blurhash: null,
@@ -777,6 +782,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            payment_method_configuration: { disabled: ["card"], enabled: ["card"], include_platform_defaults: true },
             platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 blurhash: "blurhash",
@@ -1326,6 +1332,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            payment_method_configuration: { disabled: ["card"], enabled: ["card"], include_platform_defaults: true },
             platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 blurhash: "blurhash",
@@ -1890,6 +1897,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            payment_method_configuration: { disabled: ["card"], enabled: ["card"], include_platform_defaults: true },
             platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 blurhash: "blurhash",
@@ -2497,6 +2505,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            payment_method_configuration: { disabled: ["card"], enabled: ["card"], include_platform_defaults: true },
             platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 blurhash: "blurhash",
@@ -3794,6 +3803,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            payment_method_configuration: { disabled: ["card"], enabled: ["card"], include_platform_defaults: true },
             platform_credits: [{ amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 blurhash: "blurhash",
