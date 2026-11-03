@@ -5,7 +5,7 @@ export interface Webhook {
     api_version: Webhook.ApiVersion;
     /** The dated API version (Api-Version-Date) that v1 payloads for this endpoint are pinned to: events serialize exactly like a REST read at this version (the native serializer where the resource has one). Null when unpinned — legacy (v2/v5) webhooks, and v1 webhooks on the legacy payload shape. */
     api_version_date: string | null;
-    /** Whether events are sent for child resources. For example, if the webhook is on an account, enabling this sends events only from its connected accounts. */
+    /** Whether events are sent for child resources. For example, if the webhook is on an account, enabling this sends events only from its subaccounts. */
     child_resource_events: boolean;
     /** Number of consecutive deliveries whose first attempt to this endpoint failed since it last accepted one. Later retries of the same delivery do not increment it. Resets to `0` when a delivery succeeds or the webhook is re-enabled. */
     consecutive_failures: number;

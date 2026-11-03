@@ -5,10 +5,10 @@
  *     {}
  */
 export interface PayoutCashbackRulesRequest {
-    /** Pay only this direct connected account. */
+    /** Pay only this direct subaccount. */
     account_id?: string | null;
     /** Pay only transactions whose winning cashback rule has this ID and is funded by the authenticated platform. */
     cashback_rule_id?: string | null;
-    /** Pay only this card transaction belonging to a direct connected account. */
+    /** Pay only this card transaction belonging to a direct subaccount. */
     transaction_id?: string | null;
 }

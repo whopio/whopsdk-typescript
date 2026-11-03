@@ -3,13 +3,13 @@
 import type * as Whop from "../index.js";
 
 export interface AccountFeeMarkups {
-    /** The markup on card purchases settled by the connected account. */
+    /** The markup on card purchases settled by the subaccount. */
     card_spend: Whop.AccountFeeMarkup;
     /** The markup on cryptocurrency token swaps. */
     crypto_swaps: Whop.AccountFeeMarkup;
     /** Markups on deposits into the account's balance, keyed by rail: `bank` and `crypto`. */
     deposits: Record<string, Whop.AccountFeeMarkup>;
-    /** The markup on payments the connected account collects without a checkout application fee. */
+    /** The markup on payments the subaccount collects without a checkout application fee. */
     payments: Whop.AccountFeeMarkup;
     /** Markups on withdrawals, keyed by payout method: `bank_wire`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. */
     payouts: Record<string, Whop.AccountFeeMarkup>;

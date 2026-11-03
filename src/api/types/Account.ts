@@ -14,7 +14,7 @@ export interface Account {
     business_name: string | null;
     /** High-level business category for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
     business_type: string | null;
-    /** Whether pending funds may be transferred from this platform account to its connected accounts. */
+    /** Whether pending funds may be transferred from this platform account to its subaccounts. */
     can_transfer_pending_balance_to_children: boolean;
     /** The account's cancellation policy document, or `null` if they have not published one. */
     cancellation_policy: Whop.File_ | null;
@@ -73,7 +73,7 @@ export interface Account {
     other_industry_description: string | null;
     /** The single user who owns the account, whose email is the `email` above. Distinct from the `owner` role on team members, which any number of them can hold. */
     owner: Whop.UserSummary;
-    /** Parent account for connected accounts, or `null` for standalone accounts. */
+    /** Parent account for subaccounts, or `null` for standalone accounts. */
     parent_account: Whop.AccountParent | null;
     /** The account's active first-tier partner. Present on retrieve responses; null when no active first-tier partner is attributed to the account. Omitted from other responses. */
     partner?: (Whop.AccountPartner | null) | undefined;

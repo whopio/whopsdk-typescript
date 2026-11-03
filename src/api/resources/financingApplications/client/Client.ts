@@ -17,7 +17,7 @@ export declare namespace FinancingApplicationsClient {
 }
 
 /**
- * To accept payment-financing methods, an account applies through a financing application: a request to review the account for payment financing, not a loan or business capital. Create an application, save answers to its requirements, then submit it for review. You can manage applications for your own account and its direct connected accounts.
+ * To accept payment-financing methods, an account applies through a financing application: a request to review the account for payment financing, not a loan or business capital. Create an application, save answers to its requirements, then submit it for review. You can manage applications for your own account and its direct subaccounts.
  */
 export class FinancingApplicationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FinancingApplicationsClient.Options>;
@@ -27,7 +27,7 @@ export class FinancingApplicationsClient {
     }
 
     /**
-     * Lists payment-financing applications. Without `account_id`, an account credential lists its own account and its direct connected accounts, but not deeper descendants, and a user credential lists every account it can read applications for.
+     * Lists payment-financing applications. Without `account_id`, an account credential lists its own account and its direct subaccounts, but not deeper descendants, and a user credential lists every account it can read applications for.
      *
      * @param {Whop.ListFinancingApplicationsRequest} request
      * @param {FinancingApplicationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -79,7 +79,7 @@ export class FinancingApplicationsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -183,7 +183,7 @@ export class FinancingApplicationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -269,7 +269,7 @@ export class FinancingApplicationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -352,7 +352,7 @@ export class FinancingApplicationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -447,7 +447,7 @@ export class FinancingApplicationsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-03-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

@@ -31,7 +31,7 @@ export interface ListAccountsRequest {
     volume_min?: number;
     /** Return only accounts whose lifetime USD volume is at most this value. Requires `stats:read` on the parent account. */
     volume_max?: number;
-    /** For platforms: the parent account ID whose direct connected accounts to return. Requires `payout:account:read` on the parent account. */
+    /** For platforms: the parent account ID whose direct subaccounts to return. Requires `payout:account:read` on the parent account. */
     parent_account_id?: string;
     /** Return only accounts owned by this user (`user_...`), the account's `owner`. Cannot be combined with `parent_account_id`. */
     owner_id?: string;

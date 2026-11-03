@@ -17,9 +17,9 @@ export interface AccountFees {
     buyer: Whop.AccountFee;
     /** Card payments. `percentage` and `fixed` are the rate in the headline `region`; every other acquirer region is under `regions`. */
     card_processing: Whop.AccountFee;
-    /** The default markups this account charges connected accounts, configurable before any accounts connect. `null` if this account has a parent. */
+    /** The default markups this account charges subaccounts, configurable before any accounts connect. `null` if this account has a parent. */
     child_markups: Whop.AccountFeeMarkups | null;
-    /** Which payout fees this account pays for its connected accounts. */
+    /** Which payout fees this account pays for its subaccounts. */
     covered_payout_fees: Whop.AccountCoveredPayoutFees;
     /** Added to a payment whose card was issued outside the region where the payment was processed. */
     cross_border: Whop.AccountFee;
@@ -51,7 +51,7 @@ export interface AccountFees {
     parent_account_id: string | null;
     /** Processing fees for every non-card payment method the platform prices, keyed by payment method type such as `us_bank_account` or `klarna`. */
     payment_methods: Record<string, Whop.AccountFee>;
-    /** Fees on withdrawals, keyed by payout method: `bank_wire`, `same_day_bank`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. Payout fees the parent account covers show as zero when a connected account's fees are read without access to its parent account. */
+    /** Fees on withdrawals, keyed by payout method: `bank_wire`, `same_day_bank`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. Payout fees the parent account covers show as zero when a subaccount's fees are read without access to its parent account. */
     payouts: Record<string, Whop.AccountFee>;
     /** Charged when pending, not-yet-settled balance is advanced to fund the account's cards balance. */
     pending_auto_topup: Whop.AccountFee;

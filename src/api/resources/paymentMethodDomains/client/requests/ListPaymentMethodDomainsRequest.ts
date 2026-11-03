@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListPaymentMethodDomainsRequest {
-    /** Only domains registered for this account (`biz_` tag). Defaults to the caller's account plus its connected accounts. */
+    /** Only domains registered for this account (`biz_` tag). Defaults to the caller's account plus its subaccounts. */
     account_id?: string;
     /** Only the domain with this exact hostname. */
     hostname?: string;

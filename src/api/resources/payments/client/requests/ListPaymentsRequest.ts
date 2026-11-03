@@ -27,8 +27,8 @@ export interface ListPaymentsRequest {
     user_id?: string;
     /** Search payments by payment ID, dispute ID, user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;
-    /** Also cover the account's connected accounts. Requires `account_id`, and is a 400 without it. Without `query`, lists the payments of the account and every connected account, newest first by `created_at` only; another `order` is a 400. The listing is cut off after 10 seconds, which a rare filter on an account with little recent activity can reach; add a `query` to narrow it. With `query`, matches on payment, dispute, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`); free-text queries such as a name search only the named account. Connected accounts' payments are returned only for connected accounts you can read payments on. */
-    include_connected_accounts?: boolean;
+    /** Also cover the account's subaccounts. Requires `account_id`, and is a 400 without it. Without `query`, lists the payments of the account and every subaccount, newest first by `created_at` only; another `order` is a 400. The listing is cut off after 10 seconds, which a rare filter on an account with little recent activity can reach; add a `query` to narrow it. With `query`, matches on payment, dispute, user or membership ID, buyer email, or a card's first 6 or 8 digits and last 4 separated by a space or dash (`424242 4242`); free-text queries such as a name search only the named account. Subaccounts' payments are returned only for subaccounts you can read payments on. */
+    include_subaccounts?: boolean;
     /** Only payments made by this member, prefixed `mber_`. */
     member_id?: string;
     /** Only payments billed under this membership, prefixed `mem_`. */
