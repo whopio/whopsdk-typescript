@@ -67,6 +67,7 @@ export class ProductsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                     created_after: createdAfter,
                     created_before: createdBefore,
                 } = request;
@@ -90,6 +91,7 @@ export class ProductsClient {
                     after,
                     last,
                     before,
+                    include_total_count: includeTotalCount,
                     created_after: createdAfter,
                     created_before: createdBefore,
                 };

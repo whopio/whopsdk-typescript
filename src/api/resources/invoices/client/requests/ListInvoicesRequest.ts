@@ -24,4 +24,6 @@ export interface ListInvoicesRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
+    /** Set to `true` to return the number of matching results in `page_info.total_count`. Send `first=0` as well to return the count without any results. */
+    include_total_count?: boolean;
 }

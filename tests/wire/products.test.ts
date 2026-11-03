@@ -64,6 +64,8 @@ describe("ProductsClient", () => {
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
+                total_count: 1,
+                total_count_capped: true,
             },
         };
 
