@@ -114,8 +114,8 @@ export class WhopClient {
     protected _accounts: AccountsClient | undefined;
     protected _adCampaigns: AdCampaignsClient | undefined;
     protected _adGroups: AdGroupsClient | undefined;
-    protected _adPixels: AdPixelsClient | undefined;
     protected _ads: AdsClient | undefined;
+    protected _adPixels: AdPixelsClient | undefined;
     protected _affiliates: AffiliatesClient | undefined;
     protected _aiChats: AiChatsClient | undefined;
     protected _apiKeys: ApiKeysClient | undefined;
@@ -230,12 +230,12 @@ export class WhopClient {
         return (this._adGroups ??= new AdGroupsClient(this._options));
     }
 
-    public get adPixels(): AdPixelsClient {
-        return (this._adPixels ??= new AdPixelsClient(this._options));
-    }
-
     public get ads(): AdsClient {
         return (this._ads ??= new AdsClient(this._options));
+    }
+
+    public get adPixels(): AdPixelsClient {
+        return (this._adPixels ??= new AdPixelsClient(this._options));
     }
 
     public get affiliates(): AffiliatesClient {

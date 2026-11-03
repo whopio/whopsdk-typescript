@@ -5,6 +5,226 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("AdsClient", () => {
+    test("reportIssues (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }] };
+        const rawResponseBody = {
+            data: [
+                {
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    id: "adiss_xxxxxxxxxxxxxx",
+                    message:
+                        "Your ad was rejected in ad review for misleading claims. Edit the ad's text or creative to follow advertising policies, then resubmit.",
+                    policy: "misleading",
+                    reason: "content_rejected",
+                    resource_id: "ad_xxxxxxxxxxxxxx",
+                    resource_type: "ad",
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.ads.reportIssues({
+            issues: [
+                {
+                    reason: "content_rejected",
+                },
+            ],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("reportIssues (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }, { reason: "content_rejected" }] };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportIssues({
+                issues: [
+                    {
+                        reason: "content_rejected",
+                    },
+                    {
+                        reason: "content_rejected",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("reportIssues (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }, { reason: "content_rejected" }] };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportIssues({
+                issues: [
+                    {
+                        reason: "content_rejected",
+                    },
+                    {
+                        reason: "content_rejected",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("reportIssues (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }, { reason: "content_rejected" }] };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportIssues({
+                issues: [
+                    {
+                        reason: "content_rejected",
+                    },
+                    {
+                        reason: "content_rejected",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("reportIssues (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }, { reason: "content_rejected" }] };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportIssues({
+                issues: [
+                    {
+                        reason: "content_rejected",
+                    },
+                    {
+                        reason: "content_rejected",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("reportIssues (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { issues: [{ reason: "content_rejected" }, { reason: "content_rejected" }] };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_issues")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.reportIssues({
+                issues: [
+                    {
+                        reason: "content_rejected",
+                    },
+                    {
+                        reason: "content_rejected",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("reportStats (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
