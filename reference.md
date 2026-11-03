@@ -22622,7 +22622,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Sends money from an account or user balance to a saved payout method for that owner.
+Sends money from an account or user balance to a saved payout method for that owner. First create a quote with POST /payouts/quotes, then submit its quote_token with the same payout details before it expires.
 </dd>
 </dl>
 </dd>
@@ -22639,7 +22639,8 @@ Sends money from an account or user balance to a saved payout method for that ow
 ```typescript
 await client.payouts.create({
     amount: 50,
-    payout_method_id: "potk_xxxxxxxxxxxxxx"
+    payout_method_id: "potk_xxxxxxxxxxxxxx",
+    quote_token: "signed-payout-quote"
 });
 
 ```

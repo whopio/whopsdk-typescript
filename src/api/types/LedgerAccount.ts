@@ -18,7 +18,7 @@ export interface LedgerAccount {
     payments_approval_status: Whop.PaymentsApprovalStatuses | null;
     /** The payout account associated with the LedgerAccount, if any. */
     payout_account_details: LedgerAccount.PayoutAccountDetails | null;
-    /** Whether a payout from this account must be confirmed against a provider-backed quote first. When true, create a quote with POST /payouts/quotes and send its quote_token when creating the payout. */
+    /** Whether legacy payout clients should confirm a provider-backed quote for this account. REST POST /payouts on API version 2026-11-03 or later always requires quote_token from POST /payouts/quotes, regardless of this flag. */
     payout_quote_required: boolean;
     /** The settlement batch most recently posted to this account's available balance, at midnight UTC. Every payment settling in that batch carries the same `settlement_time_at`. */
     settlement_time_at: string | null;
