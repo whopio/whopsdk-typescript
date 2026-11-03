@@ -394,6 +394,7 @@ describe("PayoutsClient", () => {
                 name: "Bank Wire",
                 supported_payout_method_id: "podst_xxxxxxxxxxxxxx",
             },
+            server_time: "2026-01-01T12:00:00Z",
         };
 
         server
