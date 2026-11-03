@@ -13,7 +13,7 @@ export interface TeamMember {
     direct_reports_count: number | null;
     /** The member's email address. For an invite sent to an email with no Whop account yet, the invited address; for accepted members and invites to an existing Whop account, `null` unless the caller holds the `company:authorized_user:email:read` scope. */
     email: string | null;
-    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_` or `minv_`. Treat it as opaque: both member prefixes are accepted wherever a team member ID is. */
+    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_`. Treat it as opaque: both member prefixes are accepted wherever a team member ID is. */
     id: string;
     /** Whether this member is an agent (app-controlled account) rather than a human team member. Always `false` for invites. */
     is_agent: boolean;
