@@ -99,6 +99,7 @@ export namespace PostAdGroupUpdatedPayload {
             NoAds: "no_ads",
             CampaignPaused: "campaign_paused",
             Paused: "paused",
+            InReview: "in_review",
             Processing: "processing",
             Issues: "issues",
             Scheduled: "scheduled",
