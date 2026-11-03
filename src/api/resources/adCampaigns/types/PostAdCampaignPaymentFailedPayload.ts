@@ -28,6 +28,8 @@ export namespace PostAdCampaignPaymentFailedPayload {
     export type ApiVersion = (typeof ApiVersion)[keyof typeof ApiVersion];
 
     export interface Data {
+        /** The business running this campaign, with the name and logo its ads show. */
+        account: Whop.StorefrontAccount | null;
         /** The campaign's budget in USD, which is what it is stored and billed in. `null` when each ad group sets its own budget instead. */
         budget_amount: number | null;
         /** The same budget stated in `budget_currency` at today's exchange rate, for display in the account's ads reporting currency. `null` when `budget_amount` is. */

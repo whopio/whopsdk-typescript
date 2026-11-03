@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface AdCampaign {
+    /** The business running this campaign, with the name and logo its ads show. */
+    account: Whop.StorefrontAccount | null;
     /** USD value attributed to add-to-cart events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
     added_to_cart_value: number;
     /** Whop pixel-attributed add-to-cart events, last-click. */
