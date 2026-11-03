@@ -72,6 +72,7 @@ export * from "./AdGroupLearningProgress.js";
 export * from "./AdGroupOperatingSystem.js";
 export * from "./AdGroupRegions.js";
 export * from "./AdGroupRegionsBody.js";
+export * from "./AdIssue.js";
 export * from "./AdPixel.js";
 export * from "./AdPlatformIssue.js";
 export * from "./AdStat.js";
