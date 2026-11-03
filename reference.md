@@ -28033,6 +28033,71 @@ await client.trades.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.trades.<a href="/src/api/resources/trades/client/Client.ts">cancel</a>({ ...params }) -> Whop.Trade</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels the order of a trade while it rests on the book, such as a `good_til_canceled` limit order. Answers with the trade still `processing`; read it with `GET /trades/:id` until its `status` is `completed` or `failed`. A part that filled before the cancel landed stays filled, and money bridged in for an order that did not fill goes back to the wallet. Calling it again sends no second cancel. Answers `409` when the trade has no order on the book.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.trades.cancel({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CancelTradesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TradesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Transfers
 <details><summary><code>client.transfers.<a href="/src/api/resources/transfers/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListTransfersResponse.Data.Item, Whop.ListTransfersResponse&gt;</code></summary>
 <dl>

@@ -443,4 +443,137 @@ describe("TradesClient", () => {
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
+
+    test("cancel (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount: "25",
+            average_price: "average_price",
+            client_order_id: "client_order_id",
+            completed_at: "completed_at",
+            created_at: "2026-01-01T12:00:00.000Z",
+            external_order_id: "0x63cabad10f072c65ad84526e0c33081b",
+            failure_code: "market_unavailable",
+            filled_size: "filled_size",
+            funds_location: "wallet",
+            id: "tint_xxxxxxxxxxxxxx",
+            instrument_type: "perpetual",
+            leverage: 10,
+            market: "BTC",
+            metadata: { key: "value" },
+            object: "trade",
+            order_type: "market",
+            price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            reduce_only: true,
+            side: "buy",
+            size: "size",
+            status: "pending",
+            status_detail: "partial_fill",
+            step: "depositing",
+            trigger_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            type: "close",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_id",
+        };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.trades.cancel({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("cancel (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.trades.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("cancel (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.trades.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("cancel (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.trades.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("cancel (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/trades/id/cancel").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.trades.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
 });
