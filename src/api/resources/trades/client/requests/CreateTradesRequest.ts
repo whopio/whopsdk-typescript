@@ -24,7 +24,7 @@ export interface CreateTradesRequest {
     metadata?: Record<string, string>;
     /** Only for an order. The order value in USD, as a decimal string; the size is rounded down to the market's decimals. Send exactly one of `size` or `notional`; a spot buy takes `notional`, the USDT0 to spend. */
     notional?: string;
-    /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
+    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. Required for an order. */
     order_type?: CreateTradesRequest.OrderType;
     /** Only for an order. The limit price in USD, as a decimal string Hyperliquid accepts without rounding. Required for a limit order; not accepted for a market order. */
     price?: string;
@@ -36,6 +36,8 @@ export interface CreateTradesRequest {
     size?: string;
     /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100 for a perpetual, and to the swap route's own default for spot. */
     slippage_bps?: number;
+    /** Only for a perpetual limit order. `good_til_canceled` rests on the book until it fills; `add_liquidity_only` is canceled instead of filling at once; `immediate_or_cancel` fills what it can now and cancels the rest. Defaults to `good_til_canceled`. The trade stays `processing` while the order rests. */
+    time_in_force?: CreateTradesRequest.TimeInForce;
     /** `order` places one order. A perpetual order trades from the trading balance, setting cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. A spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: CreateTradesRequest.Type;
 }
@@ -47,7 +49,7 @@ export namespace CreateTradesRequest {
         Spot: "spot",
     } as const;
     export type InstrumentType = (typeof InstrumentType)[keyof typeof InstrumentType];
-    /** `market` fills now within `slippage_bps` of the mid price; `limit` fills now at `price` or better. Anything unfilled is canceled. Required for an order. */
+    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. Required for an order. */
     export const OrderType = {
         Market: "market",
         Limit: "limit",
@@ -59,6 +61,13 @@ export namespace CreateTradesRequest {
         Sell: "sell",
     } as const;
     export type Side = (typeof Side)[keyof typeof Side];
+    /** Only for a perpetual limit order. `good_til_canceled` rests on the book until it fills; `add_liquidity_only` is canceled instead of filling at once; `immediate_or_cancel` fills what it can now and cancels the rest. Defaults to `good_til_canceled`. The trade stays `processing` while the order rests. */
+    export const TimeInForce = {
+        AddLiquidityOnly: "add_liquidity_only",
+        GoodTilCanceled: "good_til_canceled",
+        ImmediateOrCancel: "immediate_or_cancel",
+    } as const;
+    export type TimeInForce = (typeof TimeInForce)[keyof typeof TimeInForce];
     /** `order` places one order. A perpetual order trades from the trading balance, setting cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. A spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     export const Type = {
         Close: "close",
