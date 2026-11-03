@@ -24,20 +24,22 @@ export interface CreateTradesRequest {
     metadata?: Record<string, string>;
     /** Only for an order. The order value in USD, as a decimal string; the size is rounded down to the market's decimals. Send exactly one of `size` or `notional`; a spot buy takes `notional`, the USDT0 to spend. */
     notional?: string;
-    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. Required for an order. */
+    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. `take_profit` and `stop_loss` reduce the open perpetual position with a market order once the price crosses `trigger_price`; the trade stays `processing` until then. Required for an order. */
     order_type?: CreateTradesRequest.OrderType;
     /** Only for an order. The limit price in USD, as a decimal string Hyperliquid accepts without rounding. Required for a limit order; not accepted for a market order. */
     price?: string;
     /** Only for a perpetual order. Only reduce an open position; defaults to `false`. A reduce-only order takes no `leverage`. */
     reduce_only?: boolean;
-    /** `buy` or `sell`. Required for an order. */
+    /** `buy` or `sell`. Required for an order, except a `take_profit` or `stop_loss`, where it defaults to the side that reduces the position. */
     side?: CreateTradesRequest.Side;
-    /** Only for an order. The size in units of the market, as a decimal string, with at most the market's size decimals. Send exactly one of `size` or `notional`; a spot sell takes `size`. A perpetual order must be worth at least 10 USD, unless reduce-only. */
+    /** Only for an order. The size in units of the market, as a decimal string, with at most the market's size decimals. Send exactly one of `size` or `notional`; a spot sell takes `size`. A perpetual order must be worth at least 10 USD, unless reduce-only. A `take_profit` or `stop_loss` takes `size` or nothing for the whole position, and a set `size` must be worth at least 10 USD at `trigger_price`. */
     size?: string;
     /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100 for a perpetual, and to the swap route's own default for spot. */
     slippage_bps?: number;
     /** Only for a perpetual limit order. `good_til_canceled` rests on the book until it fills; `add_liquidity_only` is canceled instead of filling at once; `immediate_or_cancel` fills what it can now and cancels the rest. Defaults to `good_til_canceled`. The trade stays `processing` while the order rests. */
     time_in_force?: CreateTradesRequest.TimeInForce;
+    /** Required for a `take_profit` or `stop_loss`, and only for them. The USD price, as a decimal string Hyperliquid accepts without rounding, at which it sends a market order. Closing a long, a take-profit triggers above the current price and a stop-loss below; closing a short, the reverse. It is always reduce-only, needs an open position, and takes no `price`, `notional`, `leverage`, `time_in_force` or `slippage_bps`. */
+    trigger_price?: string;
     /** `order` places one order. A perpetual order trades from the trading balance, setting cross `leverage` first; when the balance is short, it bridges the USDT0 it needs from the wallet first. A spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges `amount` USDT0 from the wallet to the trading balance. `withdraw` sends `amount` USDC (or `all`) from the trading balance back to the wallet. `close` closes the whole position in `market` with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: CreateTradesRequest.Type;
 }
@@ -49,13 +51,15 @@ export namespace CreateTradesRequest {
         Spot: "spot",
     } as const;
     export type InstrumentType = (typeof InstrumentType)[keyof typeof InstrumentType];
-    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. Required for an order. */
+    /** `market` fills now within `slippage_bps` of the mid price, and anything unfilled is canceled; `limit` fills at `price` or better, and how long it stays on the book follows `time_in_force`. `take_profit` and `stop_loss` reduce the open perpetual position with a market order once the price crosses `trigger_price`; the trade stays `processing` until then. Required for an order. */
     export const OrderType = {
         Market: "market",
         Limit: "limit",
+        TakeProfit: "take_profit",
+        StopLoss: "stop_loss",
     } as const;
     export type OrderType = (typeof OrderType)[keyof typeof OrderType];
-    /** `buy` or `sell`. Required for an order. */
+    /** `buy` or `sell`. Required for an order, except a `take_profit` or `stop_loss`, where it defaults to the side that reduces the position. */
     export const Side = {
         Buy: "buy",
         Sell: "sell",

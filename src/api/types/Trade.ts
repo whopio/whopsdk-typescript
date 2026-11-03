@@ -34,9 +34,9 @@ export interface Trade {
     /** Free-form string-to-string annotations stored on the trade. */
     metadata: Record<string, unknown>;
     object: Trade.Object_;
-    /** `market` or `limit` for an order. `null` otherwise. */
+    /** `market`, `limit`, `take_profit` or `stop_loss` for an order. `null` otherwise. */
     order_type: Trade.OrderType | null;
-    /** The limit price of the order in USD. A market order's price is the mid price moved by `slippage_bps`. `null` for other types. */
+    /** The limit price of the order in USD. A market order's price is the mid price moved by `slippage_bps`; a take-profit or stop-loss's is the worst price its market order may fill at once triggered. `null` for other types. */
     price: Whop.Money | null;
     /** Whether the order can only reduce a position. `null` for other types. */
     reduce_only: boolean | null;
@@ -50,6 +50,8 @@ export interface Trade {
     status_detail: Trade.StatusDetail | null;
     /** What a live trade is doing now: `depositing` while the wallet's USDT0 is being sent to the bridge, `landing` once sent and until it reaches the trading balance, `placing` while the order or close is with the venue, `withdrawing` while USDC heads back to the wallet, `returning` while money an unfilled order bridged in goes back. `null` once the trade is no longer pending or processing. */
     step: Trade.Step | null;
+    /** The price in USD at which a take-profit or stop-loss sends its market order. `null` for other orders and types. */
+    trigger_price: Whop.Money | null;
     /** `order` places one order: a perpetual order trades from the trading balance, a spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */
     type: Trade.Type;
     /** When the trade last changed, as an ISO 8601 timestamp. */
@@ -94,10 +96,12 @@ export namespace Trade {
         Trade: "trade",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
-    /** `market` or `limit` for an order. `null` otherwise. */
+    /** `market`, `limit`, `take_profit` or `stop_loss` for an order. `null` otherwise. */
     export const OrderType = {
         Market: "market",
         Limit: "limit",
+        TakeProfit: "take_profit",
+        StopLoss: "stop_loss",
     } as const;
     export type OrderType = (typeof OrderType)[keyof typeof OrderType];
     /** `buy` or `sell` for an order. `null` otherwise. */
