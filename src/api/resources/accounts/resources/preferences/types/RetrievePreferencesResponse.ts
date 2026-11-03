@@ -45,6 +45,8 @@ export interface RetrievePreferencesResponse {
     preferred_settlement_currency: RetrievePreferencesResponse.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once a day. `null` when it may change now. */
     preferred_settlement_currency_changeable_at: string | null;
+    /** Whether Whop emails customers after a purchase asking them to leave a review. `true` by default. Set it to `false` to stop these emails, including ones already scheduled. They also stop while the account's `send_customer_emails` is `false`. */
+    review_request_emails: boolean;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: RetrievePreferencesResponse.SubscriptionFailureBehavior;
 }
