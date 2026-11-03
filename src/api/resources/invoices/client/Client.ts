@@ -514,7 +514,7 @@ export class InvoicesClient {
         request: Whop.GeneratePdfInvoicesRequest,
         requestOptions?: InvoicesClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.InvoicePdf>> {
-        const { id } = request;
+        const { id, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -534,7 +534,10 @@ export class InvoicesClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

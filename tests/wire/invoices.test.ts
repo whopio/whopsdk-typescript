@@ -41,6 +41,7 @@ describe("InvoicesClient", () => {
                     invoice_prefix: "invoice_prefix",
                     line_items: [
                         {
+                            description: null,
                             discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             id: "li_xxxxxxxxxxxxxx",
                             label: "Ceramic Coating Package",
@@ -209,6 +210,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -436,6 +438,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -574,6 +577,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -740,6 +744,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -937,7 +942,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = {
             expires_at: "2026-01-01T12:00:00.000Z",
             url: "https://content.whop.com/exports/2026-01-01/pdfs/receipt_pay_xxxxxxxxxxxxxx.pdf",
@@ -946,6 +951,7 @@ describe("InvoicesClient", () => {
         server
             .mockEndpoint()
             .post("/invoices/id/generate_pdf")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -966,12 +972,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/generate_pdf")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
@@ -993,12 +1000,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/generate_pdf")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
@@ -1020,12 +1028,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/generate_pdf")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
@@ -1047,12 +1056,13 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/invoices/id/generate_pdf")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(409)
             .jsonBody(rawResponseBody)
@@ -1099,6 +1109,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -1321,6 +1332,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -1510,6 +1522,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -1676,6 +1689,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
@@ -1811,6 +1825,7 @@ describe("InvoicesClient", () => {
             invoice_prefix: "invoice_prefix",
             line_items: [
                 {
+                    description: "description",
                     discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
