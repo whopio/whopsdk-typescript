@@ -7,7 +7,7 @@
  *     }
  */
 export interface UpdateTeamMembersRequest {
-    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_`. Treat it as opaque. */
+    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_` or `minv_`. Treat it as opaque. */
     id: string;
     /** The system role to grant. Custom roles cannot be granted through the API. The Partner role provides view-only access. */
     role?: UpdateTeamMembersRequest.Role;
