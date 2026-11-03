@@ -11,7 +11,7 @@ export interface AdPlatformIssue {
     resource_id: string | null;
     /** The type of resource the issue is attached to. */
     resource_type: AdPlatformIssue.ResourceType;
-    /** A short, creator-facing title for the issue. */
+    /** A short, creator-facing title for the issue: the rule a content-review rejection names, or a generic label. */
     title: string;
 }
 
