@@ -20,6 +20,7 @@ export namespace DomainIssue {
         Verification: "verification",
         Registration: "registration",
         Platform: "platform",
+        Subdomain: "subdomain",
         Website: "website",
         ApplePay: "apple_pay",
         Pixel: "pixel",
@@ -63,6 +64,9 @@ export namespace DomainIssue {
         EmailUnreachable: "email_unreachable",
         EmailIdentityInUse: "email_identity_in_use",
         EmailVerificationFailed: "email_verification_failed",
+        SubdomainNeedsWhopDomain: "subdomain_needs_whop_domain",
+        RootDomainPending: "root_domain_pending",
+        RootDomainNeedsAction: "root_domain_needs_action",
     } as const;
     export type Code = (typeof Code)[keyof typeof Code];
 }

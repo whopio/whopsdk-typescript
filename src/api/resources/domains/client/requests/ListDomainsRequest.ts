@@ -39,6 +39,8 @@ export interface ListDomainsRequest {
     registration?: Whop.ListDomainsRequestRegistration;
     /** Only domains with platform in this state, such as `ready`, or `any` for every domain that has platform. */
     platform?: Whop.ListDomainsRequestPlatform;
+    /** Only domains with subdomain in this state, such as `ready`, or `any` for every domain that has subdomain. */
+    subdomain?: Whop.ListDomainsRequestSubdomain;
     /** Only domains with website in this state, such as `ready`, or `any` for every domain that has website. */
     website?: Whop.ListDomainsRequestWebsite;
     /** Only domains with apple_pay in this state, such as `ready`, or `any` for every domain that has apple_pay. */

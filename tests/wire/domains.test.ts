@@ -55,6 +55,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    subdomain: null,
                     transfer: null,
                     updated_at: null,
                     verification: null,
@@ -98,6 +99,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    subdomain: null,
                     transfer: null,
                     updated_at: null,
                     verification: null,
@@ -141,6 +143,7 @@ describe("DomainsClient", () => {
                     registration: null,
                     stats: null,
                     status: null,
+                    subdomain: null,
                     transfer: null,
                     updated_at: null,
                     verification: null,
@@ -226,7 +229,7 @@ describe("DomainsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { domain: "store.example.com" };
+        const rawRequestBody = { domain: "www.bought.com" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             apple_pay: { state: "pending" },
@@ -297,6 +300,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            subdomain: { state: "pending" },
             transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
@@ -316,7 +320,7 @@ describe("DomainsClient", () => {
             .build();
 
         const response = await client.domains.create({
-            domain: "store.example.com",
+            domain: "www.bought.com",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -442,6 +446,7 @@ describe("DomainsClient", () => {
             registration: null,
             stats: null,
             status: null,
+            subdomain: null,
             transfer: null,
             updated_at: null,
             verification: null,
@@ -578,6 +583,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            subdomain: { state: "pending" },
             transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
@@ -696,6 +702,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            subdomain: { state: "pending" },
             transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },
@@ -828,6 +835,7 @@ describe("DomainsClient", () => {
             },
             stats: { unique_visitors_last_7_days: 0 },
             status: "idle",
+            subdomain: { state: "pending" },
             transfer: { code: "code", destination: "internal", state: "ready" },
             updated_at: "2026-01-01T12:00:00.000Z",
             verification: { state: "pending", verification_expires_at: "2026-01-01T12:00:00.000Z" },

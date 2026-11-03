@@ -34,6 +34,8 @@ export interface Domain {
     stats: Whop.DomainStats | null;
     /** The most pressing state of the domain's capabilities: `releasing`, then `action_required`, then `pending`, then `ready`. `idle` when it wants nothing. */
     status: Domain.Status | null;
+    /** A subdomain of a domain this account bought through Whop, whose DNS Whop runs. Whop removes it when the account no longer holds the root domain. `null` for other domains or when not visible to you. */
+    subdomain: Whop.DomainSubdomain | null;
     /** Moving the domain to another Whop account. `null` when not turned on or not visible to you. */
     transfer: Whop.DomainTransfer | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. */
