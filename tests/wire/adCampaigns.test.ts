@@ -18,6 +18,13 @@ describe("AdCampaignsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
+                        title: "Shine Time Auto Detailing",
+                    },
                     added_to_cart_value: 12650,
                     added_to_carts: 165,
                     budget_amount: 50,
@@ -167,6 +174,13 @@ describe("AdCampaignsClient", () => {
         });
         const rawRequestBody = { objective: "traffic", title: "Now hiring mobile detailers — Austin" };
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             added_to_cart_value: 12650,
             added_to_carts: 165,
             budget_amount: 50,
@@ -327,6 +341,13 @@ describe("AdCampaignsClient", () => {
         });
 
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             added_to_cart_value: 12650,
             added_to_carts: 165,
             budget_amount: 50,
@@ -495,6 +516,13 @@ describe("AdCampaignsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             added_to_cart_value: 12650,
             added_to_carts: 165,
             budget_amount: 50,
@@ -598,6 +626,13 @@ describe("AdCampaignsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
+                        title: "Shine Time Auto Detailing",
+                    },
                     added_to_cart_value: 12650,
                     added_to_carts: 165,
                     budget_amount: 50,
@@ -785,6 +820,13 @@ describe("AdCampaignsClient", () => {
         });
 
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             added_to_cart_value: 12650,
             added_to_carts: 165,
             budget_amount: 50,
@@ -912,6 +954,13 @@ describe("AdCampaignsClient", () => {
         });
 
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             added_to_cart_value: 12650,
             added_to_carts: 165,
             budget_amount: 50,
