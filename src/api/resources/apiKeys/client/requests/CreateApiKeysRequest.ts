@@ -137,7 +137,7 @@ export namespace CreateApiKeysRequest {
                 actions: string[];
                 /** Whether the actions are granted (`true`) or denied (`false`). */
                 grant: boolean;
-                /** Resource identifiers the statement applies to, for example `biz_xxx` or `biz_xxx|pass_*`. Defaults to the key's owning resource when omitted. */
+                /** Resource identifiers the statement applies to, for example `biz_xxx` or `biz_xxx|prod_*`. Defaults to the key's owning resource when omitted. */
                 resources?: string[] | undefined;
             }
         }
