@@ -69,6 +69,7 @@ export class DomainsClient {
                     verification,
                     registration,
                     platform,
+                    subdomain,
                     website,
                     apple_pay: applePay,
                     pixel,
@@ -91,6 +92,7 @@ export class DomainsClient {
                     verification: verification != null ? verification : undefined,
                     registration: registration != null ? registration : undefined,
                     platform: platform != null ? platform : undefined,
+                    subdomain: subdomain != null ? subdomain : undefined,
                     website: website != null ? website : undefined,
                     apple_pay: applePay != null ? applePay : undefined,
                     pixel: pixel != null ? pixel : undefined,
@@ -176,7 +178,7 @@ export class DomainsClient {
      *
      * Pass `registration.auth_code` to transfer in a domain you own at another registrar. The transfer starts once its `amount_due` is paid, or at once when `amount_due` is `null`. While `registration.phase` is `transferring`, its `issues` say what the transfer needs from you.
      *
-     * Pass `verification` to connect a domain you registered elsewhere: its `issues` list the TXT and routing records to publish. Pass `website` with an `app_id` to serve that app on the domain.
+     * Pass `verification` to connect a domain you registered elsewhere: its `issues` list the TXT and routing records to publish. A subdomain of a domain this account bought through Whop takes `subdomain` by default, and Whop publishes its DNS records itself. Pass `website` with an `app_id` to serve that app on the domain.
      *
      * To change a domain you already have, update it instead. Adding a domain this account deleted revives it under its original ID.
      *
@@ -190,7 +192,7 @@ export class DomainsClient {
      *
      * @example
      *     await client.domains.create({
-     *         domain: "store.example.com"
+     *         domain: "www.bought.com"
      *     })
      */
     public create(

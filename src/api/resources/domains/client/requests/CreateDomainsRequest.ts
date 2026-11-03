@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         domain: "store.example.com"
+ *         domain: "www.bought.com"
  *     }
  */
 export interface CreateDomainsRequest {
@@ -13,7 +13,7 @@ export interface CreateDomainsRequest {
     apple_pay?: CreateDomainsRequest.ApplePay | null;
     /** Bare hostname, such as example.com or checkout.example.com. A bought domain must be a root domain. Wildcards, paths, schemes, and ports are not accepted. */
     domain: string;
-    /** Send and receive email on the domain. Only a domain bought through Whop, or a subdomain of one in the same account, can have it. Whop publishes the DNS records and stays `pending` until its email provider verifies them, then turns `ready`. Pass `null` to remove email. */
+    /** Send and receive email on the domain. It needs `registration` or `subdomain`, so only a domain bought through Whop, or a subdomain of one in the same account, can have it. Whop publishes the DNS records and stays `pending` until its email provider verifies them, then turns `ready`. Pass `null` to remove email. */
     email?: CreateDomainsRequest.Email | null;
     /** Custom string keys and values. */
     metadata?: Record<string, string>;
@@ -21,6 +21,8 @@ export interface CreateDomainsRequest {
     pixel?: CreateDomainsRequest.Pixel | null;
     /** Buy the domain through Whop, or transfer in a domain you own elsewhere with `auth_code`, then renew it every year and let Whop run its DNS. Pass `null` to release an unpaid or failed purchase, or to cancel a transfer while its current registrar can still stop it. */
     registration?: CreateDomainsRequest.Registration | null;
+    /** Use a subdomain of a domain this account bought through Whop, such as shop.example.com under example.com. It's the default when you add such a subdomain without a capability. Whop publishes its DNS records in the root domain's zone, so it needs nothing from you: it stays `pending` until the root domain is set up, then turns `ready`. Whop releases it, and its website, when the account no longer holds the root domain, and deletes it when the root domain leaves the account. Pass `null` to release it. Can't be combined with `verification` or `registration`. */
+    subdomain?: CreateDomainsRequest.Subdomain | null;
     /** Move a domain registered through Whop to another Whop account. Turning it on returns a code in `transfer.code`; the receiving account enters it as `registration.auth_code` on its own copy of the domain. Whop then removes the domain's email, email addresses and Apple Pay from this account, moves the registration with its expiry, stops charging this account to renew it, and removes the domain from this account. Pass `null` to turn it off and invalidate the code, until another account has entered it. */
     transfer?: CreateDomainsRequest.Transfer | null;
     /** Prove you control the domain's DNS: Whop returns a TXT record to publish in `issues`, and whoever publishes it owns the domain on Whop. Pass `null` to release it. Can't be combined with `registration`. */
@@ -36,7 +38,7 @@ export namespace CreateDomainsRequest {
     export type ApplePay = {};
 
     /**
-     * Send and receive email on the domain. Only a domain bought through Whop, or a subdomain of one in the same account, can have it. Whop publishes the DNS records and stays `pending` until its email provider verifies them, then turns `ready`. Pass `null` to remove email.
+     * Send and receive email on the domain. It needs `registration` or `subdomain`, so only a domain bought through Whop, or a subdomain of one in the same account, can have it. Whop publishes the DNS records and stays `pending` until its email provider verifies them, then turns `ready`. Pass `null` to remove email.
      */
     export type Email = {};
 
@@ -56,6 +58,11 @@ export namespace CreateDomainsRequest {
         /** Saved card to charge, prefixed `payt_`. It must belong to the signed-in user. Pass `null` to remove it. */
         payment_method_id?: (string | null) | undefined;
     }
+
+    /**
+     * Use a subdomain of a domain this account bought through Whop, such as shop.example.com under example.com. It's the default when you add such a subdomain without a capability. Whop publishes its DNS records in the root domain's zone, so it needs nothing from you: it stays `pending` until the root domain is set up, then turns `ready`. Whop releases it, and its website, when the account no longer holds the root domain, and deletes it when the root domain leaves the account. Pass `null` to release it. Can't be combined with `verification` or `registration`.
+     */
+    export type Subdomain = {};
 
     /**
      * Move a domain registered through Whop to another Whop account. Turning it on returns a code in `transfer.code`; the receiving account enters it as `registration.auth_code` on its own copy of the domain. Whop then removes the domain's email, email addresses and Apple Pay from this account, moves the registration with its expiry, stops charging this account to renew it, and removes the domain from this account. Pass `null` to turn it off and invalidate the code, until another account has entered it.
