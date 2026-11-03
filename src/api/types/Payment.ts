@@ -90,7 +90,7 @@ export interface Payment {
     refunded_at: string | null;
     /** When the earliest response is due on a dispute or Resolution Center case awaiting the account's response, as an ISO 8601 timestamp. Null when nothing awaits a response, or without the permission to read that dispute or case. */
     response_due_at: string | null;
-    /** True when the payment is `open` and Whop can attempt the charge again — see `POST /payments/{id}/retry`. */
+    /** True when the payment is `open` and can be retried by hand with `POST /payments/{id}/retry`: its membership is `active`, `trialing`, or `past_due` (or it is a failed first payment on a `drafted` membership), it is not paid through an invoice payment link, and its one manual retry is not used up. A retry can still be refused when the company cannot currently accept payments. */
     retryable: boolean;
     /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available. */
     risk_score: number | null;

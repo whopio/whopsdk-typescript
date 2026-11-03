@@ -72,7 +72,7 @@ export interface PaymentListItem {
     refunded_amount: number | null;
     /** When the payment was refunded (if applicable). */
     refunded_at: string | null;
-    /** True when the payment status is `open` and its membership is in one of the retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or when it is a failed initial billing-engine payment on a `drafted` membership with an unlimited-stock plan; otherwise false. Used to decide if Whop can attempt the charge again. */
+    /** True when the payment is `open`, its processor can be charged again, its membership is `active`, `trialing`, or `past_due` (or it is a failed initial payment on a `drafted` membership), it is not paid through an invoice link, and its one manual retry is not used up. Used to decide if the payment can be retried by hand. A retry can still be refused when the company cannot accept payments. */
     retryable: boolean;
     /** The three-letter ISO currency code for this payment (e.g., 'usd', 'eur'). */
     settlement_currency: Whop.Currencies;
