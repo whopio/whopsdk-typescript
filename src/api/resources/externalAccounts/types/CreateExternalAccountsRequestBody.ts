@@ -4,7 +4,7 @@ import type * as Whop from "../../../index.js";
 
 export type CreateExternalAccountsRequestBody =
     /**
-     * Provisions a Whop-managed Facebook page for the account. Requires the account's `banner_image`, `logo`, and `description`; configure them with [Update Account](/api-reference/beta/accounts/update-account). The account is returned before Facebook has created the page — its `id` is usable right away, and the rest of the profile fills in once provisioning finishes. */
+     * Whop no longer creates Facebook pages, so this returns a `facebook_page_provisioning_retired` error. */
     | Whop.CreateExternalAccountsRequestBody.Facebook
     /**
      * Provisions a Whop-managed TikTok account for the account. Requires the account's `logo`; configure it with [Update Account](/api-reference/beta/accounts/update-account). The account is returned before TikTok has created it — its `id` is usable right away, and the rest of the profile fills in once provisioning finishes. */

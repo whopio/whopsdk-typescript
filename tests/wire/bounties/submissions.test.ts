@@ -31,7 +31,7 @@ describe("SubmissionsClient", () => {
                             "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         started_at: "2026-01-01T12:00:00.000Z",
                         thumbnail_url:
-                            "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
+                            "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                         title: "Untitled Livestream",
                     },
                     resolved_at: "2026-01-01T12:00:00.000Z",
@@ -151,7 +151,7 @@ describe("SubmissionsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 started_at: "2026-01-01T12:00:00.000Z",
                 thumbnail_url:
-                    "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
+                    "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                 title: "Untitled Livestream",
             },
             resolved_at: "2026-01-01T12:00:00.000Z",
