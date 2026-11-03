@@ -27,6 +27,7 @@ export interface Membership {
     current_period_start: string | null;
     /** When access ends for a membership with a fixed expiration, as an ISO 8601 timestamp. `null` when the membership has no expiration, such as a renewing membership. */
     expires_at: string | null;
+    external_accounts: Whop.MembershipExternalAccount[] | null;
     /** The account's own cancel reason the member picked, as they saw it. `null` when the member picked a default category or gave no reason. */
     feedback_option: Whop.MembershipFeedbackOption | null;
     /** Membership ID, prefixed `mem_`. */
