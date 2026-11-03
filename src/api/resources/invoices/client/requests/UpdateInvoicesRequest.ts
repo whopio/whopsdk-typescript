@@ -15,7 +15,7 @@ export interface UpdateInvoicesRequest {
     buyer_fee_percentage?: number;
     /** When payment is due, as an ISO 8601 timestamp. */
     due_at?: string | null;
-    /** The variants being invoiced, all in the same currency. Each variant may appear once; use quantity for multiple units. Product and price come from each variant; a recurring variant must belong to a product, bills its renewal price and, once the invoice is paid, renews as a subscription charged to the payment method that paid it. With several items, every item that has a product must be a regular product, and all items need compatible payment, tax, and access settings. */
+    /** The variants being invoiced, all in the same currency. Each variant may appear once; use quantity for multiple units. Product and price come from each variant; a recurring variant must belong to a product, bills its renewal price and, once the invoice is paid, renews as a subscription collected by the `collection_method` the invoice was sent or issued with. With several items, every item that has a product must be a regular product, and all items need compatible payment, tax, and access settings. */
     items?: UpdateInvoicesRequest.Items.Item[];
     /** An address associated with the member. Mutually exclusive with billing_address. */
     mailing_address_id?: string | null;

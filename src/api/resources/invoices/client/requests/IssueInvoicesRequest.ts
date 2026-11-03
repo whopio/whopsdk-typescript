@@ -11,4 +11,15 @@ export interface IssueInvoicesRequest {
     id: string;
     /** When to charge the draft's `payment_method_id`, as an ISO 8601 timestamp in the future. Only for a draft with a `payment_method_id` and a total above zero. Omit to charge on `due_at` if it is still ahead, or right away otherwise. */
     charge_at?: string | null;
+    /** How the subscription this invoice starts collects each renewal. `charge_automatically` charges the payment method that paid the invoice each period: the draft's `payment_method_id`, or the one the customer pays the invoice link with. `send_invoice` issues a numbered invoice each period, due on the renewal date and emailed with its payment link to the latest invoice's `recipient_emails`, so it needs at least one recipient and isn't available for invoices billed to a business. Defaults to `charge_automatically`. Only for a draft with a recurring item. A scheduled send applies it when it fires (see `scheduled_collection_method`). */
+    collection_method?: IssueInvoicesRequest.CollectionMethod | null;
+}
+
+export namespace IssueInvoicesRequest {
+    /** How the subscription this invoice starts collects each renewal. `charge_automatically` charges the payment method that paid the invoice each period: the draft's `payment_method_id`, or the one the customer pays the invoice link with. `send_invoice` issues a numbered invoice each period, due on the renewal date and emailed with its payment link to the latest invoice's `recipient_emails`, so it needs at least one recipient and isn't available for invoices billed to a business. Defaults to `charge_automatically`. Only for a draft with a recurring item. A scheduled send applies it when it fires (see `scheduled_collection_method`). */
+    export const CollectionMethod = {
+        ChargeAutomatically: "charge_automatically",
+        SendInvoice: "send_invoice",
+    } as const;
+    export type CollectionMethod = (typeof CollectionMethod)[keyof typeof CollectionMethod];
 }

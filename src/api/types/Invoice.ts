@@ -19,6 +19,8 @@ export interface Invoice {
     line_items: Whop.InvoiceLineItem[];
     mailing_address_id: string | null;
     member_id: string | null;
+    /** The membership this invoice bills, prefixed `mem_`: the subscription a renewal invoice renews, or the one created when an invoice with a recurring item is issued. Null for one-off invoices, for a draft not yet issued, and without the member:basic:read permission. */
+    membership_id: string | null;
     /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. `null` when none is set. */
     memo: string | null;
     metadata: Record<string, string>;
@@ -30,6 +32,8 @@ export interface Invoice {
     recipient_emails: string[];
     /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp: the `charge_at` it was sent or issued with, or `due_at` when an invoice with a `payment_method_id` is sent or issued before it is due without one. On a draft, the `charge_at` of its scheduled send. `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
     scheduled_charge_at: string | null;
+    /** The `collection_method` a draft's scheduled send applies when it fires. `null` when the draft has no scheduled send or it was scheduled without one, and once the invoice is issued. */
+    scheduled_collection_method: Invoice.ScheduledCollectionMethod | null;
     scheduled_send_at: string | null;
     status: Invoice.Status;
     subtotal: Whop.Money;
@@ -44,6 +48,12 @@ export namespace Invoice {
         Invoice: "invoice",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+    /** The `collection_method` a draft's scheduled send applies when it fires. `null` when the draft has no scheduled send or it was scheduled without one, and once the invoice is issued. */
+    export const ScheduledCollectionMethod = {
+        ChargeAutomatically: "charge_automatically",
+        SendInvoice: "send_invoice",
+    } as const;
+    export type ScheduledCollectionMethod = (typeof ScheduledCollectionMethod)[keyof typeof ScheduledCollectionMethod];
     export const Status = {
         Draft: "draft",
         Open: "open",
