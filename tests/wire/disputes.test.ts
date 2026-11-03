@@ -18,7 +18,7 @@ describe("DisputesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    acceptable: false,
+                    acceptable: true,
                     account_id: "biz_xxxxxxxxxxxxxx",
                     amount: 150,
                     buyer: {
@@ -100,11 +100,11 @@ describe("DisputesClient", () => {
                         },
                     },
                     evidence_due_at: "2026-01-01T12:00:00.000Z",
-                    evidence_editable: false,
+                    evidence_editable: true,
                     evidence_locked_reason: "submitted",
-                    evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+                    evidence_submitted_at: "evidence_submitted_at",
                     fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-                    fee_charged: false,
+                    fee_charged: true,
                     id: "dspt_xxxxxxxxxxxxxx",
                     inquiry: false,
                     issuer_comments: [
@@ -351,7 +351,7 @@ describe("DisputesClient", () => {
         });
 
         const rawResponseBody = {
-            acceptable: false,
+            acceptable: true,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -432,11 +432,11 @@ describe("DisputesClient", () => {
                 },
             },
             evidence_due_at: "2026-01-01T12:00:00.000Z",
-            evidence_editable: false,
+            evidence_editable: true,
             evidence_locked_reason: "submitted",
-            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            evidence_submitted_at: "evidence_submitted_at",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            fee_charged: false,
+            fee_charged: true,
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -580,7 +580,7 @@ describe("DisputesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            acceptable: false,
+            acceptable: true,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -661,11 +661,11 @@ describe("DisputesClient", () => {
                 },
             },
             evidence_due_at: "2026-01-01T12:00:00.000Z",
-            evidence_editable: false,
+            evidence_editable: true,
             evidence_locked_reason: "submitted",
-            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            evidence_submitted_at: "evidence_submitted_at",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            fee_charged: false,
+            fee_charged: true,
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -858,7 +858,7 @@ describe("DisputesClient", () => {
         });
 
         const rawResponseBody = {
-            acceptable: false,
+            acceptable: true,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -939,11 +939,11 @@ describe("DisputesClient", () => {
                 },
             },
             evidence_due_at: "2026-01-01T12:00:00.000Z",
-            evidence_editable: false,
+            evidence_editable: true,
             evidence_locked_reason: "submitted",
-            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            evidence_submitted_at: "evidence_submitted_at",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            fee_charged: false,
+            fee_charged: true,
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -1186,7 +1186,7 @@ describe("DisputesClient", () => {
         });
 
         const rawResponseBody = {
-            acceptable: false,
+            acceptable: true,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -1267,11 +1267,11 @@ describe("DisputesClient", () => {
                 },
             },
             evidence_due_at: "2026-01-01T12:00:00.000Z",
-            evidence_editable: false,
+            evidence_editable: true,
             evidence_locked_reason: "submitted",
-            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            evidence_submitted_at: "evidence_submitted_at",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            fee_charged: false,
+            fee_charged: true,
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
@@ -1487,7 +1487,7 @@ describe("DisputesClient", () => {
         });
         const rawRequestBody = { documents: [{ document_type: "return_policy" }] };
         const rawResponseBody = {
-            acceptable: false,
+            acceptable: true,
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 150,
             buyer: {
@@ -1568,11 +1568,11 @@ describe("DisputesClient", () => {
                 },
             },
             evidence_due_at: "2026-01-01T12:00:00.000Z",
-            evidence_editable: false,
+            evidence_editable: true,
             evidence_locked_reason: "submitted",
-            evidence_submitted_at: "2026-01-01T12:00:00.000Z",
+            evidence_submitted_at: "evidence_submitted_at",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
-            fee_charged: false,
+            fee_charged: true,
             id: "dspt_xxxxxxxxxxxxxx",
             inquiry: false,
             issuer_comments: [
