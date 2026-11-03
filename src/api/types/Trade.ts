@@ -36,6 +36,8 @@ export interface Trade {
     object: Trade.Object_;
     /** `market`, `limit`, `take_profit` or `stop_loss` for an order. `null` otherwise. */
     order_type: Trade.OrderType | null;
+    /** For a take-profit or stop-loss sent with an order, that order's trade, prefixed `tint_`. `null` otherwise. */
+    parent_id: string | null;
     /** The limit price of the order in USD. A market order's price is the mid price moved by `slippage_bps`; a take-profit or stop-loss's is the worst price its market order may fill at once triggered. `null` for other types. */
     price: Whop.Money | null;
     /** Whether the order can only reduce a position. `null` for other types. */

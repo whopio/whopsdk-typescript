@@ -36,6 +36,10 @@ export interface CreateTradesRequest {
     size?: string;
     /** Only for a market order or a close. The worst price as basis points from the mid price, from 1 to 1000; defaults to 100 for a perpetual, and to the swap route's own default for spot. */
     slippage_bps?: number;
+    /** Only for a perpetual order that opens or adds to a position. A stop-loss for the order's full size, armed once the order fills and sent with it as its own trade, whose `parent_id` is this trade. */
+    stop_loss?: CreateTradesRequest.StopLoss;
+    /** Only for a perpetual order that opens or adds to a position. A take-profit for the order's full size, armed once the order fills and sent with it as its own trade, whose `parent_id` is this trade. */
+    take_profit?: CreateTradesRequest.TakeProfit;
     /** Only for a perpetual limit order. `good_til_canceled` rests on the book until it fills; `add_liquidity_only` is canceled instead of filling at once; `immediate_or_cancel` fills what it can now and cancels the rest. Defaults to `good_til_canceled`. The trade stays `processing` while the order rests. */
     time_in_force?: CreateTradesRequest.TimeInForce;
     /** Required for a `take_profit` or `stop_loss`, and only for them. The USD price, as a decimal string Hyperliquid accepts without rounding, at which it sends a market order. Closing a long, a take-profit triggers above the current price and a stop-loss below; closing a short, the reverse. It is always reduce-only, needs an open position, and takes no `price`, `notional`, `leverage`, `time_in_force` or `slippage_bps`. */
@@ -65,6 +69,23 @@ export namespace CreateTradesRequest {
         Sell: "sell",
     } as const;
     export type Side = (typeof Side)[keyof typeof Side];
+
+    /**
+     * Only for a perpetual order that opens or adds to a position. A stop-loss for the order's full size, armed once the order fills and sent with it as its own trade, whose `parent_id` is this trade.
+     */
+    export interface StopLoss {
+        /** The USD price, as a decimal string Hyperliquid accepts without rounding, at which the stop-loss sends its market order. Below `price` (or the mid price for a market order) for a buy, above it for a sell. */
+        trigger_price: string;
+    }
+
+    /**
+     * Only for a perpetual order that opens or adds to a position. A take-profit for the order's full size, armed once the order fills and sent with it as its own trade, whose `parent_id` is this trade.
+     */
+    export interface TakeProfit {
+        /** The USD price, as a decimal string Hyperliquid accepts without rounding, at which the take-profit sends its market order. Above `price` (or the mid price for a market order) for a buy, below it for a sell. */
+        trigger_price: string;
+    }
+
     /** Only for a perpetual limit order. `good_til_canceled` rests on the book until it fills; `add_liquidity_only` is canceled instead of filling at once; `immediate_or_cancel` fills what it can now and cancels the rest. Defaults to `good_til_canceled`. The trade stays `processing` while the order rests. */
     export const TimeInForce = {
         AddLiquidityOnly: "add_liquidity_only",
