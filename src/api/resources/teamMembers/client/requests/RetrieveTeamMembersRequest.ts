@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveTeamMembersRequest {
-    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_`. Treat it as opaque. */
+    /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_` or `minv_`. Treat it as opaque. */
     id: string;
 }
