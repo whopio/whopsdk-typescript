@@ -11,4 +11,6 @@ export interface PaymentInstrumentCard {
     issuer_identification_number: string | null;
     /** The card's last four digits, when captured. */
     last4: string | null;
+    /** The network transaction id this account uses for the card. It's this account's own id, from its first customer-present charge or verification on the card, when Whop has one. Otherwise it's an earlier network transaction id for this card, which can come from another account's transaction or be one brought with the card. Cite it as the prior transaction on a later merchant-initiated charge of this card at this account. Null until there is one. A webhook sent as a payment is first recorded can carry `null`, so retrieve the payment to read it. */
+    network_transaction_id: string | null;
 }

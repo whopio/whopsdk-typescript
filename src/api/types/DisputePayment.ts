@@ -15,7 +15,7 @@ export interface DisputePayment {
     currency: string | null;
     /** Payment ID, prefixed `pay_`. */
     id: string;
-    /** The instrument this payment was made with, shaped for display: the method type, a buyer-facing name, the standard icon set, and the card facts when it was a card. Null when the payment names no method. */
+    /** The instrument this payment was made with, shaped for display: the method type, a buyer-facing name, the standard icon set, and the card facts, including the network transaction id the account uses for the card, when it was a card. Null when the payment names no method. */
     payment_instrument: Whop.PaymentInstrument | null;
     /** How the customer paid, such as `card` or `paypal`. */
     payment_method_type: string | null;

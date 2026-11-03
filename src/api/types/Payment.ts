@@ -59,7 +59,7 @@ export interface Payment {
     next_payment_attempt_at: string | null;
     /** When the money was collected, or null while it has not been. */
     paid_at: string | null;
-    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and the card's brand, last four and issuer identification number when it was a card. */
+    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and when it was a card, the card's brand, last four, issuer identification number, and the network transaction id the account uses for the card. */
     payment_instrument: Whop.PaymentInstrument | null;
     /** The stored payment method that was charged, prefixed `payt_`. Null when the method was not saved. */
     payment_method_id: string | null;
