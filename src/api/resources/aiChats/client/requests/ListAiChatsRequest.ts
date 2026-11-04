@@ -19,6 +19,8 @@ export interface ListAiChatsRequest {
     /** Returns the last _n_ elements from the list. */
     last?: number;
     agent_identifier?: Whop.AiChatAgentIdentifiers;
+    /** Only return chats associated with this business account. */
+    account_id?: string;
     /** When true, returns only chats with an active cron schedule */
     only_active_crons?: boolean;
 }

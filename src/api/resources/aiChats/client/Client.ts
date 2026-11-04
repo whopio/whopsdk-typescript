@@ -57,6 +57,7 @@ export class AiChatsClient {
                     first,
                     last,
                     agent_identifier: agentIdentifier,
+                    account_id: accountId,
                     only_active_crons: onlyActiveCrons,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
@@ -65,6 +66,7 @@ export class AiChatsClient {
                     first,
                     last,
                     agent_identifier: agentIdentifier != null ? agentIdentifier : undefined,
+                    account_id: accountId,
                     only_active_crons: onlyActiveCrons,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
