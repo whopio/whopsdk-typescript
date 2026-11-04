@@ -3,27 +3,27 @@
 import type * as Whop from "../index.js";
 
 export interface AccountLevel {
-    /** `true` when this account's own points this month fall short of `current`, so the owner's other accounts lift it to this level. */
+    /** This account's own level from its points alone, from `0` up to `10`. `applied_level` is higher when the owner's other accounts lift it. */
+    account_level: number;
+    /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
+    applied_level: number;
+    /** `true` when this account's own points this month fall short of `applied_level`, so the owner's other accounts lift it to that level. */
     boosted: boolean;
-    /** Current level, from `0` before the first threshold up to `10`. */
-    current: number;
     levels: Whop.AccountProcessingOfferLevel[];
-    /** Charged Whop Ads spend this calendar month across every account the owner owns, in USD. */
+    /** Whop Ads charges paid this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
     monthly_ads_spend: Whop.Money;
-    /** Effective Whop Card spend this calendar month across every account the owner owns, in USD. */
+    /** Captured Whop Card spend this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
     monthly_card_spend: Whop.Money;
-    /** Qualifying spend this calendar month across every account the owner owns, in USD: Whop Ads spend, Whop Card spend, and a tenth of perpetual trading volume. */
+    /** Qualifying spend this calendar month across every account the owner owns, plus the owner's partner points, in USD: `points` divided by 10. */
     monthly_qualifying_spend: Whop.Money;
-    /** Perpetual trading notional volume this calendar month across every account the owner owns, in USD. */
+    /** Perpetual trading volume filled through Whop this calendar month across every account the owner owns, in USD. An account whose month nets to zero or below is left out. */
     monthly_trading_volume: Whop.Money;
-    /** Points earned this month across every account the owner owns. */
+    /** Points earned this month across every account the owner owns, plus the owner's partner points, rounded down. An account whose month nets below zero counts as zero. */
     points: number;
-    /** This month's points, split by where they were earned. */
+    /** This month's points, split by where they were earned. Each source is net of its refunds, so one can be negative. */
     points_by_source: Whop.OwnerLevelPoints;
     /** Points still needed this month to reach the next level, or `null` at level `10`. */
     points_to_next: number | null;
-    /** The standard US and Canada card processing percentage at `current`, before any account's custom rate. */
-    processing_rate_percentage: number;
     /** When this month's points reset to zero, as an ISO 8601 timestamp. */
     resets_at: string;
 }
