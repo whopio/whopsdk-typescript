@@ -62,6 +62,7 @@ export const ListFinancialActivityRequestLineTypesItem = {
     LegacyCryptoPayment: "legacy_crypto_payment",
     LegacyPayment: "legacy_payment",
     LegacyPaymentRefund: "legacy_payment_refund",
+    LevelsRebate: "levels_rebate",
     LicenseSale: "license_sale",
     LicenseSaleCommission: "license_sale_commission",
     LicenseSaleRevenue: "license_sale_revenue",
