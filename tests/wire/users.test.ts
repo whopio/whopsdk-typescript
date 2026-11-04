@@ -934,18 +934,18 @@ describe("UsersClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account_id: "biz_xxxxxxxxxxxxxx",
-                    account_name: "Shine Time Auto Detailing",
+                    account_id: "account_id",
+                    account_name: "account_name",
                     action: "create_business",
-                    blocked_capabilities: ["accept_bnpl_payments"],
-                    cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings/payments/",
-                    cta_label: "Apply",
-                    description: "Let detailing customers split a $249 ceramic coating over four payments.",
-                    icon_url: "https://whop.com/illustrations/orange/piggy-bank.svg",
-                    impact_score: 82,
-                    reasoning: "Ceramic coating is the priciest job on the menu, so financing lifts conversion most.",
+                    blocked_capabilities: ["blocked_capabilities"],
+                    cta: "https://whop.com/dashboard/start/",
+                    cta_label: "Create a business",
+                    description: "Launch a store on Whop and start selling in minutes.",
+                    icon_url: "https://whop.com/illustrations/orange/store.svg",
+                    impact_score: 1,
+                    reasoning: "reasoning",
                     status: "optional",
-                    title: "Offer financing at checkout",
+                    title: "Start your own business",
                 },
             ],
         };

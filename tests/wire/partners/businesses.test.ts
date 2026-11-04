@@ -248,16 +248,15 @@ describe("BusinessesClient", () => {
                 recommended_actions: [
                     {
                         action: "theme_business",
-                        blocked_capabilities: ["accept_bnpl_payments"],
-                        cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings/payments/",
-                        cta_label: "Apply",
-                        description: "Let customers pay over time with buy now, pay later.",
-                        icon_url: "https://whop.com/illustrations/orange/piggy-bank.svg",
-                        impact_score: 86,
-                        reasoning:
-                            "Financing lifts conversion on the $249 ceramic coating, the priciest job on the menu.",
+                        blocked_capabilities: ["blocked_capabilities"],
+                        cta: "cta",
+                        cta_label: "cta_label",
+                        description: "description",
+                        icon_url: null,
+                        impact_score: null,
+                        reasoning: null,
                         status: "optional",
-                        title: "Offer financing at checkout",
+                        title: "title",
                     },
                 ],
                 required_actions: [
@@ -571,16 +570,15 @@ describe("BusinessesClient", () => {
                 recommended_actions: [
                     {
                         action: "theme_business",
-                        blocked_capabilities: ["accept_bnpl_payments"],
-                        cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings/payments/",
-                        cta_label: "Apply",
-                        description: "Let customers pay over time with buy now, pay later.",
-                        icon_url: "https://whop.com/illustrations/orange/piggy-bank.svg",
-                        impact_score: 86,
-                        reasoning:
-                            "Financing lifts conversion on the $249 ceramic coating, the priciest job on the menu.",
+                        blocked_capabilities: ["blocked_capabilities"],
+                        cta: "cta",
+                        cta_label: "cta_label",
+                        description: "description",
+                        icon_url: null,
+                        impact_score: null,
+                        reasoning: null,
                         status: "optional",
-                        title: "Offer financing at checkout",
+                        title: "title",
                     },
                 ],
                 required_actions: [
