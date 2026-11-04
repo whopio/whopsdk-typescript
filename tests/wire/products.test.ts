@@ -37,6 +37,20 @@ describe("ProductsClient", () => {
                         visibility: "visible",
                     },
                     description: "empower rich infrastructures",
+                    experiences: [
+                        {
+                            app: {
+                                icon: {
+                                    url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg",
+                                },
+                                id: "app_xxxxxxxxxxxxxx",
+                                name: "app1",
+                            },
+                            id: "exp_xxxxxxxxxxxxxx",
+                            logo_url: null,
+                            name: "Name1",
+                        },
+                    ],
                     external_identifier: "SHINE-CERAMIC-01",
                     gallery_images: [
                         {
@@ -48,6 +62,8 @@ describe("ProductsClient", () => {
                     headline: "thought leadership",
                     id: "prod_xxxxxxxxxxxxxx",
                     labels: ["courses"],
+                    logo_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     member_count: 0,
                     metadata: { key: "value" },
                     published_reviews_count: 0,
@@ -127,6 +143,25 @@ describe("ProductsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/products").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.products.list();
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -156,6 +191,18 @@ describe("ProductsClient", () => {
                 visibility: "visible",
             },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
+            experiences: [
+                {
+                    app: {
+                        icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
+                        id: "app_xxxxxxxxxxxxxx",
+                        name: "app1",
+                    },
+                    id: "exp_xxxxxxxxxxxxxx",
+                    logo_url: "logo_url",
+                    name: "Name1",
+                },
+            ],
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
                 {
@@ -169,6 +216,7 @@ describe("ProductsClient", () => {
             headline: "Steam, shampoo, and odor removal in one visit",
             id: "prod_xxxxxxxxxxxxxx",
             labels: ["interior"],
+            logo_url: "logo_url",
             marketplace_status: "not_available",
             member_affiliate_percentage: 5,
             member_affiliate_status: "enabled",
@@ -350,6 +398,18 @@ describe("ProductsClient", () => {
                 visibility: "visible",
             },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
+            experiences: [
+                {
+                    app: {
+                        icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
+                        id: "app_xxxxxxxxxxxxxx",
+                        name: "app1",
+                    },
+                    id: "exp_xxxxxxxxxxxxxx",
+                    logo_url: "logo_url",
+                    name: "Name1",
+                },
+            ],
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
                 {
@@ -363,6 +423,7 @@ describe("ProductsClient", () => {
             headline: "Steam, shampoo, and odor removal in one visit",
             id: "prod_xxxxxxxxxxxxxx",
             labels: ["interior"],
+            logo_url: "logo_url",
             marketplace_status: "not_available",
             member_affiliate_percentage: 5,
             member_affiliate_status: "enabled",
@@ -564,6 +625,18 @@ describe("ProductsClient", () => {
                 visibility: "visible",
             },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
+            experiences: [
+                {
+                    app: {
+                        icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
+                        id: "app_xxxxxxxxxxxxxx",
+                        name: "app1",
+                    },
+                    id: "exp_xxxxxxxxxxxxxx",
+                    logo_url: "logo_url",
+                    name: "Name1",
+                },
+            ],
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
                 {
@@ -577,6 +650,7 @@ describe("ProductsClient", () => {
             headline: "Steam, shampoo, and odor removal in one visit",
             id: "prod_xxxxxxxxxxxxxx",
             labels: ["interior"],
+            logo_url: "logo_url",
             marketplace_status: "not_available",
             member_affiliate_percentage: 5,
             member_affiliate_status: "enabled",
@@ -758,6 +832,18 @@ describe("ProductsClient", () => {
                 visibility: "visible",
             },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
+            experiences: [
+                {
+                    app: {
+                        icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
+                        id: "app_xxxxxxxxxxxxxx",
+                        name: "app1",
+                    },
+                    id: "exp_xxxxxxxxxxxxxx",
+                    logo_url: "logo_url",
+                    name: "Name1",
+                },
+            ],
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
                 {
@@ -771,6 +857,7 @@ describe("ProductsClient", () => {
             headline: "Steam, shampoo, and odor removal in one visit",
             id: "prod_xxxxxxxxxxxxxx",
             labels: ["interior"],
+            logo_url: "logo_url",
             marketplace_status: "not_available",
             member_affiliate_percentage: 5,
             member_affiliate_status: "enabled",
@@ -976,6 +1063,18 @@ describe("ProductsClient", () => {
                 visibility: "visible",
             },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
+            experiences: [
+                {
+                    app: {
+                        icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
+                        id: "app_xxxxxxxxxxxxxx",
+                        name: "app1",
+                    },
+                    id: "exp_xxxxxxxxxxxxxx",
+                    logo_url: "logo_url",
+                    name: "Name1",
+                },
+            ],
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
                 {
@@ -989,6 +1088,7 @@ describe("ProductsClient", () => {
             headline: "Steam, shampoo, and odor removal in one visit",
             id: "prod_xxxxxxxxxxxxxx",
             labels: ["interior"],
+            logo_url: "logo_url",
             marketplace_status: "not_available",
             member_affiliate_percentage: 5,
             member_affiliate_status: "enabled",

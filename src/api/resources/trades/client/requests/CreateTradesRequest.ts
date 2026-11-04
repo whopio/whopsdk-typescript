@@ -18,7 +18,7 @@ export interface CreateTradesRequest {
     instrument_type?: CreateTradesRequest.InstrumentType;
     /** Only for a perpetual order. The cross leverage, from 1 to the market's maximum. Required unless `reduce_only`; not accepted on a reduce-only order. */
     leverage?: number;
-    /** The market: a perpetual such as `BTC`, or for spot an asset the wallet can swap into, such as `BTC` or `XAUT`. Required for an order or close, and a close takes only a perpetual; not accepted for a deposit or withdraw. */
+    /** The market: a perpetual such as `BTC` or `xyz:TSLA`, or for spot an asset the wallet can swap into, such as `BTC` or `XAUT`. Required for an order or close, and a close takes only a perpetual; not accepted for a deposit or withdraw. */
     market?: string;
     /** Only for an order. Free-form string-to-string annotations: up to 50 keys of at most 40 characters, values up to 500 characters. */
     metadata?: Record<string, string>;

@@ -13,6 +13,7 @@ export interface ProductListItem {
     default_variant: Whop.ProductPublicVariant | null;
     /** Written description displayed on the product page. `null` if none is set. */
     description: string | null;
+    experiences: Whop.ProductExperience[];
     /** External identifier stored on the product for your own reference. */
     external_identifier: string | null;
     gallery_images: Whop.ProductGalleryImage[];
@@ -21,6 +22,8 @@ export interface ProductListItem {
     /** Product ID, prefixed `prod_`. */
     id: string;
     labels: string[];
+    /** Logo image URL shown on product pages and in search results. `null` when the product has no logo. */
+    logo_url: string | null;
     /** Active memberships for this product; 0 if public member counts are disabled. */
     member_count: number;
     /** Custom key-value pairs stored on the product. */

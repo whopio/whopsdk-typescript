@@ -23585,7 +23585,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Lists an account's products, or searches the public marketplace when you omit `account_id`.
+Lists an account's products, or searches the public marketplace when you omit `account_id`. Without the `access_pass:basic:read` permission on the account, including when signed out, the list holds only the products its store page lists.
 </dd>
 </dl>
 </dd>
@@ -33258,7 +33258,7 @@ await client.stats.timeSeries.retrieve({
 Returns every market you can trade on Whop.
 
 - **Spot:** listed by symbol: `BTC`, `SOL` and `XAUT` (gold).
-- **Perpetuals:** such as `BTC`. Send the `id` as `market` when you create a trade.
+- **Perpetuals:** such as `BTC`, and stock and commodity perpetuals from Hyperliquid's `xyz` exchange, such as `xyz:TSLA`. Send the `id` as `market` when you create a trade.
 
 The same symbol can appear twice, once as a perpetual and once as spot, so use `id` together with `instrument_type` to tell them apart. Results are sorted by `id`, then `instrument_type`.
 

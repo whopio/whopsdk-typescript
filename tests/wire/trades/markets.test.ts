@@ -59,6 +59,13 @@ describe("MarketsClient", () => {
                     price: { amount: "4012.85000000", currency: "usd", decimals: 8, display_decimals: 8 },
                     size_decimals: 2,
                 },
+                {
+                    id: "xyz:TSLA",
+                    instrument_type: "perpetual",
+                    max_leverage: 20,
+                    price: { amount: "441.500000", currency: "usd", decimals: 6, display_decimals: 6 },
+                    size_decimals: 3,
+                },
             ],
             page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
         };
