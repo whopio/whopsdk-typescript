@@ -21408,6 +21408,8 @@ Lists payments, newest first. By default, returns sales for the accounts your cr
 ```typescript
 const pageableResponse = await client.payments.list({
     currencies: ["eur"],
+    min_amount: 995,
+    max_amount: 995,
     variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
@@ -21418,6 +21420,8 @@ for await (const item of pageableResponse) {
 // Or you can manually iterate page-by-page
 let page = await client.payments.list({
     currencies: ["eur"],
+    min_amount: 995,
+    max_amount: 995,
     variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });
@@ -21556,6 +21560,8 @@ Totals up the same payments the list returns, so you can build status tabs and f
 ```typescript
 await client.payments.summary({
     currencies: ["usd"],
+    min_amount: 995,
+    max_amount: 995,
     variant_ids: ["plan_xxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"]
 });

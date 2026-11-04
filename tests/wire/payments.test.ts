@@ -203,6 +203,8 @@ describe("PaymentsClient", () => {
         const expected = rawResponseBody;
         const page = await client.payments.list({
             currencies: ["eur"],
+            min_amount: 995,
+            max_amount: 995,
             variant_ids: ["plan_xxxxxxxxxxxxx"],
             product_ids: ["prod_xxxxxxxxxxxxx"],
         });
@@ -646,6 +648,8 @@ describe("PaymentsClient", () => {
 
         const response = await client.payments.summary({
             currencies: ["usd"],
+            min_amount: 995,
+            max_amount: 995,
             variant_ids: ["plan_xxxxxxxxxxxxx"],
             product_ids: ["prod_xxxxxxxxxxxxx"],
         });

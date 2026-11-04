@@ -49,6 +49,8 @@ export class PaymentsClient {
      * @example
      *     await client.payments.list({
      *         currencies: ["eur"],
+     *         min_amount: 995,
+     *         max_amount: 995,
      *         variant_ids: ["plan_xxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"]
      *     })
@@ -79,6 +81,8 @@ export class PaymentsClient {
                     substatuses,
                     billing_reasons: billingReasons,
                     currencies,
+                    min_amount: minAmount,
+                    max_amount: maxAmount,
                     variant_ids: variantIds,
                     product_ids: productIds,
                     payment_methods: paymentMethods,
@@ -129,6 +133,8 @@ export class PaymentsClient {
                           ? billingReasons
                           : undefined,
                     currencies,
+                    min_amount: minAmount,
+                    max_amount: maxAmount,
                     variant_ids: variantIds,
                     product_ids: productIds,
                     payment_methods: Array.isArray(paymentMethods)
@@ -323,6 +329,8 @@ export class PaymentsClient {
      * @example
      *     await client.payments.summary({
      *         currencies: ["usd"],
+     *         min_amount: 995,
+     *         max_amount: 995,
      *         variant_ids: ["plan_xxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"]
      *     })
@@ -345,6 +353,8 @@ export class PaymentsClient {
             substatuses,
             billing_reasons: billingReasons,
             currencies,
+            min_amount: minAmount,
+            max_amount: maxAmount,
             variant_ids: variantIds,
             product_ids: productIds,
             payment_methods: paymentMethods,
@@ -375,6 +385,8 @@ export class PaymentsClient {
                   ? billingReasons
                   : undefined,
             currencies,
+            min_amount: minAmount,
+            max_amount: maxAmount,
             variant_ids: variantIds,
             product_ids: productIds,
             payment_methods: Array.isArray(paymentMethods)

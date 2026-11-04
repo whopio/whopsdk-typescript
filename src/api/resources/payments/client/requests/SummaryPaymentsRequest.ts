@@ -6,6 +6,8 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         currencies: ["usd"],
+ *         min_amount: 995,
+ *         max_amount: 995,
  *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"]
  *     }
@@ -23,6 +25,10 @@ export interface SummaryPaymentsRequest {
     billing_reasons?: Whop.SummaryPaymentsRequestBillingReasonsItem | Whop.SummaryPaymentsRequestBillingReasonsItem[];
     /** Only payments presented in any of these three-letter currencies. Repeat the parameter to pass several. */
     currencies?: string | string[];
+    /** Only payments charged at least this amount: what the buyer was charged after discounts and including tax, in the currency each payment was presented in. Where tax is added on top of the price (`tax_behavior` is `exclusive`), that is the price plus the tax. A failed payment that charged nothing counts as 0. Inclusive and compared to the cent. */
+    min_amount?: number;
+    /** Only payments charged at most this amount, measured like `min_amount`: after discounts and including tax. Inclusive and compared to the cent. Must not be less than `min_amount`. */
+    max_amount?: number;
     /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. */
     variant_ids?: string | string[];
     /** Only payments for any of these products, each prefixed `prod_`. Repeat the parameter to pass several. */
