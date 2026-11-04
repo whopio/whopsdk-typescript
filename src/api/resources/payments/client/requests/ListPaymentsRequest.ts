@@ -6,6 +6,8 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         currencies: ["eur"],
+ *         min_amount: 995,
+ *         max_amount: 995,
  *         variant_ids: ["plan_xxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"]
  *     }
@@ -49,6 +51,10 @@ export interface ListPaymentsRequest {
     billing_reasons?: Whop.ListPaymentsRequestBillingReasonsItem | Whop.ListPaymentsRequestBillingReasonsItem[];
     /** Only payments presented in any of these three-letter currencies. Repeat the parameter to pass several. Combined with `currency` when both are sent. */
     currencies?: string | string[];
+    /** Only payments charged at least this amount: what the buyer was charged after discounts and including tax, in the currency each payment was presented in, the same amount `order=amount` sorts by. Where tax is added on top of the price (`tax_behavior` is `exclusive`), that is the price plus the tax, so a 995 price with tax added does not match `995`: match a range instead. A failed payment that charged nothing matches 0, not its price. Inclusive and compared to the cent. Pair it with `currencies` when the account sells in several. Send the same value as `max_amount` to match one exact amount. */
+    min_amount?: number;
+    /** Only payments charged at most this amount, measured like `min_amount`: after discounts and including tax, in the currency each payment was presented in. Inclusive and compared to the cent. Must not be less than `min_amount`. */
+    max_amount?: number;
     /** Only payments priced by any of these variants, each prefixed `plan_`. Repeat the parameter to pass several. Combined with `variant_id` when both are sent. */
     variant_ids?: string | string[];
     /** Only payments for any of these products, each prefixed `prod_`. Repeat the parameter to pass several. Combined with `product_id` when both are sent. */
