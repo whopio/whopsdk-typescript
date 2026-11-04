@@ -163,8 +163,9 @@ describe("AccountsClient", () => {
                     industry_type: "trading",
                     invoice_prefix: "INV",
                     level: {
+                        account_level: 0,
+                        applied_level: 1,
                         boosted: true,
-                        current: 1,
                         levels: [
                             {
                                 level: 0,
@@ -193,9 +194,8 @@ describe("AccountsClient", () => {
                             display_decimals: 2,
                         },
                         points: 41000,
-                        points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                        points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                         points_to_next: 59000,
-                        processing_rate_percentage: 2.6,
                         resets_at: "2026-01-01T12:00:00.000Z",
                     },
                     logo_url:
@@ -709,8 +709,9 @@ describe("AccountsClient", () => {
             industry_type: "trading",
             invoice_prefix: "INV",
             level: {
+                account_level: 0,
+                applied_level: 1,
                 boosted: true,
-                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -724,9 +725,8 @@ describe("AccountsClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -1260,8 +1260,9 @@ describe("AccountsClient", () => {
             industry_type: "trading",
             invoice_prefix: "INV",
             level: {
+                account_level: 0,
+                applied_level: 1,
                 boosted: true,
-                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -1275,9 +1276,8 @@ describe("AccountsClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -1826,8 +1826,9 @@ describe("AccountsClient", () => {
             industry_type: "trading",
             invoice_prefix: "INV",
             level: {
+                account_level: 0,
+                applied_level: 1,
                 boosted: true,
-                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -1841,9 +1842,8 @@ describe("AccountsClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -2435,8 +2435,9 @@ describe("AccountsClient", () => {
             industry_type: "trading",
             invoice_prefix: "INV",
             level: {
+                account_level: 0,
+                applied_level: 1,
                 boosted: true,
-                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -2450,9 +2451,8 @@ describe("AccountsClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -3734,8 +3734,9 @@ describe("AccountsClient", () => {
             industry_type: "trading",
             invoice_prefix: "INV",
             level: {
+                account_level: 0,
+                applied_level: 1,
                 boosted: true,
-                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -3749,9 +3750,8 @@ describe("AccountsClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:

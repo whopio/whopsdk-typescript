@@ -115,7 +115,7 @@ describe("UsersClient", () => {
                     email: "marcus@shinetime.example",
                     id: "user_xxxxxxxxxxxxxx",
                     level: {
-                        current: 1,
+                        applied_level: 1,
                         levels: [
                             {
                                 level: 0,
@@ -144,9 +144,8 @@ describe("UsersClient", () => {
                             display_decimals: 2,
                         },
                         points: 41000,
-                        points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                        points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                         points_to_next: 59000,
-                        processing_rate_percentage: 2.6,
                         resets_at: "2026-01-01T12:00:00.000Z",
                     },
                     name: "Marcus Webb",
@@ -307,7 +306,7 @@ describe("UsersClient", () => {
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                current: 1,
+                applied_level: 1,
                 levels: [
                     {
                         level: 0,
@@ -321,9 +320,8 @@ describe("UsersClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -475,7 +473,7 @@ describe("UsersClient", () => {
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                current: 1,
+                applied_level: 1,
                 levels: [
                     {
                         level: 0,
@@ -489,9 +487,8 @@ describe("UsersClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -657,7 +654,7 @@ describe("UsersClient", () => {
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                current: 1,
+                applied_level: 1,
                 levels: [
                     {
                         level: 0,
@@ -671,9 +668,8 @@ describe("UsersClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -829,7 +825,7 @@ describe("UsersClient", () => {
             email: "marcus@shinetime.example",
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                current: 1,
+                applied_level: 1,
                 levels: [
                     {
                         level: 0,
@@ -843,9 +839,8 @@ describe("UsersClient", () => {
                 monthly_qualifying_spend: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 monthly_trading_volume: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 points: 41000,
-                points_by_source: { ads: 0, cards: 40000, trading: 1000 },
+                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 points_to_next: 59000,
-                processing_rate_percentage: 2.6,
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
