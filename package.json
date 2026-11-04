@@ -924,6 +924,17 @@
             },
             "default": "./dist/cjs/api/resources/reviews/exports.js"
         },
+        "./search": {
+            "import": {
+                "types": "./dist/esm/api/resources/search/exports.d.mts",
+                "default": "./dist/esm/api/resources/search/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/search/exports.d.ts",
+                "default": "./dist/cjs/api/resources/search/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/search/exports.js"
+        },
         "./setupIntents": {
             "import": {
                 "types": "./dist/esm/api/resources/setupIntents/exports.d.mts",
