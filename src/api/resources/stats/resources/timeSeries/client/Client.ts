@@ -197,6 +197,9 @@ export class TimeSeriesClient {
             event_count_lt: eventCountLt,
             event_count_lte: eventCountLte,
             referring_account_id: referringAccountId,
+            team_lead_id: teamLeadId,
+            activity,
+            breakdown_limit: breakdownLimit,
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
@@ -271,6 +274,9 @@ export class TimeSeriesClient {
             event_count_lt: eventCountLt,
             event_count_lte: eventCountLte,
             referring_account_id: referringAccountId,
+            team_lead_id: teamLeadId,
+            activity: activity != null ? activity : undefined,
+            breakdown_limit: breakdownLimit,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

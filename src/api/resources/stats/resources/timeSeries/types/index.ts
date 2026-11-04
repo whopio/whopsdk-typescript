@@ -1,4 +1,5 @@
 export * from "./ListTimeSeriesResponse.js";
+export * from "./RetrieveTimeSeriesRequestActivity.js";
 export * from "./RetrieveTimeSeriesRequestEventType.js";
 export * from "./RetrieveTimeSeriesRequestInterval.js";
 export * from "./RetrieveTimeSeriesRequestSnapshotWindow.js";
