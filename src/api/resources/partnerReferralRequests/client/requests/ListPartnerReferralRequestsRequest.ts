@@ -13,6 +13,8 @@ export interface ListPartnerReferralRequestsRequest {
     target_user_id?: string;
     /** Only requests sent by this partner's user ID, prefixed `user_`. */
     partner_id?: string;
+    /** Only the referral links created for memberships on this business's team, prefixed `biz_`. Needs read access to the business: its owner sees every member's links, a manager the links of the people reporting to them, and other members only their own. */
+    referring_account_id?: string;
     /** Only requests with this approval status. */
     status?: Whop.ListPartnerReferralRequestsRequestStatus;
     /** Only requests initiated in this way. */
