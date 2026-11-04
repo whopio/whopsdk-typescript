@@ -311,6 +311,7 @@ describe("BusinessesClient", () => {
             created_at: "2026-01-01T12:00:00Z",
             deal_closed_reason: "deal_closed_reason",
             earnings_usd: { completed: "0.00", pending: "0.00", total: "0.00" },
+            estimated_commission_rate: "estimated_commission_rate",
             first_tier_partner: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Marcus Webb",
