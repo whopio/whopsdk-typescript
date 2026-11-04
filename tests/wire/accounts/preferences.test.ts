@@ -22,19 +22,6 @@ describe("PreferencesClient", () => {
                 printed_name: "Marcus Webb",
                 status: "not_required",
             },
-            ads_certifications: [
-                {
-                    approved_countries: ["approved_countries"],
-                    business_name: "business_name",
-                    business_type: "online_pharmacy",
-                    certification_type: "prescription_drug_ads",
-                    countries: ["countries"],
-                    denial_reason: "denial_reason",
-                    request_id: "request_id",
-                    status: "not_started",
-                    url: "url",
-                },
-            ],
             ads_payment_methods: {
                 backup: {
                     card_brand: "visa",
@@ -192,19 +179,6 @@ describe("PreferencesClient", () => {
                 printed_name: "Marcus Webb",
                 status: "not_required",
             },
-            ads_certifications: [
-                {
-                    approved_countries: ["approved_countries"],
-                    business_name: "business_name",
-                    business_type: "online_pharmacy",
-                    certification_type: "prescription_drug_ads",
-                    countries: ["countries"],
-                    denial_reason: "denial_reason",
-                    request_id: "inrq_xxxxxxxxxxxxxx",
-                    status: "not_started",
-                    url: "url",
-                },
-            ],
             ads_payment_methods: {
                 backup: {
                     card_brand: "visa",
@@ -398,33 +372,5 @@ describe("PreferencesClient", () => {
                 account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("update (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/accounts/account_id/preferences")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(409)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.accounts.preferences.update({
-                account_id: "account_id",
-            });
-        }).rejects.toThrow(Whop.ConflictError);
     });
 });
