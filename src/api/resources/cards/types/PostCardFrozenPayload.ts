@@ -32,6 +32,8 @@ export namespace PostCardFrozenPayload {
         canceled_at: string | null;
         /** When the card was created. */
         created_at: string | null;
+        /** The digital wallets the card has been added to. List Cards, Update Card, and webhook payloads return `null`, as does Retrieve Card when the wallets cannot be retrieved. */
+        digital_wallets: Data.DigitalWallets.Item[] | null;
         /** Card expiration month. */
         expiration_month: string | null;
         /** Card expiration year. */
@@ -76,6 +78,16 @@ export namespace PostCardFrozenPayload {
             postal_code: string | null;
             /** Billing region or state. */
             region: string | null;
+        }
+
+        export type DigitalWallets = DigitalWallets.Item[];
+
+        export namespace DigitalWallets {
+            export const Item = {
+                ApplePay: "apple_pay",
+                GooglePay: "google_pay",
+            } as const;
+            export type Item = (typeof Item)[keyof typeof Item];
         }
 
         /**
