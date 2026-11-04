@@ -29,13 +29,14 @@ export class ProductsClient {
     }
 
     /**
-     * Lists an account's products, or searches the public marketplace when you omit `account_id`.
+     * Lists an account's products, or searches the public marketplace when you omit `account_id`. Without the `access_pass:basic:read` permission on the account, including when signed out, the list holds only the products its store page lists.
      *
      * @param {Whop.ListProductsRequest} request
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -137,6 +138,8 @@ export class ProductsClient {
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        case 403:
+                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,

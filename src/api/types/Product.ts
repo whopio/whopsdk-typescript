@@ -19,6 +19,7 @@ export interface Product {
     default_variant: Whop.ProductPublicVariant | null;
     /** Written description displayed on the product page. `null` if none is set. */
     description: string | null;
+    experiences: Whop.ProductExperience[];
     /** External identifier stored on the product for your own reference. */
     external_identifier: string | null;
     gallery_images: Whop.ProductGalleryImage[];
@@ -31,6 +32,8 @@ export interface Product {
     /** Product ID, prefixed `prod_`. */
     id: string;
     labels: string[];
+    /** Logo image URL shown on product pages and in search results. `null` when the product has no logo. */
+    logo_url: string | null;
     /** Listing state on the whop.com marketplace. `pending_review` means submitted and awaiting review; `live_marketplace` means approved and discoverable. */
     marketplace_status: Product.MarketplaceStatus;
     /** Commission rate members earn through the member affiliate program. */

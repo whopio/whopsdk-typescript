@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface Market {
-    /** The market's name: a perpetual's Hyperliquid name such as `BTC`, which you send as `market` when you create a trade, or a spot asset's symbol such as `BTC` or `XAUT`. A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market. */
+    /** The market's name: a perpetual's Hyperliquid name such as `BTC` or `xyz:TSLA`, which you send as `market` when you create a trade, or a spot asset's symbol such as `BTC` or `XAUT`. A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market. */
     id: string;
     /** Whether this is a perpetual or a spot market. With `id`, it identifies the market. */
     instrument_type: Market.InstrumentType;

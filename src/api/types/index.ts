@@ -432,6 +432,8 @@ export * from "./PlanTypes.js";
 export * from "./Product.js";
 export * from "./ProductAffiliate.js";
 export * from "./ProductAffiliateUser.js";
+export * from "./ProductExperience.js";
+export * from "./ProductExperienceApp.js";
 export * from "./ProductGalleryImage.js";
 export * from "./ProductLegacy.js";
 export * from "./ProductListItem.js";
