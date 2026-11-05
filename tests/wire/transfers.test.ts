@@ -22,7 +22,8 @@ describe("TransfersClient", () => {
                     created_at: "2026-01-01T12:00:00Z",
                     destination: {
                         id: "user_xxxxxxxxxxxxxx",
-                        logo_url: null,
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/shine-time-logo",
                         name: "Dana Whitfield",
                         object: "account",
                     },
