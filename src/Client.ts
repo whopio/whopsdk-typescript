@@ -81,6 +81,7 @@ import { PromoCodesClient } from "./api/resources/promoCodes/client/Client.js";
 import { ReactionsClient } from "./api/resources/reactions/client/Client.js";
 import { RefundsClient } from "./api/resources/refunds/client/Client.js";
 import { ResolutionCenterCasesClient } from "./api/resources/resolutionCenterCases/client/Client.js";
+import { ReviewReportsClient } from "./api/resources/reviewReports/client/Client.js";
 import { ReviewsClient } from "./api/resources/reviews/client/Client.js";
 import { SearchClient } from "./api/resources/search/client/Client.js";
 import { SetupIntentsClient } from "./api/resources/setupIntents/client/Client.js";
@@ -191,6 +192,7 @@ export class WhopClient {
     protected _reactions: ReactionsClient | undefined;
     protected _refunds: RefundsClient | undefined;
     protected _resolutionCenterCases: ResolutionCenterCasesClient | undefined;
+    protected _reviewReports: ReviewReportsClient | undefined;
     protected _reviews: ReviewsClient | undefined;
     protected _search: SearchClient | undefined;
     protected _setupIntents: SetupIntentsClient | undefined;
@@ -534,6 +536,10 @@ export class WhopClient {
 
     public get resolutionCenterCases(): ResolutionCenterCasesClient {
         return (this._resolutionCenterCases ??= new ResolutionCenterCasesClient(this._options));
+    }
+
+    public get reviewReports(): ReviewReportsClient {
+        return (this._reviewReports ??= new ReviewReportsClient(this._options));
     }
 
     public get reviews(): ReviewsClient {
