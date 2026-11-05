@@ -60,6 +60,10 @@ export namespace PostAdCampaignPaymentFailedPayload {
         starts_at: string | null;
         /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
         status: Data.Status;
+        /** The desired cost per result for `target_result_event`, in USD. `null` when none is set. */
+        target_cost_per_result: number | null;
+        /** The event `target_cost_per_result` is priced per, such as `purchase` or `lead`. `null` when the campaign has no single goal. */
+        target_result_event: string | null;
         /** Display name of the ad campaign. */
         title: string;
         /** When the campaign was last updated, as an ISO 8601 timestamp. */

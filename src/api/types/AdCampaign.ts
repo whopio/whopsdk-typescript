@@ -117,6 +117,10 @@ export interface AdCampaign {
     submitted_application_value: number;
     /** Whop pixel-attributed submit-application events, last-click. */
     submitted_applications: number;
+    /** The desired cost per result for `target_result_event`, in USD. `null` when none is set. */
+    target_cost_per_result: number | null;
+    /** The event `target_cost_per_result` is priced per, such as `purchase` or `lead`. `null` when the campaign has no single goal. */
+    target_result_event: string | null;
     /** Display name of the ad campaign. */
     title: string;
     /** Unique clicks divided by impressions, between 0 and 1. */
