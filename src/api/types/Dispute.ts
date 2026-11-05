@@ -43,8 +43,10 @@ export interface Dispute {
     reason: Dispute.Reason;
     /** The raw card-network or processor reason code, such as `10.4`. Informational only — `reason` is not derived from it. */
     reason_code: string | null;
-    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `prevented` means the customer was refunded before any ruling, so it settles like `lost`. The `warning_` statuses are the same stages for an inquiry, which moves no funds. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
+    /** `needs_response` awaits evidence (after a processor refused a filing, `submission_failure_reason` says why); `generating_response` has evidence with the processor, not yet accepted; `under_review` is with the processor; `won`/`lost` are the rulings; `prevented` settles like `lost`. `warning_` statuses are the inquiry tiers. Past `evidence_due_at` an open one reports `under_review`. */
     status: Dispute.Status;
+    /** Why the payment processor refused the last filing, in plain English, while the dispute is back in `needs_response`. Fix what it names and submit again. Only on retrieve: `dispute.updated` reports the move back to `needs_response`, then read this here. */
+    submission_failure_reason: string | null;
     /** When the dispute was last changed, as an ISO 8601 timestamp. */
     updated_at: string;
     /** The variant the disputed payment was made on, prefixed `plan_`. */
@@ -75,12 +77,13 @@ export namespace Dispute {
         Other: "other",
     } as const;
     export type Reason = (typeof Reason)[keyof typeof Reason];
-    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `prevented` means the customer was refunded before any ruling, so it settles like `lost`. The `warning_` statuses are the same stages for an inquiry, which moves no funds. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
+    /** `needs_response` awaits evidence (after a processor refused a filing, `submission_failure_reason` says why); `generating_response` has evidence with the processor, not yet accepted; `under_review` is with the processor; `won`/`lost` are the rulings; `prevented` settles like `lost`. `warning_` statuses are the inquiry tiers. Past `evidence_due_at` an open one reports `under_review`. */
     export const Status = {
         NeedsResponse: "needs_response",
         WarningNeedsResponse: "warning_needs_response",
         UnderReview: "under_review",
         WarningUnderReview: "warning_under_review",
+        GeneratingResponse: "generating_response",
         Won: "won",
         Lost: "lost",
         Prevented: "prevented",
