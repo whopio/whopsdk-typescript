@@ -9,7 +9,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface ListTeamMembersRequest {
-    /** Account ID, prefixed `biz_`. */
+    /** Account ID, prefixed `biz_`. A global admin query passes `global` to list the joined members of every partner account, in `created_at` order; of the reporting line filters, only `team_lead_id` and `has_referred_businesses` apply. */
     account_id: string;
     /** Only return members with this status: `joined` (accepted members) or `pending` (pending invites). Both are returned by default. */
     status?: Whop.ListTeamMembersRequestStatus;
@@ -25,6 +25,10 @@ export interface ListTeamMembersRequest {
     direct_reports_min?: number;
     /** Only return members with at most this many direct reports; `0` returns the people who manage no one. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
     direct_reports_max?: number;
+    /** Only return this user, prefixed `user_`, and everyone under them in today's org chart: the same team the stats API's `team_lead_id` reads. With `account_id=global`, their line in every partner account where they hold a role. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
+    team_lead_id?: string;
+    /** When true, only members who referred at least one business for their account, the reps the `partner_reps` stats metric counts; when false, only members who referred none. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
+    has_referred_businesses?: boolean;
     /** Only return members added before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only return members added after this ISO 8601 timestamp. */

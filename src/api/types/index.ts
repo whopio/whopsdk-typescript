@@ -523,6 +523,7 @@ export * from "./TaxIdentifierTypes.js";
 export * from "./TaxTypes.js";
 export * from "./TeamMember.js";
 export * from "./TeamMemberAuthorizedRole.js";
+export * from "./TeamMemberManager.js";
 export * from "./TooManyRequestsErrorBody.js";
 export * from "./Trade.js";
 export * from "./TradingAccount.js";
