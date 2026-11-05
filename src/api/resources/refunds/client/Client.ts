@@ -16,7 +16,7 @@ export declare namespace RefundsClient {
 }
 
 /**
- * A Refund is one full or partial reversal of a payment, issued with [Refund Payment](/api-reference/beta/payments/refund-payment). It records how much moved, through which provider, and whether it succeeded.
+ * A Refund is one full or partial reversal of a payment, issued with [Refund Payment](/api-reference/payments/refund-payment). It records how much moved, through which provider, and whether it succeeded.
  *
  * Use the Refunds API to list the refunds on a payment or across an account, and to retrieve a single refund.
  */

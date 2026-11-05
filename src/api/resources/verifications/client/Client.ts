@@ -19,7 +19,7 @@ export declare namespace VerificationsClient {
 /**
  * A Verification represents a legal identity for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
  *
- * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
+ * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/verifications/update-verification).
  */
 export class VerificationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<VerificationsClient.Options>;

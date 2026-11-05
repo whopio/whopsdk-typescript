@@ -20,7 +20,7 @@ export declare namespace PaymentsClient {
 /**
  * A Payment is one charge against a buyer, for one or more variants. Create an on-session payment with a `confirmation_token` for the method the buyer selected, or an off-session payment with an existing member's stored payment method.
  *
- * Use the Payments API to charge buyers, list and retrieve payments, and refund, void, capture, or retry them. Collection runs in the background, so the create response is not the outcome. Poll [Retrieve status](/api-reference/beta/payments/retrieve-payment-status) for how far the payment has gone and, while it is `requires_action`, what the buyer must do next: follow a redirect, complete 3D Secure, display transfer instructions, or link a bank account. Update the payment's `return_url` to change where they land afterwards, up until they come back.
+ * Use the Payments API to charge buyers, list and retrieve payments, and refund, void, capture, or retry them. Collection runs in the background, so the create response is not the outcome. Poll [Retrieve status](/api-reference/payments/retrieve-payment-status) for how far the payment has gone and, while it is `requires_action`, what the buyer must do next: follow a redirect, complete 3D Secure, display transfer instructions, or link a bank account. Update the payment's `return_url` to change where they land afterwards, up until they come back.
  */
 export class PaymentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentsClient.Options>;

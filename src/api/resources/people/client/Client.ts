@@ -16,7 +16,7 @@ export declare namespace PeopleClient {
 }
 
 /**
- * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/beta/events/event) the person generated, such as pixel page views, ad clicks, leads, and payments.
+ * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/events/event) the person generated, such as pixel page views, ad clicks, leads, and payments.
  *
  * Use the People API to list and segment the people of an account by activity, purchases, traffic source, or marketing touch, and to retrieve one person by person ID, user ID, email address, or phone number.
  */
