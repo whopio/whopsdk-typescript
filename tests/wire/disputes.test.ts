@@ -183,6 +183,7 @@ describe("DisputesClient", () => {
                     reason: "fraudulent",
                     reason_code: "13.1",
                     status: "needs_response",
+                    submission_failure_reason: "submission_failure_reason",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     variant_id: "plan_xxxxxxxxxxxxxx",
                 },
@@ -283,6 +284,7 @@ describe("DisputesClient", () => {
             groups: {
                 currency: { usd: 1 },
                 status: {
+                    generating_response: 0,
                     lost: 0,
                     needs_response: 1,
                     prevented: 0,
@@ -515,6 +517,7 @@ describe("DisputesClient", () => {
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
+            submission_failure_reason: "submission_failure_reason",
             updated_at: "2026-01-01T12:00:00.000Z",
             variant_id: "plan_xxxxxxxxxxxxxx",
         };
@@ -744,6 +747,7 @@ describe("DisputesClient", () => {
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
+            submission_failure_reason: "submission_failure_reason",
             updated_at: "2026-01-01T12:00:00.000Z",
             variant_id: "plan_xxxxxxxxxxxxxx",
         };
@@ -1022,6 +1026,7 @@ describe("DisputesClient", () => {
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
+            submission_failure_reason: "submission_failure_reason",
             updated_at: "2026-01-01T12:00:00.000Z",
             variant_id: "plan_xxxxxxxxxxxxxx",
         };
@@ -1350,6 +1355,7 @@ describe("DisputesClient", () => {
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
+            submission_failure_reason: "submission_failure_reason",
             updated_at: "2026-01-01T12:00:00.000Z",
             variant_id: "plan_xxxxxxxxxxxxxx",
         };
@@ -1651,6 +1657,7 @@ describe("DisputesClient", () => {
             reason: "fraudulent",
             reason_code: "13.1",
             status: "needs_response",
+            submission_failure_reason: "submission_failure_reason",
             updated_at: "2026-01-01T12:00:00.000Z",
             variant_id: "plan_xxxxxxxxxxxxxx",
         };

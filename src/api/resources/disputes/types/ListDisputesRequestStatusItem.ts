@@ -5,6 +5,7 @@ export const ListDisputesRequestStatusItem = {
     WarningNeedsResponse: "warning_needs_response",
     UnderReview: "under_review",
     WarningUnderReview: "warning_under_review",
+    GeneratingResponse: "generating_response",
     Won: "won",
     Lost: "lost",
     Prevented: "prevented",
