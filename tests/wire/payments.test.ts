@@ -34,6 +34,8 @@ describe("PaymentsClient", () => {
                     billing_reason: "subscription_create",
                     capture_expires_at: "capture_expires_at",
                     checkout_configuration_id: "checkout_configuration_id",
+                    checkout_origin: "checkout_origin",
+                    checkout_surface: "hosted_checkout",
                     client_secret:
                         "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -299,6 +301,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -683,6 +687,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -924,6 +930,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -1591,6 +1599,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -1916,6 +1926,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -2181,6 +2193,8 @@ describe("PaymentsClient", () => {
             billing_reason: "subscription_create",
             capture_expires_at: "capture_expires_at",
             checkout_configuration_id: "checkout_configuration_id",
+            checkout_origin: "checkout_origin",
+            checkout_surface: "hosted_checkout",
             client_secret:
                 "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
