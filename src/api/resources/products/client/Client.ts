@@ -87,7 +87,7 @@ export class ProductsClient {
                     access_pass_types: accessPassTypes,
                     labels,
                     direction: direction != null ? direction : undefined,
-                    order,
+                    order: order != null ? order : undefined,
                     first,
                     after,
                     last,
