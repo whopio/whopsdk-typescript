@@ -913,6 +913,17 @@
             },
             "default": "./dist/cjs/api/resources/resolutionCenterCases/exports.js"
         },
+        "./reviewReports": {
+            "import": {
+                "types": "./dist/esm/api/resources/reviewReports/exports.d.mts",
+                "default": "./dist/esm/api/resources/reviewReports/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/reviewReports/exports.d.ts",
+                "default": "./dist/cjs/api/resources/reviewReports/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/reviewReports/exports.js"
+        },
         "./reviews": {
             "import": {
                 "types": "./dist/esm/api/resources/reviews/exports.d.mts",

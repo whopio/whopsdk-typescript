@@ -25650,6 +25650,88 @@ await client.resolutionCenterCases.withdraw({
 </dl>
 </details>
 
+## Review reports
+<details><summary><code>client.reviewReports.<a href="/src/api/resources/reviewReports/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ReviewReport, Whop.ListReviewReportsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the reports filed against customer reviews on the accounts you can moderate, newest first. Use it to check whether a review was reported and where the report stands. Omit `account_id` to cover every account you can moderate.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.reviewReports.list({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    review_id: "rev_xxxxxxxxxxxxxx"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.reviewReports.list({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    review_id: "rev_xxxxxxxxxxxxxx"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListReviewReportsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReviewReportsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Reviews
 <details><summary><code>client.reviews.<a href="/src/api/resources/reviews/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ReviewListItem, Whop.ListReviewsResponse&gt;</code></summary>
 <dl>

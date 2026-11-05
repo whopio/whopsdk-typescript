@@ -486,6 +486,7 @@ export * from "./ReviewAccount.js";
 export * from "./ReviewAttachment.js";
 export * from "./ReviewListItem.js";
 export * from "./ReviewProduct.js";
+export * from "./ReviewReport.js";
 export * from "./ReviewStatus.js";
 export * from "./ReviewUser.js";
 export * from "./ScheduleFrequencies.js";
