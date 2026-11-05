@@ -1,6 +1,7 @@
 export * from "./DeleteProductsResponse.js";
 export * from "./ListProductsRequestBillingTypesItem.js";
 export * from "./ListProductsRequestDirection.js";
+export * from "./ListProductsRequestOrder.js";
 export * from "./ListProductsResponse.js";
 export * from "./PostProductCreatedPayload.js";
 export * from "./PostProductDeletedPayload.js";

@@ -50,7 +50,7 @@ export interface Trade {
     status: Trade.Status;
     /** `partial_fill` when the order filled only part of its size. `null` otherwise. */
     status_detail: Trade.StatusDetail | null;
-    /** What a live trade is doing now: `depositing` while the wallet's USDT0 is being sent to the bridge, `landing` once sent and until it reaches the trading balance, `placing` while the order or close is with the venue, `withdrawing` while USDC heads back to the wallet, `returning` while money an unfilled order bridged in goes back. `null` once the trade is no longer pending or processing. */
+    /** What a live trade is doing now: `depositing` while the wallet's USDT0 is being sent to the bridge, `landing` once sent and until it reaches the trading balance, `placing` while the order or close is with the venue, `withdrawing` while USDC heads back to the wallet, `returning` while money an unfilled order bridged in goes back. A spot order is `quoting` while the swap is priced, `swapping` while it runs onchain, and `crediting` until the new balance shows in the wallet. `null` once the trade is no longer pending or processing. */
     step: Trade.Step | null;
     /** The price in USD at which a take-profit or stop-loss sends its market order. `null` for other orders and types. */
     trigger_price: Whop.Money | null;
@@ -126,13 +126,16 @@ export namespace Trade {
         PartialFill: "partial_fill",
     } as const;
     export type StatusDetail = (typeof StatusDetail)[keyof typeof StatusDetail];
-    /** What a live trade is doing now: `depositing` while the wallet's USDT0 is being sent to the bridge, `landing` once sent and until it reaches the trading balance, `placing` while the order or close is with the venue, `withdrawing` while USDC heads back to the wallet, `returning` while money an unfilled order bridged in goes back. `null` once the trade is no longer pending or processing. */
+    /** What a live trade is doing now: `depositing` while the wallet's USDT0 is being sent to the bridge, `landing` once sent and until it reaches the trading balance, `placing` while the order or close is with the venue, `withdrawing` while USDC heads back to the wallet, `returning` while money an unfilled order bridged in goes back. A spot order is `quoting` while the swap is priced, `swapping` while it runs onchain, and `crediting` until the new balance shows in the wallet. `null` once the trade is no longer pending or processing. */
     export const Step = {
         Depositing: "depositing",
         Landing: "landing",
         Placing: "placing",
         Withdrawing: "withdrawing",
         Returning: "returning",
+        Quoting: "quoting",
+        Swapping: "swapping",
+        Crediting: "crediting",
     } as const;
     export type Step = (typeof Step)[keyof typeof Step];
     /** `order` places one order: a perpetual order trades from the trading balance, a spot order swaps between USDT0 and the asset in the wallet. `deposit` bridges USDT0 from the wallet to the trading balance. `withdraw` sends USDC from the trading balance back to the wallet. `close` closes the whole position in one market with a market reduce-only order; when the account is then flat, a `withdraw` trade sends the trading balance back to the wallet. */

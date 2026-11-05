@@ -30,8 +30,8 @@ export interface ListProductsRequest {
     labels?: string | string[];
     /** The sort direction for results. Defaults to descending. */
     direction?: Whop.ListProductsRequestDirection;
-    /** Field to sort results by. Account lists accept `created_at` (the default), `active_memberships_count`, `usd_gmv`, `usd_gmv_30_days` and `position`; `position` with `direction` `asc` matches the order the store page shows. Without the `access_pass:basic:read` permission, an account list sorts only by `created_at` or `position`. Marketplace lists default to `discoverable_at`, accept only `created_at` or `discoverable_at`, and can't be combined with `query`. */
-    order?: string;
+    /** Field to sort results by. Account lists default to `created_at`, and `position` with `direction` `asc` matches the order the store page shows. Without the `access_pass:basic:read` permission, an account list sorts only by `created_at` or `position`. Marketplace lists default to `discoverable_at`, accept only `created_at` or `discoverable_at`, and can't be combined with `query`. */
+    order?: Whop.ListProductsRequestOrder;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
