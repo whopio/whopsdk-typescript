@@ -34,6 +34,8 @@ export namespace PostAdUpdatedPayload {
         ad_group: Whop.AdEntityReference;
         /** The call-to-action button shown on the ad. */
         call_to_action: Data.CallToAction | null;
+        /** Whop's content review of this ad: whether it has finished, which ad networks it is recommended for, and the content rules it breaks. */
+        content_review: Whop.AdContentReview;
         /** When the ad was created, as an ISO 8601 timestamp. */
         created_at: string;
         creatives: Whop.AdCreative[];
