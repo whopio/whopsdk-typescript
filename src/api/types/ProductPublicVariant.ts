@@ -17,6 +17,8 @@ export interface ProductPublicVariant {
     renewal_price: Whop.Money;
     /** Variant display name shown to customers. `null` if no title has been set. */
     title: string | null;
+    /** Free trial days before the first renewal charge. `null` if no trial is configured or the signed-in user has already used a trial on this variant. */
+    trial_period_days: number | null;
     /** Whether the variant has unlimited stock. */
     unlimited_stock: boolean;
     /** Where this variant can be seen. `visible` variants appear on the product page. */
