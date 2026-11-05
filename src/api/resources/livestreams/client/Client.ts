@@ -18,7 +18,7 @@ export declare namespace LivestreamsClient {
 /**
  * A Livestream represents a live video broadcast in an experience. After a recorded livestream ends, members can watch the replay, and moderators can pin the best recordings to feature them.
  *
- * Use the Livestreams API to [list an experience's livestreams](/api-reference/beta/livestreams/list-livestreams), [retrieve one](/api-reference/beta/livestreams/retrieve-livestream) with its recording, and [pin](/api-reference/beta/livestreams/pin-livestream) or [unpin](/api-reference/beta/livestreams/unpin-livestream) recordings.
+ * Use the Livestreams API to [list an experience's livestreams](/api-reference/livestreams/list-livestreams), [retrieve one](/api-reference/livestreams/retrieve-livestream) with its recording, and [pin](/api-reference/livestreams/pin-livestream) or [unpin](/api-reference/livestreams/unpin-livestream) recordings.
  */
 export class LivestreamsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<LivestreamsClient.Options>;

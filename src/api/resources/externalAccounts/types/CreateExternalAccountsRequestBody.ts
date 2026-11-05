@@ -7,7 +7,7 @@ export type CreateExternalAccountsRequestBody =
      * Whop no longer creates Facebook pages, so this returns a `facebook_page_provisioning_retired` error. */
     | Whop.CreateExternalAccountsRequestBody.Facebook
     /**
-     * Provisions a Whop-managed TikTok account for the account. Requires the account's `logo`; configure it with [Update Account](/api-reference/beta/accounts/update-account). The account is returned before TikTok has created it — its `id` is usable right away, and the rest of the profile fills in once provisioning finishes. */
+     * Provisions a Whop-managed TikTok account for the account. Requires the account's `logo`; configure it with [Update Account](/api-reference/accounts/update-account). The account is returned before TikTok has created it — its `id` is usable right away, and the rest of the profile fills in once provisioning finishes. */
     | Whop.CreateExternalAccountsRequestBody.Tiktok
     /**
      * Connects the account's existing Klaviyo account with a private API key. */

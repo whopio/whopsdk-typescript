@@ -12,7 +12,7 @@ export interface Account {
     business_address: Record<string, unknown> | null;
     /** The account's legal business name used with its tax address. */
     business_name: string | null;
-    /** High-level business category for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
+    /** High-level business category for the account. See the [business types and industries glossary](/api-reference/accounts/account#business-types-and-industries-glossary) for valid values. */
     business_type: string | null;
     /** Whether pending funds may be transferred from this platform account to its subaccounts. */
     can_transfer_pending_balance_to_children: boolean;
@@ -24,7 +24,7 @@ export interface Account {
     cards: Whop.AccountCards | null;
     /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
     collect_vat_id: boolean;
-    /** Company formation state for the account, managed through [Form Company](/api-reference/beta/accounts/form-company). A `draft` `status` until the formation checkout is paid, then filing progress with downloadable documents and signatures awaiting action. Empty when the formation state is temporarily unavailable. */
+    /** Company formation state for the account, managed through [Form Company](/api-reference/accounts/form-company). A `draft` `status` until the formation checkout is paid, then filing progress with downloadable documents and signatures awaiting action. Empty when the formation state is temporarily unavailable. */
     company_formation: Whop.AccountCompanyFormation;
     /** Country where the account is located. */
     country: string | null;
@@ -51,7 +51,7 @@ export interface Account {
     home_preferences: Account.HomePreferences.Item[];
     /** Account ID, prefixed `biz_`. */
     id: string;
-    /** Specific industry vertical for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
+    /** Specific industry vertical for the account. See the [business types and industries glossary](/api-reference/accounts/account#business-types-and-industries-glossary) for valid values. */
     industry_type: string | null;
     /** Prefix used for account invoices. */
     invoice_prefix: string | null;

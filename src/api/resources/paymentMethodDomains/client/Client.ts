@@ -17,7 +17,7 @@ export declare namespace PaymentMethodDomainsClient {
 }
 
 /**
- * The Payment Method Domains API is deprecated. Add, check, and remove Apple Pay domains with the `apple_pay` capability of the [Domains API](/api-reference/beta/domains/domain) instead. These endpoints keep working and return `Deprecation` and successor `Link` headers. A domain keeps its ID, so `/domains/{id}` takes the `dom_` or `pmd_` ID these endpoints return.
+ * The Payment Method Domains API is deprecated. Add, check, and remove Apple Pay domains with the `apple_pay` capability of the [Domains API](/api-reference/domains/domain) instead. These endpoints keep working and return `Deprecation` and successor `Link` headers. A domain keeps its ID, so `/domains/{id}` takes the `dom_` or `pmd_` ID these endpoints return.
  *
  * A Payment Method Domain registers a hostname with a wallet provider so its payment methods can appear at a checkout served from that domain. The domain proves ownership by hosting the provider's association file — for Apple Pay, at `/.well-known/apple-developer-merchantid-domain-association` — and `status` reports whether verification has completed. Embedded surfaces like the [Express Checkout element](/elements/beta/checkout/expressCheckout) only render Apple Pay, Google Pay and PayPal express on a `verified` domain (first-party whop.com pages are pre-approved).
  *

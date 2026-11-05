@@ -19,7 +19,7 @@ export declare namespace AppInstallationsClient {
 /**
  * An App Installation represents one install of your app on one account. An account installs an app once, however many experiences it adds, so an installation holds state that belongs to the account rather than to one experience, such as a sync cursor or the ID of the account it's linked to in another system.
  *
- * Use the App Installations API to [list the accounts your app is installed on](/api-reference/beta/app-installations/list-app-installations), [retrieve one](/api-reference/beta/app-installations/retrieve-app-installation), and [update](/api-reference/beta/app-installations/update-app-installation) the `metadata` and `external_id` your app keeps on it. An account can also list the apps installed on it, and a developer every installation of their app. Only the app and its developer see `metadata` and `external_id`, and only the app can change them.
+ * Use the App Installations API to [list the accounts your app is installed on](/api-reference/app-installations/list-app-installations), [retrieve one](/api-reference/app-installations/retrieve-app-installation), and [update](/api-reference/app-installations/update-app-installation) the `metadata` and `external_id` your app keeps on it. An account can also list the apps installed on it, and a developer every installation of their app. Only the app and its developer see `metadata` and `external_id`, and only the app can change them.
  */
 export class AppInstallationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AppInstallationsClient.Options>;

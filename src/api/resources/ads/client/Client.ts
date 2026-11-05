@@ -17,7 +17,7 @@ export declare namespace AdsClient {
 }
 
 /**
- * An Ad is the individual creative unit delivered by an [ad group](/api-reference/beta/ad-groups/ad-group). It holds the copy, creative assets, and destination URL for one ad.
+ * An Ad is the individual creative unit delivered by an [ad group](/api-reference/ad-groups/ad-group). It holds the copy, creative assets, and destination URL for one ad.
  *
  * Use the Ads API to list ads for an account, create ads inside ad groups, retrieve or update creative details, delete ads that should stop running, and pause or resume delivery.
  */
