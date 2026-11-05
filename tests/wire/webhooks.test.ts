@@ -691,7 +691,7 @@ describe("WebhooksClient", () => {
             ],
             page_info: {
                 end_cursor:
-                    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--xxxxxxxxxxxxxxxx--xxxxxxxxxxxxxxxxxxxxxx",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "start_cursor",
