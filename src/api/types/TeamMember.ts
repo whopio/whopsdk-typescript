@@ -17,6 +17,7 @@ export interface TeamMember {
     id: string;
     /** Whether this member is an agent (app-controlled account) rather than a human team member. Always `false` for invites. */
     is_agent: boolean;
+    reports_to_chain: Whop.TeamMemberManager[] | null;
     /** The ID of the team member this member reports to, starting with `ausr_` or `mber_`; treat it as opaque. `null` when the member reports to the business directly, and for invites. */
     reports_to_id: string | null;
     /** The member's role on the account. `custom` means a bespoke dashboard-managed role; the API can read but not grant it. */

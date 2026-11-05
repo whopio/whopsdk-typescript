@@ -25,6 +25,17 @@ describe("TeamMembersClient", () => {
                     email: "marcus@shinetime.example",
                     id: "ausr_xxxxxxxxxxxxxx",
                     is_agent: false,
+                    reports_to_chain: [
+                        {
+                            id: "ausr_xxxxxxxxxxxxxx",
+                            user: {
+                                id: "user_xxxxxxxxxxxxxx",
+                                name: "Dana Whitfield",
+                                profile_picture: { url: "https://ui-avatars.com/api/" },
+                                username: "danawhitfield",
+                            },
+                        },
+                    ],
                     reports_to_id: "ausr_xxxxxxxxxxxxxx",
                     role: "owner",
                     status: "joined",
@@ -170,6 +181,17 @@ describe("TeamMembersClient", () => {
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            reports_to_chain: [
+                {
+                    id: "ausr_xxxxxxxxxxxxxx",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
+                },
+            ],
             reports_to_id: "ausr_xxxxxxxxxxxxxx",
             role: "owner",
             status: "joined",
@@ -304,6 +326,17 @@ describe("TeamMembersClient", () => {
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            reports_to_chain: [
+                {
+                    id: "ausr_xxxxxxxxxxxxxx",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
+                },
+            ],
             reports_to_id: "ausr_xxxxxxxxxxxxxx",
             role: "owner",
             status: "joined",
@@ -470,6 +503,17 @@ describe("TeamMembersClient", () => {
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            reports_to_chain: [
+                {
+                    id: "ausr_xxxxxxxxxxxxxx",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
+                },
+            ],
             reports_to_id: "ausr_xxxxxxxxxxxxxx",
             role: "owner",
             status: "joined",
