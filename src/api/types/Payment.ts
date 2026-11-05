@@ -19,6 +19,10 @@ export interface Payment {
     capture_expires_at: string | null;
     /** The checkout configuration the buyer paid through, prefixed `ch_`, or null. */
     checkout_configuration_id: string | null;
+    /** The scheme and host of the website where the buyer opened the checkout, such as `https://store.example.com`. Use it to tell apart payments from different websites on one account. Null when the website was not recorded, including for payments made without the buyer present. */
+    checkout_origin: string | null;
+    /** The checkout experience that produced this payment, such as `embedded_checkout` for a checkout on the account's own website or `off_session` for a subscription renewal. Null when the checkout was not recorded. */
+    checkout_surface: Payment.CheckoutSurface | null;
     /** The credential a buyer's surface presents to poll this payment, set its return URL and resume it when the bank asked the customer to authenticate. Only on payments created from a confirmation token or waiting on that authentication, and always null in list responses — retrieve the payment for it. */
     client_secret: string | null;
     /** When the payment was created, as an ISO 8601 timestamp. */
@@ -137,4 +141,19 @@ export interface Payment {
     voidable: boolean;
     /** The Whop pixel's visitor ID for the buyer's browser at checkout, prefixed `wuid_`. Null when the checkout page had no Whop pixel, when the buyer was not present at checkout, or without the member:basic:read permission. */
     wuid: string | null;
+}
+
+export namespace Payment {
+    /** The checkout experience that produced this payment, such as `embedded_checkout` for a checkout on the account's own website or `off_session` for a subscription renewal. Null when the checkout was not recorded. */
+    export const CheckoutSurface = {
+        HostedCheckout: "hosted_checkout",
+        EmbeddedCheckout: "embedded_checkout",
+        CustomCheckout: "custom_checkout",
+        ModalCheckout: "modal_checkout",
+        InAppCheckout: "in_app_checkout",
+        MobileCheckout: "mobile_checkout",
+        OffSession: "off_session",
+        CardPresent: "card_present",
+    } as const;
+    export type CheckoutSurface = (typeof CheckoutSurface)[keyof typeof CheckoutSurface];
 }
