@@ -174,6 +174,8 @@ export namespace CreateDirectRequest {
         product_id?: (string | null) | undefined;
         /** Recurring price in the variant currency. */
         renewal_price?: (number | null) | undefined;
+        /** How many payments a recurring variant collects before it stops billing, from 2 to 115. Only valid for `renewal` variants. `null` bills until the subscription is canceled. */
+        split_pay_required_payments?: (number | null) | undefined;
         /** Variant title. */
         title?: (string | null) | undefined;
         /** Free trial days before renewal. */
