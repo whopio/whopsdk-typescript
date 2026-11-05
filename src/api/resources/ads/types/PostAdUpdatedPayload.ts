@@ -53,7 +53,7 @@ export namespace PostAdUpdatedPayload {
         updated_at: string;
         /** The URL the ad links to, without its query string. Parameters belong in `url_parameters`; any you send on `url` are moved there. */
         url: string | null;
-        /** Every query parameter appended to the URL, keyed by parameter name — including any you sent on `url` itself. Whop adds its own click-attribution parameters; those are reserved, and setting one returns an error that names it. */
+        /** Query parameters appended to `url`, keyed by name. Whop's click-attribution parameters are reserved. */
         url_parameters: Record<string, unknown>;
     }
 
