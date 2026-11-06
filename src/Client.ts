@@ -16,6 +16,9 @@ import { AppInstallationsClient } from "./api/resources/appInstallations/client/
 import { AppsClient } from "./api/resources/apps/client/Client.js";
 import { AudiencesClient } from "./api/resources/audiences/client/Client.js";
 import { AuthorizedUsersClient } from "./api/resources/authorizedUsers/client/Client.js";
+import { AutomationEnrollmentsClient } from "./api/resources/automationEnrollments/client/Client.js";
+import { AutomationStepsClient } from "./api/resources/automationSteps/client/Client.js";
+import { AutomationsClient } from "./api/resources/automations/client/Client.js";
 import { BountiesClient } from "./api/resources/bounties/client/Client.js";
 import { BountySubmissionsClient } from "./api/resources/bountySubmissions/client/Client.js";
 import { CardsClient } from "./api/resources/cards/client/Client.js";
@@ -127,6 +130,9 @@ export class WhopClient {
     protected _apps: AppsClient | undefined;
     protected _audiences: AudiencesClient | undefined;
     protected _authorizedUsers: AuthorizedUsersClient | undefined;
+    protected _automationEnrollments: AutomationEnrollmentsClient | undefined;
+    protected _automationSteps: AutomationStepsClient | undefined;
+    protected _automations: AutomationsClient | undefined;
     protected _bounties: BountiesClient | undefined;
     protected _bountySubmissions: BountySubmissionsClient | undefined;
     protected _cardTransactions: CardTransactionsClient | undefined;
@@ -276,6 +282,18 @@ export class WhopClient {
 
     public get authorizedUsers(): AuthorizedUsersClient {
         return (this._authorizedUsers ??= new AuthorizedUsersClient(this._options));
+    }
+
+    public get automationEnrollments(): AutomationEnrollmentsClient {
+        return (this._automationEnrollments ??= new AutomationEnrollmentsClient(this._options));
+    }
+
+    public get automationSteps(): AutomationStepsClient {
+        return (this._automationSteps ??= new AutomationStepsClient(this._options));
+    }
+
+    public get automations(): AutomationsClient {
+        return (this._automations ??= new AutomationsClient(this._options));
     }
 
     public get bounties(): BountiesClient {
