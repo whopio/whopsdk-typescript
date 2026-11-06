@@ -36,6 +36,8 @@ export interface UpdateMethodsResponse {
     /** Machine-readable code for why the method is `broken` — the newest failure recorded through it, whether a payout error or a pre-payout rejection. `null` unless the method is broken, or when it was disabled without a recorded failure. */
     status_reason: string | null;
     supported_payout_method: UpdateMethodsResponse.SupportedPayoutMethod | null;
+    /** The kind of payout method. `external` sends funds out of Whop. `whop_card` moves funds onto the account's own Whop Card. A `whop_card` method takes standard-speed payouts only, and cannot be updated, reconnected, or deleted. */
+    type: UpdateMethodsResponse.Type;
     /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
     unavailable_reason: UpdateMethodsResponse.UnavailableReason | null;
 }
@@ -103,6 +105,12 @@ export namespace UpdateMethodsResponse {
         export type DeliveryType = (typeof DeliveryType)[keyof typeof DeliveryType];
     }
 
+    /** The kind of payout method. `external` sends funds out of Whop. `whop_card` moves funds onto the account's own Whop Card. A `whop_card` method takes standard-speed payouts only, and cannot be updated, reconnected, or deleted. */
+    export const Type = {
+        External: "external",
+        WhopCard: "whop_card",
+    } as const;
+    export type Type = (typeof Type)[keyof typeof Type];
     /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
     export const UnavailableReason = {
         DestinationRetired: "destination_retired",

@@ -61,6 +61,7 @@ describe("MethodsClient", () => {
                         supports_plaid: true,
                         supports_standard_delivery: true,
                     },
+                    type: "external",
                     unavailable_reason: "destination_retired",
                 },
             ],
@@ -221,6 +222,7 @@ describe("MethodsClient", () => {
                 supports_plaid: true,
                 supports_standard_delivery: true,
             },
+            type: "external",
             unavailable_reason: "destination_retired",
         };
 
@@ -531,6 +533,7 @@ describe("MethodsClient", () => {
                 supports_plaid: true,
                 supports_standard_delivery: true,
             },
+            type: "external",
             unavailable_reason: "destination_retired",
         };
 

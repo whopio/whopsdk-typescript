@@ -96,6 +96,8 @@ export namespace RetrievePayoutsResponse {
         nickname: string | null;
         /** Supported payout method display details. */
         supported_payout_method: PayoutMethod.SupportedPayoutMethod | null;
+        /** The kind of payout method the payout used. `external` sent funds out of Whop. `whop_card` moved funds onto the account's own Whop Card. */
+        type: PayoutMethod.Type;
     }
 
     export namespace PayoutMethod {
@@ -126,6 +128,13 @@ export namespace RetrievePayoutsResponse {
             } as const;
             export type DeliveryType = (typeof DeliveryType)[keyof typeof DeliveryType];
         }
+
+        /** The kind of payout method the payout used. `external` sent funds out of Whop. `whop_card` moved funds onto the account's own Whop Card. */
+        export const Type = {
+            External: "external",
+            WhopCard: "whop_card",
+        } as const;
+        export type Type = (typeof Type)[keyof typeof Type];
     }
 
     /** How the payout was created. `automatic` means a scheduled auto-payout; `null` on payouts created before source tracking or through internal tooling. Only returned to callers with payout:withdrawal:read on the owning ledger. */
