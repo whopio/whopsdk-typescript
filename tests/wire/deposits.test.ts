@@ -205,6 +205,7 @@ describe("DepositsClient", () => {
                 payout_destination: {
                     icon_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-activity-icon",
                     payer_name: "ACH Bank Deposit",
+                    security_answer: "security_answer",
                 },
                 payout_token_nickname: "Ops checking",
                 reason: "bounty_payout",
