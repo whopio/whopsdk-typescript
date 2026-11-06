@@ -3,6 +3,7 @@
 export const RetrieveStatsRequestInterval = {
     Minute: "minute",
     FiveMinutes: "five_minutes",
+    FifteenMinutes: "fifteen_minutes",
     ThirtyMinutes: "thirty_minutes",
     Hour: "hour",
     Day: "day",
