@@ -3,9 +3,9 @@
 import type * as Whop from "../index.js";
 
 export interface ShippingAddressChangedWebhookLineItem {
-    /** The line's original total, the same on every call for this payment. */
+    /** The line's original total, the same on every call for this purchase. */
     amount: Whop.Money;
-    /** The line item, prefixed `li_`. Your reply names each line by this id. */
+    /** Identifies the line. Your reply names each line by this id, so send it back unchanged. */
     id: string;
     /** How many of the variant this line holds. */
     quantity: number;

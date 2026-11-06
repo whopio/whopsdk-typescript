@@ -3,8 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface ShippingAddressChangedWebhookReplyLineItem {
-    /** The line's total at this address, tax and shipping included, in the payment's currency. */
+    /** The line's total at this address, tax and shipping included, in the currency of `data.amount`. */
     amount: Whop.Money;
-    /** The line item, prefixed `li_`, from `data.line_items`. */
+    /** The line's `id` from `data.line_items`, unchanged. */
     id: string;
 }

@@ -3,11 +3,13 @@
 import type * as Whop from "../index.js";
 
 export interface ShippingAddressChangedWebhookData {
-    /** The payment's original total, before your price for this address. */
+    /** The original total, before your price for this address. */
     amount: Whop.Money;
+    /** The checkout session being priced, prefixed `chs_`, when the buyer is paying through one. `null` for a payment. */
+    checkout_session_id: string | null;
     line_items: Whop.ShippingAddressChangedWebhookLineItem[];
-    /** The payment being priced, prefixed `pay_`. */
-    payment_id: string;
+    /** The payment being priced, prefixed `pay_`. `null` when the buyer is paying through a checkout session: the payment is created only after they approve, at your price. */
+    payment_id: string | null;
     /** The address the buyer picked. PayPal shares only these fields until the buyer approves. */
     shipping_address: Whop.ShippingAddressChangedWebhookAddress;
 }
