@@ -198,6 +198,39 @@
             },
             "default": "./dist/cjs/api/resources/authorizedUsers/exports.js"
         },
+        "./automationEnrollments": {
+            "import": {
+                "types": "./dist/esm/api/resources/automationEnrollments/exports.d.mts",
+                "default": "./dist/esm/api/resources/automationEnrollments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/automationEnrollments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/automationEnrollments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/automationEnrollments/exports.js"
+        },
+        "./automationSteps": {
+            "import": {
+                "types": "./dist/esm/api/resources/automationSteps/exports.d.mts",
+                "default": "./dist/esm/api/resources/automationSteps/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/automationSteps/exports.d.ts",
+                "default": "./dist/cjs/api/resources/automationSteps/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/automationSteps/exports.js"
+        },
+        "./automations": {
+            "import": {
+                "types": "./dist/esm/api/resources/automations/exports.d.mts",
+                "default": "./dist/esm/api/resources/automations/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/automations/exports.d.ts",
+                "default": "./dist/cjs/api/resources/automations/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/automations/exports.js"
+        },
         "./bounties": {
             "import": {
                 "types": "./dist/esm/api/resources/bounties/exports.d.mts",
