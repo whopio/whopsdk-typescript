@@ -18,11 +18,11 @@ describe("TimeSeriesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    breakdowns: ["breakdowns"],
+                    breakdowns: ["component"],
                     description:
-                        "Ad platform delivery over time (spend, impressions, clicks) on the unified source language: source scopes by a whop:<campaign>:<group>:<ad> path, exact or with a trailing :* prefix (whop alone or no source = the whole account), and group_by=source groups one path segment deeper than the filter prefix. Only whop:* paths report delivery today; other roots return nothing. Requires breakdown_by=metric, which returns each delivery measure per bucket plus whole-window data.totals. Spend converts to convert_to (defaults to usd). Whole-account attribution numbers live in the events and people metrics.",
-                    key: "ad_xxxxxxxxxxxxxx",
-                    name: "Ad delivery",
+                        "A 0 to 100 campaign score at each interval since launch, read off the 15-minute ledger windows: half how charged spend moved window to window on average (steady spend scores 50), half the share of windows since launch it charged in. Several ad_xxxxxxxxxxxxxx_ids (up to 100) average their scores weighted by daily budget. breakdown_by=component, for one campaign, adds each part's score and weight and the counts behind them. A runner reads the campaigns they run; staff read any campaign with account_id=global.",
+                    key: "ad_xxxxxxxxxxxxxx_score",
+                    name: "Ad campaign score",
                     properties: ["source"],
                     unit: "count",
                     windows: ["7d"],
