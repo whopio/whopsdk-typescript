@@ -168,6 +168,7 @@ export namespace WebhookListItem {
             AppPaymentPending: "app_payment.pending",
             AppPaymentRequiresAction: "app_payment.requires_action",
             AppMembershipCancelAtPeriodEndChanged: "app_membership.cancel_at_period_end_changed",
+            ShippingAddressChanged: "shipping_address.changed",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
     }

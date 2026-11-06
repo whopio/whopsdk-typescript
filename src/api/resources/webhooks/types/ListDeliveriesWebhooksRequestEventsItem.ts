@@ -117,6 +117,7 @@ export const ListDeliveriesWebhooksRequestEventsItem = {
     AppPaymentPending: "app_payment.pending",
     AppPaymentRequiresAction: "app_payment.requires_action",
     AppMembershipCancelAtPeriodEndChanged: "app_membership.cancel_at_period_end_changed",
+    ShippingAddressChanged: "shipping_address.changed",
 } as const;
 export type ListDeliveriesWebhooksRequestEventsItem =
     (typeof ListDeliveriesWebhooksRequestEventsItem)[keyof typeof ListDeliveriesWebhooksRequestEventsItem];
