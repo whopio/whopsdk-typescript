@@ -66,6 +66,8 @@ export namespace CreateCheckoutConfigurationsRequest {
     export interface Variant {
         /** Account ID for the inline variant, prefixed `biz_`. Defaults to the account resolved from the request. */
         account_id?: (string | null) | undefined;
+        /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for subaccounts with a parent account. */
+        application_fee_amount?: (number | null) | undefined;
         /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
         billing_period?: (number | null) | undefined;
         /** Billing model for the variant. */
