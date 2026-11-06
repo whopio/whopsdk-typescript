@@ -49,7 +49,6 @@ export namespace FinancingProvider {
         ProcessorConnectionRequired: "processor_connection_required",
         MinimumVolumeNotMet: "minimum_volume_not_met",
         TurnedOffInCheckoutSettings: "turned_off_in_checkout_settings",
-        BillingAddressHidden: "billing_address_hidden",
         ProviderReview: "provider_review",
         DisputeRateNearLimit: "dispute_rate_near_limit",
         DisputeRateExceeded: "dispute_rate_exceeded",
