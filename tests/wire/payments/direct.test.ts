@@ -80,6 +80,7 @@ describe("DirectClient", () => {
             member_id: "mber_xxxxxxxxxxxxxx",
             membership_id: "mem_xxxxxxxxxxxxxx",
             metadata: { order_ref: "SHINE-4417" },
+            missing_tracking: false,
             needs_tracking: false,
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",

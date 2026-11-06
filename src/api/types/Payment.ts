@@ -57,6 +57,8 @@ export interface Payment {
     membership_id: string | null;
     /** Your own key-value data attached when the payment was created. */
     metadata: Record<string, unknown> | null;
+    /** True for a paid payment with a shipping address, no shipment, and no full refund. Null without the shipment:basic:read permission. */
+    missing_tracking: boolean | null;
     /** True when funds are held until the order ships and no tracking number has been added yet. Null without the shipment:basic:read permission. */
     needs_tracking: boolean | null;
     /** When the next automatic retry is scheduled, or null. */
