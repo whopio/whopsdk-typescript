@@ -28,6 +28,8 @@ export interface Experiment {
     hypothesis?: (string | null) | undefined;
     /** Unique identifier for the experiment, prefixed `expt_`. */
     id: string;
+    /** Key-value pairs attached when the experiment was created. Empty when none were set. */
+    metadata?: Record<string, string> | undefined;
     /** Human-readable display name. */
     name: string;
     /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */

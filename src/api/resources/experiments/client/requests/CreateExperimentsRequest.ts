@@ -21,6 +21,8 @@ export interface CreateExperimentsRequest {
     flag_key: string;
     /** Required for full experiments; rejected on feature flags. Structure it as "If we [change] for [cohort], then [measurable behavior] will [increase/decrease], resulting in [business outcome], because [evidence]. Created by [name]." Evidence should be something real — a baseline number, a funnel breakdown — not a guess, and [name] is you, not something to leave blank. */
     hypothesis?: string | null;
+    /** Up to 20 key-value pairs you can attach to the experiment for your own use, such as which pages it changes. Keys are at most 40 characters and values at most 500. */
+    metadata?: Record<string, string>;
     /** Human-readable display name. Defaults to `flag_key` when omitted. */
     name?: string;
     /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
