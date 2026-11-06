@@ -23,7 +23,7 @@ export interface UpdatePreferencesRequest {
     cards_notifications?: boolean;
     /** Whether this account covers its subaccounts' negative balances. When a subaccount's balance drops below zero (from refunds, disputes, or fees), this account's available balance in the same currency pays it back, up to what is available. Only accounts with subaccounts can set it. Requires the `payout:account:update` scope on your API key. */
     covers_subaccount_negative_balances?: boolean;
-    /** Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are saved as unset. Pass null to clear them, which turns tracking off. Tracking is off unless `enabled` is `true`. Requires the `company:manage_checkout` scope on your API key. */
+    /** Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are reset to their defaults. Pass null to clear them, which turns tracking off. Requires the `company:manage_checkout` scope on your API key. */
     customer_tracking?: UpdatePreferencesRequest.CustomerTracking | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. Requires the `payment:dispute` scope on your API key. */
     dispute_fighter_enabled?: boolean;
@@ -99,7 +99,7 @@ export namespace UpdatePreferencesRequest {
     }
 
     /**
-     * Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are saved as unset. Pass null to clear them, which turns tracking off. Tracking is off unless `enabled` is `true`. Requires the `company:manage_checkout` scope on your API key.
+     * Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are reset to their defaults. Pass null to clear them, which turns tracking off. Requires the `company:manage_checkout` scope on your API key.
      */
     export interface CustomerTracking {
         /** Accent color, as a `#rrggbb` hex color. Unset uses the default. */
