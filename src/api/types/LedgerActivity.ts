@@ -625,6 +625,8 @@ export namespace LedgerActivity {
         export interface PayoutDestination {
             icon_url?: (string | null) | undefined;
             payer_name?: (string | null) | undefined;
+            /** The security answer the merchant set when adding this payout method (for example an Interac e-Transfer), needed to claim the payout. null when the destination has no custom answer. Requires payout:destination:read. */
+            security_answer?: (string | null) | undefined;
         }
     }
 }
