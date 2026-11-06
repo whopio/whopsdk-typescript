@@ -125,6 +125,7 @@ export namespace CreateWebhooksRequest {
             RefundUpdated: "refund.updated",
             DisputeAlertCreated: "dispute_alert.created",
             MembershipCancelAtPeriodEndChanged: "membership.cancel_at_period_end_changed",
+            ShippingAddressChanged: "shipping_address.changed",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
     }

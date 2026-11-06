@@ -18,6 +18,8 @@ export * from "./PostPaymentFailedPayload.js";
 export * from "./PostPaymentPendingPayload.js";
 export * from "./PostPaymentRequiresActionPayload.js";
 export * from "./PostPaymentSucceededPayload.js";
+export * from "./PostShippingAddressChangedPayload.js";
+export * from "./PostShippingAddressChangedResponse.js";
 export * from "./SummaryPaymentsRequestBillingReasonsItem.js";
 export * from "./SummaryPaymentsRequestGroupsItem.js";
 export * from "./SummaryPaymentsRequestPaymentMethodsItem.js";
