@@ -53,6 +53,8 @@ export namespace ListMethodsResponse {
             status_reason: string | null;
             /** The supported payout method this saved method was created from. */
             supported_payout_method: Item.SupportedPayoutMethod | null;
+            /** The kind of payout method. `external` sends funds out of Whop. `whop_card` moves funds onto the account's own Whop Card. A `whop_card` method takes standard-speed payouts only, and cannot be updated, reconnected, or deleted. */
+            type: Item.Type;
             /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
             unavailable_reason: Item.UnavailableReason | null;
         }
@@ -199,6 +201,12 @@ export namespace ListMethodsResponse {
                 export type DeliveryType = (typeof DeliveryType)[keyof typeof DeliveryType];
             }
 
+            /** The kind of payout method. `external` sends funds out of Whop. `whop_card` moves funds onto the account's own Whop Card. A `whop_card` method takes standard-speed payouts only, and cannot be updated, reconnected, or deleted. */
+            export const Type = {
+                External: "external",
+                WhopCard: "whop_card",
+            } as const;
+            export type Type = (typeof Type)[keyof typeof Type];
             /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
             export const UnavailableReason = {
                 DestinationRetired: "destination_retired",

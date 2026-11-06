@@ -84,7 +84,7 @@ export class ProductAffiliatesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-05",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-05-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
