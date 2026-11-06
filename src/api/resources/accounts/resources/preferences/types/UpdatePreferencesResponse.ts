@@ -19,7 +19,7 @@ export interface UpdatePreferencesResponse {
     cards_notifications: boolean;
     /** Whether this account covers its subaccounts' negative balances. When a subaccount's balance drops below zero (from refunds, disputes, or fees), this account's available balance in the same currency pays it back, up to what is available. Refunds on its subaccounts may also take them negative by up to this account's available balance. `null` when the account has no subaccounts. */
     covers_subaccount_negative_balances: boolean | null;
-    /** The saved customer tracking settings for the hosted tracking page and Element, exactly as saved. `null` until set; tracking is off unless `enabled` is `true`. */
+    /** The saved customer tracking settings for the hosted tracking page and Element, with defaults applied. `null` until set; tracking is off unless `enabled` is `true`. */
     customer_tracking: Whop.CustomerTrackingPreferences | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. */
     dispute_fighter_enabled: boolean;

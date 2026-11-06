@@ -102,13 +102,13 @@ export namespace UpdatePreferencesRequest {
      * Customer tracking settings for the hosted tracking page and Element, replaced as a whole: fields left out are reset to their defaults. Pass null to clear them, which turns tracking off. Requires the `company:manage_checkout` scope on your API key.
      */
     export interface CustomerTracking {
-        /** Accent color, as a `#rrggbb` hex color. Unset uses the default. */
+        /** Accent color, as a `#rrggbb` hex color. Omitted or null resets to `#1d4ed8`. */
         accent_color?: (string | null) | undefined;
-        /** Turns the public tracking page and guest lookup on. Unset is off. */
+        /** Turns the public tracking page and guest lookup on. Omitted or null resets to false. */
         enabled?: (boolean | null) | undefined;
-        /** Show the business name on the tracking page and Element. Unset shows it. */
+        /** Show the business name on the tracking page and Element. Omitted or null resets to true. */
         show_business_name?: (boolean | null) | undefined;
-        /** Show the account logo on the tracking page and Element. Unset shows it. */
+        /** Show the account logo on the tracking page and Element. Omitted or null resets to true. */
         show_logo?: (boolean | null) | undefined;
         /** Customer support email address. */
         support_email?: (string | null) | undefined;
