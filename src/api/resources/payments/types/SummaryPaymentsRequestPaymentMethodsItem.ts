@@ -82,6 +82,7 @@ export const SummaryPaymentsRequestPaymentMethodsItem = {
     Claritypay: "claritypay",
     Coinbase: "coinbase",
     Crypto: "crypto",
+    CryptoSubscription: "crypto_subscription",
     Custom: "custom",
     CustomerBalance: "customer_balance",
     DemoPay: "demo_pay",
