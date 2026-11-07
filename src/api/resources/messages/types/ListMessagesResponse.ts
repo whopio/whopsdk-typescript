@@ -2,12 +2,16 @@
 
 import type * as Whop from "../../../index.js";
 
-/**
- * The connection type for DmsPost.
- */
 export interface ListMessagesResponse {
-    /** A list of nodes. */
-    data: Whop.MessageListItem[];
-    /** Information to aid in pagination. */
-    page_info: Whop.PageInfo;
+    data: Whop.ChatMessage[];
+    page_info: ListMessagesResponse.PageInfo;
+}
+
+export namespace ListMessagesResponse {
+    export interface PageInfo {
+        end_cursor: string | null;
+        has_next_page: boolean;
+        has_previous_page: boolean;
+        start_cursor: string | null;
+    }
 }

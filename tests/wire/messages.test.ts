@@ -18,28 +18,133 @@ describe("MessagesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    content: "Hey, are you available for a **quick call**?",
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "id",
-                    is_edited: true,
-                    is_pinned: true,
-                    mentions: ["mentions"],
-                    mentions_everyone: true,
+                    attachments: [
+                        {
+                            blurhash: null,
+                            content_type: "application/pdf",
+                            created_at: "2026-01-01T12:00:00.000Z",
+                            duration_seconds: null,
+                            filename: "evidence.pdf",
+                            height: null,
+                            id: "file_xxxxxxxxxxxxxx",
+                            multipart_chunk_size: 5242880,
+                            multipart_upload_id: "upload-id",
+                            multipart_upload_urls: [
+                                {
+                                    part_number: 1,
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                },
+                            ],
+                            object: "file",
+                            removed_by_moderation: false,
+                            size: 9670,
+                            upload_headers: { key: "value" },
+                            upload_status: "pending",
+                            upload_url:
+                                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            visibility: "public",
+                            waveform_url: null,
+                            width: null,
+                        },
+                    ],
+                    author: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
+                    author_is_team_member: false,
+                    author_user_id: "user_xxxxxxxxxxxxxx",
+                    channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+                    content: "Content 1",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    custom_author: {
+                        display_name: null,
+                        profile_picture: {
+                            blurhash: null,
+                            content_type: "application/pdf",
+                            created_at: "2026-01-01T12:00:00.000Z",
+                            duration_seconds: null,
+                            filename: "evidence.pdf",
+                            height: null,
+                            id: "file_xxxxxxxxxxxxxx",
+                            multipart_chunk_size: 5242880,
+                            multipart_upload_id: "upload-id",
+                            multipart_upload_urls: [
+                                {
+                                    part_number: 1,
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                },
+                            ],
+                            object: "file",
+                            removed_by_moderation: false,
+                            size: 9670,
+                            upload_headers: { key: "value" },
+                            upload_status: "pending",
+                            upload_url:
+                                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            visibility: "public",
+                            waveform_url: null,
+                            width: null,
+                        },
+                    },
+                    deleted_at: "deleted_at",
+                    edited: false,
+                    embeds: [
+                        {
+                            color: null,
+                            description: null,
+                            fields: [{ inline: true, name: "name", value: "value" }],
+                            footer: null,
+                            image: null,
+                            thumbnail: null,
+                            timestamp_at: null,
+                            title: null,
+                            url: null,
+                        },
+                    ],
+                    gifs: [
+                        {
+                            height: 1,
+                            original_url: "original_url",
+                            preview_url: "preview_url",
+                            slug: "slug",
+                            title: "title",
+                            url: "url",
+                            width: 1,
+                        },
+                    ],
+                    id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                    link_previews: [
+                        {
+                            description: null,
+                            favicon_url: null,
+                            footer: null,
+                            image_url: null,
+                            processing: true,
+                            title: null,
+                            url: "url",
+                        },
+                    ],
+                    mentioned_user_ids: ["mentioned_user_ids"],
                     message_type: "regular",
-                    poll: { options: null },
-                    poll_votes: [{ count: 42, option_id: null }],
-                    reaction_counts: [{ count: 42, emoji: null }],
+                    pinned: false,
+                    plain_content: "Content 1",
+                    poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+                    reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
                     replying_to_message_id: "replying_to_message_id",
-                    updated_at: "2023-12-01T05:00:00Z",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-                    view_count: 42,
+                    replying_to_user_id: "replying_to_user_id",
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    view_count: 1,
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -53,8 +158,6 @@ describe("MessagesClient", () => {
 
         const expected = rawResponseBody;
         const page = await client.messages.list({
-            first: 42,
-            last: 42,
             channel_id: "channel_id",
         });
 
@@ -148,69 +251,6 @@ describe("MessagesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.list({
-                channel_id: "channel_id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.list({
-                channel_id: "channel_id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.list({
-                channel_id: "channel_id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -220,23 +260,128 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { channel_id: "channel_id", content: "content" };
+        const rawRequestBody = { channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx", content: "New **message**" };
         const rawResponseBody = {
-            content: "Hey, are you available for a **quick call**?",
-            created_at: "2023-12-01T05:00:00Z",
-            id: "id",
-            is_edited: true,
-            is_pinned: true,
-            mentions: ["mentions"],
-            mentions_everyone: true,
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
-            poll: { options: [{ id: "id", text: "text" }] },
-            poll_votes: [{ count: 42, option_id: "option_id" }],
-            reaction_counts: [{ count: 42, emoji: "emoji" }],
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            view_count: 42,
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
         };
 
         server
@@ -249,8 +394,8 @@ describe("MessagesClient", () => {
             .build();
 
         const response = await client.messages.create({
-            channel_id: "channel_id",
-            content: "content",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "New **message**",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -301,7 +446,7 @@ describe("MessagesClient", () => {
             .post("/messages")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(401)
+            .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -310,7 +455,7 @@ describe("MessagesClient", () => {
                 channel_id: "channel_id",
                 content: "content",
             });
-        }).rejects.toThrow(Whop.UnauthorizedError);
+        }).rejects.toThrow(Whop.ForbiddenError);
     });
 
     test("create (4)", async () => {
@@ -330,7 +475,7 @@ describe("MessagesClient", () => {
             .post("/messages")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(403)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -339,123 +484,7 @@ describe("MessagesClient", () => {
                 channel_id: "channel_id",
                 content: "content",
             });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("create (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = { channel_id: "channel_id", content: "content" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/messages")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.create({
-                channel_id: "channel_id",
-                content: "content",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("create (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = { channel_id: "channel_id", content: "content" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/messages")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.create({
-                channel_id: "channel_id",
-                content: "content",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("create (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = { channel_id: "channel_id", content: "content" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/messages")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.create({
-                channel_id: "channel_id",
-                content: "content",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("create (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = { channel_id: "channel_id", content: "content" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/messages")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.create({
-                channel_id: "channel_id",
-                content: "content",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -469,21 +498,126 @@ describe("MessagesClient", () => {
         });
 
         const rawResponseBody = {
-            content: "Hey, are you available for a **quick call**?",
-            created_at: "2023-12-01T05:00:00Z",
-            id: "id",
-            is_edited: true,
-            is_pinned: true,
-            mentions: ["mentions"],
-            mentions_everyone: true,
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
-            poll: { options: [{ id: "id", text: "text" }] },
-            poll_votes: [{ count: 42, option_id: "option_id" }],
-            reaction_counts: [{ count: 42, emoji: "emoji" }],
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            view_count: 42,
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
         };
 
         server.mockEndpoint().get("/messages/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -506,69 +640,6 @@ describe("MessagesClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("retrieve (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("retrieve (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/messages/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -576,69 +647,6 @@ describe("MessagesClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("retrieve (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retrieve (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retrieve (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/messages/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 
     test("delete (1)", async () => {
@@ -651,59 +659,15 @@ describe("MessagesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = true;
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(200).build();
 
         const response = await client.messages.delete({
             id: "id",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual(undefined);
     });
 
     test("delete (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("delete (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("delete (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -724,90 +688,6 @@ describe("MessagesClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("delete (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("delete (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("delete (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("delete (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/messages/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.messages.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -819,21 +699,126 @@ describe("MessagesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            content: "Hey, are you available for a **quick call**?",
-            created_at: "2023-12-01T05:00:00Z",
-            id: "id",
-            is_edited: true,
-            is_pinned: true,
-            mentions: ["mentions"],
-            mentions_everyone: true,
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
-            poll: { options: [{ id: "id", text: "text" }] },
-            poll_votes: [{ count: 42, option_id: "option_id" }],
-            reaction_counts: [{ count: 42, emoji: "emoji" }],
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            view_count: 42,
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
         };
 
         server
@@ -868,62 +853,6 @@ describe("MessagesClient", () => {
             .patch("/messages/id")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("update (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/messages/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.messages.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("update (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/messages/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
@@ -935,7 +864,7 @@ describe("MessagesClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("update (5)", async () => {
+    test("pin (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -944,26 +873,688 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+
+        const rawResponseBody = {
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
+            message_type: "regular",
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
+            replying_to_message_id: "replying_to_message_id",
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
+        };
+
+        server.mockEndpoint().post("/messages/id/pin").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.messages.pin({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("pin (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/messages/id/pin").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.messages.pin({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("pin (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/messages/id/pin").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.messages.pin({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("pin (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().post("/messages/id/pin").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.messages.pin({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("react (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { emoji: "❤️" };
+        const rawResponseBody = {
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
+            message_type: "regular",
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
+            replying_to_message_id: "replying_to_message_id",
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/react")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.messages.react({
+            id: "id",
+            emoji: "\u2764\uFE0F",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("react (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { emoji: "emoji" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/messages/id")
+            .post("/messages/id/react")
             .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.react({
+                id: "id",
+                emoji: "emoji",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("react (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { emoji: "emoji" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/react")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.react({
+                id: "id",
+                emoji: "emoji",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("listReactions (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    emoji: "👍",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
+                    user_id: "user_xxxxxxxxxxxxxx",
+                },
+            ],
+            page_info: {
+                end_cursor: "end_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
+            },
+        };
+
+        server
+            .mockEndpoint({ once: false })
+            .get("/messages/id/reactions")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = rawResponseBody;
+        const page = await client.messages.listReactions({
+            id: "id",
+        });
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("listReactions (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/messages/id/reactions")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.listReactions({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("unpin (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
+            message_type: "regular",
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
+            replying_to_message_id: "replying_to_message_id",
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/unpin")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.messages.unpin({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("unpin (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/unpin")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.unpin({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("unpin (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/unpin")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.messages.update({
+            return await client.messages.unpin({
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("update (6)", async () => {
+    test("unpin (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -972,26 +1563,25 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/messages/id")
-            .jsonBody(rawRequestBody)
+            .post("/messages/id/unpin")
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.messages.update({
+            return await client.messages.unpin({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
-    test("update (7)", async () => {
+    test("unreact (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1000,26 +1590,147 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawRequestBody = { emoji: "❤️" };
+        const rawResponseBody = {
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
+            message_type: "regular",
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
+            replying_to_message_id: "replying_to_message_id",
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
+        };
 
         server
             .mockEndpoint()
-            .patch("/messages/id")
+            .post("/messages/id/unreact")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(429)
+            .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        await expect(async () => {
-            return await client.messages.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
+        const response = await client.messages.unreact({
+            id: "id",
+            emoji: "\u2764\uFE0F",
+        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("update (8)", async () => {
+    test("unreact (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1028,22 +1739,259 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { emoji: "emoji" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/messages/id")
+            .post("/messages/id/unreact")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(500)
+            .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.messages.update({
+            return await client.messages.unreact({
                 id: "id",
+                emoji: "emoji",
             });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("unreact (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { emoji: "emoji" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/unreact")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.unreact({
+                id: "id",
+                emoji: "emoji",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("vote (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { poll_option_id: "2" };
+        const rawResponseBody = {
+            attachments: [
+                {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            ],
+            author: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            author_is_team_member: false,
+            author_user_id: "user_xxxxxxxxxxxxxx",
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Content 1",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_author: {
+                display_name: "display_name",
+                profile_picture: {
+                    blurhash: "blurhash",
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    duration_seconds: 1.1,
+                    filename: "evidence.pdf",
+                    height: 1,
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    removed_by_moderation: false,
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                    waveform_url: "waveform_url",
+                    width: 1,
+                },
+            },
+            deleted_at: "deleted_at",
+            edited: false,
+            embeds: [
+                {
+                    color: 1,
+                    description: "description",
+                    fields: [{ inline: true, name: "name", value: "value" }],
+                    footer: { icon: null, text: "text" },
+                    image: { blurhash: null, height: null, url: "url", width: null },
+                    thumbnail: { blurhash: null, height: null, url: "url", width: null },
+                    timestamp_at: "timestamp_at",
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            gifs: [
+                {
+                    height: 1,
+                    original_url: "original_url",
+                    preview_url: "preview_url",
+                    slug: "slug",
+                    title: "title",
+                    url: "url",
+                    width: 1,
+                },
+            ],
+            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+            link_previews: [
+                {
+                    description: "description",
+                    favicon_url: "favicon_url",
+                    footer: { description: null, icon_url: "icon_url", title: "title" },
+                    image_url: "image_url",
+                    processing: true,
+                    title: "title",
+                    url: "url",
+                },
+            ],
+            mentioned_user_ids: ["mentioned_user_ids"],
+            message_type: "regular",
+            pinned: false,
+            plain_content: "Content 1",
+            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
+            replying_to_message_id: "replying_to_message_id",
+            replying_to_user_id: "replying_to_user_id",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            view_count: 1,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/vote")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.messages.vote({
+            id: "id",
+            poll_option_id: "2",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("vote (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { poll_option_id: "poll_option_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/vote")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.vote({
+                id: "id",
+                poll_option_id: "poll_option_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("vote (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { poll_option_id: "poll_option_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/messages/id/vote")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.messages.vote({
+                id: "id",
+                poll_option_id: "poll_option_id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });

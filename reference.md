@@ -8325,6 +8325,1208 @@ await client.cashbackRules.update({
 </dl>
 </details>
 
+## Channel Members
+<details><summary><code>client.channelMembers.<a href="/src/api/resources/channelMembers/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ChannelMember, Whop.ListChannelMembersResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List or search the people in a channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.channelMembers.list({
+    channel_id: "channel_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.channelMembers.list({
+    channel_id: "channel_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListChannelMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelMembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channelMembers.<a href="/src/api/resources/channelMembers/client/Client.ts">create</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add a member to a direct or support channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channelMembers.create({
+    channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+    user_id: "user_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateChannelMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelMembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channelMembers.<a href="/src/api/resources/channelMembers/client/Client.ts">retrieve</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a channel member and their read position.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channelMembers.retrieve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveChannelMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelMembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channelMembers.<a href="/src/api/resources/channelMembers/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a channel member, or leave the channel yourself. Requires dms:channel:manage and access to the channel. Removing someone else also requires permission to manage its members.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channelMembers.delete({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.DeleteChannelMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelMembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channelMembers.<a href="/src/api/resources/channelMembers/client/Client.ts">update</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update your notification preference using your stored membership ID in a private or support channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channelMembers.update({
+    id: "id",
+    notification_preference: "all"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateChannelMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelMembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Channels
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ChannelListItem, Whop.ListChannelsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List channels you can access.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.channels.list({
+    kind: ["private"]
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.channels.list({
+    kind: ["private"]
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">create</a>({ ...params }) -> Whop.Channel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a private, community or support channel. Returns an existing private or support channel unchanged with `200`, or a new channel with `201`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.create({
+    kind: "private"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Channel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.retrieve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a channel. Deleting a support channel requires `support_chat:create` on the account. Community channels delete their backing experience and accept account API keys with the `experience:delete` permission. Private and support channels require a user identity with channel management permission; account API keys cannot act as a channel participant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.delete({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.DeleteChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">update</a>({ ...params }) -> Whop.Channel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a channel. Community icon changes update the experience logo and require `experience:update`. Support rename and notification changes require `support_chat:create`. Private and support writes require a user identity with channel management permission; account API keys can update community channels only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.update({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">accept</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Accept a direct-message request.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.accept({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.AcceptChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">hide</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Decline a DM request by hiding the channel from your inbox.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.hide({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.HideChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">markRead</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Mark a channel as read and optionally record viewed messages.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.markRead({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.MarkReadChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">markUnread</a>({ ...params }) -> Whop.ChannelMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Mark a channel as unread for the authenticated user. Experience channels are unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.markUnread({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.MarkUnreadChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">pin</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pin a private or support channel for yourself. Omit position to append a new pin or keep an existing pin in place. An explicit zero-based position inserts or moves the pin and shifts the rest. At most 12 channels can be pinned.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.pin({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.PinChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">reopen</a>({ ...params }) -> Whop.Channel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Reopen a resolved support channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.reopen({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ReopenChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">resolve</a>({ ...params }) -> Whop.Channel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resolve a support channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.resolve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ResolveChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">unpin</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a channel from your pins and compact the remaining order. Your discarded memberships and inaccessible channels can be unpinned. Does not return channel data or grant read access.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.unpin({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UnpinChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ChatChannels
 <details><summary><code>client.chatChannels.<a href="/src/api/resources/chatChannels/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ChatChannelListItem, Whop.ListChatChannelsResponse&gt;</code></summary>
 <dl>
@@ -19729,7 +20931,7 @@ await client.memberships.transfer({
 </details>
 
 ## Messages
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.MessageListItem, Whop.ListMessagesResponse&gt;</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ChatMessage, Whop.ListMessagesResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -19741,12 +20943,7 @@ await client.memberships.transfer({
 <dl>
 <dd>
 
-Lists messages in an experience chat, DM, or group chat channel, sorted by creation time.
-
-Required permissions (one of):
- - `chat:read`
- - `dms:read`
- - `support_chat:read`
+Lists messages in a channel. Existing public message and channel IDs are preserved. For reconnect synchronization, use inclusive updated_after with include_deleted=true; results use ascending change order. Follow the returned cursors and replace cached messages by ID, including when updated_at is unchanged. The returned updated_at is the stored message update time; reaction changes only affect synchronization ordering. Deleted entries contain identity and timestamps with their content redacted. To jump into history, specify channel_id and one around anchor; results use ascending creation-time order. For older messages in chronological order, use before_message_id with last and direction=asc; for newer messages, use after_message_id with first and direction=asc. Do not supply order or direction with updated_after or an around anchor. Keep message-ID filters when continuing with cursors. For around queries, omit the around anchor and continue with direction=asc.
 </dd>
 </dl>
 </dd>
@@ -19762,8 +20959,6 @@ Required permissions (one of):
 
 ```typescript
 const pageableResponse = await client.messages.list({
-    first: 42,
-    last: 42,
     channel_id: "channel_id"
 });
 for await (const item of pageableResponse) {
@@ -19772,8 +20967,6 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.messages.list({
-    first: 42,
-    last: 42,
     channel_id: "channel_id"
 });
 while (page.hasNextPage()) {
@@ -19817,7 +21010,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">create</a>({ ...params }) -> Whop.Message</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">create</a>({ ...params }) -> Whop.ChatMessage</code></summary>
 <dl>
 <dd>
 
@@ -19829,13 +21022,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Sends a message in an experience chat, DM, or group chat channel. Supports text content, attachments, polls, and replies.
-
-Required permissions (one of):
- - `chat:message:create`
- - `dms:message:manage`
- - `livestream:chat:write`
- - `support_chat:message:create`
+Sends a Markdown message as the authenticated user or app agent. Channel access, posting restrictions, moderation, and delivery follow the existing chat services. Use Idempotency-Key to safely retry a send. The response and realtime message use the same message ID. Custom author presentation and embeds are read-only.
 </dd>
 </dl>
 </dd>
@@ -19851,8 +21038,8 @@ Required permissions (one of):
 
 ```typescript
 await client.messages.create({
-    channel_id: "channel_id",
-    content: "content"
+    channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+    content: "New **message**"
 });
 
 ```
@@ -19889,7 +21076,7 @@ await client.messages.create({
 </dl>
 </details>
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Message</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">retrieve</a>({ ...params }) -> Whop.ChatMessage</code></summary>
 <dl>
 <dd>
 
@@ -19901,13 +21088,7 @@ await client.messages.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing message.
-
-Required permissions (one of):
- - `chat:read`
- - `dms:read`
- - `livestream:chat:read`
- - `support_chat:read`
+Retrieves a live message from an accessible channel. Use list synchronization to retrieve deletion entries.
 </dd>
 </dl>
 </dd>
@@ -19960,7 +21141,7 @@ await client.messages.retrieve({
 </dl>
 </details>
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">delete</a>({ ...params }) -> boolean</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">delete</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -19972,13 +21153,7 @@ await client.messages.retrieve({
 <dl>
 <dd>
 
-Permanently deletes a message from an experience chat, DM, or group chat channel. Only the message author or a channel admin can delete a message.
-
-Required permissions (one of):
- - `chat:message:create` and `chat:read`
- - `dms:message:manage` and `dms:read`
- - `livestream:chat:write` and `livestream:chat:read`
- - `support_chat:message:create` and `support_chat:read`
+Deletes a message as its author or a permitted moderator. Deleted messages remain available as redacted entries through list synchronization.
 </dd>
 </dl>
 </dd>
@@ -20031,7 +21206,7 @@ await client.messages.delete({
 </dl>
 </details>
 
-<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">update</a>({ ...params }) -> Whop.Message</code></summary>
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">update</a>({ ...params }) -> Whop.ChatMessage</code></summary>
 <dl>
 <dd>
 
@@ -20043,13 +21218,7 @@ await client.messages.delete({
 <dl>
 <dd>
 
-Edits the content, attachments, or pinned status of a message in an experience chat, DM, or group chat channel.
-
-Required permissions (one of):
- - `chat:message:create`
- - `dms:message:manage`
- - `livestream:chat:write`
- - `support_chat:message:create`
+Updates the author's message. Use the pin and unpin actions to change its pin state. Omitted fields are preserved; attachment and preview collections replace their previous values.
 </dd>
 </dl>
 </dd>
@@ -20083,6 +21252,413 @@ await client.messages.update({
 <dd>
 
 **request:** `Whop.UpdateMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">pin</a>({ ...params }) -> Whop.ChatMessage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pins a message in its channel. Requires the channel's pin permission.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.messages.pin({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.PinMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">react</a>({ ...params }) -> Whop.ChatMessage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Add your emoji reaction to a message. Reacting again with the same emoji changes nothing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.messages.react({
+    id: "id",
+    emoji: "\u2764\uFE0F"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ReactMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">listReactions</a>({ ...params }) -> core.Page&lt;Whop.ChatReaction, Whop.ListReactionsMessagesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List who reacted to a message, newest first. Optionally filter by emoji.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.messages.listReactions({
+    id: "id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.messages.listReactions({
+    id: "id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListReactionsMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">unpin</a>({ ...params }) -> Whop.ChatMessage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Unpins a message in its channel. Requires the channel's pin permission.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.messages.unpin({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UnpinMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">unreact</a>({ ...params }) -> Whop.ChatMessage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove your emoji reaction from a message. Removing a reaction you have not added changes nothing.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.messages.unreact({
+    id: "id",
+    emoji: "\u2764\uFE0F"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UnreactMessagesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MessagesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.messages.<a href="/src/api/resources/messages/client/Client.ts">vote</a>({ ...params }) -> Whop.ChatMessage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Vote for one option on a message poll. Each user can vote once per poll.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.messages.vote({
+    id: "id",
+    poll_option_id: "2"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.VoteMessagesRequest` 
     
 </dd>
 </dl>

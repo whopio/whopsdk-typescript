@@ -3,43 +3,46 @@
 /**
  * @example
  *     {
- *         channel_id: "channel_id",
- *         content: "content"
+ *         channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+ *         content: "New **message**"
  *     }
  */
 export interface CreateMessagesRequest {
-    /** A list of file attachments to include with the message, such as images or videos. */
-    attachments?: CreateMessagesRequest.Attachments.Item[] | null;
-    /** Automatically detect URLs in the message and generate link previews. */
-    auto_detect_links?: boolean | null;
-    /** The unique identifier of the channel or experience to send the message in. For example, 'exp_xxxxx' or 'feed_xxxxx'. */
+    /** Files to attach to the message. */
+    attachments?: CreateMessagesRequest.Attachments.Item[];
+    /** Generate previews for URLs in content. Mutually exclusive with link_previews. */
+    auto_detect_links?: boolean;
+    /** Public channel ID, or an experience ID for experience chat. */
     channel_id: string;
-    /** The body of the message in Markdown format. For example, 'Hello **world**'. */
+    /** Markdown content. May be empty when the message contains media or a poll. */
     content: string;
-    /** A poll to attach to this message, allowing recipients to vote on options. */
-    poll?: CreateMessagesRequest.Poll | null;
-    /** The unique identifier of the message this is replying to, creating a threaded reply. */
-    replying_to_message_id?: string | null;
+    /** Explicit URLs for the server to preview. */
+    link_previews?: CreateMessagesRequest.LinkPreviews.Item[];
+    poll?: CreateMessagesRequest.Poll;
+    /** A live message in the same channel to reply to. */
+    replying_to_message_id?: string;
 }
 
 export namespace CreateMessagesRequest {
     export type Attachments = Attachments.Item[];
 
     export namespace Attachments {
-        /**
-         * Input for an attachment
-         */
         export interface Item {
-            /** The ID of an existing file object. */
+            /** Uploaded file ID. */
             id: string;
         }
     }
 
-    /**
-     * A poll to attach to this message, allowing recipients to vote on options.
-     */
+    export type LinkPreviews = LinkPreviews.Item[];
+
+    export namespace LinkPreviews {
+        export interface Item {
+            /** URL to preview. */
+            url: string;
+        }
+    }
+
     export interface Poll {
-        /** The options for the poll. Must have sequential IDs starting from 1 */
         options: Poll.Options.Item[];
     }
 
@@ -47,13 +50,8 @@ export namespace CreateMessagesRequest {
         export type Options = Options.Item[];
 
         export namespace Options {
-            /**
-             * Input type for a single poll option
-             */
             export interface Item {
-                /** Sequential ID for the poll option (starting from '1') */
                 id: string;
-                /** The text of the poll option */
                 text: string;
             }
         }

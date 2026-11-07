@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveMessagesRequest {
-    /** The unique identifier of the message to retrieve. */
+    /** Existing public message ID. */
     id: string;
 }
