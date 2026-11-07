@@ -369,7 +369,6 @@ export namespace LedgerActivity {
         ClawbackReceivableSettlementReversal: "clawback_receivable_settlement_reversal",
         ClawbackFee: "clawback_fee",
         PspClawbackFee: "psp_clawback_fee",
-        BankTransfer: "bank_transfer",
         Deposit: "deposit",
         WalletTransferIncoming: "wallet_transfer_incoming",
         WalletTransferOutgoing: "wallet_transfer_outgoing",
