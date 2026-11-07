@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteMessagesRequest {
-    /** The unique identifier of the message to delete. */
+    /** Existing public message ID. */
     id: string;
 }

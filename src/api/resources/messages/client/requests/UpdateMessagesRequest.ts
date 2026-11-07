@@ -7,26 +7,32 @@
  *     }
  */
 export interface UpdateMessagesRequest {
-    /** The unique identifier of the message to update. */
+    /** Existing public message ID. */
     id: string;
-    /** A replacement list of file attachments for this message, such as images or videos. */
-    attachments?: UpdateMessagesRequest.Attachments.Item[] | null;
-    /** The updated body of the message in Markdown format. For example, 'Hello **world**'. */
-    content?: string | null;
-    /** Whether this message should be pinned to the top of the channel. */
-    is_pinned?: boolean | null;
+    /** Replacement attachment list; pass an empty list to remove attachments. */
+    attachments?: UpdateMessagesRequest.Attachments.Item[];
+    /** Replacement Markdown content. */
+    content?: string;
+    /** Replacement preview URLs; pass an empty list to remove previews. */
+    link_previews?: UpdateMessagesRequest.LinkPreviews.Item[];
 }
 
 export namespace UpdateMessagesRequest {
     export type Attachments = Attachments.Item[];
 
     export namespace Attachments {
-        /**
-         * Input for an attachment
-         */
         export interface Item {
-            /** The ID of an existing file object. */
+            /** Uploaded file ID. */
             id: string;
+        }
+    }
+
+    export type LinkPreviews = LinkPreviews.Item[];
+
+    export namespace LinkPreviews {
+        export interface Item {
+            /** URL to preview. */
+            url: string;
         }
     }
 }

@@ -5,21 +5,42 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         first: 42,
- *         last: 42,
  *         channel_id: "channel_id"
  *     }
  */
 export interface ListMessagesRequest {
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
-    /** The unique identifier of the channel or experience to list messages for. */
+    /** Filter by public channel ID. An experience ID is also accepted for experience chat. */
     channel_id: string;
-    direction?: Whop.Direction;
+    /** Return replies to this message. */
+    replying_to_message_id?: string;
+    /** Filter by message pin state. */
+    pinned?: boolean;
+    /** Include redacted deletion entries for cache synchronization. */
+    include_deleted?: boolean;
+    /** Return messages created strictly after this ISO 8601 timestamp. */
+    created_after?: string;
+    /** Return messages created strictly before this ISO 8601 timestamp. */
+    created_before?: string;
+    /** Return messages changed at or after this ISO 8601 timestamp in ascending change order. Cannot be combined with history filters, around anchors, order, or direction. */
+    updated_after?: string;
+    /** Filter messages strictly before this message in channel_id by creation time and message ID. Deleted anchors are accepted; missing or other-channel IDs return 404. Cannot be combined with around anchors or updated_after. */
+    before_message_id?: string;
+    /** Filter messages strictly after this message in channel_id by creation time and message ID. Deleted anchors are accepted; missing or other-channel IDs return 404. Cannot be combined with around anchors or updated_after. */
+    after_message_id?: string;
+    /** Center the first page around this live message in the selected channel. */
+    around_message_id?: string;
+    /** Center the first page around this ISO 8601 timestamp in the selected channel. */
+    around_timestamp?: string;
+    /** History sort field. Defaults to created_at. Cannot be supplied with updated_after or around anchors. */
+    order?: Whop.ListMessagesRequestOrder;
+    /** History sort direction. Defaults to desc. Cannot be supplied with updated_after or around anchors. */
+    direction?: Whop.ListMessagesRequestDirection;
+    /** Number of results to return from the start of the range. */
+    first?: number;
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
+    after?: string;
+    /** Number of results to return from the end of the range. */
+    last?: number;
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
+    before?: string;
 }

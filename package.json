@@ -286,6 +286,28 @@
             },
             "default": "./dist/cjs/api/resources/cashbackRules/exports.js"
         },
+        "./channelMembers": {
+            "import": {
+                "types": "./dist/esm/api/resources/channelMembers/exports.d.mts",
+                "default": "./dist/esm/api/resources/channelMembers/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/channelMembers/exports.d.ts",
+                "default": "./dist/cjs/api/resources/channelMembers/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/channelMembers/exports.js"
+        },
+        "./channels": {
+            "import": {
+                "types": "./dist/esm/api/resources/channels/exports.d.mts",
+                "default": "./dist/esm/api/resources/channels/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/channels/exports.d.ts",
+                "default": "./dist/cjs/api/resources/channels/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/channels/exports.js"
+        },
         "./chatChannels": {
             "import": {
                 "types": "./dist/esm/api/resources/chatChannels/exports.d.mts",

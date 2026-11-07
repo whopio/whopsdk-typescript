@@ -5,6 +5,8 @@
  *     {}
  */
 export interface ListUsersRequest {
+    /** Prioritize people relevant to this channel for mentions. Results remain global; channel access is required. */
+    context_channel_id?: string;
     /** A search term to filter users by name or username. */
     query?: string;
     /** Number of results to return from the start of the range. */

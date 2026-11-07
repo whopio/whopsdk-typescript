@@ -1,5 +1,11 @@
 export type { CreateMessagesRequest } from "./CreateMessagesRequest.js";
 export type { DeleteMessagesRequest } from "./DeleteMessagesRequest.js";
 export type { ListMessagesRequest } from "./ListMessagesRequest.js";
+export type { ListReactionsMessagesRequest } from "./ListReactionsMessagesRequest.js";
+export type { PinMessagesRequest } from "./PinMessagesRequest.js";
+export type { ReactMessagesRequest } from "./ReactMessagesRequest.js";
 export type { RetrieveMessagesRequest } from "./RetrieveMessagesRequest.js";
+export type { UnpinMessagesRequest } from "./UnpinMessagesRequest.js";
+export type { UnreactMessagesRequest } from "./UnreactMessagesRequest.js";
 export type { UpdateMessagesRequest } from "./UpdateMessagesRequest.js";
+export type { VoteMessagesRequest } from "./VoteMessagesRequest.js";
