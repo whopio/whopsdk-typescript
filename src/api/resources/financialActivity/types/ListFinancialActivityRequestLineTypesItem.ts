@@ -18,7 +18,6 @@ export const ListFinancialActivityRequestLineTypesItem = {
     ApplicationFeePayout: "application_fee_payout",
     BalanceReservation: "balance_reservation",
     BalanceReservationReversal: "balance_reservation_reversal",
-    BankTransfer: "bank_transfer",
     BillingPercentageFee: "billing_percentage_fee",
     BuyerFee: "buyer_fee",
     CardInterchange: "card_interchange",
