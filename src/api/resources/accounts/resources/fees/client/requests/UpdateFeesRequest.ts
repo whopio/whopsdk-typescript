@@ -230,7 +230,7 @@ export namespace UpdateFeesRequest {
         deposits?: Record<string, ChildMarkups.Deposits.Value | null> | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         payments?: (ChildMarkups.Payments | null) | undefined;
-        /** Markups on withdrawals, keyed by payout method. */
+        /** Markups on withdrawals, keyed by payout method. Percentage and fixed components may be negative, down to negative 100, to subsidize Whop's fee from the platform's balance in the withdrawal currency. The creator's total fee cannot go below zero. An unfunded subsidy keeps the payout pending until funded or failed by the creation deadline. */
         payouts?: Record<string, ChildMarkups.Payouts.Value | null> | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         transfers?: (ChildMarkups.Transfers | null) | undefined;
@@ -579,7 +579,7 @@ export namespace UpdateFeesRequest {
         deposits?: Record<string, Markups.Deposits.Value | null> | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         payments?: (Markups.Payments | null) | undefined;
-        /** Markups on withdrawals, keyed by payout method. */
+        /** Markups on withdrawals, keyed by payout method. Percentage and fixed components may be negative, down to negative 100, to subsidize Whop's fee from the platform's balance in the withdrawal currency. The creator's total fee cannot go below zero. An unfunded subsidy keeps the payout pending until funded or failed by the creation deadline. */
         payouts?: Record<string, Markups.Payouts.Value | null> | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         transfers?: (Markups.Transfers | null) | undefined;
