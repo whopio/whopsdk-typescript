@@ -19,7 +19,7 @@ describe("StatsClient", () => {
                 {
                     breakdowns: ["component"],
                     description:
-                        "A 0 to 100 campaign score at each interval since launch, read off the 15-minute ledger windows: half how charged spend moved window to window on average (steady spend scores 50), half the share of windows since launch it charged in. Several ad_xxxxxxxxxxxxxx_ids (up to 100) average their scores weighted by daily budget. breakdown_by=component, for one campaign, adds each part's score and weight and the counts behind them. A runner reads the campaigns they run; staff read any campaign with account_id=global.",
+                        "A 0 to 100 campaign score at each interval, over the hours since the current claim (at most the last 7 days) that the campaign was set to run: half the share of its daily budget it charged in those hours, half the share of those hours it charged in. A claim that hasn't charged yet is not scored for its first 24 such hours. Several ad_xxxxxxxxxxxxxx_ids (up to 100) average their scores weighted by daily budget. breakdown_by=component, for one campaign, adds each part's score and weight and the totals behind them. A runner reads the campaigns they run; staff read any campaign with account_id=global.",
                     key: "ad_xxxxxxxxxxxxxx_score",
                     name: "Ad campaign score",
                     properties: ["source"],
