@@ -14,7 +14,7 @@ export interface ListSearchRequest {
     query: string;
     /** Kinds of records to search. Defaults to every kind. `account` rows are `account_id` itself and, with `include_subaccounts`, its subaccounts. */
     types?: Whop.ListSearchRequestTypesItem | Whop.ListSearchRequestTypesItem[];
-    /** The account to search, prefixed `biz_`. Records other than accounts belong to it, or with `include_subaccounts` to its subaccounts. Your credential needs read access to it; an account you can't read is a 404. */
+    /** The account to search, prefixed `biz_`. Records other than accounts belong to it, or with `include_subaccounts` to its subaccounts. Your credential needs read access to at least one kind of record on it that search returns, or the account is a 404. */
     account_id: string;
     /** `true` also searches the subaccounts of a platform `account_id`: an ID, an email, card digits or a phone number finds their records, and the subaccounts themselves are found as `account` rows by name, ID or store link, or by the email of their owner, a team member or a customer. Safe to send for any account: one without subaccounts is searched as if this were false. */
     include_subaccounts?: boolean;
