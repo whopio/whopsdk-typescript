@@ -35,7 +35,7 @@ export interface Audience {
     source_audience_id: string | null;
     /** Membership source: an uploaded CSV, Whop People filters, or social engagement. Engagement audiences can no longer be created. */
     source_type: Audience.SourceType;
-    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     status: Audience.Status;
     /** Total members detected in the source — CSV rows for uploaded lists, matching people for automatic audiences. Always 0 for lookalikes and engagement audiences. */
     total_rows: number;
@@ -57,11 +57,10 @@ export namespace Audience {
         Engagement: "engagement",
     } as const;
     export type SourceType = (typeof SourceType)[keyof typeof SourceType];
-    /** Current state of audience creation. `syncing` means Whop is sending matched rows to connected ad accounts. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. When a `pending` audience is waiting on something, such as an ad account to upload to, `error_message` says what. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     export const Status = {
         Pending: "pending",
         Processing: "processing",
-        Syncing: "syncing",
         Ready: "ready",
         Partial: "partial",
         Failed: "failed",

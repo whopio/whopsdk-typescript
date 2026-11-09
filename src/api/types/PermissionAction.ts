@@ -163,6 +163,7 @@ export const PermissionAction = {
     MemberPaymentMethodsRead: "member:payment_methods:read",
     MemberPaymentMethodsUse: "member:payment_methods:use",
     MemberPhoneRead: "member:phone:read",
+    MemberReportingLineUpdate: "member:reporting_line:update",
     MemberStatsExport: "member:stats:export",
     MemberStatsRead: "member:stats:read",
     MembershipCancel: "membership:cancel",
