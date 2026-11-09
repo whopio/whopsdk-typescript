@@ -337,6 +337,8 @@ export * from "./MediaAsset.js";
 export * from "./MediaAssetFile.js";
 export * from "./MediaAssetGeneration.js";
 export * from "./Member.js";
+export * from "./MemberLastActivity.js";
+export * from "./MemberLastActivityMessage.js";
 export * from "./MemberLegacy.js";
 export * from "./MemberListItem.js";
 export * from "./MemberMostRecentActions.js";
