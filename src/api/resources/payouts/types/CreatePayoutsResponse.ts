@@ -50,7 +50,7 @@ export interface CreatePayoutsResponse {
     status: CreatePayoutsResponse.Status;
     /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */
     status_detail: string;
-    /** ACH trace number the recipient's bank can use to locate this payout. Always `null` here — it is assigned when the payout is submitted to the bank, and appears on the payout in GET /payouts once it has been sent; payouts not sent over ACH never get one. */
+    /** Payment network reference for this payout, such as an ACH trace number, an RTP or FedNow end-to-end ID, a wire IMAD, or a SWIFT UETR. Always `null` here. It appears on the payout in GET /payouts once the reference is available, and stays `null` on payouts that have none. */
     trace_code: string | null;
 }
 
