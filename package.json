@@ -1221,6 +1221,17 @@
             },
             "default": "./dist/cjs/api/resources/affiliates/resources/overrides/exports.js"
         },
+        "./apps/categories": {
+            "import": {
+                "types": "./dist/esm/api/resources/apps/resources/categories/exports.d.mts",
+                "default": "./dist/esm/api/resources/apps/resources/categories/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/apps/resources/categories/exports.d.ts",
+                "default": "./dist/cjs/api/resources/apps/resources/categories/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/apps/resources/categories/exports.js"
+        },
         "./bounties/submissions": {
             "import": {
                 "types": "./dist/esm/api/resources/bounties/resources/submissions/exports.d.mts",

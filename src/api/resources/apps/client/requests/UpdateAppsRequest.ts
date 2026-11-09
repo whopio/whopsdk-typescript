@@ -15,6 +15,8 @@ export interface UpdateAppsRequest {
     app_type?: UpdateAppsRequest.AppType;
     /** The base production URL where the app is hosted. Set to `null` to take the app proxy offline. */
     base_url?: string | null;
+    /** The App Store category of a business app. Pass an `mcat_` ID from `GET /apps/categories?app_type=b2b_app`, or `null` to clear it. Omit it to keep the current category. Setting a category needs the app to have an App Store product. */
+    category_id?: string | null;
     /** The URL path for the account dashboard view. */
     dashboard_path?: string | null;
     /** A short description of the app shown in listings and search results. */

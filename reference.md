@@ -34296,6 +34296,82 @@ await client.affiliates.overrides.update({
 </dl>
 </details>
 
+## Apps Categories
+<details><summary><code>client.apps.categories.<a href="/src/api/resources/apps/resources/categories/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.AppCategory, Whop.ListCategoriesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the App Store's categories. Pass `app_type` for one store's categories in the order that store shows them; without it, every category either store shows is listed. Use a business category's ID as an app's `category_id`, or any category's `route` to filter apps. This endpoint is public and does not require authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.apps.categories.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.apps.categories.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.apps.ListCategoriesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CategoriesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Bounties Submissions
 <details><summary><code>client.bounties.submissions.<a href="/src/api/resources/bounties/resources/submissions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.PublicBountySubmission, Whop.ListSubmissionsResponse&gt;</code></summary>
 <dl>
