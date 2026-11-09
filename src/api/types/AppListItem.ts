@@ -16,6 +16,8 @@ export interface AppListItem {
     businesses_created_logo_urls: string[];
     /** Number of businesses created from this app as a template that processed a payment in the last 24 hours. Recounted hourly, so it can be up to an hour behind. */
     businesses_with_recent_sales_count: number;
+    /** The app's App Store category, or `null` when none has been set. An app can show a category that `GET /apps/categories` does not list, if it was categorized before the current store categories. */
+    category: Whop.AppCategory | null;
     /** The user who owns the publishing account. */
     creator: Whop.AppCreator;
     /** URL path for the account dashboard view, or `null` when not configured. */

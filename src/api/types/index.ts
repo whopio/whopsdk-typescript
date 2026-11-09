@@ -104,6 +104,7 @@ export * from "./AppBuild.js";
 export * from "./AppBuildListItem.js";
 export * from "./AppBuildPlatforms.js";
 export * from "./AppBuildStatuses.js";
+export * from "./AppCategory.js";
 export * from "./AppCreator.js";
 export * from "./AppDefaultApiKey.js";
 export * from "./AppDeployment.js";

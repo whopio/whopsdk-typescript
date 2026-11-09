@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { CategoriesClient } from "../resources/categories/client/Client.js";
 
 export declare namespace AppsClient {
     export type Options = BaseClientOptions;
@@ -21,13 +22,20 @@ export declare namespace AppsClient {
  *
  * Use the Apps API to manage app configuration, deploy an app's working copy and follow the run on the app's `deployment` field, and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests.
  *
+ * Business apps have one App Store category. List the categories with `GET /apps/categories`, then set the app's `category_id` to the chosen category's ID. Use a category's `route` as `marketplace_category_route` when listing apps.
+ *
  * Apps are also reusable blueprints. List official blueprints with `app_type=website&verified=true&order=template_usage`, or community blueprints with `app_type=website&verified=false&recommended=true&order=template_usage`. Pass the returned App `id` as `blueprint_id` when creating an Account.
  */
 export class AppsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AppsClient.Options>;
+    protected _categories: CategoriesClient | undefined;
 
     constructor(options: AppsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get categories(): CategoriesClient {
+        return (this._categories ??= new CategoriesClient(this._options));
     }
 
     /**
@@ -59,6 +67,7 @@ export class AppsClient {
                     recommended,
                     query,
                     product_category: productCategory,
+                    marketplace_category_route: marketplaceCategoryRoute,
                     order,
                     direction,
                     first,
@@ -75,6 +84,7 @@ export class AppsClient {
                     recommended,
                     query,
                     product_category: productCategory,
+                    marketplace_category_route: marketplaceCategoryRoute,
                     order: order != null ? order : undefined,
                     direction: direction != null ? direction : undefined,
                     first,
