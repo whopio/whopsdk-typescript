@@ -136,14 +136,8 @@ export namespace PostAdCampaignUpdatedPayload {
             Active: "active",
             Paused: "paused",
             Inactive: "inactive",
-            Stale: "stale",
-            PendingRefund: "pending_refund",
             PaymentFailed: "payment_failed",
             Draft: "draft",
-            InReview: "in_review",
-            Flagged: "flagged",
-            Importing: "importing",
-            Imported: "imported",
             Duplicating: "duplicating",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
