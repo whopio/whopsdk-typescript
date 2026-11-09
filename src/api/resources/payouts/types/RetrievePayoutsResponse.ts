@@ -60,7 +60,7 @@ export interface RetrievePayoutsResponse {
     status_detail: string;
     /** Completed lifecycle events in chronological order. Present once the payout has a withdrawal record. */
     timeline?: RetrievePayoutsResponse.Timeline.Item[] | undefined;
-    /** ACH trace number the recipient's bank can use to locate this payout. Assigned when the payout is submitted to the bank, so it is `null` before then and on payouts not sent over ACH. */
+    /** Payment network reference for this payout, such as an ACH trace number, an RTP or FedNow end-to-end ID, a wire IMAD, or a SWIFT UETR. `null` until the reference is available, and on payouts that have none. */
     trace_code: string | null;
 }
 
