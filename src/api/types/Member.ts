@@ -21,6 +21,8 @@ export interface Member {
     joined_at: string;
     /** When the member last opened the account's content, as an ISO 8601 timestamp. `null` if they never have. */
     last_accessed_at: string | null;
+    /** When the member and the account last interacted, as an ISO 8601 timestamp. For example, a message in the member's support chat. */
+    last_activity_at: string | null;
     /** The member's latest lifecycle state on the account, derived from their memberships, such as `paid_subscriber`, `canceling`, or `churned`. `null` until it is first computed. */
     most_recent_action: Member.MostRecentAction | null;
     /** When `most_recent_action` took effect, as an ISO 8601 timestamp. `null` when `most_recent_action` is `null`. */

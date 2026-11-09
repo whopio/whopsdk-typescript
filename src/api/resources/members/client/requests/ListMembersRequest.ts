@@ -36,7 +36,7 @@ export interface ListMembersRequest {
     created_after?: string;
     /** Only members who joined before this ISO 8601 timestamp. */
     created_before?: string;
-    /** Sort field. `most_recent_action_at` places members without one first when ascending and last when descending. */
+    /** Sort field. `most_recent_action_at` and `last_activity_at` place members without one first when ascending and last when descending. */
     order?: Whop.ListMembersRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListMembersRequestDirection;
