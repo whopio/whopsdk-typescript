@@ -394,6 +394,8 @@ describe("PayoutsClient", () => {
             expires_at: "2026-01-01T12:00:00Z",
             fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "pout_aed_quote",
+            market_exchange_rate: 4.14226979,
+            market_exchange_rate_at: "2026-01-01T12:00:00Z",
             net_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             object: "payout_quote",
             quote_token: "signed-payout-quote",
