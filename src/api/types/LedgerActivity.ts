@@ -524,6 +524,7 @@ export namespace LedgerActivity {
               cashback_usd: string | null;
               declined_reason: string | null;
               id: string;
+              levels_points: string | null;
               local_amount: string | null;
               local_currency: string | null;
               merchant_category: string | null;
