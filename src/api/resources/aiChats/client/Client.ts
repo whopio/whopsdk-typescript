@@ -26,6 +26,9 @@ export class AiChatsClient {
     /**
      * Returns a paginated list of AI chat threads for the current authenticated user.
      *
+     * Required permissions:
+     *  - `ai_chat:read`
+     *
      * @param {Whop.ListAiChatsRequest} request
      * @param {AiChatsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -247,6 +250,9 @@ export class AiChatsClient {
 
     /**
      * Retrieves the details of an existing AI chat.
+     *
+     * Required permissions:
+     *  - `ai_chat:read`
      *
      * @param {Whop.RetrieveAiChatsRequest} request
      * @param {AiChatsClient.RequestOptions} requestOptions - Request-specific configuration.
