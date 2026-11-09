@@ -13,6 +13,7 @@ export interface AccountPaymentControls {
     financing_disabled: boolean;
     /** Additional processing fee percentage for high-risk processing. */
     high_risk_processing_fee_percentage: number;
+    payment_method_warnings: Record<string, unknown>[];
     /** Percentage fee charged when pending, not-yet-settled balance is advanced to fund the account's cards balance, where `2` means 2%. `0` when the account is exempt. */
     pending_auto_topup_fee_percentage: number;
     /** Additional days payments remain pending before becoming available. */
