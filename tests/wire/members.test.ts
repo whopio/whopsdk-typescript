@@ -54,9 +54,12 @@ describe("MembersClient", () => {
                     token_balance: 70.25,
                     usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     user: {
+                        city: "Austin",
+                        country: "US",
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
+                        state: "TX",
                         username: "danawhitfield",
                     },
                 },
@@ -192,9 +195,12 @@ describe("MembersClient", () => {
             token_balance: 70.25,
             usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
+                city: "Austin",
+                country: "US",
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
+                state: "TX",
                 username: "danawhitfield",
             },
         };
@@ -291,9 +297,12 @@ describe("MembersClient", () => {
             token_balance: 70.25,
             usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
+                city: "Austin",
+                country: "US",
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
+                state: "TX",
                 username: "danawhitfield",
             },
         };
