@@ -19,6 +19,8 @@ export interface PartnerReferralRequest {
     member_id: string | null;
     /** Public profile of the requesting partner. */
     partner: Whop.UserSummary;
+    /** Business the partner sent this request on behalf of, when the referral belongs to their team. `null` for a personal referral. */
+    referring_account: Whop.AccountSummary | null;
     /** How the referral request was initiated. */
     request_type: PartnerReferralRequest.RequestType;
     rewards: Whop.PartnerReferralReward[];

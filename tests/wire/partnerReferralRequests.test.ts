@@ -31,6 +31,7 @@ describe("PartnerReferralRequestsClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "danawhitfield",
                     },
+                    referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     request_type: "manual",
                     rewards: [
                         {
@@ -181,6 +182,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             request_type: "manual",
             rewards: [
                 {
@@ -381,6 +383,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             request_type: "manual",
             rewards: [
                 {
@@ -521,6 +524,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             request_type: "manual",
             rewards: [
                 {
@@ -688,6 +692,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             request_type: "manual",
             rewards: [
                 {
@@ -855,6 +860,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             request_type: "manual",
             rewards: [
                 {
