@@ -14,6 +14,10 @@ export interface User {
     bio: string | null;
     /** Where the user's personal card application stands. Populated only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise, or when the user has never applied for a card. */
     cards: Whop.AccountCards | null;
+    /** The user's city, derived from their IP address. `null` when unknown or the user turned off location sharing. */
+    city: string | null;
+    /** The user's country as an ISO 3166-1 alpha-2 code, derived from their IP address. `null` when unknown or the user turned off location sharing. */
+    country: string | null;
     /** When the user was created, as an ISO 8601 timestamp */
     created_at: string;
     /** The user's date of birth as an ISO 8601 date, like `1998-04-23`. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or when the user has not set one. */
@@ -31,6 +35,8 @@ export interface User {
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
     social_links: Whop.UserSocialLink[];
+    /** The user's state or region, derived from their IP address. `null` when unknown or the user turned off location sharing. */
+    state: string | null;
     /** Total USD value of the user's personal holdings in `balances`, across those with known exchange rates. Computed only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise, when `include_balance=false`, or when the balance source is unavailable. */
     total_usd: string | null;
     /** The trading account address and its WebSocket subscriptions. Opt in with `include_trading=true` when retrieving `me`. `null` otherwise, without trading permission, or without an Ethereum wallet. */

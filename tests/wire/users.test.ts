@@ -88,6 +88,8 @@ describe("UsersClient", () => {
                     },
                     bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
                     cards: { kind: null, status: "approved" },
+                    city: "Austin",
+                    country: "US",
                     created_at: "2026-01-01T12:00:00.000Z",
                     date_of_birth: "date_of_birth",
                     earnings_usd: {
@@ -158,6 +160,7 @@ describe("UsersClient", () => {
                             website: "x",
                         },
                     ],
+                    state: "Texas",
                     total_usd: "6320.75",
                     trading: {
                         account_id: null,
@@ -294,6 +297,8 @@ describe("UsersClient", () => {
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
+            city: "Austin",
+            country: "US",
             created_at: "2026-01-01T12:00:00.000Z",
             date_of_birth: "date_of_birth",
             earnings_usd: {
@@ -334,6 +339,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            state: "Texas",
             total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
@@ -461,6 +467,8 @@ describe("UsersClient", () => {
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
+            city: "Austin",
+            country: "US",
             created_at: "2026-01-01T12:00:00.000Z",
             date_of_birth: "date_of_birth",
             earnings_usd: {
@@ -501,6 +509,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            state: "Texas",
             total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
@@ -642,6 +651,8 @@ describe("UsersClient", () => {
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
+            city: "Austin",
+            country: "US",
             created_at: "2026-01-01T12:00:00.000Z",
             date_of_birth: "date_of_birth",
             earnings_usd: {
@@ -682,6 +693,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            state: "Texas",
             total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
@@ -813,6 +825,8 @@ describe("UsersClient", () => {
             },
             bio: "Ceramic coating specialist. Detailing cars in Austin since 2016.",
             cards: { kind: "individual", status: "approved" },
+            city: "Austin",
+            country: "US",
             created_at: "2026-01-01T12:00:00.000Z",
             date_of_birth: "date_of_birth",
             earnings_usd: {
@@ -853,6 +867,7 @@ describe("UsersClient", () => {
                     website: "x",
                 },
             ],
+            state: "Texas",
             total_usd: "6320.75",
             trading: {
                 account_id: "account_id",
