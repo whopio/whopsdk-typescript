@@ -1,3 +1,4 @@
+export type { ClaimAdCampaignsRequest } from "./ClaimAdCampaignsRequest.js";
 export { CreateAdCampaignsRequest } from "./CreateAdCampaignsRequest.js";
 export type { DeleteAdCampaignsRequest } from "./DeleteAdCampaignsRequest.js";
 export type { DuplicateAdCampaignsRequest } from "./DuplicateAdCampaignsRequest.js";
