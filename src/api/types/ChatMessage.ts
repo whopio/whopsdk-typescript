@@ -19,7 +19,7 @@ export interface ChatMessage {
     edited: boolean;
     embeds: Whop.Embed[];
     gifs: Whop.Gif[];
-    /** Existing public message ID, preserved across REST and chat clients. */
+    /** Message ID, prefixed `post_`. Matches the `id` sent on create, when one was sent. */
     id: string;
     link_previews: Whop.MessageLinkPreview[];
     mentioned_user_ids: string[];
