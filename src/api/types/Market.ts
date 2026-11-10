@@ -3,13 +3,17 @@
 import type * as Whop from "../index.js";
 
 export interface Market {
-    /** The market's name: a perpetual's Hyperliquid name such as `BTC` or `xyz:TSLA`, which you send as `market` when you create a trade, or a spot asset's symbol such as `BTC` or `XAUT`. A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market. */
+    /** How much the price moved over the last 24 hours, as a percentage where `2` means up 2%. Set for tokenized stocks; `null` when it is not available. */
+    change_24h_percentage: number | null;
+    /** The market's name: a perpetual's Hyperliquid name such as `BTC` or `xyz:TSLA`, which you send as `market` when you create a trade, or a spot asset's symbol such as `BTC`, `XAUT`, or a tokenized stock's ticker such as `AAPL`. A perpetual and a spot market can share an `id`, so `id` and `instrument_type` together identify a market. */
     id: string;
     /** Whether this is a perpetual or a spot market. With `id`, it identifies the market. */
     instrument_type: Market.InstrumentType;
+    /** A logo image URL for the asset. Set for tokenized stocks; `null` when there is no logo. */
+    logo_url: string | null;
     /** The highest cross leverage an order on this perpetual can use. `null` for a spot market, which trades without leverage. */
     max_leverage: number | null;
-    /** The current price in USD: the midpoint between the best bid and ask. `null` when no price is available. */
+    /** The current price in USD: the midpoint between the best bid and ask, or a tokenized stock's latest market price. `null` when no price is available. */
     price: Whop.Money | null;
     /** The most decimals an order's `size` can have on this market. */
     size_decimals: number;
