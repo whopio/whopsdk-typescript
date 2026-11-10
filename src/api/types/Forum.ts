@@ -6,6 +6,10 @@ import type * as Whop from "../index.js";
  * A discussion forum where members can create posts, comment, and react, belonging to an experience.
  */
 export interface Forum {
+    /** A list of words that are automatically filtered from posts in this forum. */
+    banned_words: string[];
+    /** The banner image displayed at the top of the forum page. Null if no banner has been uploaded. */
+    banner_image: Forum.BannerImage | null;
     /** The email notification setting that controls which posts trigger email alerts. One of: all_admin_posts, only_weekly_summary, none. */
     email_notification_preference: Whop.ForumEmailNotificationPreferences;
     /** The parent experience that this forum belongs to. */
@@ -19,6 +23,20 @@ export interface Forum {
 }
 
 export namespace Forum {
+    /**
+     * The banner image displayed at the top of the forum page. Null if no banner has been uploaded.
+     */
+    export interface BannerImage {
+        /** Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg. */
+        content_type: string | null;
+        /** The original filename of the uploaded attachment, including its file extension. */
+        filename: string | null;
+        /** Represents a unique identifier that is Base64 obfuscated. It is often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`) input value will be accepted as an ID. */
+        id: string;
+        /** A pre-optimized URL for rendering this attachment on the client. This should be used for displaying attachments in apps. */
+        url: string | null;
+    }
+
     /**
      * The parent experience that this forum belongs to.
      */

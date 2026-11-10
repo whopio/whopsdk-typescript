@@ -213,6 +213,13 @@ describe("ForumsClient", () => {
         });
 
         const rawResponseBody = {
+            banned_words: ["banned_words"],
+            banner_image: {
+                content_type: "image/jpeg",
+                filename: "document.pdf",
+                id: "id",
+                url: "https://media.whop.com/abc123/optimized.jpg",
+            },
             email_notification_preference: "all_admin_posts",
             experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
             id: "id",
@@ -386,6 +393,13 @@ describe("ForumsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            banned_words: ["banned_words"],
+            banner_image: {
+                content_type: "image/jpeg",
+                filename: "document.pdf",
+                id: "id",
+                url: "https://media.whop.com/abc123/optimized.jpg",
+            },
             email_notification_preference: "all_admin_posts",
             experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
             id: "id",
