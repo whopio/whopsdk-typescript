@@ -13,7 +13,7 @@ export interface ReportStatsAdsRequest {
     ad_id: string;
     /** The ad's clicks in the hour so far, at most `impressions`. Zero when left out. */
     clicks?: ReportStatsAdsRequest.Clicks;
-    /** Start of the hour, on the hour, within the last 24 hours. */
+    /** Start of the hour, on the hour, for an hour that has already started. */
     hour_started_at: string;
     /** The ad's impressions in the hour so far. Zero when left out. */
     impressions?: ReportStatsAdsRequest.Impressions;
