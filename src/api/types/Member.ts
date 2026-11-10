@@ -40,7 +40,7 @@ export interface Member {
     /** How much the member has spent on the account's products, in USD. */
     usd_total_spent: Whop.Money;
     /** The user behind this member. `null` when the buyer is another business rather than a person. */
-    user: Whop.UserSummary | null;
+    user: Whop.MemberUser | null;
 }
 
 export namespace Member {

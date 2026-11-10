@@ -356,6 +356,7 @@ export * from "./MembershipProduct.js";
 export * from "./MembershipStatus.js";
 export * from "./MembershipsSortableColumns.js";
 export * from "./MembersSortableColumns.js";
+export * from "./MemberUser.js";
 export * from "./Message.js";
 export * from "./MessageChannelOrder.js";
 export * from "./MessageCustomAuthor.js";
