@@ -13,6 +13,8 @@ export interface UpdateMessagesRequest {
     attachments?: UpdateMessagesRequest.Attachments.Item[];
     /** Replacement Markdown content. */
     content?: string;
+    /** Up to 10 GIFs to attach. URLs must use HTTPS on static.klipy.com, static1.klipy.com, or static2.klipy.com. Omit to preserve on edit; an empty list clears them. */
+    gifs?: UpdateMessagesRequest.Gifs.Item[];
     /** Replacement preview URLs; pass an empty list to remove previews. */
     link_previews?: UpdateMessagesRequest.LinkPreviews.Item[];
 }
@@ -24,6 +26,27 @@ export namespace UpdateMessagesRequest {
         export interface Item {
             /** Uploaded file ID. */
             id: string;
+        }
+    }
+
+    export type Gifs = Gifs.Item[];
+
+    export namespace Gifs {
+        export interface Item {
+            /** Height of `original_url`, in pixels. */
+            height: number;
+            /** Full-size GIF. HTTPS on a Klipy media host. */
+            original_url: string;
+            /** Smaller version for previews and placeholders. HTTPS on a Klipy media host. */
+            preview_url: string;
+            /** Client-provided GIF identifier. Whop generates the stored identifier from the GIF metadata. */
+            slug: string;
+            /** GIF title. */
+            title: string;
+            /** URL the message renders the GIF from. HTTPS on a Klipy media host. */
+            url: string;
+            /** Width of `original_url`, in pixels. */
+            width: number;
         }
     }
 

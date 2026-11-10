@@ -16,6 +16,10 @@ export interface CreateMessagesRequest {
     channel_id: string;
     /** Markdown content. May be empty when the message contains media or a poll. */
     content: string;
+    /** Up to 10 GIFs to attach. URLs must use HTTPS on static.klipy.com, static1.klipy.com, or static2.klipy.com. Omit to preserve on edit; an empty list clears them. */
+    gifs?: CreateMessagesRequest.Gifs.Item[];
+    /** Optional, for clients that show a message before the server confirms it. Use `post_` followed by 22 Base58 characters. Omit to generate an ID. Reuse the same ID and `Idempotency-Key` when retrying a send. */
+    id?: string;
     /** Explicit URLs for the server to preview. */
     link_previews?: CreateMessagesRequest.LinkPreviews.Item[];
     poll?: CreateMessagesRequest.Poll;
@@ -30,6 +34,27 @@ export namespace CreateMessagesRequest {
         export interface Item {
             /** Uploaded file ID. */
             id: string;
+        }
+    }
+
+    export type Gifs = Gifs.Item[];
+
+    export namespace Gifs {
+        export interface Item {
+            /** Height of `original_url`, in pixels. */
+            height: number;
+            /** Full-size GIF. HTTPS on a Klipy media host. */
+            original_url: string;
+            /** Smaller version for previews and placeholders. HTTPS on a Klipy media host. */
+            preview_url: string;
+            /** Client-provided GIF identifier. Whop generates the stored identifier from the GIF metadata. */
+            slug: string;
+            /** GIF title. */
+            title: string;
+            /** URL the message renders the GIF from. HTTPS on a Klipy media host. */
+            url: string;
+            /** Width of `original_url`, in pixels. */
+            width: number;
         }
     }
 
