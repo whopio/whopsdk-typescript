@@ -621,6 +621,142 @@ describe("AdCampaignsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("claim (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
+            added_to_cart_value: 12650,
+            added_to_carts: 165,
+            budget_amount: 50,
+            budget_amount_local: 50,
+            budget_currency: "usd",
+            budget_optimization: "ad_campaign",
+            budget_type: "daily",
+            campaign_type: "standard",
+            click_through_rate: 0.025,
+            clicks: 5500,
+            completed_registration_value: 1650,
+            completed_registrations: 55,
+            contact_value: 2640,
+            contacts: 88,
+            cost_per_added_to_cart: 8,
+            cost_per_click: 0.24,
+            cost_per_completed_registration: 24,
+            cost_per_contact: 15,
+            cost_per_lead: 10,
+            cost_per_mille: 6,
+            cost_per_purchase: 30,
+            cost_per_result: 40,
+            cost_per_schedule: 22,
+            cost_per_submitted_application: 120,
+            cost_per_unique_click: 0.4,
+            cost_per_viewed_content: 1.1,
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_conversions: 41,
+            custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
+            custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_status: "payment_failed",
+            desired_cost_per_result: 4.5,
+            ends_at: "2026-01-01T12:00:00.000Z",
+            frequency: 1.1,
+            id: "adcamp_xxxxxxxxxxxxxx",
+            impressions: 220000,
+            issues: [
+                {
+                    category: "information",
+                    id: "adiss_xxxxxxxxxxxxxx",
+                    message:
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
+                    resource_id: "ad_xxxxxxxxxxxxxx",
+                    resource_type: "ad_campaign",
+                    title: "Ad issue",
+                },
+            ],
+            lead_value: 3960,
+            leads: 132,
+            link_clicks: 4400,
+            objective: "awareness",
+            purchase_value: 7920,
+            purchases: 44,
+            reach: 0,
+            result_event: "purchase",
+            result_event_name: "quote_requested",
+            results: 33,
+            return_on_ad_spend: 6,
+            schedule_value: 5400,
+            schedules: 60,
+            special_ad_categories: ["housing"],
+            spend: 1320,
+            spend_currency: "usd",
+            starts_at: "2026-01-01T12:00:00.000Z",
+            status: "active",
+            submitted_application_value: 1320,
+            submitted_applications: 11,
+            target_cost_per_result: 1.1,
+            target_result_event: "target_result_event",
+            title: "Ceramic coating — Austin leads",
+            unique_click_through_rate: 1.1,
+            unique_clicks: 3300,
+            updated_at: "2026-01-01T12:00:00.000Z",
+            viewed_content_value: 8400,
+            viewed_contents: 1200,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/ad_campaigns/id/claim")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.adCampaigns.claim({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("claim (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_campaigns/id/claim")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.adCampaigns.claim({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("duplicate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

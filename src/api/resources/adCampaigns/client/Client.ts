@@ -467,6 +467,79 @@ export class AdCampaignsClient {
     }
 
     /**
+     * Attributes the whole campaign and its daily budget to the calling user as its runner. One runner holds a campaign at a time. Takes the runner's Whop session, or a user API key with `ad_campaign:update`, plus active advertiser-supplier program access; everyone else gets a 404. Returns 403 until the caller has verified their identity and added a phone number and a social account, 409 when another user holds the campaign, and changes nothing when the caller already holds it.
+     *
+     * @param {Whop.ClaimAdCampaignsRequest} request
+     * @param {AdCampaignsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.adCampaigns.claim({
+     *         id: "id"
+     *     })
+     */
+    public claim(
+        request: Whop.ClaimAdCampaignsRequest,
+        requestOptions?: AdCampaignsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.AdCampaign> {
+        return core.HttpResponsePromise.fromPromise(this.__claim(request, requestOptions));
+    }
+
+    private async __claim(
+        request: Whop.ClaimAdCampaignsRequest,
+        requestOptions?: AdCampaignsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.AdCampaign>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-07",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `ad_campaigns/${core.url.encodePathParam(id)}/claim`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.AdCampaign, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/ad_campaigns/{id}/claim");
+    }
+
+    /**
      * Creates copies of the campaign in `duplicating` status and returns them; each copy transitions to `draft` once duplication completes. Poll each returned campaign until it leaves `duplicating` — a copy that could not be completed is deleted and returns 404.
      *
      * @param {Whop.DuplicateAdCampaignsRequest} request
