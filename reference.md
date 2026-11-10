@@ -35395,6 +35395,72 @@ await client.payments.direct.create({
 </dl>
 </details>
 
+## Payments LevelsRebate
+<details><summary><code>client.payments.levelsRebate.<a href="/src/api/resources/payments/resources/levelsRebate/client/Client.ts">retrieve</a>({ ...params }) -> Whop.PaymentLevelsRebate</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the part of its account's monthly Whop Levels rebate a card payment earned: the processing fee above its level's rate, once the month its fee posted in has closed. The rebate is paid to the account as one sum each month, so the payment's own amounts and fees never change.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.levelsRebate.retrieve({
+    payment_id: "payment_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.payments.RetrieveLevelsRebateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LevelsRebateClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Payouts Methods
 <details><summary><code>client.payouts.methods.<a href="/src/api/resources/payouts/resources/methods/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListMethodsResponse.Data.Item, Whop.ListMethodsResponse&gt;</code></summary>
 <dl>
