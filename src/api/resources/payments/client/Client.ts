@@ -10,6 +10,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { DirectClient } from "../resources/direct/client/Client.js";
+import { LevelsRebateClient } from "../resources/levelsRebate/client/Client.js";
 
 export declare namespace PaymentsClient {
     export type Options = BaseClientOptions;
@@ -25,6 +26,7 @@ export declare namespace PaymentsClient {
 export class PaymentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentsClient.Options>;
     protected _direct: DirectClient | undefined;
+    protected _levelsRebate: LevelsRebateClient | undefined;
 
     constructor(options: PaymentsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -32,6 +34,10 @@ export class PaymentsClient {
 
     public get direct(): DirectClient {
         return (this._direct ??= new DirectClient(this._options));
+    }
+
+    public get levelsRebate(): LevelsRebateClient {
+        return (this._levelsRebate ??= new LevelsRebateClient(this._options));
     }
 
     /**

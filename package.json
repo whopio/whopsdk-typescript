@@ -1320,6 +1320,17 @@
             },
             "default": "./dist/cjs/api/resources/payments/resources/direct/exports.js"
         },
+        "./payments/levelsRebate": {
+            "import": {
+                "types": "./dist/esm/api/resources/payments/resources/levelsRebate/exports.d.mts",
+                "default": "./dist/esm/api/resources/payments/resources/levelsRebate/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/payments/resources/levelsRebate/exports.d.ts",
+                "default": "./dist/cjs/api/resources/payments/resources/levelsRebate/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/payments/resources/levelsRebate/exports.js"
+        },
         "./payouts/methods": {
             "import": {
                 "types": "./dist/esm/api/resources/payouts/resources/methods/exports.d.mts",
