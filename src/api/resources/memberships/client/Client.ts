@@ -341,7 +341,7 @@ export class MembershipsClient {
     }
 
     /**
-     * Updates a membership's metadata, scheduled cancellation, renewal payment method, renewal cadence, or next renewal date.
+     * Updates a membership's metadata, scheduled cancellation, renewal payment method, renewal cadence, next renewal date, or renewal price.
      *
      * @param {Whop.UpdateMembershipsRequest} request
      * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -361,6 +361,12 @@ export class MembershipsClient {
      *     await client.memberships.update({
      *         id: "id",
      *         current_period_end: "2027-01-15T00:00:00Z"
+     *     })
+     *
+     * @example
+     *     await client.memberships.update({
+     *         id: "id",
+     *         renewal_price: 19.99
      *     })
      */
     public update(

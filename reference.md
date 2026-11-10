@@ -20357,7 +20357,7 @@ await client.memberships.retrieve({
 <dl>
 <dd>
 
-Updates a membership's metadata, scheduled cancellation, renewal payment method, renewal cadence, or next renewal date.
+Updates a membership's metadata, scheduled cancellation, renewal payment method, renewal cadence, next renewal date, or renewal price.
 </dd>
 </dl>
 </dd>
