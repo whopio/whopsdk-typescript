@@ -23,6 +23,10 @@ export interface ListAppsRequest {
     query?: string;
     /** Only return apps whose `product_category` is this product category, such as `pressure_washing`. An unknown product category is rejected. */
     product_category?: string;
+    /** Only return apps whose `product_category` sits under this business type in Whop's business taxonomy, such as `services`. An unknown business type is rejected. */
+    business_type?: string;
+    /** Only return apps whose `product_category` sits under this industry type of `business_type`, such as `exterior_cleaning`. Requires `business_type`. An industry type outside it is rejected. */
+    industry_type?: string;
     /** Only return apps in this app store category. Use a `route` from `GET /apps/categories`, such as `business-productivity`. An unknown route is rejected. */
     marketplace_category_route?: string;
     /** The field to sort apps by. Defaults to discoverable_at, showing the most recently published apps first. `template_usage` ranks Whop-verified apps first, then by how many businesses created apps from each app as a template. `template_recent_sales` ranks them by how many of those businesses processed a payment in the last 24 hours, recounted hourly, breaking ties by `template_usage`. */
