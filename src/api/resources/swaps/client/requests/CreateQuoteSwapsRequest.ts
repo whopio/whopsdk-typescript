@@ -9,6 +9,8 @@
  *     }
  */
 export interface CreateQuoteSwapsRequest {
+    /** Fiat pairs only: business account to quote the swap for, prefixed `biz_`. Requires a credential with `payout:transfer_funds` on that account. Provide this, `user_id`, or neither for a public quote. */
+    account_id?: string;
     /** Source token amount. */
     amount: string;
     /** Source wallet address used for the quote. */
@@ -27,6 +29,8 @@ export interface CreateQuoteSwapsRequest {
     to_chain?: CreateQuoteSwapsRequest.ToChain | null;
     /** Destination token contract address or ticker symbol, such as "XAUT". */
     to_token: string;
+    /** Fiat pairs only: the caller's own user ID, prefixed `user_`, to quote the swap for their personal account. Provide this or `account_id`. */
+    user_id?: string;
 }
 
 export namespace CreateQuoteSwapsRequest {
