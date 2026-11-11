@@ -48,7 +48,7 @@ export interface RetrievePayoutsResponse {
     recipient_name?: (string | null) | undefined;
     /** The sending business's display name, or a personal sender's first name and last initial. */
     sender_name?: (string | null) | undefined;
-    /** How the payout was created. `automatic` means a scheduled auto-payout; `null` on payouts created before source tracking or through internal tooling. Only returned to callers with payout:withdrawal:read on the owning ledger. */
+    /** How the payout was created. `automatic` means a scheduled auto-payout. `null` when the payout has no recorded source. Only returned to callers with payout:withdrawal:read on the owning ledger. */
     source?: (RetrievePayoutsResponse.Source | null) | undefined;
     /** Payout delivery speed. */
     speed: RetrievePayoutsResponse.Speed;
@@ -137,7 +137,7 @@ export namespace RetrievePayoutsResponse {
         export type Type = (typeof Type)[keyof typeof Type];
     }
 
-    /** How the payout was created. `automatic` means a scheduled auto-payout; `null` on payouts created before source tracking or through internal tooling. Only returned to callers with payout:withdrawal:read on the owning ledger. */
+    /** How the payout was created. `automatic` means a scheduled auto-payout. `null` when the payout has no recorded source. Only returned to callers with payout:withdrawal:read on the owning ledger. */
     export const Source = {
         Api: "api",
         Dashboard: "dashboard",

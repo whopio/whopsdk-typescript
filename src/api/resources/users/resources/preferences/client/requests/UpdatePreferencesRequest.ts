@@ -9,8 +9,6 @@ export interface UpdatePreferencesRequest {
     bounty_worker_onboarding_dismissed?: boolean;
     /** Whether incoming funds, including pending balance, are automatically moved to the user's personal cards balance. Requires a cards balance and the `payout:account:update` permission. */
     cards_auto_top_up?: boolean;
-    /** Whether investigation mode is enabled for the user. Only meaningful for staff users with investigation access. */
-    investigation_enabled?: boolean;
     /** Records the user's acceptance of Whop's terms and policies. Only `true` is accepted — the server stamps `terms_accepted_at` and acceptance cannot be withdrawn here. */
     terms_accepted?: boolean;
 }

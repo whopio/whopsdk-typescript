@@ -18,7 +18,6 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
-            investigation_enabled: true,
             terms_accepted: true,
             terms_accepted_at: "2026-01-01T12:00:00.000Z",
         };
@@ -73,7 +72,6 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
-            investigation_enabled: true,
             terms_accepted: true,
             terms_accepted_at: "2026-01-01T12:00:00.000Z",
         };
