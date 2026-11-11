@@ -72,6 +72,7 @@ export class BusinessesClient {
                     referred_username: referredUsername,
                     tier,
                     business_prefix_query: businessPrefixQuery,
+                    earning_partner_id: earningPartnerId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     referring_account_id: referringAccountId,
@@ -93,6 +94,7 @@ export class BusinessesClient {
                     referred_username: referredUsername,
                     tier: tier != null ? tier : undefined,
                     business_prefix_query: businessPrefixQuery,
+                    earning_partner_id: earningPartnerId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
