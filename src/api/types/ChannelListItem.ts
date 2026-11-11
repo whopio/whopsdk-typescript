@@ -6,6 +6,8 @@ export interface ChannelListItem {
     account_id: string | null;
     /** Creation time as an ISO 8601 timestamp. */
     created_at: string;
+    /** When the channel was deleted or removed from your channel list, as an ISO 8601 timestamp. Null for a live channel. */
+    deleted_at: string | null;
     experience_id: string | null;
     /** The channel icon. Community channels show the experience logo, falling back to the app icon. Support channels show the account logo. Group private channels show their own icon. Null for one-to-one private channels or when no image is set. */
     icon: Whop.File_ | null;
@@ -24,6 +26,8 @@ export interface ChannelListItem {
     /** Whether app notifications are on. Webhooks fire either way. */
     notifications_enabled: boolean;
     support: Whop.ChannelSupportState | null;
+    /** Latest change to the channel or your membership, as an ISO 8601 timestamp. Use this value as updated_after for synchronization. */
+    synchronized_at?: string | undefined;
     /** Last channel change as an ISO 8601 timestamp. */
     updated_at: string;
 }

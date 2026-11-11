@@ -67,6 +67,8 @@ export class ChannelsClient {
                     include_members: includeMembers,
                     include_last_message: includeLastMessage,
                     direction,
+                    include_deleted: includeDeleted,
+                    updated_after: updatedAfter,
                     created_before: createdBefore,
                     created_after: createdAfter,
                 } = request;
@@ -90,6 +92,8 @@ export class ChannelsClient {
                     include_members: includeMembers,
                     include_last_message: includeLastMessage,
                     direction: direction != null ? direction : undefined,
+                    include_deleted: includeDeleted,
+                    updated_after: updatedAfter,
                     created_before: createdBefore,
                     created_after: createdAfter,
                 };

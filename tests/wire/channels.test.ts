@@ -20,6 +20,7 @@ describe("ChannelsClient", () => {
                 {
                     account_id: "account_id",
                     created_at: "2026-01-01T12:00:00.000Z",
+                    deleted_at: "deleted_at",
                     experience_id: "experience_id",
                     icon: {
                         blurhash: null,
@@ -230,6 +231,7 @@ describe("ChannelsClient", () => {
                         resolved_at: "2026-01-01T12:00:00.000Z",
                         status: "unresolved",
                     },
+                    synchronized_at: "2026-01-01T12:00:00.000Z",
                     updated_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
@@ -294,6 +296,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             experience_id: "experience_id",
             icon: {
                 blurhash: "blurhash",
@@ -505,6 +508,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             experience_id: "experience_id",
             icon: {
                 blurhash: "blurhash",
@@ -699,6 +703,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             experience_id: "experience_id",
             icon: {
                 blurhash: "blurhash",
@@ -1469,6 +1474,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             experience_id: "experience_id",
             icon: {
                 blurhash: "blurhash",
@@ -1624,6 +1630,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             experience_id: "experience_id",
             icon: {
                 blurhash: "blurhash",
