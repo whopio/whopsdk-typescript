@@ -27,9 +27,9 @@ export interface UpdatePreferencesRequest {
     customer_tracking?: UpdatePreferencesRequest.CustomerTracking | null;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. Requires the `payment:dispute` scope on your API key. */
     dispute_fighter_enabled?: boolean;
-    /** `false` stops renewing: Economic Intelligence stays on until the end of the current week, and stopping before the first renewal charges the rest of that week at the `7_days` offer's fee. `true` keeps it renewing again before then, or turns it on like the `weekly` offer. Can't be combined with `economic_intelligence_duration_key`. Requires the `company:update` scope on your API key. */
+    /** `false` stops renewing: Economic Intelligence stays on until the end of the current period, and the fee is charged until then. `true` keeps it renewing again before then, or turns it on like the `3_days` offer. Can't be combined with `economic_intelligence_duration_key`. Requires the `company:update` scope on your API key. */
     economic_intelligence_auto_renew?: boolean;
-    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted; any other key is rejected. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
     /** Replaces the account's own cancel reasons, shown to members in this order when they cancel. Pass an option's `id` to keep it, for example when renaming it; options without an `id` are added, and options left out are removed. Pass an empty array to go back to Whop's default reasons. Members who already picked an option keep the label they saw. Requires the `company:manage_checkout` scope on your API key. */
     feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
@@ -116,8 +116,9 @@ export namespace UpdatePreferencesRequest {
         support_url?: (string | null) | undefined;
     }
 
-    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. A committed duration can't be changed or turned off until `economic_intelligence_ends_at`, except to upgrade to `weekly`, which switches to auto-renew right away. Requires the `company:update` scope on your API key. */
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted; any other key is rejected. Requires the `company:update` scope on your API key. */
     export const EconomicIntelligenceDurationKey = {
+        ThreeDays: "3_days",
         Weekly: "weekly",
         SevenDays: "7_days",
         OneDay: "1_day",

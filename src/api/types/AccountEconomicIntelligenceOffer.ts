@@ -3,13 +3,13 @@
 export interface AccountEconomicIntelligenceOffer {
     /** Whether this offer renews every period until auto-renew is turned off, rather than ending after one. */
     auto_renew: boolean;
-    /** What period of time Economic Intelligence stays on. For an auto-renew offer, the length of each period it renews for. */
+    /** The length of each period Economic Intelligence renews for, in `duration_unit`, such as `3` for 3 days. */
     duration: number;
     /** The unit of time the duration is in (hours or days) */
     duration_unit: AccountEconomicIntelligenceOffer.DurationUnit;
-    /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. */
+    /** Percentage of payment volume charged while Economic Intelligence is on, such as `3` for 3%. */
     fee_percentage: number;
-    /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+    /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. Only `3_days`, the auto-renew offer, is offered. The other keys identify periods bought before it became the only plan. */
     key: AccountEconomicIntelligenceOffer.Key;
     /** Whether Whop recommends this offer. At most one offer is recommended. */
     recommended: boolean;
@@ -22,8 +22,9 @@ export namespace AccountEconomicIntelligenceOffer {
         Days: "days",
     } as const;
     export type DurationUnit = (typeof DurationUnit)[keyof typeof DurationUnit];
-    /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+    /** The unique identifier for this offer. Pass this value as `economic_intelligence_duration_key` to turn it on. Only `3_days`, the auto-renew offer, is offered. The other keys identify periods bought before it became the only plan. */
     export const Key = {
+        ThreeDays: "3_days",
         Weekly: "weekly",
         SevenDays: "7_days",
         OneDay: "1_day",

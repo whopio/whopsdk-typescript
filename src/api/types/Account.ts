@@ -38,7 +38,7 @@ export interface Account {
     direct_reports_count?: number | undefined;
     /** Whether Whop assembles and files dispute evidence for this account. Enabling it opts the account into the success fee charged on disputes it wins. */
     dispute_fighter_enabled: boolean;
-    /** Whether Economic Intelligence is on for the account. It turns off automatically when its committed period ends. */
+    /** Whether Economic Intelligence is on for the account. It turns off automatically when its committed period ends. While it is off, the account can't activate an experiment or run a recommendation. */
     economic_intelligence: boolean;
     /** Account owner email address. */
     email: string | null;
