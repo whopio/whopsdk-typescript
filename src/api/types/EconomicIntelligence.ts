@@ -35,7 +35,7 @@ export interface EconomicIntelligence {
     run_started_at: string | null;
     /** How the user rated this recommendation, or `null` if they have not rated it */
     sentiment: EconomicIntelligence.Sentiment | null;
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating or preparing its work; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
     status: EconomicIntelligence.Status;
     /** When the recommendation was rejected or replaced, as an ISO 8601 timestamp, or `null` if neither has occurred. */
     superseded_at: string | null;
@@ -54,7 +54,7 @@ export namespace EconomicIntelligence {
         Negative: "negative",
     } as const;
     export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating or preparing its work; `ready` when available to run; `running` while Whop AI or the recommendation's API calls carry it out; `executed` when carried out; `incomplete` when the run ended without carrying it out; `superseded` when rejected or replaced. */
     export const Status = {
         Queued: "queued",
         Pending: "pending",
