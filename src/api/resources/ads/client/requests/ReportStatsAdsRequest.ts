@@ -11,7 +11,7 @@
 export interface ReportStatsAdsRequest {
     /** The ad's ID, prefixed `ad_`: the campaign's ad or the runner's copy of it. */
     ad_id: string;
-    /** The ad's clicks in the hour so far, at most `impressions`. Zero when left out. */
+    /** Ignored. An ad's clicks are its Whop pixel page views, which Whop counts when it shows the ad's stats. */
     clicks?: ReportStatsAdsRequest.Clicks;
     /** Start of the hour, on the hour, for an hour that has already started. */
     hour_started_at: string;
@@ -23,7 +23,7 @@ export interface ReportStatsAdsRequest {
 
 export namespace ReportStatsAdsRequest {
     /**
-     * The ad's clicks in the hour so far, at most `impressions`. Zero when left out.
+     * Ignored. An ad's clicks are its Whop pixel page views, which Whop counts when it shows the ad's stats.
      */
     export type Clicks = number | string;
     /**

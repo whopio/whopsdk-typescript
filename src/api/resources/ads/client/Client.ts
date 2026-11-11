@@ -123,7 +123,6 @@ export class AdsClient {
      * @param {Whop.ReportStatsAdsRequest} request
      * @param {AdsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
@@ -184,8 +183,6 @@ export class AdsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:

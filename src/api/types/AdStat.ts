@@ -9,7 +9,7 @@ export interface AdStat {
     ad_group_id: string;
     /** The ad's ID, prefixed `ad_`, as sent. */
     ad_id: string;
-    /** The ad's clicks in the hour. */
+    /** Always 0. Whop stores no clicks for a runner's hour: an ad's clicks are its Whop pixel page views, counted when its stats are shown. */
     clicks: number;
     /** Start of the hour, as an ISO 8601 timestamp. */
     hour_started_at: string;
