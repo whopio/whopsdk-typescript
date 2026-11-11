@@ -8,6 +8,8 @@ export interface RetrieveStatsResponse {
 
 export namespace RetrieveStatsResponse {
     export interface Data {
+        /** Present for webhook_deliveries. False while older deliveries are still being counted in the background: the points cover what is counted so far. Responses are cached for up to a minute, so wait a minute before requesting the same range again. */
+        complete?: (boolean | null) | undefined;
         /** ISO currency the values are denominated in. Present for currency-unit metrics: the convert_to currency, or usd. */
         currency?: (string | null) | undefined;
         /** One entry per period, oldest first. */
