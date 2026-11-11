@@ -18,7 +18,7 @@ export namespace LeaderboardPartnersResponse {
             first_referral_started_at: string;
             /** 1-based leaderboard position. */
             rank: number;
-            /** The referrer's pending + completed earnings across all referred businesses, in USD. */
+            /** The referrer's pending + completed earnings across all referred businesses, in USD, without commission advances. Whop Sales commission counts only the share that reaches its people. */
             total_earnings_usd: string;
             /** Credited GMV across all the referrer's referred businesses, in USD. */
             total_volume_usd: string;
@@ -65,7 +65,7 @@ export namespace LeaderboardPartnersResponse {
         first_referral_started_at: string;
         /** 1-based leaderboard position. */
         rank: number;
-        /** The referrer's pending + completed earnings across all referred businesses, in USD. */
+        /** The referrer's pending + completed earnings across all referred businesses, in USD, without commission advances. Whop Sales commission counts only the share that reaches its people. */
         total_earnings_usd: string;
         /** Credited GMV across all the referrer's referred businesses, in USD. */
         total_volume_usd: string;
@@ -111,7 +111,7 @@ export namespace LeaderboardPartnersResponse {
             first_referral_started_at: string;
             /** 1-based leaderboard position. */
             rank: number;
-            /** The referrer's pending + completed earnings across all referred businesses, in USD. */
+            /** The referrer's pending + completed earnings across all referred businesses, in USD, without commission advances. Whop Sales commission counts only the share that reaches its people. */
             total_earnings_usd: string;
             /** Credited GMV across all the referrer's referred businesses, in USD. */
             total_volume_usd: string;
