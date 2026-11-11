@@ -15,6 +15,8 @@ export interface ListTeamMembersRequest {
     status?: Whop.ListTeamMembersRequestStatus;
     /** Only return the membership for this user ID, prefixed `user_`. */
     user_id?: string;
+    /** Only return the memberships of these users, prefixed `user_`, at most 100. IDs that match no user are ignored. With `account_id=global`, a user can have one in each partner account. Can't be combined with `user_id`. */
+    user_ids?: string | string[];
     /** Only return members with this role. `custom` matches members on a dashboard-managed custom role. */
     role?: Whop.ListTeamMembersRequestRole;
     /** Only return members whose name or username contains this text, and invites whose email contains it. */
