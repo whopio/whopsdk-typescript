@@ -45,4 +45,6 @@ export interface ListBusinessesRequest {
     tier?: Whop.partners.ListBusinessesRequestTier;
     /** Case-insensitive business-name prefix, or an exact `biz_` account ID. Surrounding whitespace is ignored; blank values apply no filter. */
     business_prefix_query?: string;
+    /** Only the referrals this team member made, plus the ones they were added to as a deal participant. User ID, prefixed `user_`. Requires `referring_account_id`. */
+    earning_partner_id?: string;
 }
