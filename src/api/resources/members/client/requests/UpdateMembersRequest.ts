@@ -11,4 +11,14 @@ export interface UpdateMembersRequest {
     id: string;
     /** The customer name to show on this member's invoices, at most 255 bytes. Leading and trailing spaces are trimmed. `null` or a blank string clears it, so invoices show the user's own name again. */
     name?: string | null;
+    /** `unsubscribed` to stop the account's marketing communications, or `null` to resubscribe. Only the member can set it. */
+    unsubscribe_status?: UpdateMembersRequest.UnsubscribeStatus | null;
+}
+
+export namespace UpdateMembersRequest {
+    /** `unsubscribed` to stop the account's marketing communications, or `null` to resubscribe. Only the member can set it. */
+    export const UnsubscribeStatus = {
+        Unsubscribed: "unsubscribed",
+    } as const;
+    export type UnsubscribeStatus = (typeof UnsubscribeStatus)[keyof typeof UnsubscribeStatus];
 }

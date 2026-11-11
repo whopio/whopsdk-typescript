@@ -37,6 +37,8 @@ export interface Member {
     status: Member.Status;
     /** The member's current token balance for this account, computed from token transactions. */
     token_balance: number;
+    /** `unsubscribed` once the member opts out of the account's marketing communications, `null` while they're subscribed. Only the member can change it. */
+    unsubscribe_status: Member.UnsubscribeStatus | null;
     /** How much the member has spent on the account's products, in USD. */
     usd_total_spent: Whop.Money;
     /** The user behind this member. `null` when the buyer is another business rather than a person. */
@@ -74,4 +76,9 @@ export namespace Member {
         Left: "left",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    /** `unsubscribed` once the member opts out of the account's marketing communications, `null` while they're subscribed. Only the member can change it. */
+    export const UnsubscribeStatus = {
+        Unsubscribed: "unsubscribed",
+    } as const;
+    export type UnsubscribeStatus = (typeof UnsubscribeStatus)[keyof typeof UnsubscribeStatus];
 }

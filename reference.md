@@ -20075,7 +20075,7 @@ await client.members.retrieve({
 <dl>
 <dd>
 
-Sets the name the account uses for a member. Every invoice for this member shows it as the customer name, paid invoices included, in place of the user's own name. It does not change the user's Whop profile.
+Updates a member. The account can update `name`, the customer name its invoices show for this member; it doesn't change the user's Whop profile. The member can update `unsubscribe_status`, with a credential for their own user that holds `user:notifications:update`, to unsubscribe from the account's marketing communications or resubscribe. Each sends only its own field.
 </dd>
 </dl>
 </dd>
@@ -20109,6 +20109,72 @@ await client.members.update({
 <dd>
 
 **request:** `Whop.UpdateMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.members.<a href="/src/api/resources/members/client/Client.ts">unsubscribe</a>({ ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Unsubscribes a member from the account's marketing communications with the token from their unsubscribe link. Inboxes post here directly for one-click unsubscribe (RFC 8058).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.members.unsubscribe({
+    id: "id",
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UnsubscribeMembersRequest` 
     
 </dd>
 </dl>
