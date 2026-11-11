@@ -20,6 +20,8 @@ export const ListFinancialActivityRequestLineTypesItem = {
     BalanceReservationReversal: "balance_reservation_reversal",
     BillingPercentageFee: "billing_percentage_fee",
     BuyerFee: "buyer_fee",
+    CapitalWithholding: "capital_withholding",
+    CapitalWithholdingReversal: "capital_withholding_reversal",
     CardInterchange: "card_interchange",
     CardLoadDeposit: "card_load_deposit",
     CardLoadTransfer: "card_load_transfer",
