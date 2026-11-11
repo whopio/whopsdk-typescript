@@ -11,6 +11,8 @@ export interface CreateChannelsRequest {
     account_id?: string;
     /** Customer ID, prefixed `user_`. Support channels only; requires support management permission. Omit to open your own support conversation. */
     customer_user_id?: string;
+    /** Channel icon as a file reference, for community channels and private channels with two or more participant IDs. Image files only. Group icons can be up to 5 MB. For community channels it sets the experience logo. Used only when a channel is created. */
+    icon?: CreateChannelsRequest.Icon;
     /** Channel kind. `private` is a one-to-one or group conversation, `community` creates a Chat experience on the account, and `support` opens a conversation between the account and a customer. */
     kind: CreateChannelsRequest.Kind;
     /** Channel display name, accepted for all channel kinds. Used only when a channel is created. For community channels, names the new Chat experience; defaults to the Chat app's name. */
@@ -26,6 +28,14 @@ export interface CreateChannelsRequest {
 }
 
 export namespace CreateChannelsRequest {
+    /**
+     * Channel icon as a file reference, for community channels and private channels with two or more participant IDs. Image files only. Group icons can be up to 5 MB. For community channels it sets the experience logo. Used only when a channel is created.
+     */
+    export interface Icon {
+        /** File ID, prefixed `file_`. */
+        id: string;
+    }
+
     /** Channel kind. `private` is a one-to-one or group conversation, `community` creates a Chat experience on the account, and `support` opens a conversation between the account and a customer. */
     export const Kind = {
         Private: "private",

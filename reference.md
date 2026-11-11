@@ -9025,7 +9025,7 @@ await client.channels.delete({
 <dl>
 <dd>
 
-Update a channel. Community icon changes update the experience logo and require `experience:update`. Support rename and notification changes require `support_chat:create`. Private and support writes require a user identity with channel management permission; account API keys can update community channels only.
+Update a channel. Community icon changes update the experience logo and require `experience:update`. Group private channel icon changes set the channel's own icon and require a group member. One-to-one private and support channels reject icon changes. Support rename and notification changes require `support_chat:create`. Private and support writes require a user identity with channel management permission. Account API keys can update community channels only.
 </dd>
 </dl>
 </dd>
