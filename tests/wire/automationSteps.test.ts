@@ -438,12 +438,12 @@ describe("AutomationStepsClient", () => {
         const rawRequestBody = { member_id: "mber_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             action_type: "email",
-            html: '<html><body><p>Hi there</p><table role="presentation" data-whop-footer width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0 0;border-top:1px solid #e6e6e6;">\n<tr><td style="padding:20px 16px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#6f6f6f;">\n<p style="margin:0 0 8px;">You&#39;re receiving this because you bought from Batman1. <a href="{{whop_unsubscribe_url}}" style="color:#6f6f6f;text-decoration:underline;">Unsubscribe from Batman1 emails</a>.</p>\n<p style="margin:0 0 8px;">Problem with your order? <a href="https://whop.com/@me/settings/resolution-center/" style="color:#6f6f6f;text-decoration:underline;">Open a case in the Resolution Center</a>.</p>\n<p style="margin:0;font-weight:600;color:#9a9a9a;">Sent with Whop</p>\n<!--whop:open-pixel-->\n</td></tr>\n</table>\n\n</body></html>',
+            html: '<html><body><p>Hi there</p><table role="presentation" data-whop-footer width="100%" cellpadding="0" cellspacing="0" style="margin:32px 0 0;border-top:1px solid #e6e6e6;">\n<tr><td style="padding:20px 16px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#6f6f6f;">\n<p style="margin:0 0 8px;">You&#39;re receiving this because you bought from Batman1. <a href="{{whop_unsubscribe_url}}" style="color:#6f6f6f;text-decoration:underline;">Unsubscribe from Batman1 marketing communications</a>.</p>\n<p style="margin:0 0 8px;">Problem with your order? <a href="https://whop.com/@me/settings/resolution-center/" style="color:#6f6f6f;text-decoration:underline;">Open a case in the Resolution Center</a>.</p>\n<p style="margin:0;font-weight:600;color:#9a9a9a;">Sent with Whop</p>\n<!--whop:open-pixel-->\n</td></tr>\n</table>\n\n</body></html>',
             outcome: "sent",
             preheader: "preheader",
             reason: "reason",
             subject: "How's the kettle?",
-            text: "Hi there\n\n--\nYou're receiving this because you bought from Batman1. Unsubscribe from Batman1 emails: {{whop_unsubscribe_url}}\nProblem with your order? Open a case in the Resolution Center: https://whop.com/@me/settings/resolution-center/\nSent with Whop",
+            text: "Hi there\n\n--\nYou're receiving this because you bought from Batman1. Unsubscribe from Batman1 marketing communications: {{whop_unsubscribe_url}}\nProblem with your order? Open a case in the Resolution Center: https://whop.com/@me/settings/resolution-center/\nSent with Whop",
         };
 
         server

@@ -52,6 +52,7 @@ describe("MembersClient", () => {
                     phone_number: "+xxxxxxxxxxx",
                     status: "joined",
                     token_balance: 70.25,
+                    unsubscribe_status: "unsubscribed",
                     usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     user: {
                         city: "Austin",
@@ -193,6 +194,7 @@ describe("MembersClient", () => {
             phone_number: "+xxxxxxxxxxx",
             status: "joined",
             token_balance: 70.25,
+            unsubscribe_status: "unsubscribed",
             usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
                 city: "Austin",
@@ -295,6 +297,7 @@ describe("MembersClient", () => {
             phone_number: "+xxxxxxxxxxx",
             status: "joined",
             token_balance: 70.25,
+            unsubscribe_status: "unsubscribed",
             usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
                 city: "Austin",
@@ -432,5 +435,80 @@ describe("MembersClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("unsubscribe (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        server.mockEndpoint().post("/members/id/unsubscribe").respondWith().statusCode(200).build();
+
+        const response = await client.members.unsubscribe({
+            id: "id",
+            token: "token",
+        });
+        expect(response).toEqual(undefined);
+    });
+
+    test("unsubscribe (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members/id/unsubscribe")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.unsubscribe({
+                id: "id",
+                token: "token",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("unsubscribe (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members/id/unsubscribe")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.unsubscribe({
+                id: "id",
+                token: "token",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });
