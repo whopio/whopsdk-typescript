@@ -84,7 +84,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface AchDispute {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -95,7 +95,7 @@ export namespace UpdateFeesRequest {
     export namespace AchDispute {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -107,7 +107,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface AchReturn {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -118,7 +118,7 @@ export namespace UpdateFeesRequest {
     export namespace AchReturn {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -130,7 +130,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface BankDeposit {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -141,7 +141,7 @@ export namespace UpdateFeesRequest {
     export namespace BankDeposit {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -153,7 +153,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Billing {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -164,7 +164,7 @@ export namespace UpdateFeesRequest {
     export namespace Billing {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -176,7 +176,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Buyer {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -187,7 +187,7 @@ export namespace UpdateFeesRequest {
     export namespace Buyer {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -199,7 +199,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface CardProcessing {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -210,7 +210,7 @@ export namespace UpdateFeesRequest {
     export namespace CardProcessing {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -318,7 +318,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface CrossBorder {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -329,7 +329,7 @@ export namespace UpdateFeesRequest {
     export namespace CrossBorder {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -341,7 +341,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Dispute {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -352,7 +352,7 @@ export namespace UpdateFeesRequest {
     export namespace Dispute {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -364,7 +364,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface DisputeAlert {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -375,7 +375,7 @@ export namespace UpdateFeesRequest {
     export namespace DisputeAlert {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -387,7 +387,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface DisputeAlertCdrn {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -398,7 +398,7 @@ export namespace UpdateFeesRequest {
     export namespace DisputeAlertCdrn {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -410,7 +410,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface DisputeAlertEthoca {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -421,7 +421,7 @@ export namespace UpdateFeesRequest {
     export namespace DisputeAlertEthoca {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -433,7 +433,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface DisputeAlertRdr {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -444,7 +444,7 @@ export namespace UpdateFeesRequest {
     export namespace DisputeAlertRdr {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -456,7 +456,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface DisputeRepresentment {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -467,7 +467,7 @@ export namespace UpdateFeesRequest {
     export namespace DisputeRepresentment {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -479,7 +479,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface ForeignExchange {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -490,7 +490,7 @@ export namespace UpdateFeesRequest {
     export namespace ForeignExchange {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -502,7 +502,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface FraudScreening {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -513,7 +513,7 @@ export namespace UpdateFeesRequest {
     export namespace FraudScreening {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -525,7 +525,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface HighRisk {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -536,7 +536,7 @@ export namespace UpdateFeesRequest {
     export namespace HighRisk {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -548,7 +548,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Marketplace {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -559,7 +559,7 @@ export namespace UpdateFeesRequest {
     export namespace Marketplace {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -655,7 +655,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Orchestration {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -666,7 +666,7 @@ export namespace UpdateFeesRequest {
     export namespace Orchestration {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -679,7 +679,7 @@ export namespace UpdateFeesRequest {
          * The fields of a fee the caller may change. Only the keys sent are replaced.
          */
         export interface Value {
-            /** The new amount per event in US dollars. `null` clears the custom amount. */
+            /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
             fixed?: (number | null) | undefined;
             /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
             percentage?: (number | null) | undefined;
@@ -690,7 +690,7 @@ export namespace UpdateFeesRequest {
         export namespace Value {
             export namespace Regions {
                 export interface Value {
-                    /** The new amount per event in US dollars. `null` clears the custom amount. */
+                    /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                     fixed?: (number | null) | undefined;
                     /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                     percentage?: (number | null) | undefined;
@@ -704,7 +704,7 @@ export namespace UpdateFeesRequest {
          * The fields of a fee the caller may change. Only the keys sent are replaced.
          */
         export interface Value {
-            /** The new amount per event in US dollars. `null` clears the custom amount. */
+            /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
             fixed?: (number | null) | undefined;
             /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
             percentage?: (number | null) | undefined;
@@ -715,7 +715,7 @@ export namespace UpdateFeesRequest {
         export namespace Value {
             export namespace Regions {
                 export interface Value {
-                    /** The new amount per event in US dollars. `null` clears the custom amount. */
+                    /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                     fixed?: (number | null) | undefined;
                     /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                     percentage?: (number | null) | undefined;
@@ -728,7 +728,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface PendingAutoTopup {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -739,7 +739,7 @@ export namespace UpdateFeesRequest {
     export namespace PendingAutoTopup {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -751,7 +751,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface PlatformProcessing {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -762,7 +762,7 @@ export namespace UpdateFeesRequest {
     export namespace PlatformProcessing {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -774,7 +774,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface PoolPayout {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -785,7 +785,7 @@ export namespace UpdateFeesRequest {
     export namespace PoolPayout {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -797,7 +797,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Revshare {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -808,7 +808,7 @@ export namespace UpdateFeesRequest {
     export namespace Revshare {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -820,7 +820,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface SepaDispute {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in euros (EUR). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -831,7 +831,7 @@ export namespace UpdateFeesRequest {
     export namespace SepaDispute {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in euros (EUR). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -843,7 +843,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface SepaReturn {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in euros (EUR). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -854,7 +854,7 @@ export namespace UpdateFeesRequest {
     export namespace SepaReturn {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in euros (EUR). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -866,7 +866,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface TaxCalculation {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -877,7 +877,7 @@ export namespace UpdateFeesRequest {
     export namespace TaxCalculation {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -889,7 +889,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface TaxService {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -900,7 +900,7 @@ export namespace UpdateFeesRequest {
     export namespace TaxService {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -912,7 +912,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface ThreeDs {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -923,7 +923,7 @@ export namespace UpdateFeesRequest {
     export namespace ThreeDs {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;
@@ -935,7 +935,7 @@ export namespace UpdateFeesRequest {
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
     export interface Transfers {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
+        /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
         fixed?: (number | null) | undefined;
         /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
         percentage?: (number | null) | undefined;
@@ -946,7 +946,7 @@ export namespace UpdateFeesRequest {
     export namespace Transfers {
         export namespace Regions {
             export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
+                /** The new amount per event, in US dollars (USD). `null` clears the custom amount. */
                 fixed?: (number | null) | undefined;
                 /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
                 percentage?: (number | null) | undefined;

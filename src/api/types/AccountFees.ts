@@ -5,9 +5,9 @@ import type * as Whop from "../index.js";
 export interface AccountFees {
     /** The account these fees are charged to, prefixed `biz_`. */
     account_id: string;
-    /** Charged when the account holder disputes an ACH payment. */
+    /** A flat fee in US dollars (USD), charged when the account holder disputes an ACH payment. Replaces the `dispute` fee for that payment. */
     ach_dispute: Whop.AccountFee;
-    /** Charged when an ACH payment is returned by the buyer's bank. */
+    /** A flat fee in US dollars (USD), charged when the buyer's bank returns an ACH payment unpaid. */
     ach_return: Whop.AccountFee;
     /** Charged on bank deposits into the account's balance. */
     bank_deposit: Whop.AccountFee;
@@ -61,9 +61,9 @@ export interface AccountFees {
     pool_payout: Whop.AccountFee;
     /** Charged on payments where the account shares revenue with revshare affiliates. */
     revshare: Whop.AccountFee;
-    /** Charged when the account holder disputes a SEPA Direct Debit payment. */
+    /** A flat fee in euros (EUR), charged when the account holder disputes a SEPA Direct Debit payment. Replaces the `dispute` fee for that payment. */
     sepa_dispute: Whop.AccountFee;
-    /** Charged when a SEPA Direct Debit payment is returned by the buyer's bank. */
+    /** A flat fee in euros (EUR), charged when the buyer's bank returns a SEPA Direct Debit payment unpaid. */
     sepa_return: Whop.AccountFee;
     /** Charged when tax is calculated on a payment. */
     tax_calculation: Whop.AccountFee;
