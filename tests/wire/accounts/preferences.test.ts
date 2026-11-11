@@ -73,10 +73,10 @@ describe("PreferencesClient", () => {
             economic_intelligence_offers: [
                 {
                     auto_renew: true,
-                    duration: 7,
+                    duration: 3,
                     duration_unit: "hours",
-                    fee_percentage: 1,
-                    key: "weekly",
+                    fee_percentage: 3,
+                    key: "3_days",
                     recommended: true,
                 },
             ],
@@ -230,10 +230,10 @@ describe("PreferencesClient", () => {
             economic_intelligence_offers: [
                 {
                     auto_renew: true,
-                    duration: 7,
+                    duration: 3,
                     duration_unit: "hours",
-                    fee_percentage: 1,
-                    key: "weekly",
+                    fee_percentage: 3,
+                    key: "3_days",
                     recommended: true,
                 },
             ],
