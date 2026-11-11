@@ -67,11 +67,12 @@ describe("TimeSeriesClient", () => {
 
         const rawResponseBody = {
             data: {
+                complete: false,
                 currency: "usd",
                 points: [
                     {
                         breakdown: [
-                            { name: "spend", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 2.82 },
+                            { name: "success", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 5 },
                         ],
                         steps: [{ conversion_rate: 100, count: 100, step: 1 }],
                         timestamp: 1767268800,

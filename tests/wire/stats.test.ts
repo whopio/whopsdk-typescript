@@ -47,6 +47,7 @@ describe("StatsClient", () => {
 
         const rawResponseBody = {
             data: {
+                complete: true,
                 currency: "usd",
                 points: [
                     {
