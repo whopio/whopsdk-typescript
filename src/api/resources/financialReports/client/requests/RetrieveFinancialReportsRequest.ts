@@ -10,7 +10,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface RetrieveFinancialReportsRequest {
-    /** The owning account ID (a biz_ identifier), or `global` for a platform-wide report across all ledger accounts (requires internal admin access). */
+    /** The account that owns the report, prefixed `biz_`. */
     account_id: string;
     /** The type of financial report to generate. */
     report_type: Whop.RetrieveFinancialReportsRequestReportType;
@@ -18,9 +18,9 @@ export interface RetrieveFinancialReportsRequest {
     currency?: string;
     /** Aggregate all activity into this display currency via FX conversion. */
     in_currency?: string;
-    /** Start of the report window as an ISO 8601 timestamp. Required for platform-wide (global) reports. */
+    /** Start of the report window as an ISO 8601 timestamp. */
     from?: string;
-    /** Exclusive end of the report window as an ISO 8601 timestamp. Required for platform-wide (global) reports. */
+    /** Exclusive end of the report window as an ISO 8601 timestamp. */
     to?: string;
     /** Grouping granularity for report rows. Hourly grouping is supported for account-level balance activity reports only; hourly periods are timestamps in the requested timezone. */
     group_by?: Whop.RetrieveFinancialReportsRequestGroupBy;
@@ -32,10 +32,6 @@ export interface RetrieveFinancialReportsRequest {
         | Whop.RetrieveFinancialReportsRequestLineTypesItem[];
     /** Account-level balance activity only: include money moving in or money moving out. */
     direction?: Whop.RetrieveFinancialReportsRequestDirection;
-    /** Platform-wide (global) reports only: when true, return cumulative balances as of to (all history, no lower bound) instead of activity within the period. */
-    cumulative?: boolean;
-    /** Platform-wide (global) reports only: narrow the report to ledger lines on the ledger account owned by this account ID (a biz_ identifier). Ignored unless account_id is `global`. */
-    scope_account_id?: string;
     /** Balance activity only: include payment costs grouped by payment method and provider. */
     include_payment_fee_breakdown?: boolean;
     /** Account-level balance activity only: return only currencies with cashflow in the exact requested window. Requires `from` and `to`. */

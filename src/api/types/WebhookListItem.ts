@@ -30,7 +30,7 @@ export interface WebhookListItem {
     title: string | null;
     /** Destination URL where webhook payloads are delivered via HTTP POST. */
     url: string;
-    /** Secret key used to sign webhook payloads for verification. Include this in your HMAC validation logic. Returned on the create response and to interactive dashboard sessions; `null` for API-key and OAuth callers on later reads. */
+    /** Secret key used to sign webhook payloads. Use it to verify the HMAC signature of each delivery. Returned in the create response. `null` on later reads by API keys and OAuth apps. */
     webhook_secret: string | null;
 }
 

@@ -69,8 +69,6 @@ export class FinancialReportsClient {
             timezone,
             line_types: lineTypes,
             direction,
-            cumulative,
-            scope_account_id: scopeAccountId,
             include_payment_fee_breakdown: includePaymentFeeBreakdown,
             period_only_currencies: periodOnlyCurrencies,
         } = request;
@@ -89,8 +87,6 @@ export class FinancialReportsClient {
                   ? lineTypes
                   : undefined,
             direction: direction != null ? direction : undefined,
-            cumulative,
-            scope_account_id: scopeAccountId,
             include_payment_fee_breakdown: includePaymentFeeBreakdown,
             period_only_currencies: periodOnlyCurrencies,
         };

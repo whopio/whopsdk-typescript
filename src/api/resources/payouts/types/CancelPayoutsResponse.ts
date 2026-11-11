@@ -40,7 +40,7 @@ export interface CancelPayoutsResponse {
     payout_method: CancelPayoutsResponse.PayoutMethod | null;
     /** Payout request ID, prefixed `cofr_`, returned by `POST /payouts`. For a request retrieved by its own `cofr_` ID, this equals `id`. Returns `null` for payouts not created by `POST /payouts`. */
     payout_request_id: string | null;
-    /** How the payout was created. `automatic` means a scheduled auto-payout; `null` on payouts created before source tracking or through internal tooling. */
+    /** How the payout was created. `automatic` means a scheduled auto-payout. `null` when the payout has no recorded source. */
     source: CancelPayoutsResponse.Source | null;
     /** Payout delivery speed. */
     speed: CancelPayoutsResponse.Speed;
@@ -127,7 +127,7 @@ export namespace CancelPayoutsResponse {
         export type Type = (typeof Type)[keyof typeof Type];
     }
 
-    /** How the payout was created. `automatic` means a scheduled auto-payout; `null` on payouts created before source tracking or through internal tooling. */
+    /** How the payout was created. `automatic` means a scheduled auto-payout. `null` when the payout has no recorded source. */
     export const Source = {
         Api: "api",
         Dashboard: "dashboard",
