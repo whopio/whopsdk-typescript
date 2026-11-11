@@ -108,7 +108,7 @@ export class SwapsClient {
     }
 
     /**
-     * Swaps one token for another in an account or user's wallet, or converts between their fiat balances at the mid-market rate. Crypto swaps finish in the background — retrieve the swap to follow its status.
+     * Swaps one token for another in an account or user's wallet, or converts between their fiat balances. Crypto swaps finish in the background — retrieve the swap to follow its status.
      *
      * @param {Whop.CreateSwapsRequest} request
      * @param {SwapsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -190,7 +190,7 @@ export class SwapsClient {
     }
 
     /**
-     * Previews the price of a swap before you create it. Fiat pairs quote the mid-market rate — the same rate creating the swap fills at. No funds move, nothing is saved, and no authentication is required.
+     * Previews the price of a swap before you create it. A fiat pair quotes the same rate creating the swap fills at; name the account with `account_id` or `user_id` to quote the rate for that account. No funds move, nothing is saved, and no authentication is required unless you name an account.
      *
      * @param {Whop.CreateQuoteSwapsRequest} request
      * @param {SwapsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -218,7 +218,9 @@ export class SwapsClient {
         request: Whop.CreateQuoteSwapsRequest,
         requestOptions?: SwapsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.CreateQuoteSwapsResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
                 "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-10",
