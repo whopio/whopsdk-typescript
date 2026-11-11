@@ -39,14 +39,18 @@ export interface ListChannelsRequest {
     viewed?: boolean;
     /** `true` returns your pending direct-message requests; `false` returns your accepted private channels. Requires `private` in `kind` and authenticating as a user. With `support` also in `kind`, `false` keeps support channels and `true` returns only pending requests. */
     requested?: boolean;
-    /** The field to sort by. Defaults to `last_viewed_at` for community channels and `last_message_at` for private and support channels. Ties sort in a stable order. */
+    /** The field to sort by. Defaults to `last_viewed_at` for community channels and `last_message_at` for private and support channels. Ties sort in a stable order. Cannot be supplied with updated_after. */
     order?: Whop.ListChannelsRequestOrder;
     /** Include the current members of private and support channels, including you, with their public profiles. */
     include_members?: boolean;
     /** Include the most recent message you can see, with its author. */
     include_last_message?: boolean;
-    /** The sort direction. Defaults to `desc`. */
+    /** The sort direction. Defaults to `desc`. Cannot be supplied with updated_after. */
     direction?: Whop.ListChannelsRequestDirection;
+    /** Include redacted entries for deleted channels and your removed memberships. Use deleted_at to remove these channels from your cache. */
+    include_deleted?: boolean;
+    /** Return channels where the channel or your membership changed at or after this ISO 8601 timestamp. Cannot be more than one hour old, including on subsequent pages. For older changes, reload channels without updated_after. Results use ascending synchronized_at order. Cannot be combined with order, direction, query, status, awaiting_reply, unread, pinned, viewed, requested, created_before, or created_after. */
+    updated_after?: string;
     /** Return only channels created before this ISO 8601 timestamp. */
     created_before?: string;
     /** Return only channels created after this ISO 8601 timestamp. */

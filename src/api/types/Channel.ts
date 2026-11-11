@@ -6,6 +6,8 @@ export interface Channel {
     account_id: string | null;
     /** Creation time as an ISO 8601 timestamp. */
     created_at: string;
+    /** When the channel was deleted or removed from your channel list, as an ISO 8601 timestamp. Null for a live channel. */
+    deleted_at: string | null;
     experience_id: string | null;
     /** The channel icon. Community channels show the experience logo, falling back to the app icon. Support channels show the account logo. Group private channels show their own icon. Null for one-to-one private channels or when no image is set. */
     icon: Whop.File_ | null;
