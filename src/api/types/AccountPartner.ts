@@ -11,6 +11,8 @@ export interface AccountPartner {
     name: string | null;
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
+    /** Business the partner referred this account on behalf of, when the referral belongs to their team. `null` for a personal referral. */
+    referring_account: Whop.AccountSummary | null;
     /** Public username. */
     username: string;
     /** When the user became a verified Whop Partner, as an ISO 8601 timestamp. Null if not verified. */
