@@ -389,6 +389,11 @@ describe("PayoutsClient", () => {
         const rawRequestBody = { payout_method_id: "potk_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            conversion: {
+                converted_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                estimated_savings: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                payout_fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             destination_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             exchange_rate: 4.13978443,
             expires_at: "2026-01-01T12:00:00Z",

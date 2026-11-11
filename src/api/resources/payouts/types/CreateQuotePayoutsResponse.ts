@@ -5,6 +5,8 @@ import type * as Whop from "../../../index.js";
 export interface CreateQuotePayoutsResponse {
     /** Gross payout amount. */
     amount: Whop.Money;
+    /** How a USD balance pays a bank in another currency: it converts into the payout method's currency, and the payout leaves from the balance in that currency. Null when the payout is paid from the requested balance directly. */
+    conversion: CreateQuotePayoutsResponse.Conversion | null;
     /** Exact amount quoted for delivery. */
     destination_amount: Whop.Money;
     /** Quoted exchange rate from the source currency to the destination currency. */
@@ -31,6 +33,18 @@ export interface CreateQuotePayoutsResponse {
 }
 
 export namespace CreateQuotePayoutsResponse {
+    /**
+     * How a USD balance pays a bank in another currency: it converts into the payout method's currency, and the payout leaves from the balance in that currency. Null when the payout is paid from the requested balance directly.
+     */
+    export interface Conversion {
+        /** What the requested amount converts into, in the payout method's currency. When the account holds its USD in a stablecoin, this is an estimate: the payout is for what the conversion produces once that USD arrives, and `POST /payouts` answers with the payout request until that payout exists. */
+        converted_amount: Whop.Money;
+        /** How much more the recipient receives than if the same amount were paid out in USD and converted at the payout provider's rate. Null when the provider has no price for that route or converting first saves nothing. */
+        estimated_savings: Whop.Money | null;
+        /** The payout fee in the converted currency, taken from the converted amount. */
+        payout_fee: Whop.Money;
+    }
+
     export const Object_ = {
         PayoutQuote: "payout_quote",
     } as const;
