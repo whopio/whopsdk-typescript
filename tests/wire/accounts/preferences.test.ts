@@ -92,6 +92,7 @@ describe("PreferencesClient", () => {
             preferred_settlement_currency_changeable_at: "preferred_settlement_currency_changeable_at",
             review_request_emails: true,
             subaccount_notifications: true,
+            subaccount_team_view_only: true,
             subscription_failure_behavior: "cancel",
         };
 
@@ -246,6 +247,7 @@ describe("PreferencesClient", () => {
             preferred_settlement_currency_changeable_at: "2026-01-01T12:00:00.000Z",
             review_request_emails: true,
             subaccount_notifications: true,
+            subaccount_team_view_only: false,
             subscription_failure_behavior: "cancel",
         };
 
