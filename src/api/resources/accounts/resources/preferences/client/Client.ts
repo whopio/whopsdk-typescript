@@ -108,20 +108,17 @@ export class PreferencesClient {
     }
 
     /**
-     * Updates the account's preferences. Each top-level key present in the body is replaced as a whole; omitted keys are left untouched.
+     * Updates the account's preferences. Each top-level key in the body replaces its stored value as a whole. Keys left out keep their current values.
      *
-     * Required scopes depend on the preferences being updated:
+     * The required scope depends on which preferences you update.
      *
-     * | Preferences | Required scope |
-     * | --- | --- |
-     * | `ads_payment_methods`, `ads_reporting_currency`, `ads_scheduling_timezone`, `ads_triple_whale_integration` | `ad_campaign:create` |
-     * | `cards_auto_top_up`, `cards_notifications`, `covers_subaccount_negative_balances` | `payout:account:update` |
-     * | `dispute_fighter_enabled` | `payment:dispute` |
-     * | `economic_intelligence_duration_key`, `economic_intelligence_auto_renew` | `company:update` |
-     * | `feedback_options`, `customer_tracking` | `company:manage_checkout` |
-     * | `review_request_emails` | `company:update` |
+     * - `ad_campaign:create`: `ads_payment_methods`, `ads_reporting_currency`, `ads_scheduling_timezone`, `ads_triple_whale_integration`.
+     * - `payout:account:update`: `cards_auto_top_up`, `cards_notifications`, `covers_subaccount_negative_balances`.
+     * - `payment:dispute`: `dispute_fighter_enabled`.
+     * - `company:update`: `economic_intelligence_duration_key`, `economic_intelligence_auto_renew`, `review_request_emails`, `subaccount_notifications`.
+     * - `company:manage_checkout`: `feedback_options`, `customer_tracking`.
      *
-     * When updating preferences from multiple rows, all corresponding scopes are required for the account.
+     * To update keys under more than one scope, the API key needs all of those scopes.
      *
      * @param {Whop.accounts.UpdatePreferencesRequest} request
      * @param {PreferencesClient.RequestOptions} requestOptions - Request-specific configuration.

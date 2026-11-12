@@ -45,6 +45,8 @@ export interface RetrievePreferencesResponse {
     preferred_settlement_currency_changeable_at: string | null;
     /** Whether Whop emails customers after a purchase asking them to leave a review. `true` by default. Set it to `false` to stop these emails, including ones already scheduled. They also stop while the account's `send_customer_emails` is `false`. */
     review_request_emails: boolean;
+    /** Whether Whop emails and notifies the teams of this account's subaccounts. `true` by default. Set it to `false` to stop Whop's emails, push, and in-app notifications to them. These include payout, verification, dispute, and card alerts about their accounts. `null` when the account has no subaccounts. */
+    subaccount_notifications: boolean | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: RetrievePreferencesResponse.SubscriptionFailureBehavior;
 }

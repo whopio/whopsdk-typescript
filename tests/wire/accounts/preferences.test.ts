@@ -91,6 +91,7 @@ describe("PreferencesClient", () => {
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "preferred_settlement_currency_changeable_at",
             review_request_emails: true,
+            subaccount_notifications: true,
             subscription_failure_behavior: "cancel",
         };
 
@@ -212,7 +213,7 @@ describe("PreferencesClient", () => {
             },
             cards_auto_top_up: false,
             cards_notifications: true,
-            covers_subaccount_negative_balances: true,
+            covers_subaccount_negative_balances: false,
             customer_tracking: {
                 accent_color: "accent_color",
                 enabled: true,
@@ -244,6 +245,7 @@ describe("PreferencesClient", () => {
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "2026-01-01T12:00:00.000Z",
             review_request_emails: true,
+            subaccount_notifications: true,
             subscription_failure_behavior: "cancel",
         };
 
