@@ -580,6 +580,8 @@ export * from "./TradingMarginSummary.js";
 export * from "./TradingOrder.js";
 export * from "./TradingPosition.js";
 export * from "./TradingPositionLeverage.js";
+export * from "./TradingSpotAccount.js";
+export * from "./TradingSpotHolding.js";
 export * from "./TradingWebsocketSubscription.js";
 export * from "./UnauthorizedErrorBody.js";
 export * from "./UnprocessableEntityErrorBody.js";
