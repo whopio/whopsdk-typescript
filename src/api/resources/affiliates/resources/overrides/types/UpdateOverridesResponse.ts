@@ -20,11 +20,11 @@ export interface UpdateOverridesResponse {
     id: string;
     /** The type of override (standard or rev_share). */
     override_type: Whop.AffiliateOverrideRoles;
-    /** The plan ID (for standard overrides). */
+    /** The plan ID (for standard overrides). Null for a product-wide override, which sets the terms for plans added to the product later. */
     plan_id: string | null;
     /** The product page direct link for referrals (standard overrides only). */
     product_direct_link: string | null;
-    /** The product ID (for rev-share overrides). */
+    /** The product ID (for rev-share overrides, and for product-wide overrides that set the terms for plans added to the product later). */
     product_id: string | null;
     /** The revenue calculation basis (pre_fees or post_fees). */
     revenue_basis: Whop.AffiliateRevenueBases | null;
