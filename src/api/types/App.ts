@@ -11,6 +11,8 @@ export interface App {
     app_store_description: string | null;
     /** The type of end-user the app is built for. */
     app_type: App.AppType;
+    /** Average star rating across published reviews for this app, from `1.0` to `5.0`. Returns `0.0` when no published-review rating is available. */
+    average_review_rating: number;
     /** Banner image from the app's product listing, or `null` when none is uploaded. */
     banner_image: Whop.AppBannerImage | null;
     /** The production base URL where the app is hosted. `null` if no base URL is configured, if the caller lacks the `developer:basic:read` permission on the app's account, or on list responses, which never expose it. */
@@ -51,6 +53,10 @@ export interface App {
     id: string;
     /** The address of the existing website this app was imported from, such as `https://shop.example.com`. `null` if the app was not imported from another site, or if the caller lacks the `developer:basic:read` permission on the app's account. */
     imported_from_url: string | null;
+    /** Whether the app is published, approved, and visible in the public app store. */
+    is_app_store_listed: boolean;
+    /** Whether Whop publishes this app. */
+    is_whop_app: boolean;
     /** Approval status of the app's product listing on the Whop app store, or `null` when the app has no associated product. */
     marketplace_status: App.MarketplaceStatus | null;
     /** Display name shown on the app store and in experience navigation. */
@@ -75,6 +81,8 @@ export interface App {
     production_ios_build: Whop.AppProductionBuild | null;
     /** The approved build currently served on web, or `null` when none is deployed. */
     production_web_build: Whop.AppProductionBuild | null;
+    /** Published customer reviews for this app. */
+    published_reviews_count: number;
     redirect_uris: string[];
     requested_permissions: Whop.AppRequestedPermission[];
     required_scopes: App.RequiredScopes.Item[];
