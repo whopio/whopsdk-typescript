@@ -9,7 +9,7 @@ export interface ChatMessage {
     author_is_team_member: boolean;
     author_user_id: string | null;
     channel_id: string;
-    /** Markdown content; null for a deleted message. */
+    /** Markdown content. `null` for a deleted message. */
     content: string | null;
     /** Creation time as an ISO 8601 timestamp. */
     created_at: string;
@@ -34,7 +34,7 @@ export interface ChatMessage {
     replying_to_user_id: string | null;
     /** Last message change as an ISO 8601 timestamp. */
     updated_at: string;
-    /** Experience view count; null for DM-backed channels. */
+    /** Experience view count. `null` for DM-backed channels. */
     view_count: number | null;
 }
 

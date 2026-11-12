@@ -7,7 +7,7 @@ export interface UserSummary {
     id: string;
     /** Display name. */
     name: string | null;
-    /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
+    /** Avatar wrapper. Its `url` is always present, and is a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
     /** Public username. */
     username: string;

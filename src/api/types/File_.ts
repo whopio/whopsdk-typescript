@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface File_ {
     /** BlurHash placeholder for an image or video. Null when unavailable or removed by moderation. */
     blurhash: string | null;
-    /** The original file's MIME type, preserved when removed by moderation, e.g. `application/pdf`. */
+    /** The original file's MIME type, for example `application/pdf`. It is kept when moderation removes the file. */
     content_type: string | null;
     /** When the file was created, as an ISO 8601 timestamp. */
     created_at: string;
@@ -24,7 +24,7 @@ export interface File_ {
     multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
     /** The type of this object, always `file`. */
     object: string;
-    /** Whether moderation removed the file. When true, `url` serves a replacement image; filename, size, and content type still describe the original file. */
+    /** Whether moderation removed the file. When `true`, `url` serves a replacement image. `filename`, `size` and `content_type` still describe the original file. */
     removed_by_moderation: boolean;
     /** The file size in bytes. `null` until the upload has finished. */
     size: number | null;
@@ -34,9 +34,9 @@ export interface File_ {
     upload_status: File_.UploadStatus;
     /** Presigned URL to PUT the file's bytes to. Present only on create, and only for single-part uploads. */
     upload_url?: (string | null) | undefined;
-    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. Null until the upload has finished; a replacement image URL when removed by moderation. */
+    /** A URL to download the file. Public files get a permanent CDN URL, and private files get a signed URL that expires. `null` until the upload has finished. When moderation removes the file, a replacement image URL. */
     url: string | null;
-    /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
+    /** `public` files are served from an unsigned CDN URL. `private` files are served from a signed URL that expires. */
     visibility: Whop.FileVisibility;
     /** Audio waveform URL. Null when unavailable or removed by moderation. */
     waveform_url: string | null;

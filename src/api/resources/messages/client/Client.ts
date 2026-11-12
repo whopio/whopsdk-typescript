@@ -17,9 +17,9 @@ export declare namespace MessagesClient {
 }
 
 /**
- * A Message contains Markdown and optional attachments, a poll or a reply. Read history, synchronize edits and deletions, or fetch a window around a message. Existing permissions govern sending, editing, pinning and deletion.
+ * A Message is one post in a channel. It holds Markdown content and can carry attachments, a poll, or a reply to another message.
  *
- * Add or remove an emoji reaction, list who reacted, and vote once on a message poll. Messages include aggregate reaction and vote counts and whether you reacted or voted, without exposing other voters.
+ * Use the Messages API to [send](/api-reference/messages/send-message), [edit](/api-reference/messages/update-message), [delete](/api-reference/messages/delete-message) and [pin](/api-reference/messages/pin-message) messages. [List a channel's messages](/api-reference/messages/list-messages) to read its history and to sync edits and deletions. You can also [react](/api-reference/messages/react-to-message) with an emoji, [list who reacted](/api-reference/messages/list-message-reactions), and [vote](/api-reference/messages/vote-on-message) once on a poll. Each message shows its reaction and vote counts and whether you reacted or voted, but not who else voted.
  */
 export class MessagesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MessagesClient.Options>;

@@ -3,7 +3,7 @@
 export interface ReviewAccount {
     /** The unique identifier for the account. */
     id: string;
-    /** URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe. */
+    /** URL slug for the account's store page. For example, `pickaxe` in whop.com/pickaxe. */
     route: string;
     /** The display name of the account shown to customers. */
     title: string;

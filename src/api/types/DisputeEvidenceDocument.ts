@@ -26,7 +26,7 @@ export interface DisputeEvidenceDocument {
     multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
     /** The type of this object, always `file`. */
     object: string;
-    /** Whether moderation removed the file. When true, `url` serves a replacement image; filename, size, and content type still describe the original file. */
+    /** Whether moderation removed the file. When `true`, `url` serves a replacement image. `filename`, `size` and `content_type` still describe the original file. */
     removed_by_moderation: boolean;
     /** The file size in bytes. `null` until the upload has finished. */
     size: number | null;
@@ -36,9 +36,9 @@ export interface DisputeEvidenceDocument {
     upload_status: DisputeEvidenceDocument.UploadStatus;
     /** Presigned URL to PUT the file's bytes to. Present only on create, and only for single-part uploads. */
     upload_url?: (string | null) | undefined;
-    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. Null until the upload has finished; a replacement image URL when removed by moderation. */
+    /** A URL to download the file. Public files get a permanent CDN URL, and private files get a signed URL that expires. `null` until the upload has finished. When moderation removes the file, a replacement image URL. */
     url: string | null;
-    /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
+    /** `public` files are served from an unsigned CDN URL. `private` files are served from a signed URL that expires. */
     visibility: DisputeEvidenceDocument.Visibility;
     /** Audio waveform URL. Null when unavailable or removed by moderation. */
     waveform_url: string | null;
@@ -80,7 +80,7 @@ export namespace DisputeEvidenceDocument {
         Failed: "failed",
     } as const;
     export type UploadStatus = (typeof UploadStatus)[keyof typeof UploadStatus];
-    /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
+    /** `public` files are served from an unsigned CDN URL. `private` files are served from a signed URL that expires. */
     export const Visibility = {
         Public: "public",
         Private: "private",

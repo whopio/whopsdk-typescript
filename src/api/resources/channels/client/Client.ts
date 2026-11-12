@@ -17,7 +17,9 @@ export declare namespace ChannelsClient {
 }
 
 /**
- * A Channel contains chat messages. Its kind determines access, membership and delivery. Retrieve a channel by its existing public ID, or use an experience ID for its chat.
+ * A Channel is a conversation on Whop that holds chat messages. A `private` channel is a one-to-one or group conversation. A `community` channel is the chat in one of an account's Chat experiences. A `support` channel is a conversation between an account and one customer.
+ *
+ * Use the Channels API to [create](/api-reference/channels/create-channel) and [list](/api-reference/channels/list-channels) channels, and to [retrieve](/api-reference/channels/retrieve-channel) one by its own ID or its Chat experience's ID. You can also [accept](/api-reference/channels/accept-dm-request) or [decline](/api-reference/channels/decline-dm-request) direct-message requests, [mark a channel read](/api-reference/channels/mark-channel-read), and [resolve](/api-reference/channels/resolve-support-channel) or [reopen](/api-reference/channels/reopen-support-channel) support conversations.
  */
 export class ChannelsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ChannelsClient.Options>;

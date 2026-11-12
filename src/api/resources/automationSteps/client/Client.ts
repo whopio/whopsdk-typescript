@@ -17,11 +17,11 @@ export declare namespace AutomationStepsClient {
 }
 
 /**
- * An Automation step is one step in a version of an automation. A `wait` step holds a member for `config.delay_seconds`, and an `email` or `message` step runs its `source_code` to decide whether to send and what to say. Steps form a chain: each one names the step before it, and only the draft version can change.
+ * An Automation step is one step in a version of an automation. A `wait` step holds a member for `config.delay_seconds`. An `email` or `message` step runs its `source_code` to decide whether to send and what to say. Steps form a chain, and each step names the step before it. Only the draft version can change.
  *
- * Use the Automation steps API to list a version's steps, add, update and remove steps in the draft, and preview what an `email` or `message` step would send a member. Nothing is sent by a preview.
+ * Use the Automation steps API to list a version's steps, and to add, update and remove steps in the draft. You can also preview what an `email` or `message` step would send a member. A preview sends nothing.
  *
- * A step's code reads the account through the API with every account-level `:read` permission that both the admin role and Whop AI hold, except `payout:account:read`, so it can't read cards. Setting a step's `source_code`, or previewing a step, needs every one of those permissions, so a credential can't write code that reads more than it can.
+ * A step's code reads the account through the API. It holds every account-level `:read` permission that both the admin role and Whop AI hold, except `payout:account:read`. So it can't read cards. Setting a step's `source_code`, or previewing a step, needs every one of those permissions. So a credential can't write code that reads more than it can.
  */
 export class AutomationStepsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AutomationStepsClient.Options>;

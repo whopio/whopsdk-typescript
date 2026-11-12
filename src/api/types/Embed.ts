@@ -6,6 +6,7 @@ export interface Embed {
     color: number | null;
     description: string | null;
     fields: Whop.EmbedField[];
+    /** Footer shown at the bottom of the embed. Null when the embed has no footer. */
     footer: Whop.EmbedFooter | null;
     image: Whop.EmbedImage | null;
     thumbnail: Whop.EmbedImage | null;

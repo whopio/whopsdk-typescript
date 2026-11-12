@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface EmbedFooter {
+    /** Small image shown beside the footer text. Null when the footer has no icon. */
     icon: Whop.EmbedImage | null;
     text: string;
 }

@@ -8,7 +8,7 @@ export interface Invoice {
     billing_address: Whop.PaymentAddress | null;
     buyer_fee_amount: Whop.Money;
     buyer_fee_percentage: number;
-    /** A signed link that opens this invoice in a checkout session so the buyer can pay it: pass it as `link` to `POST /checkout_sessions`. Present while the invoice is open; null in any other status, for an invoice billed to a business buyer or whose membership was canceled, and unless you have `payment:charge`, or `invoice:create` or `invoice:update` on an invoice with no `payment_method_id`. */
+    /** A signed link that opens this invoice in a checkout session so the buyer can pay it. Pass it as `link` to `POST /checkout_sessions`. Present while the invoice is open. `null` in any other status, for an invoice billed to a business buyer, and for an invoice whose membership was canceled. Also `null` unless you have `payment:charge`, or `invoice:create` or `invoice:update` on an invoice with no `payment_method_id`. */
     checkout_link: string | null;
     created_at: string;
     customer_name: string | null;
@@ -21,7 +21,7 @@ export interface Invoice {
     line_items: Whop.InvoiceLineItem[];
     mailing_address_id: string | null;
     member_id: string | null;
-    /** The membership this invoice bills, prefixed `mem_`: the subscription a renewal invoice renews, or the one created when an invoice with a recurring item is issued. Null for one-off invoices, for a draft not yet issued, and without the member:basic:read permission. */
+    /** The membership this invoice bills, prefixed `mem_`. For a renewal invoice, it is the subscription that renews. For an invoice with a recurring item, it is the membership created when the invoice is issued. Null for one-off invoices, for a draft not yet issued, and without the member:basic:read permission. */
     membership_id: string | null;
     /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. `null` when none is set. */
     memo: string | null;
@@ -34,7 +34,7 @@ export interface Invoice {
     payment_method_configuration: Whop.CheckoutSessionPaymentMethodConfiguration | null;
     payment_method_id: string | null;
     recipient_emails: string[];
-    /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp: the `charge_at` it was sent or issued with, or `due_at` when an invoice with a `payment_method_id` is sent or issued before it is due without one. On a draft, the `charge_at` of its scheduled send. `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
+    /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp. It is the `charge_at` the invoice was sent or issued with. Without one, it is `due_at` when an invoice with a `payment_method_id` is sent or issued before it is due. On a draft, it is the `charge_at` of its scheduled send. `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
     scheduled_charge_at: string | null;
     /** The `collection_method` a draft's scheduled send applies when it fires. `null` when the draft has no scheduled send or it was scheduled without one, and once the invoice is issued. */
     scheduled_collection_method: Invoice.ScheduledCollectionMethod | null;
