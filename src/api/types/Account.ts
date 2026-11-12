@@ -119,7 +119,7 @@ export interface Account {
     target_audience: string | null;
     tax_collection_enabled_states: string[];
     tax_identifiers: Whop.AccountTaxIdentifier[];
-    /** Who calculates and remits tax for the account: `whop` (Whop calculates and remits), `self` (Whop calculates; the account collects and remits), or `none` (neither; the account is responsible). `null` until the account enrolls in the Whop tax service. */
+    /** Who calculates and remits tax for the account. `whop` means Whop calculates and remits. `self` means Whop calculates, and the account collects and remits. `none` means neither, and the account is responsible. New businesses start on `whop`, and new connected accounts start on `none`. `null` means the account has no setting yet. */
     tax_remitted_by: Account.TaxRemittedBy | null;
     /** How tax is applied to the account's prices: `inclusive` (tax included in the listed price) or `exclusive` (tax added on top). Defaults to `exclusive` when unset; `null` only when the account has no payment connection. */
     tax_type: Account.TaxType | null;
@@ -176,7 +176,7 @@ export namespace Account {
         Orange: "orange",
     } as const;
     export type OpengraphImageVariant = (typeof OpengraphImageVariant)[keyof typeof OpengraphImageVariant];
-    /** Who calculates and remits tax for the account: `whop` (Whop calculates and remits), `self` (Whop calculates; the account collects and remits), or `none` (neither; the account is responsible). `null` until the account enrolls in the Whop tax service. */
+    /** Who calculates and remits tax for the account. `whop` means Whop calculates and remits. `self` means Whop calculates, and the account collects and remits. `none` means neither, and the account is responsible. New businesses start on `whop`, and new connected accounts start on `none`. `null` means the account has no setting yet. */
     export const TaxRemittedBy = {
         Whop: "whop",
         Self: "self",
