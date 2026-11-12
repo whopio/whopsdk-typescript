@@ -74,6 +74,8 @@ export namespace Experiment {
         export interface Item {
             /** Conditions within this rule, all of which must match. */
             conditions: Item.Conditions.Item[];
+            /** Percentage of matching subjects that this rule lets in, from 0 to 100. Absent when the rule lets in every matching subject. Raising it keeps every subject that the rule already lets in. */
+            pass_percentage?: number | undefined;
             /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. */
             type?: Item.Type | undefined;
         }
