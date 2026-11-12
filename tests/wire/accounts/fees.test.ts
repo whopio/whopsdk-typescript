@@ -7755,16 +7755,28 @@ describe("FeesClient", () => {
                     maximum: null,
                     minimum: null,
                     percentage: 15,
-                    region: "usa",
+                    region: "eu",
                     regions: {
-                        eu: {
-                            default: { fixed: null, percentage: 15 },
-                            fixed: null,
-                            maximum: null,
-                            minimum: null,
-                            percentage: 15,
-                            reset: { fixed: null, percentage: 15 },
-                            source: "default",
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
                         },
                     },
                     reset: { fixed: null, percentage: 15 },
@@ -19009,16 +19021,28 @@ describe("FeesClient", () => {
                     maximum: null,
                     minimum: null,
                     percentage: 15,
-                    region: "usa",
+                    region: "eu",
                     regions: {
-                        eu: {
-                            default: { fixed: null, percentage: 15 },
-                            fixed: null,
-                            maximum: null,
-                            minimum: null,
-                            percentage: 15,
-                            reset: { fixed: null, percentage: 15 },
-                            source: "default",
+                        key: {
+                            default: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            minimum: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: null,
                         },
                     },
                     reset: { fixed: null, percentage: 15 },
