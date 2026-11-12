@@ -1408,6 +1408,17 @@
             },
             "default": "./dist/cjs/api/resources/stats/resources/timeSeries/exports.js"
         },
+        "./trades/candles": {
+            "import": {
+                "types": "./dist/esm/api/resources/trades/resources/candles/exports.d.mts",
+                "default": "./dist/esm/api/resources/trades/resources/candles/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/trades/resources/candles/exports.d.ts",
+                "default": "./dist/cjs/api/resources/trades/resources/candles/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/trades/resources/candles/exports.js"
+        },
         "./trades/markets": {
             "import": {
                 "types": "./dist/esm/api/resources/trades/resources/markets/exports.d.mts",
