@@ -32,7 +32,7 @@ export interface User {
     level: Whop.OwnerLevel | null;
     /** The user's display name */
     name: string | null;
-    /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
+    /** Avatar wrapper. Its `url` is always present, and is a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
     social_links: Whop.UserSocialLink[];
     /** The user's state or region, derived from their IP address. `null` when unknown or the user turned off location sharing. */

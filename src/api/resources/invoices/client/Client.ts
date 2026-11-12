@@ -20,6 +20,8 @@ export declare namespace InvoicesClient {
 /**
  * An Invoice is a receipt with an invoice number. Create a draft from variant-backed items, set its recipient and due date, and edit it until it is sent. Its `pay_` ID is also the payment ID when collected.
  *
+ * Use the Invoices API to [create](/api-reference/invoices/create-invoice) and edit drafts, then [issue](/api-reference/invoices/issue-invoice) or [send](/api-reference/invoices/send-invoice) them. You can [charge](/api-reference/invoices/charge-invoice) an open invoice to a saved payment method, or [void](/api-reference/invoices/void-invoice) an invoice the buyer will not pay.
+ *
  * Draft creation does not create access or charge the buyer. The recipient's contact details live on the account's member. Financial fields and caller metadata can only be edited in draft.
  */
 export class InvoicesClient {

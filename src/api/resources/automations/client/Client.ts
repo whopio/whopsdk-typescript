@@ -17,9 +17,9 @@ export declare namespace AutomationsClient {
 }
 
 /**
- * An Automation is a chain of steps that members move through one at a time. A member enrolls when the automation's `trigger_event` happens to them, such as `payment.succeeded`, or when you enroll them with `POST /automations/{id}/trigger`. A `wait` step holds them for a set time, and an `email` or `message` step runs its `source_code`, a TSX module that reads the member's data through the API and decides whether to send and what to say.
+ * An Automation is a chain of steps that members move through one at a time. A member enrolls when the automation's `trigger_event` happens to them, such as `payment.succeeded`. You can also enroll a member with `POST /automations/{id}/trigger`. A `wait` step holds them for a set time. An `email` or `message` step runs its `source_code`, a TSX module that reads the member's data through the API. The module decides whether to send and what to say.
  *
- * Steps are versioned. You edit the draft version, and `POST /automations/{id}/publish` makes it the version new members start on, then copies it into the next draft. Each publish moves members already in the automation onto the new version. Use the Automations API to create, publish and trigger automations, and to update them, including their status, and the Automation steps and Automation enrollments APIs for their steps and members.
+ * Steps are versioned. You edit the draft version. `POST /automations/{id}/publish` makes it the version new members start on, then copies it into the next draft. Each publish moves members already in the automation onto the new version. Use the Automations API to create, publish and trigger automations, and to update them, including their status. Use the Automation steps and Automation enrollments APIs for their steps and members.
  */
 export class AutomationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AutomationsClient.Options>;

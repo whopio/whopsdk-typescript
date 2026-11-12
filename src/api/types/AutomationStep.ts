@@ -11,7 +11,7 @@ export interface AutomationStep {
     config: Whop.AutomationStepConfig;
     /** When the step was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** Automation step ID, prefixed `atos_`. A step gets a new ID in every version; `key` stays the same. */
+    /** Automation step ID, prefixed `atos_`. A step gets a new ID in every version. Its `key` stays the same. */
     id: string;
     issues: string[];
     /** Identifies the same step across versions. A new step gets a key no step of the automation has used. */
@@ -20,7 +20,7 @@ export interface AutomationStep {
     previous_step_id: string | null;
     /** The sender `config.sender_id` names. `null` on a `wait`, and when the step sends from the default sender. */
     sender: Whop.AutomationStepSender | null;
-    /** An `email` or `message` step's code: a TSX module whose default export gets the member and returns `message.send()`, `message.skip()` or `message.exit()` from `whop:message`. An `email` step sends its `subject`, its `react` element as the body and its `text` as the plain-text part; a `message` step sends its `text`. The code can import `react` and `@react-email/components`, and reads the account through the `whop` client from `whop:message`, which can only read: it holds every account-level `:read` permission that both the admin role and Whop AI hold except `payout:account:read`, as listed for previewing a step. Setting it, or previewing the step, needs every one of those permissions. Up to 64,000 characters. `null` on a `wait`, and until it is written. */
+    /** An `email` or `message` step's code: a TSX module whose default export gets the member and returns `message.send()`, `message.skip()` or `message.exit()` from `whop:message`. An `email` step sends its `subject`, its `react` element as the body and its `text` as the plain-text part. A `message` step sends its `text`. The code can import `react` and `@react-email/components`. It reads the account through the `whop` client from `whop:message`, which can only read. That client holds every account-level `:read` permission that both the admin role and Whop AI hold, except `payout:account:read`, as listed for previewing a step. Setting it, or previewing the step, needs every one of those permissions. Up to 64,000 characters. `null` on a `wait`, and until it is written. */
     source_code: string | null;
     /** When the step was last updated, as an ISO 8601 timestamp. */
     updated_at: string;

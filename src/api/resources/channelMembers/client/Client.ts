@@ -17,7 +17,9 @@ export declare namespace ChannelMembersClient {
 }
 
 /**
- * Channel members include explicit participants and access-derived experience or support users. Direct participants include read positions; access-derived users do not create memberships or expose reading activity.
+ * A Channel Member is a person in a channel. A person added to a private or support channel has a stored membership, with a read position and a notification preference. A person who reads a channel through their access to its experience or support inbox has no stored membership. Their `id` is `null`, and their read position is not shown.
+ *
+ * Use the Channel Members API to [list or search](/api-reference/channel-members/list-channel-members) the people in a channel and [add](/api-reference/channel-members/add-channel-member) someone to a private or support channel. You can also [change your notification preference](/api-reference/channel-members/update-channel-member). [Remove](/api-reference/channel-members/remove-channel-member) a member, or remove yourself to leave a channel.
  */
 export class ChannelMembersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ChannelMembersClient.Options>;

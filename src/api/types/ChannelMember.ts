@@ -8,13 +8,13 @@ export interface ChannelMember {
     created_at: string | null;
     /** Stored membership ID, or null for access-derived users. */
     id: string | null;
-    /** Your private-channel inbox state; null for other users or channel kinds. */
+    /** Your inbox state for a private channel. `null` for other users and other channel kinds. */
     inbox_status: ChannelMember.InboxStatus | null;
     /** Authorized participant read position. Community positions are visible only to the user themselves. */
     last_viewed_at: string | null;
     notification_preference: ChannelMember.NotificationPreference | null;
     pinned_position: number | null;
-    /** Personal unread state; null for other users. */
+    /** Your unread state for the channel. `null` for other users. */
     unread: boolean | null;
     /** When the stored channel membership last changed, as an ISO 8601 timestamp. Null for users whose access does not have a stored membership. */
     updated_at: string | null;
@@ -24,7 +24,7 @@ export interface ChannelMember {
 }
 
 export namespace ChannelMember {
-    /** Your private-channel inbox state; null for other users or channel kinds. */
+    /** Your inbox state for a private channel. `null` for other users and other channel kinds. */
     export const InboxStatus = {
         Requested: "requested",
         Accepted: "accepted",

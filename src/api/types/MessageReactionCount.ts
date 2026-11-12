@@ -6,7 +6,7 @@ export interface MessageReactionCount {
     reacted: boolean;
     total_score: number;
     user_count: number;
-    /** The Unicode emoji for emoji reactions; otherwise the reaction's value. */
+    /** The Unicode emoji for an emoji reaction. For other reaction kinds, the reaction's value. */
     value: string | null;
 }
 

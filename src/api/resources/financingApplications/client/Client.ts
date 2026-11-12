@@ -17,7 +17,9 @@ export declare namespace FinancingApplicationsClient {
 }
 
 /**
- * To accept payment-financing methods, an account applies through a financing application: a request to review the account for payment financing, not a loan or business capital. Create an application, save answers to its requirements, then submit it for review. You can manage applications for your own account and its direct subaccounts.
+ * A Financing Application is an account's request to accept payment-financing methods, such as buy now, pay later. Whop reviews the account before it can offer them. It is not a loan or business capital.
+ *
+ * Use the Financing Applications API to [create](/api-reference/financing-applications/create-financing-application) an application, [save answers](/api-reference/financing-applications/update-financing-application) to its requirements, and [submit](/api-reference/financing-applications/submit-financing-application) it for review. You can manage applications for your own account and its direct subaccounts.
  */
 export class FinancingApplicationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FinancingApplicationsClient.Options>;

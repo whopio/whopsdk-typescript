@@ -17,9 +17,9 @@ export declare namespace EmailAddressesClient {
 }
 
 /**
- * An Email address is a mailbox on one of the account's domains, such as support@example.com. The domain needs the `email` capability in the `ready` state first. A mailbox either belongs to one team member, who alone can read it and send from it, or is shared by the account, where `email:read` and `email:send` decide who can use it.
+ * An Email address is a mailbox on one of the account's domains, such as support@example.com. The domain needs the `email` capability in the `ready` state first. A mailbox can belong to one team member, who alone can read it and send from it. Or the account can share it, and then `email:read` and `email:send` decide who can use it.
  *
- * Use the Email addresses API to create, list, reassign and delete mailboxes, read the password mail apps sign in with, and download a configuration profile that adds the mailbox to Mail on Apple devices. Deleting an address keeps its mail, and creating it again in the same account brings the mailbox back.
+ * Use the Email addresses API to create, list, reassign and delete mailboxes. You can read the password that mail apps sign in with. You can also download a configuration profile that adds the mailbox to Mail on Apple devices. Deleting an address keeps its mail, and creating it again in the same account brings the mailbox back.
  */
 export class EmailAddressesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EmailAddressesClient.Options>;

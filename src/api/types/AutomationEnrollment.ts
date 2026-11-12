@@ -19,7 +19,7 @@ export interface AutomationEnrollment {
     next_step_id: string | null;
     /** The `key` of the step the member is waiting on, in their version. `null` once the enrollment ends. */
     next_step_key: number | null;
-    /** `active` while the member moves through the automation, `completed` after its last step, `canceled` when the account canceled the enrollment or stopped or deleted the automation. */
+    /** `active` while the member moves through the automation. `completed` after its last step. `canceled` when the account canceled the enrollment, or stopped or deleted the automation. */
     status: AutomationEnrollment.Status;
     /** The webhook event that enrolled the member. `null` when `POST /automations/{id}/trigger` enrolled them. */
     trigger_event: AutomationEnrollment.TriggerEvent | null;
@@ -34,7 +34,7 @@ export interface AutomationEnrollment {
 }
 
 export namespace AutomationEnrollment {
-    /** `active` while the member moves through the automation, `completed` after its last step, `canceled` when the account canceled the enrollment or stopped or deleted the automation. */
+    /** `active` while the member moves through the automation. `completed` after its last step. `canceled` when the account canceled the enrollment, or stopped or deleted the automation. */
     export const Status = {
         Active: "active",
         Completed: "completed",
