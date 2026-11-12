@@ -28,6 +28,8 @@ export interface Invoice {
     object: Invoice.Object_;
     overdue: boolean;
     paid_at: string | null;
+    /** The payment methods the customer can choose from when paying through the invoice's checkout link. It takes precedence over the invoice's variants and the account. `null` when the invoice uses its variants' payment methods. */
+    payment_method_configuration: Whop.CheckoutSessionPaymentMethodConfiguration | null;
     payment_method_id: string | null;
     recipient_emails: string[];
     /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp: the `charge_at` it was sent or issued with, or `due_at` when an invoice with a `payment_method_id` is sent or issued before it is due without one. On a draft, the `charge_at` of its scheduled send. `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
