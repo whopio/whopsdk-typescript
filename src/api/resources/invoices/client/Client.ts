@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { SendsClient } from "../resources/sends/client/Client.js";
 
 export declare namespace InvoicesClient {
     export type Options = BaseClientOptions;
@@ -23,9 +24,14 @@ export declare namespace InvoicesClient {
  */
 export class InvoicesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<InvoicesClient.Options>;
+    protected _sends: SendsClient | undefined;
 
     constructor(options: InvoicesClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get sends(): SendsClient {
+        return (this._sends ??= new SendsClient(this._options));
     }
 
     /**
