@@ -133,7 +133,7 @@ export interface Account {
     total_earned_usd: number | null;
     /** Total USD value across balances with known exchange rates. Computed only on single-account reads (`retrieve` and `me`); `null` on list responses, writes, missing balance-read permission, or unavailable balance source. */
     total_usd: string | null;
-    /** The trading account address and its WebSocket subscriptions. Opt in with `include_trading=true` on single-account reads. `null` otherwise, without trading permission, or without an Ethereum wallet. */
+    /** The trading account address, a snapshot of its margin and open positions, and its WebSocket subscriptions. Opt in with `include_trading=true` on single-account reads. `null` otherwise, without trading permission, or without an Ethereum wallet. */
     trading: Whop.TradingAccount | null;
     /** Whether the account uses its logo as the fallback Open Graph image. */
     use_logo_as_opengraph_image_fallback: boolean;

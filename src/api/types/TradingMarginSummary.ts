@@ -9,8 +9,6 @@ export interface TradingMarginSummary {
     total_margin_used: Whop.Money;
     /** Combined notional value of open positions, in USD. */
     total_position_notional: Whop.Money;
-    /** Raw USD balance as Hyperliquid reports it, excluding position value. */
-    total_raw_usd: Whop.Money;
     /** USD that can be withdrawn now without closing positions. */
     withdrawable: Whop.Money;
 }

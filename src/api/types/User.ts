@@ -39,7 +39,7 @@ export interface User {
     state: string | null;
     /** Total USD value of the user's personal holdings in `balances`, across those with known exchange rates. Computed only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise, when `include_balance=false`, or when the balance source is unavailable. */
     total_usd: string | null;
-    /** The trading account address and its WebSocket subscriptions. Opt in with `include_trading=true` when retrieving `me`. `null` otherwise, without trading permission, or without an Ethereum wallet. */
+    /** The trading account address, a snapshot of its margin and open positions, and its WebSocket subscriptions. Opt in with `include_trading=true` when retrieving `me`. `null` otherwise, without trading permission, or without an Ethereum wallet. */
     trading: Whop.TradingAccount | null;
     /** The user's unique username */
     username: string;

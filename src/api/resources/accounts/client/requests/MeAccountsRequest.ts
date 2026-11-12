@@ -5,6 +5,6 @@
  *     {}
  */
 export interface MeAccountsRequest {
-    /** Also return the trading account under `trading`: its address and its Hyperliquid WebSocket subscriptions. Requires crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet; null otherwise. */
+    /** Also return the trading account under `trading`: its address, a snapshot of its margin and open positions, and its Hyperliquid WebSocket subscriptions. Requires crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet. Otherwise `trading` is `null`. */
     include_trading?: boolean;
 }
