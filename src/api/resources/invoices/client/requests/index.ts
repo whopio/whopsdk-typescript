@@ -1,5 +1,6 @@
 export type { ChargeInvoicesRequest } from "./ChargeInvoicesRequest.js";
 export type { CreateInvoicesRequest } from "./CreateInvoicesRequest.js";
+export type { DeleteInvoicesRequest } from "./DeleteInvoicesRequest.js";
 export type { GeneratePdfInvoicesRequest } from "./GeneratePdfInvoicesRequest.js";
 export { IssueInvoicesRequest } from "./IssueInvoicesRequest.js";
 export type { ListInvoicesRequest } from "./ListInvoicesRequest.js";

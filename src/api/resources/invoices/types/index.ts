@@ -1,3 +1,4 @@
+export * from "./DeleteInvoicesResponse.js";
 export * from "./ListInvoicesRequestDirection.js";
 export * from "./ListInvoicesRequestOrder.js";
 export * from "./ListInvoicesRequestStatus.js";
