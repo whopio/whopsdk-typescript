@@ -115,7 +115,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -228,7 +228,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -294,7 +294,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -374,7 +374,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -482,7 +482,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -593,7 +593,7 @@ describe("ExperimentsClient", () => {
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
-            targeting_rules: [{ conditions: [], type: "include" }],
+            targeting_rules: [{ conditions: [], pass_percentage: 1.1, type: "include" }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },

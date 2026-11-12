@@ -35,6 +35,8 @@ export namespace UpdateExperimentsRequest {
         export interface Item {
             /** Conditions within this rule. Must be non-empty. All conditions must be satisfied for the rule to match (AND logic). Rules are OR-ed together. */
             conditions: Item.Conditions.Item[];
+            /** Percentage of matching subjects that this rule lets in, from 0 to 100. Omit it to let in every matching subject. Only `include` rules accept it. Raising it keeps every subject that the rule already lets in. */
+            pass_percentage?: number | undefined;
             /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. Defaults to `include`. */
             type?: Item.Type | undefined;
         }
