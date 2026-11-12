@@ -23,6 +23,8 @@ export namespace ListSupportedMethodsResponse {
             /** Supported payout method display name. */
             name: string | null;
             object: Item.Object_;
+            /** The ID of the supported payout method that lists this one, such as the bank deposit method that lists a named bank. Show this method as a choice inside that method, not as a separate method. Null for every other method. */
+            parent_id: string | null;
             /** Fee and delivery estimates for the requested amount, one per destination currency. Null unless an amount was provided. */
             quotes: Item.Quotes.Item[] | null;
             /** Fields to collect before saving this supported payout method. Present only when supported_payout_method_id narrows the request to one method. */

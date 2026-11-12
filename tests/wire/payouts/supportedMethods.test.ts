@@ -27,6 +27,7 @@ describe("SupportedMethodsClient", () => {
                     id: "podst_xxxxxxxxxxxxxx",
                     name: "SEPA Bank Transfer",
                     object: "supported_payout_method",
+                    parent_id: "parent_id",
                     quotes: [
                         {
                             amount: 2500,
