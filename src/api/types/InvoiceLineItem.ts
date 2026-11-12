@@ -19,7 +19,7 @@ export interface InvoiceLineItem {
     subtotal: Whop.Money | null;
     /** The tax collected on this item, in the payment's `currency`. Null when no tax was recorded. */
     tax_amount: Whop.Money | null;
-    /** The price of one unit before discounts, in the payment's `currency`. Null when the payment recorded no price. */
+    /** The saved price of one unit before discounts, in the payment's `currency`. Creating or replacing recurring items includes the upfront fee and first billing period. Renewal invoices exclude the upfront fee. Other edits preserve saved prices. Null when the payment recorded no price. */
     unit_amount: Whop.Money | null;
     /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
     variant_id: string | null;
