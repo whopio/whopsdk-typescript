@@ -7,6 +7,9 @@ export interface TradingHyperliquidAccount {
     address: string;
     /** USDT0 in the Whop wallet on Plasma that a `deposit` trade can move into this account, as a decimal string. `null` when the chain could not be read. */
     depositable: string | null;
+    /** Account value and margin across the main exchange and the `xyz` markets, read from Hyperliquid at most once a second. `null` when Hyperliquid could not be read. Use `websocket_subscriptions` for live updates. */
+    margin_summary: Whop.TradingMarginSummary | null;
+    positions: Whop.TradingPosition[] | null;
     websocket_subscriptions: Whop.TradingWebsocketSubscription[];
     /** Hyperliquid WebSocket URL to connect to directly for live updates. */
     websocket_url: string;
