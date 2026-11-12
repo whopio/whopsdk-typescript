@@ -13,6 +13,8 @@ export interface AccountPreferences {
     ads_scheduling_timezone: string;
     /** The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel, and tags ad click-through URLs with `tw_source`/`tw_adid` so Triple Whale's pixel attributes conversions back to the right ad. `status` is `connected`, `not_connected`, or `requires_shop_domain` (Triple Whale keys records by shop, so spend only flows once `shop_domain` is set). `masked_api_key` shows the leading characters of the stored key; the full key is never returned. `shop_domain` is the shop spend is reported for. */
     ads_triple_whale_integration: Record<string, unknown>;
+    /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
+    cancellation_emails: boolean;
     /** Whether incoming funds are automatically moved to the account's cards balance. `false` when the account has no cards balance. */
     cards_auto_top_up: boolean;
     /** Whether Whop Card notifications reach this account's team. `true` by default, including when the account has no cards balance. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. */
@@ -36,11 +38,15 @@ export interface AccountPreferences {
     economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[];
     /** The account's last Economic Intelligence period, once it has ended. `null` while Economic Intelligence is on, or when it has never been on. */
     economic_intelligence_previous_period: Whop.AccountEconomicIntelligencePreviousPeriod | null;
+    /** Whether Whop emails members when a renewal payment fails or needs them to verify it. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. Subscriptions billed by invoice still get the invoice and its past-due reminders, since that is how the member pays. These emails also stop while the account's `send_customer_emails` is `false`. */
+    failed_payment_emails: boolean;
     feedback_options: Whop.FeedbackOption[];
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: AccountPreferences.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once a day. `null` when it may change now. */
     preferred_settlement_currency_changeable_at: string | null;
+    /** Whether Whop emails members the day before their membership renews or their free trial converts. `true` by default. Set it to `false` to stop that reminder. Members still get the reminders card networks require. They go out 7 days before a trial over 7 days converts, and 30 days before a 6-month or longer plan renews. All stop while `send_customer_emails` is `false`. */
+    renewal_reminder_emails: boolean;
     /** Whether Whop emails customers after a purchase asking them to leave a review. `true` by default. Set it to `false` to stop these emails, including ones already scheduled. They also stop while the account's `send_customer_emails` is `false`. */
     review_request_emails: boolean;
     /** Whether Whop emails and notifies the teams of this account's subaccounts. `true` by default. Set it to `false` to stop Whop's emails, push, and in-app notifications to them. These include payout, verification, dispute, and card alerts about their accounts. `null` when the account has no subaccounts. */
