@@ -10,9 +10,9 @@ export interface OwnerLevel {
     monthly_ads_spend: Whop.Money;
     /** Captured Whop Card spend this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
     monthly_card_spend: Whop.Money;
-    /** Qualifying spend this calendar month across every account the owner owns, plus the owner's partner points, in USD: `points` divided by 10. */
+    /** Qualifying spend this calendar month across every account the owner owns, plus the owner's personal trading and partner points, in USD: `points` divided by 10. */
     monthly_qualifying_spend: Whop.Money;
-    /** Perpetual trading volume filled through Whop this calendar month across every account the owner owns, in USD. An account whose month nets to zero or below is left out. */
+    /** Perpetual trading volume filled through Whop this calendar month across every account the owner owns and their personal wallet, in USD. An account whose month nets to zero or below is left out. */
     monthly_trading_volume: Whop.Money;
     /** Points earned this month across every account the owner owns, plus the owner's partner points, rounded down. An account whose month nets below zero counts as zero. */
     points: number;
