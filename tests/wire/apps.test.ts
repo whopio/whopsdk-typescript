@@ -30,6 +30,7 @@ describe("AppsClient", () => {
                         title: "Shine Time Holdings",
                     },
                     app_type: "b2b_app",
+                    average_review_rating: 0,
                     banner_image: {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     },
@@ -54,10 +55,12 @@ describe("AppsClient", () => {
                     hosted_url: "https://shine-time-booking-store.whop.site",
                     icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                     id: "app_xxxxxxxxxxxxxx",
+                    is_whop_app: false,
                     name: "Shine Time Booking",
                     openapi_path: "/openapi.json",
                     origin: "https://whopappdomain0000001.apps.whop.com",
                     product_category: "pressure_washing",
+                    published_reviews_count: 0,
                     route: "shine-time-booking-store",
                     skills_path: "/skills",
                     status: "live",
@@ -65,10 +68,12 @@ describe("AppsClient", () => {
                 },
             ],
             page_info: {
-                end_cursor: "Mg",
+                end_cursor: "WyJjdXJzb3IiLDFd",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
+                total_count: 1,
+                total_count_capped: true,
             },
         };
 
@@ -157,6 +162,7 @@ describe("AppsClient", () => {
             app_store_description:
                 "Shine Time Booking turns a whop into a booking calendar. Members pick a package, choose a slot that fits the day's route, and pay up front. A reminder goes out the night before and the receipt lands as soon as the job is signed off.",
             app_type: "b2b_app",
+            average_review_rating: 0,
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -199,6 +205,8 @@ describe("AppsClient", () => {
             icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
             id: "app_xxxxxxxxxxxxxx",
             imported_from_url: "https://shinetime.example",
+            is_app_store_listed: false,
+            is_whop_app: false,
             marketplace_status: "not_available",
             name: "Shine Time Booking",
             oauth_client_type: "public",
@@ -235,6 +243,7 @@ describe("AppsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 status: "draft",
             },
+            published_reviews_count: 0,
             redirect_uris: ["https://booking.shinetime.example/oauth/callback"],
             requested_permissions: [
                 {
@@ -437,6 +446,7 @@ describe("AppsClient", () => {
             app_store_description:
                 "Shine Time Booking turns a whop into a booking calendar. Members pick a package, choose a slot that fits the day's route, and pay up front. A reminder goes out the night before and the receipt lands as soon as the job is signed off.",
             app_type: "b2b_app",
+            average_review_rating: 0,
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -479,6 +489,8 @@ describe("AppsClient", () => {
             icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
             id: "app_xxxxxxxxxxxxxx",
             imported_from_url: "https://shinetime.example",
+            is_app_store_listed: false,
+            is_whop_app: false,
             marketplace_status: "not_available",
             name: "Shine Time Booking",
             oauth_client_type: "public",
@@ -515,6 +527,7 @@ describe("AppsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 status: "draft",
             },
+            published_reviews_count: 0,
             redirect_uris: ["https://booking.shinetime.example/oauth/callback"],
             requested_permissions: [
                 {
@@ -674,6 +687,7 @@ describe("AppsClient", () => {
             app_store_description:
                 "Shine Time Booking turns a whop into a booking calendar. Members pick a package, choose a slot that fits the day's route, and pay up front. A reminder goes out the night before and the receipt lands as soon as the job is signed off.",
             app_type: "b2b_app",
+            average_review_rating: 0,
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -716,6 +730,8 @@ describe("AppsClient", () => {
             icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
             id: "app_xxxxxxxxxxxxxx",
             imported_from_url: "https://shinetime.example",
+            is_app_store_listed: false,
+            is_whop_app: false,
             marketplace_status: "not_available",
             name: "Shine Time Booking",
             oauth_client_type: "public",
@@ -752,6 +768,7 @@ describe("AppsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 status: "draft",
             },
+            published_reviews_count: 0,
             redirect_uris: ["https://booking.shinetime.example/oauth/callback"],
             requested_permissions: [
                 {
@@ -1150,6 +1167,7 @@ describe("AppsClient", () => {
             app_store_description:
                 "Shine Time Booking turns a whop into a booking calendar. Members pick a package, choose a slot that fits the day's route, and pay up front. A reminder goes out the night before and the receipt lands as soon as the job is signed off.",
             app_type: "b2b_app",
+            average_review_rating: 0,
             banner_image: {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
@@ -1192,6 +1210,8 @@ describe("AppsClient", () => {
             icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
             id: "app_xxxxxxxxxxxxxx",
             imported_from_url: "https://shinetime.example",
+            is_app_store_listed: false,
+            is_whop_app: false,
             marketplace_status: "not_available",
             name: "Shine Time Booking",
             oauth_client_type: "public",
@@ -1228,6 +1248,7 @@ describe("AppsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 status: "draft",
             },
+            published_reviews_count: 0,
             redirect_uris: ["https://booking.shinetime.example/oauth/callback"],
             requested_permissions: [
                 {

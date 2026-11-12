@@ -7,6 +7,8 @@ export interface AppListItem {
     account: Whop.AccountParent;
     /** The type of end-user the app is built for. */
     app_type: AppListItem.AppType;
+    /** Average star rating across published reviews for this app, from `1.0` to `5.0`. Returns `0.0` when no published-review rating is available. */
+    average_review_rating: number;
     /** Banner image from the app's product listing, or `null` when none is uploaded. */
     banner_image: Whop.AppBannerImage | null;
     /** The production base URL where the app is hosted. `null` if no base URL is configured, if the caller lacks the `developer:basic:read` permission on the app's account, or on list responses, which never expose it. */
@@ -40,6 +42,8 @@ export interface AppListItem {
     icon: Whop.AppIcon;
     /** App ID, prefixed `app_`. */
     id: string;
+    /** Whether Whop publishes this app. */
+    is_whop_app: boolean;
     /** Display name shown on the app store and in experience navigation. */
     name: string;
     /** URL path to the app's OpenAPI spec file, or `null` when not configured. */
@@ -48,6 +52,8 @@ export interface AppListItem {
     origin: string | null;
     /** Product category a business built from this app as a template sells, such as `pressure_washing`, or `null` when none has been set. */
     product_category: string | null;
+    /** Published customer reviews for this app. */
+    published_reviews_count: number;
     /**
      * Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed.
      * DEPRECATED: Read `domains` instead.
