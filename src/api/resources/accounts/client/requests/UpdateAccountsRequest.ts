@@ -31,6 +31,8 @@ export interface UpdateAccountsRequest {
     dispute_fighter_enabled?: boolean;
     /** The account's end-user license agreement document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
     eula?: UpdateAccountsRequest.Eula | null;
+    /** Your platform's own identifier for this subaccount. It must be unique among your subaccounts, and a duplicate returns a 409. Only the parent account can set it. Pass `null` to clear. */
+    external_id?: string | null;
     /** The ID of the product to feature for affiliates. Pass `null` to clear. */
     featured_affiliate_product_id?: string | null;
     /** Public account home page preferences. */

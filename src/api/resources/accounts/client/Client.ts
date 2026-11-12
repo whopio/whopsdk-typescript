@@ -90,6 +90,7 @@ export class AccountsClient {
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,
+                    external_id: externalId,
                     volume_min: volumeMin,
                     volume_max: volumeMax,
                     parent_account_id: parentAccountId,
@@ -106,6 +107,7 @@ export class AccountsClient {
                     query,
                     created_after: createdAfter != null ? createdAfter : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
+                    external_id: externalId,
                     volume_min: volumeMin,
                     volume_max: volumeMax,
                     parent_account_id: parentAccountId,
@@ -622,6 +624,7 @@ export class AccountsClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -685,6 +688,8 @@ export class AccountsClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

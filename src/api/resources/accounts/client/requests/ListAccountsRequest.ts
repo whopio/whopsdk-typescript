@@ -27,6 +27,8 @@ export interface ListAccountsRequest {
     created_after?: string;
     /** Return only accounts created before this ISO 8601 timestamp. */
     created_before?: string;
+    /** Return only the subaccount with this `external_id`, matched exactly and case-sensitively. End it with `%` to return every subaccount whose `external_id` starts with the text before it, such as `shopline:%`. `%` is accepted only at the end, because anywhere else it would scan all your subaccounts. `_` always matches literally. */
+    external_id?: string;
     /** Return only accounts whose lifetime USD volume is at least this value. Requires `stats:read` on the parent account. */
     volume_min?: number;
     /** Return only accounts whose lifetime USD volume is at most this value. Requires `stats:read` on the parent account. */

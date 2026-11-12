@@ -15,13 +15,17 @@ export interface CreateAccountsRequest {
     dispute_fighter_enabled?: boolean;
     /** The email address of the account owner. Required when creating a subaccount. */
     email?: string;
-    /** Arbitrary key/value metadata to store on the account. */
+    /** Your platform's own identifier for this subaccount, such as your user or store ID. Unique among your subaccounts: creating a second account with the same `external_id` and a different `email` returns a 409, unless `reassign_external_id` is `true`. Retrying with the same `email` and `external_id` returns the existing account. Subaccounts only. */
+    external_id?: string | null;
+    /** Arbitrary key/value metadata to store on the account. When `external_id` is not sent, an `external_id` key here sets `external_id` and follows its rules. It must be unique among your subaccounts unless `reassign_external_id` is `true`. It stays in `metadata` as sent. Changing it later does not change `external_id`. */
     metadata?: Record<string, unknown>;
     /** Whether payment orchestration is enabled for this account. Requires payout:account:update. Omit to preserve the existing setting or creation default. */
     orchestration_enabled?: boolean;
+    /** Pass `true` to move `external_id` to the new subaccount when another of your subaccounts already has it. Without it, that request returns a 409. The subaccount that had it is not deleted. It stays active with `external_id` set to `null`, and its `metadata` is unchanged. Requires `external_id`. Also requires the `company:update` permission on your platform account, in addition to `company:create_child`. Ignored when the same `email` already has the `external_id`, which returns that account. */
+    reassign_external_id?: boolean;
     /** Whether Whop sends transactional emails to customers on behalf of the subaccount. */
     send_customer_emails?: boolean;
-    /** The display name of the account. Defaults to `metadata.external_id` or the owner's email when omitted. */
+    /** The display name of the account. Defaults to `external_id` or the owner's email when omitted. */
     title?: string;
     /** The account's business website, as an `http` or `https` URL of at most 255 characters. Also added to the account's `social_links` as a `website` entry. */
     website?: string | null;

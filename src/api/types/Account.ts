@@ -44,6 +44,8 @@ export interface Account {
     email: string | null;
     /** The account's end-user license agreement document, or `null` if they have not published one. */
     eula: Whop.File_ | null;
+    /** The parent platform's own identifier for this subaccount, unique among the platform's subaccounts. `null` when unset. */
+    external_id: string | null;
     /** The account's most recent financing application. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has never applied for financing. */
     financing: Whop.AccountFinancing | null;
     /** When a suspended account can pay out its balance to its own payout method, as an ISO 8601 timestamp. A dispute can move it later. Computed on `retrieve`, `me`, and `suspend`; `null` otherwise, when `status` is not `suspended`, and when the suspension holds the balance. */
