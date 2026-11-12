@@ -45,6 +45,8 @@ export interface AccountPreferences {
     review_request_emails: boolean;
     /** Whether Whop emails and notifies the teams of this account's subaccounts. `true` by default. Set it to `false` to stop Whop's emails, push, and in-app notifications to them. These include payout, verification, dispute, and card alerts about their accounts. `null` when the account has no subaccounts. */
     subaccount_notifications: boolean | null;
+    /** Whether this account's subaccounts are view-only for their own team members. When `true`, a subaccount's team can still see everything their role allows but every change is refused with a view-only error. `false` by default. `null` when the account has no subaccounts. */
+    subaccount_team_view_only: boolean | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: AccountPreferences.SubscriptionFailureBehavior;
 }
