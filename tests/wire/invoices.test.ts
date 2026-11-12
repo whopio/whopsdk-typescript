@@ -35,6 +35,7 @@ describe("InvoicesClient", () => {
                         "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     customer_name: "Dana",
+                    deletable: false,
                     due_at: "due_at",
                     email_address: "marcus@shinetime.example",
                     id: "pay_xxxxxxxxxxxxxx",
@@ -211,6 +212,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -440,6 +442,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -552,6 +555,110 @@ describe("InvoicesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("delete (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { deleted: true, id: "pay_xxxxxxxxxxxxxx" };
+
+        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.invoices.delete({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.invoices.delete({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("delete (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.invoices.delete({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("delete (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.invoices.delete({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("delete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/invoices/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.invoices.delete({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -580,6 +687,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -748,6 +856,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -1114,6 +1223,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -1338,6 +1448,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -1529,6 +1640,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -1697,6 +1809,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
@@ -1834,6 +1947,7 @@ describe("InvoicesClient", () => {
                 "pay_xxxxxxxxxxxxxx.eyJfcmFpbHMiOnsiZGF0YSI6WzEsZmFsc2VdLCJwdXIiOiJSZWNlaXB0XG5jaGVja291dF9tb3VudFxuIn19--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             customer_name: "Dana",
+            deletable: false,
             due_at: "due_at",
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",

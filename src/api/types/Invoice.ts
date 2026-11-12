@@ -12,6 +12,8 @@ export interface Invoice {
     checkout_link: string | null;
     created_at: string;
     customer_name: string | null;
+    /** True when `DELETE /invoices/{id}` can delete this invoice. A draft qualifies unless it is scheduled or bills a subscription. A void invoice qualifies unless it collected money or still awaits a bank wire. */
+    deletable: boolean;
     due_at: string | null;
     email_address: string | null;
     id: string;

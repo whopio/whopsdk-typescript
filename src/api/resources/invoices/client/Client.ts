@@ -324,6 +324,88 @@ export class InvoicesClient {
     }
 
     /**
+     * Deletes a draft or void invoice. A deleted invoice no longer appears in invoice or payment lists, and its ID returns a `404`. Deleting can't be undone. Void an open invoice before you delete it. A draft with a scheduled send or charge must be unscheduled first. A draft renewal invoice can't be deleted, and neither can a void invoice that collected money or still awaits a bank wire. The invoice's `deletable` field is `true` when this call can delete it.
+     *
+     * @param {Whop.DeleteInvoicesRequest} request
+     * @param {InvoicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.invoices.delete({
+     *         id: "id"
+     *     })
+     */
+    public delete(
+        request: Whop.DeleteInvoicesRequest,
+        requestOptions?: InvoicesClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.DeleteInvoicesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
+    }
+
+    private async __delete(
+        request: Whop.DeleteInvoicesRequest,
+        requestOptions?: InvoicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.DeleteInvoicesResponse>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-10-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `invoices/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.DeleteInvoicesResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/invoices/{id}");
+    }
+
+    /**
      * Updates draft invoice items and billing fields. Updates of only `recipient_emails` and `memo` are also allowed on unpaid invoices. The customer is set when the draft is created and can't change. To bill someone else, first void the draft. Then create a new invoice. Edit customer contact details through the member API. A draft with no saved payment method and no scheduled send needs `invoice:update`, `invoice:create`, or `payment:charge`; every other update, and setting `payment_method_id`, needs `payment:charge`.
      *
      * @param {Whop.UpdateInvoicesRequest} request
