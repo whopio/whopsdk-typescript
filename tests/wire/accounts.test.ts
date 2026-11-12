@@ -156,6 +156,7 @@ describe("AccountsClient", () => {
                         waveform_url: null,
                         width: null,
                     },
+                    external_id: "connected_account_123",
                     financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
                     funds_release_at: "funds_release_at",
                     home_preferences: ["hide_member_count"],
@@ -825,6 +826,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
+            external_id: "connected_account_123",
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
@@ -1444,6 +1446,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
+            external_id: "connected_account_123",
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
@@ -2078,6 +2081,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
+            external_id: "connected_account_123",
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
@@ -2755,6 +2759,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
+            external_id: "connected_account_123",
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
@@ -3233,6 +3238,34 @@ describe("AccountsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("update (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/accounts/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.accounts.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("formCompany (1)", async () => {
@@ -4122,6 +4155,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
+            external_id: "connected_account_123",
             financing: { application_id: "inrq_xxxxxxxxxxxxxx", status: "requires_collection" },
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
