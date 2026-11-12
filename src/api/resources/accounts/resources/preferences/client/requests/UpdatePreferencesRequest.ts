@@ -17,6 +17,8 @@ export interface UpdatePreferencesRequest {
     ads_scheduling_timezone?: string;
     /** Connects or disconnects the Triple Whale integration, or changes the shop it reports to. Requires the `ad_campaign:create` scope on your API key. Connecting requires a `shop_domain` to report spend against. */
     ads_triple_whale_integration?: UpdatePreferencesRequest.AdsTripleWhaleIntegration;
+    /** Whether Whop emails members when their membership is canceled or terminated. Set it to `false` to stop these emails while keeping the account's other customer emails. Requires the `company:update` scope on your API key. */
+    cancellation_emails?: boolean;
     /** Whether incoming funds are automatically moved to the account's cards balance. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
     cards_auto_top_up?: boolean;
     /** Whether Whop Card notifications reach this account's team. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
@@ -31,10 +33,14 @@ export interface UpdatePreferencesRequest {
     economic_intelligence_auto_renew?: boolean;
     /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted; any other key is rejected. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
+    /** Whether Whop emails members when a renewal payment fails or needs them to verify it. Set it to `false` to stop these emails while keeping the account's other customer emails. Subscriptions billed by invoice still get their invoice emails. Requires the `company:update` scope on your API key. */
+    failed_payment_emails?: boolean;
     /** Replaces the account's own cancel reasons, shown to members in this order when they cancel. Pass an option's `id` to keep it, for example when renaming it; options without an `id` are added, and options left out are removed. Pass an empty array to go back to Whop's default reasons. Members who already picked an option keep the label they saw. Requires the `company:manage_checkout` scope on your API key. */
     feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once a day (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
+    /** Whether Whop emails members the day before their membership renews or their free trial converts. Set it to `false` to stop that reminder. Members still get the reminders card networks require. Requires the `company:update` scope on your API key. */
+    renewal_reminder_emails?: boolean;
     /** Whether Whop emails customers after a purchase asking them to leave a review. Set it to `false` to stop these emails, including ones already scheduled. Requires the `company:update` scope on your API key. */
     review_request_emails?: boolean;
     /** Whether Whop emails and notifies the teams of this account's subaccounts. Set it to `false` to stop Whop's emails, push, and in-app notifications to them. These include payout, verification, dispute, and card alerts about their accounts. Only accounts with subaccounts can set it. Requires the `company:update` scope on your API key. */
