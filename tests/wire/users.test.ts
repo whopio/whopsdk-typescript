@@ -168,6 +168,38 @@ describe("UsersClient", () => {
                         id: "id",
                         object: "trading_account",
                         provider: "hyperliquid",
+                        spot: {
+                            holdings: [
+                                {
+                                    average_entry_price: {
+                                        amount: "-1234.56",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                    cost_basis: {
+                                        amount: "-1234.56",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                    market: "market",
+                                    realized_pnl: {
+                                        amount: "-1234.56",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                    unrealized_pnl: {
+                                        amount: "-1234.56",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                    unrealized_pnl_percentage: null,
+                                },
+                            ],
+                        },
                         user_id: null,
                     },
                     username: "marcuswebb",
@@ -352,6 +384,23 @@ describe("UsersClient", () => {
                 id: "id",
                 object: "trading_account",
                 provider: "hyperliquid",
+                spot: {
+                    holdings: [
+                        {
+                            average_entry_price: {
+                                amount: "-1234.56",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            cost_basis: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            market: "market",
+                            realized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl_percentage: null,
+                        },
+                    ],
+                },
                 user_id: "user_id",
             },
             username: "marcuswebb",
@@ -522,6 +571,23 @@ describe("UsersClient", () => {
                 id: "id",
                 object: "trading_account",
                 provider: "hyperliquid",
+                spot: {
+                    holdings: [
+                        {
+                            average_entry_price: {
+                                amount: "-1234.56",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            cost_basis: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            market: "market",
+                            realized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl_percentage: null,
+                        },
+                    ],
+                },
                 user_id: "user_id",
             },
             username: "marcuswebb",
@@ -706,6 +772,23 @@ describe("UsersClient", () => {
                 id: "id",
                 object: "trading_account",
                 provider: "hyperliquid",
+                spot: {
+                    holdings: [
+                        {
+                            average_entry_price: {
+                                amount: "-1234.56",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            cost_basis: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            market: "market",
+                            realized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl_percentage: null,
+                        },
+                    ],
+                },
                 user_id: "user_id",
             },
             username: "marcuswebb",
@@ -880,6 +963,23 @@ describe("UsersClient", () => {
                 id: "id",
                 object: "trading_account",
                 provider: "hyperliquid",
+                spot: {
+                    holdings: [
+                        {
+                            average_entry_price: {
+                                amount: "-1234.56",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            cost_basis: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            market: "market",
+                            realized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                            unrealized_pnl_percentage: null,
+                        },
+                    ],
+                },
                 user_id: "user_id",
             },
             username: "marcuswebb",

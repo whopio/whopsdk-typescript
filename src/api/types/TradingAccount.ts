@@ -12,6 +12,8 @@ export interface TradingAccount {
     object: TradingAccount.Object_;
     /** Trading venue that holds the positions and orders. */
     provider: TradingAccount.Provider;
+    /** Spot holdings in the Whop wallet with their entry price and profit and loss. `null` when it could not be read. */
+    spot: Whop.TradingSpotAccount | null;
     /** The user who owns this trading account, prefixed `user_`. `null` when an account owns it. */
     user_id: string | null;
 }
