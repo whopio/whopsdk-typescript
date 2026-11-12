@@ -310,6 +310,7 @@ export * from "./InvoiceCollectionMethods.js";
 export * from "./InvoiceLegacy.js";
 export * from "./InvoiceLineItem.js";
 export * from "./InvoicePdf.js";
+export * from "./InvoiceSend.js";
 export * from "./InvoiceStatuses.js";
 export * from "./InvoicesSortableColumns.js";
 export * from "./Languages.js";

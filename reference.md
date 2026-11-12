@@ -34726,6 +34726,86 @@ await client.financialReports.breakdown.retrieve({
 </dl>
 </details>
 
+## Invoices Sends
+<details><summary><code>client.invoices.sends.<a href="/src/api/resources/invoices/resources/sends/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.InvoiceSend, Whop.ListSendsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists recorded invoice emails, most recent first. Each entry is a send, send again, scheduled send, reminder, or payment link after a failed charge. Each entry includes the addresses it went to and who sent it. Issuing without sending adds nothing. Entries appear after queuing. Addresses need `member:email:read`, and the sender needs `company:authorized_user:read`. History starts when recording is enabled and does not confirm inbox delivery.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.invoices.sends.list({
+    id: "id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.invoices.sends.list({
+    id: "id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.invoices.ListSendsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SendsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Members Logs
 <details><summary><code>client.members.logs.<a href="/src/api/resources/members/resources/logs/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListLogsResponse.Data.Item, Whop.ListLogsResponse&gt;</code></summary>
 <dl>

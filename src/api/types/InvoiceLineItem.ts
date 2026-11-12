@@ -9,7 +9,7 @@ export interface InvoiceLineItem {
     discount_amount: Whop.Money | null;
     /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */
     id: string | null;
-    /** The item's name as shown at checkout — the product title, else the variant title. */
+    /** The item's name as shown at checkout (the product title, else the variant title). */
     label: string | null;
     /** The product the variant belongs to, prefixed `prod_`. Null for a variant with no product. */
     product_id: string | null;
