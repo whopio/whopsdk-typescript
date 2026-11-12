@@ -153,6 +153,7 @@ export * from "./BountyTypes.js";
 export * from "./BusinessGoalTypes.js";
 export * from "./CancelationStatus.js";
 export * from "./CancelOptions.js";
+export * from "./Candle.js";
 export * from "./CaptureSpec.js";
 export * from "./CaptureSpecImu.js";
 export * from "./CaptureSpecVideo.js";

@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { CandlesClient } from "../resources/candles/client/Client.js";
 import { MarketsClient } from "../resources/markets/client/Client.js";
 
 export declare namespace TradesClient {
@@ -26,10 +27,15 @@ export declare namespace TradesClient {
  */
 export class TradesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TradesClient.Options>;
+    protected _candles: CandlesClient | undefined;
     protected _markets: MarketsClient | undefined;
 
     constructor(options: TradesClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get candles(): CandlesClient {
+        return (this._candles ??= new CandlesClient(this._options));
     }
 
     public get markets(): MarketsClient {

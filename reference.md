@@ -36342,6 +36342,95 @@ await client.stats.timeSeries.retrieve({
 </dl>
 </details>
 
+## Trades Candles
+<details><summary><code>client.trades.candles.<a href="/src/api/resources/trades/resources/candles/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Candle, Whop.ListCandlesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns price candles for a tokenized stock, oldest first.
+
+- **Intervals:** `1h`, `2h`, `4h`, `6h` and `12h` candles cover the last 30 days. `1d` and `1w` candles cover the full history.
+- **Weeks** start on Monday at 00:00 UTC.
+
+This endpoint is public: no API key is needed, and each IP address can make up to 60 requests a minute.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.trades.candles.list({
+    market: "market",
+    interval: "1h",
+    from: "2024-01-15T09:30:00Z"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.trades.candles.list({
+    market: "market",
+    interval: "1h",
+    from: "2024-01-15T09:30:00Z"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.trades.ListCandlesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CandlesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Trades Markets
 <details><summary><code>client.trades.markets.<a href="/src/api/resources/trades/resources/markets/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Market, Whop.ListMarketsResponse&gt;</code></summary>
 <dl>
