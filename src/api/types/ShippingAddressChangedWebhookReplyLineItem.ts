@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface ShippingAddressChangedWebhookReplyLineItem {
-    /** The line's total at this address, tax and shipping included, in the currency of `data.amount`. */
+    /** The line's total at this address, in the currency of `data.amount`. It includes tax unless you send `tax`, and shipping unless you send `shipping_options`. */
     amount: Whop.Money;
     /** The line's `id` from `data.line_items`, unchanged. */
     id: string;

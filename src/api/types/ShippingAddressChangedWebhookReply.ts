@@ -4,4 +4,7 @@ import type * as Whop from "../index.js";
 
 export interface ShippingAddressChangedWebhookReply {
     line_items: Whop.ShippingAddressChangedWebhookReplyLineItem[];
+    shipping_options?: Whop.ShippingAddressChangedWebhookReplyShippingOption[] | undefined;
+    /** The tax you charge at this address, in the currency of `data.amount`. PayPal shows it on its own Tax line, and the buyer pays it on top of the line totals. Leave it out to keep tax inside the line totals. */
+    tax?: Whop.Money | undefined;
 }
