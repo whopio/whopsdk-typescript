@@ -22802,7 +22802,7 @@ await client.partners.leaderboard();
 <dl>
 <dd>
 
-Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers.
+Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Deprecated: this list is retired and no longer appears in the API reference. It keeps responding for existing integrations and has no replacement.
 </dd>
 </dl>
 </dd>
