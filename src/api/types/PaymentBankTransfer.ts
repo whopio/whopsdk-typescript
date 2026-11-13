@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface PaymentBankTransfer {
+    /** Whether the buyer can complete this payment with more than one transfer. When false, only one transfer for the full amount completes it. */
+    accepts_split_transfers?: boolean | undefined;
     /** The account to send to, in the local scheme's format — `account_number_label` says what to call it. */
     account_number?: string | undefined;
     /** What to call `account_number` when showing it, in the local scheme's own terms — `CLABE` in Mexico, for example. */
