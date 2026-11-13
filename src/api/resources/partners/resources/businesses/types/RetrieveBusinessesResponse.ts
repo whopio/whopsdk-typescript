@@ -7,6 +7,8 @@ export interface RetrieveBusinessesResponse {
     account: RetrieveBusinessesResponse.Account | null;
     /** The partner whose blueprint the business deployed. Null unless this is a blueprint referral. */
     blueprint_partner: RetrieveBusinessesResponse.BlueprintPartner | null;
+    /** Whether the caller can change the fees of this business. `true` for the Whop Verified Partner who referred it. Also `true` for a verified partner in the same team who manages that partner or can update every reporting line. Read and change the fees with the account fees endpoints. */
+    can_edit_fees: boolean;
     /** CPA terms for the referring partner. Read with referring_account_id, the business's owner sees every rep's terms and a manager sees those of the reps below them, read-only. Omitted for other callers. An offer token is only for the referring partner and requires partner:commission_advance:accept permission. */
     commission_advance?: (Whop.PartnerAdvance | null) | undefined;
     /** The most the referring organization advances per business, in USD. Returned only with commission_advance_rate. */
