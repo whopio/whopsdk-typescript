@@ -282,6 +282,7 @@ describe("BusinessesClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "marcuswebb",
             },
+            can_edit_fees: false,
             commission_advance: {
                 activity_30_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 activity_60_day: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
