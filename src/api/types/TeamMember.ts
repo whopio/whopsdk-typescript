@@ -3,20 +3,22 @@
 import type * as Whop from "../index.js";
 
 export interface TeamMember {
-    /** The account this membership belongs to, prefixed `biz_`. */
-    account_id: string;
+    /** The account this membership belongs to. */
+    account: Whop.AccountParent;
     /** Custom role assigned to this member, or `null` when the member has a system role. */
     authorized_role: Whop.TeamMemberAuthorizedRole | null;
     /** When the member joined the team or the invite was sent, as an ISO 8601 timestamp. A member who was a customer first keeps the date they were given their role. */
     created_at: string;
     /** How many team members report directly to this member. `null` for invites. */
     direct_reports_count: number | null;
-    /** The member's email address. For an invite sent to an email with no Whop account yet, the invited address; for accepted members and invites to an existing Whop account, `null` unless the caller holds the `company:authorized_user:email:read` scope. */
+    /** The member's email address. For an invite to an email with no Whop account yet, this is the invited address. Otherwise it is `null` unless the caller holds the `company:authorized_user:email:read` scope. */
     email: string | null;
     /** Team member ID. Accepted members have an ID starting with `ausr_` or `mber_`, and pending invites one starting with `ausri_`. Treat it as opaque: both member prefixes are accepted wherever a team member ID is. */
     id: string;
     /** Whether this member is an agent (app-controlled account) rather than a human team member. Always `false` for invites. */
     is_agent: boolean;
+    /** Whether this member or invite has the view-only Partner role, directly or through a custom role based on it. A Partner can read only the account's basic details. */
+    is_partner: boolean;
     reports_to_chain: Whop.TeamMemberManager[] | null;
     /** The ID of the team member this member reports to, starting with `ausr_` or `mber_`; treat it as opaque. `null` when the member reports to the business directly, and for invites. */
     reports_to_id: string | null;
