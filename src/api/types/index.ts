@@ -555,6 +555,7 @@ export * from "./ShippingAddressChangedWebhookData.js";
 export * from "./ShippingAddressChangedWebhookLineItem.js";
 export * from "./ShippingAddressChangedWebhookReply.js";
 export * from "./ShippingAddressChangedWebhookReplyLineItem.js";
+export * from "./ShippingAddressChangedWebhookReplyShippingOption.js";
 export * from "./SocialAccount.js";
 export * from "./SocialAccountParent.js";
 export * from "./SpecificFeeOrigins.js";
