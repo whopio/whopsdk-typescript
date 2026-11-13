@@ -17,7 +17,7 @@ export interface CardTransaction {
     id: string;
     /** True when the merchant is outside the card's home country. */
     international: boolean;
-    /** Whop Levels points this transaction earned for the business. Negative for a refund that takes them back. Null when it earns none: a transaction that hasn't settled, was declined, or was made on a personal card. */
+    /** Whop Levels points this transaction earned for the business. Negative for a refund that takes them back. Null when it earns none: a transaction that hasn't settled or was declined. */
     levels_points: number | null;
     /** Amount the merchant charged in their own currency. Pair with `currency`. */
     local_amount: number | null;
