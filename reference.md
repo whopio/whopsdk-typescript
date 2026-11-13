@@ -6927,7 +6927,7 @@ await client.automations.update({
 <dl>
 <dd>
 
-Publishes the draft version: new members start on it, and the automation becomes `active`. Members already in the automation move onto it: onto the same step when it's still there, or, when the draft removed it, onto the step that now follows the nearest earlier step the draft kept. The draft is then copied into the next draft version, whose steps get new IDs and keep their `key`. Every draft step's `issues` must be empty. When the draft has no edits since the last publish, no new version is made, and this only makes a `closed` or `stopped` automation `active` again.
+Publishes the draft version: new members start on it, and the automation becomes `active`. Members already in the automation move onto it. A member stays on the same step when it's still there. When the draft removed that step, the member moves to the step that now follows the nearest earlier step the draft kept. The draft is then copied into the next draft version, whose steps get new IDs and keep their `key`. Every draft step's `issues` must be empty. When the draft has no edits since the last publish, no new version is made. Publishing then only makes a `closed` or `stopped` automation `active` again. The account must have Economic Intelligence turned on.
 </dd>
 </dl>
 </dd>

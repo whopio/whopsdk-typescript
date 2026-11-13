@@ -45,7 +45,7 @@ describe("ProductsClient", () => {
                                     url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg",
                                 },
                                 id: "app_xxxxxxxxxxxxxx",
-                                name: "app1",
+                                name: "Chat",
                             },
                             id: "exp_xxxxxxxxxxxxxx",
                             logo_url: null,
@@ -198,7 +198,7 @@ describe("ProductsClient", () => {
                     app: {
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "app1",
+                        name: "Chat",
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
@@ -406,7 +406,7 @@ describe("ProductsClient", () => {
                     app: {
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "app1",
+                        name: "Chat",
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
@@ -634,7 +634,7 @@ describe("ProductsClient", () => {
                     app: {
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "app1",
+                        name: "Chat",
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
@@ -842,7 +842,7 @@ describe("ProductsClient", () => {
                     app: {
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "app1",
+                        name: "Chat",
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
@@ -1074,7 +1074,7 @@ describe("ProductsClient", () => {
                     app: {
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "app1",
+                        name: "Chat",
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",

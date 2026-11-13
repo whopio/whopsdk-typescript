@@ -31,7 +31,7 @@ export interface UpdatePreferencesRequest {
     dispute_fighter_enabled?: boolean;
     /** `false` stops renewing: Economic Intelligence stays on until the end of the current period, and the fee is charged until then. `true` keeps it renewing again before then, or turns it on like the `3_days` offer. Can't be combined with `economic_intelligence_duration_key`. Requires the `company:update` scope on your API key. */
     economic_intelligence_auto_renew?: boolean;
-    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted; any other key is rejected. Requires the `company:update` scope on your API key. */
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted. Any other key is rejected. Returns `403` for an account Economic Intelligence is not offered to. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
     /** Whether Whop emails members when a renewal payment fails or needs them to verify it. Set it to `false` to stop these emails while keeping the account's other customer emails. Subscriptions billed by invoice still get their invoice emails. Requires the `company:update` scope on your API key. */
     failed_payment_emails?: boolean;
@@ -126,7 +126,7 @@ export namespace UpdatePreferencesRequest {
         support_url?: (string | null) | undefined;
     }
 
-    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted; any other key is rejected. Requires the `company:update` scope on your API key. */
+    /** Turns on Economic Intelligence with the offer that has this `key` in `economic_intelligence_offers`, at that offer's fee. Only `3_days`, the auto-renew offer, is accepted. Any other key is rejected. Returns `403` for an account Economic Intelligence is not offered to. Requires the `company:update` scope on your API key. */
     export const EconomicIntelligenceDurationKey = {
         ThreeDays: "3_days",
         Weekly: "weekly",
