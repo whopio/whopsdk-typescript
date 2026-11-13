@@ -6,6 +6,7 @@ export const ListEarningsRequestIncomeSourceItem = {
     Transfer: "transfer",
     CardInterchange: "card_interchange",
     Withdrawal: "withdrawal",
+    BusinessReferral: "business_referral",
     OnboardingReward: "onboarding_reward",
     PartnerReward: "partner_reward",
     VerifiedPartnerReferralPayback: "verified_partner_referral_payback",

@@ -33,7 +33,7 @@ export namespace ListEarningsResponse {
             product: Item.Product | null;
             /** Estimated commission while awaiting settlement. Zero when a funded commission advance covers the earning. Null when no estimate is available or the earning has settled. */
             projected_commission_amount_usd: Whop.Money | null;
-            /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the withdrawal for withdrawal earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings. */
+            /** The resource that generated the earning. For sales and ad spend earnings, it is the customer payment receipt. For transfer earnings, it is the balance transfer. For withdrawal earnings, it is the withdrawal. For card interchange earnings, it is the card transaction. For fixed reward earnings, it is the qualifying reward. For business referral earnings, it is the referred partner business's own commission. */
             resource: Item.Resource | null;
             /** Whether this earning is a second-tier (grandparent) commission. */
             second_tier: boolean;
@@ -92,6 +92,7 @@ export namespace ListEarningsResponse {
                 Transfer: "transfer",
                 CardInterchange: "card_interchange",
                 Withdrawal: "withdrawal",
+                BusinessReferral: "business_referral",
                 OnboardingReward: "onboarding_reward",
                 PartnerReward: "partner_reward",
                 VerifiedPartnerReferralPayback: "verified_partner_referral_payback",
@@ -110,7 +111,7 @@ export namespace ListEarningsResponse {
             }
 
             /**
-             * The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the withdrawal for withdrawal earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings.
+             * The resource that generated the earning. For sales and ad spend earnings, it is the customer payment receipt. For transfer earnings, it is the balance transfer. For withdrawal earnings, it is the withdrawal. For card interchange earnings, it is the card transaction. For fixed reward earnings, it is the qualifying reward. For business referral earnings, it is the referred partner business's own commission.
              */
             export type Resource =
                 | {
@@ -159,6 +160,22 @@ export namespace ListEarningsResponse {
                       created_at: string;
                       id: string;
                       object: "partner_reward";
+                  }
+                | {
+                      created_at: string;
+                      id: string;
+                      income_source:
+                          | "sales"
+                          | "ad_spend"
+                          | "transfer"
+                          | "card_interchange"
+                          | "withdrawal"
+                          | "business_referral"
+                          | "onboarding_reward"
+                          | "partner_reward"
+                          | "verified_partner_referral_payback"
+                          | "commission_advance";
+                      object: "commission";
                   };
             /** Current status of the earning. */
             export const Status = {
