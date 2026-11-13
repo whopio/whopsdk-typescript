@@ -154,6 +154,186 @@ describe("MembersClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
+    test("create (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { email: "jane@example.com" };
+        const rawResponseBody = {
+            access_level: "no_access",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            display_name: "Dana Whitfield",
+            earnings_usd: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
+            email: "marcus@shinetime.example",
+            id: "mber_xxxxxxxxxxxxxx",
+            joined_at: "2026-01-01T12:00:00.000Z",
+            last_accessed_at: "2026-01-01T12:00:00.000Z",
+            last_activity: {
+                author: {
+                    id: "user_xxxxxxxxxxxxxx",
+                    name: "Dana Whitfield",
+                    profile_picture: { url: "https://ui-avatars.com/api/" },
+                    username: "danawhitfield",
+                },
+                channel_id: "channel_id",
+                created_at: "created_at",
+                id: "id",
+                object: "message",
+                plain_content: "plain_content",
+            },
+            last_activity_at: "2026-01-01T12:00:00.000Z",
+            most_recent_action: "canceling",
+            most_recent_action_at: "2026-01-01T12:00:00.000Z",
+            name: "Northwind Legal LLP",
+            phone_number: "+xxxxxxxxxxx",
+            status: "joined",
+            token_balance: 70.25,
+            unsubscribe_status: "unsubscribed",
+            usd_total_spent: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                city: "Austin",
+                country: "US",
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                state: "TX",
+                username: "danawhitfield",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.members.create({
+            email: "jane@example.com",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("create (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.create({
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("create (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.create({
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("create (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.create({
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("create (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { email: "email" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/members")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.members.create({
+                email: "email",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
