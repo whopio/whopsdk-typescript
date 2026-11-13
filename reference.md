@@ -20063,6 +20063,71 @@ const response = page.response;
 </dl>
 </details>
 
+<details><summary><code>client.members.<a href="/src/api/resources/members/client/Client.ts">create</a>({ ...params }) -> Whop.Member</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Adds a person to an account as a member. If the person is already a member of the account, that member is returned unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.members.create({
+    email: "jane@example.com"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateMembersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.members.<a href="/src/api/resources/members/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Member</code></summary>
 <dl>
 <dd>
