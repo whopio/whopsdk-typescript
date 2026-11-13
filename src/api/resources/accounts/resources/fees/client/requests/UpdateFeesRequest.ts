@@ -224,15 +224,17 @@ export namespace UpdateFeesRequest {
     export interface ChildMarkups {
         /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (ChildMarkups.CardSpend | null) | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (ChildMarkups.CryptoSwaps | null) | undefined;
         /** Markups on deposits, keyed by rail: `bank` or `crypto`. */
         deposits?: Record<string, ChildMarkups.Deposits.Value | null> | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** Markups on payments, keyed by payment method: `card`, `ach`, or `wire`. `null` clears a method's markup so it uses `payments`. */
+        payment_methods?: Record<string, ChildMarkups.PaymentMethods.Value | null> | undefined;
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         payments?: (ChildMarkups.Payments | null) | undefined;
         /** Markups on withdrawals, keyed by payout method. Percentage and fixed components may be negative, down to negative 100, to subsidize Whop's fee from the platform's balance in the withdrawal currency. The creator's total fee cannot go below zero. An unfunded subsidy keeps the payout pending until funded or failed by the creation deadline. */
         payouts?: Record<string, ChildMarkups.Payouts.Value | null> | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         transfers?: (ChildMarkups.Transfers | null) | undefined;
     }
 
@@ -248,7 +250,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface CryptoSwaps {
             /** The amount the platform adds per event, in US dollars. */
@@ -259,7 +261,19 @@ export namespace UpdateFeesRequest {
 
         export namespace Deposits {
             /**
-             * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
+             */
+            export interface Value {
+                /** The amount the platform adds per event, in US dollars. */
+                fixed?: number | undefined;
+                /** The percentage of the transaction the platform adds, where `2` means 2%. */
+                percentage?: number | undefined;
+            }
+        }
+
+        export namespace PaymentMethods {
+            /**
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
              */
             export interface Value {
                 /** The amount the platform adds per event, in US dollars. */
@@ -270,7 +284,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface Payments {
             /** The amount the platform adds per event, in US dollars. */
@@ -281,7 +295,7 @@ export namespace UpdateFeesRequest {
 
         export namespace Payouts {
             /**
-             * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
              */
             export interface Value {
                 /** The amount the platform adds per event, in US dollars. */
@@ -292,7 +306,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface Transfers {
             /** The amount the platform adds per event, in US dollars. */
@@ -573,15 +587,17 @@ export namespace UpdateFeesRequest {
     export interface Markups {
         /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (Markups.CardSpend | null) | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (Markups.CryptoSwaps | null) | undefined;
         /** Markups on deposits, keyed by rail: `bank` or `crypto`. */
         deposits?: Record<string, Markups.Deposits.Value | null> | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** Markups on payments, keyed by payment method: `card`, `ach`, or `wire`. `null` clears a method's markup so it uses `payments`. */
+        payment_methods?: Record<string, Markups.PaymentMethods.Value | null> | undefined;
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         payments?: (Markups.Payments | null) | undefined;
         /** Markups on withdrawals, keyed by payout method. Percentage and fixed components may be negative, down to negative 100, to subsidize Whop's fee from the platform's balance in the withdrawal currency. The creator's total fee cannot go below zero. An unfunded subsidy keeps the payout pending until funded or failed by the creation deadline. */
         payouts?: Record<string, Markups.Payouts.Value | null> | undefined;
-        /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
+        /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
         transfers?: (Markups.Transfers | null) | undefined;
     }
 
@@ -597,7 +613,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface CryptoSwaps {
             /** The amount the platform adds per event, in US dollars. */
@@ -608,7 +624,19 @@ export namespace UpdateFeesRequest {
 
         export namespace Deposits {
             /**
-             * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
+             */
+            export interface Value {
+                /** The amount the platform adds per event, in US dollars. */
+                fixed?: number | undefined;
+                /** The percentage of the transaction the platform adds, where `2` means 2%. */
+                percentage?: number | undefined;
+            }
+        }
+
+        export namespace PaymentMethods {
+            /**
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
              */
             export interface Value {
                 /** The amount the platform adds per event, in US dollars. */
@@ -619,7 +647,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface Payments {
             /** The amount the platform adds per event, in US dollars. */
@@ -630,7 +658,7 @@ export namespace UpdateFeesRequest {
 
         export namespace Payouts {
             /**
-             * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
              */
             export interface Value {
                 /** The amount the platform adds per event, in US dollars. */
@@ -641,7 +669,7 @@ export namespace UpdateFeesRequest {
         }
 
         /**
-         * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
+         * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
          */
         export interface Transfers {
             /** The amount the platform adds per event, in US dollars. */
