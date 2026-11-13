@@ -20205,7 +20205,7 @@ await client.members.retrieve({
 <dl>
 <dd>
 
-Updates a member. The account can update `name`, the customer name its invoices show for this member; it doesn't change the user's Whop profile. The member can update `unsubscribe_status`, with a credential for their own user that holds `user:notifications:update`, to unsubscribe from the account's marketing communications or resubscribe. Each sends only its own field.
+Updates a member.
 </dd>
 </dl>
 </dd>
