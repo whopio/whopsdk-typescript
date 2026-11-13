@@ -7,13 +7,13 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListEconomicIntelligenceRequest {
-    /** Account ID, prefixed `biz_`. Defaults to the API key's own account; omit for personal onboarding, where signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. */
+    /** Account ID, prefixed `biz_`. Defaults to the API key's own account. Omit with `has_run` for the runs on every account you can read. */
     account_id?: string;
-    /** Filter recommendations by their current status. */
+    /** `ready` lists the recommendations the account can run now. A run status lists only the runs in that state. `queued`, `pending` and `superseded` are no longer listed and answer nothing. */
     status?: Whop.ListEconomicIntelligenceRequestStatus;
-    /** What you want recommendations for, in your own words. Up to 1000 characters. Narrows the list to the recommendations that address it. Without a `status` filter, when none do and you can update the account, new recommendations start generating for your input, and the list shows that request until they're ready. Repeating the same input while it generates doesn't start another. */
+    /** No longer read: recommendations are written for the business as it changes. Up to 1000 characters. */
     input?: string;
-    /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read that has Economic Intelligence. Can't be combined with `input`. */
+    /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read. */
     has_run?: boolean;
     /** Sort field. */
     order?: Whop.ListEconomicIntelligenceRequestOrder;

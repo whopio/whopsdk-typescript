@@ -20,7 +20,7 @@ describe("EconomicIntelligenceClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     acknowledged_at: "2026-01-01T12:00:00.000Z",
-                    action_type: "cut_losing_ad_spend",
+                    action_type: "add_cancel_offer",
                     ai_chat_id: "aich_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
@@ -28,16 +28,8 @@ describe("EconomicIntelligenceClient", () => {
                         { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
                     ],
                     id: "reca_xxxxxxxxxxxxxx",
-                    input: "more sales from ads",
-                    inputs: [
-                        {
-                            answer: null,
-                            id: "audience",
-                            label: "Guide audience",
-                            options: ["Daily drivers"],
-                            template: "Guide audience: {answer}",
-                        },
-                    ],
+                    input: "input",
+                    inputs: [{ answer: null, id: "id", label: "label", options: ["options"], template: "template" }],
                     prompt: "Create a 20% off promo code for my members.",
                     reasoning: "Capped 9 of 14 days.",
                     result_url: "https://atlas.whop.site/",
@@ -49,7 +41,7 @@ describe("EconomicIntelligenceClient", () => {
                     superseded_at: "2026-01-01T12:00:00.000Z",
                     target_url: "https://example.com/join",
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-                    user_feedback: "They already do this",
+                    user_feedback: "user_feedback",
                 },
             ],
             page_info: {
@@ -143,31 +135,6 @@ describe("EconomicIntelligenceClient", () => {
             .mockEndpoint()
             .get("/economic_intelligence")
             .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.economicIntelligence.list();
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("list (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/economic_intelligence")
-            .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
@@ -190,7 +157,7 @@ describe("EconomicIntelligenceClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             acknowledged_at: "2026-01-01T12:00:00.000Z",
-            action_type: "cut_losing_ad_spend",
+            action_type: "add_cancel_offer",
             ai_chat_id: "aich_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
@@ -198,16 +165,8 @@ describe("EconomicIntelligenceClient", () => {
                 { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
             ],
             id: "reca_xxxxxxxxxxxxxx",
-            input: "more sales from ads",
-            inputs: [
-                {
-                    answer: "answer",
-                    id: "audience",
-                    label: "Guide audience",
-                    options: ["Daily drivers"],
-                    template: "Guide audience: {answer}",
-                },
-            ],
+            input: "input",
+            inputs: [{ answer: "answer", id: "id", label: "label", options: ["options"], template: "template" }],
             prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
             result_url: "https://atlas.whop.site/",
@@ -219,7 +178,7 @@ describe("EconomicIntelligenceClient", () => {
             superseded_at: "2026-01-01T12:00:00.000Z",
             target_url: "https://example.com/join",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-            user_feedback: "They already do this",
+            user_feedback: "user_feedback",
         };
 
         server

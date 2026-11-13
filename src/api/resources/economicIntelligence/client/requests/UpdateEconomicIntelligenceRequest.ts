@@ -11,11 +11,11 @@ export interface UpdateEconomicIntelligenceRequest {
     id: string;
     /** Account ID, prefixed `biz_`. Defaults to the API key's own account. */
     account_id?: string;
-    /** What you want the replacement recommendation for, in your own words. Up to 1000 characters. Sent when superseding, it directs the generation that replaces the rejected recommendation. */
+    /** No longer read: recommendations are written for the business as it changes. Up to 1000 characters. */
     input?: string;
     /** With `status: executed`, the ID of what the run produced or changed, and the recommendation's `result_url` becomes where to view it: an ad (`ad_`), ad group (`adgrp_`) or ad campaign (`adcamp_`), a website (`app_`), a product (`prod_`), a plan (`plan_`), a checkout link (`ch_`), a promo code (`promo_`), or an experience (`exp_`). Without `result_id` or `result_page`, `result_url` links to the resource the recommendation was about, when it names one. Send only one of `result_id`, `result_page` and `result_url`. */
     result_id?: string;
-    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list or the store page. The recommendation's `result_url` becomes that page on the account's dashboard, or its store page for `store_page`. */
+    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list. The recommendation's `result_url` becomes that page on the account's dashboard. */
     result_page?: UpdateEconomicIntelligenceRequest.ResultPage;
     /** With `status: executed`, where to view what was produced when it is outside Whop. An http or https URL. Prefer `result_id` for anything on Whop. */
     result_url?: string;
@@ -23,12 +23,12 @@ export interface UpdateEconomicIntelligenceRequest {
     sentiment?: UpdateEconomicIntelligenceRequest.Sentiment;
     /** Use `running` to start a run of a ready recommendation, `executed` to record that it was carried out, `incomplete` to record that a running recommendation's run ended without carrying it out, `superseded` to reject a ready recommendation, or `acknowledged` to mark an executed run as seen; the recommendation stays `executed` and records `acknowledged_at`. */
     status?: UpdateEconomicIntelligenceRequest.Status;
-    /** An optional explanation of the rating or rejection. Negative feedback informs replacement recommendations. */
+    /** An optional explanation of the rating or rejection. */
     user_feedback?: string;
 }
 
 export namespace UpdateEconomicIntelligenceRequest {
-    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list or the store page. The recommendation's `result_url` becomes that page on the account's dashboard, or its store page for `store_page`. */
+    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list. The recommendation's `result_url` becomes that page on the account's dashboard. */
     export const ResultPage = {
         Home: "home",
         Products: "products",
