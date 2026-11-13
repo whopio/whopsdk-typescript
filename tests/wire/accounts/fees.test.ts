@@ -1760,6 +1760,53 @@ describe("FeesClient", () => {
                         unadjustable_reason: "not_permitted",
                     },
                 },
+                payment_methods: {
+                    ach: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    card: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    wire: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 payments: {
                     adjustable: false,
                     default: {
@@ -5004,6 +5051,53 @@ describe("FeesClient", () => {
                         unadjustable_reason: "not_permitted",
                     },
                     crypto: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
+                payment_methods: {
+                    ach: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    card: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    wire: {
                         adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -13026,6 +13120,53 @@ describe("FeesClient", () => {
                         unadjustable_reason: "not_permitted",
                     },
                 },
+                payment_methods: {
+                    ach: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    card: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    wire: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 payments: {
                     adjustable: false,
                     default: {
@@ -16270,6 +16411,53 @@ describe("FeesClient", () => {
                         unadjustable_reason: "not_permitted",
                     },
                     crypto: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
+                payment_methods: {
+                    ach: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    card: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    wire: {
                         adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },

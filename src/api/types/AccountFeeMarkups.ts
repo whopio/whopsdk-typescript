@@ -9,7 +9,9 @@ export interface AccountFeeMarkups {
     crypto_swaps: Whop.AccountFeeMarkup;
     /** Markups on deposits into the account's balance, keyed by rail: `bank` and `crypto`. */
     deposits: Record<string, Whop.AccountFeeMarkup>;
-    /** The markup on payments the subaccount collects without a checkout application fee. */
+    /** Markups on payments, keyed by payment method: `card` (including Apple Pay and Google Pay), `ach` (US bank account and US bank transfer), and `wire`. A payment method without its own markup uses `payments`. */
+    payment_methods: Record<string, Whop.AccountFeeMarkup>;
+    /** The markup on payments the subaccount collects without a checkout application fee, for every payment method without its own markup under `payment_methods`. */
     payments: Whop.AccountFeeMarkup;
     /** Markups on withdrawals, keyed by payout method: `bank_wire`, `next_day_bank`, `rtp`, `crypto`, and `digital_wallet`. */
     payouts: Record<string, Whop.AccountFeeMarkup>;
