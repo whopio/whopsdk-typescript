@@ -17,7 +17,7 @@ export interface CreateQuotePayoutsResponse {
     fee: Whop.Money;
     /** Provider-backed payout quote ID, prefixed `pout_`. */
     id: string;
-    /** Interbank mid-market rate, with no spread, for the same conversion as `exchange_rate`. The gap between the two is the cost of the conversion. `null` when the payout provider does no foreign exchange for this payout, such as USD to a USD bank account or to a USD stablecoin, when no market rate from the last 15 minutes is available, and on card-funded quotes. */
+    /** Interbank mid-market rate, with no spread, for the same conversion as `exchange_rate`. The gap between the two is the cost of the conversion. `null` when the payout provider does no foreign exchange, such as USD to a USD bank account. Also `null` when no market rate from the last 15 minutes is available, and on card-funded quotes. */
     market_exchange_rate: number | null;
     /** When `market_exchange_rate` was taken from the market feed, as an ISO 8601 timestamp. `null` when `market_exchange_rate` is `null`. */
     market_exchange_rate_at: string | null;
@@ -37,7 +37,7 @@ export namespace CreateQuotePayoutsResponse {
      * How a USD balance pays a bank in another currency: it converts into the payout method's currency, and the payout leaves from the balance in that currency. Null when the payout is paid from the requested balance directly.
      */
     export interface Conversion {
-        /** What the requested amount converts into, in the payout method's currency. When the account holds its USD in a stablecoin, this is an estimate: the payout is for what the conversion produces once that USD arrives, and `POST /payouts` answers with the payout request until that payout exists. */
+        /** What the requested amount converts into, in the payout method's currency. This is an estimate when the account's USD has to settle before payout. The payout is then for what the conversion produces. `POST /payouts` answers with the payout request until that payout exists. */
         converted_amount: Whop.Money;
         /** How much more the recipient receives than if the same amount were paid out in USD and converted at the payout provider's rate. Null when the provider has no price for that route or converting first saves nothing. */
         estimated_savings: Whop.Money | null;

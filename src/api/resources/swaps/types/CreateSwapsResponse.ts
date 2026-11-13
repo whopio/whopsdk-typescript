@@ -5,9 +5,9 @@ export interface CreateSwapsResponse {
     account_id: string;
     /** Crypto pairs only: the from_token amount the swap spends, as a decimal string. A request for `all` returns the wallet balance it read. */
     amount?: (string | null) | undefined;
-    /** Fiat pairs only: amount of the source currency converted. Null while a stablecoin repayment is processing. */
+    /** Fiat pairs only: amount of the source currency converted. Null while the conversion is settling. */
     amount_in?: (number | null) | undefined;
-    /** Fiat pairs only: amount credited in the destination currency. Null while a stablecoin repayment is processing. */
+    /** Fiat pairs only: amount credited in the destination currency. Null while the conversion is settling. */
     amount_out?: (number | null) | undefined;
     /** Expected destination token amount. */
     amount_out_expected?: string | undefined;
@@ -20,7 +20,7 @@ export interface CreateSwapsResponse {
     object: CreateSwapsResponse.Object_;
     /** Quoted exchange rate used to create the swap. */
     rate?: string | undefined;
-    /** Swap status. Crypto swaps start `queued`; fiat conversions return `complete`, or `working` while a stablecoin repayment settles. */
+    /** Swap status. Crypto swaps start `queued`. Fiat conversions return `complete`, or `working` while the conversion settles. */
     status: CreateSwapsResponse.Status;
     /** Destination chain for the swap. */
     to_chain?: string | undefined;
@@ -42,7 +42,7 @@ export namespace CreateSwapsResponse {
         Swap: "swap",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
-    /** Swap status. Crypto swaps start `queued`; fiat conversions return `complete`, or `working` while a stablecoin repayment settles. */
+    /** Swap status. Crypto swaps start `queued`. Fiat conversions return `complete`, or `working` while the conversion settles. */
     export const Status = {
         Queued: "queued",
         Working: "working",
