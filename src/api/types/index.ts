@@ -315,8 +315,6 @@ export * from "./InvoiceSend.js";
 export * from "./InvoiceStatuses.js";
 export * from "./InvoicesSortableColumns.js";
 export * from "./Languages.js";
-export * from "./Lead.js";
-export * from "./LeadListItem.js";
 export * from "./LedgerAccount.js";
 export * from "./LedgerAccountOwner.js";
 export * from "./LedgerAccountOwnerCompany.js";

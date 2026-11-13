@@ -59,7 +59,6 @@ import { ForumPostsClient } from "./api/resources/forumPosts/client/Client.js";
 import { ForumsClient } from "./api/resources/forums/client/Client.js";
 import { IdentityProfilesClient } from "./api/resources/identityProfiles/client/Client.js";
 import { InvoicesClient } from "./api/resources/invoices/client/Client.js";
-import { LeadsClient } from "./api/resources/leads/client/Client.js";
 import { LedgerAccountsClient } from "./api/resources/ledgerAccounts/client/Client.js";
 import { LivestreamsClient } from "./api/resources/livestreams/client/Client.js";
 import { MediaClient } from "./api/resources/media/client/Client.js";
@@ -175,7 +174,6 @@ export class WhopClient {
     protected _forums: ForumsClient | undefined;
     protected _identityProfiles: IdentityProfilesClient | undefined;
     protected _invoices: InvoicesClient | undefined;
-    protected _leads: LeadsClient | undefined;
     protected _ledgerAccounts: LedgerAccountsClient | undefined;
     protected _livestreams: LivestreamsClient | undefined;
     protected _media: MediaClient | undefined;
@@ -458,10 +456,6 @@ export class WhopClient {
 
     public get invoices(): InvoicesClient {
         return (this._invoices ??= new InvoicesClient(this._options));
-    }
-
-    public get leads(): LeadsClient {
-        return (this._leads ??= new LeadsClient(this._options));
     }
 
     public get ledgerAccounts(): LedgerAccountsClient {
