@@ -29,7 +29,7 @@ export class TeamMembersClient {
     }
 
     /**
-     * Lists an account's team members, including pending invites. A user credential with `company:basic:read` may list only its own joined membership by passing its own `user_id` and `status=joined`. Listing `role=workforce` is also allowed with the `bounty:create` scope. A signed-in Partner, or a member others report to, without `company:authorized_user:read` lists only their own joined membership and the members who report up to them, never pending invites. Members with the view-only Partner role are listed after all other members.
+     * Lists team members, including pending invites. Pass `account_id` to list one account's team. Without it, a signed-in user can pass `user_id=me` to list their own joined memberships across accounts. The list has one for each account they can read. An API key without `account_id` lists the team of its own account. With `company:basic:read`, a user can list their own joined membership on one account. To do this, pass `status=joined` and their own `user_id` with the account ID. The `bounty:create` scope also allows listing `role=workforce` members. A signed-in Partner without `company:authorized_user:read` lists only their own joined membership and the members who report up to them. A member others report to gets the same list. Neither of them sees pending invites. Members with the view-only Partner role are listed after all other members.
      *
      * @param {Whop.ListTeamMembersRequest} request
      * @param {TeamMembersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -42,12 +42,10 @@ export class TeamMembersClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.teamMembers.list({
-     *         account_id: "account_id"
-     *     })
+     *     await client.teamMembers.list()
      */
     public async list(
-        request: Whop.ListTeamMembersRequest,
+        request: Whop.ListTeamMembersRequest = {},
         requestOptions?: TeamMembersClient.RequestOptions,
     ): Promise<core.Page<Whop.TeamMember, Whop.ListTeamMembersResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
@@ -66,6 +64,7 @@ export class TeamMembersClient {
                     direct_reports_max: directReportsMax,
                     team_lead_id: teamLeadId,
                     has_referred_businesses: hasReferredBusinesses,
+                    is_partner: isPartner,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     order,
@@ -87,6 +86,7 @@ export class TeamMembersClient {
                     direct_reports_max: directReportsMax,
                     team_lead_id: teamLeadId,
                     has_referred_businesses: hasReferredBusinesses,
+                    is_partner: isPartner,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     order: order != null ? order : undefined,
@@ -102,7 +102,7 @@ export class TeamMembersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -202,7 +202,7 @@ export class TeamMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -282,7 +282,7 @@ export class TeamMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -357,7 +357,7 @@ export class TeamMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -435,7 +435,7 @@ export class TeamMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-13-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

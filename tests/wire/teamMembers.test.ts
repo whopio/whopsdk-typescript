@@ -18,13 +18,24 @@ describe("TeamMembersClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account_id: "biz_xxxxxxxxxxxxxx",
+                    account: {
+                        fees: {
+                            crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                            transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                        },
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-holdings",
+                        title: "Shine Time Holdings",
+                    },
                     authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
                     created_at: "2026-01-01T12:00:00.000Z",
                     direct_reports_count: 0,
                     email: "marcus@shinetime.example",
                     id: "ausr_xxxxxxxxxxxxxx",
                     is_agent: false,
+                    is_partner: false,
                     reports_to_chain: [
                         {
                             id: "ausr_xxxxxxxxxxxxxx",
@@ -65,9 +76,7 @@ describe("TeamMembersClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.teamMembers.list({
-            account_id: "account_id",
-        });
+        const page = await client.teamMembers.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -90,9 +99,7 @@ describe("TeamMembersClient", () => {
         server.mockEndpoint().get("/team_members").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.teamMembers.list({
-                account_id: "account_id",
-            });
+            return await client.teamMembers.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -111,9 +118,7 @@ describe("TeamMembersClient", () => {
         server.mockEndpoint().get("/team_members").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.teamMembers.list({
-                account_id: "account_id",
-            });
+            return await client.teamMembers.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -132,9 +137,7 @@ describe("TeamMembersClient", () => {
         server.mockEndpoint().get("/team_members").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.teamMembers.list({
-                account_id: "account_id",
-            });
+            return await client.teamMembers.list();
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
@@ -153,9 +156,7 @@ describe("TeamMembersClient", () => {
         server.mockEndpoint().get("/team_members").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.teamMembers.list({
-                account_id: "account_id",
-            });
+            return await client.teamMembers.list();
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
@@ -174,13 +175,24 @@ describe("TeamMembersClient", () => {
             user_id: "user_xxxxxxxxxxxxxx",
         };
         const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
+            account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-holdings",
+                title: "Shine Time Holdings",
+            },
             authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            is_partner: false,
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",
@@ -319,13 +331,24 @@ describe("TeamMembersClient", () => {
         });
 
         const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
+            account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-holdings",
+                title: "Shine Time Holdings",
+            },
             authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            is_partner: false,
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",
@@ -496,13 +519,24 @@ describe("TeamMembersClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
+            account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-holdings",
+                title: "Shine Time Holdings",
+            },
             authorized_role: { id: "aurl_xxxxxxxxxxxxxx", name: "community-moderators" },
             created_at: "2026-01-01T12:00:00.000Z",
             direct_reports_count: 0,
             email: "marcus@shinetime.example",
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
+            is_partner: false,
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",

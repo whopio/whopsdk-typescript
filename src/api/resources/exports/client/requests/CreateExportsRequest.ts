@@ -11,7 +11,7 @@ export interface CreateExportsRequest {
     account_id?: string;
     /** Column keys to include. Empty means all columns for the resource. */
     columns?: string[];
-    /** Resource-specific filters. For native REST resources (`payouts`, `transfers`, `products`) these are the resource's own list query params; for dashboard tables they mirror the dashboard table filters. */
+    /** Resource-specific filters. For a native REST resource, such as `payouts`, `transfers` or `products`, these are the query params of its list endpoint. For a dashboard table, they are the table's filters. */
     filters?: Record<string, unknown>;
     /** The resource to export, e.g. `payouts`, `receipts`, or `members`. */
     resource: CreateExportsRequest.Resource;

@@ -4,16 +4,14 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         account_id: "account_id"
- *     }
+ *     {}
  */
 export interface ListTeamMembersRequest {
-    /** Account ID, prefixed `biz_`. */
-    account_id: string;
+    /** Only return the team of this account, prefixed `biz_`. A signed-in user can omit it only with `user_id=me` or their own user ID. An API key that omits it gets its own account. `reports_to_id`, `direct_reports_min` and `direct_reports_max` need it. */
+    account_id?: string;
     /** Only return members with this status: `joined` (accepted members) or `pending` (pending invites). Both are returned by default. */
     status?: Whop.ListTeamMembersRequestStatus;
-    /** Only return the membership for this user ID, prefixed `user_`. */
+    /** Only return the memberships of this user ID, prefixed `user_`. Pass `me` for the signed-in user. */
     user_id?: string;
     /** Only return the memberships of these users, prefixed `user_`, at most 100. IDs that match no user are ignored. With `account_id=global`, a user can have one in each partner account. Can't be combined with `user_id`. */
     user_ids?: string | string[];
@@ -31,6 +29,8 @@ export interface ListTeamMembersRequest {
     team_lead_id?: string;
     /** When true, only members who referred at least one business for their account; when false, only members who referred none. Pending invites are excluded, and the list pages in `created_at` order without moving Partner-role members last. */
     has_referred_businesses?: boolean;
+    /** When true, only members and invites with the view-only Partner role. When false, only the ones without it. */
+    is_partner?: boolean;
     /** Only return members added before this ISO 8601 timestamp. */
     created_before?: string;
     /** Only return members added after this ISO 8601 timestamp. */
