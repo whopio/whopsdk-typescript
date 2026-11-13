@@ -671,17 +671,6 @@
             },
             "default": "./dist/cjs/api/resources/invoices/exports.js"
         },
-        "./leads": {
-            "import": {
-                "types": "./dist/esm/api/resources/leads/exports.d.mts",
-                "default": "./dist/esm/api/resources/leads/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/leads/exports.d.ts",
-                "default": "./dist/cjs/api/resources/leads/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/leads/exports.js"
-        },
         "./ledgerAccounts": {
             "import": {
                 "types": "./dist/esm/api/resources/ledgerAccounts/exports.d.mts",
