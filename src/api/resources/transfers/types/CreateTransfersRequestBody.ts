@@ -48,13 +48,106 @@ export namespace CreateTransfersRequestBody {
 
     export interface ClaimLink {
         type: "claim_link";
-        /** The amount to move, in the transfer currency. For example 25.00. */
+        /** The amount each claim pays, in the link currency. For example 25.00. Use at most two decimal places. Use a whole number for a currency without decimal places, such as `jpy`. */
         amount: number;
+        /** Currency of `amount`, as a lowercase ISO 4217 code. Defaults to `usd`. The origin balance must hold `amount` times `redeemable_count` in this currency. */
+        currency?: CreateTransfersRequestBodyClaimLink.Currency | undefined;
         /** Link expiry as an ISO 8601 timestamp. Defaults to 24 hours from creation. */
         expires_at?: (string | null) | undefined;
         /** The account sending the funds. A user ID (user_xxx), account ID (biz_xxx), or ledger account ID (ldgr_xxx). */
         origin_id: string;
         /** How many different users can claim the link. Defaults to 1. */
         redeemable_count?: number | undefined;
+    }
+
+    export namespace CreateTransfersRequestBodyClaimLink {
+        /** Currency of `amount`, as a lowercase ISO 4217 code. Defaults to `usd`. The origin balance must hold `amount` times `redeemable_count` in this currency. */
+        export const Currency = {
+            Usd: "usd",
+            Sgd: "sgd",
+            Inr: "inr",
+            Aud: "aud",
+            Brl: "brl",
+            Cad: "cad",
+            Dkk: "dkk",
+            Eur: "eur",
+            Nok: "nok",
+            Gbp: "gbp",
+            Sek: "sek",
+            Chf: "chf",
+            Hkd: "hkd",
+            Huf: "huf",
+            Jpy: "jpy",
+            Mxn: "mxn",
+            Myr: "myr",
+            Pln: "pln",
+            Czk: "czk",
+            Nzd: "nzd",
+            Aed: "aed",
+            Cop: "cop",
+            Ron: "ron",
+            Thb: "thb",
+            Bgn: "bgn",
+            Idr: "idr",
+            Dop: "dop",
+            Php: "php",
+            Try: "try",
+            Krw: "krw",
+            Twd: "twd",
+            Vnd: "vnd",
+            Pkr: "pkr",
+            Clp: "clp",
+            Uyu: "uyu",
+            Ars: "ars",
+            Zar: "zar",
+            Dzd: "dzd",
+            Tnd: "tnd",
+            Mad: "mad",
+            Kes: "kes",
+            Kwd: "kwd",
+            Jod: "jod",
+            All: "all",
+            Xcd: "xcd",
+            Amd: "amd",
+            Bsd: "bsd",
+            Bhd: "bhd",
+            Bob: "bob",
+            Bam: "bam",
+            Khr: "khr",
+            Crc: "crc",
+            Xof: "xof",
+            Egp: "egp",
+            Etb: "etb",
+            Gmd: "gmd",
+            Ghs: "ghs",
+            Gtq: "gtq",
+            Gyd: "gyd",
+            Ils: "ils",
+            Jmd: "jmd",
+            Mop: "mop",
+            Mga: "mga",
+            Mur: "mur",
+            Mdl: "mdl",
+            Mnt: "mnt",
+            Nad: "nad",
+            Ngn: "ngn",
+            Mkd: "mkd",
+            Omr: "omr",
+            Pyg: "pyg",
+            Pen: "pen",
+            Qar: "qar",
+            Rwf: "rwf",
+            Sar: "sar",
+            Rsd: "rsd",
+            Lkr: "lkr",
+            Tzs: "tzs",
+            Ttd: "ttd",
+            Uzs: "uzs",
+            Rub: "rub",
+            Cny: "cny",
+            Kzt: "kzt",
+            Awg: "awg",
+        } as const;
+        export type Currency = (typeof Currency)[keyof typeof Currency];
     }
 }
