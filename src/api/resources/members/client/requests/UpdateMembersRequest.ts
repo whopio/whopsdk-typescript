@@ -9,14 +9,20 @@
 export interface UpdateMembersRequest {
     /** Member ID (`mber_` tag). */
     id: string;
-    /** The customer name to show on this member's invoices, at most 255 bytes. Leading and trailing spaces are trimmed. `null` or a blank string clears it, so invoices show the user's own name again. */
+    /** Your own key-value data on this member. Up to 50 keys of at most 100 characters. Values are strings of at most 500 characters, numbers, `true`, `false`, or `null`. At most 200 KB. Replaces existing metadata, and `null` clears it. Requires `member:manage`. */
+    metadata?: Record<string, UpdateMembersRequest.Metadata.Value | null> | null;
+    /** The name invoices show for this member, in place of the user's own. `null` clears it. Requires `member:manage`. */
     name?: string | null;
-    /** `unsubscribed` to stop the account's marketing communications, or `null` to resubscribe. Only the member can set it. */
+    /** `unsubscribed` to opt out of the account's marketing, `null` to opt back in. Only the member can set it, with `user:notifications:update`. */
     unsubscribe_status?: UpdateMembersRequest.UnsubscribeStatus | null;
 }
 
 export namespace UpdateMembersRequest {
-    /** `unsubscribed` to stop the account's marketing communications, or `null` to resubscribe. Only the member can set it. */
+    export namespace Metadata {
+        export type Value = string | number | boolean;
+    }
+
+    /** `unsubscribed` to opt out of the account's marketing, `null` to opt back in. Only the member can set it, with `user:notifications:update`. */
     export const UnsubscribeStatus = {
         Unsubscribed: "unsubscribed",
     } as const;
