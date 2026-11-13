@@ -253,6 +253,7 @@ export const PermissionAction = {
     UserAbuseReportRead: "user:abuse_report:read",
     UserBalanceRead: "user:balance:read",
     UserEmailRead: "user:email:read",
+    UserMailingAddressesRead: "user:mailing_addresses:read",
     UserNotificationsRead: "user:notifications:read",
     UserNotificationsUpdate: "user:notifications:update",
     UserPaymentCharge: "user:payment:charge",
