@@ -17,6 +17,8 @@ export interface Market {
     price: Whop.Money | null;
     /** The most decimals an order's `size` can have on this market. */
     size_decimals: number;
+    /** The value of the asset traded on all exchanges in the last 24 hours, in USD. For a tokenized stock, this counts trades of the token. `null` for a perpetual. `null` when the volume is not available. */
+    volume_24h: Whop.Money | null;
 }
 
 export namespace Market {
