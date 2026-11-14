@@ -25,6 +25,7 @@ describe("MarketsClient", () => {
                     max_leverage: 40,
                     price: { amount: "80155.500000", currency: "usd", decimals: 6, display_decimals: 6 },
                     size_decimals: 5,
+                    volume_24h: null,
                 },
                 {
                     change_24h_percentage: null,
@@ -34,6 +35,7 @@ describe("MarketsClient", () => {
                     max_leverage: null,
                     price: { amount: "80065.50000000", currency: "usd", decimals: 8, display_decimals: 8 },
                     size_decimals: 5,
+                    volume_24h: { amount: "21622161986.44", currency: "usd", decimals: 2, display_decimals: 2 },
                 },
                 {
                     change_24h_percentage: null,
@@ -43,6 +45,7 @@ describe("MarketsClient", () => {
                     max_leverage: 25,
                     price: { amount: "2322.350000", currency: "usd", decimals: 6, display_decimals: 6 },
                     size_decimals: 4,
+                    volume_24h: null,
                 },
                 {
                     change_24h_percentage: 1.4235,
@@ -52,6 +55,7 @@ describe("MarketsClient", () => {
                     max_leverage: null,
                     price: { amount: "191.27000000", currency: "usd", decimals: 8, display_decimals: 8 },
                     size_decimals: 8,
+                    volume_24h: { amount: "34341055.48", currency: "usd", decimals: 2, display_decimals: 2 },
                 },
                 {
                     change_24h_percentage: null,
@@ -61,6 +65,7 @@ describe("MarketsClient", () => {
                     max_leverage: 20,
                     price: { amount: "101.325000", currency: "usd", decimals: 6, display_decimals: 6 },
                     size_decimals: 2,
+                    volume_24h: null,
                 },
                 {
                     change_24h_percentage: null,
@@ -70,6 +75,7 @@ describe("MarketsClient", () => {
                     max_leverage: null,
                     price: { amount: "101.23500000", currency: "usd", decimals: 8, display_decimals: 8 },
                     size_decimals: 3,
+                    volume_24h: null,
                 },
                 {
                     change_24h_percentage: null,
@@ -79,6 +85,7 @@ describe("MarketsClient", () => {
                     max_leverage: null,
                     price: { amount: "4012.85000000", currency: "usd", decimals: 8, display_decimals: 8 },
                     size_decimals: 2,
+                    volume_24h: null,
                 },
                 {
                     change_24h_percentage: null,
@@ -88,6 +95,7 @@ describe("MarketsClient", () => {
                     max_leverage: 20,
                     price: { amount: "441.500000", currency: "usd", decimals: 6, display_decimals: 6 },
                     size_decimals: 3,
+                    volume_24h: null,
                 },
             ],
             page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
