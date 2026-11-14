@@ -30,6 +30,8 @@ export namespace PostPayoutUpdatedPayload {
         amount: string;
         /** Whether `POST /payouts/{id}/cancel` would act on this payout right now: `true` while it is `in_review`, while it is `processing` with nothing yet submitted to the payout provider, or while a submitted payout can still be asked to cancel at the provider. `false` once the money has arrived or the payout has already ended. */
         cancelable: boolean;
+        /** How the balance was converted into the payout currency before the payout was sent. `null` when the payout was sent from a balance in its own currency. */
+        conversion: Data.Conversion | null;
         /** When the payout was created. */
         created_at: string;
         /** Payout currency. */
@@ -80,6 +82,18 @@ export namespace PostPayoutUpdatedPayload {
     }
 
     export namespace Data {
+        /**
+         * How the balance was converted into the payout currency before the payout was sent. `null` when the payout was sent from a balance in its own currency.
+         */
+        export interface Conversion {
+            /** The amount the conversion took from the balance, as a decimal string. */
+            from_amount: string;
+            /** The currency of the balance the conversion took the amount from. */
+            from_currency: string;
+            /** The conversion rate, in units of the payout currency for each unit of `from_currency`. Any conversion charge is included in this rate. */
+            rate: number;
+        }
+
         /**
          * Why the payout ended without paying, or why it reversed after settlement. Present on failed, canceled, denied, and reversed payouts; `null` otherwise.
          */
