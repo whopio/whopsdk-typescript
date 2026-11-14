@@ -90,7 +90,7 @@ export class TimeSeriesClient {
     }
 
     /**
-     * Retrieves a metric as a series of points over a time range for an account or user. For an aggregate that is not bucketed over time, use a report from `GET /stats/reports`. The `market_prices` metric is public and requires no authentication. Each metric takes its own scope: most need `stats:read`, the earnings, markup revenue and `platform_markup_amount` metrics need `company:balance:read`, `markup_earning_estimate` needs `company:update_child_fees`, and `ad_delivery`, `ad_campaign_score`, `people` and `events` also accept `ad_campaign:read`.
+     * Retrieves a metric as a series of points over a time range for an account or user. For an aggregate that is not bucketed over time, use a report from `GET /stats/reports`. The `market_prices` metric is public and requires no authentication. Each metric takes its own scope: most need `stats:read`, the earnings, markup revenue and `platform_markup_amount` metrics need `company:balance:read`, `markup_earning_estimate` needs `company:update_child_fees`, `ad_delivery`, `ad_campaign_score`, `people` and `events` also accept `ad_campaign:read`, and `cashback` and `cashback_qualified_spend` also accept `payout:account:read`.
      *
      * @param {Whop.stats.RetrieveTimeSeriesRequest} request
      * @param {TimeSeriesClient.RequestOptions} requestOptions - Request-specific configuration.
