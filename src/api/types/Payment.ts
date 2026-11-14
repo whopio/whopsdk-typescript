@@ -5,8 +5,10 @@ import type * as Whop from "../index.js";
 export interface Payment {
     /** The account that received the payment, prefixed `biz_`. */
     account_id: string | null;
-    /** What the account keeps: the total less Whop's fees. */
-    amount_after_fees: Whop.Money;
+    /** What the account keeps: the total less Whop's fees. Null when you read the payment as its buyer. */
+    amount_after_fees: Whop.Money | null;
+    /** What the buyer is charged for this payment: the total plus any buyer fees, in the currency the buyer pays in. Refunds do not reduce it; `presentment_refunded_amount` states them in the same currency. */
+    amount_charged: Whop.Money;
     /** When Whop will capture this authorized card payment automatically unless it is voided first, as an ISO 8601 timestamp. Null when no automatic capture was requested. */
     auto_capture_at: string | null;
     /** True when Whop refunded the payment automatically, for example on a dispute alert. */
@@ -23,7 +25,7 @@ export interface Payment {
     checkout_origin: string | null;
     /** The checkout experience that produced this payment, such as `embedded_checkout` for a checkout on the account's own website or `off_session` for a subscription renewal. Null when the checkout was not recorded. */
     checkout_surface: Payment.CheckoutSurface | null;
-    /** The credential a buyer's surface presents to poll this payment, set its return URL and resume it when the bank asked the customer to authenticate. Only on payments created from a confirmation token or waiting on that authentication, and always null in list responses — retrieve the payment for it. */
+    /** The credential a buyer's surface presents to poll this payment, set its return URL and resume it when the bank asked the customer to authenticate. Only on payments created from a confirmation token or waiting on that authentication, null when you read the payment as its buyer, and always null in list responses — retrieve the payment for it. */
     client_secret: string | null;
     /** When the payment was created, as an ISO 8601 timestamp. */
     created_at: string;
@@ -46,16 +48,16 @@ export interface Payment {
     holds: Whop.PaymentHold[];
     /** Payment ID, prefixed `pay_`. */
     id: string;
-    /** The buyer's IP address at checkout: the one Whop's fraud screening identified, otherwise the one Whop captured from the buyer's browser at checkout. Null when the buyer was not present at checkout, such as a subscription renewal or a charge made without the buyer present. */
+    /** The buyer's IP address at checkout: the one Whop's fraud screening identified, otherwise the one Whop captured from the buyer's browser at checkout. Null when the buyer was not present at checkout, such as a subscription renewal or a charge made without the buyer present, or when you read the payment as its buyer. */
     ip_address: string | null;
     /** When the most recent charge attempt ran, or null. */
     last_payment_attempt_at: string | null;
     line_items: Whop.ReceiptLineItem[];
-    /** The buyer's member record on the account, prefixed `mber_`. Null without the member:basic:read permission. */
+    /** The buyer's member record on the account, prefixed `mber_`. Null without the member:basic:read permission, unless you are the buyer. */
     member_id: string | null;
-    /** The membership this payment is billed against, prefixed `mem_`. Null for one-off purchases or without the member:basic:read permission. */
+    /** The membership this payment is billed against, prefixed `mem_`. Null for one-off purchases, or without the member:basic:read permission unless you are the buyer. */
     membership_id: string | null;
-    /** Your own key-value data attached when the payment was created. */
+    /** Your own key-value data attached when the payment was created. Null when you read the payment as its buyer. */
     metadata: Record<string, unknown> | null;
     /** True for a paid payment with a shipping address, no shipment, and no full refund. Null without the shipment:basic:read permission. */
     missing_tracking: boolean | null;
@@ -65,7 +67,7 @@ export interface Payment {
     next_payment_attempt_at: string | null;
     /** When the money was collected, or null while it has not been. */
     paid_at: string | null;
-    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and when it was a card, the card's brand, last four, issuer identification number, and the network transaction id the account uses for the card. */
+    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and when it was a card, the card's brand, last four, issuer identification number, and the network transaction id the account uses for the card. The network transaction id is null when you read the payment as its buyer. */
     payment_instrument: Whop.PaymentInstrument | null;
     /** The stored payment method that was charged, prefixed `payt_`. Null when the method was not saved. */
     payment_method_id: string | null;
@@ -98,14 +100,14 @@ export interface Payment {
     response_due_at: string | null;
     /** True when the payment is `open` and can be retried by hand with `POST /payments/{id}/retry`: its membership is `active`, `trialing`, or `past_due` (or it is a failed first payment on a `drafted` membership), it is not paid through an invoice payment link, and its one manual retry is not used up. A retry can still be refused when the company cannot currently accept payments. */
     retryable: boolean;
-    /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available. */
+    /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available or you read the payment as its buyer. */
     risk_score: number | null;
     /**
      * Deprecated. Risk score explanations are no longer provided; always null.
      * DEPRECATED: Risk score explanations are no longer provided. Always null.
      */
     risk_signals: Record<string, unknown> | null;
-    /** When the portion not listed in `holds` posts to the account's available balance, at midnight UTC. The `financial_activity.funds_available` webhook's `posted_at` carries the same value when the settlement that clears it posts. Null until the payment is paid, and always null in list responses — retrieve the payment for it. */
+    /** When the portion not listed in `holds` posts to the account's available balance, at midnight UTC. The `financial_activity.funds_available` webhook's `posted_at` carries the same value when the settlement that clears it posts. Null until the payment is paid or when you read the payment as its buyer, and always null in list responses — retrieve the payment for it. */
     settlement_time_at: string | null;
     /** The shipment fulfilling this payment, prefixed `ship_`. Null when nothing ships or without the shipment:basic:read permission. */
     shipment_id: string | null;
@@ -125,11 +127,11 @@ export interface Payment {
     tax_refunded_amount: Whop.Money;
     /** True when the buyer completed 3D Secure for this payment. */
     three_ds_verified: boolean;
-    /** The account-facing total: the price after discounts, plus any tax added on top. Excludes buyer fees, which the buyer pays above this amount — so this is not necessarily what the buyer's statement shows. */
+    /** The account-facing total: the price after discounts, plus any tax added on top. Excludes buyer fees, which the buyer pays above this amount — so this is not necessarily what the buyer's statement shows; `amount_charged` is what the buyer is charged. */
     total: Whop.Money | null;
     /** When the payment last changed, as an ISO 8601 timestamp. */
     updated_at: string;
-    /** The total converted to USD at the time of the charge, for reporting across currencies. Excludes the adaptive pricing FX markup, which the account does not keep. */
+    /** The total converted to USD at the time of the charge, for reporting across currencies. Excludes the adaptive pricing FX markup, which the account does not keep. Null when you read the payment as its buyer. */
     usd_total: Whop.Money | null;
     /** The buyer. Null when the payment belongs to a company buyer rather than a user. */
     user: Whop.UserSummary | null;
@@ -137,7 +139,7 @@ export interface Payment {
     user_agent: string | null;
     /** The variant that was charged, prefixed `plan_`. */
     variant_id: string | null;
-    /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none. */
+    /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none or you read the payment as its buyer. */
     verification_checks: Whop.PaymentVerificationChecks | null;
     /** True when the payment can be voided or canceled. The request is rejected if the payment is no longer eligible — see `POST /payments/{id}/void`. */
     voidable: boolean;

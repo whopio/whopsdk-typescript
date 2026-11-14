@@ -26,6 +26,7 @@ describe("DirectClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_after_fees: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            amount_charged: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             auto_capture_at: "auto_capture_at",
             auto_refunded: false,
             billing_address: {

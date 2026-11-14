@@ -13,19 +13,19 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface ListPaymentsRequest {
-    /** Which sales to list. `account_sales` returns sales for the accounts the caller can read. `user_sales` returns only sales the signed-in user received personally, outside any account; it requires the user's own Whop login session and cannot be combined with `account_id`. */
+    /** Which sales to list. `account_sales` returns sales for the accounts the caller can read, and with `user_id=me` the user's own purchases too. `user_sales` returns only sales the signed-in user received personally, outside any account; it requires the user's own Whop login session and cannot be combined with `account_id`. */
     mode?: Whop.ListPaymentsRequestMode;
-    /** Only payments charged by this account, prefixed `biz_`. */
+    /** Only payments charged by this account, prefixed `biz_`. With `user_id=me`, an account whose payments you cannot read lists only your own purchases from it. */
     account_id?: string;
     /** Only payments in this lifecycle state. */
     status?: Whop.ListPaymentsRequestStatus;
-    /** Only payments whose most recently attached kept shipment is in this tracking state. `missing_tracking` selects paid payments with a captured shipping address and no kept shipment, excluding fully refunded payments. `needs_tracking` selects payments with an open pre-shipment funds hold and no kept shipment. Shipment states do not imply a payment or refund state. Requires `shipment:basic:read` as well as `payment:basic:read`; user-wide lists include only accounts readable under both scopes. Only supported with `mode=account_sales`. */
+    /** Only payments whose most recently attached kept shipment is in this tracking state. `missing_tracking` selects paid payments with a captured shipping address and no kept shipment, excluding fully refunded payments. `needs_tracking` selects payments with an open pre-shipment funds hold and no kept shipment. Shipment states do not imply a payment or refund state. Requires `shipment:basic:read` as well as `payment:basic:read`; user-wide lists include only accounts readable under both scopes, and none of the user's purchases. Only supported with `mode=account_sales`. */
     tracking_status?: Whop.ListPaymentsRequestTrackingStatus;
     /** Only payments charged for this reason. `subscription_cycle` also matches renewals recorded as `subscription_update`. */
     billing_reason?: Whop.ListPaymentsRequestBillingReason;
     /** Only payments presented in this three-letter currency, such as `usd`. */
     currency?: string;
-    /** Only payments made by this buyer, prefixed `user_`. This filters sales the caller can read, so `me` is not accepted; list the caller's own purchases with `GET /memberships?user_id=me`. */
+    /** Only payments made by this buyer, prefixed `user_`. `me` is the signed-in user and needs a user credential: a whop.com session, an OAuth token or a user-scoped token. It lists the user's own payments: their purchases from any account, and their payments on accounts they read as the seller. */
     user_id?: string;
     /** Search payments by payment ID, dispute ID, user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;
@@ -45,7 +45,7 @@ export interface ListPaymentsRequest {
     created_after?: string;
     /** Only payments in any of these lifecycle states, with the same meanings as `status`. Repeat the parameter to pass several. Combined with `status` when both are sent. */
     statuses?: Whop.ListPaymentsRequestStatusesItem | Whop.ListPaymentsRequestStatusesItem[];
-    /** Only payments whose `substatus` is any of these. Repeat the parameter to pass several. `incomplete` also matches payments that report `incomplete` because no finer status was recorded. */
+    /** Only payments whose `substatus` is any of these. Repeat the parameter to pass several. `incomplete` also matches payments that report `incomplete` because no finer status was recorded. A purchase Whop's risk checks blocked reports `failed`, so `failed` matches it and `blocked` does not. */
     substatuses?: Whop.ListPaymentsRequestSubstatusesItem | Whop.ListPaymentsRequestSubstatusesItem[];
     /** Only payments charged for any of these reasons, with the same meanings as `billing_reason`. Repeat the parameter to pass several. Combined with `billing_reason` when both are sent. */
     billing_reasons?: Whop.ListPaymentsRequestBillingReasonsItem | Whop.ListPaymentsRequestBillingReasonsItem[];
