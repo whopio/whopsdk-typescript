@@ -20,6 +20,7 @@ describe("PayoutsClient", () => {
                 {
                     amount: "500.0",
                     cancelable: true,
+                    conversion: { from_amount: "1000.0", from_currency: "usd", rate: 0.9108 },
                     created_at: "2026-07-29T18:22:00Z",
                     currency: "usd",
                     destination_amount: "461.7",
@@ -172,6 +173,7 @@ describe("PayoutsClient", () => {
         const rawResponseBody = {
             amount: "50.0",
             cancelable: true,
+            conversion: { from_amount: "1000.0", from_currency: "usd", rate: 0.9108 },
             created_at: "2026-01-01T12:00:00Z",
             currency: "usd",
             destination_amount: "destination_amount",
@@ -556,6 +558,7 @@ describe("PayoutsClient", () => {
         const rawResponseBody = {
             amount: "500.0",
             cancelable: true,
+            conversion: { from_amount: "1000.0", from_currency: "usd", rate: 0.9108 },
             created_at: "2026-07-29T18:22:00Z",
             currency: "usd",
             delayed: false,
@@ -670,6 +673,7 @@ describe("PayoutsClient", () => {
         const rawResponseBody = {
             amount: "500.0",
             cancelable: false,
+            conversion: { from_amount: "1000.0", from_currency: "usd", rate: 0.9108 },
             created_at: "2026-07-29T18:22:00Z",
             currency: "usd",
             destination_amount: "461.7",
