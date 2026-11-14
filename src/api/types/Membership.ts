@@ -56,7 +56,7 @@ export interface Membership {
     product_id: string;
     /** The promo code discounting this membership, prefixed `promo_`. `null` when none is applied. Set at checkout or by Apply Promo Code to Membership. */
     promo_code_id: string | null;
-    /** What the next renewal charges, after any promo code that still applies. `null` for non-renewing memberships. */
+    /** The variant's renewal price, in the variant's currency, after any promo code that still applies. A membership billed in the buyer's local currency is charged this price converted at the exchange rate on each billing date. `null` for non-renewing memberships. */
     renewal_price: Whop.Money | null;
     /** Paid installments counted so far on a split pay membership. `null` when the membership is not on split pay, or before its first installment is counted. */
     split_pay_current_payments: number | null;
