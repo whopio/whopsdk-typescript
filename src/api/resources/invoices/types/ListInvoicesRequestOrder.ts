@@ -3,5 +3,6 @@
 export const ListInvoicesRequestOrder = {
     CreatedAt: "created_at",
     DueAt: "due_at",
+    Status: "status",
 } as const;
 export type ListInvoicesRequestOrder = (typeof ListInvoicesRequestOrder)[keyof typeof ListInvoicesRequestOrder];
