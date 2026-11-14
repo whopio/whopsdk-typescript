@@ -162,7 +162,7 @@ export class MessagesClient {
     }
 
     /**
-     * Sends a Markdown message as the authenticated user or app agent. Channel access, posting restrictions, moderation, and delivery follow the existing chat services. Use Idempotency-Key to safely retry a send. The response and realtime message use the same message ID. Custom author presentation and embeds are read-only.
+     * Sends a Markdown message as the authenticated user or app agent. Channel access, posting restrictions, moderation, and delivery follow the existing chat services. Use Idempotency-Key to safely retry a send. The response and realtime message use the same message ID. Custom author presentation and embeds are read-only. With email_address, the message's text is also emailed to the customer of a support chat with that address's account, if they're a member with an email address. The email answers the email behind replying_to_message_id, or else continues the chat's latest email. The message is posted even when it isn't emailed. Files, GIFs and polls stay in the chat and are left out of the email, and a message with no text isn't emailed. Sending needs member:email:read, and the address's owner or, for a shared address, email:read and email:send.
      *
      * @param {Whop.CreateMessagesRequest} request
      * @param {MessagesClient.RequestOptions} requestOptions - Request-specific configuration.

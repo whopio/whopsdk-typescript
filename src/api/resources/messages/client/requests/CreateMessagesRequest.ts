@@ -16,6 +16,8 @@ export interface CreateMessagesRequest {
     channel_id: string;
     /** Markdown content. May be empty when the message contains media or a poll. */
     content: string;
+    /** Also send this message as an email from this email address. Pass the address, like `support@example.com`, or its ID, prefixed `emaddr_`. */
+    email_address?: string;
     /** Up to 10 GIFs to attach. URLs must use HTTPS on static.klipy.com, static1.klipy.com, or static2.klipy.com. Omit to preserve on edit; an empty list clears them. */
     gifs?: CreateMessagesRequest.Gifs.Item[];
     /** Optional, for clients that show a message before the server confirms it. Use `post_` followed by 22 Base58 characters. Omit to generate an ID. Reuse the same ID and `Idempotency-Key` when retrying a send. */
