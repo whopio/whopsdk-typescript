@@ -45,6 +45,7 @@ export class VariantsClient {
      *         visibilities: ["visible"],
      *         billing_types: ["renewal"],
      *         product_ids: ["prod_xxxxxxxxxxxxxx"],
+     *         sku: "TEE-LARGE-BLUE",
      *         presentment_currency: "auto",
      *         ip_address: "203.0.113.7",
      *         presentment_country: "JP"
@@ -64,6 +65,7 @@ export class VariantsClient {
                     visibilities,
                     billing_types: billingTypes,
                     product_ids: productIds,
+                    sku,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     presentment_currency: presentmentCurrency,
@@ -82,6 +84,7 @@ export class VariantsClient {
                     visibilities,
                     billing_types: billingTypes,
                     product_ids: productIds,
+                    sku,
                     created_before: createdBefore,
                     created_after: createdAfter,
                     presentment_currency: presentmentCurrency,
