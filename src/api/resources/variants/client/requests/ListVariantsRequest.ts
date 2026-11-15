@@ -9,6 +9,7 @@ import type * as Whop from "../../../../index.js";
  *         visibilities: ["visible"],
  *         billing_types: ["renewal"],
  *         product_ids: ["prod_xxxxxxxxxxxxxx"],
+ *         sku: "TEE-LARGE-BLUE",
  *         presentment_currency: "auto",
  *         ip_address: "203.0.113.7",
  *         presentment_country: "JP"
@@ -29,6 +30,8 @@ export interface ListVariantsRequest {
     billing_types?: string | string[];
     /** Filter to only variants belonging to these product identifiers. When `account_id` is omitted, this is required and the response is publicly readable: only visible, non-invoice variants are returned. */
     product_ids?: string | string[];
+    /** Filter to only variants with this stock keeping unit. The match is on the full value and is not case-sensitive. */
+    sku?: string;
     /** Only return variants created before this timestamp. */
     created_before?: string;
     /** Only return variants created after this timestamp. */

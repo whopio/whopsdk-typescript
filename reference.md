@@ -31653,6 +31653,7 @@ const pageableResponse = await client.variants.list({
     visibilities: ["visible"],
     billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
+    sku: "TEE-LARGE-BLUE",
     presentment_currency: "auto",
     ip_address: "203.0.113.7",
     presentment_country: "JP"
@@ -31667,6 +31668,7 @@ let page = await client.variants.list({
     visibilities: ["visible"],
     billing_types: ["renewal"],
     product_ids: ["prod_xxxxxxxxxxxxxx"],
+    sku: "TEE-LARGE-BLUE",
     presentment_currency: "auto",
     ip_address: "203.0.113.7",
     presentment_country: "JP"

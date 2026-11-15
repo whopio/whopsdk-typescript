@@ -14,6 +14,7 @@ export interface ListPlansRequest {
     visibilities?: string | string[];
     billing_types?: string | string[];
     product_ids?: string | string[];
+    sku?: string;
     created_before?: string;
     created_after?: string;
     /** Number of results to return from the start of the range. */
