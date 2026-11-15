@@ -26,6 +26,8 @@ export interface User {
     earnings_usd: Whop.UserEarnings | null;
     /** The user's email address. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or while the account has no confirmed email yet. */
     email: string | null;
+    /** The number of users who follow this user. */
+    followers_count: number;
     /** User ID, prefixed `user_`. */
     id: string;
     /** The user's Whop Level, counted across every account they own. `applied_level` is public. The points and spend fields are populated only when you retrieve yourself with the reserved id `me` and have balance-read scope. `null` on lists, and when none of their accounts are in Whop Levels. */
@@ -45,6 +47,8 @@ export interface User {
     username: string;
     /** Identity verification status for the user's `individual` (KYC) and `business` (KYB) profiles. Each is `null` until created, otherwise a `status` of `not_started`, `pending`, `approved`, or `rejected`. */
     verification: Record<string, unknown>;
+    /** When the user received a verified badge, as an ISO 8601 timestamp. `null` when the user is not verified. */
+    verified_at: string | null;
     /** When the user became an enrolled Whop Partner, as an ISO 8601 timestamp. `null` if never enrolled. */
     whop_partner_enabled_at: string | null;
     /** Number of accounts the user referred to Whop as a Whop Partner that have processed more than $1 in volume attributed to the user. Populated only when retrieving a single user who is a Verified Whop Partner; `null` otherwise. */
