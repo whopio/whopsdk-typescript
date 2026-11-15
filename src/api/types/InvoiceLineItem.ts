@@ -9,6 +9,8 @@ export interface InvoiceLineItem {
     discount_amount: Whop.Money | null;
     /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */
     id: string | null;
+    /** The part of `unit_amount` that is a recurring variant's one-time upfront fee, the variant's `initial_price`, charged on this invoice only. The rest of `unit_amount` is the first billing period. Null for one-time items, renewal invoices, items with no upfront fee, and items whose variant prices changed after the invoice was priced. */
+    initial_price: Whop.Money | null;
     /** The item's name as shown at checkout (the product title, else the variant title). */
     label: string | null;
     /** The product the variant belongs to, prefixed `prod_`. Null for a variant with no product. */
