@@ -229,6 +229,7 @@ describe("VariantsClient", () => {
             title: "Unlimited Wash Club",
             trial_period_days: 7,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };
@@ -399,6 +400,7 @@ describe("VariantsClient", () => {
             title: "Unlimited Wash Club",
             trial_period_days: 7,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };
@@ -551,6 +553,7 @@ describe("VariantsClient", () => {
             title: "Unlimited Wash Club",
             trial_period_days: 7,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };
@@ -571,6 +574,34 @@ describe("VariantsClient", () => {
     });
 
     test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/variants/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.variants.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("update (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,

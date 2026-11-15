@@ -162,6 +162,7 @@ describe("PlansClient", () => {
             title: "Deprecated plan update",
             trial_period_days: 1.1,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };
@@ -272,6 +273,7 @@ describe("PlansClient", () => {
             title: "Deprecated plan update",
             trial_period_days: 1.1,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };
@@ -371,6 +373,7 @@ describe("PlansClient", () => {
             title: "Deprecated plan update",
             trial_period_days: 1.1,
             unlimited_stock: false,
+            unpaid_invoice_count: 0,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
         };

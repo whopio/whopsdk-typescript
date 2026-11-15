@@ -61,10 +61,12 @@ export class InvoicesClient {
                 const {
                     account_id: accountId,
                     status,
+                    statuses,
                     overdue,
                     scheduled,
                     member_id: memberId,
                     product_id: productId,
+                    variant_id: variantId,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     order,
@@ -78,10 +80,16 @@ export class InvoicesClient {
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     status: status != null ? status : undefined,
+                    statuses: Array.isArray(statuses)
+                        ? statuses.map((item) => item)
+                        : statuses != null
+                          ? statuses
+                          : undefined,
                     overdue,
                     scheduled,
                     member_id: memberId,
                     product_id: productId,
+                    variant_id: variantId,
                     created_after: createdAfter != null ? createdAfter : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     order: order != null ? order : undefined,

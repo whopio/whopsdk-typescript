@@ -9,11 +9,15 @@ import type * as Whop from "../../../../index.js";
 export interface ListInvoicesRequest {
     account_id?: string;
     status?: Whop.ListInvoicesRequestStatus;
+    /** Only invoices in any of these statuses. Repeat the parameter to pass several. Combined with `status` when both are sent. */
+    statuses?: Whop.ListInvoicesRequestStatusesItem | Whop.ListInvoicesRequestStatusesItem[];
     overdue?: boolean;
     /** Set to `true` for drafts with a scheduled send, which are the invoices with a `scheduled_send_at`. Set to `false` for every other invoice. Only a `draft` can be scheduled. An `open` invoice is not scheduled, even with a `scheduled_charge_at`. A draft that sends on its due date (`sends_on_due_date`) is not scheduled. Omit to include both. */
     scheduled?: boolean;
     member_id?: string;
     product_id?: string;
+    /** Only invoices that bill this variant, prefixed `plan_`. An invoice matches when the variant is any of its items. */
+    variant_id?: string;
     created_after?: string;
     created_before?: string;
     /** Field to sort by. Sorting by `due_at` or `scheduled_send_at` puts invoices without that date last in both directions. */
