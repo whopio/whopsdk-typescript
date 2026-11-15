@@ -18,8 +18,6 @@ export interface UpdateExperimentsRequest {
     hypothesis?: string | null;
     /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
     related_resource?: Whop.ExperimentResourceReference;
-    /** Replace the targeting rules with this set. Omit to leave unchanged. */
-    targeting_rules?: UpdateExperimentsRequest.TargetingRules.Item[];
     /** Grow treatment allocation. Pass every existing treatment with an equal-or-higher weight; append new names to add arms. Weights never decrease and arms are never removed. Omit to leave unchanged. */
     variants?: UpdateExperimentsRequest.Variants.Item[];
 }
@@ -27,64 +25,6 @@ export interface UpdateExperimentsRequest {
 export namespace UpdateExperimentsRequest {
     export interface Control {
         related_resource?: Whop.ExperimentResourceReference | undefined;
-    }
-
-    export type TargetingRules = TargetingRules.Item[];
-
-    export namespace TargetingRules {
-        export interface Item {
-            /** Conditions within this rule. Must be non-empty. All conditions must be satisfied for the rule to match (AND logic). Rules are OR-ed together. */
-            conditions: Item.Conditions.Item[];
-            /** Percentage of matching subjects that this rule lets in, from 0 to 100. Omit it to let in every matching subject. Only `include` rules accept it. Raising it keeps every subject that the rule already lets in. */
-            pass_percentage?: number | undefined;
-            /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. Defaults to `include`. */
-            type?: Item.Type | undefined;
-        }
-
-        export namespace Item {
-            export type Conditions = Conditions.Item[];
-
-            export namespace Conditions {
-                export interface Item {
-                    /** Property name to read from the user context. Required when `type` is `property`. */
-                    field?: (string | null) | undefined;
-                    /** Comparison to apply: `any`/`none` — inclusion/exclusion list; `eq`/`neq` — equality; `gt`/`gte`/`lt`/`lte` — numeric range. */
-                    operator: Item.Operator;
-                    /** `user_id` — match on subject user ID; `account_id` — match on account ID (prefixed `biz_`); `property` — match on a named user property (requires `field`). */
-                    type: Item.Type;
-                    value?: unknown | undefined;
-                }
-
-                export namespace Item {
-                    /** Comparison to apply: `any`/`none` — inclusion/exclusion list; `eq`/`neq` — equality; `gt`/`gte`/`lt`/`lte` — numeric range. */
-                    export const Operator = {
-                        Any: "any",
-                        None: "none",
-                        Eq: "eq",
-                        Neq: "neq",
-                        Gt: "gt",
-                        Gte: "gte",
-                        Lt: "lt",
-                        Lte: "lte",
-                    } as const;
-                    export type Operator = (typeof Operator)[keyof typeof Operator];
-                    /** `user_id` — match on subject user ID; `account_id` — match on account ID (prefixed `biz_`); `property` — match on a named user property (requires `field`). */
-                    export const Type = {
-                        UserId: "user_id",
-                        AccountId: "account_id",
-                        Property: "property",
-                    } as const;
-                    export type Type = (typeof Type)[keyof typeof Type];
-                }
-            }
-
-            /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. Defaults to `include`. */
-            export const Type = {
-                Include: "include",
-                Exclude: "exclude",
-            } as const;
-            export type Type = (typeof Type)[keyof typeof Type];
-        }
     }
 
     export type Variants = Variants.Item[];

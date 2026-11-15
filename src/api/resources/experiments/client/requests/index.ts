@@ -5,4 +5,4 @@ export type { ExposuresExperimentsRequest } from "./ExposuresExperimentsRequest.
 export type { ListExperimentsRequest } from "./ListExperimentsRequest.js";
 export type { PauseExperimentsRequest } from "./PauseExperimentsRequest.js";
 export type { RetrieveExperimentsRequest } from "./RetrieveExperimentsRequest.js";
-export { UpdateExperimentsRequest } from "./UpdateExperimentsRequest.js";
+export type { UpdateExperimentsRequest } from "./UpdateExperimentsRequest.js";

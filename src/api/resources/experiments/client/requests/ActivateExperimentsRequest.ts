@@ -11,6 +11,4 @@ export interface ActivateExperimentsRequest {
     id: string;
     /** Owning account ID. Required when id is a flag key; optional for an expt_ ID. */
     account_id?: string;
-    /** Reporting window length in days. Omit to use the default. This does not automatically end the experiment. */
-    duration_days?: number | null;
 }
