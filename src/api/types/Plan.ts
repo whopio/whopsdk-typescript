@@ -88,6 +88,8 @@ export interface Plan {
     trial_period_days: number | null;
     /** Whether the variant has unlimited stock. When `true`, the `stock` field is ignored; waitlist variants always report `true`. */
     unlimited_stock: boolean;
+    /** Number of issued invoices for this variant that are not paid or void. While it is above `0`, you can't change the variant's prices, billing period, trial, number of payments, currency or billing type. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
+    unpaid_invoice_count: number | null;
     /** When the variant was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
     /** Controls where this variant can be seen. When `hidden`, the variant is reachable only by its direct link. */

@@ -2,6 +2,7 @@ export * from "./DeleteInvoicesResponse.js";
 export * from "./ListInvoicesRequestDirection.js";
 export * from "./ListInvoicesRequestOrder.js";
 export * from "./ListInvoicesRequestStatus.js";
+export * from "./ListInvoicesRequestStatusesItem.js";
 export * from "./ListInvoicesResponse.js";
 export * from "./PostInvoiceCreatedPayload.js";
 export * from "./PostInvoiceMarkedUncollectiblePayload.js";

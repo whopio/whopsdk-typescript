@@ -405,11 +405,12 @@ export class VariantsClient {
     }
 
     /**
-     * Updates a variant's pricing, billing interval, visibility, stock, and other settings.
+     * Updates a variant's pricing, billing interval, visibility, stock, and other settings. While `unpaid_invoice_count` is above `0`, a change to the prices, billing period, trial, number of payments, currency or billing type returns a `400`.
      *
      * @param {Whop.UpdateVariantsRequest} request
      * @param {VariantsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -466,6 +467,8 @@ export class VariantsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 default:
