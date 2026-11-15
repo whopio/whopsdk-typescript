@@ -102,7 +102,7 @@ export interface RetrieveTimeSeriesRequest {
     mature_only?: boolean;
     /** Funnel only. Required when metric=funnel. 2 to 10 ordered events per person, as consecutive one-based bracket parameters such as `steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed`. Values are scalar strings, never JSON. A person's first step 1 match inside `from`/`to` anchors their cohort, breakdown, and conversion window; later matches do not restart it. Other events may occur between steps, and conversions may land after `to`. For an experiment funnel, make `experiment.exposure` step 1 and pass `breakdown_by=variant`. */
     steps?: Whop.RetrieveTimeSeriesRequestSteps;
-    /** Funnel only. The breakdown value to use as baseline for whole-window final conversion. Requires breakdown_by and mature_only=true; defaults confidence_level to 0.95. */
+    /** Funnel only. The breakdown value to use as baseline for whole-window final conversion. Requires breakdown_by and mature_only=true. Defaults confidence_level to 0.95. Also returns all_entrant_totals, which include entrants whose conversion window has not elapsed yet. Comparisons are left out until the baseline has mature entrants. */
     compare_to?: string;
     /** Funnel only. Confidence level for whole-window final conversion intervals, for example 0.95. Requires mature_only=true. Exposure steps must each filter one user- or visitor-randomized experiment. */
     confidence_level?: number;
