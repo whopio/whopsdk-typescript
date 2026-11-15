@@ -172,6 +172,8 @@ export namespace CreateDirectRequest {
         product?: (Plan.Product | null) | undefined;
         /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
         product_id?: (string | null) | undefined;
+        /** Where the customer is sent after paying for this variant. Must be a valid URL that is not another Whop checkout link. */
+        redirect_url?: (string | null) | undefined;
         /** Recurring price in the variant currency. */
         renewal_price?: (number | null) | undefined;
         /** How many payments a recurring variant collects before it stops billing, from 2 to 115. Only valid for `renewal` variants. `null` bills until the subscription is canceled. */

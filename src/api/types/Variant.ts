@@ -62,6 +62,8 @@ export interface Variant {
     product: Record<string, unknown> | null;
     /** URL where customers can purchase this variant directly. */
     purchase_url: string;
+    /** Where the customer is sent after paying for this variant. `null` when none is set, or unless the actor has the `plan:basic:read` scope on the variant's account. */
+    redirect_url: string | null;
     /** Sales method for this variant. */
     release_method: Variant.ReleaseMethod;
     /** Recurring price charged every billing period, in `currency`. */
