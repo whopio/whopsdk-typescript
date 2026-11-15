@@ -18,8 +18,6 @@ export interface Experiment {
     created_by?: (string | null) | undefined;
     /** When the experiment stopped collecting data, as an ISO 8601 timestamp. `null` while still running. */
     ended_at?: (string | null) | undefined;
-    /** `true` when this was created as a feature flag rather than a full experiment. Feature flags share the same evaluation API but do not collect metric results. */
-    feature_flag_only?: (boolean | null) | undefined;
     /** What was learned and why this outcome, recorded when the experiment was ended. `null` until then. */
     findings?: (string | null) | undefined;
     /** Developer-chosen handle referenced from code. Anywhere the API takes an experiment identifier, the `expt_` id and the flag_key are interchangeable. */
@@ -38,8 +36,6 @@ export interface Experiment {
     started_at?: (string | null) | undefined;
     /** Lifecycle state. `draft` — not yet live; `active` — currently running; `paused` — traffic paused; `ended` — concluded. */
     status: Experiment.Status;
-    /** Rules gating who is in the experiment at all. Conditions within a rule are AND-ed, rules are OR-ed, and `exclude` rules always win. Empty means everyone qualifies. */
-    targeting_rules: Experiment.TargetingRules.Item[];
     updated_at: string | null;
     /** Treatment arms. Users outside every arm's allocation form the implicit `control` group. Weights only ever grow and arms are never removed, so a user moves from control into a treatment at most once. */
     variants: Experiment.Variants.Item[];
@@ -68,64 +64,6 @@ export namespace Experiment {
         Ended: "ended",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
-    export type TargetingRules = TargetingRules.Item[];
-
-    export namespace TargetingRules {
-        export interface Item {
-            /** Conditions within this rule, all of which must match. */
-            conditions: Item.Conditions.Item[];
-            /** Percentage of matching subjects that this rule lets in, from 0 to 100. Absent when the rule lets in every matching subject. Raising it keeps every subject that the rule already lets in. */
-            pass_percentage?: number | undefined;
-            /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. */
-            type?: Item.Type | undefined;
-        }
-
-        export namespace Item {
-            export type Conditions = Conditions.Item[];
-
-            export namespace Conditions {
-                export interface Item {
-                    /** Property name to read from the user context. Present when `type` is `property`. */
-                    field?: (string | null) | undefined;
-                    /** Comparison to apply. */
-                    operator: Item.Operator;
-                    /** What the condition matches on: the user ID, the account ID, or a named user property. */
-                    type: Item.Type;
-                    value?: unknown | undefined;
-                }
-
-                export namespace Item {
-                    /** Comparison to apply. */
-                    export const Operator = {
-                        Any: "any",
-                        None: "none",
-                        Eq: "eq",
-                        Neq: "neq",
-                        Gt: "gt",
-                        Gte: "gte",
-                        Lt: "lt",
-                        Lte: "lte",
-                    } as const;
-                    export type Operator = (typeof Operator)[keyof typeof Operator];
-                    /** What the condition matches on: the user ID, the account ID, or a named user property. */
-                    export const Type = {
-                        UserId: "user_id",
-                        AccountId: "account_id",
-                        Property: "property",
-                    } as const;
-                    export type Type = (typeof Type)[keyof typeof Type];
-                }
-            }
-
-            /** `include` — users matching this rule qualify; `exclude` — users matching this rule are always excluded, overriding any include rule. */
-            export const Type = {
-                Include: "include",
-                Exclude: "exclude",
-            } as const;
-            export type Type = (typeof Type)[keyof typeof Type];
-        }
-    }
-
     export type Variants = Variants.Item[];
 
     export namespace Variants {
