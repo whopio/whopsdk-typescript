@@ -597,6 +597,7 @@ export * from "./UserBanner.js";
 export * from "./UserEarnings.js";
 export * from "./UserEarningsAmount.js";
 export * from "./UserFees.js";
+export * from "./UserLevel.js";
 export * from "./UserNotificationPreference.js";
 export * from "./UserPreferences.js";
 export * from "./UserProfilePicture.js";
