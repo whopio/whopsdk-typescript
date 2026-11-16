@@ -42,6 +42,8 @@ export interface Invoice {
     /** Whether this draft is issued automatically when its `due_at` arrives. Issuing it charges its `payment_method_id`, or emails its payment link to its `recipient_emails`. `false` for an invoice that is not a draft and for a draft with a scheduled send. `false` while sending the draft would fail for missing recipients or an unavailable payment link. `false` for a draft that had no future `due_at` when it was last saved. `false` for a draft created before 2026-11-12T22:00:00Z. */
     sends_on_due_date: boolean;
     status: Invoice.Status;
+    /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp. Renewals count from this moment. `null` starts the period when the invoice is paid, and so does a time that has passed by then. An invoice with a start date skips its variants' free trial. */
+    subscription_starts_at: string | null;
     subtotal: Whop.Money;
     tax_amount: Whop.Money | null;
     /** The IANA time zone for the dates on the invoice's email and PDF, such as `America/New_York`. `UTC` unless one was set. */
