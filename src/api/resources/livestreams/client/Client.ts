@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
 import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import * as core from "../../../../core/index.js";
+import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -211,7 +212,7 @@ export class LivestreamsClient {
     }
 
     /**
-     * Pins an ended livestream's recording so everyone in the experience sees it featured. Pinning it again keeps the original `pinned_at`.
+     * Pins an ended livestream's recording so everyone in the experience sees it featured, up to 3 per experience. Without `position`, a new pin goes first and an existing pin keeps its place. With `position`, the pin moves there and every pinned livestream in that experience gets a new `pinned_at` in the new order.
      *
      * @param {Whop.PinLivestreamsRequest} request
      * @param {LivestreamsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -240,7 +241,7 @@ export class LivestreamsClient {
         request: Whop.PinLivestreamsRequest,
         requestOptions?: LivestreamsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.Livestream>> {
-        const { id } = request;
+        const { id, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -260,7 +261,10 @@ export class LivestreamsClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

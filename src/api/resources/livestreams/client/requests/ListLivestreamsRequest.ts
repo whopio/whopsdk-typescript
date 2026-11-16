@@ -9,7 +9,7 @@
 export interface ListLivestreamsRequest {
     /** ID of a livestreams experience, prefixed `exp_`. */
     experience_id: string;
-    /** When `true`, only pinned livestreams, most recently pinned first. When `false`, only livestreams that are not pinned. */
+    /** When `true`, only pinned livestreams, newest `pinned_at` first. When `false`, only livestreams that are not pinned. */
     pinned?: boolean;
     /** When `true`, only ended livestreams that were recorded, including recordings still processing. `false` or omitted lists every livestream. */
     recorded?: boolean;
