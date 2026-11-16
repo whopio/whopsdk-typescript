@@ -44,6 +44,8 @@ export interface Invoice {
     status: Invoice.Status;
     subtotal: Whop.Money;
     tax_amount: Whop.Money | null;
+    /** The IANA time zone for the dates on the invoice's email and PDF, such as `America/New_York`. `UTC` unless one was set. */
+    time_zone: string;
     total: Whop.Money;
     totals_status: Invoice.TotalsStatus;
     updated_at: string;
