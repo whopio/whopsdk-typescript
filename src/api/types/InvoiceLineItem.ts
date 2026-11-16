@@ -9,7 +9,7 @@ export interface InvoiceLineItem {
     discount_amount: Whop.Money | null;
     /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */
     id: string | null;
-    /** The part of `unit_amount` that is a recurring variant's one-time upfront fee, the variant's `initial_price`, charged on this invoice only. The rest of `unit_amount` is the first billing period. Null for one-time items, renewal invoices, items with no upfront fee, and items whose variant prices changed after the invoice was priced. */
+    /** The part of `unit_amount` that is a recurring variant's one-time upfront fee, the variant's `initial_price`, charged on this invoice only. The rest of `unit_amount` is the first billing period. A trial has no first-period charge. Null for one-time items, renewal invoices, items with no upfront fee, and items whose variant prices changed after the invoice was priced. */
     initial_price: Whop.Money | null;
     /** The item's name as shown at checkout (the product title, else the variant title). */
     label: string | null;
@@ -21,7 +21,9 @@ export interface InvoiceLineItem {
     subtotal: Whop.Money | null;
     /** The tax collected on this item, in the payment's `currency`. Null when no tax was recorded. */
     tax_amount: Whop.Money | null;
-    /** The saved price of one unit before discounts, in the payment's `currency`. Creating or replacing recurring items includes the upfront fee and first billing period. Renewal invoices exclude the upfront fee. Other edits preserve saved prices. Null when the payment recorded no price. */
+    /** Free trial days before this recurring item's first renewal charge, from the variant's `trial_period_days`. The invoice then bills only the variant's `initial_price` for the item. `null` for one-time items and renewal invoices, and when the customer already had a subscription to the variant. */
+    trial_period_days: number | null;
+    /** The saved price of one unit before discounts, in the payment's `currency`. Creating or replacing recurring items includes the upfront fee, plus the first billing period unless the item starts with a trial. Renewal invoices exclude the upfront fee. Other edits preserve saved prices. Null when the payment recorded no price. */
     unit_amount: Whop.Money | null;
     /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
     variant_id: string | null;
