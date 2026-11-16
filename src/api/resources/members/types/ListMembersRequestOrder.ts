@@ -7,5 +7,6 @@ export const ListMembersRequestOrder = {
     LastActivityAt: "last_activity_at",
     MostRecentActionAt: "most_recent_action_at",
     UsdTotalSpent: "usd_total_spent",
+    NeedsReply: "needs_reply",
 } as const;
 export type ListMembersRequestOrder = (typeof ListMembersRequestOrder)[keyof typeof ListMembersRequestOrder];
