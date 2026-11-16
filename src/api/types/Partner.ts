@@ -12,7 +12,10 @@ export interface Partner {
     payout_rates: Whop.PartnerPayoutTier[];
     /** Number of active first-tier business referrals attributed to the partner, excluding deleted businesses. */
     referred_businesses_count: number;
-    /** The user currently attributed as this user's primary referrer. Null when there is no active primary referral. */
+    /**
+     * The user who referred this user. Deprecated: no longer populated. Always `null`.
+     * DEPRECATED: No longer populated. Always null.
+     */
     referring_partner: Whop.UserSummary | null;
     /** The authenticated partner's public profile. */
     user: Whop.UserSummary;
