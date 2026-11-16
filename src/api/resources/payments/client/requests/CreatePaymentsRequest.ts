@@ -39,7 +39,7 @@ export interface CreatePaymentsRequest extends Whop.PaymentInput {
     quote_id?: string | null;
     /** Where the buyer continues after completing an off-site step such as 3D Secure. An absolute https URL without credentials, at most 2,048 characters. Required when a saved payment method is charged with `off_session` false; otherwise ignored unless `confirmation_token` or a `paypal` `payment_method` is provided. */
     return_url?: string | null;
-    /** Attests that the buyer was told the payment method will be saved for later charges, and saves it once they approve, so it can be charged with `member_id` and `payment_method_id`. PayPal shows the buyer the agreement to future charges on its approval page. Omit it for a one-time payment that saves nothing. Ignored unless a `paypal` `payment_method` is provided. */
+    /** Attests that the buyer was told the payment method will be saved for later charges. A `paypal` method is saved once the buyer approves on PayPal's page, and can then be charged with `member_id` and `payment_method_id`. A `card_present` method saves the tapped card when the reader collects it. The payment's `payment_method_id` then names the saved card. The point of sale must also pass the buyer's consent to the Terminal SDK as `allow_redisplay`. Omit it for a one-time payment that saves nothing. Other payment methods ignore it. */
     setup_future_usage?: CreatePaymentsRequest.SetupFutureUsage | null;
     /** Where physical goods ship, returned on the payment as `shipping_address`. Only the keys you supply are kept; omit it for digital goods. */
     shipping_address?: CreatePaymentsRequest.ShippingAddress | null;
@@ -120,7 +120,7 @@ export namespace CreatePaymentsRequest {
         export type Type = (typeof Type)[keyof typeof Type];
     }
 
-    /** Attests that the buyer was told the payment method will be saved for later charges, and saves it once they approve, so it can be charged with `member_id` and `payment_method_id`. PayPal shows the buyer the agreement to future charges on its approval page. Omit it for a one-time payment that saves nothing. Ignored unless a `paypal` `payment_method` is provided. */
+    /** Attests that the buyer was told the payment method will be saved for later charges. A `paypal` method is saved once the buyer approves on PayPal's page, and can then be charged with `member_id` and `payment_method_id`. A `card_present` method saves the tapped card when the reader collects it. The payment's `payment_method_id` then names the saved card. The point of sale must also pass the buyer's consent to the Terminal SDK as `allow_redisplay`. Omit it for a one-time payment that saves nothing. Other payment methods ignore it. */
     export const SetupFutureUsage = {
         OffSession: "off_session",
     } as const;
