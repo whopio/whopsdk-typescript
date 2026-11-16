@@ -331,6 +331,8 @@ export * from "./ListApiKeysRequestCreatedBefore.js";
 export * from "./ListAppBuildsRequestCreatedAfter.js";
 export * from "./ListAppBuildsRequestCreatedBefore.js";
 export * from "./Livestream.js";
+export * from "./LivestreamViewership.js";
+export * from "./LivestreamViewersPoint.js";
 export * from "./Market.js";
 export * from "./MarketplaceStatuses.js";
 export * from "./MediaAsset.js";
