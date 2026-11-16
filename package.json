@@ -308,17 +308,6 @@
             },
             "default": "./dist/cjs/api/resources/channels/exports.js"
         },
-        "./chatChannels": {
-            "import": {
-                "types": "./dist/esm/api/resources/chatChannels/exports.d.mts",
-                "default": "./dist/esm/api/resources/chatChannels/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/chatChannels/exports.d.ts",
-                "default": "./dist/cjs/api/resources/chatChannels/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/chatChannels/exports.js"
-        },
         "./checkoutConfigurations": {
             "import": {
                 "types": "./dist/esm/api/resources/checkoutConfigurations/exports.d.mts",
@@ -450,28 +439,6 @@
                 "default": "./dist/cjs/api/resources/disputes/exports.js"
             },
             "default": "./dist/cjs/api/resources/disputes/exports.js"
-        },
-        "./dmChannels": {
-            "import": {
-                "types": "./dist/esm/api/resources/dmChannels/exports.d.mts",
-                "default": "./dist/esm/api/resources/dmChannels/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/dmChannels/exports.d.ts",
-                "default": "./dist/cjs/api/resources/dmChannels/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/dmChannels/exports.js"
-        },
-        "./dmMembers": {
-            "import": {
-                "types": "./dist/esm/api/resources/dmMembers/exports.d.mts",
-                "default": "./dist/esm/api/resources/dmMembers/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/dmMembers/exports.d.ts",
-                "default": "./dist/cjs/api/resources/dmMembers/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/dmMembers/exports.js"
         },
         "./domains": {
             "import": {
@@ -1033,17 +1000,6 @@
                 "default": "./dist/cjs/api/resources/stats/exports.js"
             },
             "default": "./dist/cjs/api/resources/stats/exports.js"
-        },
-        "./supportChannels": {
-            "import": {
-                "types": "./dist/esm/api/resources/supportChannels/exports.d.mts",
-                "default": "./dist/esm/api/resources/supportChannels/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/supportChannels/exports.d.ts",
-                "default": "./dist/cjs/api/resources/supportChannels/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/supportChannels/exports.js"
         },
         "./swaps": {
             "import": {

@@ -26,7 +26,6 @@ import { CardTransactionsClient } from "./api/resources/cardTransactions/client/
 import { CashbackRulesClient } from "./api/resources/cashbackRules/client/Client.js";
 import { ChannelMembersClient } from "./api/resources/channelMembers/client/Client.js";
 import { ChannelsClient } from "./api/resources/channels/client/Client.js";
-import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.js";
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
 import { ClaimLinksClient } from "./api/resources/claimLinks/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
@@ -39,8 +38,6 @@ import { CoursesClient } from "./api/resources/courses/client/Client.js";
 import { DepositsClient } from "./api/resources/deposits/client/Client.js";
 import { DisputeAlertsClient } from "./api/resources/disputeAlerts/client/Client.js";
 import { DisputesClient } from "./api/resources/disputes/client/Client.js";
-import { DmChannelsClient } from "./api/resources/dmChannels/client/Client.js";
-import { DmMembersClient } from "./api/resources/dmMembers/client/Client.js";
 import { DomainsClient } from "./api/resources/domains/client/Client.js";
 import { EconomicIntelligenceClient } from "./api/resources/economicIntelligence/client/Client.js";
 import { EmailAddressesClient } from "./api/resources/emailAddresses/client/Client.js";
@@ -92,7 +89,6 @@ import { SetupIntentsClient } from "./api/resources/setupIntents/client/Client.j
 import { ShipmentsClient } from "./api/resources/shipments/client/Client.js";
 import { SocialAccountsClient } from "./api/resources/socialAccounts/client/Client.js";
 import { StatsClient } from "./api/resources/stats/client/Client.js";
-import { SupportChannelsClient } from "./api/resources/supportChannels/client/Client.js";
 import { SwapsClient } from "./api/resources/swaps/client/Client.js";
 import { TeamMembersClient } from "./api/resources/teamMembers/client/Client.js";
 import { TradesClient } from "./api/resources/trades/client/Client.js";
@@ -141,7 +137,6 @@ export class WhopClient {
     protected _cashbackRules: CashbackRulesClient | undefined;
     protected _channelMembers: ChannelMembersClient | undefined;
     protected _channels: ChannelsClient | undefined;
-    protected _chatChannels: ChatChannelsClient | undefined;
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
     protected _claimLinks: ClaimLinksClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
@@ -154,8 +149,6 @@ export class WhopClient {
     protected _deposits: DepositsClient | undefined;
     protected _disputeAlerts: DisputeAlertsClient | undefined;
     protected _disputes: DisputesClient | undefined;
-    protected _dmChannels: DmChannelsClient | undefined;
-    protected _dmMembers: DmMembersClient | undefined;
     protected _domains: DomainsClient | undefined;
     protected _economicIntelligence: EconomicIntelligenceClient | undefined;
     protected _emailAddresses: EmailAddressesClient | undefined;
@@ -207,7 +200,6 @@ export class WhopClient {
     protected _shipments: ShipmentsClient | undefined;
     protected _socialAccounts: SocialAccountsClient | undefined;
     protected _stats: StatsClient | undefined;
-    protected _supportChannels: SupportChannelsClient | undefined;
     protected _swaps: SwapsClient | undefined;
     protected _teamMembers: TeamMembersClient | undefined;
     protected _trades: TradesClient | undefined;
@@ -326,10 +318,6 @@ export class WhopClient {
         return (this._channels ??= new ChannelsClient(this._options));
     }
 
-    public get chatChannels(): ChatChannelsClient {
-        return (this._chatChannels ??= new ChatChannelsClient(this._options));
-    }
-
     public get checkoutConfigurations(): CheckoutConfigurationsClient {
         return (this._checkoutConfigurations ??= new CheckoutConfigurationsClient(this._options));
     }
@@ -376,14 +364,6 @@ export class WhopClient {
 
     public get disputes(): DisputesClient {
         return (this._disputes ??= new DisputesClient(this._options));
-    }
-
-    public get dmChannels(): DmChannelsClient {
-        return (this._dmChannels ??= new DmChannelsClient(this._options));
-    }
-
-    public get dmMembers(): DmMembersClient {
-        return (this._dmMembers ??= new DmMembersClient(this._options));
     }
 
     public get domains(): DomainsClient {
@@ -588,10 +568,6 @@ export class WhopClient {
 
     public get stats(): StatsClient {
         return (this._stats ??= new StatsClient(this._options));
-    }
-
-    public get supportChannels(): SupportChannelsClient {
-        return (this._supportChannels ??= new SupportChannelsClient(this._options));
     }
 
     public get swaps(): SwapsClient {
