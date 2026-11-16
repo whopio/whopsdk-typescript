@@ -133,7 +133,7 @@ export class LivestreamsClient {
     }
 
     /**
-     * Retrieves a livestream by ID.
+     * Retrieves a livestream by ID. Callers with the `livestream:moderate` permission also get its `recap`: the top moments AI picked from chat, and chat activity.
      *
      * @param {Whop.RetrieveLivestreamsRequest} request
      * @param {LivestreamsClient.RequestOptions} requestOptions - Request-specific configuration.

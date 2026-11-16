@@ -19355,7 +19355,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves a livestream by ID.
+Retrieves a livestream by ID. Callers with the `livestream:moderate` permission also get its `recap`: the top moments AI picked from chat, and chat activity.
 </dd>
 </dl>
 </dd>

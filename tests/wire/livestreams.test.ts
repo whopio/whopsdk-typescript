@@ -22,6 +22,23 @@ describe("LivestreamsClient", () => {
                     ended_at: "2026-01-01T12:00:00.000Z",
                     id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
                     pinned_at: "2026-01-01T12:00:00.000Z",
+                    recap: {
+                        chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                        moments: [
+                            {
+                                description: "Elena showed her new preset pack and chat asked how to get it.",
+                                end_offset_seconds: 1461,
+                                message: {
+                                    content: "how do I get these presets??",
+                                    id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                                    user_name: "Maya Chen",
+                                },
+                                offset_seconds: 1412,
+                                title: "Elena reveals the blue hour preset pack",
+                            },
+                        ],
+                        status: "pending",
+                    },
                     recording_started_at: "2026-01-01T12:00:00.000Z",
                     recording_status: "recording",
                     recording_url:
@@ -136,6 +153,23 @@ describe("LivestreamsClient", () => {
             ended_at: "2026-01-01T12:00:00.000Z",
             id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
             pinned_at: "2026-01-01T12:00:00.000Z",
+            recap: {
+                chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                moments: [
+                    {
+                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        end_offset_seconds: 1461,
+                        message: {
+                            content: "how do I get these presets??",
+                            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                            user_name: "Maya Chen",
+                        },
+                        offset_seconds: 1412,
+                        title: "Elena reveals the blue hour preset pack",
+                    },
+                ],
+                status: "pending",
+            },
             recording_started_at: "2026-01-01T12:00:00.000Z",
             recording_status: "recording",
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
@@ -230,6 +264,23 @@ describe("LivestreamsClient", () => {
             ended_at: "2026-01-01T12:00:00.000Z",
             id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
             pinned_at: "2026-01-01T12:00:00.000Z",
+            recap: {
+                chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                moments: [
+                    {
+                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        end_offset_seconds: 1461,
+                        message: {
+                            content: "how do I get these presets??",
+                            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                            user_name: "Maya Chen",
+                        },
+                        offset_seconds: 1412,
+                        title: "Elena reveals the blue hour preset pack",
+                    },
+                ],
+                status: "pending",
+            },
             recording_started_at: "2026-01-01T12:00:00.000Z",
             recording_status: "recording",
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
@@ -408,6 +459,23 @@ describe("LivestreamsClient", () => {
             ended_at: "2026-01-01T12:00:00.000Z",
             id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
             pinned_at: "2026-01-01T12:00:00.000Z",
+            recap: {
+                chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                moments: [
+                    {
+                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        end_offset_seconds: 1461,
+                        message: {
+                            content: "how do I get these presets??",
+                            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                            user_name: "Maya Chen",
+                        },
+                        offset_seconds: 1412,
+                        title: "Elena reveals the blue hour preset pack",
+                    },
+                ],
+                status: "pending",
+            },
             recording_started_at: "2026-01-01T12:00:00.000Z",
             recording_status: "recording",
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
