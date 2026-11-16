@@ -19420,7 +19420,7 @@ await client.livestreams.retrieve({
 <dl>
 <dd>
 
-Pins an ended livestream's recording so everyone in the experience sees it featured. Pinning it again keeps the original `pinned_at`.
+Pins an ended livestream's recording so everyone in the experience sees it featured, up to 3 per experience. Without `position`, a new pin goes first and an existing pin keeps its place. With `position`, the pin moves there and every pinned livestream in that experience gets a new `pinned_at` in the new order.
 </dd>
 </dl>
 </dd>

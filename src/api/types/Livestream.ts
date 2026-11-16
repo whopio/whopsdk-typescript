@@ -7,7 +7,7 @@ export interface Livestream {
     ended_at: string | null;
     /** Livestream ID, prefixed `lfeed_`. */
     id: string;
-    /** When a moderator pinned this livestream's recording, as an ISO 8601 timestamp. `null` when it is not pinned. */
+    /** When the recording was pinned or last moved, as an ISO 8601 timestamp. Pinned livestreams are ordered by it, newest first. `null` when not pinned. */
     pinned_at: string | null;
     /** When the recording's first frame was captured, as an ISO 8601 timestamp. Offsets into the recording count from here, not from `started_at`. `null` until recording starts. */
     recording_started_at: string | null;

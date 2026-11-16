@@ -9,4 +9,8 @@
 export interface PinLivestreamsRequest {
     /** Livestream ID, prefixed `lfeed_`. */
     id: string;
+    /** ID of the livestreams experience that `position` counts in, prefixed `exp_`. Required with `position` when the livestream is in more than one experience. */
+    experience_id?: string;
+    /** Zero-based index in the experience's pinned livestreams after the change. Omit it to put a new pin first or keep an existing pin in place. */
+    position?: number;
 }
