@@ -92,5 +92,6 @@ export const Currencies = {
     Awg: "awg",
     WhopUsd: "whop_usd",
     Xau: "xau",
+    Hnl: "hnl",
 } as const;
 export type Currencies = (typeof Currencies)[keyof typeof Currencies];

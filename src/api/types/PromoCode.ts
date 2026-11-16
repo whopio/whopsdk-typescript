@@ -142,6 +142,7 @@ export namespace PromoCode {
         Awg: "awg",
         WhopUsd: "whop_usd",
         Xau: "xau",
+        Hnl: "hnl",
     } as const;
     export type Currency = (typeof Currency)[keyof typeof Currency];
     /** How long the discount applies. */
