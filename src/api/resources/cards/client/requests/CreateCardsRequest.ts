@@ -7,11 +7,11 @@
 export interface CreateCardsRequest {
     /** The owning account ID (a biz_ identifier). Provide this or user_id. */
     account_id?: string;
-    /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts. When this call files the card application, the member applies with their identity; a company API key that sends neither this nor kind is refused. */
+    /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts. When this call files the card application, the member applies with their identity. An account API key that sends neither this nor kind is refused. */
     assigned_user_id?: string;
-    /** The card's initial billing address. On a company card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required. */
+    /** The card's initial billing address. On a business card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required. */
     billing?: CreateCardsRequest.Billing;
-    /** Details for a company card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not. */
+    /** Details for a business card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not. */
     cardholder?: CreateCardsRequest.Cardholder;
     /** Who the card application verifies, set only on the call that files it; sending it while the account's application is in progress or approved is a 400. `business` applies as the account with its approved KYB. `individual` applies as a person: assigned_user_id when given, otherwise the account owner, using the identity verified on the account. Omit it to apply as the business when its KYB is approved, and as an individual otherwise. */
     kind?: CreateCardsRequest.Kind;
@@ -29,7 +29,7 @@ export interface CreateCardsRequest {
 
 export namespace CreateCardsRequest {
     /**
-     * The card's initial billing address. On a company card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required.
+     * The card's initial billing address. On a business card it also registers the assigned member as a cardholder if they are not one yet. For an individual card, region is also required.
      */
     export interface Billing {
         /** Billing city. */
@@ -47,7 +47,7 @@ export namespace CreateCardsRequest {
     }
 
     /**
-     * Details for a company card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not.
+     * Details for a business card's assigned member when they are not registered as a cardholder yet. Send with billing to register them and start provisioning in one call instead of sending them an onboarding invitation. The legal name comes from the member's approved identity verification when they have one, and from these fields when they do not.
      */
     export interface Cardholder {
         /** The member's email address. Defaults to the email on their user. */

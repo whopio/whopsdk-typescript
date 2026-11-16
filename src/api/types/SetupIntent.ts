@@ -35,7 +35,7 @@ export interface SetupIntent {
     three_ds_verified: boolean;
     /** When the setup intent was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
-    /** The user saving the payment method. Null when the buyer is a company rather than a user. */
+    /** The user saving the payment method. Null when the buyer is an account rather than a user. */
     user: Whop.UserSummary | null;
 }
 

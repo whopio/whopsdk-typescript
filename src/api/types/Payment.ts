@@ -98,7 +98,7 @@ export interface Payment {
     refunded_at: string | null;
     /** When the earliest response is due on a dispute or Resolution Center case awaiting the account's response, as an ISO 8601 timestamp. Null when nothing awaits a response, or without the permission to read that dispute or case. */
     response_due_at: string | null;
-    /** True when the payment is `open` and can be retried by hand with `POST /payments/{id}/retry`: its membership is `active`, `trialing`, or `past_due` (or it is a failed first payment on a `drafted` membership), it is not paid through an invoice payment link, and its one manual retry is not used up. A retry can still be refused when the company cannot currently accept payments. */
+    /** True when the payment can be retried by hand with `POST /payments/{id}/retry`. The payment must be `open` and not paid through an invoice payment link. Its membership must be `active`, `trialing`, or `past_due`, or the payment must be a failed first payment on a `drafted` membership. Its one manual retry must not be used up. A retry can still be refused when the account cannot currently accept payments. */
     retryable: boolean;
     /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available or you read the payment as its buyer. */
     risk_score: number | null;
@@ -133,7 +133,7 @@ export interface Payment {
     updated_at: string;
     /** The total converted to USD at the time of the charge, for reporting across currencies. Excludes the adaptive pricing FX markup, which the account does not keep. Null when you read the payment as its buyer. */
     usd_total: Whop.Money | null;
-    /** The buyer. Null when the payment belongs to a company buyer rather than a user. */
+    /** The buyer. Null when the buyer is an account rather than a user. */
     user: Whop.UserSummary | null;
     /** The buyer's browser user agent at checkout. Null when the buyer was not present at checkout, such as a subscription renewal, or without the member:basic:read permission. */
     user_agent: string | null;

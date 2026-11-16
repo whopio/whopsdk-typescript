@@ -320,7 +320,7 @@ export class VerificationsClient {
     }
 
     /**
-     * Updates editable profile details or submits answers for items returned in `requested_information`. On a business verification still collecting details, company details, `documents`, and `owners` also go to the verification provider; call Create Verification again to send the business for review once everything is in. Under review, `registration_number`, `incorporation_date`, `place_of_incorporation`, and `documents` are refused. While the review waits on owners, owners can still be added, changed, or removed with `remove`; otherwise only an owner's missing documents can still be sent. Once a verification is `approved` its profile details are locked and can no longer be edited.
+     * Updates editable profile details or submits answers for items returned in `requested_information`. On a business verification still collecting details, business details, `documents`, and `owners` also go to the verification provider. Call Create Verification again to send the business for review once everything is in. Under review, `registration_number`, `incorporation_date`, `place_of_incorporation`, and `documents` are refused. While the review waits on owners, owners can still be added, changed, or removed with `remove`. Otherwise, only an owner's missing documents can still be sent. Once a verification is `approved`, its profile details are locked and can no longer be edited.
      *
      * @param {Whop.UpdateVerificationsRequest} request
      * @param {VerificationsClient.RequestOptions} requestOptions - Request-specific configuration.
