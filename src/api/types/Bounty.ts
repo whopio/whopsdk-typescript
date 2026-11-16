@@ -186,6 +186,7 @@ export namespace Bounty {
         Cny: "cny",
         Kzt: "kzt",
         Awg: "awg",
+        Hnl: "hnl",
     } as const;
     export type Currency = (typeof Currency)[keyof typeof Currency];
     /** How often the schedule creates a new bounty. Each occurrence is a separate bounty; the original is not republished. */

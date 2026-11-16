@@ -125,6 +125,7 @@ export namespace CheckoutConfiguration {
         Awg: "awg",
         WhopUsd: "whop_usd",
         Xau: "xau",
+        Hnl: "hnl",
     } as const;
     export type Currency = (typeof Currency)[keyof typeof Currency];
     /** Controls whether checkout charges the buyer immediately or saves payment details for later. */

@@ -205,6 +205,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -484,6 +505,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -765,6 +807,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -1044,6 +1107,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -1325,6 +1409,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -1604,6 +1709,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -2111,6 +2237,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -2390,6 +2537,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -2671,6 +2839,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -2950,6 +3139,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -3231,6 +3441,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -3510,6 +3741,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -3791,6 +4043,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -4070,6 +4343,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -4351,6 +4645,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -4631,6 +4946,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -4910,6 +5246,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -5408,6 +5765,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -8683,6 +9061,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -8962,6 +9361,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -9243,6 +9663,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -9522,6 +9963,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -9803,6 +10265,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -10082,6 +10565,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -10363,6 +10867,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -10642,6 +11167,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -10923,6 +11469,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -11202,6 +11769,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -11565,6 +12153,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -11844,6 +12453,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -12125,6 +12755,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -12404,6 +13055,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -12685,6 +13357,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -12964,6 +13657,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -13471,6 +14185,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -13750,6 +14485,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -14031,6 +14787,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -14310,6 +15087,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -14591,6 +15389,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -14870,6 +15689,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -15151,6 +15991,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -15430,6 +16291,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -15711,6 +16593,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -15991,6 +16894,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -16270,6 +17194,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -16768,6 +17713,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -20043,6 +21009,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -20322,6 +21309,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -20603,6 +21611,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -20882,6 +21911,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -21163,6 +22213,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -21442,6 +22513,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -21723,6 +22815,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -22002,6 +23115,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {
@@ -22283,6 +23417,27 @@ describe("FeesClient", () => {
                         },
                         source: "custom",
                     },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
+                    },
                     mx: {
                         default: {
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -22562,6 +23717,27 @@ describe("FeesClient", () => {
                             percentage: 2.6,
                         },
                         source: "custom",
+                    },
+                    hn: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "1.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 10,
+                        },
+                        minimum: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.7,
+                        },
+                        percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     mx: {
                         default: {

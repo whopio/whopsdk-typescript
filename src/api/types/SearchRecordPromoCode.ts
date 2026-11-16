@@ -116,6 +116,7 @@ export namespace SearchRecordPromoCode {
         Awg: "awg",
         WhopUsd: "whop_usd",
         Xau: "xau",
+        Hnl: "hnl",
     } as const;
     export type Currency = (typeof Currency)[keyof typeof Currency];
     /** Whether the discount is percentage-based or a fixed amount. */

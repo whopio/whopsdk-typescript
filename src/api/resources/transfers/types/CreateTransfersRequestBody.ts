@@ -147,6 +147,7 @@ export namespace CreateTransfersRequestBody {
             Cny: "cny",
             Kzt: "kzt",
             Awg: "awg",
+            Hnl: "hnl",
         } as const;
         export type Currency = (typeof Currency)[keyof typeof Currency];
     }

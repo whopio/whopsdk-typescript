@@ -122,6 +122,7 @@ export namespace CreatePromoCodesRequest {
         Awg: "awg",
         WhopUsd: "whop_usd",
         Xau: "xau",
+        Hnl: "hnl",
     } as const;
     export type BaseCurrency = (typeof BaseCurrency)[keyof typeof BaseCurrency];
     export const PromoType = {
