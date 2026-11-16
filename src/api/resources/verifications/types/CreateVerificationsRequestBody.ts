@@ -21,7 +21,7 @@ export namespace CreateVerificationsRequestBody {
         business_name?: string | undefined;
         /** Entity type for sole proprietors, such as `single_member_llc`. Supported values vary by country of incorporation — see [Business structures](/developer/verification/business-structures). */
         business_structure?: string | undefined;
-        /** The business ID number of the company, as appropriate for the company's country. Examples are an Employer Identification Number (EIN) in the US, a Business Number in Canada, or a Company Number in the UK. */
+        /** The business ID number, as appropriate for the business's country. Examples are an Employer Identification Number (EIN) in the US, a Business Number in Canada, or a Company Number in the UK. */
         business_tax_identification_number?: string | undefined;
         /** Business website URL. Whop store pages are not accepted. */
         business_website?: string | undefined;
@@ -102,7 +102,7 @@ export namespace CreateVerificationsRequestBody {
         business_name?: string | undefined;
         /** Legal entity structure of the business, such as `private_corporation` or `sole_proprietorship`. Supported values vary by country of incorporation — see [Business structures](/developer/verification/business-structures). */
         business_structure?: string | undefined;
-        /** The business ID number of the company, as appropriate for the company's country. Examples are an Employer Identification Number (EIN) in the US, a Business Number in Canada, or a Company Number in the UK. */
+        /** The business ID number, as appropriate for the business's country. Examples are an Employer Identification Number (EIN) in the US, a Business Number in Canada, or a Company Number in the UK. */
         business_tax_identification_number?: string | undefined;
         /** Business website URL. Whop store pages are not accepted. */
         business_website?: string | undefined;
@@ -118,7 +118,7 @@ export namespace CreateVerificationsRequestBody {
         incorporation_date?: string | undefined;
         /** Last name of the business representative, used to prefill the verification session. */
         last_name?: string | undefined;
-        /** Owners of the business, up to 10 per request. Once the company details, the company documents, and the owners are in and every new owner's documents were sent, Create Verification sends the business for review: in the request that completes it, as soon as the last owner's documents finish sending in the background, or when called again after Update Verification. Owners can still be added, changed, or removed while the review waits on them. */
+        /** Owners of the business, up to 10 per request. Create Verification sends the business for review when the business details, business documents, and owners are in, and every new owner's documents are sent. It does this in the request that completes the set. It also does this when the last owner's documents finish sending in the background, or when you call it again after Update Verification. Owners can still be added, changed, or removed while the review waits on them. */
         owners?: CreateVerificationsRequestBodyBusiness.Owners.Item[] | undefined;
         /** State or region where the business is incorporated. Sent to the verification provider and returned in the response; `requested_information` asks for it while it is still missing. */
         place_of_incorporation?: string | undefined;

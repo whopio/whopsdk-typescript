@@ -566,7 +566,7 @@ export namespace LedgerActivity {
         card_brand?: (string | null) | undefined;
         /** Chain the deposit landed on, for example plasma (onchain_transaction sources only). */
         chain?: (string | null) | undefined;
-        /** The airdrop's claim URL. Null unless the caller can manage claim links on the funding company or withdraw from the funding personal balance. */
+        /** The airdrop's claim URL. Null unless the caller can manage claim links on the funding account or withdraw from the funding personal balance. */
         claim_url?: (string | null) | undefined;
         /** Payout creation time as an ISO 8601 timestamp (payout sources only; requires payout:withdrawal:read). */
         created_at?: (string | null) | undefined;
