@@ -163,6 +163,7 @@ export namespace AdCampaign {
         InReview: "in_review",
         Learning: "learning",
         Processing: "processing",
+        ReviseContent: "revise_content",
         Issues: "issues",
         Scheduled: "scheduled",
         Completed: "completed",
