@@ -167,6 +167,7 @@ export namespace LedgerActivity {
         OnchainInternalTransferIncoming: "onchain_internal_transfer_incoming",
         OnchainSwapSource: "onchain_swap_source",
         OnchainSwapTarget: "onchain_swap_target",
+        SavingsRevaluation: "savings_revaluation",
         OnchainSwapOffset: "onchain_swap_offset",
         WhopSwapFeeReceived: "whop_swap_fee_received",
         SwapFee: "swap_fee",
