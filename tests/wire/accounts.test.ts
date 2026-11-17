@@ -92,7 +92,7 @@ describe("AccountsClient", () => {
                         standard_payout: "active",
                         transfer: "active",
                     },
-                    cards: { kind: null, status: "approved" },
+                    cards: { decline_reason: null, kind: null, status: "approved" },
                     collect_vat_id: false,
                     company_formation: {
                         documents: [
@@ -762,7 +762,7 @@ describe("AccountsClient", () => {
                 standard_payout: "active",
                 transfer: "active",
             },
-            cards: { kind: "individual", status: "approved" },
+            cards: { decline_reason: "compromised_identity", kind: "individual", status: "approved" },
             collect_vat_id: false,
             company_formation: {
                 documents: [
@@ -1382,7 +1382,7 @@ describe("AccountsClient", () => {
                 standard_payout: "active",
                 transfer: "active",
             },
-            cards: { kind: "individual", status: "approved" },
+            cards: { decline_reason: "compromised_identity", kind: "individual", status: "approved" },
             collect_vat_id: false,
             company_formation: {
                 documents: [
@@ -2017,7 +2017,7 @@ describe("AccountsClient", () => {
                 standard_payout: "active",
                 transfer: "active",
             },
-            cards: { kind: "individual", status: "approved" },
+            cards: { decline_reason: "compromised_identity", kind: "individual", status: "approved" },
             collect_vat_id: false,
             company_formation: {
                 documents: [
@@ -2695,7 +2695,7 @@ describe("AccountsClient", () => {
                 standard_payout: "active",
                 transfer: "active",
             },
-            cards: { kind: "individual", status: "approved" },
+            cards: { decline_reason: "compromised_identity", kind: "individual", status: "approved" },
             collect_vat_id: false,
             company_formation: {
                 documents: [
@@ -4091,7 +4091,7 @@ describe("AccountsClient", () => {
                 standard_payout: "active",
                 transfer: "active",
             },
-            cards: { kind: "individual", status: "approved" },
+            cards: { decline_reason: "compromised_identity", kind: "individual", status: "approved" },
             collect_vat_id: false,
             company_formation: {
                 documents: [
