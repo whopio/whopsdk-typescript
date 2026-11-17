@@ -5,21 +5,10 @@ import type * as Whop from "../index.js";
 export interface UserLevel {
     /** The level that applies: the highest the user reached this month or in the 5 months before, from `0` up to `10`. Public. */
     current: number;
-    levels: Whop.AccountProcessingOfferLevel[] | null;
-    /** Whop Ads charges paid this calendar month across every account the user owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
-    monthly_ads_spend: Whop.Money | null;
-    /** Captured Whop Card spend this calendar month across every account the user owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
-    monthly_card_spend: Whop.Money | null;
-    /** Qualifying spend this calendar month across every account the user owns, plus their personal trading and partner points, in USD: `points` divided by 10. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
-    monthly_qualifying_spend: Whop.Money | null;
-    /** Perpetual trading volume filled through Whop this calendar month across every account the user owns and their personal wallet, in USD. An account whose month nets to zero or below is left out. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
-    monthly_trading_volume: Whop.Money | null;
     /** Points earned this month across every account the user owns, plus their partner points, rounded down. An account whose month nets below zero counts as zero. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
     points: number | null;
     /** This month's points, split by where they were earned. Each source is net of its refunds, so one can be negative. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
     points_by_source: Whop.OwnerLevelPoints | null;
-    /** Points still needed this month to reach the next level. `null` at level `10`, and unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
-    points_to_next: number | null;
     /** When this month's points reset to zero, as an ISO 8601 timestamp. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
     resets_at: string | null;
 }

@@ -222,6 +222,8 @@ export namespace UpdateFeesRequest {
      * Default markups for subaccounts. Available on accounts without a parent, even before any accounts connect.
      */
     export interface ChildMarkups {
+        /** Markups on card payments, keyed by acquiring region: `usa`, `eu`, `uk`, `ca`, or `au`. `null` clears a region's markup so it uses `payment_methods.card`. */
+        card_regions?: Record<string, ChildMarkups.CardRegions.Value | null> | undefined;
         /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (ChildMarkups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
@@ -239,6 +241,18 @@ export namespace UpdateFeesRequest {
     }
 
     export namespace ChildMarkups {
+        export namespace CardRegions {
+            /**
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
+             */
+            export interface Value {
+                /** The amount the platform adds per event, in US dollars. */
+                fixed?: number | undefined;
+                /** The percentage of the transaction the platform adds, where `2` means 2%. */
+                percentage?: number | undefined;
+            }
+        }
+
         /**
          * The markup on card purchases settled by the subaccount. `null` clears the custom markup.
          */
@@ -585,6 +599,8 @@ export namespace UpdateFeesRequest {
      * Markups on this subaccount, set by the platform it is connected to.
      */
     export interface Markups {
+        /** Markups on card payments, keyed by acquiring region: `usa`, `eu`, `uk`, `ca`, or `au`. `null` clears a region's markup so it uses `payment_methods.card`. */
+        card_regions?: Record<string, Markups.CardRegions.Value | null> | undefined;
         /** The markup on card purchases settled by the subaccount. `null` clears the custom markup. */
         card_spend?: (Markups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default. */
@@ -602,6 +618,18 @@ export namespace UpdateFeesRequest {
     }
 
     export namespace Markups {
+        export namespace CardRegions {
+            /**
+             * The new markup. Fields left out keep their current value. `null` clears the row so the markup returns to its default.
+             */
+            export interface Value {
+                /** The amount the platform adds per event, in US dollars. */
+                fixed?: number | undefined;
+                /** The percentage of the transaction the platform adds, where `2` means 2%. */
+                percentage?: number | undefined;
+            }
+        }
+
         /**
          * The markup on card purchases settled by the subaccount. `null` clears the custom markup.
          */

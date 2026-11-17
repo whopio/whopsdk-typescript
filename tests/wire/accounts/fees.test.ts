@@ -1824,6 +1824,83 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             child_markups: {
+                card_regions: {
+                    au: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    ca: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    eu: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    uk: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    usa: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 card_spend: {
                     adjustable: false,
                     default: {
@@ -5361,6 +5438,83 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             markups: {
+                card_regions: {
+                    au: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    ca: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    eu: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    uk: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    usa: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 card_spend: {
                     adjustable: false,
                     default: {
@@ -13815,6 +13969,83 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             child_markups: {
+                card_regions: {
+                    au: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    ca: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    eu: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    uk: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    usa: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 card_spend: {
                     adjustable: false,
                     default: {
@@ -17352,6 +17583,83 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             markups: {
+                card_regions: {
+                    au: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    ca: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    eu: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    uk: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                    usa: {
+                        adjustable: false,
+                        default: {
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 0,
+                        },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        maximum: {
+                            fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 100,
+                        },
+                        percentage: 0,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
+                    },
+                },
                 card_spend: {
                     adjustable: false,
                     default: {

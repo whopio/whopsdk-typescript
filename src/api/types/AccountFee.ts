@@ -25,7 +25,7 @@ export interface AccountFee {
     regions: Record<string, Whop.AccountFeeRegionalRate>;
     /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. Its `percentage` and `fixed` are `null` when a subaccount's fees are read without access to its parent account. */
     reset: Whop.AccountFeeRate;
-    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. `null` when a subaccount's fees are read without access to its parent account. */
+    /** Where the rate in effect comes from. `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by this account's platform. `null` when a subaccount's fees are read without access to its parent account. */
     source: AccountFee.Source | null;
     /** Why the caller may not change this fee, or `null` when `adjustable`. `not_permitted` when the caller has no say over it. */
     unadjustable_reason: AccountFee.UnadjustableReason | null;
@@ -66,7 +66,7 @@ export namespace AccountFee {
         Hn: "hn",
     } as const;
     export type Region = (typeof Region)[keyof typeof Region];
-    /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. `null` when a subaccount's fees are read without access to its parent account. */
+    /** Where the rate in effect comes from. `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by this account's platform. `null` when a subaccount's fees are read without access to its parent account. */
     export const Source = {
         Default: "default",
         Custom: "custom",
