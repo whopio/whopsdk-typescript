@@ -104,6 +104,8 @@ export namespace WebhookListItem {
             DomainCreated: "domain.created",
             DomainUpdated: "domain.updated",
             DomainDeleted: "domain.deleted",
+            CapitalCreated: "capital.created",
+            CapitalUpdated: "capital.updated",
             PayoutMethodCreated: "payout_method.created",
             VerificationSucceeded: "verification.succeeded",
             IdentityProfileApproved: "identity_profile.approved",
