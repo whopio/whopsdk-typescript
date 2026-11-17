@@ -18,6 +18,13 @@ describe("AdPixelsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
+                        title: "Shine Time Auto Detailing",
+                    },
                     account_id: "biz_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     error_message: "error_message",
@@ -108,6 +115,13 @@ describe("AdPixelsClient", () => {
             platform: "meta",
         };
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             error_message: "error_message",
@@ -292,6 +306,13 @@ describe("AdPixelsClient", () => {
         });
 
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             error_message: "error_message",
@@ -363,6 +384,13 @@ describe("AdPixelsClient", () => {
         });
         const rawRequestBody = { access_token: "new-token" };
         const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             error_message: "error_message",
