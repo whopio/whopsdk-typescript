@@ -68,7 +68,7 @@ export namespace RetrieveFinancialReportsResponse {
             amount: number;
             /** The family the row's `line_category` rolls up into. Balance summary rows are always `balance`. */
             grouping: Item.Grouping;
-            /** The ledger line category the row aggregates. Balance summary rows carry the balance bucket instead. */
+            /** The ledger line category the row aggregates. Balance summary rows carry the balance bucket instead. A `savings_revaluation` row is the change in the value of savings shares above one dollar each. */
             line_category: Item.LineCategory;
             line_count?: (number | null) | undefined;
             /** Start of the time bucket this row covers, truncated to `group_by`. */
@@ -106,7 +106,7 @@ export namespace RetrieveFinancialReportsResponse {
                 Withdrawals: "withdrawals",
             } as const;
             export type Grouping = (typeof Grouping)[keyof typeof Grouping];
-            /** The ledger line category the row aggregates. Balance summary rows carry the balance bucket instead. */
+            /** The ledger line category the row aggregates. Balance summary rows carry the balance bucket instead. A `savings_revaluation` row is the change in the value of savings shares above one dollar each. */
             export const LineCategory = {
                 AcceleratedSettlementFee: "accelerated_settlement_fee",
                 AccountSettlement: "account_settlement",
@@ -406,6 +406,7 @@ export namespace RetrieveFinancialReportsResponse {
                 SalesTaxRemittance: "sales_tax_remittance",
                 SalesTaxRemittanceReversal: "sales_tax_remittance_reversal",
                 SalesTaxRemitted: "sales_tax_remitted",
+                SavingsRevaluation: "savings_revaluation",
                 SettlementRoundingVariance: "settlement_rounding_variance",
                 SettlementShortfallLoss: "settlement_shortfall_loss",
                 SoftwareRentalRevshare: "software_rental_revshare",
