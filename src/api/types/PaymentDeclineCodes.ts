@@ -32,6 +32,7 @@ export const PaymentDeclineCodes = {
     ClosedAccount: "closed_account",
     IssuerUnavailable: "issuer_unavailable",
     InvalidZip: "invalid_zip",
+    InvalidBillingAddress: "invalid_billing_address",
     InvalidExpiryMonth: "invalid_expiry_month",
     InvalidExpiryYear: "invalid_expiry_year",
     InvalidExpiry: "invalid_expiry",

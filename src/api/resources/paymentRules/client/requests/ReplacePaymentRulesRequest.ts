@@ -19,14 +19,14 @@ import type * as Whop from "../../../../index.js";
 export interface ReplacePaymentRulesRequest {
     /** The payment rule ID. */
     id: string;
-    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 48 hours after authorization; capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. */
+    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 48 hours after authorization. Capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. A rule on `postal_code_check`, `address_line1_check`, or `cvv_check` accepts `block` or `review`. Whop authorizes a freshly entered card first. When the rule matches the bank's result, `block` voids and declines the payment. A `review` holds it for you to capture or void, with the same automatic capture. */
     action: ReplacePaymentRulesRequest.Action;
     /** The conditions a payment is matched against. Up to 10 conditions, and 8 KiB once serialized. */
     conditions: ReplacePaymentRulesRequest.Conditions;
 }
 
 export namespace ReplacePaymentRulesRequest {
-    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 48 hours after authorization; capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. */
+    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 48 hours after authorization. Capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. A rule on `postal_code_check`, `address_line1_check`, or `cvv_check` accepts `block` or `review`. Whop authorizes a freshly entered card first. When the rule matches the bank's result, `block` voids and declines the payment. A `review` holds it for you to capture or void, with the same automatic capture. */
     export const Action = {
         Allow: "allow",
         Block: "block",
@@ -70,6 +70,9 @@ export namespace ReplacePaymentRulesRequest {
                     EmailDomain: "email_domain",
                     IpAddress: "ip_address",
                     IpCountry: "ip_country",
+                    PostalCodeCheck: "postal_code_check",
+                    AddressLine1Check: "address_line1_check",
+                    CvvCheck: "cvv_check",
                 } as const;
                 export type Field = (typeof Field)[keyof typeof Field];
                 /** How the payment attribute is compared to the value. */

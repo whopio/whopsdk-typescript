@@ -27,6 +27,9 @@ export namespace PaymentRuleCondition {
         EmailDomain: "email_domain",
         IpAddress: "ip_address",
         IpCountry: "ip_country",
+        PostalCodeCheck: "postal_code_check",
+        AddressLine1Check: "address_line1_check",
+        CvvCheck: "cvv_check",
     } as const;
     export type Field = (typeof Field)[keyof typeof Field];
     /** How the payment attribute is compared to the value. */
