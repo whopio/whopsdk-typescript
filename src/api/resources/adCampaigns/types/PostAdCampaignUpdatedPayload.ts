@@ -92,12 +92,8 @@ export namespace PostAdCampaignUpdatedPayload {
         /** Whether the campaign's ads are delivering right now, and if not, why. Content review is in_review; a campaign waiting to start is processing. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
             PaymentFailed: "payment_failed",
-            WaitingForEin: "waiting_for_ein",
-            InAppeal: "in_appeal",
             AllAdsRejected: "all_ads_rejected",
             Draft: "draft",
-            NoAdGroups: "no_ad_groups",
-            NoAds: "no_ads",
             Paused: "paused",
             InReview: "in_review",
             Learning: "learning",
@@ -105,7 +101,6 @@ export namespace PostAdCampaignUpdatedPayload {
             Issues: "issues",
             Scheduled: "scheduled",
             Completed: "completed",
-            AdGroupsOff: "ad_groups_off",
             Active: "active",
         } as const;
         export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];

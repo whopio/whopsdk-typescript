@@ -100,17 +100,14 @@ export namespace PostAdUpdatedPayload {
         export type CallToAction = (typeof CallToAction)[keyof typeof CallToAction];
         /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
-            InAppeal: "in_appeal",
             Rejected: "rejected",
             InReview: "in_review",
             Draft: "draft",
             CampaignPaused: "campaign_paused",
-            AdGroupPaused: "ad_group_paused",
             Paused: "paused",
             Processing: "processing",
             Issues: "issues",
             Scheduled: "scheduled",
-            LearningLimited: "learning_limited",
             Learning: "learning",
             Active: "active",
         } as const;
