@@ -18,6 +18,8 @@ export interface ListInvoicesRequest {
     product_id?: string;
     /** Only invoices that bill this variant, prefixed `plan_`. An invoice matches when the variant is any of its items. */
     variant_id?: string;
+    /** Text to find invoices by. It matches the invoice number, the invoice ID, and the customer's name, username, or email address. A number matches with or without its prefix and leading zeros. A name matches on any part. An email address matches from its start. The match ignores letter case. `%` and `_` match literally. Combined with the other filters. Name matches need `member:basic:read`. Email matches need `member:email:read`. */
+    query?: string;
     created_after?: string;
     created_before?: string;
     /** Field to sort by. Sorting by `due_at` or `scheduled_send_at` puts invoices without that date last in both directions. */
