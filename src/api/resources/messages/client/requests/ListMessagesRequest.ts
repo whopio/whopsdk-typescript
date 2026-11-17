@@ -17,6 +17,8 @@ export interface ListMessagesRequest {
     pinned?: boolean;
     /** Include redacted deletion entries for cache synchronization. */
     include_deleted?: boolean;
+    /** Include the full replied-to message. Nested replies are not included. */
+    include_replying_to_message?: boolean;
     /** Return messages created strictly after this ISO 8601 timestamp. */
     created_after?: string;
     /** Return messages created strictly before this ISO 8601 timestamp. */

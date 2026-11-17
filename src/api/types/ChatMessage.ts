@@ -29,6 +29,8 @@ export interface ChatMessage {
     plain_content: string | null;
     poll: Whop.ChatMessagePoll | null;
     reaction_counts: Whop.MessageReactionCount[];
+    /** The replied-to message. Omitted unless `include_replying_to_message=true`. Includes all message fields except `replying_to_message`. `null` when this message is deleted or no same-channel target exists. */
+    replying_to_message?: (Whop.ChatMessage | null) | undefined;
     replying_to_message_id: string | null;
     /** User ID of the replied-to message's author, prefixed `user_`. `null` without a reply in this channel, or when either message is deleted. */
     replying_to_user_id: string | null;

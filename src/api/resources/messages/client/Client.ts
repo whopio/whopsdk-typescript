@@ -57,6 +57,7 @@ export class MessagesClient {
                     replying_to_message_id: replyingToMessageId,
                     pinned,
                     include_deleted: includeDeleted,
+                    include_replying_to_message: includeReplyingToMessage,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     updated_after: updatedAfter,
@@ -76,6 +77,7 @@ export class MessagesClient {
                     replying_to_message_id: replyingToMessageId,
                     pinned,
                     include_deleted: includeDeleted,
+                    include_replying_to_message: includeReplyingToMessage,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     updated_after: updatedAfter,
@@ -269,7 +271,10 @@ export class MessagesClient {
         request: Whop.RetrieveMessagesRequest,
         requestOptions?: MessagesClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ChatMessage>> {
-        const { id } = request;
+        const { id, include_replying_to_message: includeReplyingToMessage } = request;
+        const _queryParams: Record<string, unknown> = {
+            include_replying_to_message: includeReplyingToMessage,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -289,7 +294,11 @@ export class MessagesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

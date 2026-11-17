@@ -9,4 +9,6 @@
 export interface RetrieveMessagesRequest {
     /** Existing public message ID. */
     id: string;
+    /** Include the full replied-to message. Nested replies are not included. */
+    include_replying_to_message?: boolean;
 }
