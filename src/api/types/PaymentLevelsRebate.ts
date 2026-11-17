@@ -9,6 +9,8 @@ export interface PaymentLevelsRebate {
     covered_share: number | null;
     /** Processing fee as a percentage of the amount it was charged on, before the rebate, where `2.7` means 2.7%. `null` unless `status` is `rebated`. */
     effective_rate_percentage: number | null;
+    /** Estimate of the payment's part of its account's monthly rebate, as if its month closed now. It uses the account's level so far and the share of the payment that its spend so far covers. Both can change until the month closes. `null` unless `status` is `pending` with the processing fee posted, and when estimates are unavailable. */
+    estimate: Whop.PaymentLevelsRebateEstimate | null;
     /** Why the payment can't earn a rebate: `not_card_payment`, `before_levels` (made before Whop Levels started), `not_in_levels` (its account wasn't in Whop Levels that month), `fee_not_posted`, `fee_at_level_rate` (its fee was already at or below the level's rate) or `no_level_rate` (its fee matched no level rate). `null` unless `status` is `ineligible`. */
     ineligible_reason: PaymentLevelsRebate.IneligibleReason | null;
     /** Level the account's month closed at, from `0` up to `10`. `null` until that month's close has applied to the payment, and for a payment that can't earn a rebate before then, such as a non-card payment. */
