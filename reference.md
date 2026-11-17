@@ -18456,6 +18456,72 @@ await client.livestreams.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.livestreams.<a href="/src/api/resources/livestreams/client/Client.ts">addCoHost</a>({ ...params }) -> Whop.Livestream</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Makes someone in a live livestream a co-host until it ends. Co-hosts can change chat settings, manage the stage, and moderate chat, but can't end the livestream.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.livestreams.addCoHost({
+    id: "id",
+    user_id: "user_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.AddCoHostLivestreamsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LivestreamsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.livestreams.<a href="/src/api/resources/livestreams/client/Client.ts">pin</a>({ ...params }) -> Whop.Livestream</code></summary>
 <dl>
 <dd>
@@ -18502,6 +18568,72 @@ await client.livestreams.pin({
 <dd>
 
 **request:** `Whop.PinLivestreamsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `LivestreamsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.livestreams.<a href="/src/api/resources/livestreams/client/Client.ts">removeCoHost</a>({ ...params }) -> Whop.Livestream</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Removes a co-host from a live livestream.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.livestreams.removeCoHost({
+    id: "id",
+    user_id: "user_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RemoveCoHostLivestreamsRequest` 
     
 </dd>
 </dl>

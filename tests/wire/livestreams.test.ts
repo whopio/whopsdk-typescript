@@ -249,6 +249,207 @@ describe("LivestreamsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("addCoHost (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_xxxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            created_at: "2026-01-01T12:00:00.000Z",
+            ended_at: "2026-01-01T12:00:00.000Z",
+            id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
+            pinned_at: "2026-01-01T12:00:00.000Z",
+            recap: {
+                chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                moments: [
+                    {
+                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        end_offset_seconds: 1461,
+                        message: {
+                            content: "how do I get these presets??",
+                            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                            user_name: "Maya Chen",
+                        },
+                        offset_seconds: 1412,
+                        title: "Elena reveals the blue hour preset pack",
+                    },
+                ],
+                status: "pending",
+            },
+            recording_started_at: "2026-01-01T12:00:00.000Z",
+            recording_status: "recording",
+            recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
+            started_at: "2026-01-01T12:00:00.000Z",
+            thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
+            title: "Live edit: blue hour",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.livestreams.addCoHost({
+            id: "id",
+            user_id: "user_xxxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("addCoHost (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.addCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("addCoHost (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.addCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("addCoHost (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.addCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("addCoHost (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.addCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("addCoHost (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/add_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.addCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("pin (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -440,6 +641,207 @@ describe("LivestreamsClient", () => {
         await expect(async () => {
             return await client.livestreams.pin({
                 id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("removeCoHost (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_xxxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            created_at: "2026-01-01T12:00:00.000Z",
+            ended_at: "2026-01-01T12:00:00.000Z",
+            id: "lfeed_xxxxxxxxxxxxxxxxxxxxxx",
+            pinned_at: "2026-01-01T12:00:00.000Z",
+            recap: {
+                chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
+                moments: [
+                    {
+                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        end_offset_seconds: 1461,
+                        message: {
+                            content: "how do I get these presets??",
+                            id: "post_xxxxxxxxxxxxxxxxxxxxxx",
+                            user_name: "Maya Chen",
+                        },
+                        offset_seconds: 1412,
+                        title: "Elena reveals the blue hour preset pack",
+                    },
+                ],
+                status: "pending",
+            },
+            recording_started_at: "2026-01-01T12:00:00.000Z",
+            recording_status: "recording",
+            recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
+            started_at: "2026-01-01T12:00:00.000Z",
+            thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
+            title: "Live edit: blue hour",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.livestreams.removeCoHost({
+            id: "id",
+            user_id: "user_xxxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("removeCoHost (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.removeCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("removeCoHost (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.removeCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("removeCoHost (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.removeCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("removeCoHost (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.removeCoHost({
+                id: "id",
+                user_id: "user_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("removeCoHost (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { user_id: "user_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/livestreams/id/remove_co_host")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.livestreams.removeCoHost({
+                id: "id",
+                user_id: "user_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

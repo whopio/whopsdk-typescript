@@ -212,6 +212,100 @@ export class LivestreamsClient {
     }
 
     /**
+     * Makes someone in a live livestream a co-host until it ends. Co-hosts can change chat settings, manage the stage, and moderate chat, but can't end the livestream.
+     *
+     * @param {Whop.AddCoHostLivestreamsRequest} request
+     * @param {LivestreamsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.livestreams.addCoHost({
+     *         id: "id",
+     *         user_id: "user_xxxxxxxxxxxxxx"
+     *     })
+     */
+    public addCoHost(
+        request: Whop.AddCoHostLivestreamsRequest,
+        requestOptions?: LivestreamsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Livestream> {
+        return core.HttpResponsePromise.fromPromise(this.__addCoHost(request, requestOptions));
+    }
+
+    private async __addCoHost(
+        request: Whop.AddCoHostLivestreamsRequest,
+        requestOptions?: LivestreamsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Livestream>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16-2",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `livestreams/${core.url.encodePathParam(id)}/add_co_host`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Livestream, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/livestreams/{id}/add_co_host",
+        );
+    }
+
+    /**
      * Pins an ended livestream's recording so everyone in the experience sees it featured, up to 3 per experience. Without `position`, a new pin goes first and an existing pin keeps its place. With `position`, the pin moves there and every pinned livestream in that experience gets a new `pinned_at` in the new order.
      *
      * @param {Whop.PinLivestreamsRequest} request
@@ -297,6 +391,100 @@ export class LivestreamsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/livestreams/{id}/pin");
+    }
+
+    /**
+     * Removes a co-host from a live livestream.
+     *
+     * @param {Whop.RemoveCoHostLivestreamsRequest} request
+     * @param {LivestreamsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.livestreams.removeCoHost({
+     *         id: "id",
+     *         user_id: "user_xxxxxxxxxxxxxx"
+     *     })
+     */
+    public removeCoHost(
+        request: Whop.RemoveCoHostLivestreamsRequest,
+        requestOptions?: LivestreamsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Livestream> {
+        return core.HttpResponsePromise.fromPromise(this.__removeCoHost(request, requestOptions));
+    }
+
+    private async __removeCoHost(
+        request: Whop.RemoveCoHostLivestreamsRequest,
+        requestOptions?: LivestreamsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Livestream>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16-2",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `livestreams/${core.url.encodePathParam(id)}/remove_co_host`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Livestream, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/livestreams/{id}/remove_co_host",
+        );
     }
 
     /**

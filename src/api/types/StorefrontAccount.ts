@@ -5,7 +5,7 @@ export interface StorefrontAccount {
     id: string;
     /** Account logo image URL. `null` when the account has not set one. */
     logo_url: string | null;
-    /** Account public route identifier — the `whop.com/{route}` storefront path. */
+    /** Account public route identifier, used in the `whop.com/{route}` storefront path. */
     route: string;
     /** Account display name. */
     title: string;
