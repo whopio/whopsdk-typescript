@@ -41,6 +41,8 @@ export interface AccountPreferences {
     /** Whether Whop emails members when a renewal payment fails or needs them to verify it. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. Subscriptions billed by invoice still get the invoice and its past-due reminders, since that is how the member pays. These emails also stop while the account's `send_customer_emails` is `false`. */
     failed_payment_emails: boolean;
     feedback_options: Whop.FeedbackOption[];
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account's business category cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
+    merchant_of_record: AccountPreferences.MerchantOfRecord | null;
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     preferred_settlement_currency: AccountPreferences.PreferredSettlementCurrency | null;
     /** When `preferred_settlement_currency` may next be changed or turned off, as an ISO 8601 timestamp. It can change at most once a day. `null` when it may change now. */
@@ -58,6 +60,13 @@ export interface AccountPreferences {
 }
 
 export namespace AccountPreferences {
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account's business category cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
+    export const MerchantOfRecord = {
+        Whop: "whop",
+        Pending: "pending",
+        Account: "account",
+    } as const;
+    export type MerchantOfRecord = (typeof MerchantOfRecord)[keyof typeof MerchantOfRecord];
     /** Lowercase ISO currency code every new sale settles into, regardless of the plan's currency or what the buyer paid in. Sales converted this way carry an additional 0.5% FX fee. `null` when the account settles each sale in its plan's currency. */
     export const PreferredSettlementCurrency = {
         Usd: "usd",

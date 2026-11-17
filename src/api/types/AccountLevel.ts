@@ -3,12 +3,12 @@
 import type * as Whop from "../index.js";
 
 export interface AccountLevel {
-    /** This account's own level from its points alone, from `0` up to `10`. `applied_level` is higher when the owner's other accounts lift it. */
+    /** This account's own level from its points alone, from `0` up to `10`. `current` is higher when the owner's other accounts lift it. */
     account_level: number;
-    /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
-    applied_level: number;
-    /** `true` when this account's own points this month fall short of `applied_level`, so the owner's other accounts lift it to that level. */
+    /** `true` when this account's own points this month fall short of `current`, so the owner's other accounts lift it to that level. */
     boosted: boolean;
+    /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
+    current: number;
     levels: Whop.AccountProcessingOfferLevel[];
     /** Whop Ads charges paid this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
     monthly_ads_spend: Whop.Money;

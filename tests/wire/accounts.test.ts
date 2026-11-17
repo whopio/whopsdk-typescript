@@ -165,8 +165,8 @@ describe("AccountsClient", () => {
                     invoice_prefix: "INV",
                     level: {
                         account_level: 0,
-                        applied_level: 1,
                         boosted: true,
+                        current: 1,
                         levels: [
                             {
                                 level: 0,
@@ -835,8 +835,8 @@ describe("AccountsClient", () => {
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
-                applied_level: 1,
                 boosted: true,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -1455,8 +1455,8 @@ describe("AccountsClient", () => {
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
-                applied_level: 1,
                 boosted: true,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -2090,8 +2090,8 @@ describe("AccountsClient", () => {
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
-                applied_level: 1,
                 boosted: true,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -2768,8 +2768,8 @@ describe("AccountsClient", () => {
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
-                applied_level: 1,
                 boosted: true,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -4164,8 +4164,8 @@ describe("AccountsClient", () => {
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
-                applied_level: 1,
                 boosted: true,
+                current: 1,
                 levels: [
                     {
                         level: 0,

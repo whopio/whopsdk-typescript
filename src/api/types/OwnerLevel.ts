@@ -4,7 +4,7 @@ import type * as Whop from "../index.js";
 
 export interface OwnerLevel {
     /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
-    applied_level: number;
+    current: number;
     levels: Whop.AccountProcessingOfferLevel[];
     /** Whop Ads charges paid this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
     monthly_ads_spend: Whop.Money;
