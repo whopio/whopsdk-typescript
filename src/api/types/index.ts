@@ -411,6 +411,7 @@ export * from "./PaymentInstrumentCard.js";
 export * from "./PaymentLastPaymentError.js";
 export * from "./PaymentLegacy.js";
 export * from "./PaymentLevelsRebate.js";
+export * from "./PaymentLevelsRebateEstimate.js";
 export * from "./PaymentListItem.js";
 export * from "./PaymentMethod.js";
 export * from "./PaymentMethodDisplay.js";
