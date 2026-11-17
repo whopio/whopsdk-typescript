@@ -171,6 +171,7 @@ export namespace Ad {
         CampaignPaused: "campaign_paused",
         Paused: "paused",
         Processing: "processing",
+        ReviseContent: "revise_content",
         Issues: "issues",
         Scheduled: "scheduled",
         Learning: "learning",
