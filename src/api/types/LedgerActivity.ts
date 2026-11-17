@@ -218,6 +218,7 @@ export namespace LedgerActivity {
         LevelsPointsAds: "levels_points_ads",
         LevelsPointsTrading: "levels_points_trading",
         LevelsPointsPartner: "levels_points_partner",
+        LevelsPointsAction: "levels_points_action",
         LevelsPointsBurned: "levels_points_burned",
         LevelsPointsIssued: "levels_points_issued",
         LevelsRebate: "levels_rebate",

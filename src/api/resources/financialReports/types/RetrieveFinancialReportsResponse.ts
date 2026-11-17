@@ -227,6 +227,7 @@ export namespace RetrieveFinancialReportsResponse {
                 LegacyCryptoPayment: "legacy_crypto_payment",
                 LegacyPayment: "legacy_payment",
                 LegacyPaymentRefund: "legacy_payment_refund",
+                LevelsPointsAction: "levels_points_action",
                 LevelsPointsAds: "levels_points_ads",
                 LevelsPointsBurned: "levels_points_burned",
                 LevelsPointsCard: "levels_points_card",
