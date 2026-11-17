@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface AccountFeeMarkups {
+    /** Markups on card payments, keyed by acquiring region (`usa`, `eu`, `uk`, `ca`, or `au`). A region without its own markup uses `payment_methods.card`. */
+    card_regions: Record<string, Whop.AccountFeeMarkup>;
     /** The markup on card purchases settled by the subaccount. */
     card_spend: Whop.AccountFeeMarkup;
     /** The markup on cryptocurrency token swaps. */

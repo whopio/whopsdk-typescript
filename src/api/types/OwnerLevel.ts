@@ -5,21 +5,10 @@ import type * as Whop from "../index.js";
 export interface OwnerLevel {
     /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
     current: number;
-    levels: Whop.AccountProcessingOfferLevel[];
-    /** Whop Ads charges paid this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
-    monthly_ads_spend: Whop.Money;
-    /** Captured Whop Card spend this calendar month across every account the owner owns, net of refunds, in USD, so it can be negative. An account whose month nets to zero or below is left out. */
-    monthly_card_spend: Whop.Money;
-    /** Qualifying spend this calendar month across every account the owner owns, plus the owner's personal trading and partner points, in USD: `points` divided by 10. */
-    monthly_qualifying_spend: Whop.Money;
-    /** Perpetual trading volume filled through Whop this calendar month across every account the owner owns and their personal wallet, in USD. An account whose month nets to zero or below is left out. */
-    monthly_trading_volume: Whop.Money;
     /** Points earned this month across every account the owner owns, plus the owner's partner points, rounded down. An account whose month nets below zero counts as zero. */
     points: number;
     /** This month's points, split by where they were earned. Each source is net of its refunds, so one can be negative. */
     points_by_source: Whop.OwnerLevelPoints;
-    /** Points still needed this month to reach the next level, or `null` at level `10`. */
-    points_to_next: number | null;
     /** When this month's points reset to zero, as an ISO 8601 timestamp. */
     resets_at: string;
 }
