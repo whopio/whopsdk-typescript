@@ -9,7 +9,7 @@ import type * as Whop from "../../../../index.js";
 export interface ListPartnerReferralRequestsRequest {
     /** Only requests for this business ID, prefixed `biz_`. */
     account_id?: string;
-    /** Only requests received by this user ID, prefixed `user_`. */
+    /** Deprecated: requests to a user have ended. Returns no requests. */
     target_user_id?: string;
     /** Only requests sent by this partner's user ID, prefixed `user_`. */
     partner_id?: string;
