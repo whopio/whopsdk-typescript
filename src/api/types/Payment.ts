@@ -48,7 +48,7 @@ export interface Payment {
     holds: Whop.PaymentHold[];
     /** Payment ID, prefixed `pay_`. */
     id: string;
-    /** The buyer's IP address at checkout: the one Whop's fraud screening identified, otherwise the one Whop captured from the buyer's browser at checkout. Null when the buyer was not present at checkout, such as a subscription renewal or a charge made without the buyer present, or when you read the payment as its buyer. */
+    /** IP address that Whop captured from the buyer's browser at checkout. Null when the buyer was not present at checkout, for example a subscription renewal or a charge made without the buyer. Also null when you read the payment as its buyer. */
     ip_address: string | null;
     /** When the most recent charge attempt ran, or null. */
     last_payment_attempt_at: string | null;
