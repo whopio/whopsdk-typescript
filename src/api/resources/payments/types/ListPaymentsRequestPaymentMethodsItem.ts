@@ -149,6 +149,7 @@ export const ListPaymentsRequestPaymentMethodsItem = {
     PaytoPhone: "payto_phone",
     PaytoBankAccount: "payto_bank_account",
     Pix: "pix",
+    PixAutomatico: "pix_automatico",
     PlatformBalance: "platform_balance",
     Promptpay: "promptpay",
     Qris: "qris",
