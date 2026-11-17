@@ -28,7 +28,10 @@ export interface PartnerReferralRequest {
     status: PartnerReferralRequest.Status | null;
     /** When the request last changed, as an ISO 8601 timestamp. */
     updated_at: string;
-    /** User receiving the attribution request, or null for a business request or referral link. */
+    /**
+     * The user an attribution request was sent to. Deprecated: requests to a user have ended. Always `null`.
+     * DEPRECATED: No longer populated. Always null.
+     */
     user: Whop.UserSummary | null;
 }
 

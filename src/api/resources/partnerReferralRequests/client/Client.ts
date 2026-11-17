@@ -17,9 +17,9 @@ export declare namespace PartnerReferralRequestsClient {
 }
 
 /**
- * A Partner Referral Request is a partner's referral link, or a request to be credited as the referrer of an existing business or user. An attribution request takes effect only when the recipient accepts it.
+ * A Partner Referral Request is a partner's referral link, or a request to be credited as the referrer of an existing business. An attribution request takes effect only when an owner of the business accepts it.
  *
- * Use the Partner Referral Requests API to create referral links, send attribution requests, list the links and requests you've sent or received, and accept, decline, or cancel a pending request.
+ * Use the Partner Referral Requests API to create referral links and send attribution requests. You can also list the links and requests you've sent or received, and accept, decline, or cancel a pending request.
  */
 export class PartnerReferralRequestsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PartnerReferralRequestsClient.Options>;
@@ -29,7 +29,7 @@ export class PartnerReferralRequestsClient {
     }
 
     /**
-     * Lists your referral links and attribution requests, including incoming requests for you or businesses you own, with filters for recipient, partner, type, and status.
+     * Lists your referral links and attribution requests, including incoming requests for businesses you own, with filters for business, partner, type, and status.
      *
      * @param {Whop.ListPartnerReferralRequestsRequest} request
      * @param {PartnerReferralRequestsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -91,7 +91,7 @@ export class PartnerReferralRequestsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -163,7 +163,7 @@ export class PartnerReferralRequestsClient {
     }
 
     /**
-     * Creates a referral link, or sends an attribution request to an existing business or user for approval. Links require an enrolled partner who is not suspended; attribution requests require an enrolled, verified partner. Recipients do not need to join the partner program.
+     * Creates a referral link, or sends an attribution request to an existing business for approval. Links require an enrolled partner who is not suspended. Attribution requests require an enrolled, verified partner. Recipients do not need to join the partner program.
      *
      * @param {Whop.CreatePartnerReferralRequestsRequestBody} request
      * @param {PartnerReferralRequestsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -197,7 +197,7 @@ export class PartnerReferralRequestsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -283,7 +283,7 @@ export class PartnerReferralRequestsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -368,7 +368,7 @@ export class PartnerReferralRequestsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -455,7 +455,7 @@ export class PartnerReferralRequestsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -542,7 +542,7 @@ export class PartnerReferralRequestsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-14-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-16",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
