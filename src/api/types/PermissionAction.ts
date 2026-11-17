@@ -269,6 +269,7 @@ export const PermissionAction = {
     WebhookReceiveAppInstallations: "webhook_receive:app_installations",
     WebhookReceiveAppMemberships: "webhook_receive:app_memberships",
     WebhookReceiveAppPayments: "webhook_receive:app_payments",
+    WebhookReceiveCapital: "webhook_receive:capital",
     WebhookReceiveCardApplications: "webhook_receive:card_applications",
     WebhookReceiveCardTransactions: "webhook_receive:card_transactions",
     WebhookReceiveCards: "webhook_receive:cards",
