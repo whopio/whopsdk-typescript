@@ -90,6 +90,7 @@ describe("PreferencesClient", () => {
                     label: "I don't get my car detailed often enough",
                 },
             ],
+            merchant_of_record: "whop",
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "preferred_settlement_currency_changeable_at",
             renewal_reminder_emails: true,
@@ -248,6 +249,7 @@ describe("PreferencesClient", () => {
             feedback_options: [
                 { category: "too_expensive", id: "fo_xxxxxxxxxxxxxx", label: "The detail missed spots" },
             ],
+            merchant_of_record: "whop",
             preferred_settlement_currency: "usd",
             preferred_settlement_currency_changeable_at: "2026-01-01T12:00:00.000Z",
             renewal_reminder_emails: true,

@@ -118,7 +118,7 @@ describe("UsersClient", () => {
                     followers_count: 0,
                     id: "user_xxxxxxxxxxxxxx",
                     level: {
-                        applied_level: 1,
+                        current: 1,
                         levels: [
                             {
                                 level: 0,
@@ -435,7 +435,7 @@ describe("UsersClient", () => {
             followers_count: 0,
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                applied_level: 1,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -673,7 +673,7 @@ describe("UsersClient", () => {
             followers_count: 0,
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                applied_level: 1,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -925,7 +925,7 @@ describe("UsersClient", () => {
             followers_count: 0,
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                applied_level: 1,
+                current: 1,
                 levels: [
                     {
                         level: 0,
@@ -1167,7 +1167,7 @@ describe("UsersClient", () => {
             followers_count: 0,
             id: "user_xxxxxxxxxxxxxx",
             level: {
-                applied_level: 1,
+                current: 1,
                 levels: [
                     {
                         level: 0,
