@@ -13,6 +13,8 @@ export interface CreateMethodsResponse {
     fee_structure: Record<string, unknown> | null;
     /** Payout method ID, usable as payout_method_id on POST /payouts. */
     id: string;
+    /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
+    instant_unavailable_reason?: (CreateMethodsResponse.InstantUnavailableReason | null) | undefined;
     institution_name: string | null;
     /** Whether this method is a copy of one saved on another of the payer's accounts. */
     is_clone?: boolean | undefined;
@@ -52,6 +54,12 @@ export namespace CreateMethodsResponse {
         Broken: "broken",
     } as const;
     export type BankVerificationState = (typeof BankVerificationState)[keyof typeof BankVerificationState];
+    /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
+    export const InstantUnavailableReason = {
+        MinimumCryptoSalesNotMet: "minimum_crypto_sales_not_met",
+        NewPayoutMethodHold: "new_payout_method_hold",
+    } as const;
+    export type InstantUnavailableReason = (typeof InstantUnavailableReason)[keyof typeof InstantUnavailableReason];
     export const Object_ = {
         PayoutMethod: "payout_method",
     } as const;
