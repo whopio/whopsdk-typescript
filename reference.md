@@ -15530,7 +15530,7 @@ await client.externalAccounts.delete({
 <dl>
 <dd>
 
-Refreshes the state of an external account. Use it to clear an `error` that has been resolved.
+Deprecated. Returns the external account unchanged.
 </dd>
 </dl>
 </dd>
@@ -28771,7 +28771,7 @@ await client.socialAccounts.delete({
 <dl>
 <dd>
 
-Deprecated compatibility endpoint. Refresh external accounts with `POST /external_accounts/{id}/refresh` instead.
+Deprecated compatibility endpoint. Returns the social account unchanged.
 </dd>
 </dl>
 </dd>
