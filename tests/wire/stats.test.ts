@@ -22,7 +22,7 @@ describe("StatsClient", () => {
                         "A 0 to 100 campaign score at each interval, over the hours since the current claim (at most the last 7 days) that the campaign was active or paused: half the share of its daily budget it charged in those hours, half the share of those hours it charged in. A claim that hasn't charged yet is not scored for its first 24 such hours. Several ad_xxxxxxxxxxxxxx_ids (up to 100) average their scores weighted by daily budget. breakdown_by=component, for one campaign, adds each part's score and weight and the totals behind them. A runner reads the campaigns they run; staff read any campaign with account_id=global.",
                     key: "ad_xxxxxxxxxxxxxx_score",
                     name: "Ad campaign score",
-                    properties: ["source"],
+                    properties: ["segment"],
                     unit: "count",
                     windows: ["7d"],
                 },
@@ -49,6 +49,7 @@ describe("StatsClient", () => {
             data: {
                 complete: true,
                 currency: "usd",
+                data_as_of: "data_as_of",
                 points: [
                     {
                         breakdown: [

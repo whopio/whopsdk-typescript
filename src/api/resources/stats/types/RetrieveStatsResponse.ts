@@ -12,6 +12,8 @@ export namespace RetrieveStatsResponse {
         complete?: (boolean | null) | undefined;
         /** ISO currency the values are denominated in. Present for currency-unit metrics: the convert_to currency, or usd. */
         currency?: (string | null) | undefined;
+        /** Present for metrics computed on a schedule. When the values were computed, as an ISO 8601 timestamp. */
+        data_as_of?: (string | null) | undefined;
         /** One entry per period, oldest first. */
         points: Data.Points.Item[];
         /** Whole-window aggregates, present when the metric computes them. Don't derive these from `points`: a rate is measured across the whole window, not averaged across its points, and whole-window unique people are distinct across every bucket. */
