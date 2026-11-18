@@ -180,6 +180,7 @@ describe("ChannelsClient", () => {
                         {
                             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                             created_at: "2026-01-01T12:00:00.000Z",
+                            deleted_at: null,
                             id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                             inbox_status: null,
                             last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -199,6 +200,7 @@ describe("ChannelsClient", () => {
                     membership: {
                         channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                         created_at: "2026-01-01T12:00:00.000Z",
+                        deleted_at: null,
                         id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         inbox_status: null,
                         last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -333,6 +335,7 @@ describe("ChannelsClient", () => {
             membership: {
                 channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                 created_at: "2026-01-01T12:00:00.000Z",
+                deleted_at: "deleted_at",
                 id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 inbox_status: "requested",
                 last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -545,6 +548,7 @@ describe("ChannelsClient", () => {
             membership: {
                 channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                 created_at: "2026-01-01T12:00:00.000Z",
+                deleted_at: "deleted_at",
                 id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 inbox_status: "requested",
                 last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -740,6 +744,7 @@ describe("ChannelsClient", () => {
             membership: {
                 channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                 created_at: "2026-01-01T12:00:00.000Z",
+                deleted_at: "deleted_at",
                 id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 inbox_status: "requested",
                 last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -915,6 +920,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             inbox_status: "requested",
             last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -1015,6 +1021,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             inbox_status: "requested",
             last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -1115,6 +1122,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             inbox_status: "requested",
             last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -1215,6 +1223,7 @@ describe("ChannelsClient", () => {
         const rawResponseBody = {
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
+            deleted_at: "deleted_at",
             id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             inbox_status: "requested",
             last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -1511,6 +1520,7 @@ describe("ChannelsClient", () => {
             membership: {
                 channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                 created_at: "2026-01-01T12:00:00.000Z",
+                deleted_at: "deleted_at",
                 id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 inbox_status: "requested",
                 last_viewed_at: "2026-01-01T12:00:00.000Z",
@@ -1667,6 +1677,7 @@ describe("ChannelsClient", () => {
             membership: {
                 channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                 created_at: "2026-01-01T12:00:00.000Z",
+                deleted_at: "deleted_at",
                 id: "memb_1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 inbox_status: "requested",
                 last_viewed_at: "2026-01-01T12:00:00.000Z",

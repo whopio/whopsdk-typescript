@@ -19,4 +19,6 @@ export interface ListChannelMembersRequest {
     channel_id: string;
     /** Search by name or username. */
     query?: string;
+    /** Include former members with a deleted_at timestamp. Defaults to current members only. */
+    include_deleted?: boolean;
 }
