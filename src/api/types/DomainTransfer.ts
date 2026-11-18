@@ -5,7 +5,7 @@ export interface DomainTransfer {
     code: string | null;
     /** Where the domain is moving. `internal` is another Whop account. */
     destination: DomainTransfer.Destination;
-    /** `ready` while the code waits to be used. `pending` once it has: Whop removes the domain's email, Apple Pay and pixel from this account, then moves the registration and removes the domain from this account. */
+    /** `ready` while the code waits to be used. `pending` once another account uses it. Whop then removes the domain's email, Apple Pay and pixel from this account. Then it moves the registration and removes the domain from this account. `releasing` while Whop turns the transfer off. */
     state: DomainTransfer.State;
 }
 
@@ -15,10 +15,11 @@ export namespace DomainTransfer {
         Internal: "internal",
     } as const;
     export type Destination = (typeof Destination)[keyof typeof Destination];
-    /** `ready` while the code waits to be used. `pending` once it has: Whop removes the domain's email, Apple Pay and pixel from this account, then moves the registration and removes the domain from this account. */
+    /** `ready` while the code waits to be used. `pending` once another account uses it. Whop then removes the domain's email, Apple Pay and pixel from this account. Then it moves the registration and removes the domain from this account. `releasing` while Whop turns the transfer off. */
     export const State = {
         Ready: "ready",
         Pending: "pending",
+        Releasing: "releasing",
     } as const;
     export type State = (typeof State)[keyof typeof State];
 }

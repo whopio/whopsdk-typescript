@@ -54,6 +54,8 @@ export namespace DomainIssue {
         TransferRejected: "transfer_rejected",
         TransferNotCancellable: "transfer_not_cancellable",
         DomainTransferFailed: "domain_transfer_failed",
+        TransferOutLocked: "transfer_out_locked",
+        RegistrarUnavailable: "registrar_unavailable",
         ApplePayUnverified: "apple_pay_unverified",
         PixelNotSeen: "pixel_not_seen",
         PixelNotInstalled: "pixel_not_installed",
