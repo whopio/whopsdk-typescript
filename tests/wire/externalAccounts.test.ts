@@ -18,7 +18,6 @@ describe("ExternalAccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    error: "error",
                     external_id: "555222",
                     id: "sacc_xxxxxxxxxxxxxx",
                     name: "Valentine Tromp",
@@ -114,7 +113,6 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = { platform: "facebook" };
         const rawResponseBody = {
-            error: "error",
             external_id: "555222",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Valentine Tromp",
@@ -553,7 +551,6 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            error: "error",
             external_id: "555222",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Valentine Tromp",
@@ -607,34 +604,6 @@ describe("ExternalAccountsClient", () => {
             .post("/external_accounts/id/refresh")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.externalAccounts.refresh({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("refresh (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/external_accounts/id/refresh")
-            .jsonBody(rawRequestBody)
-            .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
@@ -646,7 +615,7 @@ describe("ExternalAccountsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("refresh (4)", async () => {
+    test("refresh (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -674,7 +643,7 @@ describe("ExternalAccountsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("refresh (5)", async () => {
+    test("refresh (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -702,7 +671,7 @@ describe("ExternalAccountsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("refresh (6)", async () => {
+    test("refresh (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -728,33 +697,5 @@ describe("ExternalAccountsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.ConflictError);
-    });
-
-    test("refresh (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/external_accounts/id/refresh")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.externalAccounts.refresh({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
     });
 });

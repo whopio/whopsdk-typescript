@@ -3,8 +3,6 @@
 import type * as Whop from "../index.js";
 
 export interface ExternalAccount {
-    /** Why this external account currently can't be used for advertising — a failed share or a Meta-side restriction. Null when the account is healthy. */
-    error: string | null;
     /** The platform-specific ID for this external account. */
     external_id: string | null;
     /** Unique identifier for the external account. */

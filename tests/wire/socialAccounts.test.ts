@@ -18,7 +18,6 @@ describe("SocialAccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    error: "error",
                     external_id: "17841479809129315",
                     id: "sacc_xxxxxxxxxxxxxx",
                     name: "Shine Time Detail",
@@ -76,7 +75,6 @@ describe("SocialAccountsClient", () => {
         });
         const rawRequestBody = { platform: "facebook" };
         const rawResponseBody = {
-            error: "error",
             external_id: "17841479809129315",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Shine Time Detail",
@@ -238,7 +236,6 @@ describe("SocialAccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            error: "error",
             external_id: "17841479809129315",
             id: "sacc_xxxxxxxxxxxxxx",
             name: "Shine Time Detail",
