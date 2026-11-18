@@ -92,10 +92,8 @@ export namespace PostAdGroupUpdatedPayload {
         export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
         /** Whether ads in this ad group are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
-            AllAdsRejected: "all_ads_rejected",
             Rejected: "rejected",
             Draft: "draft",
-            CampaignPaused: "campaign_paused",
             Paused: "paused",
             InReview: "in_review",
             Processing: "processing",
