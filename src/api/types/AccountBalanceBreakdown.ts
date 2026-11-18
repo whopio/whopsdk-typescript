@@ -12,6 +12,8 @@ export interface AccountBalanceBreakdown {
     /** Amount from recent payments still settling, in native units, as a decimal string. */
     pending: string;
     pending_settlements: Whop.AccountBalanceSettlement[];
+    /** Amount held for perpetual trading, at what the trading account is worth now, in native units, as a decimal string. It is not part of `available`. */
+    perps: string;
     /** Amount held back, in native units, as a decimal string. Retrieve the account's reserves for why it is held and when it unlocks. */
     reserve: string;
 }
