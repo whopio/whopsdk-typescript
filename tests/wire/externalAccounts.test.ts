@@ -18,10 +18,10 @@ describe("ExternalAccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
-                    external_id: "1234567891",
+                    error: "error",
+                    external_id: "555222",
                     id: "sacc_xxxxxxxxxxxxxx",
-                    name: "Shine Time Auto Detailing",
+                    name: "Valentine Tromp",
                     parent_external_account: {
                         external_id: "555111",
                         id: "sacc_xxxxxxxxxxxxxx",
@@ -33,11 +33,11 @@ describe("ExternalAccountsClient", () => {
                     },
                     partnership_status: "partnership_status",
                     platform: "x",
-                    profile_picture_url: "https://shinetime.example/logo.png",
+                    profile_picture_url: "http://zboncak.example/greg_mcclure",
                     scopes: ["advertise"],
-                    url: "https://instagram.com/shinetimedetail",
-                    username: "shinetimedetail",
-                    verified: true,
+                    url: "https://instagram.com/shinetimeaustin",
+                    username: "shinetimeaustin",
+                    verified: false,
                 },
             ],
             page_info: {
@@ -114,10 +114,10 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = { platform: "facebook" };
         const rawResponseBody = {
-            error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
-            external_id: "1234567891",
+            error: "error",
+            external_id: "555222",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Shine Time Auto Detailing",
+            name: "Valentine Tromp",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -129,11 +129,11 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "https://shinetime.example/logo.png",
+            profile_picture_url: "http://zboncak.example/greg_mcclure",
             scopes: ["advertise"],
-            url: "https://instagram.com/shinetimedetail",
-            username: "shinetimedetail",
-            verified: true,
+            url: "https://instagram.com/shinetimeaustin",
+            username: "shinetimeaustin",
+            verified: false,
         };
 
         server
@@ -553,10 +553,10 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            error: "You don't have permission to share this account with Whop. Contact Whop support for help.",
-            external_id: "1234567891",
+            error: "error",
+            external_id: "555222",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Shine Time Auto Detailing",
+            name: "Valentine Tromp",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -568,11 +568,11 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "https://shinetime.example/logo.png",
+            profile_picture_url: "http://zboncak.example/greg_mcclure",
             scopes: ["advertise"],
-            url: "https://instagram.com/shinetimedetail",
-            username: "shinetimedetail",
-            verified: true,
+            url: "https://instagram.com/shinetimeaustin",
+            username: "shinetimeaustin",
+            verified: false,
         };
 
         server
