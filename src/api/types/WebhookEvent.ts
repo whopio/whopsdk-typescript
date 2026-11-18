@@ -85,6 +85,7 @@ export const WebhookEvent = {
     AdCampaignUpdated: "ad_campaign.updated",
     AdCampaignEvents: "ad_campaign.events",
     AdCampaignDeleted: "ad_campaign.deleted",
+    AdCampaignClaimEnded: "ad_campaign.claim_ended",
     AdGroupCreated: "ad_group.created",
     AdGroupUpdated: "ad_group.updated",
     AdGroupDeleted: "ad_group.deleted",
