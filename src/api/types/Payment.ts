@@ -96,6 +96,8 @@ export interface Payment {
     refunded_amount: Whop.Money | null;
     /** When the payment was refunded, or null. */
     refunded_at: string | null;
+    /** Why the buyer cannot open a Resolution Center case on this payment with `POST /resolution_center_cases`, or null when they can. `already_opened`: a case is already open or was decided (a withdrawn case does not count). `unsupported_payment_processor`: the payment method does not support cases. `out_of_date`: the window to open a case has passed. `not_paid`: the payment is not `paid`. `free`: nothing was charged. `already_refunded`: some of it has been refunded. */
+    resolution_center_ineligible_reason: Payment.ResolutionCenterIneligibleReason | null;
     /** When the earliest response is due on a dispute or Resolution Center case awaiting the account's response, as an ISO 8601 timestamp. Null when nothing awaits a response, or without the permission to read that dispute or case. */
     response_due_at: string | null;
     /** True when the payment can be retried by hand with `POST /payments/{id}/retry`. The payment must be `open` and not paid through an invoice payment link. Its membership must be `active`, `trialing`, or `past_due`, or the payment must be a failed first payment on a `drafted` membership. Its one manual retry must not be used up. A retry can still be refused when the account cannot currently accept payments. */
@@ -160,4 +162,15 @@ export namespace Payment {
         CardPresent: "card_present",
     } as const;
     export type CheckoutSurface = (typeof CheckoutSurface)[keyof typeof CheckoutSurface];
+    /** Why the buyer cannot open a Resolution Center case on this payment with `POST /resolution_center_cases`, or null when they can. `already_opened`: a case is already open or was decided (a withdrawn case does not count). `unsupported_payment_processor`: the payment method does not support cases. `out_of_date`: the window to open a case has passed. `not_paid`: the payment is not `paid`. `free`: nothing was charged. `already_refunded`: some of it has been refunded. */
+    export const ResolutionCenterIneligibleReason = {
+        AlreadyOpened: "already_opened",
+        UnsupportedPaymentProcessor: "unsupported_payment_processor",
+        OutOfDate: "out_of_date",
+        NotPaid: "not_paid",
+        Free: "free",
+        AlreadyRefunded: "already_refunded",
+    } as const;
+    export type ResolutionCenterIneligibleReason =
+        (typeof ResolutionCenterIneligibleReason)[keyof typeof ResolutionCenterIneligibleReason];
 }

@@ -142,6 +142,7 @@ describe("DirectClient", () => {
             refundable: false,
             refunded_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
+            resolution_center_ineligible_reason: "already_opened",
             response_due_at: "response_due_at",
             retryable: true,
             risk_score: 1.1,

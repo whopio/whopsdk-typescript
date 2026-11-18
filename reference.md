@@ -26714,7 +26714,7 @@ await client.refunds.retrieve({
 <dl>
 <dd>
 
-Lists resolution center cases. Without `account_id` you get every case you can read — the ones you opened as a buyer and every account you are a team member of; the filters narrow that list.
+Lists resolution center cases. Without `account_id` you get every case you can read: cases you opened as a buyer, and cases on accounts where you are on the team. The filters narrow that list.
 </dd>
 </dl>
 </dd>
@@ -26729,13 +26729,19 @@ Lists resolution center cases. Without `account_id` you get every case you can r
 <dd>
 
 ```typescript
-const pageableResponse = await client.resolutionCenterCases.list();
+const pageableResponse = await client.resolutionCenterCases.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    payment_id: ["pay_xxxxxxxxxxxxxx"]
+});
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.resolutionCenterCases.list();
+let page = await client.resolutionCenterCases.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    payment_id: ["pay_xxxxxxxxxxxxxx"]
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -26871,7 +26877,10 @@ Aggregates the same cases `GET /resolution_center_cases` lists, using the same f
 <dd>
 
 ```typescript
-await client.resolutionCenterCases.summary();
+await client.resolutionCenterCases.summary({
+    product_ids: ["prod_xxxxxxxxxxxxx"],
+    payment_id: ["pay_xxxxxxxxxxxxxx"]
+});
 
 ```
 </dd>

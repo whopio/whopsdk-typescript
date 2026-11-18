@@ -9,4 +9,6 @@
 export interface WithdrawResolutionCenterCasesRequest {
     /** The resolution center case ID (`reso_` tag). */
     id: string;
+    /** Why you are withdrawing the case, recorded on the case timeline where the merchant can read it. Without one, the timeline says the customer withdrew. */
+    message?: string;
 }

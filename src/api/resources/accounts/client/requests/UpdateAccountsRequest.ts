@@ -55,6 +55,8 @@ export interface UpdateAccountsRequest {
     other_business_description?: string | null;
     /** The description of the industry type when industry_type is other. */
     other_industry_description?: string | null;
+    /** Payment controls to change. Only `resolution_center_auto_refund` can change. Whop ignores the other fields, so you can send back the object from `GET`. Requires the `payment:resolution_center` and `company:balance:read` scopes. */
+    payment_controls?: UpdateAccountsRequest.PaymentControls;
     /** The account's privacy policy document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
     privacy_policy?: UpdateAccountsRequest.PrivacyPolicy | null;
     /** ID of the tax classification code applied by default to the account's products. See the available [product categories](https://docs.numeral.com/essentials/product-categories). */
@@ -197,6 +199,32 @@ export namespace UpdateAccountsRequest {
         Orange: "orange",
     } as const;
     export type OpengraphImageVariant = (typeof OpengraphImageVariant)[keyof typeof OpengraphImageVariant];
+
+    /**
+     * Payment controls to change. Only `resolution_center_auto_refund` can change. Whop ignores the other fields, so you can send back the object from `GET`. Requires the `payment:resolution_center` and `company:balance:read` scopes.
+     */
+    export interface PaymentControls {
+        /** Settings for automatic refunds of Resolution Center cases. Fields you leave out keep their value. A threshold change while `locked` is `true` returns a `403`. You can send back the object from `GET` unchanged. */
+        resolution_center_auto_refund?: PaymentControls.ResolutionCenterAutoRefund | undefined;
+    }
+
+    export namespace PaymentControls {
+        /**
+         * Settings for automatic refunds of Resolution Center cases. Fields you leave out keep their value. A threshold change while `locked` is `true` returns a `403`. You can send back the object from `GET` unchanged.
+         */
+        export interface ResolutionCenterAutoRefund {
+            /** Whop automatically refunds Resolution Center cases on card payments up to this amount in USD. Card payments include Visa, Mastercard, American Express and Discover. Send `null` or `0` to turn it off. Otherwise it must be at least `1`. Whop rounds it to cents. */
+            card_threshold_usd?: (number | null) | undefined;
+            /** Whop automatically refunds Resolution Center cases on financing payments up to this amount in USD. Financing payments include Klarna, Affirm, Zip, Afterpay, Splitit and Sezzle. Send `null` or `0` to turn it off. Otherwise it must be at least `1`. Whop rounds it to cents. */
+            financing_threshold_usd?: (number | null) | undefined;
+            /** Whether the thresholds are locked. You cannot change this field. Whop ignores it when you send it. */
+            locked?: boolean | undefined;
+            /** Message the customer gets when Whop automatically refunds their case. A message is required while any threshold is set. You can also change it while `locked` is `true`. */
+            message?: (string | null) | undefined;
+            /** Whop automatically refunds Resolution Center cases on PayPal and Venmo payments up to this amount in USD. Send `null` or `0` to turn it off. Otherwise it must be at least `1`. Whop rounds it to cents. */
+            paypal_threshold_usd?: (number | null) | undefined;
+        }
+    }
 
     /**
      * The account's privacy policy document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.

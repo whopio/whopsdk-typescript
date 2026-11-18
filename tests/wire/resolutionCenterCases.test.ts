@@ -28,6 +28,7 @@ describe("ResolutionCenterCasesClient", () => {
                         user_id: "user_xxxxxxxxxxxxxx",
                         username: "danawhitfield",
                     },
+                    closed_at: "2026-01-01T12:00:00.000Z",
                     created_at: "2026-01-01T12:00:00.000Z",
                     currency: "usd",
                     customer_appealed: false,
@@ -80,7 +81,10 @@ describe("ResolutionCenterCasesClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.resolutionCenterCases.list();
+        const page = await client.resolutionCenterCases.list({
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+            payment_id: ["pay_xxxxxxxxxxxxxx"],
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -188,6 +192,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -333,7 +338,10 @@ describe("ResolutionCenterCasesClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.resolutionCenterCases.summary();
+        const response = await client.resolutionCenterCases.summary({
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+            payment_id: ["pay_xxxxxxxxxxxxxx"],
+        });
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -408,6 +416,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -532,6 +541,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -687,6 +697,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -819,6 +830,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -1060,6 +1072,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -1190,6 +1203,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -1305,7 +1319,7 @@ describe("ResolutionCenterCasesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
@@ -1317,6 +1331,7 @@ describe("ResolutionCenterCasesClient", () => {
                 user_id: "user_xxxxxxxxxxxxxx",
                 username: "danawhitfield",
             },
+            closed_at: "2026-01-01T12:00:00.000Z",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             customer_appealed: false,
@@ -1355,6 +1370,7 @@ describe("ResolutionCenterCasesClient", () => {
         server
             .mockEndpoint()
             .post("/resolution_center_cases/id/withdraw")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -1375,12 +1391,13 @@ describe("ResolutionCenterCasesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/resolution_center_cases/id/withdraw")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
@@ -1402,12 +1419,13 @@ describe("ResolutionCenterCasesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
             .post("/resolution_center_cases/id/withdraw")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(409)
             .jsonBody(rawResponseBody)
