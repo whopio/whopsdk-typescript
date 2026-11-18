@@ -57,7 +57,9 @@ export class MembersClient {
      *         user_ids: ["user_xxxxxxxxxxxxxx"],
      *         product_ids: ["prod_xxxxxxxxxxxxx"],
      *         variant_ids: ["plan_xxxxxxxxxxxxx"],
-     *         promo_code_ids: ["promo_xxxxxxxxxxxx"]
+     *         promo_code_ids: ["promo_xxxxxxxxxxxx"],
+     *         affiliate_id: "aff_xxxxxxxxxxxxxx",
+     *         buyer_account_ids: ["biz_xxxxxxxxxxxxxx"]
      *     })
      */
     public async list(
@@ -76,6 +78,8 @@ export class MembersClient {
                     product_ids: productIds,
                     variant_ids: variantIds,
                     promo_code_ids: promoCodeIds,
+                    affiliate_id: affiliateId,
+                    buyer_account_ids: buyerAccountIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,
@@ -101,6 +105,8 @@ export class MembersClient {
                     product_ids: productIds,
                     variant_ids: variantIds,
                     promo_code_ids: promoCodeIds,
+                    affiliate_id: affiliateId,
+                    buyer_account_ids: buyerAccountIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,

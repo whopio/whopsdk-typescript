@@ -8,7 +8,9 @@ import type * as Whop from "../../../../index.js";
  *         user_ids: ["user_xxxxxxxxxxxxxx"],
  *         product_ids: ["prod_xxxxxxxxxxxxx"],
  *         variant_ids: ["plan_xxxxxxxxxxxxx"],
- *         promo_code_ids: ["promo_xxxxxxxxxxxx"]
+ *         promo_code_ids: ["promo_xxxxxxxxxxxx"],
+ *         affiliate_id: "aff_xxxxxxxxxxxxxx",
+ *         buyer_account_ids: ["biz_xxxxxxxxxxxxxx"]
  *     }
  */
 export interface ListMembersRequest {
@@ -30,6 +32,10 @@ export interface ListMembersRequest {
     variant_ids?: string | string[];
     /** Only return members holding a membership bought with one of these promo codes, prefixed `promo_`. Unknown IDs match nothing. */
     promo_code_ids?: string | string[];
+    /** Only return members this affiliate referred, prefixed `aff_`. Requires `affiliate:basic:read` and sorts by `created_at` only. Unknown IDs match nothing. */
+    affiliate_id?: string;
+    /** Only return members bought by these accounts, prefixed `biz_`. Unknown IDs match nothing. */
+    buyer_account_ids?: string | string[];
     /** Search members by name or username. An exact email address also matches when the credential holds the member:email:read scope. */
     query?: string;
     /** Only members who joined after this ISO 8601 timestamp. */
