@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface PaymentQr {
     /** Exactly what the buyer must pay, in the charged currency. */
     amount?: Whop.Money | undefined;
-    /** The code the buyer pastes into their payment app instead of scanning, such as Pix's copy-and-paste code, so they can pay from the device showing the QR. Only present for methods that accept a pasted code. */
+    /** The code the buyer pastes into their payment app instead of scanning, such as Pix's copy-and-paste code. This lets them pay from the device showing the QR. Only present for methods that accept a pasted code. */
     copy_code?: string | undefined;
     /** A hosted page with the complete, printable instructions. If you would rather not render the details yourself, send the buyer here. */
     document_url?: string | undefined;
@@ -13,7 +13,7 @@ export interface PaymentQr {
     expires_at?: string | undefined;
     /** An account key the buyer can pay to directly (Colombia's Bre-B llave), for apps that take a key instead of a scan. */
     key?: string | undefined;
-    /** The QR code's contents, ready to render as a scannable image — `qr_format` says how it is encoded. */
+    /** The QR code's contents, ready to render as a scannable image. `qr_format` says how it is encoded. */
     qr_code?: string | undefined;
     /** How `qr_code` is encoded. */
     qr_format?: string | undefined;
