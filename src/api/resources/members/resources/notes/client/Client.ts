@@ -228,4 +228,89 @@ export class NotesClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/members/{member_id}/notes");
     }
+
+    /**
+     * Deletes a note from a member, whoever wrote it. A deleted note's ID returns a `404`. Deleting can't be undone.
+     *
+     * @param {Whop.members.DeleteNotesRequest} request
+     * @param {NotesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.members.notes.delete({
+     *         member_id: "member_id",
+     *         id: "id"
+     *     })
+     */
+    public delete(
+        request: Whop.members.DeleteNotesRequest,
+        requestOptions?: NotesClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.members.DeleteNotesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
+    }
+
+    private async __delete(
+        request: Whop.members.DeleteNotesRequest,
+        requestOptions?: NotesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.members.DeleteNotesResponse>> {
+        const { member_id: memberId, id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-3",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `members/${core.url.encodePathParam(memberId)}/notes/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.members.DeleteNotesResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "DELETE",
+            "/members/{member_id}/notes/{id}",
+        );
+    }
 }

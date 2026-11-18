@@ -7,6 +7,8 @@ export interface Member {
     access_level: Member.AccessLevel;
     /** The account this member belongs to, prefixed `biz_`. */
     account_id: string;
+    /** The business that bought, prefixed `biz_`. `null` when the buyer is a person. */
+    buyer_account_id: string | null;
     /** When the member record was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** The name to show for this member: the user's name, or their username when they have not set one. The buying business's name when `user` is `null`. */

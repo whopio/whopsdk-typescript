@@ -18947,7 +18947,9 @@ const pageableResponse = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
     variant_ids: ["plan_xxxxxxxxxxxxx"],
-    promo_code_ids: ["promo_xxxxxxxxxxxx"]
+    promo_code_ids: ["promo_xxxxxxxxxxxx"],
+    affiliate_id: "aff_xxxxxxxxxxxxxx",
+    buyer_account_ids: ["biz_xxxxxxxxxxxxxx"]
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -18958,7 +18960,9 @@ let page = await client.members.list({
     user_ids: ["user_xxxxxxxxxxxxxx"],
     product_ids: ["prod_xxxxxxxxxxxxx"],
     variant_ids: ["plan_xxxxxxxxxxxxx"],
-    promo_code_ids: ["promo_xxxxxxxxxxxx"]
+    promo_code_ids: ["promo_xxxxxxxxxxxx"],
+    affiliate_id: "aff_xxxxxxxxxxxxxx",
+    buyer_account_ids: ["biz_xxxxxxxxxxxxxx"]
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -33786,6 +33790,72 @@ await client.members.notes.create({
 <dd>
 
 **request:** `Whop.members.CreateNotesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `NotesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.members.notes.<a href="/src/api/resources/members/resources/notes/client/Client.ts">delete</a>({ ...params }) -> Whop.DeleteNotesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a note from a member, whoever wrote it. A deleted note's ID returns a `404`. Deleting can't be undone.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.members.notes.delete({
+    member_id: "member_id",
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.members.DeleteNotesRequest` 
     
 </dd>
 </dl>

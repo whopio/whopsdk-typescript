@@ -20,6 +20,7 @@ describe("MembersClient", () => {
                 {
                     access_level: "no_access",
                     account_id: "biz_xxxxxxxxxxxxxx",
+                    buyer_account_id: "biz_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     display_name: "Dana Whitfield",
                     earnings_usd: {
@@ -90,6 +91,8 @@ describe("MembersClient", () => {
             product_ids: ["prod_xxxxxxxxxxxxx"],
             variant_ids: ["plan_xxxxxxxxxxxxx"],
             promo_code_ids: ["promo_xxxxxxxxxxxx"],
+            affiliate_id: "aff_xxxxxxxxxxxxxx",
+            buyer_account_ids: ["biz_xxxxxxxxxxxxxx"],
         });
 
         expect(expected.data).toEqual(page.data);
@@ -168,6 +171,7 @@ describe("MembersClient", () => {
         const rawResponseBody = {
             access_level: "no_access",
             account_id: "biz_xxxxxxxxxxxxxx",
+            buyer_account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             display_name: "Dana Whitfield",
             earnings_usd: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
@@ -349,6 +353,7 @@ describe("MembersClient", () => {
         const rawResponseBody = {
             access_level: "no_access",
             account_id: "biz_xxxxxxxxxxxxxx",
+            buyer_account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             display_name: "Dana Whitfield",
             earnings_usd: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
@@ -453,6 +458,7 @@ describe("MembersClient", () => {
         const rawResponseBody = {
             access_level: "no_access",
             account_id: "biz_xxxxxxxxxxxxxx",
+            buyer_account_id: "biz_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             display_name: "Dana Whitfield",
             earnings_usd: { last_24_hours: "0.00", last_30_days: "0.00", last_7_days: "0.00", lifetime: "0.00" },
