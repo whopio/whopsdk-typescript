@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface Invoice {
+    /** The account that sent the invoice. */
+    account: Whop.AccountSummary;
     account_id: string;
     amount_due: Whop.Money;
     billing_address: Whop.PaymentAddress | null;
@@ -25,6 +27,7 @@ export interface Invoice {
     membership_id: string | null;
     /** A note to the customer, shown on the invoice email, PDF, and checkout page with its line breaks kept. `null` when none is set. */
     memo: string | null;
+    /** Key-value pairs the seller stored on the invoice. Empty when the invoice is read without a credential. */
     metadata: Record<string, string>;
     number: string;
     object: Invoice.Object_;
