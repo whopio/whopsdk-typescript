@@ -40,6 +40,8 @@ export namespace PostPayoutMethodCreatedPayload {
         fee_structure: Data.FeeStructure | null;
         /** Payout method ID. */
         id: string;
+        /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
+        instant_unavailable_reason: Data.InstantUnavailableReason | null;
         /** Name of the bank or institution receiving payouts. */
         institution_name: string | null;
         /** Whether this method is a copy of one saved on another of the payer's accounts. */
@@ -106,6 +108,12 @@ export namespace PostPayoutMethodCreatedPayload {
             percentage: number;
         }
 
+        /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
+        export const InstantUnavailableReason = {
+            MinimumCryptoSalesNotMet: "minimum_crypto_sales_not_met",
+            NewPayoutMethodHold: "new_payout_method_hold",
+        } as const;
+        export type InstantUnavailableReason = (typeof InstantUnavailableReason)[keyof typeof InstantUnavailableReason];
         export const Object_ = {
             PayoutMethod: "payout_method",
         } as const;
@@ -123,7 +131,7 @@ export namespace PostPayoutMethodCreatedPayload {
             exchange_rate: number;
             /** Instant-delivery estimate. Null if the method does not support instant delivery, instant delivery is unavailable for the account, or the amount does not cover the fee. */
             instant: Quote.Instant | null;
-            /** Why instant delivery is unavailable for this method. `minimum_crypto_sales_not_met` means the account has not reached the total sales required for instant cryptocurrency payouts. `null` when this restriction does not apply. */
+            /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
             instant_unavailable_reason: Quote.InstantUnavailableReason | null;
             /** Maximum payout amount for this method, in the payout currency. */
             max_limit: number | null;
@@ -144,9 +152,10 @@ export namespace PostPayoutMethodCreatedPayload {
                 total_received: number;
             }
 
-            /** Why instant delivery is unavailable for this method. `minimum_crypto_sales_not_met` means the account has not reached the total sales required for instant cryptocurrency payouts. `null` when this restriction does not apply. */
+            /** Why instant delivery is unavailable. `new_payout_method_hold` means the payout method is within its initial instant delivery hold. `minimum_crypto_sales_not_met` means the account has not reached the sales requirement for instant cryptocurrency payouts. `null` means neither restriction applies. */
             export const InstantUnavailableReason = {
                 MinimumCryptoSalesNotMet: "minimum_crypto_sales_not_met",
+                NewPayoutMethodHold: "new_payout_method_hold",
             } as const;
             export type InstantUnavailableReason =
                 (typeof InstantUnavailableReason)[keyof typeof InstantUnavailableReason];
