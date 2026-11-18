@@ -39,6 +39,8 @@ export interface UpdatePreferencesRequest {
     feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
     /** Set it to `account` to make the account the merchant of record. Only some business categories can switch. The business must be verified. The switch cannot be undone. The response shows `pending` until approval. Checkout takes no payments until then. After the switch, the account accepts only card, Apple Pay, Google Pay and crypto payments. PayPal, buy now pay later and local payment methods stop. Requires the `payout:account:update` scope on your API key. */
     merchant_of_record?: UpdatePreferencesRequest.MerchantOfRecord;
+    /** Whether this account's active payment rules apply to future off-session charges, including renewals. Off by default. Requires the payment:manage scope on your API key. */
+    off_session_payment_rules?: boolean;
     /** Settle every new sale into this currency, regardless of the plan's currency or what the buyer paid in; sales converted this way carry an additional 0.5% FX fee. Pass `null` to go back to settling each sale in its plan's currency. Changing it never converts money already in your balances, and it can change at most once a day (see `preferred_settlement_currency_changeable_at`). Requires the `payout:account:update` scope on your API key. */
     preferred_settlement_currency?: UpdatePreferencesRequest.PreferredSettlementCurrency | null;
     /** Whether Whop emails members the day before their membership renews or their free trial converts. Set it to `false` to stop that reminder. Members still get the reminders card networks require. Requires the `company:update` scope on your API key. */
