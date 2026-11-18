@@ -168,7 +168,6 @@ export namespace Ad {
         Rejected: "rejected",
         InReview: "in_review",
         Draft: "draft",
-        CampaignPaused: "campaign_paused",
         Paused: "paused",
         Processing: "processing",
         ReviseContent: "revise_content",
