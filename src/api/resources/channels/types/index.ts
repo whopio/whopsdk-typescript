@@ -1,4 +1,5 @@
 export * from "./ListChannelsRequestDirection.js";
+export * from "./ListChannelsRequestIncludeMembers.js";
 export * from "./ListChannelsRequestKindItem.js";
 export * from "./ListChannelsRequestOrder.js";
 export * from "./ListChannelsRequestStatus.js";

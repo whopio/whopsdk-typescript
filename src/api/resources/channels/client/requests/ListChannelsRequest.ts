@@ -41,8 +41,8 @@ export interface ListChannelsRequest {
     requested?: boolean;
     /** The field to sort by. Defaults to `last_viewed_at` for community channels and `last_message_at` for private and support channels. Ties sort in a stable order. Cannot be supplied with updated_after. */
     order?: Whop.ListChannelsRequestOrder;
-    /** Include the current members of private and support channels, including you, with their public profiles. */
-    include_members?: boolean;
+    /** Members to include for private and support channels, with their public profiles. `current` includes current members. `current_and_deleted` also includes former members, marked with `deleted_at`. Omit or pass `null` to leave out members. */
+    include_members?: Whop.ListChannelsRequestIncludeMembers | null;
     /** Include the most recent message you can see, with its author. */
     include_last_message?: boolean;
     /** The sort direction. Defaults to `desc`. Cannot be supplied with updated_after. */

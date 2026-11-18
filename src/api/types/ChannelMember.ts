@@ -6,6 +6,8 @@ export interface ChannelMember {
     channel_id: string;
     /** When the stored channel membership was created, as an ISO 8601 timestamp. Null for users whose access does not have a stored membership. */
     created_at: string | null;
+    /** When the membership was removed, as an ISO 8601 timestamp. Null for current members and access-derived users. */
+    deleted_at: string | null;
     /** Stored membership ID, or null for access-derived users. */
     id: string | null;
     /** Your inbox state for a private channel. `null` for other users and other channel kinds. */

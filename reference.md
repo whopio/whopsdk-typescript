@@ -8409,7 +8409,7 @@ await client.cashbackRules.update({
 <dl>
 <dd>
 
-List or search the people in a channel.
+List or search the current members of a channel. Set include_deleted to true to include former members with a deleted_at timestamp.
 </dd>
 </dl>
 </dd>
@@ -9090,7 +9090,7 @@ await client.channels.update({
 <dl>
 <dd>
 
-Accept a direct-message request.
+Accept a direct-message request or restore a hidden conversation. Your membership must not have been removed.
 </dd>
 </dl>
 </dd>

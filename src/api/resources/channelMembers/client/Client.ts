@@ -29,7 +29,7 @@ export class ChannelMembersClient {
     }
 
     /**
-     * List or search the people in a channel.
+     * List or search the current members of a channel. Set include_deleted to true to include former members with a deleted_at timestamp.
      *
      * @param {Whop.ListChannelMembersRequest} request
      * @param {ChannelMembersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -52,7 +52,15 @@ export class ChannelMembersClient {
             async (
                 request: Whop.ListChannelMembersRequest,
             ): Promise<core.WithRawResponse<Whop.ListChannelMembersResponse>> => {
-                const { first, after, last, before, channel_id: channelId, query } = request;
+                const {
+                    first,
+                    after,
+                    last,
+                    before,
+                    channel_id: channelId,
+                    query,
+                    include_deleted: includeDeleted,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     first,
                     after,
@@ -60,6 +68,7 @@ export class ChannelMembersClient {
                     before,
                     channel_id: channelId,
                     query,
+                    include_deleted: includeDeleted,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -67,7 +76,7 @@ export class ChannelMembersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -164,7 +173,7 @@ export class ChannelMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -242,7 +251,7 @@ export class ChannelMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -315,7 +324,7 @@ export class ChannelMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -389,7 +398,7 @@ export class ChannelMembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
