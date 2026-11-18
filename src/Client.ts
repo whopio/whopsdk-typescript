@@ -80,6 +80,7 @@ import { ProductAffiliatesClient } from "./api/resources/productAffiliates/clien
 import { ProductsClient } from "./api/resources/products/client/Client.js";
 import { PromoCodesClient } from "./api/resources/promoCodes/client/Client.js";
 import { ReactionsClient } from "./api/resources/reactions/client/Client.js";
+import { RecommendedActionsClient } from "./api/resources/recommendedActions/client/Client.js";
 import { RefundsClient } from "./api/resources/refunds/client/Client.js";
 import { ResolutionCenterCasesClient } from "./api/resources/resolutionCenterCases/client/Client.js";
 import { ReviewReportsClient } from "./api/resources/reviewReports/client/Client.js";
@@ -191,6 +192,7 @@ export class WhopClient {
     protected _products: ProductsClient | undefined;
     protected _promoCodes: PromoCodesClient | undefined;
     protected _reactions: ReactionsClient | undefined;
+    protected _recommendedActions: RecommendedActionsClient | undefined;
     protected _refunds: RefundsClient | undefined;
     protected _resolutionCenterCases: ResolutionCenterCasesClient | undefined;
     protected _reviewReports: ReviewReportsClient | undefined;
@@ -532,6 +534,10 @@ export class WhopClient {
 
     public get reactions(): ReactionsClient {
         return (this._reactions ??= new ReactionsClient(this._options));
+    }
+
+    public get recommendedActions(): RecommendedActionsClient {
+        return (this._recommendedActions ??= new RecommendedActionsClient(this._options));
     }
 
     public get refunds(): RefundsClient {
