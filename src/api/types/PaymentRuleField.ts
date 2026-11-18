@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface PaymentRuleField {
+    actions: PaymentRuleField.Actions.Item[];
     /** The payment attribute this condition reads. */
     field: PaymentRuleField.Field;
     /** The largest value this field accepts, or `null` when the field is not numeric. */
@@ -11,11 +12,26 @@ export interface PaymentRuleField {
     minimum: number | null;
     operators: PaymentRuleField.Operators.Item[];
     options: Whop.PaymentRuleFieldOption[] | null;
+    /** When a rule on this field runs. An `after_authorization` field reads the bank's answer, so its rule runs after the bank authorizes the card. A rule cannot mix fields from both stages. */
+    stage: PaymentRuleField.Stage;
     /** The type of value this field compares against. */
     type: PaymentRuleField.Type;
 }
 
 export namespace PaymentRuleField {
+    export type Actions = Actions.Item[];
+
+    export namespace Actions {
+        /** The actions a rule that reads this field can take. */
+        export const Item = {
+            Allow: "allow",
+            Block: "block",
+            Review: "review",
+            Enforce3Ds: "enforce_3ds",
+        } as const;
+        export type Item = (typeof Item)[keyof typeof Item];
+    }
+
     /** The payment attribute this condition reads. */
     export const Field = {
         RiskScore: "risk_score",
@@ -31,8 +47,7 @@ export namespace PaymentRuleField {
         EmailDomain: "email_domain",
         IpAddress: "ip_address",
         IpCountry: "ip_country",
-        PostalCodeCheck: "postal_code_check",
-        AddressLine1Check: "address_line1_check",
+        AvsCheck: "avs_check",
         CvvCheck: "cvv_check",
     } as const;
     export type Field = (typeof Field)[keyof typeof Field];
@@ -57,6 +72,12 @@ export namespace PaymentRuleField {
         export type Item = (typeof Item)[keyof typeof Item];
     }
 
+    /** When a rule on this field runs. An `after_authorization` field reads the bank's answer, so its rule runs after the bank authorizes the card. A rule cannot mix fields from both stages. */
+    export const Stage = {
+        BeforeAuthorization: "before_authorization",
+        AfterAuthorization: "after_authorization",
+    } as const;
+    export type Stage = (typeof Stage)[keyof typeof Stage];
     /** The type of value this field compares against. */
     export const Type = {
         Integer: "integer",

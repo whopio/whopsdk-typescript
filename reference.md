@@ -22646,7 +22646,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`.
+Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`. A rule on a bank check field applies after the bank authorizes the card.
 </dd>
 </dl>
 </dd>
@@ -22707,7 +22707,7 @@ await client.paymentRules.create({
 </dl>
 </details>
 
-<details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">listFields</a>() -> Whop.ListFieldsPaymentRulesResponse</code></summary>
+<details><summary><code>client.paymentRules.<a href="/src/api/resources/paymentRules/client/Client.ts">listFields</a>({ ...params }) -> Whop.ListFieldsPaymentRulesResponse</code></summary>
 <dl>
 <dd>
 
@@ -22746,6 +22746,14 @@ await client.paymentRules.listFields();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListFieldsPaymentRulesRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>

@@ -17,7 +17,7 @@ export declare namespace PaymentRulesClient {
 }
 
 /**
- * A Payment Rule lets an account act on its own payments before they reach the bank: block them, let them through, send them to review, or ask the buyer for 3D Secure. Each rule matches on a small set of payment attributes, and every condition must hold for it to apply.
+ * A Payment Rule lets an account block, allow, review, or challenge its own payments, including payments that fail a CVV or billing address check. A challenge asks the buyer for 3D Secure. Most rules run before the payment reaches the bank. A rule on the bank's CVV check or address verification (AVS) check runs after the bank authorizes the card. Each rule matches on a small set of payment attributes, and every condition must hold for it to apply.
  *
  * A rule's definition is fixed once created, so the payments it decided keep naming the rule that decided them. Use [Replace](/api-reference/payment-rules/replace-a-payment-rule) to change one, and [List fields](/api-reference/payment-rules/list-fields) for the attributes, operators and values a condition can use.
  */
@@ -130,7 +130,7 @@ export class PaymentRulesClient {
     }
 
     /**
-     * Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`.
+     * Creates a payment rule. It is created `active` and applies its `action` to new payments that match all of its `conditions`. A rule on a bank check field applies after the bank authorizes the card.
      *
      * @param {Whop.CreatePaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -221,6 +221,7 @@ export class PaymentRulesClient {
     /**
      * Lists the payment attributes a rule condition can read, with the operators and values each one accepts. Small and returned in full on one page.
      *
+     * @param {Whop.ListFieldsPaymentRulesRequest} request
      * @param {PaymentRulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link errors.WhopError}
@@ -230,14 +231,20 @@ export class PaymentRulesClient {
      *     await client.paymentRules.listFields()
      */
     public listFields(
+        request: Whop.ListFieldsPaymentRulesRequest = {},
         requestOptions?: PaymentRulesClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.ListFieldsPaymentRulesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listFields(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__listFields(request, requestOptions));
     }
 
     private async __listFields(
+        request: Whop.ListFieldsPaymentRulesRequest = {},
         requestOptions?: PaymentRulesClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ListFieldsPaymentRulesResponse>> {
+        const { account_id: accountId } = request;
+        const _queryParams: Record<string, unknown> = {
+            account_id: accountId,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -257,7 +264,11 @@ export class PaymentRulesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

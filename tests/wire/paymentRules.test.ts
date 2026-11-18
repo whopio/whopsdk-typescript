@@ -295,11 +295,13 @@ describe("PaymentRulesClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    actions: ["allow"],
                     field: "risk_score",
                     maximum: 100,
                     minimum: 0,
                     operators: ["eq"],
                     options: [{ label: "Abkhazia", value: "AB" }],
+                    stage: "before_authorization",
                     type: "integer",
                 },
             ],

@@ -2,6 +2,7 @@ export type { ActivatePaymentRulesRequest } from "./ActivatePaymentRulesRequest.
 export { CreatePaymentRulesRequest } from "./CreatePaymentRulesRequest.js";
 export type { DeactivatePaymentRulesRequest } from "./DeactivatePaymentRulesRequest.js";
 export type { DeletePaymentRulesRequest } from "./DeletePaymentRulesRequest.js";
+export type { ListFieldsPaymentRulesRequest } from "./ListFieldsPaymentRulesRequest.js";
 export type { ListPaymentRulesRequest } from "./ListPaymentRulesRequest.js";
 export { ReplacePaymentRulesRequest } from "./ReplacePaymentRulesRequest.js";
 export type { RetrievePaymentRulesRequest } from "./RetrievePaymentRulesRequest.js";
