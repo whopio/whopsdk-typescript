@@ -4,12 +4,15 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         product_ids: ["prod_xxxxxxxxxxxxx"],
+ *         payment_id: ["pay_xxxxxxxxxxxxxx"]
+ *     }
  */
 export interface ListResolutionCenterCasesRequest {
     /** Only cases filed against this account (`biz_` tag). With read access to the account this lists its whole queue; without, only the cases you opened against it. */
     account_id?: string;
-    /** Only cases opened by this customer — a `user_` tag, or `me` for the calling user. It narrows what you can already read, so `me` lists the cases you opened without the ones on accounts you are a team member of. */
+    /** Only cases opened by this customer: a `user_` tag, or `me` for the calling user. It narrows what you can already read, so `me` lists the cases you opened without the ones on accounts you are a team member of. */
     user_id?: string;
     /** Number of results to return from the start of the range. */
     first?: number;
@@ -23,7 +26,7 @@ export interface ListResolutionCenterCasesRequest {
     order?: Whop.ListResolutionCenterCasesRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListResolutionCenterCasesRequestDirection;
-    /** Only cases in these statuses. Repeat the parameter to pass several — one paginated list covers all of them. */
+    /** Only cases in these statuses. Repeat the parameter to pass several. One paginated list covers all of them. */
     status?: Whop.ListResolutionCenterCasesRequestStatusItem | Whop.ListResolutionCenterCasesRequestStatusItem[];
     /** Only cases opened for these reasons. Repeat the parameter to pass several. */
     reason?: Whop.ListResolutionCenterCasesRequestReasonItem | Whop.ListResolutionCenterCasesRequestReasonItem[];
@@ -33,4 +36,14 @@ export interface ListResolutionCenterCasesRequest {
     created_before?: string;
     /** Only cases created after this ISO 8601 timestamp. */
     created_after?: string;
+    /** Only cases about a payment for these products, each prefixed `prod_`. A case matches when any item on its payment is one of them. Repeat the parameter to pass several. */
+    product_ids?: string | string[];
+    /** Only cases opened on these payments, each prefixed `pay_`. Repeat the parameter to pass several. */
+    payment_id?: string | string[];
+    /** Only cases about a payment made with one of these methods. Takes card brands such as `amex`, wallets such as `apple_pay`, and types such as `paypal`. Repeat the parameter to pass several. */
+    payment_methods?:
+        | Whop.ListResolutionCenterCasesRequestPaymentMethodsItem
+        | Whop.ListResolutionCenterCasesRequestPaymentMethodsItem[];
+    /** Search cases by case ID, payment ID, user ID, membership ID, user email, name, or username. Email search requires the member:email:read permission. */
+    query?: string;
 }

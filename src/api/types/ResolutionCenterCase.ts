@@ -10,6 +10,8 @@ export interface ResolutionCenterCase {
     available_actions: ResolutionCenterCase.AvailableActions.Item[];
     /** The customer who opened the case. */
     buyer: Whop.ResolutionBuyer;
+    /** When the case closed, as an ISO 8601 timestamp. `null` while the case is open, and on older closed cases that predate this being recorded. */
+    closed_at: string | null;
     /** When the case was opened, as an ISO 8601 timestamp. */
     created_at: string;
     /** Three-letter ISO currency code of the amount. */

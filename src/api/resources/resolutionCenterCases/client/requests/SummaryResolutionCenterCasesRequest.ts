@@ -4,14 +4,17 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         product_ids: ["prod_xxxxxxxxxxxxx"],
+ *         payment_id: ["pay_xxxxxxxxxxxxxx"]
+ *     }
  */
 export interface SummaryResolutionCenterCasesRequest {
     /** Which breakdowns to return, keyed by these names under `groups`. Repeat the parameter to ask for several; omit it for all of them. */
     groups?: Whop.SummaryResolutionCenterCasesRequestGroupsItem | Whop.SummaryResolutionCenterCasesRequestGroupsItem[];
     /** The account to summarize cases for (`biz_` tag). */
     account_id?: string;
-    /** Only cases opened by this customer — a `user_` tag, or `me` for the calling user. */
+    /** Only cases opened by this customer: a `user_` tag, or `me` for the calling user. */
     user_id?: string;
     /** Only cases in these statuses. */
     status?: Whop.SummaryResolutionCenterCasesRequestStatusItem | Whop.SummaryResolutionCenterCasesRequestStatusItem[];
@@ -25,4 +28,14 @@ export interface SummaryResolutionCenterCasesRequest {
     created_before?: string;
     /** Only count cases created after this ISO 8601 timestamp. */
     created_after?: string;
+    /** Only count cases about a payment for these products, each prefixed `prod_`. Repeat the parameter to pass several. */
+    product_ids?: string | string[];
+    /** Only count cases opened on these payments, each prefixed `pay_`. Repeat the parameter to pass several. */
+    payment_id?: string | string[];
+    /** Only count cases about a payment paid with any of these methods. Repeat the parameter to pass several. */
+    payment_methods?:
+        | Whop.SummaryResolutionCenterCasesRequestPaymentMethodsItem
+        | Whop.SummaryResolutionCenterCasesRequestPaymentMethodsItem[];
+    /** Only count cases that match this search, as on the list. */
+    query?: string;
 }

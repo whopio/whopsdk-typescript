@@ -29,7 +29,7 @@ export class ResolutionCenterCasesClient {
     }
 
     /**
-     * Lists resolution center cases. Without `account_id` you get every case you can read — the ones you opened as a buyer and every account you are a team member of; the filters narrow that list.
+     * Lists resolution center cases. Without `account_id` you get every case you can read: cases you opened as a buyer, and cases on accounts where you are on the team. The filters narrow that list.
      *
      * @param {Whop.ListResolutionCenterCasesRequest} request
      * @param {ResolutionCenterCasesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -41,7 +41,10 @@ export class ResolutionCenterCasesClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.resolutionCenterCases.list()
+     *     await client.resolutionCenterCases.list({
+     *         product_ids: ["prod_xxxxxxxxxxxxx"],
+     *         payment_id: ["pay_xxxxxxxxxxxxxx"]
+     *     })
      */
     public async list(
         request: Whop.ListResolutionCenterCasesRequest = {},
@@ -65,6 +68,10 @@ export class ResolutionCenterCasesClient {
                     outcome,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    product_ids: productIds,
+                    payment_id: paymentId,
+                    payment_methods: paymentMethods,
+                    query,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -84,6 +91,14 @@ export class ResolutionCenterCasesClient {
                           : undefined,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    product_ids: productIds,
+                    payment_id: paymentId,
+                    payment_methods: Array.isArray(paymentMethods)
+                        ? paymentMethods.map((item) => item)
+                        : paymentMethods != null
+                          ? paymentMethods
+                          : undefined,
+                    query,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -254,7 +269,10 @@ export class ResolutionCenterCasesClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.resolutionCenterCases.summary()
+     *     await client.resolutionCenterCases.summary({
+     *         product_ids: ["prod_xxxxxxxxxxxxx"],
+     *         payment_id: ["pay_xxxxxxxxxxxxxx"]
+     *     })
      */
     public summary(
         request: Whop.SummaryResolutionCenterCasesRequest = {},
@@ -276,6 +294,10 @@ export class ResolutionCenterCasesClient {
             outcome,
             created_before: createdBefore,
             created_after: createdAfter,
+            product_ids: productIds,
+            payment_id: paymentId,
+            payment_methods: paymentMethods,
+            query,
         } = request;
         const _queryParams: Record<string, unknown> = {
             groups: Array.isArray(groups) ? groups.map((item) => item) : groups != null ? groups : undefined,
@@ -286,6 +308,14 @@ export class ResolutionCenterCasesClient {
             outcome: Array.isArray(outcome) ? outcome.map((item) => item) : outcome != null ? outcome : undefined,
             created_before: createdBefore,
             created_after: createdAfter,
+            product_ids: productIds,
+            payment_id: paymentId,
+            payment_methods: Array.isArray(paymentMethods)
+                ? paymentMethods.map((item) => item)
+                : paymentMethods != null
+                  ? paymentMethods
+                  : undefined,
+            query,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -982,7 +1012,7 @@ export class ResolutionCenterCasesClient {
         request: Whop.WithdrawResolutionCenterCasesRequest,
         requestOptions?: ResolutionCenterCasesClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ResolutionCenterCase>> {
-        const { id } = request;
+        const { id, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1002,7 +1032,10 @@ export class ResolutionCenterCasesClient {
             ),
             method: "POST",
             headers: _headers,
+            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
