@@ -159,6 +159,7 @@ export * from "./CaptureSpecVideo.js";
 export * from "./CardBrands.js";
 export * from "./CardFundingTypes.js";
 export * from "./CardIssuingTransactionStatus.js";
+export * from "./CardSurchargePreferences.js";
 export * from "./CardTransaction.js";
 export * from "./CardTransactionLegacy.js";
 export * from "./CardTransactionListItem.js";

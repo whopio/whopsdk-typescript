@@ -15,6 +15,8 @@ export interface AccountPreferences {
     ads_triple_whale_integration: Record<string, unknown>;
     /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
     cancellation_emails: boolean;
+    /** The card surcharge a point of sale adds to credit card payments. Debit and prepaid cards never pay it. */
+    card_surcharge: Whop.CardSurchargePreferences;
     /** Whether incoming funds are automatically moved to the account's cards balance. `false` when the account has no cards balance. */
     cards_auto_top_up: boolean;
     /** Whether Whop Card notifications reach this account's team. `true` by default, including when the account has no cards balance. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. */
