@@ -5,8 +5,18 @@ export interface UserPreferences {
     bounty_worker_onboarding_dismissed: boolean;
     /** Whether incoming funds, including pending balance, are automatically moved to the user's personal cards balance. `false` when the user has no cards balance. */
     cards_auto_top_up: boolean;
+    /** Whether to show the user's earnings on their profile. */
+    show_earnings: boolean;
+    /** Whether to show the whops the user joined on their profile. */
+    show_joined_whops: boolean;
     /** Whether other people can see the user's Whop Level. Set to `false` to hide it. */
     show_level: boolean;
+    /** Whether to show the user's location on their profile. */
+    show_location: boolean;
+    /** Whether to show the whops the user owns on their profile. */
+    show_owned_whops: boolean;
+    /** Whether to show the user's ranking on their profile. */
+    show_user_ranking: boolean;
     /** Whether the user has accepted Whop's terms and policies. `false` until recorded via `PATCH` with `terms_accepted: true`. */
     terms_accepted: boolean;
     /** When the user most recently accepted Whop's terms and policies, as an ISO 8601 timestamp. `null` until accepted. */
