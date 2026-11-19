@@ -161,6 +161,7 @@ describe("DirectClient", () => {
             status: "draft",
             substatus: "succeeded",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            surcharge: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
             tax_refunded_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },

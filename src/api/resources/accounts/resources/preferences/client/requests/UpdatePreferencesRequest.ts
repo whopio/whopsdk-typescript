@@ -19,6 +19,8 @@ export interface UpdatePreferencesRequest {
     ads_triple_whale_integration?: UpdatePreferencesRequest.AdsTripleWhaleIntegration;
     /** Whether Whop emails members when their membership is canceled or terminated. Set it to `false` to stop these emails while keeping the account's other customer emails. Requires the `company:update` scope on your API key. */
     cancellation_emails?: boolean;
+    /** The card surcharge a point of sale adds to credit card payments, replaced as a whole. You can always turn it off. You can turn it on only when `card_surcharge.maximum_percentage` is not null. Requires the `company:update` scope on your API key. */
+    card_surcharge?: UpdatePreferencesRequest.CardSurcharge;
     /** Whether incoming funds are automatically moved to the account's cards balance. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
     cards_auto_top_up?: boolean;
     /** Whether Whop Card notifications reach this account's team. Set it to `false` to stop every card email and push notification for the account — application status, verification and action-required alerts, card-ready alerts, declines, large charges, and cashback summaries. Cardholder onboarding invitations still send, because they carry the only link an invited cardholder can onboard with. Requesting a card is rejected while notifications are off, since the request reaches nobody. Cards on personal accounts are unaffected. Requires a cards balance on the account and the `payout:account:update` scope on your API key. */
@@ -110,6 +112,16 @@ export namespace UpdatePreferencesRequest {
         api_key?: (string | null) | undefined;
         /** The exact shop domain configured in Triple Whale's Settings → Store (for Shopify this is the `.myshopify.com` domain; for a custom sales platform it's whatever domain Triple Whale assigned when the shop was set up there). A leading `https://` and trailing `/` are stripped, and what remains must be a bare hostname with no path or spaces. Validated against Triple Whale — the API key must have access to it — before it is stored. Changing it on a connected integration backfills the account's ad spend onto the new shop. Omit to keep the stored domain; there is no way to clear a stored value, only to overwrite it with a new domain. */
         shop_domain?: string | undefined;
+    }
+
+    /**
+     * The card surcharge a point of sale adds to credit card payments, replaced as a whole. You can always turn it off. You can turn it on only when `card_surcharge.maximum_percentage` is not null. Requires the `company:update` scope on your API key.
+     */
+    export interface CardSurcharge {
+        /** Whether credit card payments with `apply_surcharge` add the surcharge. */
+        enabled: boolean;
+        /** The surcharge as a percentage, such as `3` for 3%. Greater than 0, with at most 2 decimal places, and at most `maximum_percentage`. Required when `enabled` is true. Turning the surcharge off clears it. */
+        percentage?: (number | null) | undefined;
     }
 
     /**

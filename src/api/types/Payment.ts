@@ -121,6 +121,8 @@ export interface Payment {
     substatus: Whop.FriendlyReceiptStatus;
     /** The price before discounts, tax and fees. */
     subtotal: Whop.Money | null;
+    /** The card surcharge the buyer pays for paying by credit card. It is included in `total` and `amount_charged`, and appears in `line_items` as a line of its own. Null when the payment has no surcharge. */
+    surcharge: Whop.Money | null;
     /** The sales tax or VAT collected. Null when no tax applied. */
     tax_amount: Whop.Money | null;
     /** Whether `tax_amount` was added on top of the price (`exclusive`) or was already inside it (`inclusive`). */
