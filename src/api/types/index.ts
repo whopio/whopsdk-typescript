@@ -496,6 +496,7 @@ export * from "./ReceiptV2Order.js";
 export * from "./RecommendedAction.js";
 export * from "./RecommendedActionChangedResource.js";
 export * from "./RecommendedActionPreview.js";
+export * from "./RecommendedActionStat.js";
 export * from "./RecommendedActionWebsiteAbTestPreview.js";
 export * from "./RecommendedActionWebsiteChangePreview.js";
 export * from "./RecommendedActionWorkflow.js";

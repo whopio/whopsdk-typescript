@@ -7,6 +7,8 @@ export interface RecommendedAction {
     account_id: string;
     /** When the action was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** The experiment measuring the action's outcome, prefixed `expt_`. `null` when there is none. */
+    experiment_id: string | null;
     /** Recommended action ID, prefixed `reca_`. */
     id: string;
     /** The website change the action makes when it runs. `type` picks the shape. New types can be added, so skip a preview whose `type` you do not know. `null` while the action is `preparing`, or when the action does not change a website. */
@@ -21,6 +23,7 @@ export interface RecommendedAction {
     run_started_at: string | null;
     /** Where the action is. `preparing` while its work is built, and it cannot run yet. `ready` when it can run. `running` while its steps are sent. `executed` when every step succeeded. `failed` when the run ended before every step succeeded. `dismissed` when the owner chose not to run it. `superseded` when Whop retired it, such as for a newer action. */
     status: RecommendedAction.Status;
+    target_stats: Whop.RecommendedActionStat[];
     /** What the action does, written for the account owner. */
     title: string;
     /** What kind of change the action makes. New values can be added, so skip an action whose type you do not know. */
