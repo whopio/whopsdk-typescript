@@ -3,6 +3,7 @@
 export const ListRecommendedActionsRequestOrder = {
     CreatedAt: "created_at",
     RunStartedAt: "run_started_at",
+    Lift: "lift",
 } as const;
 export type ListRecommendedActionsRequestOrder =
     (typeof ListRecommendedActionsRequestOrder)[keyof typeof ListRecommendedActionsRequestOrder];
