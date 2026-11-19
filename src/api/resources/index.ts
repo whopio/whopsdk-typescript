@@ -267,6 +267,8 @@ export * from "./socialAccounts/types/index.js";
 export * from "./stats/client/requests/index.js";
 export * as stats from "./stats/index.js";
 export * from "./stats/types/index.js";
+export * from "./suspensionAppeals/client/requests/index.js";
+export * as suspensionAppeals from "./suspensionAppeals/index.js";
 export * from "./swaps/client/requests/index.js";
 export * as swaps from "./swaps/index.js";
 export * from "./swaps/types/index.js";

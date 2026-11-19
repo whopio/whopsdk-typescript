@@ -29234,6 +29234,140 @@ await client.stats.retrieve({
 </dl>
 </details>
 
+## SuspensionAppeals
+<details><summary><code>client.suspensionAppeals.<a href="/src/api/resources/suspensionAppeals/client/Client.ts">create</a>({ ...params }) -> Whop.SuspensionAppeal</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submits an appeal for one direct subaccount using a platform account API key with company:suspend_child. First retrieve the appeal context and copy its account IDs and suspension timestamps into the submission. Submitting accepts the declaration returned by the context. Provide written business answers or a private video uploaded through POST /files with the same platform account. Supporting files must also be private and uploaded by that platform. One appeal is accepted per suspension. Submission does not reinstate the account. Use Idempotency-Key to safely retry, and retrieve the context to check the decision.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.suspensionAppeals.create({
+    suspension_appeal_submission: {
+        accounts: [{
+                id: "biz_xxxxxxxxxxxxxx",
+                suspended_at: "2026-01-01T12:00:00.000Z"
+            }]
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateSuspensionAppealsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SuspensionAppealsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.suspensionAppeals.<a href="/src/api/resources/suspensionAppeals/client/Client.ts">context</a>({ ...params }) -> Whop.SuspensionAppealContext</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns appeal eligibility, the declaration accepted on submission, and optional fulfillment evidence requests for a direct subaccount. Requires a platform account API key with company:suspend_child and account_id. Only the requested subaccount is included. After submission, use this endpoint to read the appeal status and decision.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.suspensionAppeals.context();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ContextSuspensionAppealsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SuspensionAppealsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Swaps
 <details><summary><code>client.swaps.<a href="/src/api/resources/swaps/client/Client.ts">list</a>({ ...params }) -> Whop.ListSwapsResponse</code></summary>
 <dl>

@@ -90,6 +90,7 @@ import { SetupIntentsClient } from "./api/resources/setupIntents/client/Client.j
 import { ShipmentsClient } from "./api/resources/shipments/client/Client.js";
 import { SocialAccountsClient } from "./api/resources/socialAccounts/client/Client.js";
 import { StatsClient } from "./api/resources/stats/client/Client.js";
+import { SuspensionAppealsClient } from "./api/resources/suspensionAppeals/client/Client.js";
 import { SwapsClient } from "./api/resources/swaps/client/Client.js";
 import { TeamMembersClient } from "./api/resources/teamMembers/client/Client.js";
 import { TradesClient } from "./api/resources/trades/client/Client.js";
@@ -202,6 +203,7 @@ export class WhopClient {
     protected _shipments: ShipmentsClient | undefined;
     protected _socialAccounts: SocialAccountsClient | undefined;
     protected _stats: StatsClient | undefined;
+    protected _suspensionAppeals: SuspensionAppealsClient | undefined;
     protected _swaps: SwapsClient | undefined;
     protected _teamMembers: TeamMembersClient | undefined;
     protected _trades: TradesClient | undefined;
@@ -574,6 +576,10 @@ export class WhopClient {
 
     public get stats(): StatsClient {
         return (this._stats ??= new StatsClient(this._options));
+    }
+
+    public get suspensionAppeals(): SuspensionAppealsClient {
+        return (this._suspensionAppeals ??= new SuspensionAppealsClient(this._options));
     }
 
     public get swaps(): SwapsClient {
