@@ -9,8 +9,6 @@ export interface UpdatePreferencesRequest {
     bounty_worker_onboarding_dismissed?: boolean;
     /** Whether incoming funds, including pending balance, are automatically moved to the user's personal cards balance. Requires a cards balance and the `payout:account:update` permission. */
     cards_auto_top_up?: boolean;
-    /** Whether to show the user's earnings on their profile. */
-    show_earnings?: boolean;
     /** Whether to show the whops the user joined on their profile. */
     show_joined_whops?: boolean;
     /** Whether other people can see the user's Whop Level. Set to `false` to hide it. */

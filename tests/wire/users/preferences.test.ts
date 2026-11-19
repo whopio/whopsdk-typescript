@@ -18,7 +18,6 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
-            show_earnings: true,
             show_joined_whops: true,
             show_level: true,
             show_location: true,
@@ -78,7 +77,6 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
-            show_earnings: true,
             show_joined_whops: true,
             show_level: true,
             show_location: true,
