@@ -22,6 +22,8 @@ export interface CreateVerificationsResponse {
     first_name?: (string | null) | undefined;
     /** Verification profile ID, prefixed `idpf_`. */
     id?: string | undefined;
+    /** Identity document on file for the person. Individual verifications only. `null` until the person sends a document. */
+    identity_document?: (CreateVerificationsResponse.IdentityDocument | null) | undefined;
     /** Date the business was incorporated, formatted as `YYYY-MM-DD`, as on file for the business verification. Business verifications only; `null` until it is sent. */
     incorporation_date?: (string | null) | undefined;
     kind?: CreateVerificationsResponse.Kind | undefined;
@@ -38,6 +40,8 @@ export interface CreateVerificationsResponse {
     requested_information?: CreateVerificationsResponse.RequestedInformation.Item[] | undefined;
     /** Documents for a document-upload verification and their progress. Present only on individual verifications created by sending `documents`. `pending_upload` documents were not accepted yet — send the full set again with another Create Verification call. */
     required_documents?: CreateVerificationsResponse.RequiredDocuments.Item[] | undefined;
+    /** Selfie check of the person. Individual verifications only. `null` when the verification has no selfie check. */
+    selfie?: (CreateVerificationsResponse.Selfie | null) | undefined;
     /** Hosted verification session URL for the user to complete identity checks. Expires 7 days after creation. */
     session_url?: (string | null) | undefined;
     /** Current verification state. `not_started` before any session exists; `pending` while a session needs the user's input; `processing` while the provider's automated checks run on a fresh submission; `action_required` when `requested_information` needs answers; `manual_review` while information already sent is under review — an audit answer, or a document the payout provider holds — nothing to submit, usually done within 3 business days; `approved` on success; `rejected` on failure. Call Create Verification again to start a new session. */
@@ -62,6 +66,36 @@ export namespace CreateVerificationsResponse {
         postal_code?: (string | null) | undefined;
         /** State, province, or region code, for example `CA`. */
         state?: (string | null) | undefined;
+    }
+
+    /**
+     * Identity document on file for the person. Individual verifications only. `null` until the person sends a document.
+     */
+    export interface IdentityDocument {
+        /** Two-letter ISO 3166-1 code of the country that issued the document. */
+        country: string | null;
+        /** Review result of the document. `pending` until the review ends. */
+        status: IdentityDocument.Status;
+        /** Kind of identity document. */
+        type: IdentityDocument.Type;
+    }
+
+    export namespace IdentityDocument {
+        /** Review result of the document. `pending` until the review ends. */
+        export const Status = {
+            Pending: "pending",
+            Approved: "approved",
+            Rejected: "rejected",
+        } as const;
+        export type Status = (typeof Status)[keyof typeof Status];
+        /** Kind of identity document. */
+        export const Type = {
+            IdCard: "id_card",
+            Drivers: "drivers",
+            ResidencePermit: "residence_permit",
+            Passport: "passport",
+        } as const;
+        export type Type = (typeof Type)[keyof typeof Type];
     }
 
     export const Kind = {
@@ -244,6 +278,32 @@ export namespace CreateVerificationsResponse {
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
         }
+    }
+
+    /**
+     * Selfie check of the person. Individual verifications only. `null` when the verification has no selfie check.
+     */
+    export interface Selfie {
+        /** How the selfie is taken. `liveness` is a live camera check. `upload` is a photo sent as a file. */
+        capture: Selfie.Capture;
+        /** Review result of the selfie check. `pending` until the review ends. */
+        status: Selfie.Status;
+    }
+
+    export namespace Selfie {
+        /** How the selfie is taken. `liveness` is a live camera check. `upload` is a photo sent as a file. */
+        export const Capture = {
+            Upload: "upload",
+            Liveness: "liveness",
+        } as const;
+        export type Capture = (typeof Capture)[keyof typeof Capture];
+        /** Review result of the selfie check. `pending` until the review ends. */
+        export const Status = {
+            Pending: "pending",
+            Approved: "approved",
+            Rejected: "rejected",
+        } as const;
+        export type Status = (typeof Status)[keyof typeof Status];
     }
 
     /** Current verification state. `not_started` before any session exists; `pending` while a session needs the user's input; `processing` while the provider's automated checks run on a fresh submission; `action_required` when `requested_information` needs answers; `manual_review` while information already sent is under review — an audit answer, or a document the payout provider holds — nothing to submit, usually done within 3 business days; `approved` on success; `rejected` on failure. Call Create Verification again to start a new session. */
