@@ -53,7 +53,19 @@ export namespace CourseStudent {
         id: string;
         /** The user's display name shown on their public profile. */
         name: string | null;
+        /** The user's profile picture attachment with URL, content type, and file metadata. Null if using a legacy profile picture. */
+        profile_picture: User.ProfilePicture | null;
         /** The user's unique username shown on their public profile. */
         username: string;
+    }
+
+    export namespace User {
+        /**
+         * The user's profile picture attachment with URL, content type, and file metadata. Null if using a legacy profile picture.
+         */
+        export interface ProfilePicture {
+            /** A pre-optimized URL for rendering this attachment on the client. This should be used for displaying attachments in apps. */
+            url: string | null;
+        }
     }
 }

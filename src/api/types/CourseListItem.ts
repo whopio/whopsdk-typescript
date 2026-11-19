@@ -18,6 +18,8 @@ export interface CourseListItem {
     created_at: string;
     /** A brief summary of the course content and objectives. Null if no description has been set. */
     description: string | null;
+    /** The parent experience that this course belongs to. */
+    experience: CourseListItem.Experience;
     /** The unique identifier for the course. */
     id: string;
     /** The spoken language of the video content, used to generate accurate closed captions. One of: en, es, it, pt, de, fr, pl, ru, nl, ca, tr, sv, uk, no, fi, sk, el, cs, hr, da, ro, bg. */
@@ -51,6 +53,14 @@ export interface CourseListItem {
 }
 
 export namespace CourseListItem {
+    /**
+     * The parent experience that this course belongs to.
+     */
+    export interface Experience {
+        /** The unique identifier for the experience. */
+        id: string;
+    }
+
     /**
      * The lesson the current user should continue from: their first incomplete lesson, or the first lesson when they have finished the course, have not started it, or can edit it. Null if the course has no lessons.
      */

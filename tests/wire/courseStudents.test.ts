@@ -24,7 +24,12 @@ describe("CourseStudentsClient", () => {
                     id: "id",
                     last_interaction_at: "2023-12-01T05:00:00Z",
                     total_lessons_count: 42,
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    user: {
+                        id: "user_xxxxxxxxxxxxx",
+                        name: "John Doe",
+                        profile_picture: { url: "https://media.whop.com/abc123/optimized.jpg" },
+                        username: "johndoe42",
+                    },
                 },
             ],
             page_info: {
@@ -225,7 +230,12 @@ describe("CourseStudentsClient", () => {
             id: "id",
             last_interaction_at: "2023-12-01T05:00:00Z",
             total_lessons_count: 42,
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: {
+                id: "user_xxxxxxxxxxxxx",
+                name: "John Doe",
+                profile_picture: { url: "https://media.whop.com/abc123/optimized.jpg" },
+                username: "johndoe42",
+            },
         };
 
         server
