@@ -361,6 +361,225 @@ describe("RecommendedActionsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("update (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}] } };
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            id: "reca_xxxxxxxxxxxxxx",
+            preview: {
+                type: "website_ab_test",
+                app_id: "app_xxxxxxxxxxxxxx",
+                base_build_id: "apbu_xxxxxxxxxxxxxx",
+                changed_resources: [{ id: "id", object: "variant" }],
+                draft_build_id: "apbu_xxxxxxxxxxxxxx",
+                page_paths: ["/"],
+                traffic_percent: 50,
+            },
+            reasoning:
+                "Visitors who reach your pricing section buy, but most leave the home page before they scroll to it.",
+            run_by_user_id: "user_xxxxxxxxxxxxxx",
+            run_ended_at: "run_ended_at",
+            run_started_at: "2026-01-01T12:00:00.000Z",
+            status: "preparing",
+            title: "Lead your home page with member results",
+            type: "add_cancel_offer",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            workflow: {
+                api_version: "2026-01-01",
+                steps: [
+                    {
+                        arguments: { id: "{{steps[0].id}}" },
+                        error: null,
+                        operation: "activateExperiment",
+                        status: "pending",
+                        title: "Start the A/B test",
+                    },
+                ],
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/reca_xxxxxxxxxxxxx")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.recommendedActions.update({
+            id: "reca_xxxxxxxxxxxxx",
+            workflow: {
+                steps: [{}],
+            },
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}, {}] } };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.recommendedActions.update({
+                id: "id",
+                workflow: {
+                    steps: [{}, {}],
+                },
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("update (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}, {}] } };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.recommendedActions.update({
+                id: "id",
+                workflow: {
+                    steps: [{}, {}],
+                },
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("update (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}, {}] } };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.recommendedActions.update({
+                id: "id",
+                workflow: {
+                    steps: [{}, {}],
+                },
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("update (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}, {}] } };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.recommendedActions.update({
+                id: "id",
+                workflow: {
+                    steps: [{}, {}],
+                },
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("update (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { workflow: { steps: [{}, {}] } };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/recommended_actions/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.recommendedActions.update({
+                id: "id",
+                workflow: {
+                    steps: [{}, {}],
+                },
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("dismiss (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

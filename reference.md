@@ -26701,6 +26701,74 @@ await client.recommendedActions.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">update</a>({ ...params }) -> Whop.RecommendedAction</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Edits the arguments of a `ready` action's steps before it runs. Send the action's `workflow` back with one entry for each step, in the same order. An entry with `arguments` replaces that step's arguments. An entry without them leaves the step as it is. Only `arguments` can change. Other step fields can be sent back only with the values the action has.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.recommendedActions.update({
+    id: "reca_xxxxxxxxxxxxx",
+    workflow: {
+        steps: [{}]
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateRecommendedActionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RecommendedActionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">dismiss</a>({ ...params }) -> Whop.RecommendedAction</code></summary>
 <dl>
 <dd>
