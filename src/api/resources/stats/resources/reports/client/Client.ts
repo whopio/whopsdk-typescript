@@ -90,6 +90,121 @@ export class ReportsClient {
     }
 
     /**
+     * The revenue lines charged to the businesses that the team of a partner business referred. Each row shows the commission paid to the partner business on that line. Lines that share an income source show the whole commission of that source. A team member who is not an owner sees only the referrals of their own team. While a day of the window is still being read, `commission` and `paid` are `null` on every row. A line may be missing. The days fill within minutes, so read the report again.
+     *
+     * @param {Whop.stats.PartnerRevenueLinesReportsRequest} request
+     * @param {ReportsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.stats.reports.partnerRevenueLines({
+     *         referring_account_id: "referring_account_id"
+     *     })
+     */
+    public partnerRevenueLines(
+        request: Whop.stats.PartnerRevenueLinesReportsRequest,
+        requestOptions?: ReportsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.stats.PartnerRevenueLinesReportsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__partnerRevenueLines(request, requestOptions));
+    }
+
+    private async __partnerRevenueLines(
+        request: Whop.stats.PartnerRevenueLinesReportsRequest,
+        requestOptions?: ReportsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.stats.PartnerRevenueLinesReportsResponse>> {
+        const {
+            referring_account_id: referringAccountId,
+            breakdown_by: breakdownBy,
+            columns,
+            windows,
+            time_zone: timeZone,
+            revenue_line: revenueLine,
+            income_source: incomeSource,
+            order,
+            direction,
+            convert_to: convertTo,
+            first,
+            after,
+        } = request;
+        const _queryParams: Record<string, unknown> = {
+            referring_account_id: referringAccountId,
+            breakdown_by: breakdownBy != null ? breakdownBy : undefined,
+            columns,
+            windows,
+            time_zone: timeZone,
+            revenue_line: revenueLine,
+            income_source: incomeSource,
+            order: order != null ? order : undefined,
+            direction: direction != null ? direction : undefined,
+            convert_to: convertTo,
+            first,
+            after,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-17-3",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                "stats/reports/partner_revenue_lines",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Whop.stats.PartnerRevenueLinesReportsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/stats/reports/partner_revenue_lines",
+        );
+    }
+
+    /**
      * Retrieves payments across all of Whop for up to four windows at once. Pass `breakdown_by` to split them by business type, industry type, product category, account country or customer country. The report covers the whole platform, so it takes no `account_id`. Only users with Trends access can read it, from whop.com, the Whop apps, the Whop CLI or the Whop MCP.
      *
      * @param {Whop.stats.PlatformTrendsReportsRequest} request

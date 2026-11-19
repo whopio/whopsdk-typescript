@@ -21,7 +21,7 @@ export namespace ListReportsResponse {
             path: string;
             /** The timestamp a range window filters on, such as `paid_at`. */
             window_field: string | null;
-            /** `range` reports measure activity in a period; `as_of` reports measure state at a moment. */
+            /** `range` reports measure activity in a period. `as_of` reports measure state at a moment. */
             window_kind: Item.WindowKind;
         }
 
@@ -42,7 +42,7 @@ export namespace ListReportsResponse {
                     key: string;
                     /** The column's display name. */
                     name: string;
-                    /** Properties only. `fixed` breakdowns list every value, zero-filled; `open` ones list values with activity. */
+                    /** Properties only. `fixed` breakdowns list every value, zero-filled. `open` ones list values with activity. */
                     set?: Item.Set | undefined;
                     /** Whether the column is an attribute of the row or a number measured over it. */
                     type: Item.Type;
@@ -62,7 +62,7 @@ export namespace ListReportsResponse {
                         None: "none",
                     } as const;
                     export type Aggregate = (typeof Aggregate)[keyof typeof Aggregate];
-                    /** Properties only. `fixed` breakdowns list every value, zero-filled; `open` ones list values with activity. */
+                    /** Properties only. `fixed` breakdowns list every value, zero-filled. `open` ones list values with activity. */
                     export const Set = {
                         Fixed: "fixed",
                         Open: "open",
@@ -86,7 +86,7 @@ export namespace ListReportsResponse {
                 }
             }
 
-            /** `range` reports measure activity in a period; `as_of` reports measure state at a moment. */
+            /** `range` reports measure activity in a period. `as_of` reports measure state at a moment. */
             export const WindowKind = {
                 Range: "range",
                 AsOf: "as_of",
