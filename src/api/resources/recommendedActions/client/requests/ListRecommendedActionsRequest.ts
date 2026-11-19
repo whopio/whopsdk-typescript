@@ -11,7 +11,7 @@ export interface ListRecommendedActionsRequest {
     account_id?: string;
     /** Only actions in any of these statuses. Repeat the parameter to pass several. */
     statuses?: Whop.ListRecommendedActionsRequestStatusesItem | Whop.ListRecommendedActionsRequestStatusesItem[];
-    /** Field to sort by. */
+    /** Field to sort by. With `lift`, the list holds only the actions whose experiment has a result. The action with the highest lift on its primary stat is first. */
     order?: Whop.ListRecommendedActionsRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListRecommendedActionsRequestDirection;
