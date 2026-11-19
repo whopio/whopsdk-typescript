@@ -29266,7 +29266,9 @@ await client.stats.retrieve({
     to: "to",
     ad_campaign_ids: ["adcamp_xxxxxxxxxxxxxx"],
     ad_group_ids: ["adgrp_xxxxxxxxxxxxxx"],
-    ad_ids: ["ad_xxxxxxxxxxxxxx"]
+    ad_ids: ["ad_xxxxxxxxxxxxxx"],
+    account_ids: ["biz_xxxxxxxxxxxxxx"],
+    runner_ids: ["user_xxxxxxxxxxxxxx"]
 });
 
 ```
@@ -35762,7 +35764,9 @@ await client.stats.timeSeries.retrieve({
     to: "to",
     ad_campaign_ids: ["adcamp_xxxxxxxxxxxxxx"],
     ad_group_ids: ["adgrp_xxxxxxxxxxxxxx"],
-    ad_ids: ["ad_xxxxxxxxxxxxxx"]
+    ad_ids: ["ad_xxxxxxxxxxxxxx"],
+    account_ids: ["biz_xxxxxxxxxxxxxx"],
+    runner_ids: ["user_xxxxxxxxxxxxxx"]
 });
 
 ```

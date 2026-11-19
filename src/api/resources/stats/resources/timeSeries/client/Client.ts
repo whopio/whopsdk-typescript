@@ -109,7 +109,9 @@ export class TimeSeriesClient {
      *         to: "to",
      *         ad_campaign_ids: ["adcamp_xxxxxxxxxxxxxx"],
      *         ad_group_ids: ["adgrp_xxxxxxxxxxxxxx"],
-     *         ad_ids: ["ad_xxxxxxxxxxxxxx"]
+     *         ad_ids: ["ad_xxxxxxxxxxxxxx"],
+     *         account_ids: ["biz_xxxxxxxxxxxxxx"],
+     *         runner_ids: ["user_xxxxxxxxxxxxxx"]
      *     })
      */
     public retrieve(
@@ -201,6 +203,8 @@ export class TimeSeriesClient {
             team_lead_id: teamLeadId,
             activity,
             breakdown_limit: breakdownLimit,
+            account_ids: accountIds,
+            runner_ids: runnerIds,
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
@@ -279,6 +283,8 @@ export class TimeSeriesClient {
             team_lead_id: teamLeadId,
             activity: activity != null ? activity : undefined,
             breakdown_limit: breakdownLimit,
+            account_ids: accountIds,
+            runner_ids: runnerIds,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
