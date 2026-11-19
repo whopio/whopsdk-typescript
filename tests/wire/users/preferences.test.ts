@@ -18,7 +18,12 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
+            show_earnings: true,
+            show_joined_whops: true,
             show_level: true,
+            show_location: true,
+            show_owned_whops: true,
+            show_user_ranking: true,
             terms_accepted: true,
             terms_accepted_at: "2026-01-01T12:00:00.000Z",
         };
@@ -73,7 +78,12 @@ describe("PreferencesClient", () => {
         const rawResponseBody = {
             bounty_worker_onboarding_dismissed: false,
             cards_auto_top_up: false,
+            show_earnings: true,
+            show_joined_whops: true,
             show_level: true,
+            show_location: true,
+            show_owned_whops: true,
+            show_user_ranking: true,
             terms_accepted: true,
             terms_accepted_at: "2026-01-01T12:00:00.000Z",
         };
