@@ -30,7 +30,7 @@ export interface User {
     followers_count: number;
     /** User ID, prefixed `user_`. */
     id: string;
-    /** The user's Whop Level, counted across every account they own. `current` is public. The points and spend fields are populated only when you retrieve yourself with the reserved id `me` and have balance-read scope. `null` on lists, and when none of their accounts are in Whop Levels. */
+    /** The user's Whop Level, counted across every account they own. `current` is public. The points and spend fields are populated only when you retrieve yourself with the reserved id `me` and have balance-read scope. `null` on lists, when none of their accounts are in Whop Levels, and when the user hides their level from other people. */
     level: Whop.UserLevel | null;
     /** The user's display name */
     name: string | null;
