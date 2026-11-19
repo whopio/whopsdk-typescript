@@ -3,17 +3,5 @@
 import type * as Whop from "../../../index.js";
 
 export interface ListPermissionsResponse {
-    data: ListPermissionsResponse.Data.Item[];
-}
-
-export namespace ListPermissionsResponse {
-    export type Data = Data.Item[];
-
-    export namespace Data {
-        export interface Item {
-            action: Whop.PermissionAction;
-            /** Whether the credential is granted the action for the resource. */
-            granted: boolean;
-        }
-    }
+    data: Whop.PermissionGrant[];
 }

@@ -15,6 +15,8 @@ export interface ApiKey {
     ip_allowlist: string[] | null;
     /** Whether this is the resource's default API key. Default keys cannot be updated or deleted, only rotated. */
     is_default_for_resource: boolean;
+    /** When the API key last authenticated a request, as an ISO 8601 timestamp. Recorded at most once an hour, so it can trail the latest request by up to an hour. `null` means the key has not been used since this field was introduced. */
+    last_used_at: string | null;
     /** Human-readable name identifying the API key, or `null` when none was set. */
     name: string | null;
     /** Masked version of the secret key, so the key can be recognized without revealing the full secret. */
