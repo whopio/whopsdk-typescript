@@ -140,6 +140,7 @@ describe("ChannelsClient", () => {
                                 url: null,
                             },
                         ],
+                        external_message: null,
                         gifs: [
                             {
                                 height: 1,

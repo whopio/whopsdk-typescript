@@ -260,6 +260,7 @@ export * from "./Export.js";
 export * from "./ExposuresExperimentsRequestSubject.js";
 export * from "./ExternalAccount.js";
 export * from "./ExternalAccountParent.js";
+export * from "./ExternalMessageEmail.js";
 export * from "./FeedbackOption.js";
 export * from "./FeeMarkup.js";
 export * from "./FeeMarkupListItem.js";
