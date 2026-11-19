@@ -19,6 +19,8 @@ export interface ListAppInstallationsRequest {
     created_before?: string;
     /** Only return installations created after this ISO 8601 timestamp. */
     created_after?: string;
+    /** When `true`, only return installations whose app asks for permissions the account hasn't approved yet. When `false`, only return the others. */
+    requesting_reauthorization?: boolean;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
@@ -27,6 +29,8 @@ export interface ListAppInstallationsRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
+    /** Set to `true` to return the number of matching results in `page_info.total_count`. Send `first=0` as well to return the count without any results. */
+    include_total_count?: boolean;
     /** Field to sort installations by. `name` sorts by app name, and only when listing the apps installed on one account. */
     order?: Whop.ListAppInstallationsRequestOrder;
     /** Sort direction. */
