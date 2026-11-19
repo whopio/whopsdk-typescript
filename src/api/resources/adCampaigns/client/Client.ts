@@ -467,12 +467,13 @@ export class AdCampaignsClient {
     }
 
     /**
-     * Attributes the whole campaign and its daily budget to the calling user as its runner. One runner holds a campaign at a time. Takes the runner's Whop session, or a user API key with `ad_campaign:update`. The caller also needs active advertiser-supplier program access. Everyone else gets a 404. Returns 403 until the caller has verified their identity and added a phone number and a social account. Returns 403 when the claim would take the daily budget the caller holds past the limit for their score. Returns 409 when another user holds the campaign. Changes nothing when the caller already holds it.
+     * Attributes the whole campaign and its daily budget to the calling user as its runner. One runner holds a campaign at a time. Takes the runner's Whop session, or a user API key with `ad_campaign:update`. The caller also needs active advertiser-supplier program access. Everyone else gets a 404. Returns 403 until the caller has verified their identity and added a phone number and a social account. Returns 403 when the claim would take the daily budget the caller holds past the limit for their score. Returns 409 when another user holds the campaign. Changes nothing when the caller already holds it. Returns 429 when the caller already claimed the campaign in the last hour: a runner can claim each campaign once an hour.
      *
      * @param {Whop.ClaimAdCampaignsRequest} request
      * @param {AdCampaignsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.TooManyRequestsError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -527,6 +528,8 @@ export class AdCampaignsClient {
             switch (_response.error.statusCode) {
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                case 429:
+                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

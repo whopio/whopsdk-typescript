@@ -757,6 +757,33 @@ describe("AdCampaignsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("claim (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ad_campaigns/id/claim")
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.adCampaigns.claim({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.TooManyRequestsError);
+    });
+
     test("duplicate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
