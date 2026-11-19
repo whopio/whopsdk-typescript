@@ -69,6 +69,7 @@ export namespace CreateDepositsResponse {
                             Sepa: "sepa",
                             Fps: "fps",
                             Chaps: "chaps",
+                            Swift: "swift",
                         } as const;
                         export type Item = (typeof Item)[keyof typeof Item];
                     }
