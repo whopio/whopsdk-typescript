@@ -105,6 +105,14 @@ describe("MessagesClient", () => {
                             url: null,
                         },
                     ],
+                    external_message: {
+                        from_address: null,
+                        id: "id",
+                        object: "email_message",
+                        status: "received",
+                        subject: null,
+                        to_address: null,
+                    },
                     gifs: [
                         {
                             height: 1,
@@ -349,6 +357,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -585,6 +601,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -786,6 +810,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -962,6 +994,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -1166,6 +1206,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -1451,6 +1499,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -1679,6 +1735,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,
@@ -1886,6 +1950,14 @@ describe("MessagesClient", () => {
                     url: "url",
                 },
             ],
+            external_message: {
+                from_address: "from_address",
+                id: "id",
+                object: "email_message",
+                status: "received",
+                subject: "subject",
+                to_address: "to_address",
+            },
             gifs: [
                 {
                     height: 1,

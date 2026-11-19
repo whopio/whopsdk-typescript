@@ -18,6 +18,8 @@ export interface ChatMessage {
     deleted_at: string | null;
     edited: boolean;
     embeds: Whop.Embed[];
+    /** The message outside chat that this message was sent or received as. `object` says which kind it is, such as `email_message`. For an email, the first file in `attachments` named `email.html` holds the email's HTML body. The email's own attachments are also in `attachments`. `null` for a message that exists only in chat, or a deleted message. */
+    external_message: Whop.ExternalMessageEmail | null;
     gifs: Whop.Gif[];
     /** Message ID, prefixed `post_`. Matches the `id` sent on create, when one was sent. */
     id: string;
