@@ -66,6 +66,8 @@ export namespace UpdateAdsRequest {
             format?: Item.Format | undefined;
             /** Uploaded file ID, prefixed `file_`. */
             id?: string | undefined;
+            /** The uploaded file to cut this format out of, prefixed `file_`. Whop cuts the `crop` window out of it, in that file's pixels, and makes the slot's file. Omit it to use `id` as uploaded. */
+            source_id?: string | undefined;
         }
 
         export namespace Item {

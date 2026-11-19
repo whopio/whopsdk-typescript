@@ -13,6 +13,8 @@ export interface AdCreative {
     language: string | null;
     /** The kind of asset, image or video. */
     media_type: string | null;
+    /** The file this format was cut out of, prefixed `file_`. Null for the original asset or a format uploaded as it is. */
+    source_id: string | null;
     /** CDN url of the asset. */
     url: string | null;
 }
