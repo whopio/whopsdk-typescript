@@ -458,6 +458,7 @@ export * from "./PayoutMethod.js";
 export * from "./PayoutMethodListItem.js";
 export * from "./Permission.js";
 export * from "./PermissionAction.js";
+export * from "./PermissionGrant.js";
 export * from "./PixelValidation.js";
 export * from "./Plan.js";
 export * from "./PlanCustomField.js";
