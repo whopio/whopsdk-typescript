@@ -20,6 +20,8 @@ export interface Course {
     created_at: string;
     /** A brief summary of the course content and objectives. Null if no description has been set. */
     description: string | null;
+    /** The parent experience that this course belongs to. */
+    experience: Course.Experience;
     /** The unique identifier for the course. */
     id: string;
     /** The spoken language of the video content, used to generate accurate closed captions. One of: en, es, it, pt, de, fr, pl, ru, nl, ca, tr, sv, uk, no, fi, sk, el, cs, hr, da, ro, bg. */
@@ -115,6 +117,14 @@ export namespace Course {
                 }
             }
         }
+    }
+
+    /**
+     * The parent experience that this course belongs to.
+     */
+    export interface Experience {
+        /** The unique identifier for the experience. */
+        id: string;
     }
 
     /**
