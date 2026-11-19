@@ -25,6 +25,8 @@ export interface ListSupportedMethodsRequest {
     party_type?: Whop.payouts.ListSupportedMethodsRequestPartyType;
     /** Whether to list each bank as its own payout method in countries where people choose a bank by name. Each bank has `parent_id` set to the bank deposit method that lists it. When `false`, these countries list one bank deposit method instead. */
     include_individual_banks?: boolean;
+    /** In countries that list methods by payout route, only list one generic method per route and receiving currency. Each is the method that costs least for the amount, and has `category` and `rail` set. Returns an empty list there when no generic method is available. Other countries list as without this parameter. */
+    generic_only?: boolean;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */

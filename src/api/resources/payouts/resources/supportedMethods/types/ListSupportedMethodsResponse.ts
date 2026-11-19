@@ -12,6 +12,8 @@ export namespace ListSupportedMethodsResponse {
 
     export namespace Data {
         export interface Item {
+            /** Category of the payout route that this method belongs to. Set only when `generic_only` is true and this country lists methods by payout route. `null` for every other method. */
+            category: Item.Category | null;
             /** How funds are delivered, for example `bank_deposit`. */
             delivery_type: Item.DeliveryType;
             /** Fee terms for payouts to this method: a percentage of the payout amount plus a fixed fee. The quotes carry the exact fee for a specific amount. */
@@ -27,6 +29,8 @@ export namespace ListSupportedMethodsResponse {
             parent_id: string | null;
             /** Fee and delivery estimates for the requested amount, one per destination currency. Null unless an amount was provided. */
             quotes: Item.Quotes.Item[] | null;
+            /** Payout rail that this method pays through, for example `ach`, `sepa`, `venmo` or `ethereum`. Set only when `generic_only` is true and this country lists methods by payout route. `null` for every other method. */
+            rail: string | null;
             /** Fields to collect before saving this supported payout method. Present only when supported_payout_method_id narrows the request to one method. */
             required_fields: Item.RequiredFields.Item[] | null;
             supports_instant_delivery: boolean;
@@ -36,6 +40,13 @@ export namespace ListSupportedMethodsResponse {
         }
 
         export namespace Item {
+            /** Category of the payout route that this method belongs to. Set only when `generic_only` is true and this country lists methods by payout route. `null` for every other method. */
+            export const Category = {
+                BankDeposit: "bank_deposit",
+                Crypto: "crypto",
+                PaymentApp: "payment_app",
+            } as const;
+            export type Category = (typeof Category)[keyof typeof Category];
             /** How funds are delivered, for example `bank_deposit`. */
             export const DeliveryType = {
                 CashPickup: "cash_pickup",

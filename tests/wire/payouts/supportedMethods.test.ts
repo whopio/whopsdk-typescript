@@ -18,6 +18,7 @@ describe("SupportedMethodsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    category: "bank_deposit",
                     delivery_type: "cash_pickup",
                     fee_structure: {
                         fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -40,6 +41,7 @@ describe("SupportedMethodsClient", () => {
                             standard: { estimated_arrival: "2026-01-01T12:00:00Z", fee: 2.5, total_received: 2497.5 },
                         },
                     ],
+                    rail: "rail",
                     required_fields: [
                         {
                             id: "fld_bank_account_number",
