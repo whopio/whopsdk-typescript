@@ -44,8 +44,11 @@ export namespace SuspensionAppealSubject {
     /** Why the account was suspended. `null` when the suspension has no current code. */
     export const SuspensionCode = {
         FraudulentActivity: "fraudulent_activity",
+        UnauthorizedPayments: "unauthorized_payments",
+        PreviousFraudSuspension: "previous_fraud_suspension",
         ProhibitedBusinessCategory: "prohibited_business_category",
         UnverifiableBusiness: "unverifiable_business",
+        UnverifiableFulfillment: "unverifiable_fulfillment",
         Sanctions: "sanctions",
         UnsupportedJurisdiction: "unsupported_jurisdiction",
         ProhibitedContent: "prohibited_content",
