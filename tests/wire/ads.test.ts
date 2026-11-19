@@ -409,7 +409,13 @@ describe("AdsClient", () => {
                     content_review: {
                         networks: [{ recommended: true, title: "whop" }],
                         status: "reviewed",
-                        tags: [{ message: "message", title: "title" }],
+                        tags: [
+                            {
+                                message: "message",
+                                restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                                title: "title",
+                            },
+                        ],
                     },
                     cost_per_added_to_cart: 6.515675675675676,
                     cost_per_click: 0.36,
@@ -573,7 +579,13 @@ describe("AdsClient", () => {
             content_review: {
                 networks: [{ recommended: true, title: "whop" }],
                 status: "reviewed",
-                tags: [{ message: "message", title: "title" }],
+                tags: [
+                    {
+                        message: "message",
+                        restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                        title: "title",
+                    },
+                ],
             },
             cost_per_added_to_cart: 6.515675675675676,
             cost_per_click: 0.36,
@@ -762,7 +774,13 @@ describe("AdsClient", () => {
             content_review: {
                 networks: [{ recommended: true, title: "whop" }],
                 status: "reviewed",
-                tags: [{ message: "message", title: "title" }],
+                tags: [
+                    {
+                        message: "message",
+                        restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                        title: "title",
+                    },
+                ],
             },
             cost_per_added_to_cart: 6.515675675675676,
             cost_per_click: 0.36,
@@ -930,7 +948,13 @@ describe("AdsClient", () => {
             content_review: {
                 networks: [{ recommended: true, title: "whop" }],
                 status: "reviewed",
-                tags: [{ message: "message", title: "title" }],
+                tags: [
+                    {
+                        message: "message",
+                        restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                        title: "title",
+                    },
+                ],
             },
             cost_per_added_to_cart: 6.515675675675676,
             cost_per_click: 0.36,
@@ -1045,7 +1069,13 @@ describe("AdsClient", () => {
                     content_review: {
                         networks: [{ recommended: true, title: "whop" }],
                         status: "reviewed",
-                        tags: [{ message: "message", title: "title" }],
+                        tags: [
+                            {
+                                message: "message",
+                                restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                                title: "title",
+                            },
+                        ],
                     },
                     cost_per_added_to_cart: 6.515675675675676,
                     cost_per_click: 0.36,
@@ -1244,7 +1274,13 @@ describe("AdsClient", () => {
             content_review: {
                 networks: [{ recommended: true, title: "whop" }],
                 status: "reviewed",
-                tags: [{ message: "message", title: "title" }],
+                tags: [
+                    {
+                        message: "message",
+                        restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                        title: "title",
+                    },
+                ],
             },
             cost_per_added_to_cart: 6.515675675675676,
             cost_per_click: 0.36,
@@ -1371,7 +1407,13 @@ describe("AdsClient", () => {
             content_review: {
                 networks: [{ recommended: true, title: "whop" }],
                 status: "reviewed",
-                tags: [{ message: "message", title: "title" }],
+                tags: [
+                    {
+                        message: "message",
+                        restrictions: [{ condition: null, country: null, kind: null, network: "whop" }],
+                        title: "title",
+                    },
+                ],
             },
             cost_per_added_to_cart: 6.515675675675676,
             cost_per_click: 0.36,
