@@ -31,7 +31,9 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists an account's recommendations, newest first by default. `status: ready` is what the account can act on now. Any other listing is its history of runs. Executed recommendations and runs stay listed after Economic Intelligence turns off, but new recommendations are offered only to businesses it is written for. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
+     * @deprecated
+     *
+     * Deprecated. Use `GET /recommended_actions` instead. Lists an account's recommendations, newest first by default. `status: ready` lists what the account can act on now. Any other listing is its history of runs. Executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only to businesses it is written for. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -56,7 +58,6 @@ export class EconomicIntelligenceClient {
                 const {
                     account_id: accountId,
                     status,
-                    input,
                     has_run: hasRun,
                     order,
                     direction,
@@ -68,7 +69,6 @@ export class EconomicIntelligenceClient {
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     status: status != null ? status : undefined,
-                    input,
                     has_run: hasRun,
                     order: order != null ? order : undefined,
                     direction: direction != null ? direction : undefined,
@@ -83,7 +83,7 @@ export class EconomicIntelligenceClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -155,7 +155,9 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire a ready recommendation. A rating alone leaves its status unchanged. To run a recommendation yourself, send `status: running` to start. Send `status: executed` when it is carried out, or `status: incomplete` if the run ended without carrying it out. With `executed`, name what changed in `result_id` or where the run worked in `result_page`, and the result links there. Whop AI reports its own runs the same way. Send `status: acknowledged` once an executed run's result has been seen.
+     * @deprecated
+     *
+     * Deprecated. Use `POST /recommended_actions/:id/dismiss` instead.Dismisses a ready recommendation. Send `status: superseded`. A recommendation that is already superseded stays unchanged. Other statuses and fields return a `400` that names `/api/v1/recommended_actions`.
      *
      * @param {Whop.UpdateEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -169,7 +171,8 @@ export class EconomicIntelligenceClient {
      *
      * @example
      *     await client.economicIntelligence.update({
-     *         id: "id"
+     *         id: "id",
+     *         status: "superseded"
      *     })
      */
     public update(
@@ -192,7 +195,7 @@ export class EconomicIntelligenceClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

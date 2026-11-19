@@ -239,8 +239,6 @@ export * from "./DomainVerification.js";
 export * from "./DomainWebsite.js";
 export * from "./DomainWebsiteApp.js";
 export * from "./EconomicIntelligence.js";
-export * from "./EconomicIntelligenceInput.js";
-export * from "./EconomicIntelligenceOperation.js";
 export * from "./EmailAddress.js";
 export * from "./Embed.js";
 export * from "./EmbedField.js";
