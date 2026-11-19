@@ -15,6 +15,8 @@ export interface ListBusinessesRequest {
     status?: Whop.partners.ListBusinessesRequestStatus;
     /** When true, only businesses with pending or completed earnings paid to the caller. */
     has_earnings?: boolean;
+    /** When true, only the referrals that the `partner_network_volume` series count today. A referral whose window has ended is left out. Requires `referring_account_id`. */
+    counted_in_network_volume?: boolean;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */

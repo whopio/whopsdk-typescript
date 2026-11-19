@@ -35544,6 +35544,71 @@ await client.stats.reports.list();
 </dl>
 </details>
 
+<details><summary><code>client.stats.reports.<a href="/src/api/resources/stats/resources/reports/client/Client.ts">partnerRevenueLines</a>({ ...params }) -> Whop.PartnerRevenueLinesReportsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The revenue lines charged to the businesses that the team of a partner business referred. Each row shows the commission paid to the partner business on that line. Lines that share an income source show the whole commission of that source. A team member who is not an owner sees only the referrals of their own team. While a day of the window is still being read, `commission` and `paid` are `null` on every row. A line may be missing. The days fill within minutes, so read the report again.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.stats.reports.partnerRevenueLines({
+    referring_account_id: "referring_account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.stats.PartnerRevenueLinesReportsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ReportsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.stats.reports.<a href="/src/api/resources/stats/resources/reports/client/Client.ts">platformTrends</a>({ ...params }) -> Whop.PlatformTrendsReportsResponse</code></summary>
 <dl>
 <dd>

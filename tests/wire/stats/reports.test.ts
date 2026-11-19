@@ -18,12 +18,21 @@ describe("ReportsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    breakdowns: ["breakdowns"],
-                    columns: [{ key: "key", name: "name", type: "property" }],
-                    description: "description",
-                    key: "key",
-                    path: "path",
-                    window_field: "window_field",
+                    breakdowns: ["revenue_line"],
+                    columns: [
+                        {
+                            available_on: ["revenue_line"],
+                            default: true,
+                            key: "revenue_line",
+                            name: "Revenue line",
+                            type: "property",
+                        },
+                    ],
+                    description:
+                        "The revenue lines charged to the businesses a partner business's team referred, with the commission the partner business was paid on each. Lines that share an income source show that source's whole commission. A team member who is not an owner sees only their own line. While a day of the window is still being read, commission and paid are null on every row. A line may be missing. The days fill within minutes.",
+                    key: "partner_revenue_lines",
+                    path: "/api/v1/stats/reports/partner_revenue_lines",
+                    window_field: "posted_at",
                     window_kind: "range",
                 },
             ],
@@ -52,6 +61,116 @@ describe("ReportsClient", () => {
         await expect(async () => {
             return await client.stats.reports.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("partnerRevenueLines (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            data: {
+                breakdown_by: "revenue_line",
+                columns: [{ key: "revenue_line", name: "Revenue line", type: "property" }],
+                data_as_of: "2026-01-01T12:00:00.000Z",
+                report: "partner_revenue_lines",
+                reports: [
+                    {
+                        rows: [
+                            {
+                                commission: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                                income_source: { id: "sales", name: "Sales" },
+                                paid: 1,
+                                revenue_line: {
+                                    id: "payment_processing_percentage_fee",
+                                    name: "Payment processing percentage fee",
+                                },
+                            },
+                        ],
+                        window: {
+                            from: "2026-01-01T12:00:00.000Z",
+                            key: "2026-06-01..2026-06-30",
+                            kind: "range",
+                            time_zone: "Etc/UTC",
+                            to: "2026-01-01T12:00:00.000Z",
+                        },
+                    },
+                ],
+            },
+            page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/stats/reports/partner_revenue_lines")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.stats.reports.partnerRevenueLines({
+            referring_account_id: "referring_account_id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("partnerRevenueLines (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/stats/reports/partner_revenue_lines")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.stats.reports.partnerRevenueLines({
+                referring_account_id: "referring_account_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("partnerRevenueLines (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/stats/reports/partner_revenue_lines")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.stats.reports.partnerRevenueLines({
+                referring_account_id: "referring_account_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
     });
 
     test("platformTrends (1)", async () => {
