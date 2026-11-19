@@ -19,29 +19,18 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    acknowledged_at: "2026-01-01T12:00:00.000Z",
-                    action_type: "add_cancel_offer",
-                    ai_chat_id: "aich_xxxxxxxxxxxxxx",
+                    action_type: "improve_landing_page",
                     created_at: "2026-01-01T12:00:00.000Z",
-                    executed_at: "2026-01-01T12:00:00.000Z",
-                    expected_tool_calls: [
-                        { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
-                    ],
+                    executed_at: "executed_at",
                     id: "reca_xxxxxxxxxxxxxx",
-                    input: "input",
-                    inputs: [{ answer: null, id: "id", label: "label", options: ["options"], template: "template" }],
-                    prompt: "Create a 20% off promo code for my members.",
                     reasoning: "Capped 9 of 14 days.",
-                    result_url: "https://atlas.whop.site/",
+                    result_url: "result_url",
                     run_by_user_id: "user_xxxxxxxxxxxxxx",
                     run_ended_at: "2026-01-01T12:00:00.000Z",
                     run_started_at: "2026-01-01T12:00:00.000Z",
-                    sentiment: "positive",
                     status: "queued",
                     superseded_at: "2026-01-01T12:00:00.000Z",
-                    target_url: "https://example.com/join",
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-                    user_feedback: "user_feedback",
                 },
             ],
             page_info: {
@@ -153,32 +142,21 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { status: "superseded" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            acknowledged_at: "2026-01-01T12:00:00.000Z",
-            action_type: "add_cancel_offer",
-            ai_chat_id: "aich_xxxxxxxxxxxxxx",
+            action_type: "improve_landing_page",
             created_at: "2026-01-01T12:00:00.000Z",
-            executed_at: "2026-01-01T12:00:00.000Z",
-            expected_tool_calls: [
-                { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
-            ],
+            executed_at: "executed_at",
             id: "reca_xxxxxxxxxxxxxx",
-            input: "input",
-            inputs: [{ answer: "answer", id: "id", label: "label", options: ["options"], template: "template" }],
-            prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
-            result_url: "https://atlas.whop.site/",
+            result_url: "result_url",
             run_by_user_id: "user_xxxxxxxxxxxxxx",
             run_ended_at: "2026-01-01T12:00:00.000Z",
             run_started_at: "2026-01-01T12:00:00.000Z",
-            sentiment: "positive",
             status: "queued",
             superseded_at: "2026-01-01T12:00:00.000Z",
-            target_url: "https://example.com/join",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
-            user_feedback: "user_feedback",
         };
 
         server
@@ -192,6 +170,7 @@ describe("EconomicIntelligenceClient", () => {
 
         const response = await client.economicIntelligence.update({
             id: "id",
+            status: "superseded",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -205,7 +184,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { status: "superseded" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -220,6 +199,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
+                status: "superseded",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -233,7 +213,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { status: "superseded" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -248,6 +228,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
+                status: "superseded",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -261,7 +242,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { status: "superseded" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -276,6 +257,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
+                status: "superseded",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -289,7 +271,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { status: "superseded" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -304,6 +286,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
+                status: "superseded",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

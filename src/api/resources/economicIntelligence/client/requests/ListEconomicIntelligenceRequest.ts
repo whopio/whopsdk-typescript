@@ -11,8 +11,6 @@ export interface ListEconomicIntelligenceRequest {
     account_id?: string;
     /** `ready` lists the recommendations the account can run now. A run status lists only the runs in that state. `queued`, `pending` and `superseded` are no longer listed and answer nothing. */
     status?: Whop.ListEconomicIntelligenceRequestStatus;
-    /** No longer read: recommendations are written for the business as it changes. Up to 1000 characters. */
-    input?: string;
     /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read. */
     has_run?: boolean;
     /** Sort field. */

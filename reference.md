@@ -13079,7 +13079,7 @@ await client.domains.check({
 <dl>
 <dd>
 
-Lists an account's recommendations, newest first by default. `status: ready` is what the account can act on now. Any other listing is its history of runs. Executed recommendations and runs stay listed after Economic Intelligence turns off, but new recommendations are offered only to businesses it is written for. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
+Deprecated. Use `GET /recommended_actions` instead. Lists an account's recommendations, newest first by default. `status: ready` lists what the account can act on now. Any other listing is its history of runs. Executed recommendations and runs stay listed after Economic Intelligence turns off. New recommendations are offered only to businesses it is written for. For visitor countries, page views, ad impressions and clicks, or payment volume over a time range, use `GET /stats/time_series/:metric`.
 </dd>
 </dl>
 </dd>
@@ -13154,7 +13154,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire a ready recommendation. A rating alone leaves its status unchanged. To run a recommendation yourself, send `status: running` to start. Send `status: executed` when it is carried out, or `status: incomplete` if the run ended without carrying it out. With `executed`, name what changed in `result_id` or where the run worked in `result_page`, and the result links there. Whop AI reports its own runs the same way. Send `status: acknowledged` once an executed run's result has been seen.
+Deprecated. Use `POST /recommended_actions/:id/dismiss` instead.Dismisses a ready recommendation. Send `status: superseded`. A recommendation that is already superseded stays unchanged. Other statuses and fields return a `400` that names `/api/v1/recommended_actions`.
 </dd>
 </dl>
 </dd>
@@ -13170,7 +13170,8 @@ Updates a recommendation status, records feedback, or both. Send `sentiment` to 
 
 ```typescript
 await client.economicIntelligence.update({
-    id: "id"
+    id: "id",
+    status: "superseded"
 });
 
 ```
