@@ -1012,6 +1012,17 @@
             },
             "default": "./dist/cjs/api/resources/stats/exports.js"
         },
+        "./suspensionAppeals": {
+            "import": {
+                "types": "./dist/esm/api/resources/suspensionAppeals/exports.d.mts",
+                "default": "./dist/esm/api/resources/suspensionAppeals/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/suspensionAppeals/exports.d.ts",
+                "default": "./dist/cjs/api/resources/suspensionAppeals/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/suspensionAppeals/exports.js"
+        },
         "./swaps": {
             "import": {
                 "types": "./dist/esm/api/resources/swaps/exports.d.mts",
