@@ -68,6 +68,7 @@ export namespace LedgerActivity {
         PaymentRefund: "payment_refund",
         PaymentRefundReversal: "payment_refund_reversal",
         PlatformBalancePayment: "platform_balance_payment",
+        FeeRebate: "fee_rebate",
         PlatformBalancePaymentRefund: "platform_balance_payment_refund",
         AdSpendPurchase: "ad_spend_purchase",
         PspRefundPayable: "psp_refund_payable",

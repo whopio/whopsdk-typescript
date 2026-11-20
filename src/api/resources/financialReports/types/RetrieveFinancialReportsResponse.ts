@@ -201,6 +201,7 @@ export namespace RetrieveFinancialReportsResponse {
                 ExternalAccountConnectionFee: "external_account_connection_fee",
                 ExternalCardLoadDeposit: "external_card_load_deposit",
                 ExternalCardLoadOffset: "external_card_load_offset",
+                FeeRebate: "fee_rebate",
                 FraudPreventionFee: "fraud_prevention_fee",
                 FxGainLoss: "fx_gain_loss",
                 FxMarkup: "fx_markup",
