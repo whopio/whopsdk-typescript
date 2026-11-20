@@ -108,7 +108,7 @@ export class PreferencesClient {
     }
 
     /**
-     * Updates the account's preferences. Each top-level key in the body replaces its stored value as a whole. Keys left out keep their current values.
+     * Updates the account's preferences. Keys left out keep their current values. In `affiliate_program` and `ads_triple_whale_integration`, only the fields you send change. `customer_tracking`, `card_surcharge` and `ads_payment_methods` replace their stored value as a whole.
      *
      * The required scope depends on which preferences you update.
      *
@@ -118,6 +118,7 @@ export class PreferencesClient {
      * - `payment:dispute`: `dispute_fighter_enabled`.
      * - `company:update`: `economic_intelligence_duration_key`, `economic_intelligence_auto_renew`, `review_request_emails`, `cancellation_emails`, `renewal_reminder_emails`, `failed_payment_emails`, `subaccount_notifications`, `subaccount_team_view_only`, `card_surcharge`.
      * - `company:manage_checkout`: `feedback_options`, `customer_tracking`.
+     * - `affiliate:update`: `affiliate_program`.
      *
      * To update keys under more than one scope, the API key needs all of those scopes.
      *

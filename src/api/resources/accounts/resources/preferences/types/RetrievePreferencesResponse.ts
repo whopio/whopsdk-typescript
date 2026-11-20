@@ -13,6 +13,8 @@ export interface RetrievePreferencesResponse {
     ads_scheduling_timezone: string;
     /** The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel. Available to any Triple Whale customer — Shopify, WooCommerce, or a custom checkout — by setting `shop_domain`. Requires the `ad_campaign:create` scope. Once connected, ad click-through URLs Whop serves carry `tw_source=whop` and `tw_adid=<ad id>` query parameters so Triple Whale's pixel attributes conversions back to the originating ad — no destination URL changes are needed. */
     ads_triple_whale_integration: RetrievePreferencesResponse.AdsTripleWhaleIntegration;
+    /** The account's affiliate program: its instructions, its application and the product it features for affiliates. `GET /accounts/{account_id}/affiliate_program` returns the same object without authentication. */
+    affiliate_program: Whop.AccountAffiliateProgram;
     /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
     cancellation_emails: boolean;
     /** The card surcharge a point of sale adds to credit card payments. Debit and prepaid cards never pay it. */

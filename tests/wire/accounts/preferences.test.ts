@@ -53,6 +53,21 @@ describe("PreferencesClient", () => {
                 shop_domain: "shinetime.myshopify.com",
                 status: "connected",
             },
+            affiliate_program: {
+                application_questions: [
+                    {
+                        field_type: "text",
+                        id: "field_xxxxxxxxxxxxxx",
+                        name: "Where do you post?",
+                        order: 0,
+                        placeholder: null,
+                        required: true,
+                    },
+                ],
+                application_required: true,
+                featured_product_id: "prod_xxxxxxxxxxxxxx",
+                instructions: "Share your link on your socials.",
+            },
             cancellation_emails: true,
             card_surcharge: { enabled: true, maximum_percentage: 2, percentage: 2 },
             cards_auto_top_up: false,
@@ -217,6 +232,21 @@ describe("PreferencesClient", () => {
                 masked_api_key: "tw_live_********",
                 shop_domain: "shinetime.myshopify.com",
                 status: "connected",
+            },
+            affiliate_program: {
+                application_questions: [
+                    {
+                        field_type: "text",
+                        id: "field_xxxxxxxxxxxxxx",
+                        name: "Where do you post?",
+                        order: 0,
+                        placeholder: null,
+                        required: true,
+                    },
+                ],
+                application_required: true,
+                featured_product_id: "prod_xxxxxxxxxxxxxx",
+                instructions: "Share your link on your socials.",
             },
             cancellation_emails: true,
             card_surcharge: { enabled: true, maximum_percentage: 2, percentage: 2 },

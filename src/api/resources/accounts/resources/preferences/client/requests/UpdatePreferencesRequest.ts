@@ -17,6 +17,8 @@ export interface UpdatePreferencesRequest {
     ads_scheduling_timezone?: string;
     /** Connects or disconnects the Triple Whale integration, or changes the shop it reports to. Requires the `ad_campaign:create` scope on your API key. Connecting requires a `shop_domain` to report spend against. */
     ads_triple_whale_integration?: UpdatePreferencesRequest.AdsTripleWhaleIntegration;
+    /** The account's affiliate program. Only the fields you send change, and fields left out keep their current values. To clear a field, set it to `null`. To turn affiliates on or off, set `global_affiliate_status` and `member_affiliate_status` on each product with `PATCH /products/{id}`. Requires the `affiliate:update` scope on your API key. */
+    affiliate_program?: UpdatePreferencesRequest.AffiliateProgram;
     /** Whether Whop emails members when their membership is canceled or terminated. Set it to `false` to stop these emails while keeping the account's other customer emails. Requires the `company:update` scope on your API key. */
     cancellation_emails?: boolean;
     /** The card surcharge a point of sale adds to credit card payments, replaced as a whole. You can always turn it off. You can turn it on only when `card_surcharge.maximum_percentage` is not null. Requires the `company:update` scope on your API key. */
@@ -37,7 +39,7 @@ export interface UpdatePreferencesRequest {
     economic_intelligence_duration_key?: UpdatePreferencesRequest.EconomicIntelligenceDurationKey;
     /** Whether Whop emails members when a renewal payment fails or needs them to verify it. Set it to `false` to stop these emails while keeping the account's other customer emails. Subscriptions billed by invoice still get their invoice emails. Requires the `company:update` scope on your API key. */
     failed_payment_emails?: boolean;
-    /** Replaces the account's own cancel reasons, shown to members in this order when they cancel. Pass an option's `id` to keep it, for example when renaming it; options without an `id` are added, and options left out are removed. Pass an empty array to go back to Whop's default reasons. Members who already picked an option keep the label they saw. Requires the `company:manage_checkout` scope on your API key. */
+    /** Replaces the account's own cancel reasons, shown to members in this order when they cancel. Pass an option's `id` to keep it, for example when renaming it. Options without an `id` are added, and options left out are removed. Pass an empty array to go back to Whop's default reasons. Members who already picked an option keep the label they saw. Requires the `company:manage_checkout` scope on your API key. */
     feedback_options?: UpdatePreferencesRequest.FeedbackOptions.Item[];
     /** Set it to `account` to make the account the merchant of record. Only some business categories can switch. The business must be verified. The switch cannot be undone. The response shows `pending` until approval. Checkout takes no payments until then. After the switch, the account accepts only card, Apple Pay, Google Pay and crypto payments. PayPal, buy now pay later and local payment methods stop. Requires the `payout:account:update` scope on your API key. */
     merchant_of_record?: UpdatePreferencesRequest.MerchantOfRecord;
@@ -112,6 +114,47 @@ export namespace UpdatePreferencesRequest {
         api_key?: (string | null) | undefined;
         /** The exact shop domain in Triple Whale's Settings → Store. For Shopify, this is the `.myshopify.com` domain. For a custom sales platform, it is the domain Triple Whale assigned when the shop was set up. Whop strips a leading `https://` and a trailing `/`. What remains must be a bare hostname with no path or spaces. Whop validates it against Triple Whale before storing it, and the API key must have access to it. Omit to keep the stored domain. You can't clear a stored value, only overwrite it with a new domain. */
         shop_domain?: string | undefined;
+    }
+
+    /**
+     * The account's affiliate program. Only the fields you send change, and fields left out keep their current values. To clear a field, set it to `null`. To turn affiliates on or off, set `global_affiliate_status` and `member_affiliate_status` on each product with `PATCH /products/{id}`. Requires the `affiliate:update` scope on your API key.
+     */
+    export interface AffiliateProgram {
+        /** The questions the affiliate application asks, in order. A question with an `id` is updated, a question without one is added, and questions left out are removed. Up to 20 questions. Pass an empty array or `null` to remove every question. */
+        application_questions?: (AffiliateProgram.ApplicationQuestions.Item[] | null) | undefined;
+        /** Whether a person must apply and get approval to become an affiliate. */
+        application_required?: boolean | undefined;
+        /** The product to feature for affiliates, prefixed `prod_`. It must belong to the account and allow global affiliates. Pass `null` to clear it. */
+        featured_product_id?: (string | null) | undefined;
+        /** The instructions for the account's affiliates. Pass `null` or an empty string to clear them. */
+        instructions?: (string | null) | undefined;
+    }
+
+    export namespace AffiliateProgram {
+        export type ApplicationQuestions = ApplicationQuestions.Item[];
+
+        export namespace ApplicationQuestions {
+            export interface Item {
+                /** The input type of the answer. Required for a new question. */
+                field_type?: Item.FieldType | undefined;
+                /** The ID of one of the account's questions, prefixed `field_`. Fields you leave out keep their values. An ID the account doesn't have is a `400`. */
+                id?: (string | null) | undefined;
+                /** The question, shown as the field label. Required for a new question. */
+                name?: string | undefined;
+                /** Placeholder text shown in the empty field. Pass `null` to clear it. */
+                placeholder?: (string | null) | undefined;
+                /** Whether an answer is required. Defaults to `true` for a new question. */
+                required?: boolean | undefined;
+            }
+
+            export namespace Item {
+                /** The input type of the answer. Required for a new question. */
+                export const FieldType = {
+                    Text: "text",
+                } as const;
+                export type FieldType = (typeof FieldType)[keyof typeof FieldType];
+            }
+        }
     }
 
     /**

@@ -1122,6 +1122,17 @@
             },
             "default": "./dist/cjs/api/resources/webhooks/exports.js"
         },
+        "./accounts/affiliateProgram": {
+            "import": {
+                "types": "./dist/esm/api/resources/accounts/resources/affiliateProgram/exports.d.mts",
+                "default": "./dist/esm/api/resources/accounts/resources/affiliateProgram/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/accounts/resources/affiliateProgram/exports.d.ts",
+                "default": "./dist/cjs/api/resources/accounts/resources/affiliateProgram/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/accounts/resources/affiliateProgram/exports.js"
+        },
         "./accounts/customerTracking": {
             "import": {
                 "types": "./dist/esm/api/resources/accounts/resources/customerTracking/exports.d.mts",
