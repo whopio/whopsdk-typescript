@@ -29,7 +29,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.1.1
-        version: 4.1.12(@types/node@20.19.43)(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.2))
+        version: 4.1.12(@types/node@20.19.43)(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.4))
       webpack:
         specifier: ^5.105.4
         version: 5.113.0
@@ -653,8 +653,8 @@ packages:
     resolution: {integrity: sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==}
     engines: {node: '>= 0.6'}
 
-  minimizer-webpack-plugin@5.14.0:
-    resolution: {integrity: sha512-PnvQXCJxhgH2ZVVO7Lj0sM6q8L1XGxnUvd8wVQIRwi8khMCLq5wg0Ngxe44bcuZL2FSN81RdVE7YHEVzTKsQDQ==}
+  minimizer-webpack-plugin@5.14.1:
+    resolution: {integrity: sha512-qsfTb5Ao4nre9krFweqj8k5bVU7KxgsP4WkLO/ITTuiJkbitCzYBY+Aum5KTKRhY0wDr8VJ1RILsTCSUtPd1kQ==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
       '@minify-html/node': '*'
@@ -839,8 +839,8 @@ packages:
     resolution: {integrity: sha512-NHFiWnAbMJxNNpBwiO7jJVGDuqMxT9/oV8v57RR+fgBQShkJil5inGD8/xWy0hjLyHQyX1tu27QANhlz3KBqCg==}
     engines: {node: '>=6'}
 
-  terser@5.51.2:
-    resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
+  terser@5.51.4:
+    resolution: {integrity: sha512-VPi1CkDvCWLGUVIToctNBG+NdHbSXwOPjHJnQ3pdB0XknaldnI76wSkAFOGxV2ZdkzOP5d6gpQ5c58XvDghRvw==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1259,14 +1259,14 @@ snapshots:
       chai: 6.3.0
       tinyrainbow: 3.2.0
 
-  '@vitest/mocker@4.1.12(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.2))':
+  '@vitest/mocker@4.1.12(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.4))':
     dependencies:
       '@vitest/spy': 4.1.12
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
       msw: 2.11.2(@types/node@20.19.43)(typescript@5.9.3)
-      vite: 8.3.8(@types/node@20.19.43)(terser@5.51.2)
+      vite: 8.3.8(@types/node@20.19.43)(terser@5.51.4)
 
   '@vitest/pretty-format@4.1.12':
     dependencies:
@@ -1556,11 +1556,11 @@ snapshots:
 
   mime-db@1.54.0: {}
 
-  minimizer-webpack-plugin@5.14.0(webpack@5.113.0):
+  minimizer-webpack-plugin@5.14.1(webpack@5.113.0):
     dependencies:
       jest-worker: 27.5.1
       schema-utils: 4.8.5(webpack@5.113.0)
-      terser: 5.51.2
+      terser: 5.51.4
       webpack: 5.113.0
 
   msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3):
@@ -1698,7 +1698,7 @@ snapshots:
 
   tapable@2.3.4: {}
 
-  terser@5.51.2:
+  terser@5.51.4:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.19.0
@@ -1749,7 +1749,7 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  vite@8.3.8(@types/node@20.19.43)(terser@5.51.2):
+  vite@8.3.8(@types/node@20.19.43)(terser@5.51.4):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -1759,12 +1759,12 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.19.43
       fsevents: 2.3.3
-      terser: 5.51.2
+      terser: 5.51.4
 
-  vitest@4.1.12(@types/node@20.19.43)(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.2)):
+  vitest@4.1.12(@types/node@20.19.43)(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.4)):
     dependencies:
       '@vitest/expect': 4.1.12
-      '@vitest/mocker': 4.1.12(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.2))
+      '@vitest/mocker': 4.1.12(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.3.8(@types/node@20.19.43)(terser@5.51.4))
       '@vitest/pretty-format': 4.1.12
       '@vitest/runner': 4.1.12
       '@vitest/snapshot': 4.1.12
@@ -1781,7 +1781,7 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.2.0
-      vite: 8.3.8(@types/node@20.19.43)(terser@5.51.2)
+      vite: 8.3.8(@types/node@20.19.43)(terser@5.51.4)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.19.43
@@ -1807,7 +1807,7 @@ snapshots:
       events: 3.3.0
       graceful-fs: 4.2.12
       mime-db: 1.54.0
-      minimizer-webpack-plugin: 5.14.0(webpack@5.113.0)
+      minimizer-webpack-plugin: 5.14.1(webpack@5.113.0)
       schema-utils: 4.8.5(webpack@5.113.0)
       tapable: 2.3.4
       watchpack: 2.6.4
