@@ -11,4 +11,6 @@ export interface BadgesNotificationsRequest {
     experience_ids?: string | string[];
     /** The client's last fetched-at ISO 8601 timestamp, used to partially refresh badges after a websocket message. */
     last_fetched_at?: string;
+    /** Only return badges for experiences with unread notifications. */
+    unread?: boolean;
 }

@@ -250,10 +250,11 @@ export class NotificationsClient {
         request: Whop.BadgesNotificationsRequest = {},
         requestOptions?: NotificationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.BadgesNotificationsResponse>> {
-        const { experience_ids: experienceIds, last_fetched_at: lastFetchedAt } = request;
+        const { experience_ids: experienceIds, last_fetched_at: lastFetchedAt, unread } = request;
         const _queryParams: Record<string, unknown> = {
             experience_ids: experienceIds,
             last_fetched_at: lastFetchedAt,
+            unread,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
