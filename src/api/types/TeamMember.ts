@@ -19,7 +19,7 @@ export interface TeamMember {
     is_agent: boolean;
     /** Whether this member or invite has the view-only Partner role, directly or through a custom role based on it. A Partner can read only the account's basic details. */
     is_partner: boolean;
-    /** The legal name from the member's approved identity verification, returned to the account's own API key when listing or retrieving a partner account's team members. `null` when the member has none, for invites, on write responses, and for other callers. */
+    /** The first and last name on the member's approved identity verification, set only when the member has no profile name. Returned to the account's own API key when listing or retrieving a partner account's team members. `null` when the member has a profile name or no approved verification, for invites, on write responses, and for other callers. */
     legal_name: string | null;
     reports_to_chain: Whop.TeamMemberManager[] | null;
     /** The ID of the team member this member reports to, starting with `ausr_` or `mber_`; treat it as opaque. `null` when the member reports to the business directly, and for invites. */
