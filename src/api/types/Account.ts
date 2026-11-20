@@ -22,7 +22,7 @@ export interface Account {
     capabilities: Whop.AccountCapabilities | null;
     /** Whop Cards application details for the account. Returned on `list`, `retrieve`, and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has no card application or blocking application review. */
     cards: Whop.AccountCards | null;
-    /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
+    /** The account's saved preference for offering optional buyer VAT/tax ID entry. Checkouts where Whop collects and remits tax offer entry automatically, regardless of this preference. Does not require a VAT ID to purchase. */
     collect_vat_id: boolean;
     /** Company formation state for the account, managed through [Form Company](/api-reference/accounts/form-company). A `draft` `status` until the formation checkout is paid, then filing progress with downloadable documents and signatures awaiting action. Empty when the formation state is temporarily unavailable. */
     company_formation: Whop.AccountCompanyFormation;
