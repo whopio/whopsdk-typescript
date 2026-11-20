@@ -15,7 +15,7 @@ export interface UpdateCardsRequest {
     billing?: UpdateCardsRequest.Billing;
     /** Pass `true` to permanently cancel the card. A canceled card cannot be uncanceled. Cannot be combined with other fields. */
     canceled?: boolean;
-    /** Details for the invited cardholder, accepted only while completing onboarding on an invited card. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not. */
+    /** Details for the cardholder. On an invited card, these fields complete onboarding. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not. On an issued card, only email and phone can be changed. 3D Secure verification codes go to that email and phone. */
     cardholder?: UpdateCardsRequest.Cardholder;
     /** Pass `true` to freeze the card, `false` to unfreeze it. The assigned cardholder may freeze their own card without the payout:account:update scope. */
     frozen?: boolean;
@@ -55,16 +55,16 @@ export namespace UpdateCardsRequest {
     }
 
     /**
-     * Details for the invited cardholder, accepted only while completing onboarding on an invited card. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not.
+     * Details for the cardholder. On an invited card, these fields complete onboarding. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not. On an issued card, only email and phone can be changed. 3D Secure verification codes go to that email and phone.
      */
     export interface Cardholder {
-        /** Email address for the invited cardholder. */
+        /** Email address for the cardholder. */
         email?: string | undefined;
-        /** Legal first name of the invited cardholder. */
+        /** Legal first name of the invited cardholder. Only accepted on an invited card. */
         first_name?: string | undefined;
-        /** Legal last name of the invited cardholder. */
+        /** Legal last name of the invited cardholder. Only accepted on an invited card. */
         last_name?: string | undefined;
-        /** Phone number for the invited cardholder. */
+        /** Phone number for the cardholder, in international format with the country code (for example `+14155550100`). */
         phone?: string | undefined;
     }
 
