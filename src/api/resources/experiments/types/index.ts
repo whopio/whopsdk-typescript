@@ -3,3 +3,4 @@ export * from "./ListExperimentsRequestDirection.js";
 export * from "./ListExperimentsRequestOrder.js";
 export * from "./ListExperimentsRequestStatus.js";
 export * from "./ListExperimentsResponse.js";
+export * from "./ResultsExperimentsResponse.js";

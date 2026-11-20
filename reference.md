@@ -14869,7 +14869,7 @@ await client.experiments.update({
 <dl>
 <dd>
 
-Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires `experiment:manage` on the owning account. Activating needs Economic Intelligence on for the owning account: while the account's `economic_intelligence` is `false`, this returns a `403` and the experiment keeps its status. Turn it on with `PATCH /accounts/:account_id/preferences`. Creating, editing, pausing and ending an experiment don't need it.
+Starts or resumes an experiment or feature flag so evaluation begins serving it. Activating a draft sets `started_at`. Activating a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires `experiment:manage` on the owning account. Activating needs Economic Intelligence on for the owning account. When it is off, the request returns `403` and the experiment keeps its status. Turn it on with `PATCH /accounts/:account_id/preferences`. Creating, editing, pausing, and ending an experiment without a winner do not need it.
 </dd>
 </dl>
 </dd>
@@ -14934,7 +14934,7 @@ await client.experiments.activate({
 <dl>
 <dd>
 
-Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires `experiment:manage` on the owning account.
+Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone. Omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires `experiment:manage` on the owning account. Passing `winning_arm` needs Economic Intelligence on for the owning account, like activating. Ending without one does not.
 </dd>
 </dl>
 </dd>
@@ -15034,6 +15034,71 @@ await client.experiments.pause({
 <dd>
 
 **request:** `Whop.PauseExperimentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExperimentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.experiments.<a href="/src/api/resources/experiments/client/Client.ts">results</a>({ ...params }) -> Whop.ResultsExperimentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns an experiment's results: one reading per target stat, with the arms it was read on. Requires `experiment:read` on the owning account, and the read scope of each target stat's metric, `stats:read` for most.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.experiments.results({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ResultsExperimentsRequest` 
     
 </dd>
 </dl>

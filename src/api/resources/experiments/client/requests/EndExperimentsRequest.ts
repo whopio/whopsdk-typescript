@@ -8,9 +8,9 @@
  *     }
  */
 export interface EndExperimentsRequest {
-    /** The experiment identifier — the `expt_` id or the flag_key handle. */
+    /** The experiment identifier, the `expt_` id or the `flag_key` handle. */
     id: string;
-    /** Owning account ID. Required when id is a flag key; optional for an expt_ ID. */
+    /** Owning account ID. Required when `id` is a flag key, optional for an `expt_` ID. */
     account_id?: string;
     /** What you learned and why you chose this outcome. Required. */
     findings: string;
