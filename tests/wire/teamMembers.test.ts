@@ -36,9 +36,11 @@ describe("TeamMembersClient", () => {
                     id: "ausr_xxxxxxxxxxxxxx",
                     is_agent: false,
                     is_partner: false,
+                    legal_name: "legal_name",
                     reports_to_chain: [
                         {
                             id: "ausr_xxxxxxxxxxxxxx",
+                            legal_name: null,
                             user: {
                                 id: "user_xxxxxxxxxxxxxx",
                                 name: "Dana Whitfield",
@@ -193,9 +195,11 @@ describe("TeamMembersClient", () => {
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
             is_partner: false,
+            legal_name: "legal_name",
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",
+                    legal_name: "legal_name",
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -349,9 +353,11 @@ describe("TeamMembersClient", () => {
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
             is_partner: false,
+            legal_name: "legal_name",
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",
+                    legal_name: "legal_name",
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -537,9 +543,11 @@ describe("TeamMembersClient", () => {
             id: "ausr_xxxxxxxxxxxxxx",
             is_agent: false,
             is_partner: false,
+            legal_name: "legal_name",
             reports_to_chain: [
                 {
                     id: "ausr_xxxxxxxxxxxxxx",
+                    legal_name: "legal_name",
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",

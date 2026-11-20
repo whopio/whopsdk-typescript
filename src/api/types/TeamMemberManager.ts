@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface TeamMemberManager {
     /** The manager's team member ID, starting with `ausr_` or `mber_`; treat it as opaque. */
     id: string;
+    /** The legal name from the manager's approved identity verification, returned to the account's own API key when listing a partner account's team. `null` when the manager has none, and for other callers. */
+    legal_name: string | null;
     /** The user behind the manager's team membership. */
     user: Whop.UserSummary;
 }
