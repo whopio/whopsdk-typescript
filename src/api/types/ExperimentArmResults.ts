@@ -11,6 +11,8 @@ export interface ExperimentArmResults {
     lift_unit?: (number | null) | undefined;
     /** This arm's own parameters where they differ from the reading's. `null` when they do not. */
     params?: (Record<string, string | null> | null) | undefined;
+    /** Whether `lift_confidence_interval` excludes zero, so the lift is unlikely to be noise. `false` while the interval is unknown. `null` on the control. */
+    statistically_significant?: (boolean | null) | undefined;
     /** The measure on this arm, in the reading's unit. `null` when unknown. */
     value: number | null;
 }
