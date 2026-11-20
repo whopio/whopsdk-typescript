@@ -336,6 +336,7 @@ export * from "./MarketplaceStatuses.js";
 export * from "./MediaAsset.js";
 export * from "./MediaAssetFile.js";
 export * from "./MediaAssetGeneration.js";
+export * from "./MediaAssetsAdVideo.js";
 export * from "./Member.js";
 export * from "./MemberLastActivity.js";
 export * from "./MemberLastActivityMessage.js";

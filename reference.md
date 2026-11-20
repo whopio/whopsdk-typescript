@@ -18878,7 +18878,6 @@ Starts an AI media generation job billed from the account's balance. Generation 
 
 ```typescript
 await client.media.generate({
-    prompt: "A 9:16 product showcase of a cordless power scrubber",
     type: "video"
 });
 
