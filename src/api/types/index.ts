@@ -358,6 +358,7 @@ export * from "./MembershipsSortableColumns.js";
 export * from "./MembersSortableColumns.js";
 export * from "./MemberUser.js";
 export * from "./Message.js";
+export * from "./MessageAutomation.js";
 export * from "./MessageCustomAuthor.js";
 export * from "./MessageLinkFooter.js";
 export * from "./MessageLinkPreview.js";

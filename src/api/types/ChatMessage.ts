@@ -8,6 +8,8 @@ export interface ChatMessage {
     /** `true` if the author is a team member of the account that owns this community channel. `false` for partners, private and support channels, and deleted messages. */
     author_is_team_member: boolean;
     author_user_id: string | null;
+    /** The automation that sent this message. `null` for a message no automation sent, a deleted message, or a caller without `automation:read` on the automation's account. */
+    automation: Whop.MessageAutomation | null;
     channel_id: string;
     /** Markdown content. `null` for a deleted message. */
     content: string | null;
