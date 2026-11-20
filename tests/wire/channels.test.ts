@@ -91,6 +91,7 @@ describe("ChannelsClient", () => {
                         },
                         author_is_team_member: false,
                         author_user_id: "user_xxxxxxxxxxxxxx",
+                        automation: null,
                         channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
                         content: "Content 1",
                         created_at: "2026-01-01T12:00:00.000Z",
