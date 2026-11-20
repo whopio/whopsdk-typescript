@@ -19,12 +19,16 @@ export interface CreateExperimentsRequest {
     flag_key: string;
     /** Required for full experiments; rejected on feature flags. Structure it as "If we [change] for [cohort], then [measurable behavior] will [increase/decrease], resulting in [business outcome], because [evidence]. Created by [name]." Evidence should be something real — a baseline number, a funnel breakdown — not a guess, and [name] is you, not something to leave blank. */
     hypothesis?: string | null;
+    /** `experiment` assigns its subjects to arms and takes `variants`. `beforeafter` compares a change with the period before it: it assigns nobody and needs `target_stats`. Defaults to `experiment`. */
+    kind?: CreateExperimentsRequest.Kind;
     /** Up to 20 key-value pairs you can attach to the experiment for your own use, such as which pages it changes. Keys are at most 40 characters and values at most 500. */
     metadata?: Record<string, string>;
     /** Human-readable display name. Defaults to `flag_key` when omitted. */
     name?: string;
     /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
     related_resource?: Whop.ExperimentResourceReference;
+    /** The measures the experiment sets out to move, as the stats API reads them. Only an account's experiment takes them. */
+    target_stats?: Whop.ExperimentStat[];
     /** Treatment arms to create. Users outside every arm form the implicit `control` group. Required unless `feature_flag_only` is `true`. */
     variants?: CreateExperimentsRequest.Variants.Item[];
 }
@@ -42,6 +46,12 @@ export namespace CreateExperimentsRequest {
         related_resource?: Whop.ExperimentResourceReference | undefined;
     }
 
+    /** `experiment` assigns its subjects to arms and takes `variants`. `beforeafter` compares a change with the period before it: it assigns nobody and needs `target_stats`. Defaults to `experiment`. */
+    export const Kind = {
+        Experiment: "experiment",
+        Beforeafter: "beforeafter",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     export type Variants = Variants.Item[];
 
     export namespace Variants {
