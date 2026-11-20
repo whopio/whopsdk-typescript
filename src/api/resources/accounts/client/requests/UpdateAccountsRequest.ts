@@ -21,7 +21,7 @@ export interface UpdateAccountsRequest {
     business_name?: string | null;
     /** The account's cancellation policy document. Attached to new disputes as the cancellation policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
     cancellation_policy?: UpdateAccountsRequest.CancellationPolicy | null;
-    /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
+    /** The account's saved preference for offering optional buyer VAT/tax ID entry. Checkouts where Whop collects and remits tax offer entry automatically, regardless of this preference. Does not require a VAT ID to purchase. */
     collect_vat_id?: boolean;
     /** Country where the account is located. */
     country?: string | null;
