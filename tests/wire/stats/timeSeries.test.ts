@@ -18,11 +18,11 @@ describe("TimeSeriesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    breakdowns: ["component"],
+                    breakdowns: ["result_type"],
                     description:
-                        "A 0 to 100 campaign score at each interval, over the hours since the current claim (at most the last 7 days) that the campaign was active or paused: half the share of its daily budget it charged in those hours, half the share of those hours it charged in. A claim has no score until it has charged. Several ad_xxxxxxxxxxxxxx_ids (up to 100) average their scores weighted by daily budget. breakdown_by=component, for one campaign, adds each part's score and weight and the totals behind them. A runner reads the campaigns they run; staff read any campaign with account_id=global.",
-                    key: "ad_xxxxxxxxxxxxxx_score",
-                    name: "Ad campaign score",
+                        "The average wait from a runner claiming and keeping an ad campaign to its first result of the kind it is set to get, by the day it was claimed. Campaigns set to get no result are left out. breakdown_by=result_type splits it by that kind. It counts only waits of 3 days or less. A day has no average until every campaign claimed in it has had 3 days, and the total is the average over every campaign in the range under the same rule.",
+                    key: "ad_xxxxxxxxxxxxxx_average_result_seconds",
+                    name: "Average seconds to an ad campaign getting a first result",
                     properties: ["segment"],
                     unit: "count",
                     windows: ["7d"],
