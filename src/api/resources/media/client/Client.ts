@@ -44,7 +44,6 @@ export class MediaClient {
      *
      * @example
      *     await client.media.generate({
-     *         prompt: "A 9:16 product showcase of a cordless power scrubber",
      *         type: "video"
      *     })
      */

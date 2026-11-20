@@ -3,17 +3,18 @@
 /**
  * @example
  *     {
- *         prompt: "A 9:16 product showcase of a cordless power scrubber",
  *         type: "video"
  *     }
  */
 export interface GenerateMediaRequest {
     /** Account ID, prefixed `biz_`. Defaults to the account the API key belongs to. */
     account_id?: string;
+    /** Makes a video ad: Whop writes the prompt, picks product photos, and adds a voiceover with captions. The video is 15 seconds at `720p` in 9:16. Video only. Can't be combined with `prompt`, `reference_media`, `duration_seconds` or `resolution`. */
+    ad_video?: GenerateMediaRequest.AdVideo;
     /** Video length in seconds. Video only; defaults to 5. */
     duration_seconds?: number;
-    /** What to generate. Up to 2,000 characters. */
-    prompt: string;
+    /** What to generate. Up to 2,000 characters. Required unless `ad_video` is set. */
+    prompt?: string;
     /** Optional reference file IDs (`file_` prefixed), up to 4. Images guide the output: for video, a single image seeds the opening frame; multiple images guide subject and style instead. Include one video to remake it: its motion and scene are kept and the images are swapped in. Video only; needs an image and can't be combined with `duration_seconds`. The output matches the video's length, up to 30 seconds, and is billed on it. */
     reference_media?: string[];
     /** Video resolution. Video only; defaults to `1080p`. `1080p` is not supported by Seedance 2.0 Fast or Mini; `4k` is only supported by Seedance 2.0. */
@@ -23,6 +24,14 @@ export interface GenerateMediaRequest {
 }
 
 export namespace GenerateMediaRequest {
+    /**
+     * Makes a video ad: Whop writes the prompt, picks product photos, and adds a voiceover with captions. The video is 15 seconds at `720p` in 9:16. Video only. Can't be combined with `prompt`, `reference_media`, `duration_seconds` or `resolution`.
+     */
+    export interface AdVideo {
+        /** An ad of the account, prefixed `ad_`. The video sells that ad's landing page and avoids what content review turned down in it. Omit it to sell the account's own products. */
+        ad_id?: string | undefined;
+    }
+
     /** Video resolution. Video only; defaults to `1080p`. `1080p` is not supported by Seedance 2.0 Fast or Mini; `4k` is only supported by Seedance 2.0. */
     export const Resolution = {
         FourHundredEightyP: "480p",

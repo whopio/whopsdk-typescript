@@ -14,7 +14,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "A 9:16 product showcase of a cordless power scrubber", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = {
             amount_charged: 2.5,
             completed_at: "2026-01-01T12:00:00.000Z",
@@ -26,6 +26,7 @@ describe("MediaClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             generation: {
+                ad_video: { ad_id: "ad_id" },
                 duration_seconds: 5,
                 prompt: "A 9:16 product showcase of a cordless power scrubber",
                 reference_media: ["file_xxxxxxxxxxxxxx"],
@@ -47,7 +48,6 @@ describe("MediaClient", () => {
             .build();
 
         const response = await client.media.generate({
-            prompt: "A 9:16 product showcase of a cordless power scrubber",
             type: "video",
         });
         expect(response).toEqual(rawResponseBody);
@@ -62,7 +62,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "prompt", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -76,7 +76,6 @@ describe("MediaClient", () => {
 
         await expect(async () => {
             return await client.media.generate({
-                prompt: "prompt",
                 type: "video",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -91,7 +90,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "prompt", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -105,7 +104,6 @@ describe("MediaClient", () => {
 
         await expect(async () => {
             return await client.media.generate({
-                prompt: "prompt",
                 type: "video",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -120,7 +118,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "prompt", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = { error: { deposit_url: "deposit_url", message: "message", type: "payment_required" } };
 
         server
@@ -134,7 +132,6 @@ describe("MediaClient", () => {
 
         await expect(async () => {
             return await client.media.generate({
-                prompt: "prompt",
                 type: "video",
             });
         }).rejects.toThrow(Whop.PaymentRequiredError);
@@ -149,7 +146,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "prompt", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -163,7 +160,6 @@ describe("MediaClient", () => {
 
         await expect(async () => {
             return await client.media.generate({
-                prompt: "prompt",
                 type: "video",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -178,7 +174,7 @@ describe("MediaClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { prompt: "prompt", type: "video" };
+        const rawRequestBody = { type: "video" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -192,7 +188,6 @@ describe("MediaClient", () => {
 
         await expect(async () => {
             return await client.media.generate({
-                prompt: "prompt",
                 type: "video",
             });
         }).rejects.toThrow(Whop.ConflictError);
@@ -219,6 +214,7 @@ describe("MediaClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             },
             generation: {
+                ad_video: { ad_id: "ad_id" },
                 duration_seconds: 5,
                 prompt: "A 9:16 product showcase of a cordless power scrubber",
                 reference_media: ["file_xxxxxxxxxxxxxx"],
