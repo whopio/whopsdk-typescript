@@ -1,3 +1,5 @@
+export * from "./affiliateProgram/client/requests/index.js";
+export * as affiliateProgram from "./affiliateProgram/index.js";
 export * from "./customerTracking/client/requests/index.js";
 export * as customerTracking from "./customerTracking/index.js";
 export * from "./fees/client/requests/index.js";

@@ -32906,6 +32906,72 @@ await client.webhooks.test({
 </dl>
 </details>
 
+## Accounts AffiliateProgram
+<details><summary><code>client.accounts.affiliateProgram.<a href="/src/api/resources/accounts/resources/affiliateProgram/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountAffiliateProgram</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the account's affiliate program. It holds the instructions for its affiliates, its affiliate application and the product it features for affiliates. This endpoint needs no authentication. To change the program, update the `affiliate_program` key of the account's preferences. To turn affiliates on or off, set `global_affiliate_status` and `member_affiliate_status` on each product.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.affiliateProgram.retrieve({
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.RetrieveAffiliateProgramRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AffiliateProgramClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Accounts CustomerTracking
 <details><summary><code>client.accounts.customerTracking.<a href="/src/api/resources/accounts/resources/customerTracking/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountCustomerTracking</code></summary>
 <dl>
@@ -33261,7 +33327,7 @@ await client.accounts.preferences.retrieve({
 <dl>
 <dd>
 
-Updates the account's preferences. Each top-level key in the body replaces its stored value as a whole. Keys left out keep their current values.
+Updates the account's preferences. Keys left out keep their current values. In `affiliate_program` and `ads_triple_whale_integration`, only the fields you send change. `customer_tracking`, `card_surcharge` and `ads_payment_methods` replace their stored value as a whole.
 
 The required scope depends on which preferences you update.
 
@@ -33271,6 +33337,7 @@ The required scope depends on which preferences you update.
 - `payment:dispute`: `dispute_fighter_enabled`.
 - `company:update`: `economic_intelligence_duration_key`, `economic_intelligence_auto_renew`, `review_request_emails`, `cancellation_emails`, `renewal_reminder_emails`, `failed_payment_emails`, `subaccount_notifications`, `subaccount_team_view_only`, `card_surcharge`.
 - `company:manage_checkout`: `feedback_options`, `customer_tracking`.
+- `affiliate:update`: `affiliate_program`.
 
 To update keys under more than one scope, the API key needs all of those scopes.
 </dd>

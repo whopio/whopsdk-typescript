@@ -13,6 +13,8 @@ export interface AccountPreferences {
     ads_scheduling_timezone: string;
     /** The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel, and tags ad click-through URLs with `tw_source`/`tw_adid` so Triple Whale's pixel attributes conversions back to the right ad. `status` is `connected`, `not_connected`, or `requires_shop_domain` (Triple Whale keys records by shop, so spend only flows once `shop_domain` is set). `masked_api_key` shows the leading characters of the stored key; the full key is never returned. `shop_domain` is the shop spend is reported for. */
     ads_triple_whale_integration: Record<string, unknown>;
+    /** The account's affiliate program: its instructions, its application and the product it features for affiliates. `GET /accounts/{account_id}/affiliate_program` returns the same object without authentication. */
+    affiliate_program: Whop.AccountAffiliateProgram;
     /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
     cancellation_emails: boolean;
     /** The card surcharge a point of sale adds to credit card payments. Debit and prepaid cards never pay it. */

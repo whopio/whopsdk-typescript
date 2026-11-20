@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { AffiliateProgramClient } from "../resources/affiliateProgram/client/Client.js";
 import { CustomerTrackingClient } from "../resources/customerTracking/client/Client.js";
 import { FeesClient } from "../resources/fees/client/Client.js";
 import { FinancingProvidersClient } from "../resources/financingProviders/client/Client.js";
@@ -28,6 +29,7 @@ export declare namespace AccountsClient {
  */
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
+    protected _affiliateProgram: AffiliateProgramClient | undefined;
     protected _customerTracking: CustomerTrackingClient | undefined;
     protected _fees: FeesClient | undefined;
     protected _financingProviders: FinancingProvidersClient | undefined;
@@ -36,6 +38,10 @@ export class AccountsClient {
 
     constructor(options: AccountsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get affiliateProgram(): AffiliateProgramClient {
+        return (this._affiliateProgram ??= new AffiliateProgramClient(this._options));
     }
 
     public get customerTracking(): CustomerTrackingClient {

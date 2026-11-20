@@ -3,6 +3,8 @@ export * from "./AccessPassOrder.js";
 export * from "./AccessPassTypes.js";
 export * from "./AccessToken.js";
 export * from "./Account.js";
+export * from "./AccountAffiliateProgram.js";
+export * from "./AccountAffiliateProgramQuestion.js";
 export * from "./AccountBalanceBreakdown.js";
 export * from "./AccountBalanceSettlement.js";
 export * from "./AccountBalanceToken.js";

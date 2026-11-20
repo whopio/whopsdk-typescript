@@ -5,7 +5,7 @@ export interface AccountCards {
     decline_reason: AccountCards.DeclineReason | null;
     /** Whether the card application verifies a business (`business`, KYB) or a person (`individual`, consumer identity). `null` when the application is not yet linked to a verification. */
     kind: AccountCards.Kind | null;
-    /** Where the card application stands. `approved` means cards can be issued. `needs_verification` means the applicant has not completed identity verification yet; `needs_information` means they did, but the documents were rejected for a fixable reason and must be resubmitted. `pending` and `manual_review` are in flight. `denied`, `locked`, and `canceled` are terminal. */
+    /** Where the card application stands. `approved` means cards can be issued. `needs_verification` means the applicant has not completed identity verification yet. `needs_information` means they did, but the documents were rejected for a fixable reason and must be resubmitted. `pending` and `manual_review` are in flight. `denied`, `locked`, and `canceled` are terminal. */
     status: AccountCards.Status;
 }
 
@@ -28,7 +28,7 @@ export namespace AccountCards {
         Business: "business",
     } as const;
     export type Kind = (typeof Kind)[keyof typeof Kind];
-    /** Where the card application stands. `approved` means cards can be issued. `needs_verification` means the applicant has not completed identity verification yet; `needs_information` means they did, but the documents were rejected for a fixable reason and must be resubmitted. `pending` and `manual_review` are in flight. `denied`, `locked`, and `canceled` are terminal. */
+    /** Where the card application stands. `approved` means cards can be issued. `needs_verification` means the applicant has not completed identity verification yet. `needs_information` means they did, but the documents were rejected for a fixable reason and must be resubmitted. `pending` and `manual_review` are in flight. `denied`, `locked`, and `canceled` are terminal. */
     export const Status = {
         Approved: "approved",
         Pending: "pending",
