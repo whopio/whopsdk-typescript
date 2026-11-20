@@ -3,14 +3,14 @@
 export interface RecommendedActionChangedResource {
     /** ID of the resource. A `variant` ID is prefixed `plan_`. */
     id: string;
-    /** Type of the resource. New types can be added, so skip an entry whose `object` you do not know. */
-    object: RecommendedActionChangedResource.Object_;
+    /** Type of the resource. New types can be added, so skip an entry whose `resource_type` you do not know. */
+    resource_type: RecommendedActionChangedResource.ResourceType;
 }
 
 export namespace RecommendedActionChangedResource {
-    /** Type of the resource. New types can be added, so skip an entry whose `object` you do not know. */
-    export const Object_ = {
+    /** Type of the resource. New types can be added, so skip an entry whose `resource_type` you do not know. */
+    export const ResourceType = {
         Variant: "variant",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
 }
