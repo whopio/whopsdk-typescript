@@ -30,11 +30,13 @@ describe("ExperimentsClient", () => {
                     flag_key: "checkout_redesign_v2",
                     hypothesis: "Users will convert more",
                     id: "expt_xxxxxxxxxxxxxx",
+                    kind: "boolean",
                     metadata: { key: "value" },
                     name: "Checkout Redesign V2",
                     related_resource: { id: "id", object: "app" },
                     started_at: "2026-01-01T12:00:00.000Z",
                     status: "draft",
+                    target_stats: [{ direction: "up", estimate: null, metric: "metric", params: { key: "value" } }],
                     updated_at: "2026-01-01T12:00:00.000Z",
                     variants: [{ name: "treatment", weight: 50 }],
                     winning_arm: "treatment",
@@ -107,11 +109,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -218,11 +222,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -282,11 +288,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -360,11 +368,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -466,11 +476,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -575,11 +587,13 @@ describe("ExperimentsClient", () => {
             flag_key: "checkout_redesign_v2",
             hypothesis: "Users will convert more",
             id: "expt_xxxxxxxxxxxxxx",
+            kind: "boolean",
             metadata: { key: "value" },
             name: "Checkout Redesign V2",
             related_resource: { id: "id", object: "app" },
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
+            target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
             updated_at: "2026-01-01T12:00:00.000Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
@@ -626,5 +640,82 @@ describe("ExperimentsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("results (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            conclusion: "Gross revenue rose 55.98% against the period before, outside the margin of error.",
+            ended_at: "2026-01-01T12:00:00.000Z",
+            flag_key: "pricing_page_change",
+            from: "from",
+            name: "Pricing page change",
+            primary_stat: "gross_revenue",
+            started_at: "2026-01-01T12:00:00.000Z",
+            stats: [
+                {
+                    control: {
+                        confidence_interval: [790.5],
+                        params: { from: "2026-01-01T12:00:00.000Z", to: "2026-01-01T12:00:00.000Z" },
+                        value: 840,
+                    },
+                    direction: "up",
+                    estimate: 900,
+                    metric: "gross_revenue",
+                    params: { from: "2026-01-01", to: "2026-01-01" },
+                    unit: "currency",
+                },
+            ],
+            status: "draft",
+            to: "to",
+        };
+
+        server
+            .mockEndpoint()
+            .get("/experiments/id/results")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.experiments.results({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("results (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/experiments/id/results")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.experiments.results({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
     });
 });

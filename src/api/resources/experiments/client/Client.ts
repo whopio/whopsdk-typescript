@@ -460,7 +460,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Starts (or resumes) an experiment or feature flag so evaluation begins serving it. Activating a draft stamps `started_at`; resuming a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires `experiment:manage` on the owning account. Activating needs Economic Intelligence on for the owning account: while the account's `economic_intelligence` is `false`, this returns a `403` and the experiment keeps its status. Turn it on with `PATCH /accounts/:account_id/preferences`. Creating, editing, pausing and ending an experiment don't need it.
+     * Starts or resumes an experiment or feature flag so evaluation begins serving it. Activating a draft sets `started_at`. Activating a paused experiment keeps the original start. Only drafts and paused experiments can be activated. Requires `experiment:manage` on the owning account. Activating needs Economic Intelligence on for the owning account. When it is off, the request returns `403` and the experiment keeps its status. Turn it on with `PATCH /accounts/:account_id/preferences`. Creating, editing, pausing, and ending an experiment without a winner do not need it.
      *
      * @param {Whop.ActivateExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -546,7 +546,7 @@ export class ExperimentsClient {
     }
 
     /**
-     * Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone; omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires `experiment:manage` on the owning account.
+     * Concludes the experiment and records required `findings`. Pass `winning_arm` to serve the winning treatment to everyone. Omit it when control won. Ended experiments cannot restart, but may be ended again to correct the winner. Requires `experiment:manage` on the owning account. Passing `winning_arm` needs Economic Intelligence on for the owning account, like activating. Ending without one does not.
      *
      * @param {Whop.EndExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -710,5 +710,87 @@ export class ExperimentsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/experiments/{id}/pause");
+    }
+
+    /**
+     * Returns an experiment's results: one reading per target stat, with the arms it was read on. Requires `experiment:read` on the owning account, and the read scope of each target stat's metric, `stats:read` for most.
+     *
+     * @param {Whop.ResultsExperimentsRequest} request
+     * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.experiments.results({
+     *         id: "id"
+     *     })
+     */
+    public results(
+        request: Whop.ResultsExperimentsRequest,
+        requestOptions?: ExperimentsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.ResultsExperimentsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__results(request, requestOptions));
+    }
+
+    private async __results(
+        request: Whop.ResultsExperimentsRequest,
+        requestOptions?: ExperimentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.ResultsExperimentsResponse>> {
+        const { id, account_id: accountId, from: from_, to } = request;
+        const _queryParams: Record<string, unknown> = {
+            account_id: accountId,
+            from: from_,
+            to,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `experiments/${core.url.encodePathParam(id)}/results`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.ResultsExperimentsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/experiments/{id}/results");
     }
 }

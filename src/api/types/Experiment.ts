@@ -26,6 +26,8 @@ export interface Experiment {
     hypothesis?: (string | null) | undefined;
     /** Unique identifier for the experiment, prefixed `expt_`. */
     id: string;
+    /** The kind of experiment: `boolean` is a feature flag, `experiment` assigns its subjects to arms, `beforeafter` compares a change with the period before it. */
+    kind?: Experiment.Kind | undefined;
     /** Key-value pairs attached when the experiment was created. Empty when none were set. */
     metadata?: Record<string, string> | undefined;
     /** Human-readable display name. */
@@ -36,6 +38,8 @@ export interface Experiment {
     started_at?: (string | null) | undefined;
     /** Lifecycle state. `draft` — not yet live; `active` — currently running; `paused` — traffic paused; `ended` — concluded. */
     status: Experiment.Status;
+    /** The measures the experiment sets out to move, as the stats API reads them. `null` when there are none. */
+    target_stats?: (Whop.ExperimentStat[] | null) | undefined;
     updated_at: string | null;
     /** Treatment arms. Users outside every arm's allocation form the implicit `control` group. Weights only ever grow and arms are never removed, so a user moves from control into a treatment at most once. */
     variants: Experiment.Variants.Item[];
@@ -56,6 +60,13 @@ export namespace Experiment {
         related_resource?: Whop.ExperimentResourceReference | undefined;
     }
 
+    /** The kind of experiment: `boolean` is a feature flag, `experiment` assigns its subjects to arms, `beforeafter` compares a change with the period before it. */
+    export const Kind = {
+        Boolean: "boolean",
+        Experiment: "experiment",
+        Beforeafter: "beforeafter",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     /** Lifecycle state. `draft` — not yet live; `active` — currently running; `paused` — traffic paused; `ended` — concluded. */
     export const Status = {
         Draft: "draft",
