@@ -13,11 +13,11 @@ export interface CreatePaymentsRequest extends Whop.PaymentInput {
     affiliate_code?: string | null;
     /** Adds the account's card surcharge, set in `card_surcharge` on the account's preferences, when the card is a credit card. Send it only after you have shown the buyer the surcharge. Whop calculates the amount. You cannot send an amount. With a `confirmation_token`, the surcharge is a line of its own, calculated on the purchase after discounts and before tax. With a `card_present` `payment_method`, the surcharge is added after the reader reads the card, with `POST /payments/{id}/apply_surcharge`. A debit or prepaid card, or an account that cannot surcharge, pays no surcharge. The payment still goes ahead. Only for a one-time purchase, and not with `quote_id`. Defaults to false. */
     apply_surcharge?: boolean | null;
-    /** Minutes after authorization at which Whop captures the hold automatically unless it has been voided. Requires `capture: false`. Between 5 and 5760 (4 days). */
+    /** Minutes after authorization at which Whop captures the hold automatically unless it has been voided. Requires `capture: false`. Between 5 and 5760 (4 days), or 5 and 1440 (1 day) for `card_present`. */
     auto_capture_after_minutes?: number | null;
     /** The buyer's billing address, returned on the payment as `billing_address` and used to calculate tax when Whop calculates it for the account. Only with a `paypal` `payment_method`. Only the keys you supply are kept. */
     billing_address?: CreatePaymentsRequest.BillingAddress | null;
-    /** Whether to capture a card payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. */
+    /** Whether to capture a card payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. With a `card_present` `payment_method`, false holds the sale so its line items can change after the tap with `PATCH /payments/{id}`. Capture it for its total, or Whop captures it after `auto_capture_after_minutes` (10 by default). */
     capture?: boolean | null;
     /** A confirmation token describing a payment method the buyer just supplied. Provide this instead of `member_id` and `payment_method_id`; the buyer is resolved from the token's billing email, or from `email`. The buyer may still have a step to complete — poll the payment's status for what to do next. */
     confirmation_token?: string | null;

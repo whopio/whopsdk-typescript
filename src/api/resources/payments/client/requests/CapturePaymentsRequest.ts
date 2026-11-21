@@ -9,4 +9,8 @@
 export interface CapturePaymentsRequest {
     /** The unique identifier of the payment. */
     id: string;
+    /** The amount to capture, in the payment's currency. It must equal the payment's `total`, and defaults to it. The total moves away from the authorized amount when its line items change after the card was authorized. Capturing more or less than the authorized amount is off by default. Contact Whop support to turn it on for your account. */
+    amount?: number | null;
+    /** Keys and values added to the payment's `metadata` once it is captured, such as the file of the buyer's signature. Only for an in-person payment created with `capture: false`. */
+    metadata?: Record<string, string | null> | null;
 }
