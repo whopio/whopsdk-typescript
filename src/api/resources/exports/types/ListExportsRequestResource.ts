@@ -34,7 +34,6 @@ export const ListExportsRequestResource = {
     PromoCodes: "promo_codes",
     Resolutions: "resolutions",
     Entries: "entries",
-    Leads: "leads",
     Invoices: "invoices",
     CancelationReasons: "cancelation_reasons",
     ChildCompanies: "child_companies",
