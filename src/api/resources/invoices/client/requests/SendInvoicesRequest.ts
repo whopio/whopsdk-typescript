@@ -13,6 +13,10 @@ export interface SendInvoicesRequest {
     charge_at?: string | null;
     /** How the subscription this invoice starts collects each renewal. `charge_automatically` charges the payment method that paid the invoice each period: the draft's `payment_method_id`, or the one the customer pays the invoice link with. `send_invoice` issues a numbered invoice each period, due on the renewal date and emailed with its payment link to the latest invoice's `recipient_emails`, so it needs at least one recipient and isn't available for invoices billed to a business. Defaults to `charge_automatically`. Only for a draft with a recurring item. A scheduled send applies it when it fires (see `scheduled_collection_method`). */
     collection_method?: SendInvoicesRequest.CollectionMethod | null;
+    /** A note to the customer in the quote email. It is not stored. Only with `send_as` set to `quote`. Defaults to "Please review and accept this quote" when it is blank or left out. */
+    message?: string | null;
+    /** How to send the draft. `invoice` issues it and emails it to be paid. `quote` emails it as a quote and keeps it a draft. Defaults to `invoice`. */
+    send_as?: SendInvoicesRequest.SendAs;
     /** When to send the draft, as an ISO 8601 timestamp in the future. Omit to send now. */
     send_at?: string | null;
 }
@@ -24,4 +28,10 @@ export namespace SendInvoicesRequest {
         SendInvoice: "send_invoice",
     } as const;
     export type CollectionMethod = (typeof CollectionMethod)[keyof typeof CollectionMethod];
+    /** How to send the draft. `invoice` issues it and emails it to be paid. `quote` emails it as a quote and keeps it a draft. Defaults to `invoice`. */
+    export const SendAs = {
+        Invoice: "invoice",
+        Quote: "quote",
+    } as const;
+    export type SendAs = (typeof SendAs)[keyof typeof SendAs];
 }
