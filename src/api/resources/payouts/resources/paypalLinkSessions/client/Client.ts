@@ -24,7 +24,7 @@ export class PaypalLinkSessionsClient {
     }
 
     /**
-     * Starts a Log in with PayPal session so PayPal itself can confirm the account holder owns a verified PayPal account. Send the holder to `authorize_url`; after they log in, PayPal returns them to Whop, and Whop redirects the browser to your `return_url` with a `paypal_link_token` query parameter to pass to `POST /payouts/methods`. If the login fails or is canceled, `return_url` receives an `error` query parameter (`paypal_login_canceled` or `paypal_login_failed`) instead. The payout method saved this way pays the email on the PayPal account, and its holder name must match the name on the account's payout setup. PayPal login is rolling out per account: until it is enabled for the account this answers `403 forbidden`, and `supports_paypal_login` on `GET /payouts/supported_methods` is false.
+     * Starts a Log in with PayPal session so PayPal itself can confirm the account holder owns a verified PayPal account. Send the holder to `authorize_url`. After they log in, PayPal returns them to Whop, and Whop redirects the browser to your `return_url`. The redirect adds a `paypal_link_token` query parameter to pass to `POST /payouts/methods`. If the login fails or is canceled, `return_url` receives an `error` query parameter (`paypal_login_canceled` or `paypal_login_failed`) instead. The payout method saved this way pays the email on the PayPal account. Its holder name must match the name on the account's payout setup.
      *
      * @param {Whop.payouts.CreatePaypalLinkSessionsRequest} request
      * @param {PaypalLinkSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
