@@ -21,6 +21,7 @@ export type UpdateVerificationsRequestBody =
                     state?: (string | null) | undefined;
                 }
               | undefined;
+          phone?: string | undefined;
           requested_information?:
               | {
                     address?:
@@ -121,6 +122,7 @@ export type UpdateVerificationsRequestBody =
                     verification_id?: string | undefined;
                 }[]
               | undefined;
+          phone?: string | undefined;
           place_of_incorporation?: string | undefined;
           registration_number?: string | undefined;
           requested_information?:
