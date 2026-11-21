@@ -102,8 +102,23 @@ export namespace PostPayoutCreatedPayload {
             code: string | null;
             /** The effective time of the reversal that put the funds back in the balance — `null` if they never left it or have not returned yet. Set only once the return is confirmed in the ledger; the ledger posting itself can land moments after this time. */
             funds_returned_at: string | null;
-            /** Human-readable explanation of the failure. Callers holding `payout:destination:read` may receive text personalized to the destination; other callers get the generic catalog message. */
+            /** Human-readable explanation of the failure. Callers holding `payout:destination:read` may receive text personalized to the destination. Other callers get the generic catalog message. */
             message: string | null;
+            /** What to do before a new payout can succeed. `withdraw_again` means that the payout method needs no change. `null` when the failure has no code from the error catalog, or when the account owner canceled the payout. */
+            next_step: Failure.NextStep | null;
+        }
+
+        export namespace Failure {
+            /** What to do before a new payout can succeed. `withdraw_again` means that the payout method needs no change. `null` when the failure has no code from the error catalog, or when the account owner canceled the payout. */
+            export const NextStep = {
+                UpdatePayoutMethod: "update_payout_method",
+                UseAnotherPayoutMethod: "use_another_payout_method",
+                CompleteVerification: "complete_verification",
+                WithdrawAgain: "withdraw_again",
+                ContactBank: "contact_bank",
+                ContactSupport: "contact_support",
+            } as const;
+            export type NextStep = (typeof NextStep)[keyof typeof NextStep];
         }
 
         /** Who bore the payout fee: the account itself, or its parent platform. */
