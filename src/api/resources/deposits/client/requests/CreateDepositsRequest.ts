@@ -9,6 +9,8 @@
 export interface CreateDepositsRequest {
     /** Amount to prefill on hosted deposit page. Crypto deposits require a $10 minimum. With `payment_method_id`, the amount in USD to charge, and required. */
     amount?: number;
+    /** Bank account currency to set up for the destination. A USD account is always set up. Pass `cad` once to also set up a CAD account. After that, every request returns the details of all set-up currencies. */
+    currency?: CreateDepositsRequest.Currency;
     /** Account ID to fund, `biz_` or `user_`. Any business resolves without authentication; a user account resolves only for that same authenticated user. */
     destination: string;
     /** Custom metadata to attach to the payment the charge creates. Ignored unless `payment_method_id` is provided. */
@@ -20,6 +22,13 @@ export interface CreateDepositsRequest {
 }
 
 export namespace CreateDepositsRequest {
+    /** Bank account currency to set up for the destination. A USD account is always set up. Pass `cad` once to also set up a CAD account. After that, every request returns the details of all set-up currencies. */
+    export const Currency = {
+        Usd: "usd",
+        Cad: "cad",
+    } as const;
+    export type Currency = (typeof Currency)[keyof typeof Currency];
+
     export namespace Metadata {
         export type Value = string | number | boolean;
     }
