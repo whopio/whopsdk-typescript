@@ -130,6 +130,8 @@ export namespace ListVerificationsResponse {
                     required_documents: Item.RequiredDocuments.Item[];
                     /** What the person is to the business. */
                     roles: Item.Roles.Item[];
+                    /** Hosted verification session URL for the owner to complete their own identity checks. Expires 7 days after creation. `null` unless the business review waits on this owner to start or finish a hosted session. */
+                    session_url: string | null;
                     /** Where the owner's own verification stands, in the same states as `status`. `action_required` when their documents need sending again. */
                     status: Item.Status;
                 }
