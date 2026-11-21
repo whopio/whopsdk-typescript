@@ -414,6 +414,7 @@ export * from "./PaymentInput.js";
 export * from "./PaymentInstructions.js";
 export * from "./PaymentInstrument.js";
 export * from "./PaymentInstrumentCard.js";
+export * from "./PaymentInstrumentCrypto.js";
 export * from "./PaymentLastPaymentError.js";
 export * from "./PaymentLegacy.js";
 export * from "./PaymentLevelsRebate.js";

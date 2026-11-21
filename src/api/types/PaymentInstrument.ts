@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface PaymentInstrument {
     /** Card, Apple Pay, and Google Pay payments only: the card's network, last four, issuer identification number, expiry, and network transaction id. */
     card: Whop.PaymentInstrumentCard | null;
+    /** Crypto payments only: the on-chain transaction that the buyer sent. */
+    crypto: Whop.PaymentInstrumentCrypto | null;
     /** Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the method's own name ("Klarna"). */
     display_name: string;
     /** The standard icon set: square and card shapes, each in light and dark colorways. */

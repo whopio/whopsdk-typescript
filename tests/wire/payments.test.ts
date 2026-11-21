@@ -88,6 +88,7 @@ describe("PaymentsClient", () => {
                             last4: "4242",
                             network_transaction_id: "016153570198200",
                         },
+                        crypto: null,
                         display_name: "Visa •••• 4242",
                         icons: {
                             card: {
@@ -359,6 +360,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -749,6 +751,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -996,6 +999,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1669,6 +1673,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -2000,6 +2005,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -2271,6 +2277,7 @@ describe("PaymentsClient", () => {
                     last4: "4242",
                     network_transaction_id: "016153570198200",
                 },
+                crypto: { transaction_hash: "transaction_hash" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
