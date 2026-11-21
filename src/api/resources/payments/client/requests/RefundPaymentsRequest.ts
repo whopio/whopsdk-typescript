@@ -9,6 +9,8 @@
 export interface RefundPaymentsRequest {
     /** The payment to refund, prefixed `pay_`. */
     id: string;
+    /** The buyer's Solana wallet address, for a crypto payment only. A crypto payment is refunded to the wallet it came from when that wallet is known. When it is not known, the refund is refused until you send this address. The refund then goes to this address as USDC on Solana and cannot be reversed. Not accepted for any other payment. */
+    destination_wallet?: string | null;
     /** Your own key-value data to attach to the refund, returned on it and on its `refund.created` and `refund.updated` webhooks. At most 50 keys; keys up to 100 characters and values up to 500. */
     metadata?: Record<string, string | null> | null;
     /** The amount to refund, stated in this payment's `currency` like every other amount on it. When the buyer was billed in a different currency, it is converted at the payment's own exchange rate before the refund is issued. An amount that covers everything still refundable refunds the rest of the payment — omit it to refund the rest without having to work out what that is. */
