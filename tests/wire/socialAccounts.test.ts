@@ -73,7 +73,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = {
             external_id: "17841479809129315",
             id: "sacc_xxxxxxxxxxxxxx",
@@ -106,7 +106,8 @@ describe("SocialAccountsClient", () => {
             .build();
 
         const response = await client.socialAccounts.create({
-            platform: "facebook",
+            platform: "aimerce",
+            api_key: "api_key",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -120,7 +121,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -134,7 +135,8 @@ describe("SocialAccountsClient", () => {
 
         await expect(async () => {
             return await client.socialAccounts.create({
-                platform: "facebook",
+                platform: "aimerce",
+                api_key: "api_key",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

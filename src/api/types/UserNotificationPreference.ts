@@ -9,10 +9,10 @@ export interface UserNotificationPreference {
     id: string;
     /** What the user is notified about in this scope: `all` or `nothing`. */
     level: UserNotificationPreference.Level;
-    /** The type of object. Always `notification_preference`. */
-    object: UserNotificationPreference.Object_;
     /** What the preference applies to. Echo it back to `PATCH /users/me/preferences/notifications` to change this preference. */
     scope: Whop.NotificationPreferenceScope;
+    /** Always `notification_preference`. */
+    type: UserNotificationPreference.Type;
     /** When the preference was last changed, as an ISO 8601 timestamp. */
     updated_at: string;
 }
@@ -24,9 +24,9 @@ export namespace UserNotificationPreference {
         Nothing: "nothing",
     } as const;
     export type Level = (typeof Level)[keyof typeof Level];
-    /** The type of object. Always `notification_preference`. */
-    export const Object_ = {
+    /** Always `notification_preference`. */
+    export const Type = {
         NotificationPreference: "notification_preference",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type Type = (typeof Type)[keyof typeof Type];
 }

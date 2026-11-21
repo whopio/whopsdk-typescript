@@ -11,16 +11,16 @@ export interface MemberLastActivityMessage {
     created_at: string;
     /** The message ID. */
     id: string;
-    /** Always `message`. */
-    object: MemberLastActivityMessage.Object_;
     /** The message text without formatting. `null` when the message has no text, such as an attachment on its own. */
     plain_content: string | null;
+    /** Always `message`. */
+    type: MemberLastActivityMessage.Type;
 }
 
 export namespace MemberLastActivityMessage {
     /** Always `message`. */
-    export const Object_ = {
+    export const Type = {
         Message: "message",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type Type = (typeof Type)[keyof typeof Type];
 }

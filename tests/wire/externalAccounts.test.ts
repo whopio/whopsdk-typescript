@@ -111,7 +111,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = {
             external_id: "555222",
             id: "sacc_xxxxxxxxxxxxxx",
@@ -144,7 +144,8 @@ describe("ExternalAccountsClient", () => {
             .build();
 
         const response = await client.externalAccounts.create({
-            platform: "facebook",
+            platform: "aimerce",
+            api_key: "api_key",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -158,7 +159,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -172,7 +173,8 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.create({
-                platform: "facebook",
+                platform: "aimerce",
+                api_key: "api_key",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -186,7 +188,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -200,7 +202,8 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.create({
-                platform: "facebook",
+                platform: "aimerce",
+                api_key: "api_key",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -214,7 +217,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -228,7 +231,8 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.create({
-                platform: "facebook",
+                platform: "aimerce",
+                api_key: "api_key",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -242,7 +246,7 @@ describe("ExternalAccountsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { platform: "facebook" };
+        const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -256,7 +260,8 @@ describe("ExternalAccountsClient", () => {
 
         await expect(async () => {
             return await client.externalAccounts.create({
-                platform: "facebook",
+                platform: "aimerce",
+                api_key: "api_key",
             });
         }).rejects.toThrow(Whop.ServiceUnavailableError);
     });

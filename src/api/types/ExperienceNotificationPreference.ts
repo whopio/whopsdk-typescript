@@ -5,10 +5,10 @@ import type * as Whop from "../index.js";
 export interface ExperienceNotificationPreference {
     /** What the user is notified about in the experience: `all` notifications, only `mentions`, or `nothing`. */
     level: ExperienceNotificationPreference.Level;
-    /** The type of object. Always `experience_notification_preference`. */
-    object: ExperienceNotificationPreference.Object_;
     /** What the preference applies to. Echo it back to `PATCH /users/me/preferences/notifications` to change this preference. */
     scope: Whop.NotificationPreferenceScope;
+    /** Always `experience_notification_preference`. */
+    type: ExperienceNotificationPreference.Type;
 }
 
 export namespace ExperienceNotificationPreference {
@@ -19,9 +19,9 @@ export namespace ExperienceNotificationPreference {
         Nothing: "nothing",
     } as const;
     export type Level = (typeof Level)[keyof typeof Level];
-    /** The type of object. Always `experience_notification_preference`. */
-    export const Object_ = {
+    /** Always `experience_notification_preference`. */
+    export const Type = {
         ExperienceNotificationPreference: "experience_notification_preference",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type Type = (typeof Type)[keyof typeof Type];
 }

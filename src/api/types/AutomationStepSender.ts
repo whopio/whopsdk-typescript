@@ -3,16 +3,16 @@
 import type * as Whop from "../index.js";
 
 /**
- * Who a step's message comes from. `object` picks the shape: an `email_address` for an `email` step, a `user` on the team for a `message` step.
+ * Who a step's message comes from. `type` picks the shape: an `email_address` for an `email` step, a `user` on the team for a `message` step.
  */
 export type AutomationStepSender = Whop.AutomationStepSender.EmailAddress | Whop.AutomationStepSender.User;
 
 export namespace AutomationStepSender {
     export interface EmailAddress extends Whop.AutomationStepEmailAddressSender {
-        object: "email_address";
+        type: "email_address";
     }
 
     export interface User extends Whop.AutomationStepUserSender {
-        object: "user";
+        type: "user";
     }
 }

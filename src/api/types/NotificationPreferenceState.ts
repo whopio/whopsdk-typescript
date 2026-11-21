@@ -5,10 +5,10 @@ import type * as Whop from "../index.js";
 export interface NotificationPreferenceState {
     /** What the user is now notified about in this scope, or `null` if the preference was cleared and the scope inherits its default again. */
     level: NotificationPreferenceState.Level | null;
-    /** Which kind of preference was written: `experience_notification_preference` for an experience level, `notification_preference` for a topic override. */
-    object: NotificationPreferenceState.Object_;
     /** The scope that was written, resolved. `null` on a dimension means the preference is not narrowed there. */
     scope: Whop.NotificationPreferenceScope;
+    /** Which kind of preference was written: `experience_notification_preference` for an experience level, `notification_preference` for a topic override. */
+    type: NotificationPreferenceState.Type;
 }
 
 export namespace NotificationPreferenceState {
@@ -20,9 +20,9 @@ export namespace NotificationPreferenceState {
     } as const;
     export type Level = (typeof Level)[keyof typeof Level];
     /** Which kind of preference was written: `experience_notification_preference` for an experience level, `notification_preference` for a topic override. */
-    export const Object_ = {
+    export const Type = {
         NotificationPreference: "notification_preference",
         ExperienceNotificationPreference: "experience_notification_preference",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type Type = (typeof Type)[keyof typeof Type];
 }

@@ -21,7 +21,6 @@ describe("TopicsClient", () => {
                     created_at: "2026-01-01T12:00:00.000Z",
                     id: "unpf_xxxxxxxxxxxxxx",
                     level: "all",
-                    object: "notification_preference",
                     scope: {
                         account_id: "biz_xxxxxxxxxxxxxx",
                         channel: null,
@@ -29,6 +28,7 @@ describe("TopicsClient", () => {
                         team_account_id: "biz_xxxxxxxxxxxxxx",
                         topic_id: "topic_xxxxxxxxxxxxxx",
                     },
+                    type: "notification_preference",
                     updated_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
