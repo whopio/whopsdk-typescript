@@ -84,7 +84,7 @@ export class SocialAccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-20",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -155,7 +155,8 @@ export class SocialAccountsClient {
      *
      * @example
      *     await client.socialAccounts.create({
-     *         platform: "facebook"
+     *         platform: "aimerce",
+     *         api_key: "api_key"
      *     })
      */
     public create(
@@ -174,7 +175,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-20",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -252,7 +253,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-20",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -333,7 +334,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-20",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -407,7 +408,7 @@ export class SocialAccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-19-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-20",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

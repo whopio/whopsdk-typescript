@@ -19,7 +19,6 @@ describe("ExperiencesClient", () => {
             data: [
                 {
                     level: "all",
-                    object: "experience_notification_preference",
                     scope: {
                         account_id: "biz_xxxxxxxxxxxxxx",
                         channel: null,
@@ -27,6 +26,7 @@ describe("ExperiencesClient", () => {
                         team_account_id: "biz_xxxxxxxxxxxxxx",
                         topic_id: "topic_xxxxxxxxxxxxxx",
                     },
+                    type: "experience_notification_preference",
                 },
             ],
             page_info: {

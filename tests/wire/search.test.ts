@@ -20,7 +20,7 @@ describe("SearchClient", () => {
                 {
                     match_reason: "id",
                     record: {
-                        object: "account",
+                        type: "account",
                         banner_image_url: null,
                         description: null,
                         id: "id",

@@ -4,15 +4,15 @@ export interface AutomationActor {
     /** ID of the user, account or app, prefixed `user_`, `biz_` or `app_`. */
     id: string;
     /** What acted: a `user`, an `account` through one of its API keys, or an `app`. */
-    object: AutomationActor.Object_;
+    resource_type: AutomationActor.ResourceType;
 }
 
 export namespace AutomationActor {
     /** What acted: a `user`, an `account` through one of its API keys, or an `app`. */
-    export const Object_ = {
+    export const ResourceType = {
         User: "user",
         Account: "account",
         App: "app",
     } as const;
-    export type Object_ = (typeof Object_)[keyof typeof Object_];
+    export type ResourceType = (typeof ResourceType)[keyof typeof ResourceType];
 }

@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 /**
- * The record a result points to. Its fields depend on `object`, and every type shares basics like `title` and `image_url`.
+ * The record a result points to. Its fields depend on `type`, and every type shares basics like `title` and `image_url`.
  */
 export type SearchRecord =
     | Whop.SearchRecord.Account
@@ -17,34 +17,34 @@ export type SearchRecord =
 
 export namespace SearchRecord {
     export interface Account extends Whop.SearchRecordAccount {
-        object: "account";
+        type: "account";
     }
 
     export interface Affiliate extends Whop.SearchRecordAffiliate {
-        object: "affiliate";
+        type: "affiliate";
     }
 
     export interface Member extends Whop.SearchRecordMember {
-        object: "member";
+        type: "member";
     }
 
     export interface Membership extends Whop.SearchRecordMembership {
-        object: "membership";
+        type: "membership";
     }
 
     export interface Payment extends Whop.SearchRecordPayment {
-        object: "payment";
+        type: "payment";
     }
 
     export interface PromoCode extends Whop.SearchRecordPromoCode {
-        object: "promo_code";
+        type: "promo_code";
     }
 
     export interface ResolutionCenterCase extends Whop.SearchRecordResolutionCenterCase {
-        object: "resolution_center_case";
+        type: "resolution_center_case";
     }
 
     export interface Review extends Whop.SearchRecordReview {
-        object: "review";
+        type: "review";
     }
 }

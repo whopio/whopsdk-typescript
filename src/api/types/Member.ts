@@ -23,8 +23,8 @@ export interface Member {
     joined_at: string;
     /** When the member last opened the account's content, as an ISO 8601 timestamp. `null` if they never have. */
     last_accessed_at: string | null;
-    /** What happened at `last_activity_at`. `object` says which kind of activity it is. `null` without `support_chat:read` on the account, or when `last_activity_at` is `null`. */
-    last_activity: Whop.MemberLastActivity | null;
+    /** What happened at `last_activity_at`: a message in the member's support chat. `type` says which kind of activity it is. `null` without `support_chat:read` on the account, or when `last_activity_at` is `null`. */
+    last_activity: Whop.MemberLastActivityMessage | null;
     /** When the member and the account last interacted, as an ISO 8601 timestamp. For example, a message in the member's support chat. */
     last_activity_at: string | null;
     /** Your own key-value data stored on this member. `null` when none is set. */

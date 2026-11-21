@@ -19,7 +19,6 @@ describe("NotificationsClient", () => {
             data: [
                 {
                     level: "all",
-                    object: "notification_preference",
                     scope: {
                         account_id: "biz_xxxxxxxxxxxxxx",
                         channel: null,
@@ -27,6 +26,7 @@ describe("NotificationsClient", () => {
                         team_account_id: "biz_xxxxxxxxxxxxxx",
                         topic_id: "topic_xxxxxxxxxxxxxx",
                     },
+                    type: "notification_preference",
                 },
             ],
         };
