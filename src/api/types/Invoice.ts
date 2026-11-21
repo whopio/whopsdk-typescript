@@ -36,8 +36,16 @@ export interface Invoice {
     /** The payment methods the customer can choose from when paying through the invoice's checkout link. It takes precedence over the invoice's variants and the account. `null` when the invoice uses its variants' payment methods. */
     payment_method_configuration: Whop.CheckoutSessionPaymentMethodConfiguration | null;
     payment_method_id: string | null;
+    /** When the customer accepted and signed the quote, as an ISO 8601 timestamp. An edit to the draft clears it, unless the edit changes only `recipient_emails`. `null` when the quote was not accepted. */
+    quote_accepted_at: string | null;
     /** When the draft was last emailed to its recipients as a quote, as an ISO 8601 timestamp. A quote stays a draft and cannot be paid. It is not issued on its `due_at`. `null` when the invoice was never sent as a quote. */
     quote_sent_at: string | null;
+    /** A link to the signature the customer drew, as a PNG image with a transparent background. The link expires after a short time. `null` when the quote was not accepted, and for a credential without the member:basic:read permission. */
+    quote_signature_url: string | null;
+    /** The email address of the Whop user who signed the quote. `null` when the quote was not accepted, when the signer was not signed in to Whop, and without the member:email:read permission. */
+    quote_signer_email: string | null;
+    /** The full name the customer typed to sign the quote. `null` when the quote was not accepted, and for a credential without the member:basic:read permission. */
+    quote_signer_name: string | null;
     recipient_emails: string[];
     /** When the invoice's saved payment method will be charged, as an ISO 8601 timestamp. It is the `charge_at` the invoice was sent or issued with. Without one, it is `due_at` when an invoice with a `payment_method_id` is sent or issued before it is due. On a draft, it is the `charge_at` of its scheduled send. `null` otherwise, once the charge starts, and once the invoice is paid, void, or uncollectible. */
     scheduled_charge_at: string | null;
