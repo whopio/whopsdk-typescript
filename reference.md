@@ -23602,7 +23602,7 @@ await client.payments.update({
 <dl>
 <dd>
 
-Captures the full amount of a card payment created with `capture: false`. The payment must still be in `requires_capture` before `capture_expires_at`. Partial capture, multiple captures, capturing more than the authorized amount, and tips are not supported.
+Captures a card payment created with `capture: false` for its `total`. The payment must still be in `requires_capture` before `capture_expires_at`. An in-person payment's total can move away from its authorized amount when its line items change after the card was authorized. Above it, Whop captures the difference where Stripe allows it for the merchant's category, and otherwise raises the authorization first, which the card can decline. Capturing more or less than the authorized amount is off by default. Contact Whop support to turn it on for your account. Multiple captures are not supported.
 </dd>
 </dl>
 </dd>

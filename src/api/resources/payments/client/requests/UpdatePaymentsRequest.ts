@@ -9,6 +9,8 @@
 export interface UpdatePaymentsRequest {
     /** The payment, prefixed `pay_`. */
     id: string;
+    /** The line items of an in-person payment, changed after the reader reads the card and before the payment is captured. The list replaces the current one. Send each line already on the payment back with its `id`, and add a line with a one-time `variant`. Only lines added this way can change or be left out, and leaving one out removes it. Added lines aren't taxed. On an open payment, change them before you confirm the payment on the reader, within Stripe's 30 seconds. On a payment created with `capture: false`, change them before you capture, then capture the payment for its new `total`. Off by default. Contact Whop support to turn it on for your account. */
+    line_items?: UpdatePaymentsRequest.LineItems.Item[];
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Only for payments created with a `confirmation_token`, and only until the buyer has returned. Omit it to leave it unchanged. */
     return_url?: string;
     /** The complete new shipping address. It replaces the current address as a whole and is never merged with it, so send every field the address should have, including the ones that are not changing. Any field you leave out is cleared: sending only `city` leaves an address with nothing but a city. Pass null to remove the address, or omit `shipping_address` to leave it unchanged. It cannot change once a shipment exists for the payment. */
@@ -16,6 +18,12 @@ export interface UpdatePaymentsRequest {
 }
 
 export namespace UpdatePaymentsRequest {
+    export type LineItems = LineItems.Item[];
+
+    export namespace LineItems {
+        export type Item = unknown;
+    }
+
     /**
      * The complete new shipping address. It replaces the current address as a whole and is never merged with it, so send every field the address should have, including the ones that are not changing. Any field you leave out is cleared: sending only `city` leaves an address with nothing but a city. Pass null to remove the address, or omit `shipping_address` to leave it unchanged. It cannot change once a shipment exists for the payment.
      */
