@@ -47,7 +47,7 @@ export interface RetrievePreferencesResponse {
     failed_payment_emails: boolean;
     /** The account's own cancel reasons, in the order members see them when they cancel. Each is filed under a standard category, saved as the membership's `cancel_option`, so reports keep grouping cancellations. Empty when the account uses Whop's default reasons. */
     feedback_options: RetrievePreferencesResponse.FeedbackOptions.Item[];
-    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account's business category cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
     merchant_of_record: RetrievePreferencesResponse.MerchantOfRecord | null;
     /** Whether all active account payment rules apply to future off-session charges, including renewals. Off by default. Requires the payment:manage scope to change. */
     off_session_payment_rules: boolean;
@@ -254,7 +254,7 @@ export namespace RetrievePreferencesResponse {
         }
     }
 
-    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account's business category cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
     export const MerchantOfRecord = {
         Whop: "whop",
         Pending: "pending",
