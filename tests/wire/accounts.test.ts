@@ -173,6 +173,7 @@ describe("AccountsClient", () => {
                     },
                     logo_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    merchant_of_record: "whop",
                     metadata: { external_id: "connected_account_123" },
                     onboarding_type: "platform",
                     opengraph_image_url:
@@ -383,6 +384,7 @@ describe("AccountsClient", () => {
                             website: "x",
                         },
                     ],
+                    statement_descriptor: "KODARA",
                     status: "active",
                     status_reason: "Suspended - Fraudulent activity",
                     store_page_config: {
@@ -816,6 +818,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            merchant_of_record: "whop",
             metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
@@ -1008,6 +1011,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
+            statement_descriptor: "KODARA",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -1424,6 +1428,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            merchant_of_record: "whop",
             metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
@@ -1616,6 +1621,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
+            statement_descriptor: "KODARA",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -2047,6 +2053,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            merchant_of_record: "whop",
             metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
@@ -2239,6 +2246,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
+            statement_descriptor: "KODARA",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -2713,6 +2721,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            merchant_of_record: "whop",
             metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
@@ -2905,6 +2914,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
+            statement_descriptor: "KODARA",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -4097,6 +4107,7 @@ describe("AccountsClient", () => {
             },
             logo_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            merchant_of_record: "whop",
             metadata: { external_id: "connected_account_123" },
             onboarding_type: "platform",
             opengraph_image_url:
@@ -4289,6 +4300,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
+            statement_descriptor: "KODARA",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {

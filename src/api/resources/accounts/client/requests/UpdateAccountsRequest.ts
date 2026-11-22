@@ -79,6 +79,8 @@ export interface UpdateAccountsRequest {
     show_user_directory?: boolean;
     /** The full list of social links to display for the account. */
     social_links?: Record<string, unknown>[];
+    /** The text on buyers' card statements for this account's payments. It must be 5 to 22 characters with at least one letter, using only A-Z and 0-9 after any `WHOP*` prefix. It must start with `WHOP*` while Whop is the merchant of record. Once the account has switched to being its own merchant of record (`merchant_of_record` in account preferences), it can be set without the prefix. `null` clears it. Requires the `payout:account:update` scope. */
+    statement_descriptor?: string | null;
     /** Account store page display configuration. */
     store_page_config?: UpdateAccountsRequest.StorePageConfig | null;
     /** The target audience for this account. */

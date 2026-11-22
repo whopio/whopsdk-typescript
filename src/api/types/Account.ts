@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface Account {
-    /** Lifetime charged ad spend for the account, in USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
+    /** Lifetime charged ad spend for the account, in USD. Computed only on `list` for callers with `stats:read` on the account, and `null` otherwise. */
     ads_spend_usd: number | null;
     balances: Whop.AccountBalanceToken[];
     /** Account banner image URL. */
@@ -61,6 +61,8 @@ export interface Account {
     level: Whop.AccountLevel | null;
     /** Account logo image URL. */
     logo_url: string | null;
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `required_actions` lists what the account must answer, or says that it was not approved. `account` means the account is the merchant of record. Switch with `merchant_of_record` on `PATCH /accounts/{id}/preferences`. Whop sends `account.updated` when this value changes. */
+    merchant_of_record: Account.MerchantOfRecord | null;
     /** Arbitrary key/value metadata supplied at account creation. */
     metadata: Record<string, unknown>;
     /** Type of onboarding the account has completed. */
@@ -111,6 +113,8 @@ export interface Account {
     /** Whether the account shows users in the user directory. */
     show_user_directory: boolean;
     social_links: Whop.AccountSocialLink[];
+    /** The text on buyers' card statements for this account's payments, up to 22 characters. While Whop is the merchant of record, it starts with `WHOP*`. Whop drops the `WHOP*` prefix when the account is its own merchant of record and can take card payments. It keeps the prefix if fewer than five characters or no letters would remain. A product or payment descriptor takes precedence. `null` uses a descriptor made from the account's title. */
+    statement_descriptor: string | null;
     /** Whether the account can operate on Whop: `active` or `suspended`. Computed on `list`, `retrieve`, `me`, and `suspend`; `null` otherwise. */
     status: string | null;
     /** Why the account was suspended, as a label such as `Suspended - Fraudulent activity`. `Suspended` when no reason is recorded. Computed on `retrieve`, `me`, and `suspend`. `null` otherwise, or when `status` is not `suspended`. */
@@ -141,9 +145,9 @@ export interface Account {
     use_logo_as_opengraph_image_fallback: boolean;
     /** Account identity verification status for the `individual` (KYC) and `business` (KYB) profiles. Each is `null` until created, otherwise a `status` of `not_started`, `pending`, `manual_review`, `approved`, or `rejected`. */
     verification: Record<string, unknown>;
-    /** Volume through the account in the last 30 days (GMV from paid receipts), normalized to USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
+    /** Volume through the account in the last 30 days (GMV from paid receipts), normalized to USD. Computed only on `list` for callers with `stats:read` on the account, and `null` otherwise. */
     volume_l30d_usd: number | null;
-    /** Lifetime volume through the account — sales plus transfers received — normalized to USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
+    /** Lifetime volume through the account (sales plus transfers received), normalized to USD. Computed only on `list` for callers with `stats:read` on the account, and `null` otherwise. */
     volume_usd: number | null;
     /** Account primary crypto wallet, or `null` if none has been provisioned. */
     wallet: Whop.AccountWallet | null;
@@ -165,6 +169,13 @@ export namespace Account {
         export type Item = (typeof Item)[keyof typeof Item];
     }
 
+    /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `required_actions` lists what the account must answer, or says that it was not approved. `account` means the account is the merchant of record. Switch with `merchant_of_record` on `PATCH /accounts/{id}/preferences`. Whop sends `account.updated` when this value changes. */
+    export const MerchantOfRecord = {
+        Whop: "whop",
+        Pending: "pending",
+        Account: "account",
+    } as const;
+    export type MerchantOfRecord = (typeof MerchantOfRecord)[keyof typeof MerchantOfRecord];
     /** Type of onboarding the account has completed. */
     export const OnboardingType = {
         Platform: "platform",
