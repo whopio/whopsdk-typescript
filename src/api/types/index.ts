@@ -45,6 +45,7 @@ export * from "./AccountResolutionCenterAutoRefundControl.js";
 export * from "./AccountSearchResult.js";
 export * from "./AccountSocialLink.js";
 export * from "./AccountStorePageConfig.js";
+export * from "./AccountSubaccountFeeMode.js";
 export * from "./AccountSummary.js";
 export * from "./AccountTaxIdentifier.js";
 export * from "./AccountWallet.js";

@@ -65,6 +65,8 @@ export interface AccountFees {
     sepa_dispute: Whop.AccountFee;
     /** A flat fee in euros (EUR), charged when the buyer's bank returns a SEPA Direct Debit payment unpaid. */
     sepa_return: Whop.AccountFee;
+    /** How this account charges its subaccounts, and whether the caller can change it. `null` for a subaccount. */
+    subaccount_fee_mode: Whop.AccountSubaccountFeeMode | null;
     /** Charged when Whop calculates tax on a payment and the account remits the tax itself. An account whose `tax_remitted_by` is `null` pays it on every taxed payment. */
     tax_calculation: Whop.AccountFee;
     /** Charged when Whop collects and remits tax on the account's behalf. */

@@ -1,2 +1,2 @@
 export type { RetrieveFeesRequest } from "./RetrieveFeesRequest.js";
-export type { UpdateFeesRequest } from "./UpdateFeesRequest.js";
+export { UpdateFeesRequest } from "./UpdateFeesRequest.js";
