@@ -9,7 +9,7 @@
 export interface UpdatePaymentsRequest {
     /** The payment, prefixed `pay_`. */
     id: string;
-    /** The line items of an in-person payment, changed after the reader reads the card and before the payment is captured. The list replaces the current one. Send each line already on the payment back with its `id`, and add a line with a one-time `variant`. Only lines added this way can change or be left out, and leaving one out removes it. Added lines aren't taxed. On an open payment, change them before you confirm the payment on the reader, within Stripe's 30 seconds. On a payment created with `capture: false`, change them before you capture, then capture the payment for its new `total`. Off by default. Contact Whop support to turn it on for your account. */
+    /** Off by default. Whop support must turn it on for your account. Replaces an in-person payment's line items after the card is read. On an open payment, update within 30 seconds of the card read, before the reader confirms it. On a `capture: false` payment, update before you capture it for the new `total`. Send every purchased line back by `id`. Added lines can be kept by `id`, added with `variant`, or removed by leaving them out. Added lines aren't taxed. */
     line_items?: UpdatePaymentsRequest.LineItems.Item[];
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Only for payments created with a `confirmation_token`, and only until the buyer has returned. Omit it to leave it unchanged. */
     return_url?: string;
