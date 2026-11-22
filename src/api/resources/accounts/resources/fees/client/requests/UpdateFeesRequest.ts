@@ -69,6 +69,8 @@ export interface UpdateFeesRequest {
     sepa_dispute?: UpdateFeesRequest.SepaDispute;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     sepa_return?: UpdateFeesRequest.SepaReturn;
+    /** Changes how this account charges its subaccounts. Only an account without a parent account can set it. An account can change `inherit` to either other mode. It can change `subaccount_rates_collect_difference` to `subaccount_rates`. Whop must make other changes. */
+    subaccount_fee_mode?: UpdateFeesRequest.SubaccountFeeMode;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     tax_calculation?: UpdateFeesRequest.TaxCalculation;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
@@ -916,6 +918,24 @@ export namespace UpdateFeesRequest {
                 percentage?: (number | null) | undefined;
             }
         }
+    }
+
+    /**
+     * Changes how this account charges its subaccounts. Only an account without a parent account can set it. An account can change `inherit` to either other mode. It can change `subaccount_rates_collect_difference` to `subaccount_rates`. Whop must make other changes.
+     */
+    export interface SubaccountFeeMode {
+        /** How this account charges its subaccounts. `inherit` charges subaccounts this account's rates. `subaccount_rates` charges subaccounts their own rates. `subaccount_rates_collect_difference` charges subaccounts their own rates. With `subaccount_rates_collect_difference`, this account receives the amount above its own rate. */
+        mode: SubaccountFeeMode.Mode;
+    }
+
+    export namespace SubaccountFeeMode {
+        /** How this account charges its subaccounts. `inherit` charges subaccounts this account's rates. `subaccount_rates` charges subaccounts their own rates. `subaccount_rates_collect_difference` charges subaccounts their own rates. With `subaccount_rates_collect_difference`, this account receives the amount above its own rate. */
+        export const Mode = {
+            Inherit: "inherit",
+            SubaccountRates: "subaccount_rates",
+            SubaccountRatesCollectDifference: "subaccount_rates_collect_difference",
+        } as const;
+        export type Mode = (typeof Mode)[keyof typeof Mode];
     }
 
     /**
