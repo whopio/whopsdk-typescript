@@ -177,6 +177,7 @@ describe("DepositsClient", () => {
                 title: "Shine Time Auto Detailing",
             },
             source: {
+                account_id: "account_id",
                 amount_float: 1500,
                 card_brand: "card_brand",
                 chain: "plasma",
@@ -212,6 +213,7 @@ describe("DepositsClient", () => {
                 risk_review_hold: true,
                 sender_address: "0x8a4de51b9c37f2e6a0d1b8c94e5f7a2d3c6b0e19",
                 status: "fully_claimed",
+                title: "title",
                 to_amount: "500.0",
                 to_currency: "usd",
                 trace_code: "trace_code",

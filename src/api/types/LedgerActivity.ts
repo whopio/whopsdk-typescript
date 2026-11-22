@@ -563,6 +563,8 @@ export namespace LedgerActivity {
      * Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID.
      */
     export interface Source {
+        /** ID of the account that runs the ad campaign (ad_campaign sources only). */
+        account_id?: (string | null) | undefined;
         /** Payout amount as a decimal number in the destination currency (payout sources only; requires payout:withdrawal:read). */
         amount_float?: (number | null) | undefined;
         /** Card brand used by the payment source. */
@@ -613,6 +615,8 @@ export namespace LedgerActivity {
         sender_address?: (string | null) | undefined;
         /** Lifecycle status. On payout sources this is the payout status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated); on bank_deposit sources it is succeeded, reversal_in_progress or reversed (ungated). */
         status?: (string | null) | undefined;
+        /** Name of the ad campaign the spend, payout, or funding belongs to (ad_campaign sources only). */
+        title?: (string | null) | undefined;
         /** Amount received in to_currency as a decimal string (swap sources only). */
         to_amount?: (string | null) | undefined;
         /** Lowercase currency code converted to (swap sources only). */

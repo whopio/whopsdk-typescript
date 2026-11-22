@@ -3,8 +3,11 @@
 export const RetrieveFinancialReportsRequestLineTypesItem = {
     AccountSettlement: "account_settlement",
     AdAffiliatePayoutReceived: "ad_affiliate_payout_received",
+    AdBalanceFundingReceipt: "ad_balance_funding_receipt",
     AdBudgetRelease: "ad_budget_release",
     AdCampaignBudget: "ad_campaign_budget",
+    AdFundingDisbursement: "ad_funding_disbursement",
+    AdIncomeReceipt: "ad_income_receipt",
     AdPublisherPayout: "ad_publisher_payout",
     AdPublisherPayoutReceived: "ad_publisher_payout_received",
     AdSpendCharge: "ad_spend_charge",
