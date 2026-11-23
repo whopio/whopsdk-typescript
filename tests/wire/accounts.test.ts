@@ -384,7 +384,7 @@ describe("AccountsClient", () => {
                             website: "x",
                         },
                     ],
-                    statement_descriptor: "KODARA",
+                    statement_descriptor: "BUSINESS",
                     status: "active",
                     status_reason: "Suspended - Fraudulent activity",
                     store_page_config: {
@@ -1011,7 +1011,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            statement_descriptor: "KODARA",
+            statement_descriptor: "BUSINESS",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -1621,7 +1621,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            statement_descriptor: "KODARA",
+            statement_descriptor: "BUSINESS",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -2246,7 +2246,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            statement_descriptor: "KODARA",
+            statement_descriptor: "BUSINESS",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -2914,7 +2914,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            statement_descriptor: "KODARA",
+            statement_descriptor: "BUSINESS",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
@@ -4300,7 +4300,7 @@ describe("AccountsClient", () => {
                     website: "x",
                 },
             ],
-            statement_descriptor: "KODARA",
+            statement_descriptor: "BUSINESS",
             status: "active",
             status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
