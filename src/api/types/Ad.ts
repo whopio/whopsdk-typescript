@@ -25,7 +25,7 @@ export interface Ad {
     contact_value: number;
     /** Whop pixel-attributed contact events, last-click. */
     contacts: number;
-    /** Whop's content review of this ad: whether it has finished, which ad networks it is recommended for, and the content rules it breaks. */
+    /** Whop's content review of this ad: whether it has finished and the content rules it breaks. */
     content_review: Whop.AdContentReview;
     /** Spend divided by attributed add-to-cart events; null when they are not the goal and none are attributed. */
     cost_per_added_to_cart: number | null;
