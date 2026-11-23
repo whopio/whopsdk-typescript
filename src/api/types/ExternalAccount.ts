@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface ExternalAccount {
+    /** Connection health of the external account. `reconnect_required` means the platform refused Whop's access, and the owner must connect the account again. `active` means Whop has not seen a refusal. Whop checks only Stripe connections for a refusal. `null` when Whop holds no access for the account, for example a claimed profile. */
+    connection_status: ExternalAccount.ConnectionStatus | null;
     /** The platform-specific ID for this external account. */
     external_id: string | null;
     /** Unique identifier for the external account. */
@@ -27,6 +29,12 @@ export interface ExternalAccount {
 }
 
 export namespace ExternalAccount {
+    /** Connection health of the external account. `reconnect_required` means the platform refused Whop's access, and the owner must connect the account again. `active` means Whop has not seen a refusal. Whop checks only Stripe connections for a refusal. `null` when Whop holds no access for the account, for example a claimed profile. */
+    export const ConnectionStatus = {
+        Active: "active",
+        ReconnectRequired: "reconnect_required",
+    } as const;
+    export type ConnectionStatus = (typeof ConnectionStatus)[keyof typeof ConnectionStatus];
     /** The platform the external account exists on. */
     export const Platform = {
         X: "x",
@@ -39,6 +47,7 @@ export namespace ExternalAccount {
         Klaviyo: "klaviyo",
         Quickbooks: "quickbooks",
         Aimerce: "aimerce",
+        Stripe: "stripe",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }

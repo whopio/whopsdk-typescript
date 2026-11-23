@@ -30,6 +30,7 @@ export namespace ExternalAccountParent {
         Klaviyo: "klaviyo",
         Quickbooks: "quickbooks",
         Aimerce: "aimerce",
+        Stripe: "stripe",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }

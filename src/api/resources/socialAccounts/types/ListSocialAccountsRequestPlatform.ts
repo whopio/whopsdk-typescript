@@ -13,6 +13,7 @@ export const ListSocialAccountsRequestPlatform = {
     Klaviyo: "klaviyo",
     Quickbooks: "quickbooks",
     Aimerce: "aimerce",
+    Stripe: "stripe",
 } as const;
 export type ListSocialAccountsRequestPlatform =
     (typeof ListSocialAccountsRequestPlatform)[keyof typeof ListSocialAccountsRequestPlatform];

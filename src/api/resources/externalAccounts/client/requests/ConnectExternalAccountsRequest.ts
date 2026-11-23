@@ -10,20 +10,21 @@
 export interface ConnectExternalAccountsRequest {
     /** The Account (biz_ identifier) to connect the external account for. An account-scoped API key may omit this to default to its own account. Omit for user profile connections. */
     account_id?: string;
-    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. */
+    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. Use `stripe` to let Whop read the past payments of the account’s Stripe account: pass `account_id`, and the user installs Whop’s app in Stripe. It requires the `payout:account:update` scope instead of `social_account:create`. */
     platform: ConnectExternalAccountsRequest.Platform;
     /** Where to send the user once they finish connecting their accounts. Must be an `https` URL on whop.com; any other host is rejected. On success, the user is redirected with an `external_account_connected` query param naming the platform; if the connection fails, with an `external_account_error` query param instead. The same values also arrive as `social_account_connected` / `social_account_error`. */
     redirect_url: string;
 }
 
 export namespace ConnectExternalAccountsRequest {
-    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. */
+    /** The platform to connect the external account on. Use `tiktok` to connect the authenticated user’s TikTok profile, `linkedin` for their LinkedIn profile, `youtube` for their YouTube channel, or `x` for their X profile. Use `quickbooks` to connect the account’s QuickBooks Online company: pass `account_id`, and the user picks the company in QuickBooks. Use `stripe` to let Whop read the past payments of the account’s Stripe account: pass `account_id`, and the user installs Whop’s app in Stripe. It requires the `payout:account:update` scope instead of `social_account:create`. */
     export const Platform = {
         Tiktok: "tiktok",
         Linkedin: "linkedin",
         Youtube: "youtube",
         X: "x",
         Quickbooks: "quickbooks",
+        Stripe: "stripe",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }
