@@ -406,7 +406,7 @@ export class VerificationsClient {
     }
 
     /**
-     * Generates a short-lived link to download one image that a person sent for an individual verification. Use the `identity_document` and `selfie` fields of the verification to know which images exist.
+     * Generates a short-lived link to download one image that a person sent for an individual verification. Ask for `front`, `back`, or `selfie`. The link always downloads the document that passed the check, whatever its type.
      *
      * @param {Whop.GenerateDocumentUrlVerificationsRequest} request
      * @param {VerificationsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -422,7 +422,7 @@ export class VerificationsClient {
      * @example
      *     await client.verifications.generateDocumentUrl({
      *         id: "id",
-     *         document: "id_card_front"
+     *         document: "front"
      *     })
      */
     public generateDocumentUrl(
