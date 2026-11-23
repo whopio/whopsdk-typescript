@@ -3,7 +3,6 @@
 import type * as Whop from "../index.js";
 
 export interface AdContentReview {
-    networks: Whop.AdContentReviewNetwork[];
     /** `reviewed` once Whop content review finishes, `in_review` while it runs, `not_reviewed` when it never ran. */
     status: AdContentReview.Status;
     tags: Whop.AdContentReviewTag[];
