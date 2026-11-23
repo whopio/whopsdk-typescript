@@ -1,5 +1,6 @@
 export * from "./CreateVerificationsRequestBody.js";
 export * from "./CreateVerificationsResponse.js";
+export * from "./GenerateDocumentUrlVerificationsResponse.js";
 export * from "./ListVerificationsRequestDirection.js";
 export * from "./ListVerificationsRequestOrder.js";
 export * from "./ListVerificationsResponse.js";

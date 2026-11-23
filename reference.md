@@ -31827,6 +31827,72 @@ await client.verifications.update({
 </dl>
 </details>
 
+<details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">generateDocumentUrl</a>({ ...params }) -> Whop.GenerateDocumentUrlVerificationsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generates a short-lived link to download one image that a person sent for an individual verification. Use the `identity_document` and `selfie` fields of the verification to know which images exist.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.verifications.generateDocumentUrl({
+    id: "id",
+    document: "id_card_front"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.GenerateDocumentUrlVerificationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VerificationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Waitlist Entries
 <details><summary><code>client.waitlistEntries.<a href="/src/api/resources/waitlistEntries/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.WaitlistEntry, Whop.ListWaitlistEntriesResponse&gt;</code></summary>
 <dl>
