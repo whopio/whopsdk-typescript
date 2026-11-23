@@ -4,26 +4,21 @@
  * @example
  *     {
  *         id: "id",
- *         document: "id_card_front"
+ *         document: "front"
  *     }
  */
 export interface GenerateDocumentUrlVerificationsRequest {
     /** Verification profile ID, prefixed `idpf_`. */
     id: string;
-    /** Image to download. Use the side of the document type on the verification, or `selfie`. */
+    /** Image to download: the `front` or `back` of the identity document, or the `selfie`. A passport has no `back`. */
     document: GenerateDocumentUrlVerificationsRequest.Document;
 }
 
 export namespace GenerateDocumentUrlVerificationsRequest {
-    /** Image to download. Use the side of the document type on the verification, or `selfie`. */
+    /** Image to download: the `front` or `back` of the identity document, or the `selfie`. A passport has no `back`. */
     export const Document = {
-        IdCardFront: "id_card_front",
-        IdCardBack: "id_card_back",
-        DriversFront: "drivers_front",
-        DriversBack: "drivers_back",
-        ResidencePermitFront: "residence_permit_front",
-        ResidencePermitBack: "residence_permit_back",
-        PassportFront: "passport_front",
+        Front: "front",
+        Back: "back",
         Selfie: "selfie",
     } as const;
     export type Document = (typeof Document)[keyof typeof Document];

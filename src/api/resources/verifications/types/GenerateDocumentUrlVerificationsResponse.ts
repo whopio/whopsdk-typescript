@@ -12,13 +12,8 @@ export interface GenerateDocumentUrlVerificationsResponse {
 export namespace GenerateDocumentUrlVerificationsResponse {
     /** Image that the link downloads. */
     export const Document = {
-        IdCardFront: "id_card_front",
-        IdCardBack: "id_card_back",
-        DriversFront: "drivers_front",
-        DriversBack: "drivers_back",
-        ResidencePermitFront: "residence_permit_front",
-        ResidencePermitBack: "residence_permit_back",
-        PassportFront: "passport_front",
+        Front: "front",
+        Back: "back",
         Selfie: "selfie",
     } as const;
     export type Document = (typeof Document)[keyof typeof Document];

@@ -907,9 +907,9 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = {
-            document: "id_card_front",
+            document: "front",
             expires_at: "2026-06-01T12:01:00.000Z",
             url: "https://content.whop.com/document",
         };
@@ -925,7 +925,7 @@ describe("VerificationsClient", () => {
 
         const response = await client.verifications.generateDocumentUrl({
             id: "id",
-            document: "id_card_front",
+            document: "front",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -939,7 +939,7 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -954,7 +954,7 @@ describe("VerificationsClient", () => {
         await expect(async () => {
             return await client.verifications.generateDocumentUrl({
                 id: "id",
-                document: "id_card_front",
+                document: "front",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -968,7 +968,7 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -983,7 +983,7 @@ describe("VerificationsClient", () => {
         await expect(async () => {
             return await client.verifications.generateDocumentUrl({
                 id: "id",
-                document: "id_card_front",
+                document: "front",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -997,7 +997,7 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -1012,7 +1012,7 @@ describe("VerificationsClient", () => {
         await expect(async () => {
             return await client.verifications.generateDocumentUrl({
                 id: "id",
-                document: "id_card_front",
+                document: "front",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -1026,7 +1026,7 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -1041,7 +1041,7 @@ describe("VerificationsClient", () => {
         await expect(async () => {
             return await client.verifications.generateDocumentUrl({
                 id: "id",
-                document: "id_card_front",
+                document: "front",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -1055,7 +1055,7 @@ describe("VerificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { document: "id_card_front" };
+        const rawRequestBody = { document: "front" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -1070,7 +1070,7 @@ describe("VerificationsClient", () => {
         await expect(async () => {
             return await client.verifications.generateDocumentUrl({
                 id: "id",
-                document: "id_card_front",
+                document: "front",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

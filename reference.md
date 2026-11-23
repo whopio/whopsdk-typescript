@@ -31839,7 +31839,7 @@ await client.verifications.update({
 <dl>
 <dd>
 
-Generates a short-lived link to download one image that a person sent for an individual verification. Use the `identity_document` and `selfie` fields of the verification to know which images exist.
+Generates a short-lived link to download one image that a person sent for an individual verification. Ask for `front`, `back`, or `selfie`. The link always downloads the document that passed the check, whatever its type.
 </dd>
 </dl>
 </dd>
@@ -31856,7 +31856,7 @@ Generates a short-lived link to download one image that a person sent for an ind
 ```typescript
 await client.verifications.generateDocumentUrl({
     id: "id",
-    document: "id_card_front"
+    document: "front"
 });
 
 ```
