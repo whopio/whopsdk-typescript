@@ -897,4 +897,181 @@ describe("VerificationsClient", () => {
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
+
+    test("generateDocumentUrl (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = {
+            document: "id_card_front",
+            expires_at: "2026-06-01T12:01:00.000Z",
+            url: "https://content.whop.com/document",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.verifications.generateDocumentUrl({
+            id: "id",
+            document: "id_card_front",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateDocumentUrl (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.verifications.generateDocumentUrl({
+                id: "id",
+                document: "id_card_front",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("generateDocumentUrl (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.verifications.generateDocumentUrl({
+                id: "id",
+                document: "id_card_front",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("generateDocumentUrl (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.verifications.generateDocumentUrl({
+                id: "id",
+                document: "id_card_front",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("generateDocumentUrl (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.verifications.generateDocumentUrl({
+                id: "id",
+                document: "id_card_front",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("generateDocumentUrl (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { document: "id_card_front" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/verifications/id/generate_document_url")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.verifications.generateDocumentUrl({
+                id: "id",
+                document: "id_card_front",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
 });
