@@ -7,7 +7,7 @@ export interface AutomationStep {
     action_type: AutomationStep.ActionType;
     /** ID of the automation the step belongs to, prefixed `ato_`. */
     automation_id: string;
-    /** The step's settings for its `action_type`: `delay_seconds` for a `wait`, `sender_id` for an `email` or `message`. Writing it replaces the whole object. */
+    /** The step's settings for its `action_type`: `delay_seconds` for a `wait`, and `sender_id` and `attachment_ids` for an `email` or `message`. Writing it replaces the whole object, except that a step keeps its `attachment_ids` when the write leaves them out. */
     config: Whop.AutomationStepConfig;
     /** When the step was created, as an ISO 8601 timestamp. */
     created_at: string;

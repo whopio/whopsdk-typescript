@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 /**
- * The step's settings for its `action_type`: `delay_seconds` for a `wait`, and `sender_id` for an `email` or a `message`. Writing it replaces the whole object.
+ * The step's settings for its `action_type`: `delay_seconds` for a `wait`, and `sender_id` and `attachment_ids` for an `email` or a `message`. Writing it replaces the whole object, except that a step keeps its `attachment_ids` when the write leaves them out.
  */
 export type AutomationStepConfig =
     | Whop.AutomationStepWaitConfig

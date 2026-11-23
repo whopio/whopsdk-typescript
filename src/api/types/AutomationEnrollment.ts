@@ -47,6 +47,7 @@ export namespace AutomationEnrollment {
         PaymentFailed: "payment.failed",
         MembershipActivated: "membership.activated",
         MembershipTrialEndingSoon: "membership.trial_ending_soon",
+        MembershipCancelAtPeriodEndChanged: "membership.cancel_at_period_end_changed",
         MemberCreated: "member.created",
         InvoiceCreated: "invoice.created",
         InvoicePaid: "invoice.paid",
