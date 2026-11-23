@@ -16,7 +16,7 @@ export interface CreateAdCampaignsRequest {
     budget_amount_local?: number;
     /** Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group individually (`ad_group`). Defaults to `ad_group`. */
     budget_optimization?: CreateAdCampaignsRequest.BudgetOptimization;
-    /** Whether the budget is spent per day (`daily`) or over the campaign's full run (`lifetime`). Defaults to `daily`. */
+    /** Deprecated: lifetime budgets have ended. Every new campaign has a daily budget. `lifetime` returns a `400`. */
     budget_type?: CreateAdCampaignsRequest.BudgetType;
     /** The kind of campaign to create. `standard` runs image and video ads; `search` shows text ads on search results for the ad groups' keywords. Defaults to `standard`. Can't be changed after creation. */
     campaign_type?: CreateAdCampaignsRequest.CampaignType;
@@ -41,7 +41,7 @@ export namespace CreateAdCampaignsRequest {
         AdGroup: "ad_group",
     } as const;
     export type BudgetOptimization = (typeof BudgetOptimization)[keyof typeof BudgetOptimization];
-    /** Whether the budget is spent per day (`daily`) or over the campaign's full run (`lifetime`). Defaults to `daily`. */
+    /** Deprecated: lifetime budgets have ended. Every new campaign has a daily budget. `lifetime` returns a `400`. */
     export const BudgetType = {
         Daily: "daily",
         Lifetime: "lifetime",
