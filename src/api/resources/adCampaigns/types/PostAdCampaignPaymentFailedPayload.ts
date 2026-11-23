@@ -46,21 +46,21 @@ export namespace PostAdCampaignPaymentFailedPayload {
         created_at: string;
         /** Whether the campaign's ads are delivering right now, and if not, why. Content review is in_review; a campaign waiting to start is processing. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;
-        /** The cost per result, in USD, the advertiser wants this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. `null` when no target is set. */
+        /** The cost per result, in USD, the advertiser wants this campaign to achieve. A target only: it is not a bid, cost cap, or bid cap, and doesn't change how the campaign's ads bid. An ad group's own `desired_cost_per_result` overrides it. For an `awareness` campaign, it's the cost per 1,000 impressions. `null` when no target is set. */
         desired_cost_per_result?: (number | null) | undefined;
         /** When the campaign stops delivering, as an ISO 8601 timestamp. `null` when it runs until paused, or when its ad groups set their own schedule. */
         ends_at: string | null;
         /** Unique identifier for the ad campaign, prefixed `adcamp_`. */
         id: string;
         issues: Whop.AdPlatformIssue[];
-        /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
+        /** The goal the campaign optimizes toward. `awareness` optimizes for impressions. `engagement` appears only on campaigns created before it was retired. */
         objective: Data.Objective | null;
         special_ad_categories: Data.SpecialAdCategories.Item[];
         /** When the campaign starts delivering, as an ISO 8601 timestamp. `null` when it starts as soon as it launches, or when its ad groups set their own schedule. */
         starts_at: string | null;
         /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
         status: Data.Status;
-        /** The desired cost per result for `target_result_event`, in USD. `null` when none is set. */
+        /** The desired cost per result for `target_result_event`, in USD. For `impressions`, it's the cost per 1,000 impressions. `null` when none is set or the ad groups set different ones. */
         target_cost_per_result: number | null;
         /** The event `target_cost_per_result` is priced per, such as `purchase` or `lead`. `null` when the campaign has no single goal. */
         target_result_event: string | null;
@@ -105,7 +105,7 @@ export namespace PostAdCampaignPaymentFailedPayload {
             Active: "active",
         } as const;
         export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-        /** The goal the campaign optimizes toward. `awareness` appears only on campaigns created before it was retired; those campaigns can't launch. */
+        /** The goal the campaign optimizes toward. `awareness` optimizes for impressions. `engagement` appears only on campaigns created before it was retired. */
         export const Objective = {
             Awareness: "awareness",
             Traffic: "traffic",
