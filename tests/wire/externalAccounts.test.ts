@@ -18,9 +18,10 @@ describe("ExternalAccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    external_id: "555222",
+                    connection_status: "active",
+                    external_id: "creator-id",
                     id: "sacc_xxxxxxxxxxxxxx",
-                    name: "Valentine Tromp",
+                    name: "Allene Balistreri",
                     parent_external_account: {
                         external_id: "555111",
                         id: "sacc_xxxxxxxxxxxxxx",
@@ -32,10 +33,10 @@ describe("ExternalAccountsClient", () => {
                     },
                     partnership_status: "partnership_status",
                     platform: "x",
-                    profile_picture_url: "http://zboncak.example/greg_mcclure",
+                    profile_picture_url: "https://api.whop.com/valencia",
                     scopes: ["advertise"],
-                    url: "https://instagram.com/shinetimeaustin",
-                    username: "shinetimeaustin",
+                    url: "https://tiktok.com/@creator",
+                    username: "creator",
                     verified: false,
                 },
             ],
@@ -113,9 +114,10 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = { platform: "aimerce", api_key: "api_key" };
         const rawResponseBody = {
-            external_id: "555222",
+            connection_status: "active",
+            external_id: "creator-id",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Valentine Tromp",
+            name: "Allene Balistreri",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -127,10 +129,10 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "http://zboncak.example/greg_mcclure",
+            profile_picture_url: "https://api.whop.com/valencia",
             scopes: ["advertise"],
-            url: "https://instagram.com/shinetimeaustin",
-            username: "shinetimeaustin",
+            url: "https://tiktok.com/@creator",
+            username: "creator",
             verified: false,
         };
 
@@ -556,9 +558,10 @@ describe("ExternalAccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            external_id: "555222",
+            connection_status: "active",
+            external_id: "creator-id",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Valentine Tromp",
+            name: "Allene Balistreri",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -570,10 +573,10 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "http://zboncak.example/greg_mcclure",
+            profile_picture_url: "https://api.whop.com/valencia",
             scopes: ["advertise"],
-            url: "https://instagram.com/shinetimeaustin",
-            username: "shinetimeaustin",
+            url: "https://tiktok.com/@creator",
+            username: "creator",
             verified: false,
         };
 
