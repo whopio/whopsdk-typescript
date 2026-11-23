@@ -66,7 +66,7 @@ export interface AdGroup {
     custom_event_counts: Record<string, unknown>;
     /** Conversion value attributed to each custom event, keyed by event name like custom_event_counts. Sums the value passed to whop.track, normalized to USD; events fired without a value contribute 0. */
     custom_event_values: Record<string, unknown>;
-    /** Hours the ad group delivers in each week, keyed by day. Days it doesn't deliver are omitted. `null` when it delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget. */
+    /** Hours the ad group delivers in each week, keyed by day. Days it doesn't deliver are omitted. `null` when it delivers at every hour. A schedule needs a lifetime budget on the ad group, or on its campaign when the campaign holds the budget. Only ad groups and campaigns that already have one can use it. */
     delivery_schedule: Whop.AdGroupDeliverySchedule | null;
     /** Whether ads in this ad group are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: AdGroup.DeliveryStatus;

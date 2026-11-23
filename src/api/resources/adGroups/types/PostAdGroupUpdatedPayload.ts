@@ -45,7 +45,7 @@ export namespace PostAdGroupUpdatedPayload {
         conversion_event: Whop.ConversionEvent | null;
         /** When the ad group was created, as an ISO 8601 timestamp. */
         created_at: string;
-        /** Hours the ad group delivers in each week, keyed by day. Days it doesn't deliver are omitted. `null` when it delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget. */
+        /** Hours the ad group delivers in each week, keyed by day. Days it doesn't deliver are omitted. `null` when it delivers at every hour. A schedule needs a lifetime budget on the ad group, or on its campaign when the campaign holds the budget. Only ad groups and campaigns that already have one can use it. */
         delivery_schedule: Whop.AdGroupDeliverySchedule | null;
         /** Whether ads in this ad group are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;

@@ -19,10 +19,10 @@ export interface CreateAdGroupsRequest {
     budget_amount?: number;
     /** This ad group's budget stated in the account's ads reporting currency (`budget_currency` on the response) instead of USD. Converted to USD at the current exchange rate and stored as budget_amount; on an update, an amount equal to the current budget_amount_local keeps the stored USD budget as is. Provide this or budget_amount, not both. */
     budget_amount_local?: number;
-    /** Whether budget_amount is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
+    /** Deprecated: lifetime budgets have ended. Leave this out, or send `daily`. `lifetime` returns a `400` unless the ad group already has a lifetime budget. */
     budget_type?: CreateAdGroupsRequest.BudgetType;
     conversion_event?: Whop.ConversionEvent | null;
-    /** Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget. */
+    /** Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight. A day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. The schedule is replaced as a whole. `null` delivers at every hour. A schedule needs a lifetime budget on the ad group, or on its campaign when the campaign holds the budget. Only ad groups and campaigns that already have one can use it. */
     delivery_schedule?: CreateAdGroupsRequest.DeliverySchedule | null;
     /** Age, gender, and automatic-audience targeting. */
     demographics?: Whop.AdGroupDemographicsBody;
@@ -54,7 +54,7 @@ export namespace CreateAdGroupsRequest {
         MaximumTarget: "maximum_target",
     } as const;
     export type BidType = (typeof BidType)[keyof typeof BidType];
-    /** Whether budget_amount is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
+    /** Deprecated: lifetime budgets have ended. Leave this out, or send `daily`. `lifetime` returns a `400` unless the ad group already has a lifetime budget. */
     export const BudgetType = {
         Daily: "daily",
         Lifetime: "lifetime",
@@ -62,7 +62,7 @@ export namespace CreateAdGroupsRequest {
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
 
     /**
-     * Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget.
+     * Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight. A day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. The schedule is replaced as a whole. `null` delivers at every hour. A schedule needs a lifetime budget on the ad group, or on its campaign when the campaign holds the budget. Only ad groups and campaigns that already have one can use it.
      */
     export interface DeliverySchedule {
         /** Windows the ad group delivers in on Friday. */

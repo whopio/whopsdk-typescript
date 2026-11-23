@@ -9,13 +9,13 @@
 export interface UpdateAdCampaignsRequest {
     /** The ad campaign ID. */
     id: string;
-    /** The campaign budget in USD, which is what it is stored and billed in. Interpreted as daily or lifetime per the campaign's budget type, including a budget_type sent in the same request. */
+    /** The campaign budget in USD, which is what it is stored and billed in. Spent per day, or over the campaign's full run when its `budget_type` is `lifetime`. */
     budget_amount?: number;
     /** The campaign budget stated in the account's ads reporting currency (`budget_currency` on the response) instead of USD. Converted to USD at the current exchange rate and stored as budget_amount; an amount equal to the current budget_amount_local keeps the stored USD budget as is. Provide this or budget_amount, not both. */
     budget_amount_local?: number;
     /** Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group individually (`ad_group`). Only changeable before the campaign launches; switching to `ad_campaign` requires budget_amount in the same request, and switching to `ad_group` clears the campaign budget. */
     budget_optimization?: UpdateAdCampaignsRequest.BudgetOptimization;
-    /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). Only changeable while the campaign is a draft; send budget_amount in the same request so the amount lands on the new type. */
+    /** Deprecated: lifetime budgets have ended. A draft campaign with a lifetime budget can switch to `daily`. Send `budget_amount` in the same request. A switch to `lifetime` returns a `400`. */
     budget_type?: UpdateAdCampaignsRequest.BudgetType;
     /** Accepted only when it matches the campaign's current type, so a read can be sent back unchanged. The type is fixed at creation. */
     campaign_type?: UpdateAdCampaignsRequest.CampaignType;
@@ -40,7 +40,7 @@ export namespace UpdateAdCampaignsRequest {
         AdGroup: "ad_group",
     } as const;
     export type BudgetOptimization = (typeof BudgetOptimization)[keyof typeof BudgetOptimization];
-    /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). Only changeable while the campaign is a draft; send budget_amount in the same request so the amount lands on the new type. */
+    /** Deprecated: lifetime budgets have ended. A draft campaign with a lifetime budget can switch to `daily`. Send `budget_amount` in the same request. A switch to `lifetime` returns a `400`. */
     export const BudgetType = {
         Daily: "daily",
         Lifetime: "lifetime",
