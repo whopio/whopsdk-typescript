@@ -25,6 +25,7 @@ describe("ProductAffiliatesClient", () => {
                     status: "active",
                     total_reward_amount_usd: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     user: {
+                        badges: [{ type: "whop_team" }],
                         email: "marcus@shinetime.example",
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Jack Sharkey the 2nd",

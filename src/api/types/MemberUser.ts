@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface MemberUser {
+    badges: Whop.UserBadge[];
     /** The user's city, derived from their IP address. `null` when unknown or the user turned off location sharing. */
     city: string | null;
     /** The user's country as an ISO 3166-1 alpha-2 code, like `US`, derived from their IP address. `null` when unknown or the user turned off location sharing. */

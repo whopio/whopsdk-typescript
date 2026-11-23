@@ -42,6 +42,7 @@ describe("TeamMembersClient", () => {
                             id: "ausr_xxxxxxxxxxxxxx",
                             legal_name: null,
                             user: {
+                                badges: [{ type: "whop_team" }],
                                 id: "user_xxxxxxxxxxxxxx",
                                 name: "Dana Whitfield",
                                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -54,6 +55,7 @@ describe("TeamMembersClient", () => {
                     status: "joined",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -201,6 +203,7 @@ describe("TeamMembersClient", () => {
                     id: "ausr_xxxxxxxxxxxxxx",
                     legal_name: "legal_name",
                     user: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -213,6 +216,7 @@ describe("TeamMembersClient", () => {
             status: "joined",
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -359,6 +363,7 @@ describe("TeamMembersClient", () => {
                     id: "ausr_xxxxxxxxxxxxxx",
                     legal_name: "legal_name",
                     user: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -371,6 +376,7 @@ describe("TeamMembersClient", () => {
             status: "joined",
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -549,6 +555,7 @@ describe("TeamMembersClient", () => {
                     id: "ausr_xxxxxxxxxxxxxx",
                     legal_name: "legal_name",
                     user: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -561,6 +568,7 @@ describe("TeamMembersClient", () => {
             status: "joined",
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },

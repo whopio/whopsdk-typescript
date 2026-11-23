@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface ProductAffiliateUser {
+    badges: Whop.UserBadge[];
     /** The affiliate's email address. Requires the `member:email:read` scope; `null` without it. */
     email: string | null;
     /** User ID, prefixed `user_`. */

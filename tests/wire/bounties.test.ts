@@ -48,6 +48,7 @@ describe("BountiesClient", () => {
                     min_total_verified_duration_seconds: 1,
                     net_reward_amount: 10.5,
                     poster: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -168,6 +169,7 @@ describe("BountiesClient", () => {
             active_proof_livestream_feeds: [
                 {
                     host: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -238,6 +240,7 @@ describe("BountiesClient", () => {
             min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -379,6 +382,7 @@ describe("BountiesClient", () => {
             active_proof_livestream_feeds: [
                 {
                     host: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -449,6 +453,7 @@ describe("BountiesClient", () => {
             min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -512,6 +517,7 @@ describe("BountiesClient", () => {
             active_proof_livestream_feeds: [
                 {
                     host: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -582,6 +588,7 @@ describe("BountiesClient", () => {
             min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -659,6 +666,7 @@ describe("BountiesClient", () => {
             active_proof_livestream_feeds: [
                 {
                     host: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -729,6 +737,7 @@ describe("BountiesClient", () => {
             min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },

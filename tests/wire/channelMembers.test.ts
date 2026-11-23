@@ -29,6 +29,7 @@ describe("ChannelMembersClient", () => {
                     unread: false,
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -128,6 +129,7 @@ describe("ChannelMembersClient", () => {
             unread: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -232,6 +234,7 @@ describe("ChannelMembersClient", () => {
             unread: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -348,6 +351,7 @@ describe("ChannelMembersClient", () => {
             unread: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },

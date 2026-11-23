@@ -185,6 +185,7 @@ describe("AccountsClient", () => {
                     other_business_description: "other_business_description",
                     other_industry_description: "other_industry_description",
                     owner: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -202,6 +203,7 @@ describe("AccountsClient", () => {
                         title: "Shine Time Holdings",
                     },
                     partner: {
+                        badges: [{ type: "whop_team" }],
                         email: null,
                         id: "id",
                         name: null,
@@ -836,6 +838,7 @@ describe("AccountsClient", () => {
             other_business_description: "other_business_description",
             other_industry_description: "other_industry_description",
             owner: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -853,6 +856,7 @@ describe("AccountsClient", () => {
                 title: "Shine Time Holdings",
             },
             partner: {
+                badges: [{ type: "whop_team" }],
                 email: "email",
                 id: "id",
                 name: "name",
@@ -1452,6 +1456,7 @@ describe("AccountsClient", () => {
             other_business_description: "other_business_description",
             other_industry_description: "other_industry_description",
             owner: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -1469,6 +1474,7 @@ describe("AccountsClient", () => {
                 title: "Shine Time Holdings",
             },
             partner: {
+                badges: [{ type: "whop_team" }],
                 email: "email",
                 id: "id",
                 name: "name",
@@ -2083,6 +2089,7 @@ describe("AccountsClient", () => {
             other_business_description: "other_business_description",
             other_industry_description: "other_industry_description",
             owner: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -2100,6 +2107,7 @@ describe("AccountsClient", () => {
                 title: "Shine Time Holdings",
             },
             partner: {
+                badges: [{ type: "whop_team" }],
                 email: "email",
                 id: "id",
                 name: "name",
@@ -2757,6 +2765,7 @@ describe("AccountsClient", () => {
             other_business_description: "other_business_description",
             other_industry_description: "other_industry_description",
             owner: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -2774,6 +2783,7 @@ describe("AccountsClient", () => {
                 title: "Shine Time Holdings",
             },
             partner: {
+                badges: [{ type: "whop_team" }],
                 email: "email",
                 id: "id",
                 name: "name",
@@ -4149,6 +4159,7 @@ describe("AccountsClient", () => {
             other_business_description: "other_business_description",
             other_industry_description: "other_industry_description",
             owner: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -4166,6 +4177,7 @@ describe("AccountsClient", () => {
                 title: "Shine Time Holdings",
             },
             partner: {
+                badges: [{ type: "whop_team" }],
                 email: "email",
                 id: "id",
                 name: "name",
