@@ -5,6 +5,10 @@ export interface NotificationTopic {
     default_preference_value: boolean;
     /** Human-readable explanation of what notifications in this topic are about. `null` when no description has been set. */
     description: string | null;
+    /** How the topic sends email. `optional` means a preference with channel `email` turns its emails on or off. `always` means its emails are sent whatever the preferences say. `unavailable` means the topic sends no email. */
+    email_delivery: NotificationTopic.EmailDelivery;
+    /** Whether a preference with no channel also turns this topic's email on or off. When `false`, only a preference with channel `email` changes its email. */
+    every_channel_covers_email: boolean;
     /** Notification topic ID, prefixed `topic_`. This is the value the notification preference endpoints take as `topic_id`. */
     id: string;
     /** Stable, human-readable name for the category, such as `new-follower`. Unlike `id`, it is the same in every environment, which makes it the value to match on in code and to read in logs. Treat it as an opaque string: the set is open and the casing is historical rather than normalized. */
@@ -13,11 +17,26 @@ export interface NotificationTopic {
     is_mention: boolean;
     /** Display name shown in notification preference settings. */
     name: string;
+    /** How the topic sends push and in-app notifications. `optional` means a preference with channel `mobile` or `in_app` turns them on or off. A `mobile` preference wins over an `in_app` one. `unavailable` means the topic sends no push or in-app notification. */
+    push_delivery: NotificationTopic.PushDelivery;
     /** Scope of the topic: whether it applies to an account, a user, or an account's team. */
     topic_type: NotificationTopic.TopicType;
 }
 
 export namespace NotificationTopic {
+    /** How the topic sends email. `optional` means a preference with channel `email` turns its emails on or off. `always` means its emails are sent whatever the preferences say. `unavailable` means the topic sends no email. */
+    export const EmailDelivery = {
+        Optional: "optional",
+        Always: "always",
+        Unavailable: "unavailable",
+    } as const;
+    export type EmailDelivery = (typeof EmailDelivery)[keyof typeof EmailDelivery];
+    /** How the topic sends push and in-app notifications. `optional` means a preference with channel `mobile` or `in_app` turns them on or off. A `mobile` preference wins over an `in_app` one. `unavailable` means the topic sends no push or in-app notification. */
+    export const PushDelivery = {
+        Optional: "optional",
+        Unavailable: "unavailable",
+    } as const;
+    export type PushDelivery = (typeof PushDelivery)[keyof typeof PushDelivery];
     /** Scope of the topic: whether it applies to an account, a user, or an account's team. */
     export const TopicType = {
         Account: "account",

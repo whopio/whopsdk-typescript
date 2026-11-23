@@ -20,10 +20,13 @@ describe("TopicsClient", () => {
                 {
                     default_preference_value: false,
                     description: "A customer books and pays for a detail",
+                    email_delivery: "optional",
+                    every_channel_covers_email: false,
                     id: "topic_xxxxxxxxxxxxxx",
                     identifier: "notification_topic1_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     is_mention: true,
                     name: "New sales",
+                    push_delivery: "optional",
                     topic_type: "account",
                 },
             ],
