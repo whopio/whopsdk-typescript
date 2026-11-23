@@ -126,7 +126,6 @@ export * from "./AppUsageStats.js";
 export * from "./AppValidScopes.js";
 export * from "./AppViewTypes.js";
 export * from "./Audience.js";
-export * from "./AudienceMatchRate.js";
 export * from "./AuthorizedUser.js";
 export * from "./AuthorizedUserListItem.js";
 export * from "./AuthorizedUserRoles.js";

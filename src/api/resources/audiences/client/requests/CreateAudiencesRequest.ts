@@ -11,23 +11,23 @@ export interface CreateAudiencesRequest {
     account_id: string;
     /** Audience type. Defaults to `custom`. */
     audience_type?: CreateAudiencesRequest.AudienceType;
-    /** Filter audiences only, and set only at creation. `true` (the default) rebuilds membership from the filters twice a day. `false` keeps whoever matched at creation and never rebuilds. */
+    /** People audiences only. When `true`, the default, Whop rebuilds membership twice a day. When `false`, the audience keeps the people it matched at creation. You cannot change it later. */
     auto_refresh?: boolean;
-    /** CSV audiences only. Maps supported identity fields to CSV column headers. Map at least one of `email` or `phone`. */
+    /** CSV audiences only. The CSV header for each identity field. Map `email`, `phone`, or both. */
     column_mapping?: CreateAudiencesRequest.ColumnMapping;
-    /** Lookalikes only. Number of lookalike audiences to create (1–6). */
+    /** Lookalikes only. Number of lookalike audiences to create, from 1 to 6. */
     count?: number;
-    /** CSV audiences only. The uploaded customer CSV — a file id (`file_...`) returned by `POST /files`. */
+    /** CSV audiences only. File ID of the CSV, prefixed `file_`, from `POST /files`. */
     file_id?: string;
-    /** Filter audiences only. The People filters that define membership, keyed exactly as `GET /people` accepts them — for example `{"os": "iOS", "country": "US"}`. Activity dates `event_from` and `event_to` are inclusive and remain fixed on refresh. Use `event_within_days`, `first_seen_within_days` or `last_seen_within_days` for a rolling window. Source values are canonical source paths (`whop:<campaign>:<group>:<ad>`, `ext:<platform>:...`, `referrer:<domain>`, `direct`), exact or with a trailing `:*` wildcard. */
+    /** People audiences only. The filters that define membership, with the same keys as `GET /people`. `event_from` and `event_to` stay fixed when the audience rebuilds. For a rolling window, use `event_within_days`, `first_seen_within_days`, or `last_seen_within_days`. */
     filters?: Record<string, unknown>;
-    /** Audience display name. Required for custom audiences; lookalike names are generated from the source audience. */
+    /** Audience display name. Required for custom audiences. Lookalikes take their name from the source audience. */
     name?: string;
-    /** Lookalikes only. Total similarity reach as a whole percent (1–20), sliced evenly across `count` — must be divisible by `count`. For example, 3 audiences at 6% creates 0–2%, 2–4%, and 4–6% bands. */
+    /** Lookalikes only. Total reach as a whole percent, from 1 to 20. It must divide evenly by `count`. For example, 3 audiences at 6% make the 0 to 2%, 2 to 4%, and 4 to 6% bands. */
     percentage?: number;
-    /** Lookalikes only. The ready custom audience (`adaud_`) to build from; uploaded and People audiences need at least 100 matched people. */
+    /** Lookalikes only. The ready custom audience to build from, prefixed `adaud_`. It must have at least 100 people. */
     source_audience_id?: string;
-    /** Custom audience source. Inferred from `filters`, otherwise defaults to `csv_upload`. Supply only the fields for the selected source. */
+    /** Custom audience source. Defaults to `people_filter` when `filters` is set, otherwise `csv_upload`. Send only that source's fields. */
     source_type?: CreateAudiencesRequest.SourceType;
 }
 
@@ -40,7 +40,7 @@ export namespace CreateAudiencesRequest {
     export type AudienceType = (typeof AudienceType)[keyof typeof AudienceType];
 
     /**
-     * CSV audiences only. Maps supported identity fields to CSV column headers. Map at least one of `email` or `phone`.
+     * CSV audiences only. The CSV header for each identity field. Map `email`, `phone`, or both.
      */
     export interface ColumnMapping {
         /** CSV header for ISO 3166-1 alpha-2 country codes, such as `US`. */
@@ -51,13 +51,11 @@ export namespace CreateAudiencesRequest {
         first_name?: string | undefined;
         /** CSV header for last names. */
         last_name?: string | undefined;
-        /** CSV header for each customer's lifetime value — a non-negative number, currency symbols allowed. When mapped, Meta creates the audience as value-based, so lookalikes built from it favor people similar to the highest-value customers. */
-        ltv?: string | undefined;
         /** CSV header for phone numbers. */
         phone?: string | undefined;
     }
 
-    /** Custom audience source. Inferred from `filters`, otherwise defaults to `csv_upload`. Supply only the fields for the selected source. */
+    /** Custom audience source. Defaults to `people_filter` when `filters` is set, otherwise `csv_upload`. Send only that source's fields. */
     export const SourceType = {
         CsvUpload: "csv_upload",
         PeopleFilter: "people_filter",

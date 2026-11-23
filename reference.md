@@ -5418,7 +5418,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a custom audience from a customer list or your account's Whop People data, or a lookalike audience that reaches people similar to an existing one. Processing runs asynchronously. A custom audience returns one audience; a lookalike returns the requested similarity bands in `data`.
+Creates a custom audience from a CSV or Whop People filters, or lookalikes of an existing audience. Processing is asynchronous.
 </dd>
 </dl>
 </dd>
