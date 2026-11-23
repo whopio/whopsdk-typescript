@@ -215,6 +215,7 @@ describe("SwapsClient", () => {
                 symbol: "USDT",
             },
             metadata: { external_id: "shop_4417" },
+            mid_market_rate: "mid_market_rate",
             object: "swap_quote",
             rate: "1.5",
             requires_token_approval: true,

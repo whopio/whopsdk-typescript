@@ -19,6 +19,8 @@ export interface CreateQuoteSwapsResponse {
     from_token: Record<string, unknown>;
     /** Metadata from the request. */
     metadata: Record<string, unknown>;
+    /** Mid-market exchange rate for a fiat pair, before the FX charge, as a decimal string. `rate` is after the FX charge. `null` for a crypto pair. */
+    mid_market_rate: string | null;
     object: CreateQuoteSwapsResponse.Object_;
     /** Quoted exchange rate. */
     rate: string;
