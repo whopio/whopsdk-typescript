@@ -4,7 +4,9 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         product_ids: ["prod_xxxxxxxxxxxxx"]
+ *     }
  */
 export interface ListWaitlistEntriesRequest {
     /** Number of results to return from the start of the range. */
@@ -23,6 +25,8 @@ export interface ListWaitlistEntriesRequest {
     account_id?: string;
     /** Only return signups for variants on this product, prefixed `prod_`. */
     product_id?: string;
+    /** Only return signups for variants on any of these products, prefixed `prod_`. Unknown IDs match nothing. */
+    product_ids?: string | string[];
     /** List the signups submitted on behalf of this account, prefixed `biz_`, instead of your own and seller signups. Requires `waitlist_entry:read` on the account. The other filters still apply. */
     buyer_account_id?: string;
     /** Only return signups in this state. Canceled signups are returned only when `status` is `canceled`. */

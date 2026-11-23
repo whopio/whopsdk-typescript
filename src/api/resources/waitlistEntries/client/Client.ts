@@ -42,7 +42,9 @@ export class WaitlistEntriesClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.waitlistEntries.list()
+     *     await client.waitlistEntries.list({
+     *         product_ids: ["prod_xxxxxxxxxxxxx"]
+     *     })
      */
     public async list(
         request: Whop.ListWaitlistEntriesRequest = {},
@@ -61,6 +63,7 @@ export class WaitlistEntriesClient {
                     variant_id: variantId,
                     account_id: accountId,
                     product_id: productId,
+                    product_ids: productIds,
                     buyer_account_id: buyerAccountId,
                     status,
                     query,
@@ -78,6 +81,7 @@ export class WaitlistEntriesClient {
                     variant_id: variantId,
                     account_id: accountId,
                     product_id: productId,
+                    product_ids: productIds,
                     buyer_account_id: buyerAccountId,
                     status: status != null ? status : undefined,
                     query,
