@@ -3,7 +3,7 @@
 export interface NotificationPreferenceScope {
     /** Account the preference is scoped to (member notifications), prefixed `biz_`. */
     account_id: string | null;
-    /** Delivery channel the preference applies to. `null` applies to every channel. */
+    /** Delivery channel the preference applies to. `null` applies to every channel. Email is the exception when the topic's `every_channel_covers_email` is `false`. */
     channel: NotificationPreferenceScope.Channel | null;
     /** Experience the preference is scoped to, prefixed `exp_`. */
     experience_id: string | null;
@@ -14,10 +14,11 @@ export interface NotificationPreferenceScope {
 }
 
 export namespace NotificationPreferenceScope {
-    /** Delivery channel the preference applies to. `null` applies to every channel. */
+    /** Delivery channel the preference applies to. `null` applies to every channel. Email is the exception when the topic's `every_channel_covers_email` is `false`. */
     export const Channel = {
         InApp: "in_app",
         Mobile: "mobile",
+        Email: "email",
     } as const;
     export type Channel = (typeof Channel)[keyof typeof Channel];
 }

@@ -3,5 +3,6 @@
 export const ListTopicsRequestChannel = {
     InApp: "in_app",
     Mobile: "mobile",
+    Email: "email",
 } as const;
 export type ListTopicsRequestChannel = (typeof ListTopicsRequestChannel)[keyof typeof ListTopicsRequestChannel];
