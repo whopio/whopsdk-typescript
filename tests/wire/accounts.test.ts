@@ -167,8 +167,8 @@ describe("AccountsClient", () => {
                     level: {
                         account_level: 0,
                         current: 1,
-                        points: 41000,
-                        points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                        points: 41500,
+                        points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                         resets_at: "2026-01-01T12:00:00.000Z",
                     },
                     logo_url:
@@ -812,8 +812,8 @@ describe("AccountsClient", () => {
             level: {
                 account_level: 0,
                 current: 1,
-                points: 41000,
-                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points: 41500,
+                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -1422,8 +1422,8 @@ describe("AccountsClient", () => {
             level: {
                 account_level: 0,
                 current: 1,
-                points: 41000,
-                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points: 41500,
+                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -2047,8 +2047,8 @@ describe("AccountsClient", () => {
             level: {
                 account_level: 0,
                 current: 1,
-                points: 41000,
-                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points: 41500,
+                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -2715,8 +2715,8 @@ describe("AccountsClient", () => {
             level: {
                 account_level: 0,
                 current: 1,
-                points: 41000,
-                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points: 41500,
+                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:
@@ -4101,8 +4101,8 @@ describe("AccountsClient", () => {
             level: {
                 account_level: 0,
                 current: 1,
-                points: 41000,
-                points_by_source: { ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points: 41500,
+                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             logo_url:

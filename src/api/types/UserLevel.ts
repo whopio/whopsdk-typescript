@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface UserLevel {
     /** The level that applies: the highest the user reached this month or in the 5 months before, from `0` up to `10`. Public. */
     current: number;
-    /** Points earned this month across every account the user owns, plus their partner points, rounded down. An account whose month nets below zero counts as zero. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
+    /** Points earned this month by the user and their accounts, rounded down. An account whose month nets below zero counts as zero. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
     points: number | null;
     /** This month's points, split by where they were earned. Each source is net of its refunds, so one can be negative. `null` unless you retrieve yourself with the reserved id `me` and have balance-read scope. */
     points_by_source: Whop.OwnerLevelPoints | null;
