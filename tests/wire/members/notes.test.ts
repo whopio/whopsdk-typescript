@@ -19,6 +19,7 @@ describe("NotesClient", () => {
             data: [
                 {
                     author: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },
@@ -153,6 +154,7 @@ describe("NotesClient", () => {
         const rawRequestBody = { content: "Wants a call next week." };
         const rawResponseBody = {
             author: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },

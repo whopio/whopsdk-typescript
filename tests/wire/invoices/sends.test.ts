@@ -19,6 +19,7 @@ describe("SendsClient", () => {
             data: [
                 {
                     actor: {
+                        badges: [{ type: "whop_team" }],
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
                         profile_picture: { url: "https://ui-avatars.com/api/" },

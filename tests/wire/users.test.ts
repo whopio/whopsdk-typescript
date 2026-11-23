@@ -18,6 +18,7 @@ describe("UsersClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    badges: [{ type: "whop_team" }],
                     balance: {
                         businesses: [
                             {
@@ -324,6 +325,7 @@ describe("UsersClient", () => {
         });
 
         const rawResponseBody = {
+            badges: [{ type: "whop_team" }],
             balance: {
                 businesses: [
                     {
@@ -551,6 +553,7 @@ describe("UsersClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            badges: [{ type: "whop_team" }],
             balance: {
                 businesses: [
                     {
@@ -792,6 +795,7 @@ describe("UsersClient", () => {
         });
 
         const rawResponseBody = {
+            badges: [{ type: "whop_team" }],
             balance: {
                 businesses: [
                     {
@@ -1023,6 +1027,7 @@ describe("UsersClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            badges: [{ type: "whop_team" }],
             balance: {
                 businesses: [
                     {

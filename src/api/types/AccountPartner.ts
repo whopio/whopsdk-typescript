@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface AccountPartner {
+    badges: Whop.UserBadge[];
     /** Email address for contacting the partner. Null when the partner has not added their own email address. */
     email: string | null;
     /** User ID, prefixed `user_`. */

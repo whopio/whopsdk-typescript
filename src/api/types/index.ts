@@ -607,6 +607,7 @@ export * from "./UnauthorizedErrorBody.js";
 export * from "./UnprocessableEntityErrorBody.js";
 export * from "./UploadStatuses.js";
 export * from "./User.js";
+export * from "./UserBadge.js";
 export * from "./UserBalance.js";
 export * from "./UserBalanceBusiness.js";
 export * from "./UserBalanceCash.js";

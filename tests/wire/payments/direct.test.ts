@@ -171,6 +171,7 @@ describe("DirectClient", () => {
             updated_at: "2026-01-01T12:00:00.000Z",
             usd_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             user: {
+                badges: [{ type: "whop_team" }],
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
                 profile_picture: { url: "https://ui-avatars.com/api/" },

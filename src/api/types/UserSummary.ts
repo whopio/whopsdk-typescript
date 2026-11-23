@@ -3,6 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface UserSummary {
+    badges: Whop.UserBadge[];
     /** User ID, prefixed `user_`. */
     id: string;
     /** Display name. */
