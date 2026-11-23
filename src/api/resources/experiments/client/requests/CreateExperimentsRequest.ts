@@ -15,6 +15,8 @@ export interface CreateExperimentsRequest {
     /** Randomization unit, and the only identity the assignment is keyed on — evaluation fails rather than falling back to another. `user` (default) uses `subject[user_id]`; `account` uses `subject[account_id]`, so every user of an account gets the same arm; `anonymous` uses the anonymous id and survives sign-in. Fixed after creation. */
     bucket_by?: CreateExperimentsRequest.BucketBy;
     control?: CreateExperimentsRequest.Control;
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. Omit to leave it to the owner. Not accepted on feature flags. */
+    decision_mode?: CreateExperimentsRequest.DecisionMode | null;
     /** Developer-chosen handle referenced from code, used in evaluation and results calls. Interchangeable with the returned `expt_` id anywhere the API takes an experiment identifier. */
     flag_key: string;
     /** Required for full experiments; rejected on feature flags. Structure it as "If we [change] for [cohort], then [measurable behavior] will [increase/decrease], resulting in [business outcome], because [evidence]. Created by [name]." Evidence should be something real — a baseline number, a funnel breakdown — not a guess, and [name] is you, not something to leave blank. */
@@ -46,6 +48,12 @@ export namespace CreateExperimentsRequest {
         related_resource?: Whop.ExperimentResourceReference | undefined;
     }
 
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. Omit to leave it to the owner. Not accepted on feature flags. */
+    export const DecisionMode = {
+        Autopilot: "autopilot",
+        RequireApproval: "require_approval",
+    } as const;
+    export type DecisionMode = (typeof DecisionMode)[keyof typeof DecisionMode];
     /** `experiment` assigns its subjects to arms and takes `variants`. `beforeafter` compares a change with the period before it: it assigns nobody and needs `target_stats`. Defaults to `experiment`. */
     export const Kind = {
         Experiment: "experiment",

@@ -14,6 +14,8 @@ export interface UpdateExperimentsRequest {
     /** Owning account ID. Required when `id` is a flag key, optional for an `expt_` ID. */
     account_id?: string;
     control?: UpdateExperimentsRequest.Control;
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. Send `null` to leave it to the owner. Not accepted on feature flags. Omit to leave unchanged. */
+    decision_mode?: UpdateExperimentsRequest.DecisionMode | null;
     /** Omit to leave unchanged. Send an empty string to clear it. Not accepted on feature flags. When setting it, structure it as "If we [change] for [cohort], then [measurable behavior] will [increase/decrease], resulting in [business outcome], because [evidence]. Created by [name]." same as on create. */
     hypothesis?: string | null;
     /** Resource owned by the account that this experiment is bound to, such as an app or product. `null` when unbound. Fixed once the experiment first activates. */
@@ -27,6 +29,12 @@ export namespace UpdateExperimentsRequest {
         related_resource?: Whop.ExperimentResourceReference | undefined;
     }
 
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. Send `null` to leave it to the owner. Not accepted on feature flags. Omit to leave unchanged. */
+    export const DecisionMode = {
+        Autopilot: "autopilot",
+        RequireApproval: "require_approval",
+    } as const;
+    export type DecisionMode = (typeof DecisionMode)[keyof typeof DecisionMode];
     export type Variants = Variants.Item[];
 
     export namespace Variants {

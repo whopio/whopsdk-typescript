@@ -16,6 +16,8 @@ export interface Experiment {
     created_at?: (string | null) | undefined;
     /** ID of the user who created the experiment, prefixed `user_`. `null` for experiments created before creators were recorded. */
     created_by?: (string | null) | undefined;
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. `null` leaves it to the owner. */
+    decision_mode?: (Experiment.DecisionMode | null) | undefined;
     /** When the experiment stopped collecting data, as an ISO 8601 timestamp. `null` while still running. */
     ended_at?: (string | null) | undefined;
     /** What was learned and why this outcome, recorded when the experiment was ended. `null` until then. */
@@ -60,6 +62,12 @@ export namespace Experiment {
         related_resource?: Whop.ExperimentResourceReference | undefined;
     }
 
+    /** How the experiment is decided. `autopilot` ends it as soon as a result is outside the margin of error, shipping the arm that won or keeping control if it lost. If its window passes with no clear result, `autopilot` keeps control. `require_approval` leaves every arm serving for the owner to end. `null` leaves it to the owner. */
+    export const DecisionMode = {
+        Autopilot: "autopilot",
+        RequireApproval: "require_approval",
+    } as const;
+    export type DecisionMode = (typeof DecisionMode)[keyof typeof DecisionMode];
     /** The kind of experiment: `boolean` is a feature flag, `experiment` assigns its subjects to arms, `beforeafter` compares a change with the period before it. */
     export const Kind = {
         Boolean: "boolean",

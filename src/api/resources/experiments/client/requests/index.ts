@@ -6,4 +6,4 @@ export type { ListExperimentsRequest } from "./ListExperimentsRequest.js";
 export type { PauseExperimentsRequest } from "./PauseExperimentsRequest.js";
 export type { ResultsExperimentsRequest } from "./ResultsExperimentsRequest.js";
 export type { RetrieveExperimentsRequest } from "./RetrieveExperimentsRequest.js";
-export type { UpdateExperimentsRequest } from "./UpdateExperimentsRequest.js";
+export { UpdateExperimentsRequest } from "./UpdateExperimentsRequest.js";
