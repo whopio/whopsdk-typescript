@@ -77,7 +77,9 @@ describe("WaitlistEntriesClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.waitlistEntries.list();
+        const page = await client.waitlistEntries.list({
+            product_ids: ["prod_xxxxxxxxxxxxx"],
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);

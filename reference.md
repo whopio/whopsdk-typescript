@@ -31921,13 +31921,17 @@ Lists the waitlist signups you can see. `waitlist_entry:read` returns your own s
 <dd>
 
 ```typescript
-const pageableResponse = await client.waitlistEntries.list();
+const pageableResponse = await client.waitlistEntries.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"]
+});
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.waitlistEntries.list();
+let page = await client.waitlistEntries.list({
+    product_ids: ["prod_xxxxxxxxxxxxx"]
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
