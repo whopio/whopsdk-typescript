@@ -51,7 +51,7 @@ export namespace PostAdGroupUpdatedPayload {
         delivery_status: Data.DeliveryStatus;
         /** Age, gender, and automatic-audience targeting. */
         demographics: Whop.AdGroupDemographics;
-        /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). `null` for `minimum_cost` bidding. */
+        /** The cost per result the advertiser wants for this ad group, in USD. For an `awareness` campaign, it's the cost per 1,000 impressions. `null` when the ad group uses its campaign's `desired_cost_per_result`. */
         desired_cost_per_result: number | null;
         /** Device platforms and operating systems targeted. */
         devices: Whop.AdGroupDevices;

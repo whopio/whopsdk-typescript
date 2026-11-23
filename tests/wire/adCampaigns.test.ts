@@ -174,7 +174,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "traffic", title: "Now hiring mobile detailers — Austin" };
+        const rawRequestBody = { objective: "awareness", title: "Now hiring mobile detailers — Austin" };
         const rawResponseBody = {
             account: {
                 id: "biz_xxxxxxxxxxxxxx",
@@ -270,7 +270,7 @@ describe("AdCampaignsClient", () => {
             .build();
 
         const response = await client.adCampaigns.create({
-            objective: "traffic",
+            objective: "awareness",
             title: "Now hiring mobile detailers \u2014 Austin",
         });
         expect(response).toEqual(rawResponseBody);
@@ -285,7 +285,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "traffic", title: "title" };
+        const rawRequestBody = { objective: "awareness", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -299,7 +299,7 @@ describe("AdCampaignsClient", () => {
 
         await expect(async () => {
             return await client.adCampaigns.create({
-                objective: "traffic",
+                objective: "awareness",
                 title: "title",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -314,7 +314,7 @@ describe("AdCampaignsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { objective: "traffic", title: "title" };
+        const rawRequestBody = { objective: "awareness", title: "title" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -328,7 +328,7 @@ describe("AdCampaignsClient", () => {
 
         await expect(async () => {
             return await client.adCampaigns.create({
-                objective: "traffic",
+                objective: "awareness",
                 title: "title",
             });
         }).rejects.toThrow(Whop.ConflictError);

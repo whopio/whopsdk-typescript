@@ -48,7 +48,7 @@ export interface AdGroup {
     cost_per_mille: number;
     /** Spend divided by attributed purchases; null when purchases are not a goal and none are attributed. */
     cost_per_purchase: number | null;
-    /** Spend divided by Whop pixel-attributed results; null when nothing Whop-attributable is being optimized for. */
+    /** Spend divided by Whop pixel-attributed results. For `impressions`, it's the spend per 1,000 impressions. `null` when nothing Whop-attributable is being optimized for. */
     cost_per_result: number | null;
     /** Spend divided by attributed schedule events; null when schedules are not the goal and none are attributed. */
     cost_per_schedule: number | null;
@@ -72,7 +72,7 @@ export interface AdGroup {
     delivery_status: AdGroup.DeliveryStatus;
     /** Age, gender, and automatic-audience targeting. */
     demographics: Whop.AdGroupDemographics;
-    /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). `null` for `minimum_cost` bidding. */
+    /** The cost per result the advertiser wants for this ad group, in USD. For an `awareness` campaign, it's the cost per 1,000 impressions. `null` when the ad group uses its campaign's `desired_cost_per_result`. */
     desired_cost_per_result: number | null;
     /** Device platforms and operating systems targeted. */
     devices: Whop.AdGroupDevices;
@@ -103,7 +103,7 @@ export interface AdGroup {
     reach: number;
     /** Locations targeted and excluded. */
     regions: Whop.AdGroupRegions;
-    /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
+    /** The Whop pixel event whose attributed count represents results. It's the optimization goal, or the highest-volume attributed event for a campaign that budgets per ad group. `impressions` counts reported impressions. `null` when the goal isn't a Whop-attributed event. */
     result_event: AdGroup.ResultEvent | null;
     /** The merchant-defined event name when result_event is custom; null for the standard events. */
     result_event_name: string | null;
@@ -170,7 +170,7 @@ export namespace AdGroup {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-    /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
+    /** The Whop pixel event whose attributed count represents results. It's the optimization goal, or the highest-volume attributed event for a campaign that budgets per ad group. `impressions` counts reported impressions. `null` when the goal isn't a Whop-attributed event. */
     export const ResultEvent = {
         Purchase: "purchase",
         Lead: "lead",
@@ -182,6 +182,7 @@ export namespace AdGroup {
         AddToCart: "add_to_cart",
         Custom: "custom",
         MessagingConversation: "messaging_conversation",
+        Impressions: "impressions",
     } as const;
     export type ResultEvent = (typeof ResultEvent)[keyof typeof ResultEvent];
     /** Whether the ad group is enabled. `active` and `paused` are set by you; `rejected` means it failed ad review; `duplicating` is a copy still being filled in. */
