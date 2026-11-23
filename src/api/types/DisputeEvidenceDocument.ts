@@ -26,6 +26,8 @@ export interface DisputeEvidenceDocument {
     multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
     /** The type of this object, always `file`. */
     object: string;
+    /** URL to the optimized file. `null` when no optimized version is available. */
+    optimized_url: string | null;
     /** Whether moderation removed the file. When `true`, `url` serves a replacement image. `filename`, `size` and `content_type` still describe the original file. */
     removed_by_moderation: boolean;
     /** The file size in bytes. `null` until the upload has finished. */
