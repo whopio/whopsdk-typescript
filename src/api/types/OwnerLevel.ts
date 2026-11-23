@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface OwnerLevel {
     /** The level that applies: the highest the owner reached this month or in the 5 months before, from `0` up to `10`. */
     current: number;
-    /** Points earned this month across every account the owner owns, plus the owner's partner points, rounded down. An account whose month nets below zero counts as zero. */
+    /** Points earned this month by the owner and their accounts, rounded down. An account whose month nets below zero counts as zero. */
     points: number;
     /** This month's points, split by where they were earned. Each source is net of its refunds, so one can be negative. */
     points_by_source: Whop.OwnerLevelPoints;
