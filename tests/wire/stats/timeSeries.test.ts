@@ -73,7 +73,7 @@ describe("TimeSeriesClient", () => {
                 points: [
                     {
                         breakdown: [
-                            { name: "success", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 5 },
+                            { name: "visa", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 150 },
                         ],
                         steps: [{ conversion_rate: 100, count: 100, step: 1 }],
                         timestamp: 1767268800,
