@@ -7,6 +7,7 @@ export interface ResolutionCenterCase {
     account: Whop.AccountSummary | null;
     /** The amount in question, in whole units of `currency`. */
     amount: number;
+    answers: Whop.ResolutionCenterCaseAnswer[];
     available_actions: ResolutionCenterCase.AvailableActions.Item[];
     /** The customer who opened the case. */
     buyer: Whop.ResolutionBuyer;
@@ -73,6 +74,7 @@ export namespace ResolutionCenterCase {
         NotAsDescribed: "not_as_described",
         ProductUnacceptable: "product_unacceptable",
         SubscriptionCanceled: "subscription_canceled",
+        CreditNotProcessed: "credit_not_processed",
     } as const;
     export type Reason = (typeof Reason)[keyof typeof Reason];
     /** Whether money moved and off whose balance: `none`, `merchant`, or `platform` (Whop refunded the customer and the merchant kept the funds). Independent of `outcome` — a case the merchant won can still carry a platform refund. `null` while the case is open, and on older closed cases that predate this being recorded. */

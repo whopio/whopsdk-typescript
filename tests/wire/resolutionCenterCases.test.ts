@@ -20,6 +20,21 @@ describe("ResolutionCenterCasesClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
                     amount: 249,
+                    answers: [
+                        {
+                            attachments: [
+                                {
+                                    content_type: "image/png",
+                                    filename: "booking-confirmation.png",
+                                    id: "file_xxxxxxxxxxxxxx",
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                                },
+                            ],
+                            id: "inrqi_xxxxxxxxxxxxxx",
+                            question: "purchased",
+                            value: "January 5",
+                        },
+                    ],
                     available_actions: ["accept"],
                     buyer: {
                         email: "marcus@shinetime.example",
@@ -184,6 +199,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -319,6 +349,7 @@ describe("ResolutionCenterCasesClient", () => {
             groups: {
                 outcome: { customer_won: 0, merchant_won: 0, withdrawn: 0 },
                 reason: {
+                    credit_not_processed: 0,
                     fraudulent: 0,
                     not_as_described: 0,
                     product_not_received: 1,
@@ -408,6 +439,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -533,6 +579,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -689,6 +750,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -822,6 +898,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -1064,6 +1155,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -1195,6 +1301,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",
@@ -1323,6 +1444,21 @@ describe("ResolutionCenterCasesClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
             amount: 249,
+            answers: [
+                {
+                    attachments: [
+                        {
+                            content_type: "image/png",
+                            filename: "booking-confirmation.png",
+                            id: "file_xxxxxxxxxxxxxx",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        },
+                    ],
+                    id: "inrqi_xxxxxxxxxxxxxx",
+                    question: "purchased",
+                    value: "January 5",
+                },
+            ],
             available_actions: ["accept"],
             buyer: {
                 email: "marcus@shinetime.example",

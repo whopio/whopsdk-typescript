@@ -27200,7 +27200,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Opens a case, as the customer, against one of your own payments. Provide the payment (`receipt_id`), the `reason`, and a `message`.
+Opens a case, as the customer, against one of your own payments. Provide the payment (`receipt_id`), the `reason`, and a `message`. Send `answers` to record the customer's answers to the questions for that reason.
 </dd>
 </dl>
 </dd>
