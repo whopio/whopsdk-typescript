@@ -129,6 +129,7 @@ export class ReportsClient {
             convert_to: convertTo,
             first,
             after,
+            mode,
         } = request;
         const _queryParams: Record<string, unknown> = {
             referring_account_id: referringAccountId,
@@ -143,6 +144,7 @@ export class ReportsClient {
             convert_to: convertTo,
             first,
             after,
+            mode: mode != null ? mode : undefined,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -245,6 +247,7 @@ export class ReportsClient {
             blueprint,
             first,
             after,
+            mode,
         } = request;
         const _queryParams: Record<string, unknown> = {
             breakdown_by: breakdownBy != null ? breakdownBy : undefined,
@@ -262,6 +265,7 @@ export class ReportsClient {
             blueprint,
             first,
             after,
+            mode: mode != null ? mode : undefined,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

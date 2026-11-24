@@ -16,6 +16,8 @@ export namespace ListStatsResponse {
             description: string;
             /** The metric's key. Pass it to GET /stats/time_series/{metric} to query its values. */
             key: string;
+            /** The values of the mode parameter that the metric takes. owner reads the account or user named. global reads all of Whop. */
+            modes?: string[] | undefined;
             /** Human-readable display name for the metric. */
             name: string;
             /** The properties you can use with this metric — pass one as a filter (property=value) to narrow the series, or as breakdown_by=property to split it. */

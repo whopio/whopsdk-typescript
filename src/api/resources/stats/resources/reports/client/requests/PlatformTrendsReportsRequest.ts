@@ -37,4 +37,6 @@ export interface PlatformTrendsReportsRequest {
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
+    /** Whose figures the report reads, one of the modes the report has. `global` reads all of Whop with nothing left out. */
+    mode?: Whop.stats.PlatformTrendsReportsRequestMode;
 }

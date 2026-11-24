@@ -170,6 +170,8 @@ export interface RetrieveStatsRequest {
     activity?: Whop.RetrieveStatsRequestActivity;
     /** With a single breakdown_by, keep this many groups with the highest whole-range values. Every other group folds into one entry named other. A rate or an average ranks its groups by the deals it divides by. The other entry is measured from the underlying rows, so a distinct count or a rate stays exact rather than being added up from groups. */
     breakdown_limit?: number;
+    /** Whose figures the metric reads, one of the modes the metric lists. `global` reads all of Whop and takes no account_id. Without it, the metric reads the account or user named. */
+    mode?: Whop.RetrieveStatsRequestMode;
     /** Business ids (biz_...) to scope the series to. The series sums their figures. On a metric that lists account as a breakdown, it replaces account_id and takes at most 50 ids. On such a metric, breakdown_by=account returns an entry for each id. Available on metrics that list account_ids. */
     account_ids?: string | string[];
     /** Runner user ids (user_...) to scope the series to; the series sums the figures of the campaigns they hold. Available on metrics that list runner_ids. */
