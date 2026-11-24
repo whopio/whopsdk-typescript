@@ -116,15 +116,16 @@ describe("DisputesClient", () => {
                     ],
                     line_items: [
                         {
+                            discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             id: "li_xxxxxxxxxxxxxx",
-                            label: "Ceramic Coating Package",
+                            label: "Credit card surcharge",
                             product_id: "prod_xxxxxxxxxxxxxx",
-                            product_title: "Ceramic Coating Package",
+                            product_title: "Credit card surcharge",
                             quantity: 1,
                             sku: null,
                             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             variant_id: "plan_xxxxxxxxxxxxxx",
-                            variant_title: "Ceramic Coating — Full Vehicle",
+                            variant_title: "Credit card surcharge",
                         },
                     ],
                     payment: {
@@ -452,15 +453,16 @@ describe("DisputesClient", () => {
             ],
             line_items: [
                 {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
-                    label: "Ceramic Coating Package",
+                    label: "Credit card surcharge",
                     product_id: "prod_xxxxxxxxxxxxxx",
-                    product_title: "Ceramic Coating Package",
+                    product_title: "Credit card surcharge",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     variant_id: "plan_xxxxxxxxxxxxxx",
-                    variant_title: "Ceramic Coating — Full Vehicle",
+                    variant_title: "Credit card surcharge",
                 },
             ],
             payment: {
@@ -684,15 +686,16 @@ describe("DisputesClient", () => {
             ],
             line_items: [
                 {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
-                    label: "Ceramic Coating Package",
+                    label: "Credit card surcharge",
                     product_id: "prod_xxxxxxxxxxxxxx",
-                    product_title: "Ceramic Coating Package",
+                    product_title: "Credit card surcharge",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     variant_id: "plan_xxxxxxxxxxxxxx",
-                    variant_title: "Ceramic Coating — Full Vehicle",
+                    variant_title: "Credit card surcharge",
                 },
             ],
             payment: {
@@ -965,15 +968,16 @@ describe("DisputesClient", () => {
             ],
             line_items: [
                 {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
-                    label: "Ceramic Coating Package",
+                    label: "Credit card surcharge",
                     product_id: "prod_xxxxxxxxxxxxxx",
-                    product_title: "Ceramic Coating Package",
+                    product_title: "Credit card surcharge",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     variant_id: "plan_xxxxxxxxxxxxxx",
-                    variant_title: "Ceramic Coating — Full Vehicle",
+                    variant_title: "Credit card surcharge",
                 },
             ],
             payment: {
@@ -1296,15 +1300,16 @@ describe("DisputesClient", () => {
             ],
             line_items: [
                 {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
-                    label: "Ceramic Coating Package",
+                    label: "Credit card surcharge",
                     product_id: "prod_xxxxxxxxxxxxxx",
-                    product_title: "Ceramic Coating Package",
+                    product_title: "Credit card surcharge",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     variant_id: "plan_xxxxxxxxxxxxxx",
-                    variant_title: "Ceramic Coating — Full Vehicle",
+                    variant_title: "Credit card surcharge",
                 },
             ],
             payment: {
@@ -1600,15 +1605,16 @@ describe("DisputesClient", () => {
             ],
             line_items: [
                 {
+                    discount_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     id: "li_xxxxxxxxxxxxxx",
-                    label: "Ceramic Coating Package",
+                    label: "Credit card surcharge",
                     product_id: "prod_xxxxxxxxxxxxxx",
-                    product_title: "Ceramic Coating Package",
+                    product_title: "Credit card surcharge",
                     quantity: 1,
                     sku: "sku",
                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     variant_id: "plan_xxxxxxxxxxxxxx",
-                    variant_title: "Ceramic Coating — Full Vehicle",
+                    variant_title: "Credit card surcharge",
                 },
             ],
             payment: {
