@@ -15,6 +15,8 @@ export interface UpdatePreferencesResponse {
     ads_triple_whale_integration: UpdatePreferencesResponse.AdsTripleWhaleIntegration;
     /** The account's affiliate program: its instructions, its application and the product it features for affiliates. `GET /accounts/{account_id}/affiliate_program` returns the same object without authentication. */
     affiliate_program: Whop.AccountAffiliateProgram;
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. `buyer` (the default) adds about 43% to the iOS price, so the buyer pays the fee. `company` keeps the product's own price, and the fee comes out of the sale. */
+    apple_iap_fee_payer: UpdatePreferencesResponse.AppleIapFeePayer;
     /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
     cancellation_emails: boolean;
     /** The card surcharge a point of sale adds to credit card payments. Debit and prepaid cards never pay it. */
@@ -180,6 +182,12 @@ export namespace UpdatePreferencesResponse {
         export type Status = (typeof Status)[keyof typeof Status];
     }
 
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. `buyer` (the default) adds about 43% to the iOS price, so the buyer pays the fee. `company` keeps the product's own price, and the fee comes out of the sale. */
+    export const AppleIapFeePayer = {
+        Buyer: "buyer",
+        Company: "company",
+    } as const;
+    export type AppleIapFeePayer = (typeof AppleIapFeePayer)[keyof typeof AppleIapFeePayer];
     export type EconomicIntelligenceOffers = EconomicIntelligenceOffers.Item[];
 
     export namespace EconomicIntelligenceOffers {

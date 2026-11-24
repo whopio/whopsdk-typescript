@@ -15,6 +15,8 @@ export interface AccountPreferences {
     ads_triple_whale_integration: Record<string, unknown>;
     /** The account's affiliate program: its instructions, its application and the product it features for affiliates. `GET /accounts/{account_id}/affiliate_program` returns the same object without authentication. */
     affiliate_program: Whop.AccountAffiliateProgram;
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. `buyer` (the default) adds about 43% to the iOS price, so the buyer pays the fee. `company` keeps the product's own price, and the fee comes out of the sale. */
+    apple_iap_fee_payer: AccountPreferences.AppleIapFeePayer;
     /** Whether Whop emails members when their membership is canceled or terminated. `true` by default. Set it to `false` to stop these emails while keeping the account's other customer emails. They also stop while the account's `send_customer_emails` is `false`. */
     cancellation_emails: boolean;
     /** The card surcharge a point of sale adds to credit card payments. Debit and prepaid cards never pay it. */
@@ -66,6 +68,12 @@ export interface AccountPreferences {
 }
 
 export namespace AccountPreferences {
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. `buyer` (the default) adds about 43% to the iOS price, so the buyer pays the fee. `company` keeps the product's own price, and the fee comes out of the sale. */
+    export const AppleIapFeePayer = {
+        Buyer: "buyer",
+        Company: "company",
+    } as const;
+    export type AppleIapFeePayer = (typeof AppleIapFeePayer)[keyof typeof AppleIapFeePayer];
     /** The merchant of record for the account's payments. `whop` means Whop is the merchant of record and the account can switch. `null` means Whop is the merchant of record and the account cannot switch. `pending` means the account switched and waits for approval. Checkout takes no payments until then. `account` means the account is the merchant of record. */
     export const MerchantOfRecord = {
         Whop: "whop",

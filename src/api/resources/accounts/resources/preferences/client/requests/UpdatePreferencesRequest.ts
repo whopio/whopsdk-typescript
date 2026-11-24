@@ -19,6 +19,8 @@ export interface UpdatePreferencesRequest {
     ads_triple_whale_integration?: UpdatePreferencesRequest.AdsTripleWhaleIntegration;
     /** The account's affiliate program. Only the fields you send change, and fields left out keep their current values. To clear a field, set it to `null`. To turn affiliates on or off, set `global_affiliate_status` and `member_affiliate_status` on each product with `PATCH /products/{id}`. Requires the `affiliate:update` scope on your API key. */
     affiliate_program?: UpdatePreferencesRequest.AffiliateProgram;
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. Set it to `company` to sell at the product's own price and pay the fee from the sale. Set it to `buyer` to add about 43% to the iOS price, so the buyer pays the fee. Requires the `company:update` scope on your API key. */
+    apple_iap_fee_payer?: UpdatePreferencesRequest.AppleIapFeePayer;
     /** Whether Whop emails members when their membership is canceled or terminated. Set it to `false` to stop these emails while keeping the account's other customer emails. Requires the `company:update` scope on your API key. */
     cancellation_emails?: boolean;
     /** The card surcharge a point of sale adds to credit card payments, replaced as a whole. You can always turn it off. You can turn it on only when `card_surcharge.maximum_percentage` is not null. Requires the `company:update` scope on your API key. */
@@ -156,6 +158,13 @@ export namespace UpdatePreferencesRequest {
             }
         }
     }
+
+    /** Who pays Apple's 30% fee on one-time purchases made in the Whop iOS app. Set it to `company` to sell at the product's own price and pay the fee from the sale. Set it to `buyer` to add about 43% to the iOS price, so the buyer pays the fee. Requires the `company:update` scope on your API key. */
+    export const AppleIapFeePayer = {
+        Buyer: "buyer",
+        Company: "company",
+    } as const;
+    export type AppleIapFeePayer = (typeof AppleIapFeePayer)[keyof typeof AppleIapFeePayer];
 
     /**
      * The card surcharge a point of sale adds to credit card payments, replaced as a whole. You can always turn it off. You can turn it on only when `card_surcharge.maximum_percentage` is not null. Requires the `company:update` scope on your API key.
