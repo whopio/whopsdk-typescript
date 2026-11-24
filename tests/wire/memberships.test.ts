@@ -19,6 +19,7 @@ describe("MembershipsClient", () => {
             data: [
                 {
                     account: {
+                        banner_image_url: null,
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -373,6 +374,7 @@ describe("MembershipsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -494,6 +496,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { billing_period_days: 45 };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -581,6 +584,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { current_period_end: "2027-01-15T00:00:00Z" };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -668,6 +672,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { renewal_price: 19.99 };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -811,6 +816,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { promo_code: "SAVE20" };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1014,6 +1020,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { commission_type: "flat_fee", commission_value: 5, email: "affiliate@example.com" };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1103,6 +1110,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { commission_type: "percentage", commission_value: 20, user_id: "user_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1372,6 +1380,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1542,6 +1551,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = { days: 7 };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1716,6 +1726,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1886,6 +1897,7 @@ describe("MembershipsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -2112,6 +2124,7 @@ describe("MembershipsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -2278,6 +2291,7 @@ describe("MembershipsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",

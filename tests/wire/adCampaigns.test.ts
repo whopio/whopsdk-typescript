@@ -19,6 +19,7 @@ describe("AdCampaignsClient", () => {
             data: [
                 {
                     account: {
+                        banner_image_url: null,
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -177,6 +178,7 @@ describe("AdCampaignsClient", () => {
         const rawRequestBody = { objective: "awareness", title: "Now hiring mobile detailers — Austin" };
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -346,6 +348,7 @@ describe("AdCampaignsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -523,6 +526,7 @@ describe("AdCampaignsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -633,6 +637,7 @@ describe("AdCampaignsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -798,6 +803,7 @@ describe("AdCampaignsClient", () => {
             data: [
                 {
                     account: {
+                        banner_image_url: null,
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -994,6 +1000,7 @@ describe("AdCampaignsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1130,6 +1137,7 @@ describe("AdCampaignsClient", () => {
 
         const rawResponseBody = {
             account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",

@@ -23,6 +23,6 @@ export namespace TriggerAutomationsRequest {
          * Member IDs, prefixed `mber_`. */
         | string[]
         /**
-         * Filters with the names and meaning of `GET /members` query parameters: `access_level`, `status`, `most_recent_actions`, `membership_status`, `product_ids`, `variant_ids`, `promo_code_ids`, `user_ids`, `query`, `created_before`, and `created_after`. */
+         * Filters with the names and meaning of `GET /members` query parameters: `access_level`, `status`, `most_recent_actions`, `membership_status`, `product_ids`, `variant_ids`, `promo_code_ids`, `user_ids`, `query`, `metadata`, `created_before`, and `created_after`. */
         | Record<string, unknown>;
 }

@@ -21,6 +21,7 @@ describe("WaitlistEntriesClient", () => {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     approval_failure_reason: "plan_unavailable",
                     buyer_account: {
+                        banner_image_url: null,
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -177,6 +178,7 @@ describe("WaitlistEntriesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
             buyer_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -550,6 +552,7 @@ describe("WaitlistEntriesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
             buyer_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -696,6 +699,7 @@ describe("WaitlistEntriesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
             buyer_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -869,6 +873,7 @@ describe("WaitlistEntriesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
             buyer_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1042,6 +1047,7 @@ describe("WaitlistEntriesClient", () => {
             account_id: "biz_xxxxxxxxxxxxxx",
             approval_failure_reason: "plan_unavailable",
             buyer_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
