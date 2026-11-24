@@ -40,6 +40,7 @@ describe("InvoicesClient", () => {
                     email_address: "marcus@shinetime.example",
                     id: "pay_xxxxxxxxxxxxxx",
                     invoice_prefix: "invoice_prefix",
+                    issued_at: "2026-01-01T12:00:00.000Z",
                     line_items: [
                         {
                             description:
@@ -234,6 +235,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -480,6 +482,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -741,6 +744,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -926,6 +930,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -1309,6 +1314,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -1550,6 +1556,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -1758,6 +1765,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -1943,6 +1951,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
@@ -2097,6 +2106,7 @@ describe("InvoicesClient", () => {
             email_address: "marcus@shinetime.example",
             id: "pay_xxxxxxxxxxxxxx",
             invoice_prefix: "invoice_prefix",
+            issued_at: "2026-01-01T12:00:00.000Z",
             line_items: [
                 {
                     description: "Deposit toward invoice #xxxxxxxx: $225.00 of $750.00, $525.00 left after this",
