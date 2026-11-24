@@ -49,7 +49,7 @@ export namespace RecommendedAction {
     /** What kind of change the action makes. New values can be added, so skip an action whose type you do not know. */
     export const Type = {
         AddCancelOffer: "add_cancel_offer",
-        CreateEmailAutomation: "create_email_automation",
+        CreateMessageAutomation: "create_message_automation",
         ImproveLandingPage: "improve_landing_page",
         FixBrokenWebsite: "fix_broken_website",
         CloneAndAbTestSite: "clone_and_ab_test_site",
