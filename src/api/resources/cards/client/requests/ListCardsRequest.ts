@@ -5,7 +5,7 @@
  *     {}
  */
 export interface ListCardsRequest {
-    /** The owning account ID (a biz_ identifier). Provide this or user_id. */
+    /** The owning account ID: a biz_ identifier for a business, or a user_ identifier for a personal account. Provide this or user_id. */
     account_id?: string;
     /** The owning user ID (a user_ identifier). Provide this or account_id. */
     user_id?: string;

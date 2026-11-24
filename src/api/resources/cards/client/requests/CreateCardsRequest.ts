@@ -5,7 +5,7 @@
  *     {}
  */
 export interface CreateCardsRequest {
-    /** The owning account ID (a biz_ identifier). Provide this or user_id. */
+    /** The owning account ID: a biz_ identifier for a business, or a user_ identifier for a personal account. Provide this or user_id. */
     account_id?: string;
     /** The account member (a user_ identifier) to assign the card to. Required for business card issuing accounts. When this call files the card application, the member applies with their identity. An account API key that sends neither this nor kind is refused. */
     assigned_user_id?: string;
