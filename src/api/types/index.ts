@@ -520,6 +520,7 @@ export * from "./ResolutionAttachment.js";
 export * from "./ResolutionBuyer.js";
 export * from "./ResolutionCenterCase.js";
 export * from "./ResolutionCenterCaseActions.js";
+export * from "./ResolutionCenterCaseAnswer.js";
 export * from "./ResolutionCenterCaseCustomerResponses.js";
 export * from "./ResolutionCenterCaseIssueTypes.js";
 export * from "./ResolutionCenterCaseLegacy.js";

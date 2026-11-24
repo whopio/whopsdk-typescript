@@ -9,6 +9,8 @@
  *     }
  */
 export interface CreateResolutionCenterCasesRequest {
+    /** The customer's answers to the questions for this `reason`. Every required question needs an answer, and a question the reason does not ask is refused. */
+    answers?: CreateResolutionCenterCasesRequest.Answers.Item[];
     attachments?: CreateResolutionCenterCasesRequest.Attachments.Item[];
     /** The customer's explanation. */
     message: string;
@@ -19,6 +21,48 @@ export interface CreateResolutionCenterCasesRequest {
 }
 
 export namespace CreateResolutionCenterCasesRequest {
+    export type Answers = Answers.Item[];
+
+    export namespace Answers {
+        export interface Item {
+            /** Up to 5 files for this answer, by existing file `id` or `direct_upload_id`. */
+            attachments?: Item.Attachments.Item[] | undefined;
+            /** The question this answers. */
+            question: Item.Question;
+            /** The answer, up to 500 characters. A choice question takes one of its fixed values, and `contacted_on` takes an ISO 8601 date. `purchased`, `missing_items`, `promised`, `received_instead`, `quality_issue` and `merchant_reply` need at least 20 characters. */
+            value?: string | undefined;
+        }
+
+        export namespace Item {
+            export type Attachments = Attachments.Item[];
+
+            export namespace Attachments {
+                export interface Item {
+                    direct_upload_id?: string | undefined;
+                    id?: string | undefined;
+                }
+            }
+
+            /** The question this answers. */
+            export const Question = {
+                Purchased: "purchased",
+                RecognizesPurchase: "recognizes_purchase",
+                ComplaintKind: "complaint_kind",
+                MissingItems: "missing_items",
+                ExpectedBy: "expected_by",
+                Promised: "promised",
+                PromisedLink: "promised_link",
+                ReceivedInstead: "received_instead",
+                QualityIssue: "quality_issue",
+                ContactedMerchant: "contacted_merchant",
+                ContactedOn: "contacted_on",
+                MerchantReply: "merchant_reply",
+                Extra: "extra",
+            } as const;
+            export type Question = (typeof Question)[keyof typeof Question];
+        }
+    }
+
     export type Attachments = Attachments.Item[];
 
     export namespace Attachments {
@@ -35,6 +79,7 @@ export namespace CreateResolutionCenterCasesRequest {
         NotAsDescribed: "not_as_described",
         ProductUnacceptable: "product_unacceptable",
         SubscriptionCanceled: "subscription_canceled",
+        CreditNotProcessed: "credit_not_processed",
     } as const;
     export type Reason = (typeof Reason)[keyof typeof Reason];
 }

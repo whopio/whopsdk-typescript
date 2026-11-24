@@ -6,6 +6,7 @@ export const ListResolutionCenterCasesRequestReasonItem = {
     NotAsDescribed: "not_as_described",
     ProductUnacceptable: "product_unacceptable",
     SubscriptionCanceled: "subscription_canceled",
+    CreditNotProcessed: "credit_not_processed",
 } as const;
 export type ListResolutionCenterCasesRequestReasonItem =
     (typeof ListResolutionCenterCasesRequestReasonItem)[keyof typeof ListResolutionCenterCasesRequestReasonItem];

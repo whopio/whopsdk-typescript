@@ -34,6 +34,7 @@ export namespace SummaryResolutionCenterCasesResponse {
          * How many of the matching cases were opened for each reason. Every reason is present, including those with a count of zero.
          */
         export interface Reason {
+            credit_not_processed: number;
             fraudulent: number;
             not_as_described: number;
             product_not_received: number;

@@ -7,6 +7,7 @@ export const ResolutionCenterCaseIssueTypes = {
     SignificantlyNotAsDescribed: "significantly_not_as_described",
     UnauthorizedTransaction: "unauthorized_transaction",
     ProductUnacceptable: "product_unacceptable",
+    CreditNotProcessed: "credit_not_processed",
 } as const;
 export type ResolutionCenterCaseIssueTypes =
     (typeof ResolutionCenterCaseIssueTypes)[keyof typeof ResolutionCenterCaseIssueTypes];
