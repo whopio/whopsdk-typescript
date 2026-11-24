@@ -42,6 +42,10 @@ export interface Invoice {
     quote_amount_paid: Whop.Money | null;
     /** How much of the quote is not yet billed: its line items before tax, minus every invoice in `quote_invoice_ids`. `null` when the invoice was never sent as a quote. */
     quote_amount_remaining: Whop.Money | null;
+    /** How much is billed as a deposit when the customer signs, before tax. `null` when the quote has no deposit. */
+    quote_deposit_amount: Whop.Money | null;
+    /** The share of the quote billed as a deposit when the customer signs, such as `30` for 30%. `null` when the deposit is a fixed amount or there is none. */
+    quote_deposit_percentage: number | null;
     quote_invoice_ids: string[];
     /** Where the customer pays the next unpaid invoice in `quote_invoice_ids`. Only returned when the quote is read with its customer `token`. `null` otherwise, and when nothing is waiting to be paid. */
     quote_payment_url: string | null;
