@@ -20,6 +20,8 @@ export interface Invoice {
     email_address: string | null;
     id: string;
     invoice_prefix: string | null;
+    /** When the invoice was issued, as an ISO 8601 timestamp. This is when it left draft, which can be after `created_at` for an invoice drafted or scheduled ahead. `null` while the invoice is a draft, and for invoices issued before this field was introduced. */
+    issued_at: string | null;
     line_items: Whop.InvoiceLineItem[];
     mailing_address_id: string | null;
     member_id: string | null;
