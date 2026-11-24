@@ -29,6 +29,8 @@ export interface SuspensionAppealSubject {
     suspension_country: string | null;
     /** Why the account was suspended, as one sentence written for the account holder in the request's locale. `null` when the account is not suspended. Also `null` for a personal account that has no current `suspension_code` but has a reason on file. */
     suspension_explanation: string | null;
+    /** The same sentence as `suspension_explanation`, with each link kept as Markdown, such as `[community guidelines](https://whop.com/guidelines)`. `null` when `suspension_explanation` is `null`. */
+    suspension_explanation_markdown: string | null;
     /** Sentence shown to the account holder for this suspension, such as `We cannot support your business due to fraudulent activity.` It is in the request's locale. A personal account suspended without a current `suspension_code` can show the reason it was given at the time. `null` when the account is not suspended. */
     suspension_reason: string | null;
 }

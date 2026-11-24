@@ -359,6 +359,7 @@ describe("SuspensionAppealsClient", () => {
                 suspension_code: "fraudulent_activity",
                 suspension_country: "suspension_country",
                 suspension_explanation: "The email we sent you explains why.",
+                suspension_explanation_markdown: "The email we sent you explains why.",
                 suspension_reason: "We cannot support your business.",
             },
         };

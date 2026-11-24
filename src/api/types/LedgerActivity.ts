@@ -297,6 +297,7 @@ export namespace LedgerActivity {
         PaymentUnreconciledClearing: "payment_unreconciled_clearing",
         PaymentUnreconciledReversal: "payment_unreconciled_reversal",
         SettlementShortfallLoss: "settlement_shortfall_loss",
+        PspErrorLoss: "psp_error_loss",
         FxSettlementGainLoss: "fx_settlement_gain_loss",
         SettlementRoundingVariance: "settlement_rounding_variance",
         PspPayoutSettlement: "psp_payout_settlement",
