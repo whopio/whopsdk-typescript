@@ -123,7 +123,7 @@ describe("UsersClient", () => {
                     level: {
                         current: 1,
                         points: 41500,
-                        points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                        points_by_source: { actions: 0, ads: 0, cards: 0, partners: 0, trading: 0 },
                         resets_at: "2026-01-01T12:00:00.000Z",
                     },
                     name: "Marcus Webb",
@@ -415,7 +415,7 @@ describe("UsersClient", () => {
             level: {
                 current: 1,
                 points: 41500,
-                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points_by_source: { actions: 0, ads: 0, cards: 0, partners: 0, trading: 0 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -643,7 +643,7 @@ describe("UsersClient", () => {
             level: {
                 current: 1,
                 points: 41500,
-                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points_by_source: { actions: 0, ads: 0, cards: 0, partners: 0, trading: 0 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -885,7 +885,7 @@ describe("UsersClient", () => {
             level: {
                 current: 1,
                 points: 41500,
-                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points_by_source: { actions: 0, ads: 0, cards: 0, partners: 0, trading: 0 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
@@ -1117,7 +1117,7 @@ describe("UsersClient", () => {
             level: {
                 current: 1,
                 points: 41500,
-                points_by_source: { actions: 500, ads: 0, cards: 40000, partners: 0, trading: 1000 },
+                points_by_source: { actions: 0, ads: 0, cards: 0, partners: 0, trading: 0 },
                 resets_at: "2026-01-01T12:00:00.000Z",
             },
             name: "Marcus Webb",
