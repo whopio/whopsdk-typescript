@@ -15,6 +15,8 @@ export interface SendInvoicesRequest {
     collection_method?: SendInvoicesRequest.CollectionMethod | null;
     /** A note to the customer in the quote email. It is not stored. Only with `send_as` set to `quote`. Defaults to "Please review and accept this quote" when it is blank or left out. */
     message?: string | null;
+    /** A fixed amount in the invoice's currency to bill as a deposit when the customer signs, such as `200` for $200.00. It must be less than the quote total. Mutually exclusive with `quote_deposit_percentage`. Only with `send_as` set to `quote`. */
+    quote_deposit_amount?: number | null;
     /** The share of the quote to bill as a deposit when the customer signs, such as `30` for 30%. The customer is then taken to pay it. Only with `send_as` set to `quote`. */
     quote_deposit_percentage?: number | null;
     /** How to send the draft. `invoice` issues it and emails it to be paid. `quote` emails it as a quote and keeps it a draft. Defaults to `invoice`. */
