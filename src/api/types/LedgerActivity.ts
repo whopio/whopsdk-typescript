@@ -34,7 +34,7 @@ export interface LedgerActivity {
     product_name?: (string | null) | undefined;
     /** Resource associated with this ledger activity. */
     resource: LedgerActivity.Resource | null;
-    /** Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID. */
+    /** Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID. Treasury pay-ins use object `crypto_offramp` and an ID prefixed `cofr_`. With `include_resource=false`, a treasury pay-in's source and a deposit's `bank_deposit_id` can be null. */
     source: LedgerActivity.Source | null;
     /** Dollar value of this movement as a decimal string, signed like `amount`. Converted from the posted amount at the rate that was live when the line posted — the same pricing the wallet balance chart and the financial reports use — so a crypto row carries its dollar value too. `null` for a currency Whop holds no exchange rate for. */
     usd_amount: string | null;
@@ -560,13 +560,15 @@ export namespace LedgerActivity {
           };
 
     /**
-     * Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID. Treasury pay-ins use object `crypto_offramp` and an ID prefixed `cofr_`. With `include_resource=false`, a treasury pay-in's source and a deposit's `bank_deposit_id` can be null.
      */
     export interface Source {
         /** ID of the account that runs the ad campaign (ad_campaign sources only). */
         account_id?: (string | null) | undefined;
-        /** Payout amount as a decimal number in the destination currency (payout sources only; requires payout:withdrawal:read). */
+        /** Payout amount as a decimal number in the destination currency. Present only on `withdrawal` sources. Requires `payout:withdrawal:read`. */
         amount_float?: (number | null) | undefined;
+        /** ID of the bank deposit that this on-chain deposit delivered, prefixed `vbt_`. Present only on onchain_transaction sources for bank deposits. */
+        bank_deposit_id?: string | undefined;
         /** Card brand used by the payment source. */
         card_brand?: (string | null) | undefined;
         /** Chain the deposit landed on, for example plasma (onchain_transaction sources only). */
@@ -623,7 +625,7 @@ export namespace LedgerActivity {
         to_currency?: (string | null) | undefined;
         /** Bank trace reference for the withdrawal. Requires payout:withdrawal:read. */
         trace_code?: (string | null) | undefined;
-        /** On-chain transaction hash (onchain_transaction and swap sources only). */
+        /** On-chain transaction hash (onchain_transaction, swap, and crypto_offramp sources only). On crypto_offramp sources, this is the wallet send that funded the pay-in. */
         tx_hash?: (string | null) | undefined;
         /** Accepts any additional properties */
         [key: string]: any;

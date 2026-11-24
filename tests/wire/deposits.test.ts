@@ -179,6 +179,7 @@ describe("DepositsClient", () => {
             source: {
                 account_id: "account_id",
                 amount_float: 1500,
+                bank_deposit_id: "bank_deposit_id",
                 card_brand: "card_brand",
                 chain: "plasma",
                 claim_url: "https://whop.com/claim",
