@@ -1241,7 +1241,7 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             auto_capture_at: "auto_capture_at",
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
@@ -2474,7 +2474,7 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             auto_capture_at: "auto_capture_at",
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
@@ -2660,7 +2660,7 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = { return_url: "https://shinetime.example/checkout/thanks" };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             auto_capture_at: "auto_capture_at",
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
@@ -2765,7 +2765,7 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             auto_capture_at: "auto_capture_at",
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",

@@ -76,7 +76,7 @@ export namespace Experience {
         export interface Item {
             /** The unique identifier for the product. */
             id: string;
-            /** URL slug in the product's public link, e.g. `pickaxe-analytics` in whop.com/company/pickaxe-analytics. */
+            /** URL slug in the product's public link, e.g. `ceramic-coating-package` in whop.com/company/ceramic-coating-package. */
             route: string;
             /** The display name of the product shown to customers on the product page and in search results. */
             title: string;

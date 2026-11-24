@@ -26,15 +26,16 @@ describe("LivestreamsClient", () => {
                         chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                         moments: [
                             {
-                                description: "Elena showed her new preset pack and chat asked how to get it.",
+                                description:
+                                    "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                                 end_offset_seconds: 1461,
                                 message: {
-                                    content: "how do I get these presets??",
+                                    content: "How do I book a ceramic coating?",
                                     id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                                    user_name: "Maya Chen",
+                                    user_name: "Dana Whitfield",
                                 },
                                 offset_seconds: 1412,
-                                title: "Elena reveals the blue hour preset pack",
+                                title: "Marcus demonstrates the ceramic coating process",
                             },
                         ],
                         status: "pending",
@@ -45,7 +46,7 @@ describe("LivestreamsClient", () => {
                         "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
                     started_at: "2026-01-01T12:00:00.000Z",
                     thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-                    title: "Live edit: blue hour",
+                    title: "Live detail: ceramic coating",
                 },
             ],
             page_info: {
@@ -157,15 +158,16 @@ describe("LivestreamsClient", () => {
                 chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                 moments: [
                     {
-                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        description:
+                            "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                         end_offset_seconds: 1461,
                         message: {
-                            content: "how do I get these presets??",
+                            content: "How do I book a ceramic coating?",
                             id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                            user_name: "Maya Chen",
+                            user_name: "Dana Whitfield",
                         },
                         offset_seconds: 1412,
-                        title: "Elena reveals the blue hour preset pack",
+                        title: "Marcus demonstrates the ceramic coating process",
                     },
                 ],
                 status: "pending",
@@ -175,7 +177,7 @@ describe("LivestreamsClient", () => {
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
             started_at: "2026-01-01T12:00:00.000Z",
             thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-            title: "Live edit: blue hour",
+            title: "Live detail: ceramic coating",
         };
 
         server.mockEndpoint().get("/livestreams/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -268,15 +270,16 @@ describe("LivestreamsClient", () => {
                 chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                 moments: [
                     {
-                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        description:
+                            "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                         end_offset_seconds: 1461,
                         message: {
-                            content: "how do I get these presets??",
+                            content: "How do I book a ceramic coating?",
                             id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                            user_name: "Maya Chen",
+                            user_name: "Dana Whitfield",
                         },
                         offset_seconds: 1412,
-                        title: "Elena reveals the blue hour preset pack",
+                        title: "Marcus demonstrates the ceramic coating process",
                     },
                 ],
                 status: "pending",
@@ -286,7 +289,7 @@ describe("LivestreamsClient", () => {
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
             started_at: "2026-01-01T12:00:00.000Z",
             thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-            title: "Live edit: blue hour",
+            title: "Live detail: ceramic coating",
         };
 
         server
@@ -469,15 +472,16 @@ describe("LivestreamsClient", () => {
                 chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                 moments: [
                     {
-                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        description:
+                            "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                         end_offset_seconds: 1461,
                         message: {
-                            content: "how do I get these presets??",
+                            content: "How do I book a ceramic coating?",
                             id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                            user_name: "Maya Chen",
+                            user_name: "Dana Whitfield",
                         },
                         offset_seconds: 1412,
-                        title: "Elena reveals the blue hour preset pack",
+                        title: "Marcus demonstrates the ceramic coating process",
                     },
                 ],
                 status: "pending",
@@ -487,7 +491,7 @@ describe("LivestreamsClient", () => {
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
             started_at: "2026-01-01T12:00:00.000Z",
             thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-            title: "Live edit: blue hour",
+            title: "Live detail: ceramic coating",
         };
 
         server
@@ -664,15 +668,16 @@ describe("LivestreamsClient", () => {
                 chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                 moments: [
                     {
-                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        description:
+                            "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                         end_offset_seconds: 1461,
                         message: {
-                            content: "how do I get these presets??",
+                            content: "How do I book a ceramic coating?",
                             id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                            user_name: "Maya Chen",
+                            user_name: "Dana Whitfield",
                         },
                         offset_seconds: 1412,
-                        title: "Elena reveals the blue hour preset pack",
+                        title: "Marcus demonstrates the ceramic coating process",
                     },
                 ],
                 status: "pending",
@@ -682,7 +687,7 @@ describe("LivestreamsClient", () => {
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
             started_at: "2026-01-01T12:00:00.000Z",
             thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-            title: "Live edit: blue hour",
+            title: "Live detail: ceramic coating",
         };
 
         server
@@ -865,15 +870,16 @@ describe("LivestreamsClient", () => {
                 chat: { chatter_count: 87, message_count: 412, per_minute: [4] },
                 moments: [
                     {
-                        description: "Elena showed her new preset pack and chat asked how to get it.",
+                        description:
+                            "Marcus demonstrated a ceramic coating and answered questions about booking a detail.",
                         end_offset_seconds: 1461,
                         message: {
-                            content: "how do I get these presets??",
+                            content: "How do I book a ceramic coating?",
                             id: "post_xxxxxxxxxxxxxxxxxxxxxx",
-                            user_name: "Maya Chen",
+                            user_name: "Dana Whitfield",
                         },
                         offset_seconds: 1412,
-                        title: "Elena reveals the blue hour preset pack",
+                        title: "Marcus demonstrates the ceramic coating process",
                     },
                 ],
                 status: "pending",
@@ -883,7 +889,7 @@ describe("LivestreamsClient", () => {
             recording_url: "https://whop-livestreams-example.s3.amazonaws.com/room/lfeed_xxxxxxxxxxxxxxxxxxxxxx.mp4",
             started_at: "2026-01-01T12:00:00.000Z",
             thumbnail_url: "https://img.whop.com/livestreams/lfeed_xxxxxxxxxxxxxxxxxxxxxx.jpg",
-            title: "Live edit: blue hour",
+            title: "Live detail: ceramic coating",
         };
 
         server

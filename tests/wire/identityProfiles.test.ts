@@ -35,7 +35,7 @@ describe("IdentityProfilesClient", () => {
                     first_name: "first_name",
                     id: "idpf_xxxxxxxxxxxxx",
                     last_name: "last_name",
-                    linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" }],
+                    linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" }],
                     payout_status: "connected",
                     payouts_enabled: true,
                     personal_address: {
@@ -252,7 +252,7 @@ describe("IdentityProfilesClient", () => {
             first_name: "first_name",
             id: "idpf_xxxxxxxxxxxxx",
             last_name: "last_name",
-            linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" }],
+            linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" }],
             payout_status: "connected",
             payouts_enabled: true,
             personal_address: {
@@ -510,7 +510,7 @@ describe("IdentityProfilesClient", () => {
             first_name: "first_name",
             id: "idpf_xxxxxxxxxxxxx",
             last_name: "last_name",
-            linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" }],
+            linked_companies: [{ id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" }],
             payout_status: "connected",
             payouts_enabled: true,
             personal_address: {

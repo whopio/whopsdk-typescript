@@ -22,9 +22,9 @@ describe("PromoCodesClient", () => {
                         id: "aff_xxxxxxxxxxxxxx",
                         user: {
                             id: "user_xxxxxxxxxxxxxx",
-                            name: "Jack Sharkey the 3rd",
+                            name: "Dana Whitfield",
                             profile_pic: "https://ui-avatars.com/api/",
-                            username: "newpromoaffiliate",
+                            username: "danawhitfield",
                         },
                     },
                     amount_off: 0.1,
@@ -39,7 +39,7 @@ describe("PromoCodesClient", () => {
                     metadata: { key: "value" },
                     new_users_only: true,
                     one_per_customer: true,
-                    product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
+                    product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Masterclass" },
                     promo_duration_months: 1,
                     promo_type: "percentage",
                     status: "active",
@@ -162,19 +162,19 @@ describe("PromoCodesClient", () => {
             promo_type: "percentage",
         };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
                     id: "user_xxxxxxxxxxxxxx",
-                    name: "Jack Sharkey the 3rd",
+                    name: "Dana Whitfield",
                     profile_pic: "https://ui-avatars.com/api/",
-                    username: "newpromoaffiliate",
+                    username: "danawhitfield",
                 },
             },
-            amount_off: 0.25,
+            amount_off: 0.1,
             churned_users_only: false,
-            code: "affiliate25",
+            code: "welcome",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             duration: "forever",
@@ -184,14 +184,14 @@ describe("PromoCodesClient", () => {
             metadata: { key: "value" },
             new_users_only: true,
             one_per_customer: true,
-            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
-            promo_duration_months: 3,
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Masterclass" },
+            promo_duration_months: 1,
             promo_type: "percentage",
             status: "active",
-            stock: 200,
+            stock: 25,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
-            uses: 0,
+            uses: 1,
         };
 
         server
@@ -310,19 +310,19 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
                     id: "user_xxxxxxxxxxxxxx",
-                    name: "Jack Sharkey the 3rd",
+                    name: "Dana Whitfield",
                     profile_pic: "https://ui-avatars.com/api/",
-                    username: "newpromoaffiliate",
+                    username: "danawhitfield",
                 },
             },
-            amount_off: 0.25,
+            amount_off: 0.1,
             churned_users_only: false,
-            code: "affiliate25",
+            code: "welcome",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             duration: "forever",
@@ -332,14 +332,14 @@ describe("PromoCodesClient", () => {
             metadata: { key: "value" },
             new_users_only: true,
             one_per_customer: true,
-            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
-            promo_duration_months: 3,
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Masterclass" },
+            promo_duration_months: 1,
             promo_type: "percentage",
             status: "active",
-            stock: 200,
+            stock: 25,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
-            uses: 0,
+            uses: 1,
         };
 
         server.mockEndpoint().get("/promo_codes/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -402,19 +402,19 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
                     id: "user_xxxxxxxxxxxxxx",
-                    name: "Jack Sharkey the 3rd",
+                    name: "Dana Whitfield",
                     profile_pic: "https://ui-avatars.com/api/",
-                    username: "newpromoaffiliate",
+                    username: "danawhitfield",
                 },
             },
-            amount_off: 0.25,
+            amount_off: 0.1,
             churned_users_only: false,
-            code: "affiliate25",
+            code: "welcome",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             duration: "forever",
@@ -424,14 +424,14 @@ describe("PromoCodesClient", () => {
             metadata: { key: "value" },
             new_users_only: true,
             one_per_customer: true,
-            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
-            promo_duration_months: 3,
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Masterclass" },
+            promo_duration_months: 1,
             promo_type: "percentage",
             status: "active",
-            stock: 200,
+            stock: 25,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
-            uses: 0,
+            uses: 1,
         };
 
         server
@@ -513,19 +513,19 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
                     id: "user_xxxxxxxxxxxxxx",
-                    name: "Jack Sharkey the 3rd",
+                    name: "Dana Whitfield",
                     profile_pic: "https://ui-avatars.com/api/",
-                    username: "newpromoaffiliate",
+                    username: "danawhitfield",
                 },
             },
-            amount_off: 0.25,
+            amount_off: 0.1,
             churned_users_only: false,
-            code: "affiliate25",
+            code: "welcome",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             duration: "forever",
@@ -535,14 +535,14 @@ describe("PromoCodesClient", () => {
             metadata: { key: "value" },
             new_users_only: true,
             one_per_customer: true,
-            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
-            promo_duration_months: 3,
+            product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Masterclass" },
+            promo_duration_months: 1,
             promo_type: "percentage",
             status: "active",
-            stock: 200,
+            stock: 25,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
-            uses: 0,
+            uses: 1,
         };
 
         server

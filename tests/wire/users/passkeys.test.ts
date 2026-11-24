@@ -328,7 +328,7 @@ describe("PasskeysClient", () => {
                 rp: { id: "localhost", name: "Whop" },
                 timeout: 300000,
                 user: {
-                    display_name: "Jack Sharkey the 1st",
+                    display_name: "Marcus Webb",
                     id: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                     name: "marcus@shinetime.example",
                 },

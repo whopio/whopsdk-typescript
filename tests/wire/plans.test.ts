@@ -18,7 +18,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: {},
@@ -106,7 +106,7 @@ describe("PlansClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { key: "value" },
@@ -217,7 +217,7 @@ describe("PlansClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { key: "value" },
@@ -317,7 +317,7 @@ describe("PlansClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { key: "value" },

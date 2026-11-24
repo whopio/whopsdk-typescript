@@ -24,9 +24,9 @@ describe("CourseLessonInteractionsClient", () => {
                     lesson: {
                         chapter: { id: "chap_xxxxxxxxxxxxx" },
                         id: "lesn_xxxxxxxxxxxxx",
-                        title: "Understanding Candlestick Patterns",
+                        title: "Preparing Paint for Ceramic Coating",
                     },
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
                 },
             ],
             page_info: {
@@ -250,16 +250,16 @@ describe("CourseLessonInteractionsClient", () => {
             course: {
                 experience: { id: "exp_xxxxxxxxxxxxxx" },
                 id: "cors_xxxxxxxxxxxxx",
-                title: "Introduction to Technical Analysis",
+                title: "Introduction to Ceramic Coating",
             },
             created_at: "2023-12-01T05:00:00Z",
             id: "crsli_xxxxxxxxxxxx",
             lesson: {
                 chapter: { id: "chap_xxxxxxxxxxxxx" },
                 id: "lesn_xxxxxxxxxxxxx",
-                title: "Understanding Candlestick Patterns",
+                title: "Preparing Paint for Ceramic Coating",
             },
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server

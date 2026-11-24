@@ -21,7 +21,7 @@ describe("ReactionsClient", () => {
                     emoji: ":heart:",
                     id: "reac_xxxxxxxxxxxxxxxxxxxxxx",
                     resource_id: "resource_id",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
                 },
             ],
             page_info: {
@@ -214,7 +214,7 @@ describe("ReactionsClient", () => {
             emoji: ":heart:",
             id: "reac_xxxxxxxxxxxxxxxxxxxxxx",
             resource_id: "resource_id",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server
@@ -442,7 +442,7 @@ describe("ReactionsClient", () => {
             emoji: ":heart:",
             id: "reac_xxxxxxxxxxxxxxxxxxxxxx",
             resource_id: "resource_id",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server

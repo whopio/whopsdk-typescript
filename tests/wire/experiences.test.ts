@@ -23,12 +23,16 @@ describe("ExperiencesClient", () => {
                         id: "app_xxxxxxxxxxxxxx",
                         name: "Courses",
                     },
-                    company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+                    company: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
+                        title: "Shine Time Auto Detailing",
+                    },
                     created_at: "2023-12-01T05:00:00Z",
                     id: "exp_xxxxxxxxxxxxxx",
                     image: { url: "https://media.whop.com/abc123/optimized.jpg" },
                     is_public: true,
-                    name: "Trading Signals Chat",
+                    name: "Detailing Tips Chat",
                     order: "123.45",
                 },
             ],
@@ -228,14 +232,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server
@@ -473,14 +483,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server
@@ -833,14 +849,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server
@@ -1070,14 +1092,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server
@@ -1315,14 +1343,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server
@@ -1560,14 +1594,20 @@ describe("ExperiencesClient", () => {
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Courses",
             },
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "pickaxe", title: "Pickaxe" },
+            company: {
+                id: "biz_xxxxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
             created_at: "2023-12-01T05:00:00Z",
             id: "exp_xxxxxxxxxxxxxx",
             image: { url: "https://media.whop.com/abc123/optimized.jpg" },
             is_public: true,
-            name: "Trading Signals Chat",
+            name: "Detailing Tips Chat",
             order: "123.45",
-            products: [{ id: "prod_xxxxxxxxxxxxx", route: "pickaxe-analytics", title: "Pickaxe Analytics" }],
+            products: [
+                { id: "prod_xxxxxxxxxxxxx", route: "ceramic-coating-package", title: "Ceramic Coating Package" },
+            ],
         };
 
         server

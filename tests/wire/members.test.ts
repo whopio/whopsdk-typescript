@@ -169,7 +169,7 @@ describe("MembersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { email: "jane@example.com" };
+        const rawRequestBody = { email: "dana@shinetime.example" };
         const rawResponseBody = {
             access_level: "no_access",
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -227,7 +227,7 @@ describe("MembersClient", () => {
             .build();
 
         const response = await client.members.create({
-            email: "jane@example.com",
+            email: "dana@shinetime.example",
         });
         expect(response).toEqual(rawResponseBody);
     });

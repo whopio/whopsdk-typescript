@@ -31,7 +31,7 @@ describe("AffiliatesClient", () => {
                     total_referrals_count: 42,
                     total_revenue_usd: "total_revenue_usd",
                     updated_at: "2023-12-01T05:00:00Z",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "Jane Smith", username: "janesmith" },
+                    user: { id: "user_xxxxxxxxxxxxx", name: "Dana Whitfield", username: "danawhitfield" },
                 },
             ],
             page_info: {
@@ -234,7 +234,7 @@ describe("AffiliatesClient", () => {
             total_referrals_count: 42,
             total_revenue_usd: "total_revenue_usd",
             updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "Jane Smith", username: "janesmith" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Dana Whitfield", username: "danawhitfield" },
         };
 
         server
@@ -480,7 +480,7 @@ describe("AffiliatesClient", () => {
             total_referrals_count: 42,
             total_revenue_usd: "total_revenue_usd",
             updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "Jane Smith", username: "janesmith" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Dana Whitfield", username: "danawhitfield" },
         };
 
         server

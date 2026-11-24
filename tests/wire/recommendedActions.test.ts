@@ -32,7 +32,7 @@ describe("RecommendedActionsClient", () => {
                         traffic_percent: 50,
                     },
                     reasoning:
-                        "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Moving member results above the fold shows the payoff first.",
+                        "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Showing before and after detailing photos first helps drivers see the finish.",
                     run_by_user_id: null,
                     run_ended_at: null,
                     run_started_at: null,
@@ -45,7 +45,7 @@ describe("RecommendedActionsClient", () => {
                             params: { from: "2026-11-10", product: "prod_Xr2mQ8nVt4Ld", to: "2026-11-16" },
                         },
                     ],
-                    title: "Lead your home page with member results",
+                    title: "Lead your home page with before and after detailing photos",
                     type: "improve_landing_page",
                     updated_at: "2026-11-17T05:14:02.907Z",
                     workflow: {
@@ -56,14 +56,14 @@ describe("RecommendedActionsClient", () => {
                                 error: null,
                                 operation: "updatePlan",
                                 status: "pending",
-                                title: "Put the Starter bundle package on sale through the website",
+                                title: "Offer the Interior Deep Clean package on the website",
                             },
                             {
                                 arguments: { id: "plan_Pro9kL2mNq4Xs", visibility: "hidden" },
                                 error: null,
                                 operation: "updatePlan",
                                 status: "pending",
-                                title: "Put the Pro bundle package on sale through the website",
+                                title: "Offer the Ceramic Coating Package on the website",
                             },
                             {
                                 arguments: {
@@ -75,7 +75,7 @@ describe("RecommendedActionsClient", () => {
                                         "If we make this change to the website for visitors, then more of them will buy, because 62% leave the home page before they scroll to the pricing section. Created by Economic Intelligence.",
                                     kind: "experiment",
                                     metadata: { page_paths: "/" },
-                                    name: "Lead your home page with member results",
+                                    name: "Lead your home page with before and after detailing photos",
                                     related_resource: { id: "app_Wq81LmZr0aXk", object: "app" },
                                     target_stats: [
                                         {
@@ -263,7 +263,7 @@ describe("RecommendedActionsClient", () => {
                 traffic_percent: 50,
             },
             reasoning:
-                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Moving member results above the fold shows the payoff first.",
+                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Showing before and after detailing photos first helps drivers see the finish.",
             run_by_user_id: null,
             run_ended_at: null,
             run_started_at: null,
@@ -276,7 +276,7 @@ describe("RecommendedActionsClient", () => {
                     params: { from: "2026-11-10", product: "prod_Xr2mQ8nVt4Ld", to: "2026-11-16" },
                 },
             ],
-            title: "Lead your home page with member results",
+            title: "Lead your home page with before and after detailing photos",
             type: "improve_landing_page",
             updated_at: "2026-11-17T05:14:02.907Z",
             workflow: {
@@ -287,14 +287,14 @@ describe("RecommendedActionsClient", () => {
                         error: null,
                         operation: "updatePlan",
                         status: "pending",
-                        title: "Put the Starter bundle package on sale through the website",
+                        title: "Offer the Interior Deep Clean package on the website",
                     },
                     {
                         arguments: { id: "plan_Pro9kL2mNq4Xs", visibility: "hidden" },
                         error: null,
                         operation: "updatePlan",
                         status: "pending",
-                        title: "Put the Pro bundle package on sale through the website",
+                        title: "Offer the Ceramic Coating Package on the website",
                     },
                     {
                         arguments: {
@@ -306,7 +306,7 @@ describe("RecommendedActionsClient", () => {
                                 "If we make this change to the website for visitors, then more of them will buy, because 62% leave the home page before they scroll to the pricing section. Created by Economic Intelligence.",
                             kind: "experiment",
                             metadata: { page_paths: "/" },
-                            name: "Lead your home page with member results",
+                            name: "Lead your home page with before and after detailing photos",
                             related_resource: { id: "app_Wq81LmZr0aXk", object: "app" },
                             target_stats: [
                                 {
@@ -473,7 +473,7 @@ describe("RecommendedActionsClient", () => {
                     params: { from: "2026-01-01", product: "prod_xxxxxxxxxxxxxx", to: "2026-01-01" },
                 },
             ],
-            title: "Lead your home page with member results",
+            title: "Lead your home page with before and after detailing photos",
             type: "add_cancel_offer",
             updated_at: "2026-01-01T12:00:00.000Z",
             workflow: {
@@ -484,7 +484,7 @@ describe("RecommendedActionsClient", () => {
                         error: null,
                         operation: "updatePlan",
                         status: "pending",
-                        title: "Put the Pro bundle package on sale through the website",
+                        title: "Offer the Ceramic Coating Package on the website",
                     },
                 ],
             },
@@ -688,7 +688,7 @@ describe("RecommendedActionsClient", () => {
                 traffic_percent: 50,
             },
             reasoning:
-                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Moving member results above the fold shows the payoff first.",
+                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Showing before and after detailing photos first helps drivers see the finish.",
             run_by_user_id: null,
             run_ended_at: null,
             run_started_at: null,
@@ -701,7 +701,7 @@ describe("RecommendedActionsClient", () => {
                     params: { from: "2026-11-10", product: "prod_Xr2mQ8nVt4Ld", to: "2026-11-16" },
                 },
             ],
-            title: "Lead your home page with member results",
+            title: "Lead your home page with before and after detailing photos",
             type: "improve_landing_page",
             updated_at: "2026-11-17T15:40:27.006Z",
             workflow: {
@@ -712,14 +712,14 @@ describe("RecommendedActionsClient", () => {
                         error: null,
                         operation: "updatePlan",
                         status: "pending",
-                        title: "Put the Starter bundle package on sale through the website",
+                        title: "Offer the Interior Deep Clean package on the website",
                     },
                     {
                         arguments: { id: "plan_Pro9kL2mNq4Xs", visibility: "hidden" },
                         error: null,
                         operation: "updatePlan",
                         status: "pending",
-                        title: "Put the Pro bundle package on sale through the website",
+                        title: "Offer the Ceramic Coating Package on the website",
                     },
                     {
                         arguments: {
@@ -731,7 +731,7 @@ describe("RecommendedActionsClient", () => {
                                 "If we make this change to the website for visitors, then more of them will buy, because 62% leave the home page before they scroll to the pricing section. Created by Economic Intelligence.",
                             kind: "experiment",
                             metadata: { page_paths: "/" },
-                            name: "Lead your home page with member results",
+                            name: "Lead your home page with before and after detailing photos",
                             related_resource: { id: "app_Wq81LmZr0aXk", object: "app" },
                             target_stats: [
                                 {
@@ -912,7 +912,7 @@ describe("RecommendedActionsClient", () => {
                 traffic_percent: 50,
             },
             reasoning:
-                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Moving member results above the fold shows the payoff first.",
+                "Visitors who reach your pricing section buy at 4.1%, but 62% leave the home page before they scroll to it. Showing before and after detailing photos first helps drivers see the finish.",
             run_by_user_id: "user_Hn4kP0sQ2wEr",
             run_ended_at: null,
             run_started_at: "2026-11-17T15:02:11.540Z",
@@ -925,7 +925,7 @@ describe("RecommendedActionsClient", () => {
                     params: { from: "2026-11-10", product: "prod_Xr2mQ8nVt4Ld", to: "2026-11-16" },
                 },
             ],
-            title: "Lead your home page with member results",
+            title: "Lead your home page with before and after detailing photos",
             type: "improve_landing_page",
             updated_at: "2026-11-17T15:02:11.540Z",
             workflow: {
@@ -936,14 +936,14 @@ describe("RecommendedActionsClient", () => {
                         error: null,
                         operation: "updatePlan",
                         status: "succeeded",
-                        title: "Put the Starter bundle package on sale through the website",
+                        title: "Offer the Interior Deep Clean package on the website",
                     },
                     {
                         arguments: { id: "plan_Pro9kL2mNq4Xs", visibility: "hidden" },
                         error: null,
                         operation: "updatePlan",
                         status: "running",
-                        title: "Put the Pro bundle package on sale through the website",
+                        title: "Offer the Ceramic Coating Package on the website",
                     },
                     {
                         arguments: {
@@ -955,7 +955,7 @@ describe("RecommendedActionsClient", () => {
                                 "If we make this change to the website for visitors, then more of them will buy, because 62% leave the home page before they scroll to the pricing section. Created by Economic Intelligence.",
                             kind: "experiment",
                             metadata: { page_paths: "/" },
-                            name: "Lead your home page with member results",
+                            name: "Lead your home page with before and after detailing photos",
                             related_resource: { id: "app_Wq81LmZr0aXk", object: "app" },
                             target_stats: [
                                 {

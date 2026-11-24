@@ -47,7 +47,7 @@ describe("MethodsClient", () => {
                     },
                     recipient: {
                         country: "country",
-                        email: "jane.doe@example.com",
+                        email: "dana@shinetime.example",
                         first_name: "first_name",
                         last_name: "last_name",
                     },
@@ -212,7 +212,7 @@ describe("MethodsClient", () => {
             object: "payout_method",
             payer_name: "ACH Bank Deposit",
             quote: { key: "value" },
-            recipient: { country: "USA", email: "jane.doe@example.com", first_name: "Jane", last_name: "Doe" },
+            recipient: { country: "USA", email: "dana@shinetime.example", first_name: "Dana", last_name: "Whitfield" },
             status: "created",
             status_reason: "status_reason",
             supported_payout_method: {
@@ -521,7 +521,7 @@ describe("MethodsClient", () => {
             quote: { key: "value" },
             recipient: {
                 country: "country",
-                email: "jane.doe@example.com",
+                email: "dana@shinetime.example",
                 first_name: "first_name",
                 last_name: "last_name",
             },

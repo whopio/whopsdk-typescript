@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         email: "jane@example.com"
+ *         email: "dana@shinetime.example"
  *     }
  */
 export interface CreateMembersRequest {

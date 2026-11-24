@@ -204,7 +204,7 @@ export class MembersClient {
      *
      * @example
      *     await client.members.create({
-     *         email: "jane@example.com"
+     *         email: "dana@shinetime.example"
      *     })
      */
     public create(

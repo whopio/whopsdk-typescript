@@ -18,15 +18,15 @@ describe("AppInstallationsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     app: {
-                        developer: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                        developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
                         name: "Other App",
                     },
                     created_at: "2026-01-01T12:00:00.000Z",
-                    external_id: "acme-books",
+                    external_id: "shine-time-austin",
                     id: "aag_xxxxxxxxxxxxxx",
                     metadata: { last_synced_at: "2026-01-01T12:00:00.000Z", quickbooks_realm_id: "9341452712" },
                     requesting_reauthorization: false,
@@ -128,15 +128,15 @@ describe("AppInstallationsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             app: {
-                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Other App",
             },
             created_at: "2026-01-01T12:00:00.000Z",
-            external_id: "acme-books",
+            external_id: "shine-time-austin",
             id: "aag_xxxxxxxxxxxxxx",
             metadata: { last_synced_at: "2026-01-01T12:00:00.000Z", quickbooks_realm_id: "9341452712" },
             requesting_reauthorization: false,
@@ -249,15 +249,15 @@ describe("AppInstallationsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             app: {
-                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                 id: "app_xxxxxxxxxxxxxx",
                 name: "Other App",
             },
             created_at: "2026-01-01T12:00:00.000Z",
-            external_id: "acme-books",
+            external_id: "shine-time-austin",
             id: "aag_xxxxxxxxxxxxxx",
             metadata: { last_synced_at: "2026-01-01T12:00:00.000Z", quickbooks_realm_id: "9341452712" },
             requesting_reauthorization: false,

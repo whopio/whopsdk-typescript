@@ -19,7 +19,7 @@ describe("ForumsClient", () => {
             data: [
                 {
                     email_notification_preference: "all_admin_posts",
-                    experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
+                    experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Detailing Tips Chat" },
                     id: "id",
                     who_can_comment: "everyone",
                     who_can_post: "everyone",
@@ -221,7 +221,7 @@ describe("ForumsClient", () => {
                 url: "https://media.whop.com/abc123/optimized.jpg",
             },
             email_notification_preference: "all_admin_posts",
-            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
+            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Detailing Tips Chat" },
             id: "id",
             who_can_comment: "everyone",
             who_can_post: "everyone",
@@ -401,7 +401,7 @@ describe("ForumsClient", () => {
                 url: "https://media.whop.com/abc123/optimized.jpg",
             },
             email_notification_preference: "all_admin_posts",
-            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
+            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Detailing Tips Chat" },
             id: "id",
             who_can_comment: "everyone",
             who_can_post: "everyone",
