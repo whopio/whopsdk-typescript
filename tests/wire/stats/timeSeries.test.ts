@@ -24,7 +24,7 @@ describe("TimeSeriesClient", () => {
                     key: "ad_xxxxxxxxxxxxxx_average_result_seconds",
                     modes: ["global"],
                     name: "Average seconds to an ad campaign getting a first result",
-                    properties: ["segment"],
+                    properties: ["runner_ids"],
                     unit: "count",
                     windows: ["7d"],
                 },
