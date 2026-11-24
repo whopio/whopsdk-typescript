@@ -21,6 +21,7 @@ describe("StatsClient", () => {
                     description:
                         "The average wait from a runner claiming and keeping an ad campaign to its first result of the kind it is set to get, by the day it was claimed. Campaigns set to get no result are left out. breakdown_by=result_type splits it by that kind. Campaigns with no result yet are left out, so a recent day's average can still rise. The total is the average over every campaign in the range.",
                     key: "ad_xxxxxxxxxxxxxx_average_result_seconds",
+                    modes: ["global"],
                     name: "Average seconds to an ad campaign getting a first result",
                     properties: ["segment"],
                     unit: "count",

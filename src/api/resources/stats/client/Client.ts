@@ -212,6 +212,7 @@ export class StatsClient {
             team_lead_id: teamLeadId,
             activity,
             breakdown_limit: breakdownLimit,
+            mode,
             account_ids: accountIds,
             runner_ids: runnerIds,
         } = request;
@@ -292,6 +293,7 @@ export class StatsClient {
             team_lead_id: teamLeadId,
             activity: activity != null ? activity : undefined,
             breakdown_limit: breakdownLimit,
+            mode: mode != null ? mode : undefined,
             account_ids: accountIds,
             runner_ids: runnerIds,
         };
