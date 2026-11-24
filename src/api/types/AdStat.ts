@@ -15,6 +15,6 @@ export interface AdStat {
     hour_started_at: string;
     /** The ad's impressions in the hour. */
     impressions: number;
-    /** The spend recorded and paid for the ad in the hour, exactly as reported. */
+    /** The spend recorded for the ad in the hour, exactly as reported. */
     spend: Whop.Money;
 }
