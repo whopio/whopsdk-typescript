@@ -38,6 +38,7 @@ describe("BountiesClient", () => {
                     gross_paid_out_amount: 0,
                     gross_reward_amount: 15,
                     hosting_account: {
+                        banner_image_url: null,
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -230,6 +231,7 @@ describe("BountiesClient", () => {
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -443,6 +445,7 @@ describe("BountiesClient", () => {
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -578,6 +581,7 @@ describe("BountiesClient", () => {
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -727,6 +731,7 @@ describe("BountiesClient", () => {
             gross_paid_out_amount: 0,
             gross_reward_amount: 40,
             hosting_account: {
+                banner_image_url: "banner_image_url",
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
