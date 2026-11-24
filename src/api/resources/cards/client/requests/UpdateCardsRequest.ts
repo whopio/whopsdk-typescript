@@ -9,7 +9,7 @@
 export interface UpdateCardsRequest {
     /** Card ID to retrieve, prefixed `icrd_`. */
     id: string;
-    /** The owning account ID (a biz_ identifier). Provide this or user_id. */
+    /** The owning account ID: a biz_ identifier for a business, or a user_ identifier for a personal account. Provide this or user_id. */
     account_id?: string;
     /** The billing address. On an issued card this replaces the card's billing address and region is also required. On an invited card, sending it as the invited user completes onboarding and starts card provisioning. */
     billing?: UpdateCardsRequest.Billing;
