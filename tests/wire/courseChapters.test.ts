@@ -205,7 +205,7 @@ describe("CourseChaptersClient", () => {
         const rawRequestBody = { course_id: "cors_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             id: "chap_xxxxxxxxxxxxx",
-            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Understanding Candlestick Patterns" }],
+            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Preparing Paint for Ceramic Coating" }],
             order: 42,
             title: "Getting Started",
         };
@@ -433,7 +433,7 @@ describe("CourseChaptersClient", () => {
 
         const rawResponseBody = {
             id: "chap_xxxxxxxxxxxxx",
-            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Understanding Candlestick Patterns" }],
+            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Preparing Paint for Ceramic Coating" }],
             order: 42,
             title: "Getting Started",
         };
@@ -868,7 +868,7 @@ describe("CourseChaptersClient", () => {
         const rawRequestBody = { title: "title" };
         const rawResponseBody = {
             id: "chap_xxxxxxxxxxxxx",
-            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Understanding Candlestick Patterns" }],
+            lessons: [{ id: "lesn_xxxxxxxxxxxxx", order: 42, title: "Preparing Paint for Ceramic Coating" }],
             order: 42,
             title: "Getting Started",
         };

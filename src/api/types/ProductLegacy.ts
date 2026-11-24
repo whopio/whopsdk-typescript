@@ -44,7 +44,7 @@ export interface ProductLegacy {
     product_tax_code: ProductLegacy.ProductTaxCode | null;
     /** The total number of published customer reviews for this product's company. */
     published_reviews_count: number;
-    /** URL slug in the product's public link, e.g. `pickaxe-analytics` in whop.com/company/pickaxe-analytics. */
+    /** URL slug in the product's public link, e.g. `ceramic-coating-package` in whop.com/company/ceramic-coating-package. */
     route: string;
     /** The display name of the product shown to customers on the product page and in search results. */
     title: string;
@@ -103,7 +103,7 @@ export namespace ProductLegacy {
     export interface ProductTaxCode {
         /** The unique identifier for the product tax code. */
         id: string;
-        /** Human-readable name of this tax classification, such as 'Digital - SaaS'. */
+        /** Human-readable name of this tax classification, such as 'Services'. */
         name: string;
         /** Broad product category this tax code covers, such as physical goods or digital services. */
         product_type: Whop.ProductTaxCodeProductTypes;

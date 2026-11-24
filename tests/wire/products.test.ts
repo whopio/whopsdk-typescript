@@ -37,7 +37,7 @@ describe("ProductsClient", () => {
                         unlimited_stock: true,
                         visibility: "visible",
                     },
-                    description: "empower rich infrastructures",
+                    description: "A cotton tee for Unlimited Wash Club members.",
                     experiences: [
                         {
                             app: {
@@ -60,7 +60,7 @@ describe("ProductsClient", () => {
                             url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         },
                     ],
-                    headline: "thought leadership",
+                    headline: "customer journey",
                     id: "prod_xxxxxxxxxxxxxx",
                     labels: ["courses"],
                     logo_url:
@@ -225,7 +225,7 @@ describe("ProductsClient", () => {
             member_count: 0,
             metadata: { bay: "1", duration_hours: "4" },
             owner_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             published_reviews_count: 0,
             route: "interior-deep-clean",
             title: "Interior Deep Clean",
@@ -233,7 +233,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -434,7 +434,7 @@ describe("ProductsClient", () => {
             member_count: 0,
             metadata: { bay: "1", duration_hours: "4" },
             owner_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             published_reviews_count: 0,
             route: "interior-deep-clean",
             title: "Interior Deep Clean",
@@ -442,7 +442,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -663,7 +663,7 @@ describe("ProductsClient", () => {
             member_count: 0,
             metadata: { bay: "1", duration_hours: "4" },
             owner_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             published_reviews_count: 0,
             route: "interior-deep-clean",
             title: "Interior Deep Clean",
@@ -671,7 +671,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -872,7 +872,7 @@ describe("ProductsClient", () => {
             member_count: 0,
             metadata: { bay: "1", duration_hours: "4" },
             owner_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             published_reviews_count: 0,
             route: "interior-deep-clean",
             title: "Interior Deep Clean",
@@ -880,7 +880,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -1105,7 +1105,7 @@ describe("ProductsClient", () => {
             member_count: 0,
             metadata: { bay: "1", duration_hours: "4" },
             owner_user: { id: "user_xxxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             published_reviews_count: 0,
             route: "interior-deep-clean",
             title: "Interior Deep Clean",
@@ -1113,7 +1113,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },

@@ -19099,7 +19099,7 @@ Adds a person to an account as a member. If the person is already a member of th
 
 ```typescript
 await client.members.create({
-    email: "jane@example.com"
+    email: "dana@shinetime.example"
 });
 
 ```

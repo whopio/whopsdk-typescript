@@ -49,7 +49,7 @@ describe("AccountsClient", () => {
                         state: "TX",
                     },
                     business_name: "Shine Time Auto Detailing, LLC",
-                    business_type: "software",
+                    business_type: "services",
                     can_transfer_pending_balance_to_children: false,
                     cancellation_policy: {
                         blurhash: null,
@@ -164,7 +164,7 @@ describe("AccountsClient", () => {
                     funds_release_at: "funds_release_at",
                     home_preferences: ["hide_member_count"],
                     id: "biz_xxxxxxxxxxxxxx",
-                    industry_type: "trading",
+                    industry_type: "car_detailing",
                     invoice_prefix: "INV",
                     level: {
                         account_level: 0,
@@ -208,7 +208,7 @@ describe("AccountsClient", () => {
                         id: "id",
                         name: null,
                         profile_picture: { url: "https://ui-avatars.com/api/" },
-                        referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                        referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                         username: "username",
                         whop_partner_verified_at: null,
                     },
@@ -268,11 +268,7 @@ describe("AccountsClient", () => {
                         waveform_url: null,
                         width: null,
                     },
-                    product_tax_code: {
-                        id: "ptc_xxxxxxxxxxxxxx",
-                        name: "General - Digital Goods",
-                        product_type: "digital",
-                    },
+                    product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
                     recommended_actions: [
                         {
                             action: "theme_business",
@@ -702,7 +698,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "software",
+            business_type: "services",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 blurhash: "blurhash",
@@ -817,7 +813,7 @@ describe("AccountsClient", () => {
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_type: "trading",
+            industry_type: "car_detailing",
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
@@ -861,7 +857,7 @@ describe("AccountsClient", () => {
                 id: "id",
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
-                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 username: "username",
                 whop_partner_verified_at: "whop_partner_verified_at",
             },
@@ -917,7 +913,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             recommended_actions: [
                 {
                     action: "theme_business",
@@ -1320,7 +1316,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "software",
+            business_type: "services",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 blurhash: "blurhash",
@@ -1435,7 +1431,7 @@ describe("AccountsClient", () => {
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_type: "trading",
+            industry_type: "car_detailing",
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
@@ -1479,7 +1475,7 @@ describe("AccountsClient", () => {
                 id: "id",
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
-                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 username: "username",
                 whop_partner_verified_at: "whop_partner_verified_at",
             },
@@ -1535,7 +1531,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             recommended_actions: [
                 {
                     action: "theme_business",
@@ -1953,7 +1949,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "software",
+            business_type: "services",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 blurhash: "blurhash",
@@ -2068,7 +2064,7 @@ describe("AccountsClient", () => {
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_type: "trading",
+            industry_type: "car_detailing",
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
@@ -2112,7 +2108,7 @@ describe("AccountsClient", () => {
                 id: "id",
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
-                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 username: "username",
                 whop_partner_verified_at: "whop_partner_verified_at",
             },
@@ -2168,7 +2164,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             recommended_actions: [
                 {
                     action: "theme_business",
@@ -2629,7 +2625,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "software",
+            business_type: "services",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 blurhash: "blurhash",
@@ -2744,7 +2740,7 @@ describe("AccountsClient", () => {
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_type: "trading",
+            industry_type: "car_detailing",
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
@@ -2788,7 +2784,7 @@ describe("AccountsClient", () => {
                 id: "id",
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
-                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 username: "username",
                 whop_partner_verified_at: "whop_partner_verified_at",
             },
@@ -2844,7 +2840,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             recommended_actions: [
                 {
                     action: "theme_business",
@@ -4023,7 +4019,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "software",
+            business_type: "services",
             can_transfer_pending_balance_to_children: false,
             cancellation_policy: {
                 blurhash: "blurhash",
@@ -4138,7 +4134,7 @@ describe("AccountsClient", () => {
             funds_release_at: "funds_release_at",
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_type: "trading",
+            industry_type: "car_detailing",
             invoice_prefix: "INV",
             level: {
                 account_level: 0,
@@ -4182,7 +4178,7 @@ describe("AccountsClient", () => {
                 id: "id",
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
-                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                 username: "username",
                 whop_partner_verified_at: "whop_partner_verified_at",
             },
@@ -4238,7 +4234,7 @@ describe("AccountsClient", () => {
                 waveform_url: "waveform_url",
                 width: 1,
             },
-            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "Services", product_type: "services" },
             recommended_actions: [
                 {
                     action: "theme_business",

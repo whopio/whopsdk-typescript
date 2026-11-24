@@ -32,7 +32,7 @@ describe("WebhooksClient", () => {
                     last_failure_at: "2026-01-01T12:00:00.000Z",
                     resource_id: "biz_xxxxxxxxxxxxxx",
                     title: "title",
-                    url: "https://example.com/shine-time/whop",
+                    url: "https://shinetime.example/whop",
                     webhook_secret: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                 },
             ],

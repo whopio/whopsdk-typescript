@@ -18,7 +18,8 @@ describe("CourseLessonsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    content: "In this lesson, we will cover the basics of technical analysis...",
+                    content:
+                        "In this lesson, we will cover washing, decontamination, and paint preparation before ceramic coating.",
                     created_at: "2023-12-01T05:00:00Z",
                     days_from_course_start_until_unlock: 42,
                     embed_id: "dQw4w9WgXcQ",
@@ -27,7 +28,7 @@ describe("CourseLessonsClient", () => {
                     lesson_type: "text",
                     order: 42,
                     thumbnail: { url: "https://media.whop.com/abc123/optimized.jpg" },
-                    title: "Understanding Candlestick Patterns",
+                    title: "Preparing Paint for Ceramic Coating",
                     visibility: "visible",
                 },
             ],
@@ -230,7 +231,8 @@ describe("CourseLessonsClient", () => {
                     url: "https://media.whop.com/abc123/optimized.jpg",
                 },
             ],
-            content: "In this lesson, we will cover the basics of technical analysis...",
+            content:
+                "In this lesson, we will cover washing, decontamination, and paint preparation before ceramic coating.",
             created_at: "2023-12-01T05:00:00Z",
             days_from_course_start_until_unlock: 42,
             embed_id: "dQw4w9WgXcQ",
@@ -245,7 +247,7 @@ describe("CourseLessonsClient", () => {
             },
             order: 42,
             thumbnail: { url: "https://media.whop.com/abc123/optimized.jpg" },
-            title: "Understanding Candlestick Patterns",
+            title: "Preparing Paint for Ceramic Coating",
             video_asset: {
                 asset_id: "asset_id",
                 audio_only: true,
@@ -519,7 +521,8 @@ describe("CourseLessonsClient", () => {
                     url: "https://media.whop.com/abc123/optimized.jpg",
                 },
             ],
-            content: "In this lesson, we will cover the basics of technical analysis...",
+            content:
+                "In this lesson, we will cover washing, decontamination, and paint preparation before ceramic coating.",
             created_at: "2023-12-01T05:00:00Z",
             days_from_course_start_until_unlock: 42,
             embed_id: "dQw4w9WgXcQ",
@@ -534,7 +537,7 @@ describe("CourseLessonsClient", () => {
             },
             order: 42,
             thumbnail: { url: "https://media.whop.com/abc123/optimized.jpg" },
-            title: "Understanding Candlestick Patterns",
+            title: "Preparing Paint for Ceramic Coating",
             video_asset: {
                 asset_id: "asset_id",
                 audio_only: true,
@@ -965,7 +968,8 @@ describe("CourseLessonsClient", () => {
                     url: "https://media.whop.com/abc123/optimized.jpg",
                 },
             ],
-            content: "In this lesson, we will cover the basics of technical analysis...",
+            content:
+                "In this lesson, we will cover washing, decontamination, and paint preparation before ceramic coating.",
             created_at: "2023-12-01T05:00:00Z",
             days_from_course_start_until_unlock: 42,
             embed_id: "dQw4w9WgXcQ",
@@ -980,7 +984,7 @@ describe("CourseLessonsClient", () => {
             },
             order: 42,
             thumbnail: { url: "https://media.whop.com/abc123/optimized.jpg" },
-            title: "Understanding Candlestick Patterns",
+            title: "Preparing Paint for Ceramic Coating",
             video_asset: {
                 asset_id: "asset_id",
                 audio_only: true,
@@ -1653,7 +1657,7 @@ describe("CourseLessonsClient", () => {
         const rawResponseBody = {
             created_at: "2023-12-01T05:00:00Z",
             id: "crsar_xxxxxxxxxxxx",
-            lesson: { id: "lesn_xxxxxxxxxxxxx", title: "Understanding Candlestick Patterns" },
+            lesson: { id: "lesn_xxxxxxxxxxxxx", title: "Preparing Paint for Ceramic Coating" },
             result_correct: 42,
             result_grade: 6.9,
             result_graded_questions: { key: "value" },
@@ -1661,7 +1665,7 @@ describe("CourseLessonsClient", () => {
             result_question_count: 42,
             score_percent: 6.9,
             updated_at: "2023-12-01T05:00:00Z",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server

@@ -18,7 +18,7 @@ describe("InvoicesClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
                     account_id: "biz_xxxxxxxxxxxxxx",
                     amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     billing_address: {
@@ -213,7 +213,7 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", items: [] };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -460,7 +460,7 @@ describe("InvoicesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -722,7 +722,7 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -908,7 +908,7 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -1292,7 +1292,7 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -1534,7 +1534,7 @@ describe("InvoicesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -1743,7 +1743,7 @@ describe("InvoicesClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -1929,7 +1929,7 @@ describe("InvoicesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {
@@ -2084,7 +2084,7 @@ describe("InvoicesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Acme Bookkeeping" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_due: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             billing_address: {

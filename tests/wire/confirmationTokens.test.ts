@@ -28,7 +28,7 @@ describe("ConfirmationTokensClient", () => {
             billing_details: {
                 country: "AR",
                 email: "marcus@shinetime.example",
-                name: "Buyer Name",
+                name: "Dana Whitfield",
                 postal_code: "C1043",
             },
             created_at: "2026-01-01T12:00:00.000Z",

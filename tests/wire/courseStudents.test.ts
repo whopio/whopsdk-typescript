@@ -26,9 +26,9 @@ describe("CourseStudentsClient", () => {
                     total_lessons_count: 42,
                     user: {
                         id: "user_xxxxxxxxxxxxx",
-                        name: "John Doe",
+                        name: "Marcus Webb",
                         profile_picture: { url: "https://media.whop.com/abc123/optimized.jpg" },
-                        username: "johndoe42",
+                        username: "marcuswebb",
                     },
                 },
             ],
@@ -224,7 +224,7 @@ describe("CourseStudentsClient", () => {
             course: {
                 experience: { id: "exp_xxxxxxxxxxxxxx" },
                 id: "cors_xxxxxxxxxxxxx",
-                title: "Introduction to Technical Analysis",
+                title: "Introduction to Ceramic Coating",
             },
             first_interaction_at: "2023-12-01T05:00:00Z",
             id: "id",
@@ -232,9 +232,9 @@ describe("CourseStudentsClient", () => {
             total_lessons_count: 42,
             user: {
                 id: "user_xxxxxxxxxxxxx",
-                name: "John Doe",
+                name: "Marcus Webb",
                 profile_picture: { url: "https://media.whop.com/abc123/optimized.jpg" },
-                username: "johndoe42",
+                username: "marcuswebb",
             },
         };
 

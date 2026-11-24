@@ -447,7 +447,7 @@ export namespace PaymentLegacy {
         id: string;
         /** Custom key-value pairs stored on the product and included in payment and membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters per string value. */
         metadata: Record<string, unknown> | null;
-        /** URL slug in the product's public link, e.g. `pickaxe-analytics` in whop.com/company/pickaxe-analytics. */
+        /** URL slug in the product's public link, e.g. `ceramic-coating-package` in whop.com/company/ceramic-coating-package. */
         route: string;
         /** The display name of the product shown to customers on the product page and in search results. */
         title: string;

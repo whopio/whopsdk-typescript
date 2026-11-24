@@ -18,14 +18,14 @@ describe("AuthorizedUsersClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
+                    company: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     id: "ausr_xxxxxxxxxxxxx",
                     role: "owner",
                     user: {
                         email: "john.doe@example.com",
                         id: "user_xxxxxxxxxxxxx",
-                        name: "John Doe",
-                        username: "johndoe42",
+                        name: "Marcus Webb",
+                        username: "marcuswebb",
                     },
                 },
             ],
@@ -205,10 +205,15 @@ describe("AuthorizedUsersClient", () => {
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", role: "owner", user_id: "user_xxxxxxxxxxxxx" };
         const rawResponseBody = {
-            company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
+            company: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             id: "ausr_xxxxxxxxxxxxx",
             role: "owner",
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: {
+                email: "john.doe@example.com",
+                id: "user_xxxxxxxxxxxxx",
+                name: "Marcus Webb",
+                username: "marcuswebb",
+            },
         };
 
         server
@@ -449,10 +454,15 @@ describe("AuthorizedUsersClient", () => {
         });
 
         const rawResponseBody = {
-            company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
+            company: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             id: "ausr_xxxxxxxxxxxxx",
             role: "owner",
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: {
+                email: "john.doe@example.com",
+                id: "user_xxxxxxxxxxxxx",
+                name: "Marcus Webb",
+                username: "marcuswebb",
+            },
         };
 
         server

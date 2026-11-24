@@ -17,13 +17,13 @@ describe("CashbackRulesClient", () => {
         const rawRequestBody = { rate_bps: 500, starts_at: "2026-01-01T12:00:00Z" };
         const rawResponseBody = {
             created_at: "2026-01-01T12:00:00.000Z",
-            description: "Cloud cashback",
+            description: "Detailing equipment cashback",
             discarded_at: "discarded_at",
             expires_at: "2026-01-01T12:00:00.000Z",
             funding_account_id: "biz_xxxxxxxxxxxxxx",
             id: "cicbr_xxxxxxxxxxxxxx",
             merchant_category_code: "7372",
-            merchant_name: "ACME CLOUD",
+            merchant_name: "AUSTIN DETAIL SUPPLY",
             rate_bps: 500,
             scoped_account_id: "biz_xxxxxxxxxxxxxx",
             starts_at: "2026-01-01T12:00:00.000Z",
@@ -205,13 +205,13 @@ describe("CashbackRulesClient", () => {
             data: [
                 {
                     created_at: "2026-01-01T12:00:00.000Z",
-                    description: "Cloud cashback",
+                    description: "Detailing equipment cashback",
                     discarded_at: "discarded_at",
                     expires_at: "2026-01-01T12:00:00.000Z",
                     funding_account_id: "biz_xxxxxxxxxxxxxx",
                     id: "cicbr_xxxxxxxxxxxxxx",
                     merchant_category_code: "7372",
-                    merchant_name: "ACME CLOUD",
+                    merchant_name: "AUSTIN DETAIL SUPPLY",
                     rate_bps: 500,
                     scoped_account_id: "biz_xxxxxxxxxxxxxx",
                     starts_at: "2026-01-01T12:00:00.000Z",
@@ -420,13 +420,13 @@ describe("CashbackRulesClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             created_at: "2026-01-01T12:00:00.000Z",
-            description: "Cloud cashback",
+            description: "Detailing equipment cashback",
             discarded_at: "discarded_at",
             expires_at: "2026-01-01T12:00:00.000Z",
             funding_account_id: "biz_xxxxxxxxxxxxxx",
             id: "cicbr_xxxxxxxxxxxxxx",
             merchant_category_code: "7372",
-            merchant_name: "ACME CLOUD",
+            merchant_name: "AUSTIN DETAIL SUPPLY",
             rate_bps: 500,
             scoped_account_id: "biz_xxxxxxxxxxxxxx",
             starts_at: "2026-01-01T12:00:00.000Z",

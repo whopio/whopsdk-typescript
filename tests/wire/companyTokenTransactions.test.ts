@@ -27,7 +27,7 @@ describe("CompanyTokenTransactionsClient", () => {
                     linked_transaction_id: "linked_transaction_id",
                     member: { id: "id" },
                     transaction_type: "add",
-                    user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+                    user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
                 },
             ],
             page_info: {
@@ -275,7 +275,7 @@ describe("CompanyTokenTransactionsClient", () => {
             linked_transaction_id: "linked_transaction_id",
             member: { id: "id" },
             transaction_type: "add",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server
@@ -583,7 +583,7 @@ describe("CompanyTokenTransactionsClient", () => {
             linked_transaction_id: "linked_transaction_id",
             member: { id: "id" },
             transaction_type: "add",
-            user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
+            user: { id: "user_xxxxxxxxxxxxx", name: "Marcus Webb", username: "marcuswebb" },
         };
 
         server
