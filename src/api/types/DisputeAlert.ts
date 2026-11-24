@@ -11,8 +11,6 @@ export interface DisputeAlert {
     auto_refunded: boolean;
     /** The card network as reported by the issuer, lowercased, such as `visa` or `mastercard`. `unknown` when the report carries neither a network nor a recognizable BIN. */
     card_brand: string | null;
-    /** What the cardholder claims. `fraud` when they say they didn't make the payment: always for an `early_fraud_warning`, and for Ethoca fraud alerts and Visa RDR cases filed under a fraud reason. `customer_dispute` when they made the payment but dispute it, such as a product not received or a canceled subscription. `null` when the alert carries no claim, such as an issuer's request for transaction documents. */
-    category: DisputeAlert.Category | null;
     /** When Whop received the alert, as an ISO 8601 timestamp. */
     created_at: string;
     /** Three-letter ISO currency code of the alerted amount. */
@@ -32,6 +30,8 @@ export interface DisputeAlert {
     payment_id: string | null;
     /** The product the alerted payment was for, prefixed `prod_`. */
     product_id: string | null;
+    /** What the cardholder claims. `fraud` when they say they didn't make the payment: always for an `early_fraud_warning`, and for Ethoca fraud alerts and Visa RDR cases filed under a fraud reason. `customer_dispute` when they made the payment but dispute it, such as a product not received or a canceled subscription. `null` when the alert carries no claim, such as an issuer's request for transaction documents. */
+    reason: DisputeAlert.Reason | null;
     /** When the issuer filed the report, as an ISO 8601 timestamp. Earlier than `created_at`, which is when Whop received it. */
     reported_at: string;
     /** The network program that sent the alert, which `type` alone doesn't tell apart. `ethoca` for Mastercard Ethoca, `cdrn` for Visa Verifi CDRN, `rdr` for Visa RDR, `tc40` / `safe` for a Visa / Mastercard fraud report, `paypal` for a PayPal alert. `null` when the network didn't say. */
@@ -46,11 +46,11 @@ export interface DisputeAlert {
 
 export namespace DisputeAlert {
     /** What the cardholder claims. `fraud` when they say they didn't make the payment: always for an `early_fraud_warning`, and for Ethoca fraud alerts and Visa RDR cases filed under a fraud reason. `customer_dispute` when they made the payment but dispute it, such as a product not received or a canceled subscription. `null` when the alert carries no claim, such as an issuer's request for transaction documents. */
-    export const Category = {
+    export const Reason = {
         Fraud: "fraud",
         CustomerDispute: "customer_dispute",
     } as const;
-    export type Category = (typeof Category)[keyof typeof Category];
+    export type Reason = (typeof Reason)[keyof typeof Reason];
     /** The network program that sent the alert, which `type` alone doesn't tell apart. `ethoca` for Mastercard Ethoca, `cdrn` for Visa Verifi CDRN, `rdr` for Visa RDR, `tc40` / `safe` for a Visa / Mastercard fraud report, `paypal` for a PayPal alert. `null` when the network didn't say. */
     export const Source = {
         Ethoca: "ethoca",

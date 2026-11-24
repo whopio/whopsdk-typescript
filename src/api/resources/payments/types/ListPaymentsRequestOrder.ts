@@ -4,5 +4,9 @@ export const ListPaymentsRequestOrder = {
     CreatedAt: "created_at",
     PaidAt: "paid_at",
     Amount: "amount",
+    Status: "status",
+    Product: "product",
+    Plan: "plan",
+    Method: "method",
 } as const;
 export type ListPaymentsRequestOrder = (typeof ListPaymentsRequestOrder)[keyof typeof ListPaymentsRequestOrder];
