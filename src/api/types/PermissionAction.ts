@@ -238,6 +238,7 @@ export const PermissionAction = {
     SocialAccountDelete: "social_account:delete",
     SocialAccountRead: "social_account:read",
     SocialLinkUpdate: "social_link:update",
+    SocialMentionRead: "social_mention:read",
     StatsRead: "stats:read",
     SupportChatCreate: "support_chat:create",
     SupportChatMessageCreate: "support_chat:message:create",
