@@ -75,7 +75,7 @@ export interface ListPaymentsRequest {
     dispute_created_after?: string;
     /** Only payments with a dispute opened before this ISO 8601 timestamp. */
     dispute_created_before?: string;
-    /** The field to sort by. `amount` sorts by the amount charged, in the currency it was charged in. */
+    /** The field to sort by. `amount` sorts by the amount charged, in the currency it was charged in. `status`, `product`, `plan` (initial price, no currency) and `method` are a 400 unless the list is filtered to 50,000 payments or fewer. */
     order?: Whop.ListPaymentsRequestOrder;
     /** The sort direction. */
     direction?: Whop.ListPaymentsRequestDirection;
