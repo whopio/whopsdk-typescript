@@ -46,7 +46,7 @@ export class PaymentMethodDomainsClient {
     /**
      * @deprecated
      *
-     * Lists the payment method domains registered for your account and its subaccounts. Deprecated: list domains with `GET /domains` and the `apple_pay` filter instead.
+     * Lists the payment method domains registered for your account and its subaccounts. Deprecated: list domains with `GET /domains` and the `apple_pay` filter instead. Stops responding after 2026-12-23.
      *
      * @param {Whop.ListPaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -103,7 +103,7 @@ export class PaymentMethodDomainsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -179,7 +179,7 @@ export class PaymentMethodDomainsClient {
     /**
      * @deprecated
      *
-     * Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not: host the file, then retry with `POST /payment_method_domains/:id/verify`. Deprecated: add Apple Pay with `POST /domains` and `apple_pay: {}` instead.
+     * Registers a hostname with the wallet provider and attempts verification inline. Returns `verified` when the provider fetched the domain-association file (for Apple Pay, `/.well-known/apple-developer-merchantid-domain-association`), or `pending` when it could not: host the file, then retry with `POST /payment_method_domains/:id/verify`. Deprecated: add Apple Pay with `POST /domains` and `apple_pay: {}` instead. Stops responding after 2026-12-23.
      *
      * @param {Whop.CreatePaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -213,7 +213,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -268,7 +268,7 @@ export class PaymentMethodDomainsClient {
     /**
      * @deprecated
      *
-     * Retrieves a payment method domain to check its verification status. Deprecated: retrieve the domain with `GET /domains/{id}` instead, using the same ID.
+     * Retrieves a payment method domain to check its verification status. Deprecated: retrieve the domain with `GET /domains/{id}` instead, using the same ID. Stops responding after 2026-12-23.
      *
      * @param {Whop.RetrievePaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -301,7 +301,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -382,7 +382,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -438,7 +438,7 @@ export class PaymentMethodDomainsClient {
     /**
      * @deprecated
      *
-     * Re-attempts provider verification of a pending domain once the association file is hosted. Fails with a `bad_request` explaining what to fix; verifying an already `verified` domain is a no-op. Deprecated: check the domain with `POST /domains/{id}/check` instead.
+     * Re-attempts provider verification of a pending domain once the association file is hosted. Fails with a `bad_request` explaining what to fix; verifying an already `verified` domain is a no-op. Deprecated: check the domain with `POST /domains/{id}/check` instead. Stops responding after 2026-12-23.
      *
      * @param {Whop.VerifyPaymentMethodDomainsRequest} request
      * @param {PaymentMethodDomainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -473,7 +473,7 @@ export class PaymentMethodDomainsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
