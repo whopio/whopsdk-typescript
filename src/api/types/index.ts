@@ -392,6 +392,7 @@ export * from "./PartnerPayoutDuration.js";
 export * from "./PartnerPayoutRate.js";
 export * from "./PartnerPayoutTier.js";
 export * from "./PartnerReferralRequest.js";
+export * from "./PartnerReferralRequestLead.js";
 export * from "./PartnerReferralReward.js";
 export * from "./Passkey.js";
 export * from "./PasskeyAuthenticatorSelection.js";

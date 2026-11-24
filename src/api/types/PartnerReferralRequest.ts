@@ -11,21 +11,27 @@ export interface PartnerReferralRequest {
     code: string | null;
     /** When the request was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** When a lead offer stops taking a response, as an ISO 8601 timestamp. `null` for other request types. */
+    expires_at: string | null;
     /** Partner referral request ID, prefixed `prfr_`. */
     id: string;
+    /** The business's signup answers on a lead offer. Only the partner it was offered to sees them. `null` for anyone else and for other request types. */
+    lead: Whop.PartnerReferralRequestLead | null;
     /** Maximum permitted redemptions, when limited. */
     max_redemptions: number | null;
     /** The partner's member record this referral was created for, prefixed `mber_`, when their role on that business is held on their member record. `null` otherwise. */
     member_id: string | null;
-    /** Public profile of the requesting partner. */
+    /** Public profile of the partner associated with this referral request. */
     partner: Whop.UserSummary;
-    /** Business the partner sent this request on behalf of, when the referral belongs to their team. `null` for a personal referral. */
+    /** The partner's team account that this referral counts toward. `null` for a personal referral. A lead offer counts toward the partner-mode team where the partner earned the most in the last 30 days, or the newest on a tie. It is set when the offer is made. */
     referring_account: Whop.AccountSummary | null;
     /** How the referral request was initiated. */
     request_type: PartnerReferralRequest.RequestType;
     rewards: Whop.PartnerReferralReward[];
-    /** The approval state, or null for requests without an approval process. */
+    /** The approval state, or `null` for requests without an approval process. A lead offer that gets no answer before `expires_at` becomes `cancelled`. */
     status: PartnerReferralRequest.Status | null;
+    /** Why the request reached its status. `expired` means a lead offer got no answer before `expires_at`. `passed` means the partner turned down a lead offer. `withdrawn` means the partner cancelled their own request. `null` for any other status. */
+    status_reason: PartnerReferralRequest.StatusReason | null;
     /** When the request last changed, as an ISO 8601 timestamp. */
     updated_at: string;
     /**
@@ -41,9 +47,10 @@ export namespace PartnerReferralRequest {
         Manual: "manual",
         OwnershipTransfer: "ownership_transfer",
         Link: "link",
+        Lead: "lead",
     } as const;
     export type RequestType = (typeof RequestType)[keyof typeof RequestType];
-    /** The approval state, or null for requests without an approval process. */
+    /** The approval state, or `null` for requests without an approval process. A lead offer that gets no answer before `expires_at` becomes `cancelled`. */
     export const Status = {
         Pending: "pending",
         Accepted: "accepted",
@@ -51,4 +58,11 @@ export namespace PartnerReferralRequest {
         Cancelled: "cancelled",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    /** Why the request reached its status. `expired` means a lead offer got no answer before `expires_at`. `passed` means the partner turned down a lead offer. `withdrawn` means the partner cancelled their own request. `null` for any other status. */
+    export const StatusReason = {
+        Expired: "expired",
+        Passed: "passed",
+        Withdrawn: "withdrawn",
+    } as const;
+    export type StatusReason = (typeof StatusReason)[keyof typeof StatusReason];
 }
