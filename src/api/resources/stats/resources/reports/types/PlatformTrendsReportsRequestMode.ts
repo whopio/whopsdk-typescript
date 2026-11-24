@@ -2,7 +2,7 @@
 
 export const PlatformTrendsReportsRequestMode = {
     Global: "global",
-    Trends: "trends",
+    Public: "public",
 } as const;
 export type PlatformTrendsReportsRequestMode =
     (typeof PlatformTrendsReportsRequestMode)[keyof typeof PlatformTrendsReportsRequestMode];

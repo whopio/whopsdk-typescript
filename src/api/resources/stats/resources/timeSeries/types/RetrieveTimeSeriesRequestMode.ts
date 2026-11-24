@@ -3,7 +3,7 @@
 export const RetrieveTimeSeriesRequestMode = {
     Global: "global",
     Owner: "owner",
-    Trends: "trends",
+    Public: "public",
 } as const;
 export type RetrieveTimeSeriesRequestMode =
     (typeof RetrieveTimeSeriesRequestMode)[keyof typeof RetrieveTimeSeriesRequestMode];
