@@ -119,6 +119,8 @@ export const RetrieveFinancialReportsRequestLineTypesItem = {
     PlatformCreditsPayment: "platform_credits_payment",
     PlatformCreditsPaymentRefund: "platform_credits_payment_refund",
     PlatformEarning: "platform_earning",
+    PlatformInterchangeShare: "platform_interchange_share",
+    PlatformInterchangeShareReversal: "platform_interchange_share_reversal",
     PlatformMarkupFee: "platform_markup_fee",
     PlatformMarkupFeePayout: "platform_markup_fee_payout",
     PromoReversal: "promo_reversal",
