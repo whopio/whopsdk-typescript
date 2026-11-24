@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface ReceiptLineItem {
+    /** The amount taken off this item's `subtotal` by discounts and the promo code, before tax. Returns `null` when no discount was recorded for the item. */
+    discount_amount: Whop.Money | null;
     /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */
     id: string | null;
     /** The item's name as shown at checkout (the product title, else the variant title). */
