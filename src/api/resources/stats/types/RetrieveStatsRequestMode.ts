@@ -3,6 +3,6 @@
 export const RetrieveStatsRequestMode = {
     Global: "global",
     Owner: "owner",
-    Trends: "trends",
+    Public: "public",
 } as const;
 export type RetrieveStatsRequestMode = (typeof RetrieveStatsRequestMode)[keyof typeof RetrieveStatsRequestMode];
