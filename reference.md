@@ -2514,6 +2514,72 @@ await client.ads.update({
 </dl>
 </details>
 
+<details><summary><code>client.ads.<a href="/src/api/resources/ads/client/Client.ts">appeal</a>({ ...params }) -> Whop.Ad</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Asks Whop to review the ad again. A `website` appeal reviews the ad against its website as it is now. It only applies to an ad held back for something found on its website. An ad can be appealed once an hour.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.ads.appeal({
+    id: "id",
+    type: "website"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.AppealAdsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AdsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.ads.<a href="/src/api/resources/ads/client/Client.ts">duplicate</a>({ ...params }) -> Whop.DuplicateAdsResponse</code></summary>
 <dl>
 <dd>

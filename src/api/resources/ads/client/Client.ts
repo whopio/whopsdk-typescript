@@ -647,6 +647,92 @@ export class AdsClient {
     }
 
     /**
+     * Asks Whop to review the ad again. A `website` appeal reviews the ad against its website as it is now. It only applies to an ad held back for something found on its website. An ad can be appealed once an hour.
+     *
+     * @param {Whop.AppealAdsRequest} request
+     * @param {AdsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link Whop.TooManyRequestsError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.ads.appeal({
+     *         id: "id",
+     *         type: "website"
+     *     })
+     */
+    public appeal(
+        request: Whop.AppealAdsRequest,
+        requestOptions?: AdsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Ad> {
+        return core.HttpResponsePromise.fromPromise(this.__appeal(request, requestOptions));
+    }
+
+    private async __appeal(
+        request: Whop.AppealAdsRequest,
+        requestOptions?: AdsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Ad>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-11-23-3",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `ads/${core.url.encodePathParam(id)}/appeal`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Ad, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
+                case 429:
+                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/ads/{id}/appeal");
+    }
+
+    /**
      * Copies an ad into its own ad group or into another one. Copies keep the source ad's active or paused state.
      *
      * @param {Whop.DuplicateAdsRequest} request

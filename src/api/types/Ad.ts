@@ -11,6 +11,8 @@ export interface Ad {
     added_to_cart_value: number;
     /** Whop pixel-attributed add-to-cart events, last-click. */
     added_to_carts: number;
+    /** When the ad can next be appealed, as an ISO 8601 timestamp. `null` when it can be appealed now. */
+    appeal_available_at: string | null;
     /** The call-to-action button shown on the ad. */
     call_to_action: Ad.CallToAction | null;
     /** Clicks divided by impressions, between 0 and 1. */

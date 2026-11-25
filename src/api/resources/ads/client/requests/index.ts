@@ -1,3 +1,4 @@
+export { AppealAdsRequest } from "./AppealAdsRequest.js";
 export { CreateAdsRequest } from "./CreateAdsRequest.js";
 export type { DeleteAdsRequest } from "./DeleteAdsRequest.js";
 export type { DuplicateAdsRequest } from "./DuplicateAdsRequest.js";

@@ -32,6 +32,8 @@ export namespace PostAdUpdatedPayload {
         ad_campaign: Whop.AdEntityReference;
         /** The ad group this ad belongs to. */
         ad_group: Whop.AdEntityReference;
+        /** When the ad can next be appealed, as an ISO 8601 timestamp. `null` when it can be appealed now. */
+        appeal_available_at: string | null;
         /** The call-to-action button shown on the ad. */
         call_to_action: Data.CallToAction | null;
         /** Whop's content review of this ad: whether it has finished and the content rules it breaks. */
