@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface AdContentReview {
+    /** Whether the ad is held back for a rule the review found on its website. Changing the website and rechecking it can clear the ad. */
+    blocked_by_website: boolean;
     /** `reviewed` once Whop content review finishes, `in_review` while it runs, `not_reviewed` when it never ran. */
     status: AdContentReview.Status;
     tags: Whop.AdContentReviewTag[];

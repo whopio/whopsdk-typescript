@@ -399,6 +399,7 @@ describe("AdsClient", () => {
                     ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
                     added_to_cart_value: 1850,
                     added_to_carts: 74,
+                    appeal_available_at: "2026-01-01T12:00:00.000Z",
                     call_to_action: "learn_more",
                     click_through_rate: 0.0261,
                     clicks: 1337,
@@ -407,6 +408,7 @@ describe("AdsClient", () => {
                     contact_value: 175,
                     contacts: 27,
                     content_review: {
+                        blocked_by_website: false,
                         status: "reviewed",
                         tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
                     },
@@ -563,6 +565,7 @@ describe("AdsClient", () => {
             ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
             added_to_cart_value: 1850,
             added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
             call_to_action: "learn_more",
             click_through_rate: 0.0261,
             clicks: 1337,
@@ -571,6 +574,7 @@ describe("AdsClient", () => {
             contact_value: 175,
             contacts: 27,
             content_review: {
+                blocked_by_website: false,
                 status: "reviewed",
                 tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
             },
@@ -752,6 +756,7 @@ describe("AdsClient", () => {
             ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
             added_to_cart_value: 1850,
             added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
             call_to_action: "learn_more",
             click_through_rate: 0.0261,
             clicks: 1337,
@@ -760,6 +765,7 @@ describe("AdsClient", () => {
             contact_value: 175,
             contacts: 27,
             content_review: {
+                blocked_by_website: false,
                 status: "reviewed",
                 tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
             },
@@ -920,6 +926,7 @@ describe("AdsClient", () => {
             ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
             added_to_cart_value: 1850,
             added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
             call_to_action: "learn_more",
             click_through_rate: 0.0261,
             clicks: 1337,
@@ -928,6 +935,7 @@ describe("AdsClient", () => {
             contact_value: 175,
             contacts: 27,
             content_review: {
+                blocked_by_website: false,
                 status: "reviewed",
                 tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
             },
@@ -1018,6 +1026,238 @@ describe("AdsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("appeal (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { type: "website" };
+        const rawResponseBody = {
+            ad_campaign: { id: "adcamp_xxxxxxxxxxxxxx" },
+            ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
+            added_to_cart_value: 1850,
+            added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
+            call_to_action: "learn_more",
+            click_through_rate: 0.0261,
+            clicks: 1337,
+            completed_registration_value: 95,
+            completed_registrations: 19,
+            contact_value: 175,
+            contacts: 27,
+            content_review: {
+                blocked_by_website: false,
+                status: "reviewed",
+                tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
+            },
+            cost_per_added_to_cart: 6.515675675675676,
+            cost_per_click: 0.36,
+            cost_per_completed_registration: 25.37684210526316,
+            cost_per_contact: 17.85777777777778,
+            cost_per_lead: 3.984793388429752,
+            cost_per_mille: 9.42,
+            cost_per_purchase: 12.68842105263158,
+            cost_per_result: 12.68842105263158,
+            cost_per_schedule: 10.48173913043478,
+            cost_per_submitted_application: 40.18,
+            cost_per_unique_click: 0.48,
+            cost_per_viewed_content: 0.2253084112149533,
+            created_at: "2026-01-01T12:00:00.000Z",
+            creatives: [
+                {
+                    crop: { height: 1000, width: 1000, x: 40, y: 0 },
+                    format: "square",
+                    id: "file_xxxxxxxxxxxxxx",
+                    language: "language",
+                    media_type: "image",
+                    source_id: "file_xxxxxxxxxxxxxx",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                },
+            ],
+            custom_conversions: 63,
+            custom_event_counts: { booked_detail: 63 },
+            custom_event_values: { booked_detail: 4820 },
+            delivery_status: "rejected",
+            descriptions: [{ language: "language", text: "Austin's mobile detailers" }],
+            frequency: 1.1,
+            headlines: [{ language: "language", text: "Austin's mobile detailers" }],
+            id: "ad_xxxxxxxxxxxxxx",
+            impressions: 51204,
+            issues: [
+                {
+                    category: "information",
+                    id: "adiss_xxxxxxxxxxxxxx",
+                    message:
+                        "Your ad didn't pass our content review. Update it to follow our ad guidelines and resubmit.",
+                    resource_id: "ad_xxxxxxxxxxxxxx",
+                    resource_type: "ad_campaign",
+                    title: "Ad issue",
+                },
+            ],
+            lead_value: 1180,
+            leads: 121,
+            link_clicks: 1071,
+            primary_texts: [{ language: "language", text: "Austin's mobile detailers" }],
+            purchase_value: 9462,
+            purchases: 38,
+            reach: 0,
+            result_event: "purchase",
+            result_event_name: "booked_detail",
+            results: 38,
+            return_on_ad_spend: 19.62419113987058,
+            schedule_value: 640,
+            schedules: 46,
+            spend: 482.16,
+            spend_currency: "usd",
+            status: "active",
+            submitted_application_value: 300,
+            submitted_applications: 12,
+            title: "Hero video (Copy 1)",
+            unique_click_through_rate: 1.1,
+            unique_clicks: 1012,
+            updated_at: "2026-01-01T12:00:00.000Z",
+            url: "https://shinetime.example/ceramic-coating",
+            url_parameters: { key: "value" },
+            viewed_content_value: 0,
+            viewed_contents: 2140,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/ads/id/appeal")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.ads.appeal({
+            id: "id",
+            type: "website",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("appeal (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { type: "website" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ads/id/appeal")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.appeal({
+                id: "id",
+                type: "website",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("appeal (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { type: "website" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ads/id/appeal")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.appeal({
+                id: "id",
+                type: "website",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("appeal (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { type: "website" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ads/id/appeal")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.appeal({
+                id: "id",
+                type: "website",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("appeal (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { type: "website" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/ads/id/appeal")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.ads.appeal({
+                id: "id",
+                type: "website",
+            });
+        }).rejects.toThrow(Whop.TooManyRequestsError);
+    });
+
     test("duplicate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1035,6 +1275,7 @@ describe("AdsClient", () => {
                     ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
                     added_to_cart_value: 1850,
                     added_to_carts: 74,
+                    appeal_available_at: "2026-01-01T12:00:00.000Z",
                     call_to_action: "learn_more",
                     click_through_rate: 0.0261,
                     clicks: 1337,
@@ -1043,6 +1284,7 @@ describe("AdsClient", () => {
                     contact_value: 175,
                     contacts: 27,
                     content_review: {
+                        blocked_by_website: false,
                         status: "reviewed",
                         tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
                     },
@@ -1234,6 +1476,7 @@ describe("AdsClient", () => {
             ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
             added_to_cart_value: 1850,
             added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
             call_to_action: "learn_more",
             click_through_rate: 0.0261,
             clicks: 1337,
@@ -1242,6 +1485,7 @@ describe("AdsClient", () => {
             contact_value: 175,
             contacts: 27,
             content_review: {
+                blocked_by_website: false,
                 status: "reviewed",
                 tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
             },
@@ -1361,6 +1605,7 @@ describe("AdsClient", () => {
             ad_group: { id: "adcamp_xxxxxxxxxxxxxx" },
             added_to_cart_value: 1850,
             added_to_carts: 74,
+            appeal_available_at: "2026-01-01T12:00:00.000Z",
             call_to_action: "learn_more",
             click_through_rate: 0.0261,
             clicks: 1337,
@@ -1369,6 +1614,7 @@ describe("AdsClient", () => {
             contact_value: 175,
             contacts: 27,
             content_review: {
+                blocked_by_website: false,
                 status: "reviewed",
                 tags: [{ blocking: true, locations: ["creative"], message: "message", title: "title" }],
             },
