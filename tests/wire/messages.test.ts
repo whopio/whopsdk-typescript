@@ -60,7 +60,7 @@ describe("MessagesClient", () => {
                     author_user_id: "user_xxxxxxxxxxxxxx",
                     automation: { id: "id", name: "name" },
                     channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-                    content: "Content 1",
+                    content: "Which detailing service should we demonstrate next?",
                     created_at: "2026-01-01T12:00:00.000Z",
                     custom_author: {
                         display_name: null,
@@ -143,8 +143,8 @@ describe("MessagesClient", () => {
                     mentioned_user_ids: ["mentioned_user_ids"],
                     message_type: "regular",
                     pinned: false,
-                    plain_content: "Content 1",
-                    poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+                    plain_content: "Which detailing service should we demonstrate next?",
+                    poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
                     reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
                     replying_to_message_id: "replying_to_message_id",
                     replying_to_user_id: "replying_to_user_id",
@@ -272,7 +272,10 @@ describe("MessagesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx", content: "New **message**" };
+        const rawRequestBody = {
+            channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
+            content: "Your **ceramic coating** is booked for Tuesday.",
+        };
         const rawResponseBody = {
             attachments: [
                 {
@@ -316,7 +319,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -399,8 +402,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -419,7 +422,7 @@ describe("MessagesClient", () => {
 
         const response = await client.messages.create({
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "New **message**",
+            content: "Your **ceramic coating** is booked for Tuesday.",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -564,7 +567,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -647,8 +650,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -777,7 +780,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -860,8 +863,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -965,7 +968,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -1048,8 +1051,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -1181,7 +1184,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -1264,8 +1267,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -1479,7 +1482,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -1562,8 +1565,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -1719,7 +1722,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -1802,8 +1805,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",
@@ -1938,7 +1941,7 @@ describe("MessagesClient", () => {
             author_user_id: "user_xxxxxxxxxxxxxx",
             automation: { id: "id", name: "name" },
             channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-            content: "Content 1",
+            content: "Which detailing service should we demonstrate next?",
             created_at: "2026-01-01T12:00:00.000Z",
             custom_author: {
                 display_name: "display_name",
@@ -2021,8 +2024,8 @@ describe("MessagesClient", () => {
             mentioned_user_ids: ["mentioned_user_ids"],
             message_type: "regular",
             pinned: false,
-            plain_content: "Content 1",
-            poll: { options: [{ id: "1", text: "A", vote_count: 0, voted: false }] },
+            plain_content: "Which detailing service should we demonstrate next?",
+            poll: { options: [{ id: "1", text: "Ceramic coating", vote_count: 0, voted: false }] },
             reaction_counts: [{ kind: "like", reacted: true, total_score: 1, user_count: 1, value: "❤️" }],
             replying_to_message_id: "replying_to_message_id",
             replying_to_user_id: "replying_to_user_id",

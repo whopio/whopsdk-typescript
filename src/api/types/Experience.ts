@@ -53,7 +53,7 @@ export namespace Experience {
     export interface Company {
         /** The unique identifier for the company. */
         id: string;
-        /** URL slug for the account's store page. For example, `pickaxe` in whop.com/pickaxe. */
+        /** URL slug for the account's store page. For example, `shine-time-auto-detailing` in whop.com/shine-time-auto-detailing. */
         route: string;
         /** The display name of the company shown to customers. */
         title: string;

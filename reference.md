@@ -20314,7 +20314,7 @@ Sends a Markdown message as the authenticated user or app agent. Channel access,
 ```typescript
 await client.messages.create({
     channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-    content: "New **message**"
+    content: "Your **ceramic coating** is booked for Tuesday."
 });
 
 ```
@@ -35096,7 +35096,7 @@ await client.payments.direct.create({
             postal_code: "94105"
         },
         email: "dana@shinetime.example",
-        name: "Dana Shine"
+        name: "Dana Whitfield"
     },
     payment_method: {
         type: "card"
@@ -35653,7 +35653,7 @@ await client.setupIntents.direct.create({
             postal_code: "94105"
         },
         email: "dana@shinetime.example",
-        name: "Dana Shine"
+        name: "Dana Whitfield"
     },
     payment_method: {
         type: "card"

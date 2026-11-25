@@ -18,7 +18,7 @@ describe("VariantsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -165,7 +165,7 @@ describe("VariantsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },
@@ -336,7 +336,7 @@ describe("VariantsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },
@@ -489,7 +489,7 @@ describe("VariantsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
             allow_multiple_quantity: false,
             attributes: { color: "Blue", size: "Large" },

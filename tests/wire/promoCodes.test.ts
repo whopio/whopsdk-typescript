@@ -162,7 +162,7 @@ describe("PromoCodesClient", () => {
             promo_type: "percentage",
         };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
@@ -310,7 +310,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
@@ -402,7 +402,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {
@@ -513,7 +513,7 @@ describe("PromoCodesClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             affiliate: {
                 id: "aff_xxxxxxxxxxxxxx",
                 user: {

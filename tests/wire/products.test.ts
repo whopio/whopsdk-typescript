@@ -49,7 +49,7 @@ describe("ProductsClient", () => {
                             },
                             id: "exp_xxxxxxxxxxxxxx",
                             logo_url: null,
-                            name: "Name1",
+                            name: "Ceramic Coating Care",
                         },
                     ],
                     external_identifier: "SHINE-CERAMIC-01",
@@ -60,7 +60,7 @@ describe("ProductsClient", () => {
                             url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         },
                     ],
-                    headline: "customer journey",
+                    headline: "Wear your Unlimited Wash Club colors",
                     id: "prod_xxxxxxxxxxxxxx",
                     labels: ["courses"],
                     logo_url:
@@ -202,7 +202,7 @@ describe("ProductsClient", () => {
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
-                    name: "Name1",
+                    name: "Ceramic Coating Care",
                 },
             ],
             external_identifier: "SHINE-CERAMIC-01",
@@ -233,7 +233,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -411,7 +411,7 @@ describe("ProductsClient", () => {
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
-                    name: "Name1",
+                    name: "Ceramic Coating Care",
                 },
             ],
             external_identifier: "SHINE-CERAMIC-01",
@@ -442,7 +442,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -640,7 +640,7 @@ describe("ProductsClient", () => {
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
-                    name: "Name1",
+                    name: "Ceramic Coating Care",
                 },
             ],
             external_identifier: "SHINE-CERAMIC-01",
@@ -671,7 +671,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -849,7 +849,7 @@ describe("ProductsClient", () => {
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
-                    name: "Name1",
+                    name: "Ceramic Coating Care",
                 },
             ],
             external_identifier: "SHINE-CERAMIC-01",
@@ -880,7 +880,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },
@@ -1082,7 +1082,7 @@ describe("ProductsClient", () => {
                     },
                     id: "exp_xxxxxxxxxxxxxx",
                     logo_url: "logo_url",
-                    name: "Name1",
+                    name: "Ceramic Coating Care",
                 },
             ],
             external_identifier: "SHINE-CERAMIC-01",
@@ -1113,7 +1113,7 @@ describe("ProductsClient", () => {
             variant_attributes: { color: ["Red", "Blue"], size: ["M", "S"] },
             variants: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
                     allow_multiple_quantity: false,
                     attributes: { color: "Blue", size: "S" },

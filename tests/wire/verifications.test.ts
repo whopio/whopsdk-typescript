@@ -42,9 +42,9 @@ describe("VerificationsClient", () => {
                     owners: [
                         {
                             date_of_birth: "1985-06-01",
-                            first_name: "Riley",
+                            first_name: "Marcus",
                             id: "own_xxxxxxxxxxxxxx",
-                            last_name: "Owner",
+                            last_name: "Webb",
                             ownership_percentage: 60,
                             rejected_checks: ["details"],
                             required_documents: [
@@ -233,9 +233,9 @@ describe("VerificationsClient", () => {
             owners: [
                 {
                     date_of_birth: "1985-06-01",
-                    first_name: "Riley",
+                    first_name: "Marcus",
                     id: "own_xxxxxxxxxxxxxx",
-                    last_name: "Owner",
+                    last_name: "Webb",
                     ownership_percentage: 60,
                     rejected_checks: ["details"],
                     required_documents: [
@@ -517,9 +517,9 @@ describe("VerificationsClient", () => {
             owners: [
                 {
                     date_of_birth: "1985-06-01",
-                    first_name: "Riley",
+                    first_name: "Marcus",
                     id: "own_xxxxxxxxxxxxxx",
-                    last_name: "Owner",
+                    last_name: "Webb",
                     ownership_percentage: 60,
                     rejected_checks: ["details"],
                     required_documents: [
@@ -684,9 +684,9 @@ describe("VerificationsClient", () => {
             owners: [
                 {
                     date_of_birth: "1985-06-01",
-                    first_name: "Riley",
+                    first_name: "Marcus",
                     id: "own_xxxxxxxxxxxxxx",
-                    last_name: "Owner",
+                    last_name: "Webb",
                     ownership_percentage: 60,
                     rejected_checks: ["details"],
                     required_documents: [
