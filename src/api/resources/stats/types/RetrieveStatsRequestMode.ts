@@ -3,6 +3,7 @@
 export const RetrieveStatsRequestMode = {
     Global: "global",
     Owner: "owner",
+    Partners: "partners",
     Platforms: "platforms",
     Public: "public",
 } as const;

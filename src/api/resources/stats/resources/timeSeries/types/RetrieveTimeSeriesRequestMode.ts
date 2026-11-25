@@ -3,6 +3,7 @@
 export const RetrieveTimeSeriesRequestMode = {
     Global: "global",
     Owner: "owner",
+    Partners: "partners",
     Platforms: "platforms",
     Public: "public",
 } as const;
