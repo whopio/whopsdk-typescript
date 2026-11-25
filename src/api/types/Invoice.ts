@@ -71,9 +71,11 @@ export interface Invoice {
     /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp. Renewals count from this moment. `null` starts the period when the invoice is paid, and so does a time that has passed by then. An invoice with a start date skips its variants' free trial. */
     subscription_starts_at: string | null;
     subtotal: Whop.Money;
+    /** The tax charged on the invoice. On a draft, it is an estimate once the draft has a complete billing address, calculated as if it were issued now. Issuing calculates it again, so the final tax can differ. `null` on a draft without a complete billing address, and when tax could not be estimated. */
     tax_amount: Whop.Money | null;
     /** The IANA time zone for the dates on the invoice's email and PDF, such as `America/New_York`. `UTC` unless one was set. */
     time_zone: string;
+    /** The amount the invoice charges, including tax. On a draft, it includes the estimated `tax_amount`, if any. */
     total: Whop.Money;
     totals_status: Invoice.TotalsStatus;
     updated_at: string;
