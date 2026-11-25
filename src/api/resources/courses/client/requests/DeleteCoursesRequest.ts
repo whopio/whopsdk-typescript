@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteCoursesRequest {
-    /** The unique identifier of the course to delete (e.g., "course_XXXXX"). */
+    /** The unique identifier of the course to delete (for example, "cors_XXXXX"). */
     id: string;
 }

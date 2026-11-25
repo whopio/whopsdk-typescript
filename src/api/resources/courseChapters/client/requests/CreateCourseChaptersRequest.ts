@@ -7,7 +7,7 @@
  *     }
  */
 export interface CreateCourseChaptersRequest {
-    /** The unique identifier of the course to create the chapter in (e.g., "course_XXXXX"). */
+    /** The unique identifier of the course to create the chapter in (for example, "cors_XXXXX"). */
     course_id: string;
     /** The display title of the chapter (e.g., "Module 1: Introduction"). */
     title?: string | null;

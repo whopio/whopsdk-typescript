@@ -7,6 +7,6 @@
  *     }
  */
 export interface MarkAsCompletedCourseLessonsRequest {
-    /** The unique identifier of the lesson to mark as completed (e.g., "les_XXXXX"). */
+    /** The unique identifier of the lesson to mark as completed (for example, "lesn_XXXXX"). */
     lesson_id: string;
 }

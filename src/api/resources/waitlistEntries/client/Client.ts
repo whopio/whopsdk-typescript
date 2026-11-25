@@ -85,8 +85,8 @@ export class WaitlistEntriesClient {
                     buyer_account_id: buyerAccountId,
                     status: status != null ? status : undefined,
                     query,
-                    created_before: createdBefore,
-                    created_after: createdAfter,
+                    created_before: createdBefore != null ? createdBefore : undefined,
+                    created_after: createdAfter != null ? createdAfter : undefined,
                     order: order != null ? order : undefined,
                     direction: direction != null ? direction : undefined,
                 };

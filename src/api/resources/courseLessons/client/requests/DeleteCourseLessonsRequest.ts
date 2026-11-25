@@ -7,6 +7,6 @@
  *     }
  */
 export interface DeleteCourseLessonsRequest {
-    /** The unique identifier of the lesson to delete (e.g., "les_XXXXX"). */
+    /** The unique identifier of the lesson to delete (for example, "lesn_XXXXX"). */
     id: string;
 }

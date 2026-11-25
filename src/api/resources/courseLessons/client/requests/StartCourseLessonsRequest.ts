@@ -7,6 +7,6 @@
  *     }
  */
 export interface StartCourseLessonsRequest {
-    /** The unique identifier of the lesson the user is starting (e.g., "les_XXXXX"). */
+    /** The unique identifier of the lesson the user is starting (for example, "lesn_XXXXX"). */
     lesson_id: string;
 }

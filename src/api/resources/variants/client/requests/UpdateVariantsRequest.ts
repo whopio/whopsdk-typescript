@@ -27,7 +27,7 @@ export interface UpdateVariantsRequest {
     checkout_styling?: Record<string, unknown> | null;
     /** The three-letter ISO currency code for the variant's pricing. Defaults to USD. */
     currency?: string;
-    /** An array of custom field definitions to collect from customers at checkout. Omitting this field clears existing custom fields. */
+    /** An array of custom field definitions to collect from customers at checkout. On update, omitting this field leaves existing custom fields unchanged. Send an empty array to clear them. */
     custom_fields?: UpdateVariantsRequest.CustomFields.Item[] | null;
     /** A text description of the variant displayed to customers on the product page. */
     description?: string | null;
