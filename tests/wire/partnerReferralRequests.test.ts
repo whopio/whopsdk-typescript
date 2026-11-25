@@ -27,6 +27,11 @@ describe("PartnerReferralRequestsClient", () => {
                     lead: {
                         business_type: null,
                         country: null,
+                        industry_type: {
+                            business_type: { id: "education", name: "Education" },
+                            id: "equity_research",
+                            name: "Equity research",
+                        },
                         migrating_from: null,
                         owner: {
                             badges: [{ type: "whop_team" }],
@@ -35,6 +40,9 @@ describe("PartnerReferralRequestsClient", () => {
                             profile_picture: { url: "https://ui-avatars.com/api/" },
                             username: "danawhitfield",
                         },
+                        owner_email: null,
+                        owner_phone: null,
+                        revenue_band: null,
                         signed_up_at: "signed_up_at",
                         website: null,
                     },
@@ -196,6 +204,11 @@ describe("PartnerReferralRequestsClient", () => {
             lead: {
                 business_type: "business_type",
                 country: "country",
+                industry_type: {
+                    business_type: { id: "education", name: "Education" },
+                    id: "equity_research",
+                    name: "Equity research",
+                },
                 migrating_from: "migrating_from",
                 owner: {
                     badges: [{ type: "whop_team" }],
@@ -204,6 +217,9 @@ describe("PartnerReferralRequestsClient", () => {
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     username: "danawhitfield",
                 },
+                owner_email: "owner_email",
+                owner_phone: "owner_phone",
+                revenue_band: "revenue_band",
                 signed_up_at: "signed_up_at",
                 website: "website",
             },
@@ -415,6 +431,11 @@ describe("PartnerReferralRequestsClient", () => {
             lead: {
                 business_type: "business_type",
                 country: "country",
+                industry_type: {
+                    business_type: { id: "education", name: "Education" },
+                    id: "equity_research",
+                    name: "Equity research",
+                },
                 migrating_from: "migrating_from",
                 owner: {
                     badges: [{ type: "whop_team" }],
@@ -423,6 +444,9 @@ describe("PartnerReferralRequestsClient", () => {
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     username: "danawhitfield",
                 },
+                owner_email: "owner_email",
+                owner_phone: "owner_phone",
+                revenue_band: "revenue_band",
                 signed_up_at: "signed_up_at",
                 website: "website",
             },
@@ -574,6 +598,11 @@ describe("PartnerReferralRequestsClient", () => {
             lead: {
                 business_type: "business_type",
                 country: "country",
+                industry_type: {
+                    business_type: { id: "education", name: "Education" },
+                    id: "equity_research",
+                    name: "Equity research",
+                },
                 migrating_from: "migrating_from",
                 owner: {
                     badges: [{ type: "whop_team" }],
@@ -582,6 +611,9 @@ describe("PartnerReferralRequestsClient", () => {
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     username: "danawhitfield",
                 },
+                owner_email: "owner_email",
+                owner_phone: "owner_phone",
+                revenue_band: "revenue_band",
                 signed_up_at: "signed_up_at",
                 website: "website",
             },
@@ -760,6 +792,11 @@ describe("PartnerReferralRequestsClient", () => {
             lead: {
                 business_type: "business_type",
                 country: "country",
+                industry_type: {
+                    business_type: { id: "education", name: "Education" },
+                    id: "equity_research",
+                    name: "Equity research",
+                },
                 migrating_from: "migrating_from",
                 owner: {
                     badges: [{ type: "whop_team" }],
@@ -768,6 +805,9 @@ describe("PartnerReferralRequestsClient", () => {
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     username: "danawhitfield",
                 },
+                owner_email: "owner_email",
+                owner_phone: "owner_phone",
+                revenue_band: "revenue_band",
                 signed_up_at: "signed_up_at",
                 website: "website",
             },
@@ -946,6 +986,11 @@ describe("PartnerReferralRequestsClient", () => {
             lead: {
                 business_type: "business_type",
                 country: "country",
+                industry_type: {
+                    business_type: { id: "education", name: "Education" },
+                    id: "equity_research",
+                    name: "Equity research",
+                },
                 migrating_from: "migrating_from",
                 owner: {
                     badges: [{ type: "whop_team" }],
@@ -954,6 +999,9 @@ describe("PartnerReferralRequestsClient", () => {
                     profile_picture: { url: "https://ui-avatars.com/api/" },
                     username: "danawhitfield",
                 },
+                owner_email: "owner_email",
+                owner_phone: "owner_phone",
+                revenue_band: "revenue_band",
                 signed_up_at: "signed_up_at",
                 website: "website",
             },

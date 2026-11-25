@@ -258,6 +258,8 @@ describe("PartnersClient", () => {
             account_id: "account_id",
             certification_complete: false,
             joined_at: "2026-01-01T12:00:00.000Z",
+            lead_slot_limit: 5,
+            lead_slots_used: 0,
             payout_rates: [
                 {
                     duration: { unit: "day", value: 600 },

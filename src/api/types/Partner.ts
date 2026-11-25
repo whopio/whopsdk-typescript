@@ -9,6 +9,10 @@ export interface Partner {
     certification_complete: boolean;
     /** When the user joined the partner program, as an ISO 8601 timestamp. Null when they have not joined. */
     joined_at: string | null;
+    /** How many leads the partner can hold at once. A waiting lead offer takes a slot, and so does a lead accepted in the last 30 days whose business has made $1 or less. */
+    lead_slot_limit: number;
+    /** How many of the partner's lead slots are taken now. */
+    lead_slots_used: number;
     payout_rates: Whop.PartnerPayoutTier[];
     /** Number of active first-tier business referrals attributed to the partner, excluding deleted businesses. */
     referred_businesses_count: number;

@@ -3,14 +3,22 @@
 import type * as Whop from "../index.js";
 
 export interface PartnerReferralRequestLead {
-    /** What the business sells, as the owner picked it at signup, such as `education` or `coaching_and_courses`. `null` when they skipped it. */
+    /** The business type Whop classified the business into, the same value as the account's `business_type`, such as `education`. `null` until the business is classified. */
     business_type: string | null;
     /** The business's country as a two-letter ISO 3166-1 code, such as `us`. */
     country: string | null;
+    /** The industry type Whop classified the business into, the same one the account's `industry_type` names. `null` until the business is classified, or when no industry type fits. */
+    industry_type: Whop.IndustryTypeReference | null;
     /** The platform the owner said they are moving from, such as `stripe`, or `none`. `null` when the form did not ask. */
     migrating_from: string | null;
     /** The business owner. A partner messages them with this user's ID. */
     owner: Whop.UserSummary;
+    /** The business owner's email address. `null` until the partner accepts the offer. */
+    owner_email: string | null;
+    /** The business owner's phone number in E.164 format, such as `+14155552671`. `null` until the partner accepts the offer, or when the owner gave none. */
+    owner_phone: string | null;
+    /** The revenue range the owner picked at signup, such as `0-50k` or `50-250k`. `null` when they skipped it. */
+    revenue_band: string | null;
     /** When the business was created, as an ISO 8601 timestamp. */
     signed_up_at: string;
     /** The business's website. `null` when the business has none. */
