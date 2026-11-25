@@ -18,7 +18,7 @@ describe("PartnerReferralRequestsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     authorized_user_id: "authorized_user_id",
                     code: "code",
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -47,7 +47,7 @@ describe("PartnerReferralRequestsClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "danawhitfield",
                     },
-                    referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     request_type: "manual",
                     rewards: [
                         {
@@ -187,7 +187,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -216,7 +216,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
-            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             request_type: "manual",
             rewards: [
                 {
@@ -406,7 +406,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -435,7 +435,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
-            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             request_type: "manual",
             rewards: [
                 {
@@ -565,7 +565,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -594,7 +594,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
-            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             request_type: "manual",
             rewards: [
                 {
@@ -751,7 +751,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -780,7 +780,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
-            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             request_type: "manual",
             rewards: [
                 {
@@ -937,7 +937,7 @@ describe("PartnerReferralRequestsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             authorized_user_id: "authorized_user_id",
             code: "code",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -966,7 +966,7 @@ describe("PartnerReferralRequestsClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
-            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            referring_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             request_type: "manual",
             rewards: [
                 {

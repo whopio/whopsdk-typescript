@@ -6,7 +6,7 @@ export interface AccountCompanyFormation {
     documents?: Whop.AccountCompanyFormationDocument[] | undefined;
     /** Whether the company's EIN has been issued by the IRS. Present once `status` leaves `draft`. */
     ein_registered?: boolean | undefined;
-    /** Registered company name including the entity ending, for example `Acme, LLC`. Present once `status` leaves `draft`. */
+    /** Registered company name including the entity ending, for example `Shine Time Auto Detailing, LLC`. Present once `status` leaves `draft`. */
     legal_name?: (string | null) | undefined;
     /** IRS forms still awaiting a founder's signature, each with a hosted signing URL. Present once `status` leaves `draft`; empty when nothing needs signing. */
     signatures?: Whop.AccountCompanyFormationSignatures | undefined;

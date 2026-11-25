@@ -18,12 +18,12 @@ describe("AppInstallationsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                    account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     app: {
-                        developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                        developer: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                         icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                         id: "app_xxxxxxxxxxxxxx",
-                        name: "Other App",
+                        name: "Shine Time Alerts",
                     },
                     created_at: "2026-01-01T12:00:00.000Z",
                     external_id: "shine-time-austin",
@@ -128,12 +128,12 @@ describe("AppInstallationsClient", () => {
         });
 
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             app: {
-                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                 icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                 id: "app_xxxxxxxxxxxxxx",
-                name: "Other App",
+                name: "Shine Time Alerts",
             },
             created_at: "2026-01-01T12:00:00.000Z",
             external_id: "shine-time-austin",
@@ -249,12 +249,12 @@ describe("AppInstallationsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            account: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             app: {
-                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Second Account" },
+                developer: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                 icon: { url: "https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/custom-perk-icon.svg" },
                 id: "app_xxxxxxxxxxxxxx",
-                name: "Other App",
+                name: "Shine Time Alerts",
             },
             created_at: "2026-01-01T12:00:00.000Z",
             external_id: "shine-time-austin",

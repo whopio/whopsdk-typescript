@@ -21,7 +21,7 @@ describe("ExternalAccountsClient", () => {
                     connection_status: "active",
                     external_id: "creator-id",
                     id: "sacc_xxxxxxxxxxxxxx",
-                    name: "Allene Balistreri",
+                    name: "Shine Time Auto Detailing",
                     parent_external_account: {
                         external_id: "555111",
                         id: "sacc_xxxxxxxxxxxxxx",
@@ -33,10 +33,10 @@ describe("ExternalAccountsClient", () => {
                     },
                     partnership_status: "partnership_status",
                     platform: "x",
-                    profile_picture_url: "https://api.whop.com/valencia",
+                    profile_picture_url: "https://shinetime.example/tiktok-profile.png",
                     scopes: ["advertise"],
-                    url: "https://tiktok.com/@creator",
-                    username: "creator",
+                    url: "https://tiktok.com/@shinetimedetail",
+                    username: "shinetimedetail",
                     verified: false,
                 },
             ],
@@ -117,7 +117,7 @@ describe("ExternalAccountsClient", () => {
             connection_status: "active",
             external_id: "creator-id",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Allene Balistreri",
+            name: "Shine Time Auto Detailing",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -129,10 +129,10 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "https://api.whop.com/valencia",
+            profile_picture_url: "https://shinetime.example/tiktok-profile.png",
             scopes: ["advertise"],
-            url: "https://tiktok.com/@creator",
-            username: "creator",
+            url: "https://tiktok.com/@shinetimedetail",
+            username: "shinetimedetail",
             verified: false,
         };
 
@@ -561,7 +561,7 @@ describe("ExternalAccountsClient", () => {
             connection_status: "active",
             external_id: "creator-id",
             id: "sacc_xxxxxxxxxxxxxx",
-            name: "Allene Balistreri",
+            name: "Shine Time Auto Detailing",
             parent_external_account: {
                 external_id: "555111",
                 id: "sacc_xxxxxxxxxxxxxx",
@@ -573,10 +573,10 @@ describe("ExternalAccountsClient", () => {
             },
             partnership_status: "partnership_status",
             platform: "x",
-            profile_picture_url: "https://api.whop.com/valencia",
+            profile_picture_url: "https://shinetime.example/tiktok-profile.png",
             scopes: ["advertise"],
-            url: "https://tiktok.com/@creator",
-            username: "creator",
+            url: "https://tiktok.com/@shinetimedetail",
+            username: "shinetimedetail",
             verified: false,
         };
 

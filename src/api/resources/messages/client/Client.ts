@@ -178,7 +178,7 @@ export class MessagesClient {
      * @example
      *     await client.messages.create({
      *         channel_id: "feed_xxxxxxxxxxxxxxxxxxxxxx",
-     *         content: "New **message**"
+     *         content: "Your **ceramic coating** is booked for Tuesday."
      *     })
      */
     public create(
