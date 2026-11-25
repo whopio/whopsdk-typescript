@@ -7,18 +7,19 @@ export interface AccountReserveType {
     hold_period_days: number | null;
     /** Percentage of each incoming payment currently held for this reason, or `null` when the reason is not a percentage of anything. Money already held keeps the release date it was given, which `unlocks_by_date` reflects. */
     percentage: number | null;
-    /** Why this part of the balance is held. `regular` is the account's standing risk reserve; `bnpl` and `sequra` cover buy-now-pay-later settlement; `preshipment_hold` covers a physical order that has not shipped yet; `fraud_hold` is held while activity is reviewed. */
+    /** Why this part of the balance is held. `regular` is the account's standing risk reserve. `bnpl` and `sequra` cover buy-now-pay-later settlement. `preshipment_hold` covers a physical order that has not shipped yet. `fraud_hold` is held while activity is reviewed. `subaccount_negative_balances` is held by a platform for the negative balances of its sub-accounts. */
     type: AccountReserveType.Type;
 }
 
 export namespace AccountReserveType {
-    /** Why this part of the balance is held. `regular` is the account's standing risk reserve; `bnpl` and `sequra` cover buy-now-pay-later settlement; `preshipment_hold` covers a physical order that has not shipped yet; `fraud_hold` is held while activity is reviewed. */
+    /** Why this part of the balance is held. `regular` is the account's standing risk reserve. `bnpl` and `sequra` cover buy-now-pay-later settlement. `preshipment_hold` covers a physical order that has not shipped yet. `fraud_hold` is held while activity is reviewed. `subaccount_negative_balances` is held by a platform for the negative balances of its sub-accounts. */
     export const Type = {
         Regular: "regular",
         Bnpl: "bnpl",
         Sequra: "sequra",
         FraudHold: "fraud_hold",
         PreshipmentHold: "preshipment_hold",
+        SubaccountNegativeBalances: "subaccount_negative_balances",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }
