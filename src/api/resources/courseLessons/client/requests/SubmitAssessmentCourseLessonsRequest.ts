@@ -10,7 +10,7 @@
  *     }
  */
 export interface SubmitAssessmentCourseLessonsRequest {
-    /** The unique identifier of the quiz or knowledge check lesson to submit answers for (e.g., "les_XXXXX"). */
+    /** The unique identifier of the quiz or knowledge check lesson to submit answers for (for example, "lesn_XXXXX"). */
     lesson_id: string;
     /** The list of answers to submit for each assessment question. */
     answers: SubmitAssessmentCourseLessonsRequest.Answers.Item[];

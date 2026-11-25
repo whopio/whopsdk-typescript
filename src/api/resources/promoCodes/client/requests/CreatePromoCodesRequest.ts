@@ -14,18 +14,23 @@
  */
 export interface CreatePromoCodesRequest {
     account_id: string;
+    /** The discount. For `percentage`, a whole percent from 0.01 to 100 (25 means 25% off). Responses return it as a fraction, 0.25. For `flat_amount`, an amount in `base_currency` units, such as dollars (5 means $5.00). */
     amount_off: number;
     base_currency: CreatePromoCodesRequest.BaseCurrency;
     churned_users_only?: boolean;
+    /** The code customers enter at checkout. Stored lowercase. */
     code: string;
     existing_memberships_only?: boolean;
     expires_at?: string | null;
     new_users_only: boolean;
     one_per_customer?: boolean;
     product_id?: string | null;
+    /** How many billing cycles the discount applies to: 0 for every payment, 1 for the first payment only, N to cover the first N payments. */
     promo_duration_months: number;
     promo_type: CreatePromoCodesRequest.PromoType;
+    /** How many times the code can be used. Required unless `unlimited_stock` is true. */
     stock?: number | null;
+    /** Allow unlimited uses. When false or omitted, `stock` is required. */
     unlimited_stock?: boolean;
     variant_ids?: string[];
 }

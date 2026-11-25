@@ -9,7 +9,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface UpdateCourseLessonsRequest {
-    /** The unique identifier of the lesson to update (e.g., "les_XXXXX"). */
+    /** The unique identifier of the lesson to update (for example, "lesn_XXXXX"). */
     id: string;
     /** The passing criteria for quiz or knowledge check lessons, such as minimum grade or correct answers. */
     assessment_completion_requirement?: UpdateCourseLessonsRequest.AssessmentCompletionRequirement | null;

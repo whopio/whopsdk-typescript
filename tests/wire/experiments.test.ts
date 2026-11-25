@@ -38,7 +38,7 @@ describe("ExperimentsClient", () => {
                     started_at: "2026-01-01T12:00:00.000Z",
                     status: "draft",
                     target_stats: [{ direction: "up", estimate: null, metric: "metric", params: { key: "value" } }],
-                    updated_at: "2026-01-01T12:00:00.000Z",
+                    updated_at: "2026-01-01T12:00:00Z",
                     variants: [{ name: "treatment", weight: 50 }],
                     winning_arm: "treatment",
                 },
@@ -118,7 +118,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],
@@ -232,7 +232,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],
@@ -299,7 +299,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],
@@ -380,7 +380,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],
@@ -489,7 +489,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],
@@ -601,7 +601,7 @@ describe("ExperimentsClient", () => {
             started_at: "2026-01-01T12:00:00.000Z",
             status: "draft",
             target_stats: [{ direction: "up", estimate: 1.1, metric: "metric", params: { key: "value" } }],
-            updated_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00Z",
             variants: [
                 { name: "treatment", ranges: [[0, 50]], related_resource: { id: "id", object: "app" }, weight: 50 },
             ],

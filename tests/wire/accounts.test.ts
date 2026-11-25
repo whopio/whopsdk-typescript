@@ -345,7 +345,7 @@ describe("AccountsClient", () => {
                             status: "in_progress",
                         },
                     ],
-                    route: "biz_xxxxxxxxxxxxxx",
+                    route: "jordan",
                     send_customer_emails: false,
                     shipping_policy: {
                         blurhash: null,
@@ -980,7 +980,7 @@ describe("AccountsClient", () => {
                     status: "in_progress",
                 },
             ],
-            route: "biz_xxxxxxxxxxxxxx",
+            route: "jordan",
             send_customer_emails: false,
             shipping_policy: {
                 blurhash: "blurhash",
@@ -1598,7 +1598,7 @@ describe("AccountsClient", () => {
                     status: "in_progress",
                 },
             ],
-            route: "biz_xxxxxxxxxxxxxx",
+            route: "jordan",
             send_customer_emails: false,
             shipping_policy: {
                 blurhash: "blurhash",
@@ -2231,7 +2231,7 @@ describe("AccountsClient", () => {
                     status: "in_progress",
                 },
             ],
-            route: "biz_xxxxxxxxxxxxxx",
+            route: "jordan",
             send_customer_emails: false,
             shipping_policy: {
                 blurhash: "blurhash",
@@ -2907,7 +2907,7 @@ describe("AccountsClient", () => {
                     status: "in_progress",
                 },
             ],
-            route: "biz_xxxxxxxxxxxxxx",
+            route: "jordan",
             send_customer_emails: false,
             shipping_policy: {
                 blurhash: "blurhash",
@@ -4301,7 +4301,7 @@ describe("AccountsClient", () => {
                     status: "in_progress",
                 },
             ],
-            route: "biz_xxxxxxxxxxxxxx",
+            route: "jordan",
             send_customer_emails: false,
             shipping_policy: {
                 blurhash: "blurhash",

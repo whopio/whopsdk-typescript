@@ -9,7 +9,7 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface UpdateCoursesRequest {
-    /** The unique identifier of the course to update (e.g., "course_XXXXX"). */
+    /** The unique identifier of the course to update (for example, "cors_XXXXX"). */
     id: string;
     /** Whether the course awards students a PDF certificate after completing all lessons. */
     certificate_after_completion_enabled?: boolean | null;
