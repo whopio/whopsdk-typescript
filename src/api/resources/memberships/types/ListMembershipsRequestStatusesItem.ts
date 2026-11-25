@@ -3,6 +3,7 @@
 export const ListMembershipsRequestStatusesItem = {
     Active: "active",
     Trialing: "trialing",
+    Scheduled: "scheduled",
     PastDue: "past_due",
     Completed: "completed",
     Canceled: "canceled",
