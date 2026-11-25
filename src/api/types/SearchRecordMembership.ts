@@ -29,6 +29,7 @@ export namespace SearchRecordMembership {
         Canceled: "canceled",
         Expired: "expired",
         Unresolved: "unresolved",
+        Scheduled: "scheduled",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }

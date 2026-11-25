@@ -44,7 +44,7 @@ export interface Plan {
     image: Record<string, unknown> | null;
     /** Initial purchase price, in `currency`. */
     initial_price: number;
-    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring variants, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this variant. Stated in `currency`. */
+    /** Total charged at checkout for one unit, before promo codes and tax. For recurring variants it is `initial_price` plus the first `renewal_price`. It is `initial_price` alone while a free trial applies or the `subscription_starts_at` metadata key is in the future. The trial does not apply when the viewing user has already used one for this variant. Stated in `currency`. */
     initial_price_due: Whop.Money;
     /** Private notes not shown to customers. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     internal_notes: string | null;
@@ -52,7 +52,7 @@ export interface Plan {
     invoice: Record<string, unknown> | null;
     /** Active memberships through this variant. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     member_count: number | null;
-    /** Custom key-value pairs stored on the variant. Included in webhook payloads for payment and membership events. Maximum 50 keys, 100 characters per key, 500 characters per value. The reserved keys `custom_cta` and `custom_cta_url`, when set, override the product's checkout call to action for this variant. */
+    /** Custom key-value pairs stored on the variant. Included in webhook payloads for payment and membership events. Maximum 50 keys, 100 characters per key, 500 characters per value. The reserved keys `custom_cta` and `custom_cta_url`, when set, override the product's checkout call to action for this variant. The reserved key `subscription_starts_at` takes an ISO 8601 timestamp on a recurring variant. Until then, checkout saves the payment method without charging it. The membership is `scheduled` with no access until the first charge runs at that time. */
     metadata: Record<string, unknown> | null;
     /** Whether a cancellation discount is offered. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     offer_cancel_discount: boolean | null;

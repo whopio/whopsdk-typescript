@@ -9,6 +9,7 @@ export const MembershipStatus = {
     Canceled: "canceled",
     Expired: "expired",
     Unresolved: "unresolved",
+    Scheduled: "scheduled",
     Drafted: "drafted",
     Canceling: "canceling",
 } as const;
