@@ -3,6 +3,7 @@
 export const ListExperimentsRequestOrder = {
     CreatedAt: "created_at",
     FlagKey: "flag_key",
+    Lift: "lift",
 } as const;
 export type ListExperimentsRequestOrder =
     (typeof ListExperimentsRequestOrder)[keyof typeof ListExperimentsRequestOrder];
