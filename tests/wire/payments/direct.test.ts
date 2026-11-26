@@ -160,6 +160,7 @@ describe("DirectClient", () => {
                 postal_code: "78704",
                 state: "TX",
             },
+            statement_descriptor: "statement_descriptor",
             status: "draft",
             substatus: "succeeded",
             subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },

@@ -115,6 +115,8 @@ export interface Payment {
     shipment_id: string | null;
     /** The shipping address for physical goods, or null. */
     shipping_address: Whop.PaymentAddress | null;
+    /** The text the buyer's bank or card statement shows for this payment. Null when the processor did not report one. */
+    statement_descriptor: string | null;
     /** The lifecycle state of the charge: `open` while collection is outstanding, `paid` once the money moved, `pending` while a settlement rail clears, `void`/`uncollectible` when it ended without collecting. */
     status: Whop.ReceiptStatus;
     /** The dashboard's finer-grained reading of the payment, folding in refunds, disputes and Resolution Center cases. */
