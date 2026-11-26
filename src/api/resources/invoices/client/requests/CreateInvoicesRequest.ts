@@ -16,6 +16,8 @@ export interface CreateInvoicesRequest {
     billing_address?: CreateInvoicesRequest.BillingAddress | null;
     /** The buyer's adjustable fee in percentage points, with at most two decimal places: `0` for none, or between 5 and 100. The account keeps it, and Whop waives its take rate on the invoice. */
     buyer_fee_percentage?: number;
+    /** When true, the customer pays only each item's initial fee now, and their payment method is first charged the renewal price at `subscription_starts_at`. The membership is `scheduled` and has no access until then. Needs `subscription_starts_at`, items that all renew, no split pay, and renewals that charge the payment method. With nothing due now, it also needs `payment_method_id`. Defaults to `false`. Can be updated on drafts. */
+    charge_at_subscription_start?: boolean;
     /** The contact name when creating an email-only member. */
     customer_name?: string | null;
     /** When payment is due, as an ISO 8601 timestamp. */
@@ -38,7 +40,7 @@ export interface CreateInvoicesRequest {
     payment_method_id?: string | null;
     /** Email addresses saved for invoice delivery, independent of the billed customer. Saving them sends no email. Defaults to the customer email when omitted on create. Can be updated on draft, open, or uncollectible invoices. */
     recipient_emails?: string[];
-    /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp in the future. Renewals count from this moment. `null` starts the period when the invoice is paid. Needs a recurring item. Can be updated on drafts. A start date replaces a variant's free trial, and the invoice bills the full price. */
+    /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp in the future. Renewals count from this moment. `null` starts the period when the invoice is paid. Needs a recurring item. Can be updated on drafts. A start date replaces a variant's free trial, and the invoice bills the full price. With `charge_at_subscription_start`, the subscription, its first renewal charge and its access begin at this moment instead. */
     subscription_starts_at?: string | null;
     /** The IANA time zone for the dates on the invoice's email and PDF. Set it so the due date reads as the day you picked. When omitted, a new invoice uses the time zone Whop has for the user creating it, else UTC. Can be updated on drafts. */
     time_zone?: string | null;

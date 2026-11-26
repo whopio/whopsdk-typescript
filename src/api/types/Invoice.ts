@@ -10,6 +10,8 @@ export interface Invoice {
     billing_address: Whop.PaymentAddress | null;
     buyer_fee_amount: Whop.Money;
     buyer_fee_percentage: number;
+    /** True when the customer pays only the initial fee of each item now and is first charged the renewal price at `subscription_starts_at`. Until then the membership is `scheduled` and has no access. */
+    charge_at_subscription_start: boolean;
     /** A signed link that opens this invoice in a checkout session so the buyer can pay it. Pass it as `link` to `POST /checkout_sessions`. Present while the invoice is open. `null` in any other status, for an invoice billed to a business buyer, and for an invoice whose membership was canceled. Also `null` unless you have `payment:charge`, or `invoice:create` or `invoice:update` on an invoice with no `payment_method_id`. */
     checkout_link: string | null;
     created_at: string;
@@ -68,7 +70,7 @@ export interface Invoice {
     /** Whether this draft is issued automatically when its `due_at` arrives. Issuing it charges its `payment_method_id`, or emails its payment link to its `recipient_emails`. `false` for an invoice that is not a draft, for a draft with a scheduled send, and for a draft sent as a quote. `false` while sending the draft would fail for missing recipients or an unavailable payment link. `false` for a draft that had no future `due_at` when it was last saved. `false` for a draft created before 2026-11-12T22:00:00Z. */
     sends_on_due_date: boolean;
     status: Invoice.Status;
-    /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp. Renewals count from this moment. `null` starts the period when the invoice is paid, and so does a time that has passed by then. An invoice with a start date skips its variants' free trial. */
+    /** When the first billing period of the invoice's recurring items starts, as an ISO 8601 timestamp. Renewals count from this moment. `null` starts the period when the invoice is paid, and so does a time that has passed by then. An invoice with a start date skips its variants' free trial. With `charge_at_subscription_start`, the subscription and its access begin at this moment instead. */
     subscription_starts_at: string | null;
     subtotal: Whop.Money;
     /** The tax charged on the invoice. On a draft, it is an estimate once the draft has a complete billing address, calculated as if it were issued now. Issuing calculates it again, so the final tax can differ. `null` on a draft without a complete billing address, and when tax could not be estimated. */
