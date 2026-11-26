@@ -40,6 +40,8 @@ export namespace RetrieveStatsResponse {
 
                 export namespace Breakdown {
                     export interface Item {
+                        /** The display name of the property value. It is present only when the value has a name. For example, a country code has the name of its country. */
+                        label?: string | undefined;
                         /** The property value, for example usd or visa. */
                         name: string;
                         /** Present for the funnel metric. People reaching each step in order, starting with the entry step. */
