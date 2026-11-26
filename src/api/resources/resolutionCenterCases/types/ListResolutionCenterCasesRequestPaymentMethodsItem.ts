@@ -68,6 +68,7 @@ export const ListResolutionCenterCasesRequestPaymentMethodsItem = {
     Bancontact: "bancontact",
     BankWire: "bank_wire",
     Billie: "billie",
+    Bizum: "bizum",
     Blik: "blik",
     Boleto: "boleto",
     BreB: "bre_b",
