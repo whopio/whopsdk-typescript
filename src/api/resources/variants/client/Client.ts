@@ -412,6 +412,7 @@ export class VariantsClient {
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -471,6 +472,8 @@ export class VariantsClient {
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
