@@ -212,7 +212,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", items: [] };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", items: [{}] };
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -302,7 +302,7 @@ describe("InvoicesClient", () => {
 
         const response = await client.invoices.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            items: [],
+            items: [{}],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -316,7 +316,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
+        const rawRequestBody = { account_id: "account_id", items: [{}, {}] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -331,14 +331,7 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                items: [
-                    {
-                        key: "value",
-                    },
-                    {
-                        key: "value",
-                    },
-                ],
+                items: [{}, {}],
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -352,7 +345,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
+        const rawRequestBody = { account_id: "account_id", items: [{}, {}] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -367,14 +360,7 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                items: [
-                    {
-                        key: "value",
-                    },
-                    {
-                        key: "value",
-                    },
-                ],
+                items: [{}, {}],
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -388,7 +374,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
+        const rawRequestBody = { account_id: "account_id", items: [{}, {}] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -403,14 +389,7 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                items: [
-                    {
-                        key: "value",
-                    },
-                    {
-                        key: "value",
-                    },
-                ],
+                items: [{}, {}],
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -424,7 +403,7 @@ describe("InvoicesClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", items: [{ key: "value" }, { key: "value" }] };
+        const rawRequestBody = { account_id: "account_id", items: [{}, {}] };
         const rawResponseBody = { key: "value" };
 
         server
@@ -439,14 +418,7 @@ describe("InvoicesClient", () => {
         await expect(async () => {
             return await client.invoices.create({
                 account_id: "account_id",
-                items: [
-                    {
-                        key: "value",
-                    },
-                    {
-                        key: "value",
-                    },
-                ],
+                items: [{}, {}],
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

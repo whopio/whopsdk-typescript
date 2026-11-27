@@ -147,7 +147,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/reactions").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -189,7 +189,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/reactions").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -354,7 +354,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { resource_id: "resource_id" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -410,7 +410,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { resource_id: "resource_id" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -553,7 +553,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/reactions/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -595,7 +595,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/reactions/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -726,7 +726,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/reactions/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -768,7 +768,7 @@ describe("ReactionsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/reactions/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 

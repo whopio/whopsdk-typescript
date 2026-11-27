@@ -189,7 +189,7 @@ export class InvoicesClient {
      * @example
      *     await client.invoices.create({
      *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         items: []
+     *         items: [{}]
      *     })
      */
     public create(

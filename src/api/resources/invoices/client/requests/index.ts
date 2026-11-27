@@ -1,5 +1,5 @@
 export type { ChargeInvoicesRequest } from "./ChargeInvoicesRequest.js";
-export type { CreateInvoicesRequest } from "./CreateInvoicesRequest.js";
+export { CreateInvoicesRequest } from "./CreateInvoicesRequest.js";
 export type { DeleteInvoicesRequest } from "./DeleteInvoicesRequest.js";
 export type { GeneratePdfInvoicesRequest } from "./GeneratePdfInvoicesRequest.js";
 export { IssueInvoicesRequest } from "./IssueInvoicesRequest.js";
@@ -8,5 +8,5 @@ export type { MarkUncollectibleInvoicesRequest } from "./MarkUncollectibleInvoic
 export type { RetrieveInvoicesRequest } from "./RetrieveInvoicesRequest.js";
 export { SendInvoicesRequest } from "./SendInvoicesRequest.js";
 export type { UnscheduleInvoicesRequest } from "./UnscheduleInvoicesRequest.js";
-export type { UpdateInvoicesRequest } from "./UpdateInvoicesRequest.js";
+export { UpdateInvoicesRequest } from "./UpdateInvoicesRequest.js";
 export type { VoidInvoicesRequest } from "./VoidInvoicesRequest.js";

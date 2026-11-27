@@ -21,7 +21,36 @@ export namespace UpdatePaymentsRequest {
     export type LineItems = LineItems.Item[];
 
     export namespace LineItems {
-        export type Item = unknown;
+        export interface Item {
+            /** A line already on the payment to keep, prefixed `li_`. */
+            id?: string | undefined;
+            /** A line to add. Each product holds one added line, so a new line for the same product replaces it. */
+            variant?: Item.Variant | undefined;
+        }
+
+        export namespace Item {
+            /**
+             * A line to add. Each product holds one added line, so a new line for the same product replaces it.
+             */
+            export interface Variant {
+                /** Price in the payment's currency, up to two decimal places. `0` removes the product's added line. */
+                initial_price: number;
+                /** Product for the line, matched by `external_identifier`. Created hidden if it doesn't exist. An existing product must be hidden. */
+                product: Variant.Product;
+            }
+
+            export namespace Variant {
+                /**
+                 * Product for the line, matched by `external_identifier`. Created hidden if it doesn't exist. An existing product must be hidden.
+                 */
+                export interface Product {
+                    /** Your identifier for the product. */
+                    external_identifier: string;
+                    /** Product name, shown as the line's label on the receipt. */
+                    title: string;
+                }
+            }
+        }
     }
 
     /**

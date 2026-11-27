@@ -164,7 +164,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/forum_posts").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -206,7 +206,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/forum_posts").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -388,7 +388,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -444,7 +444,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -598,7 +598,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/forum_posts/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -640,7 +640,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/forum_posts/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -822,7 +822,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -878,7 +878,7 @@ describe("ForumPostsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()

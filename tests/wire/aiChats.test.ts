@@ -144,7 +144,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/ai_chats").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -182,7 +182,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/ai_chats").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -351,7 +351,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message_text: "message_text" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -407,7 +407,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { message_text: "message_text" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -556,7 +556,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/ai_chats/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -598,7 +598,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/ai_chats/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -729,7 +729,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/ai_chats/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -771,7 +771,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/ai_chats/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -942,7 +942,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -998,7 +998,7 @@ describe("AiChatsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()

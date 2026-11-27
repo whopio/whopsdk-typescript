@@ -179,7 +179,7 @@ export class MembershipsClient {
     /**
      * Emails one recipient an invitation to a free variant's membership. The invitation is bound to that recipient; after signing in, accepting it immediately grants the membership without checkout. This Experimental endpoint is available only to accounts enabled for membership invitations.
      *
-     * @param {Whop.InviteMembershipsRequestBody} request
+     * @param {Whop.InviteMembershipsRequest} request
      * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
@@ -192,19 +192,18 @@ export class MembershipsClient {
      *
      * @example
      *     await client.memberships.invite({
-     *         user_id: "user_xxxxxxxxxxxxxx",
      *         variant_id: "plan_xxxxxxxxxxxxxx"
      *     })
      */
     public invite(
-        request: Whop.InviteMembershipsRequestBody,
+        request: Whop.InviteMembershipsRequest,
         requestOptions?: MembershipsClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.InviteMembershipsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__invite(request, requestOptions));
     }
 
     private async __invite(
-        request: Whop.InviteMembershipsRequestBody,
+        request: Whop.InviteMembershipsRequest,
         requestOptions?: MembershipsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.InviteMembershipsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();

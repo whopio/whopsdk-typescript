@@ -14,7 +14,7 @@ describe("NotificationsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { preferences: [{ scope: {} }] };
+        const rawRequestBody = { preferences: [{ level: null, scope: {} }] };
         const rawResponseBody = {
             data: [
                 {
@@ -43,6 +43,7 @@ describe("NotificationsClient", () => {
         const response = await client.users.preferences.notifications.set({
             preferences: [
                 {
+                    level: null,
                     scope: {},
                 },
             ],

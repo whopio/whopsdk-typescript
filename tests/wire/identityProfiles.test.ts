@@ -177,7 +177,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/identity_profiles").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -215,7 +215,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/identity_profiles").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -411,7 +411,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -465,7 +465,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -674,7 +674,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -730,7 +730,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -916,7 +916,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -970,7 +970,7 @@ describe("IdentityProfilesClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()

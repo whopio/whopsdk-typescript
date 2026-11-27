@@ -17687,7 +17687,7 @@ Creates a draft invoice backed by a receipt, with saved items, quantities, price
 ```typescript
 await client.invoices.create({
     account_id: "biz_xxxxxxxxxxxxxx",
-    items: []
+    items: [{}]
 });
 
 ```
@@ -19512,7 +19512,6 @@ Emails one recipient an invitation to a free variant's membership. The invitatio
 
 ```typescript
 await client.memberships.invite({
-    user_id: "user_xxxxxxxxxxxxxx",
     variant_id: "plan_xxxxxxxxxxxxxx"
 });
 
@@ -19530,7 +19529,7 @@ await client.memberships.invite({
 <dl>
 <dd>
 
-**request:** `Whop.InviteMembershipsRequestBody` 
+**request:** `Whop.InviteMembershipsRequest` 
     
 </dd>
 </dl>
@@ -36880,6 +36879,7 @@ Sets the authenticated user's notification preferences, each addressed by `scope
 ```typescript
 await client.users.preferences.notifications.set({
     preferences: [{
+            level: null,
             scope: {}
         }]
 });

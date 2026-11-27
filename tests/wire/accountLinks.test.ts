@@ -202,7 +202,7 @@ describe("AccountLinksClient", () => {
             return_url: "return_url",
             use_case: "account_onboarding",
         };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -274,7 +274,7 @@ describe("AccountLinksClient", () => {
             return_url: "return_url",
             use_case: "account_onboarding",
         };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()

@@ -152,7 +152,7 @@ describe("PayoutMethodsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/payout_methods").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -194,7 +194,7 @@ describe("PayoutMethodsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/payout_methods").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -335,7 +335,7 @@ describe("PayoutMethodsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/payout_methods/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -377,7 +377,7 @@ describe("PayoutMethodsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/payout_methods/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 

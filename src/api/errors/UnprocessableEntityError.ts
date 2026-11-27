@@ -2,9 +2,12 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
+import type * as Whop from "../index.js";
 
 export class UnprocessableEntityError extends errors.WhopError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    public declare readonly body: Whop.UnprocessableEntityErrorBody;
+
+    constructor(body: Whop.UnprocessableEntityErrorBody, rawResponse?: core.RawResponse) {
         super({
             message: "UnprocessableEntityError",
             statusCode: 422,

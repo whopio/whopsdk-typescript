@@ -150,7 +150,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/fee_markups").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -192,7 +192,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().get("/fee_markups").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
@@ -365,7 +365,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -423,7 +423,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
@@ -556,7 +556,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/fee_markups/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
 
@@ -598,7 +598,7 @@ describe("FeeMarkupsClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server.mockEndpoint().delete("/fee_markups/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
 
