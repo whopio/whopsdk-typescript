@@ -1,4 +1,3 @@
-export * from "./InviteMembershipsRequestBody.js";
 export * from "./InviteMembershipsResponse.js";
 export * from "./ListMembershipsRequestDirection.js";
 export * from "./ListMembershipsRequestOrder.js";

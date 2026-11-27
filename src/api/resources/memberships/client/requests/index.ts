@@ -2,6 +2,7 @@ export type { ApplyPromoCodeMembershipsRequest } from "./ApplyPromoCodeMembershi
 export { AssignAffiliateMembershipsRequest } from "./AssignAffiliateMembershipsRequest.js";
 export type { CancelMembershipsRequest } from "./CancelMembershipsRequest.js";
 export type { ExtendMembershipsRequest } from "./ExtendMembershipsRequest.js";
+export type { InviteMembershipsRequest } from "./InviteMembershipsRequest.js";
 export type { ListMembershipsRequest } from "./ListMembershipsRequest.js";
 export type { PauseMembershipsRequest } from "./PauseMembershipsRequest.js";
 export type { ReactivateMembershipsRequest } from "./ReactivateMembershipsRequest.js";

@@ -2,9 +2,12 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
+import type * as Whop from "../index.js";
 
 export class InternalServerError extends errors.WhopError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    public declare readonly body: Whop.InternalServerErrorBody;
+
+    constructor(body: Whop.InternalServerErrorBody, rawResponse?: core.RawResponse) {
         super({
             message: "InternalServerError",
             statusCode: 500,

@@ -158,13 +158,16 @@ export class PaymentMethodsClient {
                             throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                         case 422:
                             throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
+                                _response.error.body as Whop.UnprocessableEntityErrorBody,
                                 _response.rawResponse,
                             );
                         case 429:
                             throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
                         case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                            throw new Whop.InternalServerError(
+                                _response.error.body as Whop.InternalServerErrorBody,
+                                _response.rawResponse,
+                            );
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -277,11 +280,17 @@ export class PaymentMethodsClient {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Whop.UnprocessableEntityError(
+                        _response.error.body as Whop.UnprocessableEntityErrorBody,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
                 case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Whop.InternalServerError(
+                        _response.error.body as Whop.InternalServerErrorBody,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -381,11 +390,17 @@ export class PaymentMethodsClient {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Whop.UnprocessableEntityError(
+                        _response.error.body as Whop.UnprocessableEntityErrorBody,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
                 case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Whop.InternalServerError(
+                        _response.error.body as Whop.InternalServerErrorBody,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

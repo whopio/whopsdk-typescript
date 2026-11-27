@@ -198,7 +198,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_xxxxxxxxxxxxxx", variant_id: "plan_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { variant_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = { invitation_sent: true };
 
         server
@@ -211,7 +211,6 @@ describe("MembershipsClient", () => {
             .build();
 
         const response = await client.memberships.invite({
-            user_id: "user_xxxxxxxxxxxxxx",
             variant_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
@@ -226,7 +225,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -240,7 +239,6 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                user_id: "user_id",
                 variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -255,7 +253,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -269,7 +267,6 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                user_id: "user_id",
                 variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -284,7 +281,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -298,7 +295,6 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                user_id: "user_id",
                 variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -313,7 +309,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -327,7 +323,6 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                user_id: "user_id",
                 variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
@@ -342,7 +337,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { user_id: "user_id", variant_id: "variant_id" };
+        const rawRequestBody = { variant_id: "variant_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -356,7 +351,6 @@ describe("MembershipsClient", () => {
 
         await expect(async () => {
             return await client.memberships.invite({
-                user_id: "user_id",
                 variant_id: "variant_id",
             });
         }).rejects.toThrow(Whop.ConflictError);

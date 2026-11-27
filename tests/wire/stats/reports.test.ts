@@ -93,6 +93,7 @@ describe("ReportsClient", () => {
                             },
                         ],
                         window: {
+                            as_of: null,
                             from: "2026-01-01T12:00:00.000Z",
                             key: "2026-06-01..2026-06-30",
                             kind: "range",

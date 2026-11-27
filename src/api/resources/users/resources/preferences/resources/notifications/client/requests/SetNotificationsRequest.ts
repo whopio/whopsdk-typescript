@@ -4,6 +4,7 @@
  * @example
  *     {
  *         preferences: [{
+ *                 level: null,
  *                 scope: {}
  *             }]
  *     }

@@ -6,7 +6,7 @@ import type * as Whop from "../../../../index.js";
  * @example
  *     {
  *         account_id: "biz_xxxxxxxxxxxxxx",
- *         items: []
+ *         items: [{}]
  *     }
  */
 export interface CreateInvoicesRequest {
@@ -65,7 +65,229 @@ export namespace CreateInvoicesRequest {
     export type Items = Items.Item[];
 
     export namespace Items {
-        export type Item = unknown;
+        export interface Item {
+            /** Text shown under a custom charge on the invoice, its email, and its PDF, up to 1,000 characters. Line breaks are kept. Only for an item with `variant`, where it is saved as that variant's `description` and overrides `variant.description`. An item with `variant_id` shows its variant's own description and rejects this field. */
+            description?: (string | null) | undefined;
+            quantity?: number | undefined;
+            /** Find or create a variant inline by its attributes, using the payment API properties. Requires plan:create. */
+            variant?: Item.Variant | undefined;
+            /** An existing variant belonging to the account, identified by its plan_ ID. */
+            variant_id?: string | undefined;
+        }
+
+        export namespace Item {
+            /**
+             * Find or create a variant inline by its attributes, using the payment API properties. Requires plan:create.
+             */
+            export interface Variant {
+                /** Whether more than one unit can be purchased in an order. Renewal variants cannot enable it. When `false`, checkouts, carts, and invoices reject a quantity above 1. */
+                allow_multiple_quantity?: (boolean | null) | undefined;
+                /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for subaccounts with a parent account. */
+                application_fee_amount?: (number | null) | undefined;
+                /** A recurring variant's billing period in days, from 2 to 365, such as `45`. */
+                billing_period?: (number | null) | undefined;
+                /** Billing model for the variant. */
+                billing_type?: (Variant.BillingType | null) | undefined;
+                /** Currency code for the variant prices. */
+                currency: Variant.Currency;
+                /** Variant description. */
+                description?: (string | null) | undefined;
+                /** Days until access expires. */
+                expiration_days?: (number | null) | undefined;
+                /** Create a new variant instead of reusing a matching variant. */
+                force_create_new_plan?: (boolean | null) | undefined;
+                /** Additional amount charged on the first purchase, in the variant currency. For recurring variants without a trial, the first charge includes this amount plus renewal_price. */
+                initial_price?: (number | null) | undefined;
+                /** Internal notes for the account. */
+                internal_notes?: (string | null) | undefined;
+                /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+                override_tax_type?: (Variant.OverrideTaxType | null) | undefined;
+                /** Find or create a product by external identifier. Mutually exclusive with product_id. */
+                product?: (Variant.Product | null) | undefined;
+                /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
+                product_id?: (string | null) | undefined;
+                /** Where the customer is sent after paying for this variant. Must be a valid URL that is not another Whop checkout link. */
+                redirect_url?: (string | null) | undefined;
+                /** Recurring price in the variant currency. */
+                renewal_price?: (number | null) | undefined;
+                /** How many payments a recurring variant collects before it stops billing, from 2 to 115. Only valid for `renewal` variants. `null` bills until the subscription is canceled. */
+                split_pay_required_payments?: (number | null) | undefined;
+                /** Variant title. */
+                title?: (string | null) | undefined;
+                /** Free trial days before renewal. */
+                trial_period_days?: (number | null) | undefined;
+                /** Whether the variant is visible to customers. */
+                visibility?: (Variant.Visibility | null) | undefined;
+            }
+
+            export namespace Variant {
+                /** Billing model for the variant. */
+                export const BillingType = {
+                    Renewal: "renewal",
+                    OneTime: "one_time",
+                } as const;
+                export type BillingType = (typeof BillingType)[keyof typeof BillingType];
+                /** Currency code for the variant prices. */
+                export const Currency = {
+                    Usd: "usd",
+                    Sgd: "sgd",
+                    Inr: "inr",
+                    Aud: "aud",
+                    Brl: "brl",
+                    Cad: "cad",
+                    Dkk: "dkk",
+                    Eur: "eur",
+                    Nok: "nok",
+                    Gbp: "gbp",
+                    Sek: "sek",
+                    Chf: "chf",
+                    Hkd: "hkd",
+                    Huf: "huf",
+                    Jpy: "jpy",
+                    Mxn: "mxn",
+                    Myr: "myr",
+                    Pln: "pln",
+                    Czk: "czk",
+                    Nzd: "nzd",
+                    Aed: "aed",
+                    Eth: "eth",
+                    Ape: "ape",
+                    Cop: "cop",
+                    Ron: "ron",
+                    Thb: "thb",
+                    Bgn: "bgn",
+                    Idr: "idr",
+                    Dop: "dop",
+                    Php: "php",
+                    Try: "try",
+                    Krw: "krw",
+                    Twd: "twd",
+                    Vnd: "vnd",
+                    Pkr: "pkr",
+                    Clp: "clp",
+                    Uyu: "uyu",
+                    Ars: "ars",
+                    Zar: "zar",
+                    Dzd: "dzd",
+                    Tnd: "tnd",
+                    Mad: "mad",
+                    Kes: "kes",
+                    Kwd: "kwd",
+                    Jod: "jod",
+                    All: "all",
+                    Xcd: "xcd",
+                    Amd: "amd",
+                    Bsd: "bsd",
+                    Bhd: "bhd",
+                    Bob: "bob",
+                    Bam: "bam",
+                    Khr: "khr",
+                    Crc: "crc",
+                    Xof: "xof",
+                    Egp: "egp",
+                    Etb: "etb",
+                    Gmd: "gmd",
+                    Ghs: "ghs",
+                    Gtq: "gtq",
+                    Gyd: "gyd",
+                    Ils: "ils",
+                    Jmd: "jmd",
+                    Mop: "mop",
+                    Mga: "mga",
+                    Mur: "mur",
+                    Mdl: "mdl",
+                    Mnt: "mnt",
+                    Nad: "nad",
+                    Ngn: "ngn",
+                    Mkd: "mkd",
+                    Omr: "omr",
+                    Pyg: "pyg",
+                    Pen: "pen",
+                    Qar: "qar",
+                    Rwf: "rwf",
+                    Sar: "sar",
+                    Rsd: "rsd",
+                    Lkr: "lkr",
+                    Tzs: "tzs",
+                    Ttd: "ttd",
+                    Uzs: "uzs",
+                    Rub: "rub",
+                    Btc: "btc",
+                    Cny: "cny",
+                    Usdt: "usdt",
+                    Kzt: "kzt",
+                    Awg: "awg",
+                    WhopUsd: "whop_usd",
+                    Xau: "xau",
+                    Hnl: "hnl",
+                } as const;
+                export type Currency = (typeof Currency)[keyof typeof Currency];
+                /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+                export const OverrideTaxType = {
+                    Exclusive: "exclusive",
+                    Inclusive: "inclusive",
+                    Unspecified: "unspecified",
+                } as const;
+                export type OverrideTaxType = (typeof OverrideTaxType)[keyof typeof OverrideTaxType];
+
+                /**
+                 * Find or create a product by external identifier. Mutually exclusive with product_id.
+                 */
+                export interface Product {
+                    /** Whether to collect a shipping address at checkout. */
+                    collect_shipping_address?: (boolean | null) | undefined;
+                    /** Custom card statement descriptor for the product, starting with WHOP*. */
+                    custom_statement_descriptor?: (string | null) | undefined;
+                    /** Product description. */
+                    description?: (string | null) | undefined;
+                    /** Your unique identifier for the product. */
+                    external_identifier: string;
+                    /** Percentage of revenue paid to global affiliates. */
+                    global_affiliate_percentage?: (number | null) | undefined;
+                    /** Global affiliate program status. */
+                    global_affiliate_status?: (Product.GlobalAffiliateStatus | null) | undefined;
+                    /** Product headline. */
+                    headline?: (string | null) | undefined;
+                    /** Product tax code identifier. */
+                    product_tax_code_id?: (string | null) | undefined;
+                    /** Where to redirect the buyer after purchase. */
+                    redirect_purchase_url?: (string | null) | undefined;
+                    /** Product route. */
+                    route?: (string | null) | undefined;
+                    /** Product title. */
+                    title: string;
+                    /** Product visibility. Defaults to hidden. */
+                    visibility?: Product.Visibility | undefined;
+                }
+
+                export namespace Product {
+                    /** Global affiliate program status. */
+                    export const GlobalAffiliateStatus = {
+                        Enabled: "enabled",
+                        Disabled: "disabled",
+                    } as const;
+                    export type GlobalAffiliateStatus =
+                        (typeof GlobalAffiliateStatus)[keyof typeof GlobalAffiliateStatus];
+                    /** Product visibility. Defaults to hidden. */
+                    export const Visibility = {
+                        Visible: "visible",
+                        Hidden: "hidden",
+                        Archived: "archived",
+                        QuickLink: "quick_link",
+                    } as const;
+                    export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+                }
+
+                /** Whether the variant is visible to customers. */
+                export const Visibility = {
+                    Visible: "visible",
+                    Hidden: "hidden",
+                    Archived: "archived",
+                    QuickLink: "quick_link",
+                } as const;
+                export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+            }
+        }
     }
 
     /**

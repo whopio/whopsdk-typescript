@@ -52,6 +52,7 @@ export class NotificationsClient {
      * @example
      *     await client.users.preferences.notifications.set({
      *         preferences: [{
+     *                 level: null,
      *                 scope: {}
      *             }]
      *     })
