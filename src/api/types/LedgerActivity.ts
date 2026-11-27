@@ -252,6 +252,8 @@ export namespace LedgerActivity {
         PaymentRevsharePayout: "payment_revshare_payout",
         PaymentRevshareReversal: "payment_revshare_reversal",
         PaymentRevshareRefund: "payment_revshare_refund",
+        PaymentRevshareReinstated: "payment_revshare_reinstated",
+        PaymentRevshareReinstatedPayout: "payment_revshare_reinstated_payout",
         PaymentReferral: "payment_referral",
         PaymentReferralPayable: "payment_referral_payable",
         PaymentReferralReversal: "payment_referral_reversal",

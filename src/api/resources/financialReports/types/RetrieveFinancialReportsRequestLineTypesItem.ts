@@ -107,6 +107,8 @@ export const RetrieveFinancialReportsRequestLineTypesItem = {
     PaymentRevshare: "payment_revshare",
     PaymentRevsharePayout: "payment_revshare_payout",
     PaymentRevshareRefund: "payment_revshare_refund",
+    PaymentRevshareReinstated: "payment_revshare_reinstated",
+    PaymentRevshareReinstatedPayout: "payment_revshare_reinstated_payout",
     PaymentRevshareReversal: "payment_revshare_reversal",
     PayoutFee: "payout_fee",
     PlatformAffiliatePayment: "platform_affiliate_payment",

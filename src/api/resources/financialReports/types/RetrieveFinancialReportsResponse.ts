@@ -292,6 +292,8 @@ export namespace RetrieveFinancialReportsResponse {
                 PaymentRevshare: "payment_revshare",
                 PaymentRevsharePayout: "payment_revshare_payout",
                 PaymentRevshareRefund: "payment_revshare_refund",
+                PaymentRevshareReinstated: "payment_revshare_reinstated",
+                PaymentRevshareReinstatedPayout: "payment_revshare_reinstated_payout",
                 PaymentRevshareReversal: "payment_revshare_reversal",
                 PaymentUnreconciledClearing: "payment_unreconciled_clearing",
                 PaymentUnreconciledReversal: "payment_unreconciled_reversal",
