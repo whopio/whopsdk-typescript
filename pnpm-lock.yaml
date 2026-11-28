@@ -738,8 +738,8 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  postcss@8.5.33:
-    resolution: {integrity: sha512-RVHEU9/Pp1Fnjr/MpAJsZoADukCKhfIi15OunEYiGktIkYLkPVvC1sioWolGDS7XByMTx9m/IGbro0Js13zhnQ==}
+  postcss@8.5.34:
+    resolution: {integrity: sha512-P1Qzj0XXZjMda74C7qiVnBG90UKNbyNUAOeQRBW8X63RsIMV57gevRqjnkELdwtZ/S2/uQFksJhmwuN8xShLPw==}
     engines: {node: ^10 || ^12 || >=14}
 
   require-directory@2.1.1:
@@ -846,11 +846,11 @@ packages:
     resolution: {integrity: sha512-LgO3D9yZJjApUiuUfl9iFAwrtaX4+lok3wJIqttGoKCHlWUqHqbQpnxCf82L8FjgKsh4iGo78hqJwgL8F6To2A==}
     engines: {node: '>=14.0.0'}
 
-  tldts-core@7.6.1:
-    resolution: {integrity: sha512-FzTCzmZVba1BJVZQJTGVfaRUV5dxPNV4nQZZuFrSitnsXS3k81XyDBhOUzB9/41cyVKdt2TW3YfIv9KKCBMMXg==}
+  tldts-core@7.6.2:
+    resolution: {integrity: sha512-/ZG+gignPzfgtpWNnbS7AKcU1ptt9jDqhIlr7vHOaw/Psz6HjXyB2CeFS3RrUGYwER/Q4F6IS8+9rZuYfRUz+Q==}
 
-  tldts@7.6.1:
-    resolution: {integrity: sha512-+q5zzJwjNwBPQV30jnqIaQMeZ/nQfc790uMq1vDj3kCGKNfokh+HYfwtd1d80OdSPNVS+mHV8vMd+yDtlK/+mQ==}
+  tldts@7.6.2:
+    resolution: {integrity: sha512-IylRLICacWmPVf5tQIOvKkZzf2Vp8qJT3bAZox+3bWXj5P/pn45PC1a9l86loP7D/ywbSt/h/NnyIoR0fg4utA==}
     hasBin: true
 
   tough-cookie@6.1.0:
@@ -1564,7 +1564,7 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  postcss@8.5.33:
+  postcss@8.5.34:
     dependencies:
       nanoid: 3.3.20
       picocolors: 1.1.1
@@ -1673,15 +1673,15 @@ snapshots:
 
   tinyrainbow@3.2.0: {}
 
-  tldts-core@7.6.1: {}
+  tldts-core@7.6.2: {}
 
-  tldts@7.6.1:
+  tldts@7.6.2:
     dependencies:
-      tldts-core: 7.6.1
+      tldts-core: 7.6.2
 
   tough-cookie@6.1.0:
     dependencies:
-      tldts: 7.6.1
+      tldts: 7.6.2
 
   ts-loader@9.6.2(typescript@5.9.3)(webpack@5.113.0):
     dependencies:
@@ -1707,7 +1707,7 @@ snapshots:
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
-      postcss: 8.5.33
+      postcss: 8.5.34
       rolldown: 1.3.4
       tinyglobby: 0.2.17
     optionalDependencies:
